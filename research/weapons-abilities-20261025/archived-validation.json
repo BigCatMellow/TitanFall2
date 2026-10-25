@@ -1,0 +1,121 @@
+{
+  "evidence_date": "2026-10-24",
+  "new_runtime_test": false,
+  "reload_cases": [
+    {
+      "weapon": "mp_weapon_g2",
+      "speedloader": false,
+      "normal_before": 2.2,
+      "normal_after": 1.98,
+      "empty_before": 2.64,
+      "empty_after": 2.376
+    },
+    {
+      "weapon": "mp_weapon_g2",
+      "speedloader": true,
+      "normal_before": 1.54,
+      "normal_after": 1.386,
+      "empty_before": 1.848,
+      "empty_after": 1.6632
+    },
+    {
+      "weapon": "mp_weapon_hemlok_smg",
+      "speedloader": false,
+      "normal_before": 1.5,
+      "normal_after": 1.35,
+      "empty_before": 2.0,
+      "empty_after": 1.8
+    },
+    {
+      "weapon": "mp_weapon_hemlok_smg",
+      "speedloader": true,
+      "normal_before": 1.05,
+      "normal_after": 0.945,
+      "empty_before": 1.4,
+      "empty_after": 1.26
+    },
+    {
+      "weapon": "mp_weapon_rspn101",
+      "speedloader": false,
+      "normal_before": 2.2,
+      "normal_after": 1.98,
+      "empty_before": 2.92,
+      "empty_after": 2.628
+    },
+    {
+      "weapon": "mp_weapon_rspn101",
+      "speedloader": true,
+      "normal_before": 1.54,
+      "normal_after": 1.386,
+      "empty_before": 2.044,
+      "empty_after": 1.8396
+    },
+    {
+      "weapon": "mp_weapon_car",
+      "speedloader": false,
+      "normal_before": 1.8,
+      "normal_after": 1.62,
+      "empty_before": 2.53,
+      "empty_after": 2.277
+    },
+    {
+      "weapon": "mp_weapon_car",
+      "speedloader": true,
+      "normal_before": 1.26,
+      "normal_after": 1.134,
+      "empty_before": 1.771,
+      "empty_after": 1.5939
+    }
+  ],
+  "reload_bot_transfer_stripping_exercised": false,
+  "tactical_setting_cases": [
+    {
+      "weapon": "mp_ability_shifter",
+      "refill_rate_before": 17.9995,
+      "refill_rate_after": 35.9991,
+      "recorded_duration": 2.0,
+      "recorded_ammo": 200
+    },
+    {
+      "weapon": "mp_ability_holopilot",
+      "refill_rate_before": 10.8,
+      "refill_rate_after": 21.6,
+      "recorded_duration": 0.0,
+      "recorded_ammo": 200
+    },
+    {
+      "weapon": "mp_ability_heal",
+      "refill_rate_before": 10.8,
+      "refill_rate_after": 21.6,
+      "recorded_duration": 3.0,
+      "recorded_ammo": 200
+    },
+    {
+      "weapon": "mp_ability_cloak",
+      "refill_rate_before": 13.5,
+      "refill_rate_after": 27.0,
+      "recorded_duration": 15.0,
+      "recorded_ammo": 200
+    },
+    {
+      "weapon": "mp_weapon_grenade_sonar",
+      "refill_rate_before": 10.8,
+      "refill_rate_after": 21.6,
+      "recorded_duration": 0.0,
+      "recorded_ammo": 200
+    },
+    {
+      "weapon": "mp_weapon_deployable_cover",
+      "refill_rate_before": 6.75,
+      "refill_rate_after": 13.5,
+      "recorded_duration": 15.0,
+      "recorded_ammo": 100
+    }
+  ],
+  "grapple": {
+    "before": 24.7,
+    "after": 12.4,
+    "power_cell": true
+  },
+  "limits": "Archived engine setting checks and one timed Grapple refill, not new tests, animation-time measurements for every gun or representative balance outcomes. v16 BOT_COMBAT caches can be stale."
+}

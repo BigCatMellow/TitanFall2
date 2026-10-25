@@ -315,3 +315,16 @@ Original filtered excerpts retained. Watchdog/cmds_utils files and target
 selection function match archivedv16 after line-ending normalization.
 No production source, installed files, saves or gameplay values changed;
 no game launch or queue resume. Installedv16/source diagnosticv17 unchanged.
+
+2026-10-25 weapon/ability follow-up: research/weapons-abilities-20261025 records
+the existing human four-gun0.9reload and seven-tactical0.5recharge changes,
+archived8reload/6refill/1timedGrapple checks and limitations. Bot transfer-strip
+runtime subcase was not exercised (bot_strip=false);15bots excluded in archives.
+New offline builder joins16rounds to current phase windows, retaining
+mp_weapon_defender/unarmed cache IDs omitted by narrower summaries; R201 remains dominant.
+Source audit identifies fixed-time pilot ability request windows, no readiness
+check, offhand requests clearing gunAttack and reload suppression clearing
+defensive abilities. Grapple explicitly0/AWall absent in that activation branch.
+These are source findings, not measured casts/lostshots. No gameplay changes;
+next candidate should observe readiness/actions and improve decisions before
+buffing damage/cooldowns. Source remains diagnosticv17; installs stablev16.

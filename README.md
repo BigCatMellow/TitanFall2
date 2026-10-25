@@ -35,6 +35,7 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 | `Notes/trend-analysis-20261025/` | Latest played-session export |
 | `research/trends-20261025/` | Phase-aware trends and improvement priorities |
 | `research/decision-context-20261025/` | Deduplicated descending-target observations and watchdog context |
+| `research/weapons-abilities-20261025/` | Weapon coverage, verified human modifiers and bot ability decision audit |
 | `Notes/map-context/` | Derived navigation geometry, diagrams and references |
 | `automation/runtime-mods/` | Isolated authored harnesses; **not gameplay add-ons** |
 | `automation/legacy/` | Original machine-specific launch/audit scripts |

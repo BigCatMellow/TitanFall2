@@ -1,0 +1,264 @@
+{
+  "hash_mode": "UTF-8 text, CRLF normalized to LF",
+  "inputs": [
+    {
+      "file": "bp_ort/src/bots/cmds/basic_combat.rs",
+      "sha256": "9bddef2e21761ccced42d811fa0b9bc9d6e12cc4915d8cf688270873c1b602b4"
+    },
+    {
+      "file": "bp_ort/src/bots/combat_decisions.rs",
+      "sha256": "3f11dfee7a820eb7024346e8b6b2695e2afea5989d2e687c344216a19d971d3a"
+    },
+    {
+      "file": "James.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
+      "sha256": "d3ebb2295891f7d11331e422efa9d7e72d0fa3b7a861ce0bb22d49364d4e431d"
+    },
+    {
+      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
+      "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
+    },
+    {
+      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
+      "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
+    },
+    {
+      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
+      "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
+    },
+    {
+      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
+      "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
+    },
+    {
+      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_deployable_cover.txt",
+      "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
+    },
+    {
+      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_grenade_sonar.txt",
+      "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
+    },
+    {
+      "file": "James.TacticalRecharge/mod.json",
+      "sha256": "bbb369920817d6a2075ee052adf4614d7e66a785c16b3a1853cef5e499b55321"
+    },
+    {
+      "file": "James.TacticalRecharge/mod/scripts/vscripts/james_tactical_recharge.nut",
+      "sha256": "0d4cd082b008f2da85fcfaf7e2c79ba4a950270ed03dec3dce42b55915164513"
+    },
+    {
+      "file": "James.TacticalRecharge/README.md",
+      "sha256": "3a685196eb83d01d479d45795c30ad9f11e9f8d9cb514b19aa701f9964f10ac4"
+    },
+    {
+      "file": "James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt",
+      "sha256": "ba85f538f5a4993abbe0d7a5f8fda26bf694209770a92896e1331bc39f18d7e8"
+    },
+    {
+      "file": "James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt",
+      "sha256": "ba85f538f5a4993abbe0d7a5f8fda26bf694209770a92896e1331bc39f18d7e8"
+    },
+    {
+      "file": "James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt",
+      "sha256": "ba85f538f5a4993abbe0d7a5f8fda26bf694209770a92896e1331bc39f18d7e8"
+    },
+    {
+      "file": "James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt",
+      "sha256": "ba85f538f5a4993abbe0d7a5f8fda26bf694209770a92896e1331bc39f18d7e8"
+    },
+    {
+      "file": "James.WeaponReload/mod.json",
+      "sha256": "9710b9b6ec9284d58bd2cbbcac9209ab7e7bda55e4b9d96657bf5ac0e2c7a1b9"
+    },
+    {
+      "file": "James.WeaponReload/mod/scripts/vscripts/james_weapon_reload.nut",
+      "sha256": "d8f2f9f782b7ff05cac6d11be33935a3efd5577b885954ccd07f408c050ed0b7"
+    },
+    {
+      "file": "James.WeaponReload/README.md",
+      "sha256": "0c3df281742666cf573ea39da5ba742df53a055d589a1ce50bb47be8ffa1512f"
+    },
+    {
+      "file": "Notes/map-surveys/20261025-000402/main/reports/01-mp_lf_meadow/combat/combat.csv",
+      "sha256": "0d17e5ef9217acda79c822538b506845c1c65e02fe622bd6255f1fdb46b09f53"
+    },
+    {
+      "file": "Notes/map-surveys/20261025-000402/main/reports/01-mp_lf_meadow/movement/metadata.json",
+      "sha256": "a5eac466789700928b34f5e9eeaa561c1d77598ab7bf43ffb1c617d14c3f1bfe"
+    },
+    {
+      "file": "Notes/map-surveys/20261025-000402/main/reports/01-mp_lf_meadow/movement/observations.csv",
+      "sha256": "10d29bd3e51c9a5a844a1e1b7a283f9ea7549322df6ae64a7c1e3abf7cd97e71"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/01-mp_black_water_canal/main/reports/01-mp_black_water_canal/combat/combat.csv",
+      "sha256": "b82d6ec1b330b648b42e9cf043bcfa4512fde1ce41a9fdb558af6b866333e536"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/01-mp_black_water_canal/main/reports/01-mp_black_water_canal/movement/metadata.json",
+      "sha256": "398595a1fa7ab56aaaa67374e9620652a0babe98b0238f8e431080a3fdaede64"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/01-mp_black_water_canal/main/reports/01-mp_black_water_canal/movement/observations.csv",
+      "sha256": "1adf1af888143f1f958a4a694d24116cffe2f42725f9c132a7d4b1d75b40a1d1"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/combat/combat.csv",
+      "sha256": "c2c3e90bbff9e1f8eb331c12b74f89104c249657b10c35d7a1b00ef57f757640"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/movement/metadata.json",
+      "sha256": "34e2e729f058ae4a4485cf51c7b54857f05c6cbf9cc2a235acd568f7e5efb38d"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/movement/observations.csv",
+      "sha256": "31fad91411af23d0c9a7f33cabec9b1f0dff0f3890570c68f499e93d27a098e8"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/03-mp_complex3/main/reports/01-mp_complex3/combat/combat.csv",
+      "sha256": "d624a624fa3f12121c17d4d3e48a629e6f2033b916a200cb577ab2fb2ae8f223"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/03-mp_complex3/main/reports/01-mp_complex3/movement/metadata.json",
+      "sha256": "975024dca773062f91261e0f40e6ee03343a7023846928036313d43b51708ece"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/03-mp_complex3/main/reports/01-mp_complex3/movement/observations.csv",
+      "sha256": "8d6c153b6d10611fdf3994fe11dc400dbe7417d7429f448de9ec6e75ecd5b2ff"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/04-mp_crashsite3/main/reports/01-mp_crashsite3/combat/combat.csv",
+      "sha256": "23ad0652fc7dad23a10870544083c6cc40f3c4e016a7f743a5a0b676bbed1135"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/04-mp_crashsite3/main/reports/01-mp_crashsite3/movement/metadata.json",
+      "sha256": "73dc1725600cc7f47555dc5dc26c60d903bc7391a7c2a9c2432aa2bcdd79d5dd"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/04-mp_crashsite3/main/reports/01-mp_crashsite3/movement/observations.csv",
+      "sha256": "e60407afe3e9dc9f54c96d02148097fdf16faaecb9723e0ee94a4ac5119b43c1"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/05-mp_drydock/main/reports/01-mp_drydock/combat/combat.csv",
+      "sha256": "733f708fbca8d51af696608a9f532f73970eeef2fbb9b0ef9b1397d7f09514dc"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/05-mp_drydock/main/reports/01-mp_drydock/movement/metadata.json",
+      "sha256": "fe347e5fc855f8cd4d529f9b96d430e497cd9033bf59689eeeda2f028c862888"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/05-mp_drydock/main/reports/01-mp_drydock/movement/observations.csv",
+      "sha256": "5a34314bfa4566045c031fac264bb6ba02fe6cedc7a497b7edf7095222697f12"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/06-mp_forwardbase_kodai/main/reports/01-mp_forwardbase_kodai/combat/combat.csv",
+      "sha256": "eda20c5e84b22ebbcb946f45b5507c1814588cfb65a91c1dae43f0f2ef4b9945"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/06-mp_forwardbase_kodai/main/reports/01-mp_forwardbase_kodai/movement/metadata.json",
+      "sha256": "2d67f6210348a3f901d922fa1682a68b2d256f95c1a264ca2a972b308c327da8"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/06-mp_forwardbase_kodai/main/reports/01-mp_forwardbase_kodai/movement/observations.csv",
+      "sha256": "d48140f47a83de7c1a733fb6233bcc570dd1137d6e08da6f59b45bd5ba34b4a3"
+    },
+    {
+      "file": "Notes/map-surveys/eden-control-20261025-081915/main/reports/01-mp_eden/combat/combat.csv",
+      "sha256": "536a18db2688253cd78185eb298b6072666b958213ca503f5bf60f44ed78d7c5"
+    },
+    {
+      "file": "Notes/map-surveys/eden-control-20261025-081915/main/reports/01-mp_eden/movement/metadata.json",
+      "sha256": "0382d2fcb8621b61b01d85b9d1dde92295d6c5fde1fcee47fcaa61bd0db4cc45"
+    },
+    {
+      "file": "Notes/map-surveys/eden-control-20261025-081915/main/reports/01-mp_eden/movement/observations.csv",
+      "sha256": "9703adc06012f157eef0df1d75cdd51c95ee5223b834ab5216634b304aeaf6d3"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/01-mp_eden/main/reports/01-mp_eden/combat/combat.csv",
+      "sha256": "0407b3462e7860eed9b7185c347d77fb36b89f36ba9f7a57e822a3165b02240d"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/01-mp_eden/main/reports/01-mp_eden/movement/metadata.json",
+      "sha256": "404b14c1248e2ac135758a3773e177d8a651e2c8c72c0c86d00d801ed68522db"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/01-mp_eden/main/reports/01-mp_eden/movement/observations.csv",
+      "sha256": "521ee50f414f28e9eb067be6c6a4f14b7e6894f79f406180991f5c37ba598b51"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/02-mp_glitch/main/reports/01-mp_glitch/combat/combat.csv",
+      "sha256": "a12090605830a503cf607df779603bbe36b63702d23bbbf2b681f5803d6645f3"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/02-mp_glitch/main/reports/01-mp_glitch/movement/metadata.json",
+      "sha256": "d4082620545dce1a46d97758da59ff8844b2657db9c09d142abcce142580f5cd"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/02-mp_glitch/main/reports/01-mp_glitch/movement/observations.csv",
+      "sha256": "455d028efa9ebfd7b77c502c059c49cc24ee736e2663dd6f9d7ac9e9355cce8c"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/03-mp_angel_city/main/reports/01-mp_angel_city/combat/combat.csv",
+      "sha256": "624510472e49b8b09347f1f10ff97b2410f72dd0187f3bcdbc61db17a9f83a52"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/03-mp_angel_city/main/reports/01-mp_angel_city/movement/metadata.json",
+      "sha256": "b0b4667e2805407520fd5fabaddf09b0a4a43c5689bfc95340f52491e94c0a0a"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/03-mp_angel_city/main/reports/01-mp_angel_city/movement/observations.csv",
+      "sha256": "b0580a060d4e0fc0b6c6e0a4733a8f1ebcb4e2cd086f6d137700e1da5d419e25"
+    },
+    {
+      "file": "Notes/sessions/combat-nslog2026-10-24_23-16-24/combat.csv",
+      "sha256": "913decdae41bcaf158ccee284765c449bb07b3fec90cdb9ffcb7660af6b4f202"
+    },
+    {
+      "file": "Notes/sessions/nslog2026-10-24_23-16-24/metadata.json",
+      "sha256": "a8bd2c7564bc124fdf80ed70ad8d4a4c6479f6fb51f472d8f1936a881df603f9"
+    },
+    {
+      "file": "Notes/sessions/nslog2026-10-24_23-16-24/observations.csv",
+      "sha256": "45e282e829003460a03cf3700822d2558c5eb738546c16ab1c1a93167ae7001c"
+    },
+    {
+      "file": "Notes/tests/tactical-recharge-20261024/James.TacticalProbe/mod/scripts/vscripts/james_tactical_probe.nut",
+      "sha256": "72a7454dd4533f3bcdd55277f124bdf615e25c369ade438a69e354313e7b582f"
+    },
+    {
+      "file": "Notes/tests/tactical-recharge-20261024/results.txt",
+      "sha256": "f303b1f85c4f54853c59c5ae557d1babd992af415024e560ac30683999a478a0"
+    },
+    {
+      "file": "Notes/tests/weapon-reload-20261024/James.ReloadTest/mod/scripts/vscripts/james_reload_test.nut",
+      "sha256": "6bc11ff4c40ce7b1f172501a4dc07c225e81b70bd1884c6f7312141fbf73c8b8"
+    },
+    {
+      "file": "Notes/tests/weapon-reload-20261024/results.txt",
+      "sha256": "bb8cce130f102ef739ad5def59cc2d0f4788a09eb90f5c9a578a227d9f12d490"
+    },
+    {
+      "file": "Notes/trend-analysis-20261025/played-latest/combat/combat.csv",
+      "sha256": "5090495e94a5f38ad044991e8b4a3c2350b1a2c6f7422055f2689c23864208c3"
+    },
+    {
+      "file": "Notes/trend-analysis-20261025/played-latest/movement/metadata.json",
+      "sha256": "2f6b9d877d4fcb723084b7da2d664a90fcd114b21644e04b033754446ac8e7bc"
+    },
+    {
+      "file": "Notes/trend-analysis-20261025/played-latest/movement/observations.csv",
+      "sha256": "5504cec15e2fbc1d7a87f8e64c237514410b00c33197fc9d4e155c2069354747"
+    },
+    {
+      "file": "research/trends-20261025/rounds.json",
+      "sha256": "b17dfcb6d48c247da20a19d8f4c0bf937d7b0b3b947d2844a5c37bcbd32faf43"
+    },
+    {
+      "file": "tools/Build-WeaponAbilityReview.ps1",
+      "sha256": "d1e1856d6f11d2a231977a82b8aa0a73af7d89ea771020042b412c1d0cafaa88"
+    }
+  ],
+  "game_launched": false,
+  "production_code_changed": false,
+  "deployed": false
+}

@@ -1,0 +1,926 @@
+[
+  {
+    "source": "Notes/map-surveys/all-maps-20261025-102025/01-mp_black_water_canal/main/reports/01-mp_black_water_canal/movement",
+    "combat_source": "Notes/map-surveys/all-maps-20261025-102025/01-mp_black_water_canal/main/reports/01-mp_black_water_canal/combat/combat.csv",
+    "map": "mp_black_water_canal",
+    "epoch": 1,
+    "cohort": "controlled-complete",
+    "phase": "Current all-map queue",
+    "window_start": 29.02,
+    "window_end": 917.02,
+    "live_pilot_samples": 4754,
+    "with_combat_cache": 3610,
+    "without_combat_cache": 1144,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 18
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 376
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 3216
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 2786
+      },
+      {
+        "tactic": "legacy",
+        "samples": 394
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 214
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 34
+      },
+      {
+        "tactic": "reload",
+        "samples": 119
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 60
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 3
+      }
+    ],
+    "cached_empty_not_reloading": 412,
+    "cached_reloading": 164,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/movement",
+    "combat_source": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/combat/combat.csv",
+    "map": "mp_colony02",
+    "epoch": 1,
+    "cohort": "controlled-complete",
+    "phase": "Current all-map queue",
+    "window_start": 29.02,
+    "window_end": 917.02,
+    "live_pilot_samples": 4414,
+    "with_combat_cache": 3633,
+    "without_combat_cache": 781,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 26
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 261
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 3346
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 2794
+      },
+      {
+        "tactic": "legacy",
+        "samples": 287
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 335
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 21
+      },
+      {
+        "tactic": "reload",
+        "samples": 100
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 92
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 4
+      }
+    ],
+    "cached_empty_not_reloading": 311,
+    "cached_reloading": 172,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/map-surveys/all-maps-20261025-102025/03-mp_complex3/main/reports/01-mp_complex3/movement",
+    "combat_source": "Notes/map-surveys/all-maps-20261025-102025/03-mp_complex3/main/reports/01-mp_complex3/combat/combat.csv",
+    "map": "mp_complex3",
+    "epoch": 1,
+    "cohort": "controlled-complete",
+    "phase": "Current all-map queue",
+    "window_start": 29.02,
+    "window_end": 917.02,
+    "live_pilot_samples": 4283,
+    "with_combat_cache": 2624,
+    "without_combat_cache": 1659,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 60
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 121
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 2443
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 2110
+      },
+      {
+        "tactic": "legacy",
+        "samples": 181
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 223
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 14
+      },
+      {
+        "tactic": "reload",
+        "samples": 52
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 41
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 3
+      }
+    ],
+    "cached_empty_not_reloading": 192,
+    "cached_reloading": 83,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/map-surveys/all-maps-20261025-102025/04-mp_crashsite3/main/reports/01-mp_crashsite3/movement",
+    "combat_source": "Notes/map-surveys/all-maps-20261025-102025/04-mp_crashsite3/main/reports/01-mp_crashsite3/combat/combat.csv",
+    "map": "mp_crashsite3",
+    "epoch": 1,
+    "cohort": "controlled-complete",
+    "phase": "Current all-map queue",
+    "window_start": 23.02,
+    "window_end": 913.02,
+    "live_pilot_samples": 4256,
+    "with_combat_cache": 3165,
+    "without_combat_cache": 1091,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 8
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 197
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 2960
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 2356
+      },
+      {
+        "tactic": "legacy",
+        "samples": 205
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 441
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 24
+      },
+      {
+        "tactic": "reload",
+        "samples": 57
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 75
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 7
+      }
+    ],
+    "cached_empty_not_reloading": 209,
+    "cached_reloading": 131,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/map-surveys/all-maps-20261025-102025/05-mp_drydock/main/reports/01-mp_drydock/movement",
+    "combat_source": "Notes/map-surveys/all-maps-20261025-102025/05-mp_drydock/main/reports/01-mp_drydock/combat/combat.csv",
+    "map": "mp_drydock",
+    "epoch": 1,
+    "cohort": "controlled-complete",
+    "phase": "Current all-map queue",
+    "window_start": 29.02,
+    "window_end": 917.02,
+    "live_pilot_samples": 4406,
+    "with_combat_cache": 3384,
+    "without_combat_cache": 1022,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 35
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 222
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 3127
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 2566
+      },
+      {
+        "tactic": "legacy",
+        "samples": 257
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 422
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 19
+      },
+      {
+        "tactic": "reload",
+        "samples": 62
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 55
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 3
+      }
+    ],
+    "cached_empty_not_reloading": 266,
+    "cached_reloading": 111,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/map-surveys/all-maps-20261025-102025/06-mp_forwardbase_kodai/main/reports/01-mp_forwardbase_kodai/movement",
+    "combat_source": "Notes/map-surveys/all-maps-20261025-102025/06-mp_forwardbase_kodai/main/reports/01-mp_forwardbase_kodai/combat/combat.csv",
+    "map": "mp_forwardbase_kodai",
+    "epoch": 1,
+    "cohort": "controlled-partial",
+    "phase": "Current all-map queue",
+    "window_start": 27.02,
+    "window_end": 775.02,
+    "live_pilot_samples": 4232,
+    "with_combat_cache": 3340,
+    "without_combat_cache": 892,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 16
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 137
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 3187
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 2670
+      },
+      {
+        "tactic": "legacy",
+        "samples": 153
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 393
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 12
+      },
+      {
+        "tactic": "reload",
+        "samples": 44
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 58
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 10
+      }
+    ],
+    "cached_empty_not_reloading": 161,
+    "cached_reloading": 104,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/map-surveys/fresh-batch-20261025-083855/01-mp_eden/main/reports/01-mp_eden/movement",
+    "combat_source": "Notes/map-surveys/fresh-batch-20261025-083855/01-mp_eden/main/reports/01-mp_eden/combat/combat.csv",
+    "map": "mp_eden",
+    "epoch": 1,
+    "cohort": "controlled-complete",
+    "phase": "Earlier fresh-process queue",
+    "window_start": 29.02,
+    "window_end": 917.02,
+    "live_pilot_samples": 4785,
+    "with_combat_cache": 3877,
+    "without_combat_cache": 908,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 14
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 219
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 3644
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 3237
+      },
+      {
+        "tactic": "legacy",
+        "samples": 233
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 258
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 14
+      },
+      {
+        "tactic": "reload",
+        "samples": 85
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 48
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 2
+      }
+    ],
+    "cached_empty_not_reloading": 244,
+    "cached_reloading": 124,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/map-surveys/fresh-batch-20261025-083855/02-mp_glitch/main/reports/01-mp_glitch/movement",
+    "combat_source": "Notes/map-surveys/fresh-batch-20261025-083855/02-mp_glitch/main/reports/01-mp_glitch/combat/combat.csv",
+    "map": "mp_glitch",
+    "epoch": 1,
+    "cohort": "controlled-complete",
+    "phase": "Earlier fresh-process queue",
+    "window_start": 29.02,
+    "window_end": 917.02,
+    "live_pilot_samples": 4325,
+    "with_combat_cache": 3301,
+    "without_combat_cache": 1024,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 12
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 126
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 3163
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 2677
+      },
+      {
+        "tactic": "legacy",
+        "samples": 138
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 240
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 7
+      },
+      {
+        "tactic": "reload",
+        "samples": 161
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 76
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 2
+      }
+    ],
+    "cached_empty_not_reloading": 154,
+    "cached_reloading": 223,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/map-surveys/fresh-batch-20261025-083855/03-mp_angel_city/main/reports/01-mp_angel_city/movement",
+    "combat_source": "Notes/map-surveys/fresh-batch-20261025-083855/03-mp_angel_city/main/reports/01-mp_angel_city/combat/combat.csv",
+    "map": "mp_angel_city",
+    "epoch": 1,
+    "cohort": "controlled-complete",
+    "phase": "Earlier fresh-process queue",
+    "window_start": 29.02,
+    "window_end": 785.02,
+    "live_pilot_samples": 3766,
+    "with_combat_cache": 2574,
+    "without_combat_cache": 1192,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 13
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 159
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 2402
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 1875
+      },
+      {
+        "tactic": "legacy",
+        "samples": 172
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 284
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 6
+      },
+      {
+        "tactic": "reload",
+        "samples": 150
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 85
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 2
+      }
+    ],
+    "cached_empty_not_reloading": 185,
+    "cached_reloading": 224,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/map-surveys/eden-control-20261025-081915/main/reports/01-mp_eden/movement",
+    "combat_source": "Notes/map-surveys/eden-control-20261025-081915/main/reports/01-mp_eden/combat/combat.csv",
+    "map": "mp_eden",
+    "epoch": 1,
+    "cohort": "controlled-complete",
+    "phase": "Earlier fresh control",
+    "window_start": 29.02,
+    "window_end": 917.02,
+    "live_pilot_samples": 4914,
+    "with_combat_cache": 3818,
+    "without_combat_cache": 1096,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 10
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 309
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 3499
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 3085
+      },
+      {
+        "tactic": "legacy",
+        "samples": 319
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 262
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 12
+      },
+      {
+        "tactic": "reload",
+        "samples": 89
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 49
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 2
+      }
+    ],
+    "cached_empty_not_reloading": 326,
+    "cached_reloading": 133,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/map-surveys/20261025-000402/main/reports/01-mp_lf_meadow/movement",
+    "combat_source": "Notes/map-surveys/20261025-000402/main/reports/01-mp_lf_meadow/combat/combat.csv",
+    "map": "mp_lf_meadow",
+    "epoch": 1,
+    "cohort": "controlled-complete",
+    "phase": "First map of earlier cycle survey",
+    "window_start": 23.02,
+    "window_end": 703.02,
+    "live_pilot_samples": 3822,
+    "with_combat_cache": 3822,
+    "without_combat_cache": 0,
+    "cached_weapons": [
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 3822
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 2176
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 714
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 9
+      },
+      {
+        "tactic": "reload",
+        "samples": 510
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 411
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 2
+      }
+    ],
+    "cached_empty_not_reloading": 58,
+    "cached_reloading": 864,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/trend-analysis-20261025/played-latest/movement",
+    "combat_source": "Notes/trend-analysis-20261025/played-latest/combat/combat.csv",
+    "map": "mp_eden",
+    "epoch": 1,
+    "cohort": "played",
+    "phase": "Played 2026-10-25",
+    "window_start": 17.02,
+    "window_end": 329.02,
+    "live_pilot_samples": 1630,
+    "with_combat_cache": 1372,
+    "without_combat_cache": 258,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 3
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 75
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 1294
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 1051
+      },
+      {
+        "tactic": "legacy",
+        "samples": 78
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 162
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 4
+      },
+      {
+        "tactic": "reload",
+        "samples": 41
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 35
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 1
+      }
+    ],
+    "cached_empty_not_reloading": 83,
+    "cached_reloading": 72,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/trend-analysis-20261025/played-latest/movement",
+    "combat_source": "Notes/trend-analysis-20261025/played-latest/combat/combat.csv",
+    "map": "mp_thaw",
+    "epoch": 3,
+    "cohort": "played",
+    "phase": "Played 2026-10-25",
+    "window_start": 17.02,
+    "window_end": 425.02,
+    "live_pilot_samples": 1935,
+    "with_combat_cache": 1549,
+    "without_combat_cache": 386,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 1
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 85
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 1463
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 1297
+      },
+      {
+        "tactic": "legacy",
+        "samples": 86
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 92
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 5
+      },
+      {
+        "tactic": "reload",
+        "samples": 43
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 25
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 1
+      }
+    ],
+    "cached_empty_not_reloading": 92,
+    "cached_reloading": 62,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/sessions/nslog2026-10-24_23-16-24",
+    "combat_source": "Notes/sessions/combat-nslog2026-10-24_23-16-24/combat.csv",
+    "map": "mp_eden",
+    "epoch": 1,
+    "cohort": "played",
+    "phase": "Played 2026-10-24",
+    "window_start": 17.02,
+    "window_end": 419.02,
+    "live_pilot_samples": 2304,
+    "with_combat_cache": 2085,
+    "without_combat_cache": 219,
+    "cached_weapons": [
+      {
+        "weapon": "melee_pilot_emptyhanded",
+        "samples": 30
+      },
+      {
+        "weapon": "mp_weapon_defender",
+        "samples": 103
+      },
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 1952
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 1741
+      },
+      {
+        "tactic": "legacy",
+        "samples": 133
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 129
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 5
+      },
+      {
+        "tactic": "reload",
+        "samples": 49
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 26
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 2
+      }
+    ],
+    "cached_empty_not_reloading": 137,
+    "cached_reloading": 73,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/sessions/nslog2026-10-24_23-16-24",
+    "combat_source": "Notes/sessions/combat-nslog2026-10-24_23-16-24/combat.csv",
+    "map": "mp_lf_meadow",
+    "epoch": 3,
+    "cohort": "played",
+    "phase": "Played 2026-10-24",
+    "window_start": 13.02,
+    "window_end": 297.02,
+    "live_pilot_samples": 1431,
+    "with_combat_cache": 1431,
+    "without_combat_cache": 0,
+    "cached_weapons": [
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 1431
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 851
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 307
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 5
+      },
+      {
+        "tactic": "reload",
+        "samples": 148
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 115
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 5
+      }
+    ],
+    "cached_empty_not_reloading": 16,
+    "cached_reloading": 252,
+    "current_ammo_verified": false
+  },
+  {
+    "source": "Notes/sessions/nslog2026-10-24_23-16-24",
+    "combat_source": "Notes/sessions/combat-nslog2026-10-24_23-16-24/combat.csv",
+    "map": "mp_lf_meadow",
+    "epoch": 5,
+    "cohort": "played",
+    "phase": "Played 2026-10-24",
+    "window_start": 11.02,
+    "window_end": 305.02,
+    "live_pilot_samples": 1502,
+    "with_combat_cache": 1502,
+    "without_combat_cache": 0,
+    "cached_weapons": [
+      {
+        "weapon": "mp_weapon_rspn101",
+        "samples": 1502
+      }
+    ],
+    "cached_tactics": [
+      {
+        "tactic": "advance",
+        "samples": 944
+      },
+      {
+        "tactic": "range_hold",
+        "samples": 241
+      },
+      {
+        "tactic": "range_retreat",
+        "samples": 7
+      },
+      {
+        "tactic": "reload",
+        "samples": 183
+      },
+      {
+        "tactic": "reload_hold",
+        "samples": 124
+      },
+      {
+        "tactic": "reload_retreat",
+        "samples": 3
+      }
+    ],
+    "cached_empty_not_reloading": 14,
+    "cached_reloading": 296,
+    "current_ammo_verified": false
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-25",
+  "phase_cohort_checks": "all 16 live-pilot counts match the earlier trend builder",
+  "combat_keys": "unique in each input; exact epoch/slot/two-decimal frame-time join",
+  "deterministic_regeneration": "coverage, archived validation, summary and provenance SHA256 unchanged on repeat run",
+  "archived_reload_cases": "8 parsed, both normal/empty ratios equal 0.9",
+  "archived_tactical_settings": "6 parsed, refill-rate ratios equal 2 within printed rounding tolerance",
+  "archived_grapple": "24.7 to 12.4 seconds with Power Cell, approximately half; historical timed test",
+  "archived_bot_exclusion": "both completion records report 15 unchanged bots",
+  "unexercised_case": "reload transferred-CAR stripping runtime test: bot_strip=false",
+  "v16_source_comparison": "pilot tactical/ordnance and combat reload/Attack integration blocks identical to archived v16 after LF normalization",
+  "new_runtime_tests": false,
+  "production_code_changed": false,
+  "game_launched": false,
+  "deployed": false,
+  "limits": "Source audit and offline joins/archived checks; not a test of ability effectiveness, current ammo, weapon balance or gameplay benefit."
+}

@@ -15,6 +15,7 @@ and complete project import to BigCatMellow/TitanFall2. No game launch/deploymen
 | Latest played session |2026-10-25 12:03:27; Eden/Exoplanet/lobbies; clean shutdown12:21 |
 | Data work |Phase-aware review of16 recordings across10 maps; played/controlled/partial cohorts separate |
 | Latest analysis |235 deduplicated overhead target bursts;213 show descent,22 lack adjacent follow-up; watchdog timer-context reproduction and five strict compatible log cases |
+| Weapon/ability review |Archived human reload/recharge validation,16-recording cache coverage and readiness/action-suppression source audit; no new balance/deployment changes |
 
 Recorded stalled pilot samples: Crash Site0.42%, Angel City0.85%, Drydock1.09%.
 Eden6.23–8.38% has a repeated shared route hotspot; Complex has a concentrated

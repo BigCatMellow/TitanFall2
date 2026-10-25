@@ -256,3 +256,10 @@ testing stays paused.235 deduplicated overhead target bursts,213 descending,
 five strict compatible log cases, not proven false-alarm frequency. Production
 code and installed profiles remain unchanged. See FINDINGS.md/METHODS.md and
 verification.json for source equivalence, fixtures and reproduction details.
+
+2026-10-25 weapon/ability analysis: research/weapons-abilities-20261025/FINDINGS.md
+consolidates existing human modifiers, archived checks and16round weapon-cache
+coverage. Source audit flags timed ability request/Attack suppression and blanket
+defensive-offhand suppression during reload; impact needs new diagnostics.
+No weapon/ability values, source behavior, installed files or saves changed.
+Offline analysis/tools may be pushed; game testing/map queue remain paused.
