@@ -18,7 +18,8 @@ local work. [Original README](docs/UPSTREAM-README.md).
   Newer human-played Eden/Exoplanet data is also retained. No automatic resume.
 
 Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
-[the latest review](research/trends-20261025/FINDINGS.md) before changes.
+[the map review](research/trends-20261025/FINDINGS.md) and
+[the deeper decision review](research/decision-context-20261025/FINDINGS.md) before changes.
 
 ## Contents
 
@@ -33,6 +34,7 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 | `Notes/map-surveys/` | Per-match movement/combat data and restoration checks |
 | `Notes/trend-analysis-20261025/` | Latest played-session export |
 | `research/trends-20261025/` | Phase-aware trends and improvement priorities |
+| `research/decision-context-20261025/` | Deduplicated descending-target observations and watchdog context |
 | `Notes/map-context/` | Derived navigation geometry, diagrams and references |
 | `automation/runtime-mods/` | Isolated authored harnesses; **not gameplay add-ons** |
 | `automation/legacy/` | Original machine-specific launch/audit scripts |

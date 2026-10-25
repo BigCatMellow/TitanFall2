@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-25",
+  "analysis_self_test": "passed",
+  "phase_and_overhead_count_consistency": "passed for all 16 recordings against independent PowerShell trend builder",
+  "deterministic_regeneration": "passed, SHA256 unchanged for all output artifacts on immediate rerun",
+  "independent_csv_check": "PowerShell cohort totals match generated summary; all maximum observed spans are 2 seconds",
+  "json_parsing": "passed for all new JSON artifacts",
+  "native_reproduction": "compiled and ran successfully with nightly-2025-09-11 Windows GNU and LLVM-MinGW",
+  "v16_source_equivalence": {
+    "baseline": "history/source-snapshots/v16-combat-decisions-20261024",
+    "line_endings_normalized": true,
+    "progress_watchdog_rs": "identical",
+    "cmds_utils_rs": "identical",
+    "find_team_target_function": "identical"
+  },
+  "production_code_changed": false,
+  "game_launched": false,
+  "map_queue_resumed": false,
+  "deployed": false,
+  "limits": "Offline characterization and consistency checks, not proof of runtime benefit or complete bug prevalence. Publication scan is recorded separately."
+}

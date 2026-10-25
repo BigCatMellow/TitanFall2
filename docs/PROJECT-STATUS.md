@@ -14,6 +14,7 @@ and complete project import to BigCatMellow/TitanFall2. No game launch/deploymen
 | Survey |5 completed, partial Kodai;17 trials remain; no auto-resume |
 | Latest played session |2026-10-25 12:03:27; Eden/Exoplanet/lobbies; clean shutdown12:21 |
 | Data work |Phase-aware review of16 recordings across10 maps; played/controlled/partial cohorts separate |
+| Latest analysis |235 deduplicated overhead target bursts;213 show descent,22 lack adjacent follow-up; watchdog timer-context reproduction and five strict compatible log cases |
 
 Recorded stalled pilot samples: Crash Site0.42%, Angel City0.85%, Drydock1.09%.
 Eden6.23–8.38% has a repeated shared route hotspot; Complex has a concentrated
@@ -24,7 +25,8 @@ XY-only range checks admitting distant overhead targets, apparently incoming
 Titans. Bot weapon data is mostly R-201. Existing human reload/cooldown changes
 are separately validated; broad damage/ability buffs lack outcome evidence.
 
-See research/trends-20261025/FINDINGS.md. Current instruction is organize data
+See research/trends-20261025/FINDINGS.md and
+research/decision-context-20261025/FINDINGS.md. Current instruction is organize data
 and identify good/bad trends before further gameplay changes. No new gameplay
 patch was made after that instruction. Historical archives include rejected
 builds; current status/deployment records establish what is live.

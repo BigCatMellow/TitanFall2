@@ -247,3 +247,12 @@ Overhead target selection persists in played Eden4.55%,Exoplanet5.87%visible
 pilot-engage snapshots (selection, not proven firing). Weapon data stillR-201,
 no reliable damage/hit/tactical-outcome study. See FINDINGS.md for priorities.
 User explicitly requested OFFLINE review only; no launch/deploy/resume until asked.
+
+2026-10-25 deeper decision review is saved under research/decision-context-20261025.
+Analysis/tools may be pushed to GitHub per explicit user instruction; game/map
+testing stays paused.235 deduplicated overhead target bursts,213 descending,
+22 unclassified due to missing follow-up; observed high spans never exceed2s
+(not actual durations). Watchdog stale-context behavior reproduced in pure Rust;
+five strict compatible log cases, not proven false-alarm frequency. Production
+code and installed profiles remain unchanged. See FINDINGS.md/METHODS.md and
+verification.json for source equivalence, fixtures and reproduction details.

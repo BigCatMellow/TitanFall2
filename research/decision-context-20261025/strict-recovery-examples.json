@@ -1,0 +1,91 @@
+[
+  {
+    "source": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/movement",
+    "map": "mp_colony02",
+    "epoch": 1,
+    "slot": 10,
+    "event_t": 167.05,
+    "lines": [
+      "BOT_PLAYER epoch=1 map=mp_colony02 t=163.02 slot=10 id=65547 team=2 bot=1 alive=1 titan=0 hp=100 x=1168.0 y=-437.9 z=310.9",
+      "BOT_TRACE epoch=1 map=mp_colony02 t=163.02 slot=10 target=65546 visible=1 state=engage tx=868.4 ty=546.6 tz=132.7 speed=0.0 yaw=109.2 switches=56 recoveries=3 path_failures=1 path_requests=747 jumps=164 commands=8393 yaw_travel=15024.0 supporters=0 nodes=1 neighbors=0 spacing=823",
+      "BOT_PLAYER epoch=1 map=mp_colony02 t=165.02 slot=10 id=65547 team=2 bot=1 alive=1 titan=0 hp=25 x=1168.0 y=-437.9 z=310.9",
+      "BOT_TRACE epoch=1 map=mp_colony02 t=165.02 slot=10 target=65546 visible=1 state=engage tx=905.2 ty=305.7 tz=94.3 speed=0.0 yaw=110.9 switches=56 recoveries=3 path_failures=1 path_requests=747 jumps=164 commands=8513 yaw_travel=15307.7 supporters=1 nodes=1 neighbors=0 spacing=823",
+      "BOT_PLAYER epoch=1 map=mp_colony02 t=167.02 slot=10 id=65547 team=2 bot=1 alive=1 titan=0 hp=25 x=1168.0 y=-437.9 z=310.9",
+      "BOT_TRACE epoch=1 map=mp_colony02 t=167.02 slot=10 target=65546 visible=1 state=engage tx=1020.7 ty=-19.2 tz=93.9 speed=0.0 yaw=112.7 switches=56 recoveries=3 path_failures=1 path_requests=747 jumps=164 commands=8633 yaw_travel=15627.4 supporters=0 nodes=1 neighbors=0 spacing=823",
+      "BOT_RECOVERY epoch=1 t=167.05 slot=10 reason=no_progress x=1168.0 y=-437.9 z=310.9"
+    ]
+  },
+  {
+    "source": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/movement",
+    "map": "mp_colony02",
+    "epoch": 1,
+    "slot": 8,
+    "event_t": 275.17,
+    "lines": [
+      "BOT_PLAYER epoch=1 map=mp_colony02 t=271.02 slot=8 id=65545 team=2 bot=1 alive=1 titan=0 hp=100 x=-1064.0 y=1468.3 z=92.0",
+      "BOT_TRACE epoch=1 map=mp_colony02 t=271.02 slot=8 target=65550 visible=1 state=engage tx=99.8 ty=3466.0 tz=111.1 speed=0.8 yaw=61.1 switches=92 recoveries=5 path_failures=3 path_requests=850 jumps=224 commands=14933 yaw_travel=21205.1 supporters=3 nodes=1 neighbors=0 spacing=970",
+      "BOT_PLAYER epoch=1 map=mp_colony02 t=273.02 slot=8 id=65545 team=2 bot=1 alive=1 titan=0 hp=100 x=-1064.0 y=1468.3 z=92.0",
+      "BOT_TRACE epoch=1 map=mp_colony02 t=273.02 slot=8 target=65550 visible=1 state=engage tx=11.7 ty=3316.7 tz=11.9 speed=0.0 yaw=62.4 switches=92 recoveries=5 path_failures=3 path_requests=850 jumps=224 commands=15053 yaw_travel=21430.9 supporters=3 nodes=1 neighbors=0 spacing=970",
+      "BOT_DECISION epoch=1 t=273.43 slot=8 old=65550 target=65544 reason=engage",
+      "BOT_DECISION epoch=1 t=273.45 slot=8 old=65544 target=65550 reason=engage",
+      "BOT_DECISION epoch=1 t=273.47 slot=8 old=65550 target=65544 reason=engage",
+      "BOT_DECISION epoch=1 t=273.53 slot=8 old=65544 target=65550 reason=engage",
+      "BOT_PLAYER epoch=1 map=mp_colony02 t=275.02 slot=8 id=65545 team=2 bot=1 alive=1 titan=0 hp=100 x=-1064.0 y=1468.3 z=92.0",
+      "BOT_TRACE epoch=1 map=mp_colony02 t=275.02 slot=8 target=65550 visible=1 state=engage tx=-142.9 ty=3049.8 tz=12.0 speed=0.0 yaw=58.1 switches=96 recoveries=5 path_failures=3 path_requests=850 jumps=224 commands=15173 yaw_travel=21836.4 supporters=1 nodes=1 neighbors=0 spacing=970",
+      "BOT_DECISION epoch=1 t=275.03 slot=8 old=65550 target=65538 reason=engage",
+      "BOT_DECISION epoch=1 t=275.05 slot=8 old=65538 target=65550 reason=engage",
+      "BOT_DECISION epoch=1 t=275.15 slot=8 old=65550 target=65538 reason=engage",
+      "BOT_RECOVERY epoch=1 t=275.17 slot=8 reason=no_progress x=-1064.0 y=1468.3 z=92.0"
+    ]
+  },
+  {
+    "source": "Notes/map-surveys/all-maps-20261025-102025/04-mp_crashsite3/main/reports/01-mp_crashsite3/movement",
+    "map": "mp_crashsite3",
+    "epoch": 1,
+    "slot": 11,
+    "event_t": 51.08,
+    "lines": [
+      "BOT_PLAYER epoch=1 map=mp_crashsite3 t=47.02 slot=11 id=65548 team=3 bot=1 alive=1 titan=0 hp=63 x=-3588.8 y=-1246.4 z=850.7",
+      "BOT_TRACE epoch=1 map=mp_crashsite3 t=47.02 slot=11 target=65547 visible=1 state=engage tx=-3317.5 ty=-328.7 tz=844.3 speed=27.0 yaw=72.6 switches=9 recoveries=0 path_failures=0 path_requests=56 jumps=60 commands=1703 yaw_travel=2061.0 supporters=1 nodes=0 neighbors=0 spacing=1",
+      "BOT_PLAYER epoch=1 map=mp_crashsite3 t=49.02 slot=11 id=65548 team=3 bot=1 alive=1 titan=0 hp=63 x=-3572.2 y=-1252.6 z=846.5",
+      "BOT_TRACE epoch=1 map=mp_crashsite3 t=49.02 slot=11 target=65547 visible=1 state=engage tx=-3467.9 ty=-304.7 tz=891.3 speed=0.0 yaw=86.3 switches=9 recoveries=0 path_failures=0 path_requests=56 jumps=60 commands=1823 yaw_travel=2327.3 supporters=1 nodes=0 neighbors=0 spacing=1",
+      "BOT_DECISION epoch=1 t=49.92 slot=11 old=65547 target=65553 reason=engage",
+      "BOT_PLAYER epoch=1 map=mp_crashsite3 t=51.02 slot=11 id=65548 team=3 bot=1 alive=1 titan=0 hp=25 x=-3590.6 y=-1252.1 z=849.1",
+      "BOT_TRACE epoch=1 map=mp_crashsite3 t=51.02 slot=11 target=65553 visible=1 state=engage tx=-3376.3 ty=-453.3 tz=854.0 speed=0.0 yaw=76.1 switches=10 recoveries=0 path_failures=0 path_requests=56 jumps=60 commands=1943 yaw_travel=2547.9 supporters=2 nodes=0 neighbors=0 spacing=1",
+      "BOT_RECOVERY epoch=1 t=51.08 slot=11 reason=no_progress x=-3590.6 y=-1252.1 z=849.1"
+    ]
+  },
+  {
+    "source": "Notes/map-surveys/all-maps-20261025-102025/05-mp_drydock/main/reports/01-mp_drydock/movement",
+    "map": "mp_drydock",
+    "epoch": 1,
+    "slot": 2,
+    "event_t": 181.13,
+    "lines": [
+      "BOT_PLAYER epoch=1 map=mp_drydock t=177.02 slot=2 id=65539 team=2 bot=1 alive=1 titan=0 hp=100 x=51.8 y=-544.0 z=410.0",
+      "BOT_TRACE epoch=1 map=mp_drydock t=177.02 slot=2 target=65552 visible=1 state=engage tx=83.5 ty=994.7 tz=405.6 speed=9.6 yaw=86.9 switches=36 recoveries=4 path_failures=0 path_requests=389 jumps=264 commands=9473 yaw_travel=11303.4 supporters=1 nodes=1 neighbors=0 spacing=1102",
+      "BOT_PLAYER epoch=1 map=mp_drydock t=179.02 slot=2 id=65539 team=2 bot=1 alive=1 titan=0 hp=100 x=52.6 y=-544.0 z=410.0",
+      "BOT_TRACE epoch=1 map=mp_drydock t=179.02 slot=2 target=65552 visible=1 state=engage tx=37.4 ty=642.7 tz=388.3 speed=3.3 yaw=94.1 switches=36 recoveries=4 path_failures=0 path_requests=389 jumps=264 commands=9593 yaw_travel=11660.1 supporters=0 nodes=1 neighbors=0 spacing=1102",
+      "BOT_PLAYER epoch=1 map=mp_drydock t=181.02 slot=2 id=65539 team=2 bot=1 alive=1 titan=0 hp=100 x=48.4 y=-544.0 z=410.0",
+      "BOT_TRACE epoch=1 map=mp_drydock t=181.02 slot=2 target=65552 visible=1 state=engage tx=22.1 ty=440.7 tz=387.9 speed=44.1 yaw=93.2 switches=36 recoveries=4 path_failures=0 path_requests=389 jumps=264 commands=9713 yaw_travel=11964.8 supporters=0 nodes=1 neighbors=0 spacing=1102",
+      "BOT_RECOVERY epoch=1 t=181.13 slot=2 reason=no_progress x=55.0 y=-544.0 z=410.0"
+    ]
+  },
+  {
+    "source": "Notes/trend-analysis-20261025/played-latest/movement",
+    "map": "mp_thaw",
+    "epoch": 3,
+    "slot": 12,
+    "event_t": 117.23,
+    "lines": [
+      "BOT_PLAYER epoch=3 map=mp_thaw t=113.02 slot=12 id=131085 team=2 bot=1 alive=1 titan=0 hp=100 x=-583.8 y=1980.5 z=2.4",
+      "BOT_TRACE epoch=3 map=mp_thaw t=113.02 slot=12 target=131080 visible=1 state=engage tx=-575.9 ty=1056.1 tz=1.9 speed=44.2 yaw=-91.1 switches=22 recoveries=2 path_failures=1 path_requests=406 jumps=188 commands=5345 yaw_travel=7110.0 supporters=0 nodes=0 neighbors=0 spacing=206",
+      "BOT_PLAYER epoch=3 map=mp_thaw t=115.02 slot=12 id=131085 team=2 bot=1 alive=1 titan=0 hp=100 x=-557.7 y=1980.4 z=2.4",
+      "BOT_TRACE epoch=3 map=mp_thaw t=115.02 slot=12 target=131080 visible=1 state=engage tx=-575.9 ty=1056.3 tz=1.9 speed=0.0 yaw=-91.1 switches=22 recoveries=2 path_failures=1 path_requests=406 jumps=188 commands=5465 yaw_travel=7269.3 supporters=0 nodes=0 neighbors=0 spacing=206",
+      "BOT_DECISION epoch=3 t=116.92 slot=12 old=131080 target=131086 reason=engage",
+      "BOT_PLAYER epoch=3 map=mp_thaw t=117.02 slot=12 id=131085 team=2 bot=1 alive=1 titan=0 hp=100 x=-557.5 y=1972.6 z=2.4",
+      "BOT_TRACE epoch=3 map=mp_thaw t=117.02 slot=12 target=131086 visible=1 state=engage tx=-442.1 ty=-28.5 tz=-49.6 speed=86.7 yaw=-86.7 switches=23 recoveries=2 path_failures=1 path_requests=406 jumps=188 commands=5585 yaw_travel=7435.2 supporters=0 nodes=0 neighbors=0 spacing=206",
+      "BOT_RECOVERY epoch=3 t=117.23 slot=12 reason=no_progress x=-556.1 y=1954.0 z=0.0"
+    ]
+  }
+]

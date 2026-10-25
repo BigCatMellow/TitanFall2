@@ -1,0 +1,244 @@
+{
+  "tool": "tools/Analyze-DecisionContext.mjs",
+  "tool_sha256": "10c43916d8150a26cfaafff6283f7eb88d9d33d70b4b92de847cfcd41813315e",
+  "index": "research/trends-20261025/rounds.json",
+  "index_sha256": "b17dfcb6d48c247da20a19d8f4c0bf937d7b0b3b947d2844a5c37bcbd32faf43",
+  "inputs": [
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/01-mp_black_water_canal/main/reports/01-mp_black_water_canal/movement/metadata.json",
+      "sha256": "398595a1fa7ab56aaaa67374e9620652a0babe98b0238f8e431080a3fdaede64",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/01-mp_black_water_canal/main/reports/01-mp_black_water_canal/movement/observations.csv",
+      "sha256": "1adf1af888143f1f958a4a694d24116cffe2f42725f9c132a7d4b1d75b40a1d1",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/01-mp_black_water_canal/main/reports/01-mp_black_water_canal/movement/events.json",
+      "sha256": "ec11bf16d79f350f911139eaa79245bf999205415abaa018c3b27910641844d8",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/movement/metadata.json",
+      "sha256": "34e2e729f058ae4a4485cf51c7b54857f05c6cbf9cc2a235acd568f7e5efb38d",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/movement/observations.csv",
+      "sha256": "31fad91411af23d0c9a7f33cabec9b1f0dff0f3890570c68f499e93d27a098e8",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/movement/events.json",
+      "sha256": "6782218716e8b58dc0abaaf8e7c2d5f6470d3b22b10a5ecd5e4f3c907a39a422",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/03-mp_complex3/main/reports/01-mp_complex3/movement/metadata.json",
+      "sha256": "975024dca773062f91261e0f40e6ee03343a7023846928036313d43b51708ece",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/03-mp_complex3/main/reports/01-mp_complex3/movement/observations.csv",
+      "sha256": "8d6c153b6d10611fdf3994fe11dc400dbe7417d7429f448de9ec6e75ecd5b2ff",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/03-mp_complex3/main/reports/01-mp_complex3/movement/events.json",
+      "sha256": "de9cc69c89010ea00853ce6ee7454b8e3176010480b49d8c2946836f1c782ad2",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/04-mp_crashsite3/main/reports/01-mp_crashsite3/movement/metadata.json",
+      "sha256": "73dc1725600cc7f47555dc5dc26c60d903bc7391a7c2a9c2432aa2bcdd79d5dd",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/04-mp_crashsite3/main/reports/01-mp_crashsite3/movement/observations.csv",
+      "sha256": "e60407afe3e9dc9f54c96d02148097fdf16faaecb9723e0ee94a4ac5119b43c1",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/04-mp_crashsite3/main/reports/01-mp_crashsite3/movement/events.json",
+      "sha256": "de8366d6e07425763d29dcdc935da10d601af193756e0bee8920d5071815fbd3",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/05-mp_drydock/main/reports/01-mp_drydock/movement/metadata.json",
+      "sha256": "fe347e5fc855f8cd4d529f9b96d430e497cd9033bf59689eeeda2f028c862888",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/05-mp_drydock/main/reports/01-mp_drydock/movement/observations.csv",
+      "sha256": "5a34314bfa4566045c031fac264bb6ba02fe6cedc7a497b7edf7095222697f12",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/05-mp_drydock/main/reports/01-mp_drydock/movement/events.json",
+      "sha256": "be39374926ba34c9a51b86f2f4eec546aa722676f670bd884160839d498894c9",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/06-mp_forwardbase_kodai/main/reports/01-mp_forwardbase_kodai/movement/metadata.json",
+      "sha256": "2d67f6210348a3f901d922fa1682a68b2d256f95c1a264ca2a972b308c327da8",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/06-mp_forwardbase_kodai/main/reports/01-mp_forwardbase_kodai/movement/observations.csv",
+      "sha256": "d48140f47a83de7c1a733fb6233bcc570dd1137d6e08da6f59b45bd5ba34b4a3",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/06-mp_forwardbase_kodai/main/reports/01-mp_forwardbase_kodai/movement/events.json",
+      "sha256": "011bdcb3128ece050b727d5290ba824a6287ad8a095199d5bfa844a3dfff64d0",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/01-mp_eden/main/reports/01-mp_eden/movement/metadata.json",
+      "sha256": "404b14c1248e2ac135758a3773e177d8a651e2c8c72c0c86d00d801ed68522db",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/01-mp_eden/main/reports/01-mp_eden/movement/observations.csv",
+      "sha256": "521ee50f414f28e9eb067be6c6a4f14b7e6894f79f406180991f5c37ba598b51",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/01-mp_eden/main/reports/01-mp_eden/movement/events.json",
+      "sha256": "ac69b9b7f3fca954711a60c31ef70257036c04b819c895b02515f04625a73e12",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/02-mp_glitch/main/reports/01-mp_glitch/movement/metadata.json",
+      "sha256": "d4082620545dce1a46d97758da59ff8844b2657db9c09d142abcce142580f5cd",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/02-mp_glitch/main/reports/01-mp_glitch/movement/observations.csv",
+      "sha256": "455d028efa9ebfd7b77c502c059c49cc24ee736e2663dd6f9d7ac9e9355cce8c",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/02-mp_glitch/main/reports/01-mp_glitch/movement/events.json",
+      "sha256": "49fe81e2c1557fa04611232bde03b3b42db1f3470e35f894248444a2106d0648",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/03-mp_angel_city/main/reports/01-mp_angel_city/movement/metadata.json",
+      "sha256": "b0b4667e2805407520fd5fabaddf09b0a4a43c5689bfc95340f52491e94c0a0a",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/03-mp_angel_city/main/reports/01-mp_angel_city/movement/observations.csv",
+      "sha256": "b0580a060d4e0fc0b6c6e0a4733a8f1ebcb4e2cd086f6d137700e1da5d419e25",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/fresh-batch-20261025-083855/03-mp_angel_city/main/reports/01-mp_angel_city/movement/events.json",
+      "sha256": "bf8da7b66600e40c39a8910cca3c35b4b79102576838947cc687965a5d230754",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/eden-control-20261025-081915/main/reports/01-mp_eden/movement/metadata.json",
+      "sha256": "0382d2fcb8621b61b01d85b9d1dde92295d6c5fde1fcee47fcaa61bd0db4cc45",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/eden-control-20261025-081915/main/reports/01-mp_eden/movement/observations.csv",
+      "sha256": "9703adc06012f157eef0df1d75cdd51c95ee5223b834ab5216634b304aeaf6d3",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/eden-control-20261025-081915/main/reports/01-mp_eden/movement/events.json",
+      "sha256": "9b4c34a66e508344aeb34a7251f300ad0200b0a7fb69d6c2873012db87abe471",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/20261025-000402/main/reports/01-mp_lf_meadow/movement/metadata.json",
+      "sha256": "a5eac466789700928b34f5e9eeaa561c1d77598ab7bf43ffb1c617d14c3f1bfe",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/20261025-000402/main/reports/01-mp_lf_meadow/movement/observations.csv",
+      "sha256": "10d29bd3e51c9a5a844a1e1b7a283f9ea7549322df6ae64a7c1e3abf7cd97e71",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/20261025-000402/main/reports/01-mp_lf_meadow/movement/events.json",
+      "sha256": "572a26da4a052526532f03a852edb014322aca0221ad12b53c9bb8d0bd7b5329",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/trend-analysis-20261025/played-latest/movement/metadata.json",
+      "sha256": "2f6b9d877d4fcb723084b7da2d664a90fcd114b21644e04b033754446ac8e7bc",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/trend-analysis-20261025/played-latest/movement/observations.csv",
+      "sha256": "5504cec15e2fbc1d7a87f8e64c237514410b00c33197fc9d4e155c2069354747",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/trend-analysis-20261025/played-latest/movement/events.json",
+      "sha256": "8bdf9fdad7192e60683620e76d2c81d4a455c63d4993f9f85f5c4229f2a17b99",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/sessions/nslog2026-10-24_23-16-24/metadata.json",
+      "sha256": "a8bd2c7564bc124fdf80ed70ad8d4a4c6479f6fb51f472d8f1936a881df603f9",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/sessions/nslog2026-10-24_23-16-24/observations.csv",
+      "sha256": "45e282e829003460a03cf3700822d2558c5eb738546c16ab1c1a93167ae7001c",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/sessions/nslog2026-10-24_23-16-24/events.json",
+      "sha256": "02591c1fb5e422d422ce8e5ed9931c9f43384c8c18ccd79675ceebba5f0974ed",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/02-mp_colony02/main/reports/01-mp_colony02/movement/archived.log.gz",
+      "sha256": "c9297e50f94a811b8cc00506623e98f3c6f6fedfdbadec501c232c5a81ea84af",
+      "hash_mode": "binary"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/04-mp_crashsite3/main/reports/01-mp_crashsite3/movement/archived.log.gz",
+      "sha256": "5346f5525478f3a1377e6b06f8c5d3f2c6f442b5d09b51b035696a3cece9a814",
+      "hash_mode": "binary"
+    },
+    {
+      "file": "Notes/map-surveys/all-maps-20261025-102025/05-mp_drydock/main/reports/01-mp_drydock/movement/archived.log.gz",
+      "sha256": "3cb4a8773387088ce9f743c44f2cebb232e2b1af3cccd7b9a48635ad26b8d43e",
+      "hash_mode": "binary"
+    },
+    {
+      "file": "Notes/trend-analysis-20261025/played-latest/movement/archived.log.gz",
+      "sha256": "149663c351ca906c58769bb9597851e1264ae746128b5b4c57c044ef5d01dc0b",
+      "hash_mode": "binary"
+    },
+    {
+      "file": "bp_ort/src/bots/progress_watchdog.rs",
+      "sha256": "fa8e103e786edd989f1c76e8b2147ceb9cd2bc7bf0f3f363db97406511809816",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "bp_ort/src/bots/cmds_utils.rs",
+      "sha256": "26992deeb583757178e4070e1eb8cc91e773d189de2bb6fe9eba8ce9f24b06a6",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "bp_ort/src/bots/cmds/basic_combat.rs",
+      "sha256": "9bddef2e21761ccced42d811fa0b9bc9d6e12cc4915d8cf688270873c1b602b4",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    },
+    {
+      "file": "research/decision-context-20261025/watchdog-repro.rs",
+      "sha256": "cd86b034a1ac48d4b19129aeade87474462792fde09b85dc5436c4212d96e452",
+      "hash_mode": "UTF-8 text, CRLF normalized to LF"
+    }
+  ],
+  "limits": "Text hashes normalize CRLF to LF to match repository text policy; compressed-log hashes use exact bytes. Read METHODS.md before interpreting counts. No game or gameplay changes."
+}

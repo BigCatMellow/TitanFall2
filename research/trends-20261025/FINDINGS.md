@@ -6,6 +6,11 @@ resume, deployment or weapon/ability tuning occurred. Played/unattended and
 partial cohorts remain separate. [Summary](SUMMARY.md), [rounds](rounds.json),
 [aggregates](map-cohorts.json), [reproducible builder](../../tools/Build-TrendSummary.ps1).
 
+Follow-up: [deeper decision review](../decision-context-20261025/FINDINGS.md)
+deduplicates overhead selection and checks recovery timing. It strengthens the
+incoming-Titan explanation and reproduces a watchdog timer-context weakness;
+neither is a deployed fix.
+
 ## Positive patterns
 
 - Controlled sustained navigation low-progress fractions are low on Crash

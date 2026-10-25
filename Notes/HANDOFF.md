@@ -297,3 +297,21 @@ Overhead target selection persists in played Eden4.55%,Exoplanet5.87%visible
 pilot-engage snapshots (selection, not proven firing). Weapon data stillR-201,
 no reliable damage/hit/tactical-outcome study. See FINDINGS.md for priorities.
 User explicitly requested OFFLINE review only; no launch/deploy/resume until asked.
+
+2026-10-25 deeper offline decision review: user explicitly authorized pushing
+analysis/tools to GitHub while keeping game testing paused. See
+research/decision-context-20261025/FINDINGS.md and METHODS.md. New portable
+tools/Analyze-DecisionContext.mjs checks all16 phase-window/overhead counts
+against the earlier PowerShell builder; fixtures and deterministic regeneration
+pass.235 overhead target bursts after per-entity/time deduplication:213 show
+rapid descent,22 lack adjacent follow-up. All high bursts span one/two sampled
+frames (zero/two observed seconds), not measured fixation durations. Incoming
+pet Titans remain an inference; no direct transit classification or firing proof.
+Several bots select the same entity; do not count685 bot snapshots as685 drops.
+Watchdog helper reproduction confirms stale anchor time can survive a4s call
+gap. Five strict compatible recovery log contexts (<=.25s preceding frame),
+seven <=.5s,21 <=2.1s; nested counts, not confirmed false alarms/prevalence.
+Original filtered excerpts retained. Watchdog/cmds_utils files and target
+selection function match archivedv16 after line-ending normalization.
+No production source, installed files, saves or gameplay values changed;
+no game launch or queue resume. Installedv16/source diagnosticv17 unchanged.
