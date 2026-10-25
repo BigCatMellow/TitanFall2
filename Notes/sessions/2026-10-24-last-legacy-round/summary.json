@@ -1,0 +1,133 @@
+{
+  "MapLine": "[2026-10-24] [13:48:12] [SCRIPT UI] [info] UICodeCallback_LevelInit: mp_glitch",
+  "Start": "[2026-10-24] [13:48:28] [SCRIPT SV] [info] BOT_LIFECYCLE: match playing; bot joins enabled",
+  "End": "[2026-10-24] [13:56:25] [NORTHSTAR] [info] HostState: ChangeLevelMP",
+  "BotSlots": 15,
+  "Samples": 702,
+  "MovementAttemptSamples": 537,
+  "LowDisplacementSamples": 11,
+  "NavigationFailures": 299,
+  "Errors": 0,
+  "Bots": [
+    {
+      "Slot": 11,
+      "Samples": 47,
+      "MoveSamples": 33,
+      "LowDisplacementSamples": 2,
+      "MeanDisplacement": 1679.1,
+      "TitanSamples": 4
+    },
+    {
+      "Slot": 14,
+      "Samples": 46,
+      "MoveSamples": 37,
+      "LowDisplacementSamples": 2,
+      "MeanDisplacement": 1289.4,
+      "TitanSamples": 8
+    },
+    {
+      "Slot": 15,
+      "Samples": 46,
+      "MoveSamples": 30,
+      "LowDisplacementSamples": 2,
+      "MeanDisplacement": 1593.1,
+      "TitanSamples": 0
+    },
+    {
+      "Slot": 5,
+      "Samples": 47,
+      "MoveSamples": 33,
+      "LowDisplacementSamples": 1,
+      "MeanDisplacement": 1488.9,
+      "TitanSamples": 0
+    },
+    {
+      "Slot": 6,
+      "Samples": 47,
+      "MoveSamples": 38,
+      "LowDisplacementSamples": 1,
+      "MeanDisplacement": 893.4,
+      "TitanSamples": 4
+    },
+    {
+      "Slot": 8,
+      "Samples": 47,
+      "MoveSamples": 40,
+      "LowDisplacementSamples": 1,
+      "MeanDisplacement": 978.4,
+      "TitanSamples": 7
+    },
+    {
+      "Slot": 9,
+      "Samples": 47,
+      "MoveSamples": 33,
+      "LowDisplacementSamples": 1,
+      "MeanDisplacement": 1939.3,
+      "TitanSamples": 5
+    },
+    {
+      "Slot": 10,
+      "Samples": 47,
+      "MoveSamples": 38,
+      "LowDisplacementSamples": 1,
+      "MeanDisplacement": 869.8,
+      "TitanSamples": 11
+    },
+    {
+      "Slot": 1,
+      "Samples": 47,
+      "MoveSamples": 36,
+      "LowDisplacementSamples": 0,
+      "MeanDisplacement": 2056.0,
+      "TitanSamples": 6
+    },
+    {
+      "Slot": 2,
+      "Samples": 47,
+      "MoveSamples": 41,
+      "LowDisplacementSamples": 0,
+      "MeanDisplacement": 770.0,
+      "TitanSamples": 11
+    },
+    {
+      "Slot": 3,
+      "Samples": 47,
+      "MoveSamples": 37,
+      "LowDisplacementSamples": 0,
+      "MeanDisplacement": 1580.7,
+      "TitanSamples": 1
+    },
+    {
+      "Slot": 4,
+      "Samples": 47,
+      "MoveSamples": 35,
+      "LowDisplacementSamples": 0,
+      "MeanDisplacement": 1220.8,
+      "TitanSamples": 3
+    },
+    {
+      "Slot": 7,
+      "Samples": 47,
+      "MoveSamples": 34,
+      "LowDisplacementSamples": 0,
+      "MeanDisplacement": 1570.8,
+      "TitanSamples": 9
+    },
+    {
+      "Slot": 12,
+      "Samples": 47,
+      "MoveSamples": 37,
+      "LowDisplacementSamples": 0,
+      "MeanDisplacement": 1139.4,
+      "TitanSamples": 4
+    },
+    {
+      "Slot": 13,
+      "Samples": 46,
+      "MoveSamples": 35,
+      "LowDisplacementSamples": 0,
+      "MeanDisplacement": 2066.9,
+      "TitanSamples": 0
+    }
+  ]
+}

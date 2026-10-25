@@ -1,0 +1,9 @@
+State: complete
+Updated: 00:14:41
+Completed maps: 2 / 2
+Current: {"kills":"40","map":"mp_eden","bots":"16","militia":"19","elapsed":"115.1","imc":"21","index":"1"}
+Failure: 
+
+Completed results:
+mp_lf_meadow: 22-15, score_limit, 65.3s
+mp_eden: 21-19, score_limit, 115.4s

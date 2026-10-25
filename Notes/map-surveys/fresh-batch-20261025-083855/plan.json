@@ -1,0 +1,16 @@
+{
+  "created": "2026-10-25T08:38:55.2541280-04:00",
+  "maps": [
+    "mp_eden",
+    "mp_glitch",
+    "mp_angel_city"
+  ],
+  "template_control": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915",
+  "dll_sha256": "C6A60DC54A0B7230A71A5E6D972610B9A500435402CCE4AE868252E7DB191075",
+  "real_save_sha256": "A77FB6C2ECC2A3E48BCA6A273269934499721E46E6A9A7F7833B0EE2142444E5",
+  "goal": 200,
+  "time_limit_minutes": 15,
+  "bots": 16,
+  "aim_error": 0.78,
+  "fresh_process_each": true
+}

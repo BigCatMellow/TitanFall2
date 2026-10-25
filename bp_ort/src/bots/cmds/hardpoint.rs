@@ -126,7 +126,7 @@ pub fn basic_cap_holding(
     _ = path_to_target(
         cmd,
         local_data,
-        origin,
+        player.m_vecAbsOrigin,
         new_target_pos,
         should_recaculate.unwrap_or_else(|| local_data.target_pos != new_target_pos)
             || local_data.should_recalculate_path,

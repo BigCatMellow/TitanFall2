@@ -1,0 +1,7 @@
+State: stopped_error
+Updated: 00:18:26
+Completed maps: 0 / 8
+Current: null
+Failure: Game error: [2026-10-25] [00:18:24] [SCRIPT CL] [info] SCRIPT ERROR: [CLIENT] GetWeaponInfoFileKeyField_Global() - Could not find weapon with name '' (key was 'hud_icon')
+
+Completed results:

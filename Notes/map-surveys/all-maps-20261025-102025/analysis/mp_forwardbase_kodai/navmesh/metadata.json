@@ -1,0 +1,21 @@
+{
+  "source": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_forwardbase_kodai_small.nm",
+  "sha256": "4FCB85EE3E3895554E03DF8B28CC0A76F93F247EF16C2903AD276133471A2A62",
+  "set_version": 5,
+  "tile_version": 13,
+  "tiles": 286,
+  "vertices": 8174,
+  "surface_polygons": 3190,
+  "bounds": {
+    "min_z": 772.105224609375,
+    "max_y": 5580.5771484375,
+    "min_x": -4487.9150390625,
+    "max_z": 2258.005126953125,
+    "max_x": 4696.0849609375,
+    "min_y": -4147.4228515625
+  },
+  "trailing_bytes": 50232,
+  "observations_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\06-mp_forwardbase_kodai\\main\\reports\\01-mp_forwardbase_kodai\\movement\\observations.csv",
+  "pilot_stall_samples": 49,
+  "limits": "Read-only surface geometry from installed navmesh; no adjacency/traversal validation, collision scenery, or in-game visual observation. Rendered heights overlap in top-down views. Stalls are two-second samples, not unique incidents."
+}

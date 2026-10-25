@@ -1,0 +1,8 @@
+State: complete
+Updated: 09:27:05
+Completed maps: 1 / 1
+Current: {"elapsed":"755","kills":"348","militia":"150","bots":"16","imc":"198","index":"0","map":"mp_angel_city"}
+Failure: 
+
+Completed results:
+mp_angel_city: 200-150, score_limit, 757.7s

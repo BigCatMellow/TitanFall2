@@ -1,0 +1,21 @@
+{
+  "state": "stopped_error",
+  "updated": "2026-10-25T11:59:57.7352287-04:00",
+  "smoke": false,
+  "pid": 267228,
+  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 11-46-00.txt",
+  "current": {
+    "map": "mp_forwardbase_kodai",
+    "index": "0",
+    "kills": "239",
+    "imc": "141",
+    "militia": "98",
+    "elapsed": "745.1",
+    "bots": "16"
+  },
+  "completed": 0,
+  "expected": 1,
+  "results": [],
+  "failure": "Game closed before the survey completed",
+  "analysis_errors": []
+}

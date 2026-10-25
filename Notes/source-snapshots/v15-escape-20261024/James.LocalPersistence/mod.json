@@ -1,0 +1,9 @@
+{
+  "Name": "James.LocalPersistence",
+  "Description": "Saves local human Pilot/Titan loadouts as named JSON fields using Northstar Safe IO.",
+  "Version": "1.1.0",
+  "ConVars": [{"Name":"james_local_loadouts","DefaultValue":"1"}],
+  "LoadPriority": 10,
+  "Scripts": [{"Path":"james_local_persistence.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"JamesLocalPersistence_Init"}}],
+  "PluginDependencies": ["BP_ORT"]
+}

@@ -1,0 +1,32 @@
+{
+  "state": "complete",
+  "updated": "2026-10-25T09:27:21.4152639-04:00",
+  "batch_state": "complete",
+  "results": [
+    {
+      "map": "mp_eden",
+      "state": "complete",
+      "navigation_samples": 624,
+      "low_progress": 83,
+      "high_waypoints": 0,
+      "error": null
+    },
+    {
+      "map": "mp_glitch",
+      "state": "complete",
+      "navigation_samples": 461,
+      "low_progress": 13,
+      "high_waypoints": 0,
+      "error": null
+    },
+    {
+      "map": "mp_angel_city",
+      "state": "complete",
+      "navigation_samples": 338,
+      "low_progress": 6,
+      "high_waypoints": 0,
+      "error": null
+    }
+  ],
+  "failure": null
+}

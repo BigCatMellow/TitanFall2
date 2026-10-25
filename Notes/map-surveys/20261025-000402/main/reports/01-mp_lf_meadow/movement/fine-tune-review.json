@@ -1,0 +1,368 @@
+{
+  "rounds": [
+    {
+      "round": "1, mp_lf_meadow",
+      "pilot_samples": 3822,
+      "stalls": 4,
+      "stall_percent": 0.1,
+      "stall_height_over_180": 1,
+      "recover_samples": 11,
+      "hold_samples": 1125,
+      "stopped_holds": 230,
+      "empty_not_reloading": 58
+    }
+  ],
+  "stall_clusters": [
+    {
+      "area": "mp_lf_meadow, -384,1664,128",
+      "samples": 1,
+      "slots": [
+        13
+      ],
+      "height_median": -40.2,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65545
+      ]
+    },
+    {
+      "area": "mp_lf_meadow, 0,640,0",
+      "samples": 1,
+      "slots": [
+        13
+      ],
+      "height_median": 141.3,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65541
+      ]
+    },
+    {
+      "area": "mp_lf_meadow, 256,-128,0",
+      "samples": 1,
+      "slots": [
+        8
+      ],
+      "height_median": 191.8,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65552
+      ]
+    },
+    {
+      "area": "mp_lf_meadow, 256,1536,0",
+      "samples": 1,
+      "slots": [
+        11
+      ],
+      "height_median": 44.9,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65549
+      ]
+    }
+  ],
+  "longest_episodes": [
+    {
+      "kind": "blocked_hold",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 5,
+      "start": 309.02,
+      "end": 315.02,
+      "span": 6.0,
+      "count": 4,
+      "x": -372.4,
+      "y": 1362.2,
+      "z": 123.8,
+      "target": 65549,
+      "height": -50.89999999999999
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 12,
+      "start": 309.02,
+      "end": 315.02,
+      "span": 6.0,
+      "count": 4,
+      "x": -577.8,
+      "y": 395.5,
+      "z": 12.9,
+      "target": 65542,
+      "height": 170.9
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 9,
+      "start": 237.02,
+      "end": 241.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 44.9,
+      "y": 667.1,
+      "z": 16.0,
+      "target": 65551,
+      "height": 186.7
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 2,
+      "start": 491.02,
+      "end": 495.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -699.6,
+      "y": -414.1,
+      "z": 130.3,
+      "target": 65552,
+      "height": -60.400000000000006
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 1,
+      "start": 595.02,
+      "end": 599.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 125.3,
+      "y": 452.2,
+      "z": 126.3,
+      "target": 65541,
+      "height": 76.00000000000001
+    },
+    {
+      "kind": "empty",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 15,
+      "start": 249.02,
+      "end": 251.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -376.2,
+      "y": 1662.9,
+      "z": 121.4,
+      "target": 65541,
+      "height": 85.19999999999999
+    },
+    {
+      "kind": "empty",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 1,
+      "start": 27.02,
+      "end": 27.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -122.7,
+      "y": -326.2,
+      "z": 158.9,
+      "target": 65549,
+      "height": 10.699999999999989
+    },
+    {
+      "kind": "empty",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 9,
+      "start": 471.02,
+      "end": 471.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 52.1,
+      "y": 563.9,
+      "z": 13.7,
+      "target": 65543,
+      "height": 192.3
+    },
+    {
+      "kind": "empty",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 9,
+      "start": 617.02,
+      "end": 617.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -568.4,
+      "y": 637.8,
+      "z": 9.6,
+      "target": 65539,
+      "height": 202.1
+    },
+    {
+      "kind": "empty",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 10,
+      "start": 73.02,
+      "end": 73.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 329.4,
+      "y": -790.5,
+      "z": 297.7,
+      "target": 65550,
+      "height": -227.39999999999998
+    },
+    {
+      "kind": "reload",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 12,
+      "start": 31.02,
+      "end": 33.02,
+      "span": 2.0000000000000036,
+      "count": 2,
+      "x": -258.9,
+      "y": 1682.6,
+      "z": 108.1,
+      "target": 65544,
+      "height": 85.4
+    },
+    {
+      "kind": "reload",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 5,
+      "start": 257.02,
+      "end": 259.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -86.4,
+      "y": 1264.6,
+      "z": 23.2,
+      "target": 65547,
+      "height": 178.10000000000002
+    },
+    {
+      "kind": "reload",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 14,
+      "start": 477.02,
+      "end": 479.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 253.9,
+      "y": -863.5,
+      "z": 134.6,
+      "target": 65544,
+      "height": -43.5
+    },
+    {
+      "kind": "reload",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 7,
+      "start": 593.02,
+      "end": 595.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 3.8,
+      "y": 600.1,
+      "z": 14.4,
+      "target": 65545,
+      "height": 56.00000000000001
+    },
+    {
+      "kind": "reload",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 14,
+      "start": 435.02,
+      "end": 437.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 221.6,
+      "y": -442.1,
+      "z": 134.2,
+      "target": 65552,
+      "height": 53.80000000000001
+    },
+    {
+      "kind": "stall",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 8,
+      "start": 199.02,
+      "end": 199.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 196.9,
+      "y": -154.3,
+      "z": 11.0,
+      "target": 65552,
+      "height": 191.8
+    },
+    {
+      "kind": "stall",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 11,
+      "start": 577.02,
+      "end": 577.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 288.8,
+      "y": 1524.6,
+      "z": 16.1,
+      "target": 65549,
+      "height": 44.9
+    },
+    {
+      "kind": "stall",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 13,
+      "start": 421.02,
+      "end": 421.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 54.0,
+      "y": 671.4,
+      "z": 16.0,
+      "target": 65541,
+      "height": 141.3
+    },
+    {
+      "kind": "stall",
+      "map": "mp_lf_meadow",
+      "epoch": 1,
+      "slot": 13,
+      "start": 449.02,
+      "end": 449.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -329.2,
+      "y": 1671.8,
+      "z": 115.4,
+      "target": 65545,
+      "height": -40.2
+    }
+  ],
+  "target_churn": [
+    {
+      "epoch": "1",
+      "switches": 4623,
+      "reversals_within_half_second": 781,
+      "both_visible_reversals": 517
+    }
+  ]
+}

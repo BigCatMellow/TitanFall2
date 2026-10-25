@@ -1,0 +1,127 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\02-mp_colony02\\main\\raw-session.log",
+  "motion_lines": 1425,
+  "parsed": 1425,
+  "scope": "MAP_SURVEY_BEGIN through result or end of log; warmup excluded",
+  "pilot_context_samples": 752,
+  "navigation_samples": 494,
+  "low_progress_navigation_samples": 18,
+  "low_progress_states": [
+    {
+      "state": "embark",
+      "samples": 2
+    },
+    {
+      "state": "pursue",
+      "samples": 12
+    },
+    {
+      "state": "recover",
+      "samples": 4
+    }
+  ],
+  "low_progress_waypoint_height_over_180": 0,
+  "low_progress_near_xy_other_height": 0,
+  "top_low_progress_areas": [
+    {
+      "area": "mp_colony02, -128,-1024,384",
+      "samples": 3,
+      "slots": [
+        4,
+        11,
+        14
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": 0.97,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_colony02, 2304,3712,0",
+      "samples": 2,
+      "slots": [
+        12,
+        13
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": 45.97,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_colony02, -256,1536,0",
+      "samples": 1,
+      "slots": [
+        2
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": 5.97,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_colony02, -384,-1024,320",
+      "samples": 1,
+      "slots": [
+        4
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": -128.85,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_colony02, -384,-128,128",
+      "samples": 1,
+      "slots": [
+        1
+      ],
+      "states": [
+        "recover"
+      ],
+      "waypoint_height_median": 0.97,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_colony02, 128,1280,64",
+      "samples": 1,
+      "slots": [
+        9
+      ],
+      "states": [
+        "embark"
+      ],
+      "waypoint_height_median": 28.95,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_colony02, 128,1408,64",
+      "samples": 1,
+      "slots": [
+        5
+      ],
+      "states": [
+        "recover"
+      ],
+      "waypoint_height_median": -8.03,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_colony02, 2048,3712,64",
+      "samples": 1,
+      "slots": [
+        10
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": 95.53,
+      "near_xy_other_height": 0
+    }
+  ],
+  "limits": "Motion sampled about every 10 seconds. Context comes from preceding 2-second player/trace samples (max 3 wall seconds and 250 units); game time is approximate. Low progress is endpoint XY displacement below 50, not proof of continuous immobility. A next waypoint can be stale when path following is inactive; these records do not capture waypoint consumption, selected polygons, collision traces or active hull mapping. No causal diagnosis follows from height alone."
+}

@@ -1,0 +1,9 @@
+{
+  "source_log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main\\maps\\01-mp_angel_city.log",
+  "exported": "2026-10-25T09:26:58.2101487-04:00",
+  "structured": true,
+  "build_line": "[2026-10-25] [09:12:37] [BP-ORT000] [info] local build: combat-decisions-v16 (v15 navigation plus optional weapon-range and ammo decisions)",
+  "bot_joins": 0,
+  "error_lines": 0,
+  "limitations": "Position samples, not screen video. Stall flags require <50 units of displacement over at least 10 seconds while pursuing/recovering. Clustering ignores walls. Legacy logs lack teams, human positions, targets and exact alive state."
+}

@@ -1,0 +1,47 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\06-mp_forwardbase_kodai\\main\\maps\\01-mp_forwardbase_kodai.log",
+  "summary": [
+    {
+      "map": "mp_forwardbase_kodai",
+      "pilot_samples": 3187,
+      "bots": 16,
+      "weapons": [
+        "mp_weapon_rspn101"
+      ],
+      "tactics": [
+        {
+          "Name": "advance",
+          "Count": 2670
+        },
+        {
+          "Name": "range_hold",
+          "Count": 393
+        },
+        {
+          "Name": "range_retreat",
+          "Count": 12
+        },
+        {
+          "Name": "reload",
+          "Count": 44
+        },
+        {
+          "Name": "reload_hold",
+          "Count": 58
+        },
+        {
+          "Name": "reload_retreat",
+          "Count": 10
+        }
+      ],
+      "reload_samples": 104,
+      "moving_over_100": 1975,
+      "negative_clip_samples": 0,
+      "maximum_clip": 24.0
+    }
+  ],
+  "markers": [],
+  "error_count": 0,
+  "errors": [],
+  "limitations": "Two-second snapshots; a range hold can intentionally have low speed. Short random encounters and a largely idle human cannot establish improved difficulty or win rate."
+}

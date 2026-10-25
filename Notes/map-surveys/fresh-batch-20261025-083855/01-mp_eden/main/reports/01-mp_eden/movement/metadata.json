@@ -1,0 +1,9 @@
+{
+  "source_log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\01-mp_eden\\main\\maps\\01-mp_eden.log",
+  "exported": "2026-10-25T08:55:38.0382341-04:00",
+  "structured": true,
+  "build_line": "[2026-10-25] [08:39:11] [BP-ORT000] [info] local build: combat-decisions-v16 (v15 navigation plus optional weapon-range and ammo decisions)",
+  "bot_joins": 0,
+  "error_lines": 0,
+  "limitations": "Position samples, not screen video. Stall flags require <50 units of displacement over at least 10 seconds while pursuing/recovering. Clustering ignores walls. Legacy logs lack teams, human positions, targets and exact alive state."
+}

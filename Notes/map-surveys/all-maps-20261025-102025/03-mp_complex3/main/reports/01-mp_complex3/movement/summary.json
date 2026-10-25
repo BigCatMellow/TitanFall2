@@ -1,0 +1,26 @@
+[
+  {
+    "epoch": 1,
+    "map": "mp_complex3",
+    "bot_slots": 16,
+    "player_slots": 17,
+    "observations": 7120,
+    "alive_observations": 5625,
+    "stalled_observations": 128,
+    "crowded_observations": 187,
+    "switches": 6552.0,
+    "recoveries": 256.0,
+    "path_failures": 634.0,
+    "path_requests": 69805.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.6,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 888.0
+  }
+]

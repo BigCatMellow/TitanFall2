@@ -1,0 +1,96 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main\\raw-session.log",
+  "motion_lines": 1213,
+  "parsed": 1213,
+  "scope": "MAP_SURVEY_BEGIN through result or end of log; warmup excluded",
+  "pilot_context_samples": 592,
+  "navigation_samples": 338,
+  "low_progress_navigation_samples": 6,
+  "low_progress_states": [
+    {
+      "state": "pursue",
+      "samples": 4
+    },
+    {
+      "state": "recover",
+      "samples": 2
+    }
+  ],
+  "low_progress_waypoint_height_over_180": 0,
+  "low_progress_near_xy_other_height": 0,
+  "top_low_progress_areas": [
+    {
+      "area": "mp_angel_city, 1664,1024,128",
+      "samples": 1,
+      "slots": [
+        7
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": 3.28,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_angel_city, 1664,1152,128",
+      "samples": 1,
+      "slots": [
+        15
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": 3.28,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_angel_city, 256,-384,128",
+      "samples": 1,
+      "slots": [
+        2
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": 3.28,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_angel_city, 256,-384,192",
+      "samples": 1,
+      "slots": [
+        2
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": -47.95,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_angel_city, 2688,-2944,192",
+      "samples": 1,
+      "slots": [
+        4
+      ],
+      "states": [
+        "recover"
+      ],
+      "waypoint_height_median": 0.0,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_angel_city, 2944,-2944,192",
+      "samples": 1,
+      "slots": [
+        16
+      ],
+      "states": [
+        "recover"
+      ],
+      "waypoint_height_median": 1.48,
+      "near_xy_other_height": 0
+    }
+  ],
+  "limits": "Motion sampled about every 10 seconds. Context comes from preceding 2-second player/trace samples (max 3 wall seconds and 250 units); game time is approximate. Low progress is endpoint XY displacement below 50, not proof of continuous immobility. A next waypoint can be stale when path following is inactive; these records do not capture waypoint consumption, selected polygons, collision traces or active hull mapping. No causal diagnosis follows from height alone."
+}

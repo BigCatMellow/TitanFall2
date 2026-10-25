@@ -1,0 +1,3 @@
+"map","epoch","t_approx","wall_time","slot","hp","state","pilot_context","context_age_seconds","context_position_gap","x","y","z","nx","ny","nz","waypoint_horizontal","waypoint_height","horizontal_delta_10s","low_progress","route_nodes","near_xy_other_height","grid"
+"mp_eden","1","3","10/25/2026 12:00:02 AM","1","100","pursue","1","0","0","0","0","0","0","0","200","0","200","0","1","1","1","0,0,0"
+"mp_eden","1","3","10/25/2026 12:00:02 AM","2","50","pursue","0","0","0","0","0","0","0","0","200","0","200","0","1","1","1","0,0,0"

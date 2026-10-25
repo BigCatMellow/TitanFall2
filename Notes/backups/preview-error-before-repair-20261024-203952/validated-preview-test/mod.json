@@ -1,0 +1,10 @@
+{
+  "Name": "James.MenuPreviewTest",
+  "Description": "Isolated post-round pilot preview preservation regression probe.",
+  "Version": "1.0.0",
+  "LoadPriority": 30,
+  "Scripts": [
+    {"Path":"james_menu_preview_test.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"JamesMenuPreviewTest_Init"}},
+    {"Path":"james_menu_preview_test_client.nut","RunOn":"CLIENT && MP","ClientCallback":{"After":"JamesMenuPreviewTest_ClientInit"}}
+  ]
+}

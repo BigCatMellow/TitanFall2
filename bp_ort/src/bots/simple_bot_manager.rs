@@ -23,6 +23,7 @@ static MAX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 static MIN_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 static TARGET_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 static ENABLED_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+static ROUND_READY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 
 #[derive(Debug, Clone)]
 pub struct ManagerData {
@@ -33,6 +34,7 @@ pub struct ManagerData {
     active: bool,
     bots_to_spawn: u32,
     bots_to_remove: u32,
+    last_spawn_at: Option<f32>,
 }
 
 impl Default for ManagerData {
@@ -45,7 +47,17 @@ impl Default for ManagerData {
             active: false,
             bots_to_spawn: 0,
             bots_to_remove: 0,
+            last_spawn_at: None,
         }
+    }
+}
+
+impl ManagerData {
+    pub fn reset_for_map(&mut self) {
+        self.active = false;
+        self.bots_to_spawn = 0;
+        self.bots_to_remove = 0;
+        self.last_spawn_at = None;
     }
 }
 
@@ -56,6 +68,17 @@ pub fn register_manager_sq_functions() {
 }
 
 pub fn register_manager_vars(_: &EngineData, token: EngineToken) {
+    _ = ROUND_READY_CONVAR.set(
+        ConVarStruct::try_new(
+            &ConVarRegister::mandatory(
+                "bot_manager_round_ready",
+                "0",
+                FCVAR_GAMEDLL as i32,
+                "set by the bot lifecycle script after the match intro completes",
+            ),
+            token,
+        ).expect("couldn't register bot_manager_round_ready"),
+    );
     _ = MAX_CONVAR.set(
         ConVarStruct::try_new(
             &ConVarRegister {
@@ -121,6 +144,12 @@ pub fn register_manager_vars(_: &EngineData, token: EngineToken) {
     );
 }
 
+pub fn reset_round_ready(token: EngineToken) {
+    if let Some(ready) = ROUND_READY_CONVAR.get() {
+        ready.set_value_i32(0, token);
+    }
+}
+
 fn kick_player(engine_funcs: &EngineFunctions) {
     // remove extra bots
     let engine_server = ENGINE_INTERFACES.wait().engine_server;
@@ -162,6 +191,13 @@ pub fn check_player_amount(plugin: &super::Bots, token: EngineToken) -> Result<(
     if !unsafe { iterate_c_array_sized::<_, 32>(engine_funcs.client_array.into()) }.all(|client| {
         client.m_nSignonState == SignonState::FULL || client.m_nSignonState == SignonState::NONE
     }) {
+        return Ok(());
+    }
+
+    // The script thread publishes readiness from its normal game-state event.
+    // Do not enter the VM from the engine frame while scripts initialize players.
+    if !ROUND_READY_CONVAR.get().is_some_and(ConVarStruct::get_value_bool) {
+        manager_data.active = false;
         return Ok(());
     }
 
@@ -218,15 +254,22 @@ pub fn check_player_amount(plugin: &super::Bots, token: EngineToken) -> Result<(
 
     match (manager_data.bots_to_spawn, manager_data.bots_to_remove) {
         (1.., _) => {
-            // add bots
-            spawn_fake_player(
+            // Signon FULL can precede the end of all script join callbacks.
+            // Leave a short gap between clients so their initialization settles.
+            let now = unsafe { engine_funcs.globals.as_ref() }.ok_or("missing globals")?.curTime;
+            if manager_data.last_spawn_at.is_some_and(|last| now >= last && now - last < 0.5) {
+                return Ok(());
+            }
+            if spawn_fake_player(
                 get_bot_name(),
                 choose_team(),
                 None,
                 server_funcs,
                 engine_funcs,
                 token,
-            );
+            ).is_some() {
+                manager_data.last_spawn_at = Some(now);
+            }
         }
         (0, _r @ 1..) => {
             kick_player(engine_funcs);

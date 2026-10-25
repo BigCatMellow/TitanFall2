@@ -1,0 +1,59 @@
+[
+  {
+    "epoch": 1,
+    "map": "mp_relic02",
+    "bot_slots": 15,
+    "player_slots": 15,
+    "observations": 658,
+    "alive_observations": 613,
+    "stalled_observations": 16,
+    "crowded_observations": 0,
+    "switches": 0.0,
+    "recoveries": 0.0,
+    "path_failures": 0.0,
+    "path_requests": 0.0,
+    "mean_largest_pursuit_share": null,
+    "coordination": [
+      -1
+    ],
+    "duration": 430.0
+  },
+  {
+    "epoch": 2,
+    "map": "mp_forwardbase_kodai",
+    "bot_slots": 15,
+    "player_slots": 15,
+    "observations": 501,
+    "alive_observations": 465,
+    "stalled_observations": 8,
+    "crowded_observations": 0,
+    "switches": 0.0,
+    "recoveries": 0.0,
+    "path_failures": 0.0,
+    "path_requests": 0.0,
+    "mean_largest_pursuit_share": null,
+    "coordination": [
+      -1
+    ],
+    "duration": 330.0
+  },
+  {
+    "epoch": 3,
+    "map": "mp_glitch",
+    "bot_slots": 15,
+    "player_slots": 15,
+    "observations": 702,
+    "alive_observations": 669,
+    "stalled_observations": 11,
+    "crowded_observations": 0,
+    "switches": 0.0,
+    "recoveries": 0.0,
+    "path_failures": 0.0,
+    "path_requests": 0.0,
+    "mean_largest_pursuit_share": null,
+    "coordination": [
+      -1
+    ],
+    "duration": 460.0
+  }
+]

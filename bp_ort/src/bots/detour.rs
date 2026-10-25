@@ -31,6 +31,15 @@ fn physics_run_think_functions_hook(paused: bool) {
     crate::holoplus::run_holo_frame();
 
     unsafe { Physics_RunThinkFunctions.call(paused) }
+
+    // Fake-client joins execute server Squirrel callbacks. Run them on the
+    // server frame after simulation has released its bot-state borrows, not
+    // from the engine/render frame that may overlap a worker server thread.
+    // The native parameter is a simulation flag, despite the historical
+    // `paused` name above. Server readiness/cooldown checks gate joins.
+    crate::PLUGIN.wait().bots.server_frame(unsafe {
+        rrplug::prelude::EngineToken::new_unchecked()
+    });
 }
 
 fn create_null_cmd_hook(cmd: *mut CUserCmd) -> *mut CUserCmd {

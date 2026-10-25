@@ -1,0 +1,9 @@
+{
+  "source_log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-24 23-10-17.txt",
+  "exported": "2026-10-24T23:17:18.1615011-04:00",
+  "structured": true,
+  "build_line": "[2026-10-24] [23:10:18] [BP-ORT000] [info] local build: combat-decisions-v16 (v15 navigation plus optional weapon-range and ammo decisions)",
+  "bot_joins": 30,
+  "error_lines": 0,
+  "limitations": "Position samples, not screen video. Stall flags require <50 units of displacement over at least 10 seconds while pursuing/recovering. Clustering ignores walls. Legacy logs lack teams, human positions, targets and exact alive state."
+}

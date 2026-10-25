@@ -1,0 +1,5 @@
+{
+  "requested": "2026-10-25T11:59:50.1891917-04:00",
+  "reason": "User wants to play; interrupt current test and preserve partial evidence",
+  "resume_requires_user_request": true
+}

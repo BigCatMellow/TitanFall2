@@ -38,18 +38,34 @@ pub fn path_to_target(
     should_recalcute_path: bool,
     helper: &CUserCmdHelper,
 ) -> bool {
+    if distance3(target_pos, origin)
+        <= BOT_PATH_NODE_RANGE + local_data.approach_range.unwrap_or(20.) {
+        local_data.movement_anchor = None;
+        return false;
+    }
+    if time(helper) < local_data.recovery_until {
+        face_toward(cmd, origin, target_pos, helper);
+        try_avoid_obstacle(cmd, local_data, helper);
+        return true;
+    }
+    if super::progress_watchdog::has_stalled(time(helper), &mut local_data.movement_anchor,
+        [origin.x, origin.y]) {
+        if let Some(nav) = local_data.nav_query.as_mut() {
+            nav.path_points.clear();
+            nav.end_point = None;
+        }
+        local_data.recovery_until = time(helper) + 1.2;
+        note_recovery(local_data, origin, helper, "no_progress");
+        face_toward(cmd, origin, target_pos, helper);
+        try_avoid_obstacle(cmd, local_data, helper);
+        return true;
+    }
     let dt_funcs = RECAST_DETOUR.wait();
     let debug = ENGINE_INTERFACES.wait().debug_overlay;
     let Some(nav) = local_data.nav_query.as_mut() else {
         log::warn!("null nav");
         return false;
     };
-
-    if distance3(target_pos, origin)
-        <= BOT_PATH_NODE_RANGE + local_data.approach_range.unwrap_or(20.)
-    {
-        return false;
-    }
 
     _ = nav
         .path_points
@@ -77,13 +93,17 @@ pub fn path_to_target(
 
         // this might be the reason of the sudden aim shift or not really idk
         if local_data.last_bad_path + 1. >= helper.globals.curTime {
+            face_toward(cmd, origin, target_pos, helper);
             try_avoid_obstacle(cmd, local_data, helper);
 
             return false;
         }
 
+        local_data.metrics.path_requests = local_data.metrics.path_requests.saturating_add(1);
         if let Err(err) = nav.new_path(origin, target_pos, dt_funcs) {
+            local_data.metrics.path_failures = local_data.metrics.path_failures.saturating_add(1);
             log::warn!("navigation pathing failed stuck somewhere probably! {err}");
+            face_toward(cmd, origin, target_pos, helper);
             try_avoid_obstacle(cmd, local_data, helper);
 
             local_data.last_bad_path = time(helper);
@@ -99,39 +119,37 @@ pub fn path_to_target(
         || nav.path_points.is_empty()
     {
         try_avoid_obstacle(cmd, local_data, helper);
-        cmd.world_view_angles.y = look_at(origin, target_pos).y;
+        face_toward(cmd, origin, target_pos, helper);
 
         return true;
     }
 
-    if distance(local_data.next_target_pos, origin) <= BOT_PATH_NODE_RANGE {
+    while distance(local_data.next_target_pos, origin) <= BOT_PATH_NODE_RANGE {
+        let Some(next) = nav.next_point() else { break; };
         local_data.last_time_node_reached = helper.globals.curTime;
-        local_data.next_target_pos = nav
-            .next_point()
-            .expect("should always have enough points here");
+        local_data.next_target_pos = next;
     }
 
-    // origin is from the eyes?
-    if local_data.next_target_pos.z - origin.z >= -40.
-        && (is_timedout(local_data.jump_delay, helper, 0.5)
-            .then(|| local_data.jump_hold = 4)
-            .map(|_| true)
-            .unwrap_or_default()
-            || local_data.jump_hold != 0)
-    {
-        // log::info!("jumpiness: {}", local_data.next_target_pos.z - origin.z);
+    // Flat routes do not need a constant jump attempt. Finish a short press,
+    // then release it before trying again at a step or during recovery.
+    if super::jump_pulse::jump_pulse(time(helper), &mut local_data.jump_delay,
+        &mut local_data.jump_hold, local_data.next_target_pos.z - origin.z > 18.) {
         cmd.buttons |= Action::Jump as u32;
-        local_data.jump_delay = time(helper);
         cmd.move_.z = 1.0; // hmmm
-
-        local_data.jump_hold = local_data.jump_hold.saturating_sub(1);
     }
 
-    cmd.world_view_angles.y = look_at(origin, local_data.next_target_pos).y;
+    face_toward(cmd, origin, local_data.next_target_pos, helper);
     cmd.move_.x = 1.0;
     cmd.buttons |= Action::Forward as u32 | Action::Speed as u32;
 
     if is_timedout(local_data.last_time_node_reached, helper, 5.) {
+        // Repeating avoidance against the same stale route never escapes it.
+        if let Some(nav) = local_data.nav_query.as_mut() {
+            nav.path_points.clear();
+            nav.end_point = None;
+        }
+        local_data.recovery_until = time(helper) + 1.2;
+        note_recovery(local_data, origin, helper, "waypoint_timeout");
         try_avoid_obstacle(cmd, local_data, helper);
     }
 
@@ -140,6 +158,15 @@ pub fn path_to_target(
 
 pub fn is_timedout(last_time: f32, helper: &CUserCmdHelper<'_>, time_elasped: f32) -> bool {
     last_time + time_elasped <= time(helper)
+}
+
+fn face_toward(cmd: &mut CUserCmd, origin: Vector3, target: Vector3, helper: &CUserCmdHelper) {
+    // A duplicate start point has no direction; atan2(0, 0) would snap east.
+    if distance(origin, target) > 1. {
+        cmd.world_view_angles.y = super::behavior_tuning::turn_yaw(
+            helper.angles.y, look_at(origin, target).y,
+            540. * helper.globals.frameTime.clamp(0., 0.05));
+    }
 }
 
 // same here
@@ -366,7 +393,14 @@ pub fn view_rate(
 }
 
 pub fn try_avoid_obstacle(cmd: &mut CUserCmd, local_data: &mut BotData, helper: &CUserCmdHelper) {
-    local_data.jump_delay_obstacle = time(helper);
+    local_data.metrics.state = "recover";
+    if escape_recovery_enabled(local_data)
+        && let Some(side) = local_data.escape_recovery.backstep_side(time(helper), local_data.edict) {
+        cmd.move_ = Vector3::new(-0.8, side, 0.);
+        cmd.buttons &= !(Action::Forward as u32 | Action::Jump as u32);
+        cmd.buttons |= Action::Back as u32 | Action::Speed as u32;
+        return;
+    }
     cmd.move_ = Vector3::new(
         1.,
         if helper.globals.frameCount / 100 % 2 == 0 {
@@ -377,18 +411,38 @@ pub fn try_avoid_obstacle(cmd: &mut CUserCmd, local_data: &mut BotData, helper: 
         0.,
     );
     cmd.buttons |= Action::Forward as u32
-        | Action::Walk as u32
-        | (is_timedout(local_data.jump_delay_obstacle, helper, 0.5)
-            .then(|| local_data.jump_hold = 4))
-        .or_else(|| (local_data.jump_hold != 0).then_some(()))
-        .map(|_| Action::Jump as u32)
-        .unwrap_or_default();
+        | Action::Speed as u32;
+    let retry_jump = is_timedout(local_data.jump_delay, helper, 1.2);
+    if super::jump_pulse::jump_pulse(time(helper), &mut local_data.jump_delay,
+        &mut local_data.jump_hold, retry_jump) {
+        cmd.buttons |= Action::Jump as u32;
+    }
+}
 
-    local_data.jump_hold = local_data.jump_hold.saturating_sub(0);
+fn note_recovery(local: &mut BotData, origin: Vector3, helper: &CUserCmdHelper, reason: &str) {
+    if escape_recovery_enabled(local) {
+        local.escape_recovery.stalled(time(helper), [origin.x, origin.y]);
+        if let Some(side) = local.escape_recovery.backstep_side(time(helper), local.edict)
+            && super::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
+            log::info!("BOT_ESCAPE epoch={} t={:.2} slot={} side={side} x={:.1} y={:.1} z={:.1}",
+                super::telemetry::epoch(), time(helper), local.edict, origin.x, origin.y, origin.z);
+        }
+    }
+    local.metrics.recoveries = local.metrics.recoveries.saturating_add(1);
+    if super::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
+        log::info!("BOT_RECOVERY epoch={} t={:.2} slot={} reason={reason} x={:.1} y={:.1} z={:.1}",
+            super::telemetry::epoch(), time(helper), local.edict, origin.x, origin.y, origin.z);
+    }
 }
 
 pub fn time(helper: &CUserCmdHelper<'_>) -> f32 {
     helper.globals.curTime
+}
+
+fn escape_recovery_enabled(local: &BotData) -> bool {
+    super::ESCAPE_RECOVERY_CONVAR.get().is_some_and(|c| c.get_value_bool())
+        && local.sim_type.unwrap_or_else(|| super::SIMULATE_TYPE_CONVAR.wait().get_value_i32()) == 6
+        && local.nav_query.as_ref().is_some_and(|q| q.hull == crate::navmesh::Hull::Human)
 }
 
 pub fn distance(pos: Vector3, target: Vector3) -> f32 {

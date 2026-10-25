@@ -1,0 +1,163 @@
+#![allow(unused)]
+
+use std::ops::Deref;
+
+use rrplug::bindings::class_types::cplayer::CPlayer;
+use rrplug::bindings::server::cbaseentity::CBaseEntity;
+use rrplug::prelude::*;
+use rrplug::{
+    bindings::{
+        class_types::client::SignonState,
+        cvar::convar::{FCVAR_CLIENTDLL, FCVAR_GAMEDLL, FCVAR_GAMEDLL_FOR_REMOTE_CLIENTS},
+    },
+    mid::utils::from_char_ptr,
+};
+use shared::utils::{is_alive, lookup_ent, nudge_type};
+
+use crate::admin_abuse::completion_append_player_names;
+use crate::bindings::CLIENT_FUNCTIONS;
+use crate::utils::get_c_char_array_lossy;
+use crate::{
+    admin_abuse::{admin_check, execute_for_matches, forward_to_server},
+    bindings::{ENGINE_FUNCTIONS, SERVER_FUNCTIONS},
+    utils::{from_c_string, iterate_c_array_sized},
+};
+
+pub fn register_teleport_command(engine_data: &EngineData, token: EngineToken) {
+    _ = engine_data.register_concommand_with_completion(
+        "tp",
+        forward_to_server,
+        "kills a desired target",
+        FCVAR_CLIENTDLL as i32,
+        teleport_completion,
+        token,
+    );
+
+    _ = engine_data.register_concommand(
+        "tp_server",
+        teleport_server_command,
+        "",
+        FCVAR_GAMEDLL_FOR_REMOTE_CLIENTS as i32 | FCVAR_GAMEDLL as i32,
+        token,
+    );
+
+    _ = engine_data.register_concommand(
+        "pos",
+        print_player_position,
+        "",
+        FCVAR_CLIENTDLL as i32,
+        token,
+    );
+
+    _ = engine_data.register_concommand(
+        "angles",
+        print_player_angles,
+        "",
+        FCVAR_CLIENTDLL as i32,
+        token,
+    );
+}
+
+#[rrplug::concommand]
+fn print_player_position() -> Option<()> {
+    log::info!("pos: {:?}", unsafe {
+        *(CLIENT_FUNCTIONS.wait().get_local_c_player)()
+            .as_ref()?
+            .get_origin()
+    });
+
+    None
+}
+
+#[rrplug::concommand]
+fn print_player_angles() -> Option<()> {
+    log::info!("angles: catornot should find the function in c_player lol");
+
+    None
+}
+
+#[rrplug::concommand]
+fn teleport_server_command(command: CCommandResult) -> Option<()> {
+    if command.get_arg(1).is_none() {
+        log::warn!("Usage:  {} < name > < name >", command.get_command());
+        return None;
+    }
+
+    let name_target = command.get_arg(1)?;
+
+    let engine = ENGINE_FUNCTIONS.wait();
+    let funcs = SERVER_FUNCTIONS.wait();
+
+    if !admin_check(&command, engine, funcs).0 {
+        return None;
+    }
+
+    let mut v = Vector3::ZERO;
+    let tp_location = unsafe { iterate_c_array_sized::<_, 32>(engine.client_array.into()) }
+        .enumerate()
+        .filter(|(_, client)| client.m_nSignonState == SignonState::FULL)
+        .filter_map(|(e, client)| unsafe {
+            Some((
+                (funcs.get_player_by_index)(e as i32 + 1).as_mut()?,
+                get_c_char_array_lossy(&client.m_szServerName),
+            ))
+        })
+        .find_map(|(player, name)| {
+            unsafe {
+                (funcs.calc_origin)(
+                    nudge_type::<&CBaseEntity>(player),
+                    &(nudge_type::<&CBaseEntity>(player.deref()) as *const CBaseEntity),
+                    0,
+                    0,
+                );
+            }
+            name_target
+                .starts_with(name.as_str())
+                .then_some(player.m_vecAbsOrigin)
+        })?;
+
+    // if unsafe { !(funcs.check_position)(&tp_location).is_null() } {
+    //     log::warn!("out of bounds {tp_location}");
+    //     return None;
+    // }
+
+    execute_for_matches(
+        command.get_arg(0),
+        |player| {
+            if lookup_ent(player.m_hMoveParent, funcs).is_none() && is_alive(player) {
+                unsafe { (funcs.set_origin)(player, &tp_location) }
+            }
+        },
+        true,
+        funcs,
+        engine,
+    );
+
+    Some(())
+}
+
+#[rrplug::completion]
+fn teleport_completion(current: CurrentCommand, suggestions: CommandCompletion) {
+    let Some((prev, next)) = current.partial.split_once(' ') else {
+        if "all".starts_with(current.partial) {
+            _ = suggestions.push(&format!("{} all", current.cmd))
+        }
+
+        if "imc".starts_with(current.partial) {
+            _ = suggestions.push(&format!("{} imc", current.cmd))
+        }
+
+        if "militia".starts_with(current.partial) {
+            _ = suggestions.push(&format!("{} militia", current.cmd))
+        }
+
+        completion_append_player_names(current.partial, |name| {
+            _ = suggestions.push(&format!("{} {}", current.cmd, name))
+        });
+        return;
+    };
+
+    completion_append_player_names(next, |name| {
+        _ = suggestions.push(&format!("{} {} {}", current.cmd, prev, name))
+    });
+}

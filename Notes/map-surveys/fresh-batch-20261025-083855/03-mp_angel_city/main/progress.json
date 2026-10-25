@@ -1,0 +1,32 @@
+{
+  "state": "complete",
+  "updated": "2026-10-25T09:27:05.4252574-04:00",
+  "smoke": false,
+  "pid": 246452,
+  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 09-12-36.txt",
+  "current": {
+    "elapsed": "755",
+    "kills": "348",
+    "militia": "150",
+    "bots": "16",
+    "imc": "198",
+    "index": "0",
+    "map": "mp_angel_city"
+  },
+  "completed": 1,
+  "expected": 1,
+  "results": [
+    {
+      "index": "0",
+      "map": "mp_angel_city",
+      "valid": "true",
+      "log_file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main\\maps\\01-mp_angel_city.log",
+      "imc": "200",
+      "elapsed": "757.7",
+      "reason": "score_limit",
+      "militia": "150"
+    }
+  ],
+  "failure": null,
+  "analysis_errors": []
+}

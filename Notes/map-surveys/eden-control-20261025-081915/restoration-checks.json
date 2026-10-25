@@ -1,0 +1,34 @@
+[
+  {
+    "file": "autoexec_ns_server.cfg",
+    "matches": true
+  },
+  {
+    "file": "cycle-mod.json",
+    "matches": true
+  },
+  {
+    "file": "persistence-server.nut",
+    "matches": true
+  },
+  {
+    "file": "survey-harness.nut",
+    "matches": true
+  },
+  {
+    "file": "loadouts_LOCAL_PLAYER_UID.json",
+    "matches": true
+  },
+  {
+    "file": "previous_LOCAL_PLAYER_UID.json",
+    "matches": true
+  },
+  {
+    "file": "normal save unchanged",
+    "matches": true
+  },
+  {
+    "file": "survey disabled",
+    "matches": true
+  }
+]

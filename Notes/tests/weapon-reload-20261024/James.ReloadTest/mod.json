@@ -1,0 +1,1 @@
+{"Name":"James.ReloadTest","Version":"0.0.1","LoadPriority":60,"Scripts":[{"Path":"james_reload_test.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"JamesReloadTest_Init"}}]}

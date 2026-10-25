@@ -26,7 +26,7 @@ use std::{
     cell::RefCell,
     collections::HashMap,
     ops::Not,
-    sync::atomic::{AtomicI32, AtomicU32, Ordering},
+    sync::atomic::{AtomicBool, AtomicI32, AtomicU32, Ordering},
 };
 use windows_sys::Win32::System::LibraryLoader::GetModuleHandleA;
 
@@ -51,6 +51,13 @@ pub mod cmds_utils;
 mod convars;
 mod debug_commands;
 mod detour;
+mod jump_pulse;
+mod behavior_tuning;
+mod progress_watchdog;
+mod coordination;
+mod escape_recovery;
+mod combat_decisions;
+mod telemetry;
 mod netvars;
 mod persistence;
 mod set_on_join;
@@ -63,8 +70,16 @@ static BASE_AIM_PENALTY: OnceCell<ConVarStruct> = OnceCell::new();
 static CLAN_TAG_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub static SIMULATE_TYPE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub static UWUFY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static MOTION_DEBUG_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static AIM_ERROR_SCALE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static COORDINATION_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static TELEMETRY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static ESCAPE_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static COMBAT_DECISIONS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 
 pub static AIM_PENALTY_VALUE: AtomicI32 = AtomicI32::new(100);
+static ENGINE_FRAME_THREAD: AtomicU32 = AtomicU32::new(0);
+static SERVER_FRAME_THREAD: AtomicU32 = AtomicU32::new(0);
 
 pub(super) static BOT_DATA_MAP: EngineGlobal<RefCell<Lazy<[BotData; 64]>>> =
     EngineGlobal::new(RefCell::new(Lazy::new(|| {
@@ -83,8 +98,13 @@ pub(super) struct BotData {
     next_target_pos: Vector3,
     last_time_node_reached: f32,
     jump_delay: f32,
-    jump_delay_obstacle: f32,
     jump_hold: u32,
+    motion_sample: Option<(f32, Vector3)>,
+    recovery_until: f32,
+    movement_anchor: Option<(f32, [f32; 2])>,
+    escape_recovery: escape_recovery::EscapeRecovery,
+    combat: combat_decisions::CombatState,
+    metrics: telemetry::Metrics,
     last_bad_path: f32,
     last_target_index: usize,
     target_pos: Vector3,
@@ -103,6 +123,8 @@ pub(super) struct BotData {
 pub(super) struct BotShared {
     reserved_targets: [(f32, u32); 64],
     claimed_hardpoints: HashMap<Vector3, usize>,
+    coordination: coordination::Coordinator,
+    telemetry_next_at: f32,
 }
 
 impl Default for BotShared {
@@ -110,12 +132,15 @@ impl Default for BotShared {
         Self {
             reserved_targets: std::array::from_fn(|_| Default::default()),
             claimed_hardpoints: HashMap::new(),
+            coordination: coordination::Coordinator::default(),
+            telemetry_next_at: 0.,
         }
     }
 }
 
 #[derive(Debug)]
 pub struct Bots {
+    pub server_vm_active: AtomicBool,
     pub clang_tag: Mutex<String>,
     pub generic_bot_names: Mutex<Vec<String>>,
     pub next_bot_names: Mutex<Vec<String>>,
@@ -208,6 +233,7 @@ impl Plugin for Bots {
         }
 
         Self {
+            server_vm_active: AtomicBool::new(false),
             clang_tag: Mutex::new("BOT".into()),
             next_bot_names: Mutex::new(bot_names.clone()),
             generic_bot_names: Mutex::new(bot_names),
@@ -227,6 +253,11 @@ impl Plugin for Bots {
         }
 
         cmds::reset_on_new_game();
+        telemetry::begin_map();
+
+        self.server_vm_active.store(false, Ordering::Release);
+        self.manager_data.lock().reset_for_map();
+        reset_bot_state(token);
 
         SHARED_BOT_DATA.get(token).replace(BotShared::default());
 
@@ -269,23 +300,29 @@ impl Plugin for Bots {
 
         self.max_players.store(max_players, Ordering::Release);
         self.max_teams.store(max_teams, Ordering::Release);
+        self.server_vm_active.store(true, Ordering::Release);
     }
 
-    fn on_sqvm_destroyed(&self, handle: &CSquirrelVMHandle, _token: EngineToken) {
+    fn on_sqvm_destroyed(&self, handle: &CSquirrelVMHandle, token: EngineToken) {
         if let ScriptContext::SERVER = handle.get_context() {
+            // Navigation queries own native allocations and refer to this
+            // map's navmesh. Destroy them while the old map is still loaded,
+            // before a new fake client can observe stale per-slot state.
+            self.server_vm_active.store(false, Ordering::Release);
+            self.manager_data.lock().reset_for_map();
+            reset_bot_state(token);
             let engine_functions = ENGINE_FUNCTIONS.wait();
             unsafe {
-                iterate_c_array_sized::<_, 32>(engine_functions.client_array.into())
+                let clients: Vec<*mut CClient> =
+                    iterate_c_array_sized::<_, 32>(engine_functions.client_array.into())
                     .filter(|client| {
                         client.m_nSignonState == SignonState::FULL && client.m_bFakePlayer
                     })
-                    .for_each(|client| {
-                        (engine_functions.cclient_disconnect)(
-                            (client as *const CClient).cast_mut(),
-                            1,
-                            c"no reason".as_ptr().cast(),
-                        )
-                    });
+                    .map(|client| (client as *const CClient).cast_mut())
+                    .collect();
+                for client in clients {
+                    (engine_functions.cclient_disconnect)(client, 1, c"map shutdown".as_ptr());
+                }
             }
         }
     }
@@ -328,6 +365,26 @@ impl Plugin for Bots {
         )
         .expect("failed to register the convar");
         _ = BASE_AIM_PENALTY.set(convar);
+        _ = AIM_ERROR_SCALE_CONVAR.set(ConVarStruct::try_new(
+            &ConVarRegister::new("bot_aim_error_scale", "1", FCVAR_GAMEDLL as i32,
+                "pilot-target aiming error multiplier: smaller is harder; range 0.25 to 2"), token,
+        ).expect("failed to register bot_aim_error_scale"));
+        _ = COORDINATION_CONVAR.set(ConVarStruct::try_new(
+            &ConVarRegister::new("bot_team_coordination", "0", FCVAR_GAMEDLL as i32,
+                "team-aware pursuit allocation for legacy pilots; 0 restores legacy targeting"), token,
+        ).expect("failed to register bot_team_coordination"));
+        _ = ESCAPE_RECOVERY_CONVAR.set(ConVarStruct::try_new(
+            &ConVarRegister::new("bot_escape_recovery", "0", FCVAR_GAMEDLL as i32,
+                "brief diagonal backstep after repeated pilot pursuit stalls"), token,
+        ).expect("failed to register bot_escape_recovery"));
+        _ = COMBAT_DECISIONS_CONVAR.set(ConVarStruct::try_new(
+            &ConVarRegister::new("bot_combat_decisions", "0", FCVAR_GAMEDLL as i32,
+                "weapon-range positioning and ammo-aware reloads for legacy pilot mode 6; 0 restores v15 combat"), token,
+        ).expect("failed to register bot_combat_decisions"));
+        _ = TELEMETRY_CONVAR.set(ConVarStruct::try_new(
+            &ConVarRegister::new("bot_telemetry_interval", "0", FCVAR_GAMEDLL as i32,
+                "structured position/decision snapshots in seconds; 0 disables; minimum 0.5"), token,
+        ).expect("failed to register bot_telemetry_interval"));
 
         let simulate_convar = ConVarStruct::try_new(&ConVarRegister::new(
                 "bot_cmds_type",
@@ -338,6 +395,11 @@ impl Plugin for Bots {
         ).expect("failed to register the convar");
 
         _ = SIMULATE_TYPE_CONVAR.set(simulate_convar);
+
+        _ = MOTION_DEBUG_CONVAR.set(ConVarStruct::try_new(
+            &ConVarRegister::new("bot_motion_debug", "0", FCVAR_GAMEDLL as i32,
+                "log bot movement and navigation every ten seconds"), token,
+        ).expect("failed to register bot_motion_debug"));
 
         _ = UWUFY_CONVAR.set(
             ConVarStruct::try_new(
@@ -366,8 +428,22 @@ impl Plugin for Bots {
         simple_bot_manager::register_manager_vars(engine, token);
     }
 
-    fn runframe(&self, engine_token: EngineToken) {
-        if self.manager_data.lock().enabled
+    fn runframe(&self, _engine_token: EngineToken) {
+        // HostState::FrameUpdate runs on the engine thread. A threaded server
+        // can still be executing scripts; never create fake clients here.
+        let thread = unsafe { windows_sys::Win32::System::Threading::GetCurrentThreadId() };
+        _ = ENGINE_FRAME_THREAD.compare_exchange(0, thread, Ordering::Relaxed, Ordering::Relaxed);
+    }
+}
+
+impl Bots {
+    pub(super) fn server_frame(&self, engine_token: EngineToken) {
+        let thread = unsafe { windows_sys::Win32::System::Threading::GetCurrentThreadId() };
+        if SERVER_FRAME_THREAD.compare_exchange(0, thread, Ordering::Relaxed, Ordering::Relaxed).is_ok() {
+            log::info!("bot scheduling: server thread {thread}, engine frame thread {}", ENGINE_FRAME_THREAD.load(Ordering::Relaxed));
+        }
+        if self.server_vm_active.load(Ordering::Acquire)
+            && self.manager_data.lock().enabled
             && SQVM_SERVER
                 .get(engine_token)
                 .try_borrow()
@@ -387,6 +463,16 @@ impl Plugin for Bots {
             log::error!("bot manager: {err}");
         }
     }
+}
+
+fn reset_bot_state(token: EngineToken) {
+    simple_bot_manager::reset_round_ready(token);
+    let mut states = BOT_DATA_MAP.get(token).borrow_mut();
+    let queries = states.iter().filter(|state| state.nav_query.is_some()).count();
+    for state in states.iter_mut() {
+        *state = BotData::default();
+    }
+    log::info!("map lifecycle: reset bot slots and released {queries} navigation queries");
 }
 
 fn spawn_fake_player(

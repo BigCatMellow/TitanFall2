@@ -1,0 +1,18 @@
+{
+  "Name": "James.BotCycleTest",
+  "Description": "Isolated map-change regression harness; not installed in the regular profile.",
+  "Version": "1.0.0",
+  "LoadPriority": 20,
+  "Scripts": [
+    {
+      "Path": "james_bot_cycle_test.nut",
+      "RunOn": "SERVER && MP",
+      "ServerCallback": { "After": "JamesBotCycleTest_Init" }
+    },
+    {
+      "Path": "james_preset_lobby_probe.nut",
+      "RunOn": "CLIENT && MP",
+      "ClientCallback": { "After": "JamesPresetLobbyProbe_Init" }
+    }
+  ]
+}

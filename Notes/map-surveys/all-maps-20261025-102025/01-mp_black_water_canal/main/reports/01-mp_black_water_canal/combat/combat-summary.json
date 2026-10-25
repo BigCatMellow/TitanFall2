@@ -1,0 +1,47 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main\\maps\\01-mp_black_water_canal.log",
+  "summary": [
+    {
+      "map": "mp_black_water_canal",
+      "pilot_samples": 3216,
+      "bots": 16,
+      "weapons": [
+        "mp_weapon_rspn101"
+      ],
+      "tactics": [
+        {
+          "Name": "advance",
+          "Count": 2786
+        },
+        {
+          "Name": "range_hold",
+          "Count": 214
+        },
+        {
+          "Name": "range_retreat",
+          "Count": 34
+        },
+        {
+          "Name": "reload",
+          "Count": 119
+        },
+        {
+          "Name": "reload_hold",
+          "Count": 60
+        },
+        {
+          "Name": "reload_retreat",
+          "Count": 3
+        }
+      ],
+      "reload_samples": 164,
+      "moving_over_100": 1940,
+      "negative_clip_samples": 0,
+      "maximum_clip": 24.0
+    }
+  ],
+  "markers": [],
+  "error_count": 0,
+  "errors": [],
+  "limitations": "Two-second snapshots; a range hold can intentionally have low speed. Short random encounters and a largely idle human cannot establish improved difficulty or win rate."
+}

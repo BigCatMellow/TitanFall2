@@ -1,0 +1,8 @@
+{
+  "Name":"James.TacticalRecharge",
+  "Description":"Half normal pilot tactical recharge for the local solo human, preserving ability effects and bot settings.",
+  "Version":"1.0.0",
+  "LoadPriority":40,
+  "ConVars":[{"Name":"james_tactical_recharge","DefaultValue":"1"}],
+  "Scripts":[{"Path":"james_tactical_recharge.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"JamesTacticalRecharge_Init"}}]
+}

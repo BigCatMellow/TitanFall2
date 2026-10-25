@@ -1,0 +1,49 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\20261025-000402\\main\\maps\\02-mp_eden.log",
+  "summary": [
+    {
+      "map": "mp_eden",
+      "pilot_samples": 1920,
+      "bots": 16,
+      "weapons": [
+        "mp_weapon_rspn101"
+      ],
+      "tactics": [
+        {
+          "Name": "advance",
+          "Count": 1636
+        },
+        {
+          "Name": "range_hold",
+          "Count": 160
+        },
+        {
+          "Name": "range_retreat",
+          "Count": 13
+        },
+        {
+          "Name": "reload",
+          "Count": 67
+        },
+        {
+          "Name": "reload_hold",
+          "Count": 43
+        },
+        {
+          "Name": "reload_retreat",
+          "Count": 1
+        }
+      ],
+      "reload_samples": 103,
+      "moving_over_100": 1182,
+      "negative_clip_samples": 0,
+      "maximum_clip": 24.0
+    }
+  ],
+  "markers": [],
+  "error_count": 1,
+  "errors": [
+    "[2026-10-25] [00:43:21] [SCRIPT CL] [info] SCRIPT ERROR: [CLIENT] Out of room for fx handles (playing effect of type 'P_enemy_jump_jet_WR_trails' on 'player' entity #14 at (4120.00, -355.00, 126.09), attach index #23). Max is PARTICLE_HANDLES_LIST_COUNT = 600"
+  ],
+  "limitations": "Two-second snapshots; a range hold can intentionally have low speed. Short random encounters and a largely idle human cannot establish improved difficulty or win rate."
+}

@@ -1,0 +1,32 @@
+{
+  "state": "complete",
+  "updated": "2026-10-25T11:12:17.1253348-04:00",
+  "smoke": false,
+  "pid": 258132,
+  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 10-55-41.txt",
+  "current": {
+    "index": "0",
+    "kills": "353",
+    "map": "mp_complex3",
+    "bots": "16",
+    "imc": "198",
+    "militia": "155",
+    "elapsed": "890"
+  },
+  "completed": 1,
+  "expected": 1,
+  "results": [
+    {
+      "reason": "time_limit_or_rules",
+      "valid": "true",
+      "index": "0",
+      "map": "mp_complex3",
+      "log_file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3\\main\\maps\\01-mp_complex3.log",
+      "imc": "199",
+      "militia": "155",
+      "elapsed": "891.5"
+    }
+  ],
+  "failure": null,
+  "analysis_errors": []
+}

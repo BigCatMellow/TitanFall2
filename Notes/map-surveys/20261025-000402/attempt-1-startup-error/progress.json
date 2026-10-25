@@ -1,0 +1,13 @@
+{
+  "state": "stopped_error",
+  "updated": "2026-10-25T00:18:26.7349072-04:00",
+  "smoke": false,
+  "pid": 200156,
+  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 00-17-34.txt",
+  "current": null,
+  "completed": 0,
+  "expected": 8,
+  "results": [],
+  "failure": "Game error: [2026-10-25] [00:18:24] [SCRIPT CL] [info] SCRIPT ERROR: [CLIENT] GetWeaponInfoFileKeyField_Global() - Could not find weapon with name '' (key was 'hud_icon')",
+  "analysis_errors": []
+}

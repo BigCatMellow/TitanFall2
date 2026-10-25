@@ -1,0 +1,89 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-24 23-10-17.txt",
+  "summary": [
+    {
+      "map": "mp_eden",
+      "pilot_samples": 366,
+      "bots": 15,
+      "weapons": [
+        "mp_weapon_rspn101"
+      ],
+      "tactics": [
+        {
+          "Name": "advance",
+          "Count": 287
+        },
+        {
+          "Name": "range_hold",
+          "Count": 31
+        },
+        {
+          "Name": "range_retreat",
+          "Count": 3
+        },
+        {
+          "Name": "reload",
+          "Count": 25
+        },
+        {
+          "Name": "reload_hold",
+          "Count": 20
+        }
+      ],
+      "reload_samples": 44,
+      "moving_over_100": 206,
+      "negative_clip_samples": 0,
+      "maximum_clip": 24.0
+    },
+    {
+      "map": "mp_wargames",
+      "pilot_samples": 882,
+      "bots": 15,
+      "weapons": [
+        "mp_weapon_g2",
+        "mp_weapon_shotgun"
+      ],
+      "tactics": [
+        {
+          "Name": "advance",
+          "Count": 809
+        },
+        {
+          "Name": "range_hold",
+          "Count": 33
+        },
+        {
+          "Name": "range_retreat",
+          "Count": 2
+        },
+        {
+          "Name": "reload",
+          "Count": 35
+        },
+        {
+          "Name": "reload_hold",
+          "Count": 3
+        }
+      ],
+      "reload_samples": 36,
+      "moving_over_100": 647,
+      "negative_clip_samples": 0,
+      "maximum_clip": 14.0
+    }
+  ],
+  "markers": [
+    "[2026-10-24] [23:11:21] [SCRIPT SV] [info] COMBAT_TEST: Eden baseline combat_decisions=0",
+    "[2026-10-24] [23:12:01] [SCRIPT SV] [info] COMBAT_TEST: Eden enabled combat_decisions=1",
+    "[2026-10-24] [23:12:09] [SCRIPT SV] [info] COMBAT_TEST: draining clip for reload id=4098 name=synbotli weapon=mp_weapon_rspn101",
+    "[2026-10-24] [23:12:11] [SCRIPT SV] [info] COMBAT_TEST: PASS native reload replenished clip name=synbotli",
+    "[2026-10-24] [23:13:06] [SCRIPT SV] [info] COMBAT_TEST: Eden complete; changing to Wargames",
+    "[2026-10-24] [23:13:36] [SCRIPT SV] [info] COMBAT_TEST: Wargames enabled combat_decisions=1",
+    "[2026-10-24] [23:13:48] [SCRIPT SV] [info] COMBAT_TEST: draining clip for reload id=8194 name=Bot0358 weapon=mp_weapon_shotgun",
+    "[2026-10-24] [23:13:51] [SCRIPT SV] [info] COMBAT_TEST: PASS native reload replenished clip name=Bot0358",
+    "[2026-10-24] [23:14:11] [SCRIPT SV] [info] COMBAT_TEST: Wargames next spawns use G2",
+    "[2026-10-24] [23:14:51] [SCRIPT SV] [info] COMBAT_TEST: COMPLETE two maps and runtime toggle"
+  ],
+  "error_count": 0,
+  "errors": [],
+  "limitations": "Two-second snapshots; a range hold can intentionally have low speed. Short random encounters and a largely idle human cannot establish improved difficulty or win rate."
+}

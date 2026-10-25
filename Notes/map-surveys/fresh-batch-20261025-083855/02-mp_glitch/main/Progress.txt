@@ -1,0 +1,8 @@
+State: complete
+Updated: 09:12:28
+Completed maps: 1 / 1
+Current: {"map":"mp_glitch","militia":"179","index":"0","imc":"125","bots":"16","elapsed":"890","kills":"304"}
+Failure: 
+
+Completed results:
+mp_glitch: 125-180, time_limit_or_rules, 891.5s

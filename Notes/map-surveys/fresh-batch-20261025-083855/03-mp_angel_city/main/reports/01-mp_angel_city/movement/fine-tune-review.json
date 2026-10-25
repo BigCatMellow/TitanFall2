@@ -1,0 +1,480 @@
+{
+  "rounds": [
+    {
+      "round": "1, mp_angel_city",
+      "pilot_samples": 3766,
+      "stalls": 32,
+      "stall_percent": 0.85,
+      "stall_height_over_180": 6,
+      "recover_samples": 194,
+      "hold_samples": 369,
+      "stopped_holds": 62,
+      "empty_not_reloading": 13
+    }
+  ],
+  "stall_clusters": [
+    {
+      "area": "mp_angel_city, 1664,1152,128",
+      "samples": 7,
+      "slots": [
+        15
+      ],
+      "height_median": 124.0,
+      "states": [
+        "pursue",
+        "recover"
+      ],
+      "target_ids": [
+        65541,
+        65543,
+        65545,
+        65551,
+        1901476
+      ]
+    },
+    {
+      "area": "mp_angel_city, -128,2816,192",
+      "samples": 2,
+      "slots": [
+        12,
+        13
+      ],
+      "height_median": 102.10000000000002,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65539,
+        65546
+      ]
+    },
+    {
+      "area": "mp_angel_city, 2560,-2944,192",
+      "samples": 2,
+      "slots": [
+        4
+      ],
+      "height_median": 9199.8,
+      "states": [
+        "recover"
+      ],
+      "target_ids": [
+        2163613,
+        3997924
+      ]
+    },
+    {
+      "area": "mp_angel_city, 1792,1024,128",
+      "samples": 2,
+      "slots": [
+        3,
+        11
+      ],
+      "height_median": 172.60000000000002,
+      "states": [
+        "embark",
+        "pursue"
+      ],
+      "target_ids": [
+        65539,
+        3146001
+      ]
+    },
+    {
+      "area": "mp_angel_city, 1792,1024,192",
+      "samples": 2,
+      "slots": [
+        5,
+        9
+      ],
+      "height_median": 61.599999999999994,
+      "states": [
+        "embark"
+      ],
+      "target_ids": [
+        65551,
+        65553
+      ]
+    },
+    {
+      "area": "mp_angel_city, 1536,1024,128",
+      "samples": 2,
+      "slots": [
+        7
+      ],
+      "height_median": 237.0,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65553
+      ]
+    },
+    {
+      "area": "mp_angel_city, 1536,1152,128",
+      "samples": 1,
+      "slots": [
+        15
+      ],
+      "height_median": 52.0,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65551
+      ]
+    },
+    {
+      "area": "mp_angel_city, 1536,896,128",
+      "samples": 1,
+      "slots": [
+        7
+      ],
+      "height_median": 171.3,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65553
+      ]
+    },
+    {
+      "area": "mp_angel_city, 1664,1024,192",
+      "samples": 1,
+      "slots": [
+        9
+      ],
+      "height_median": 59.69999999999999,
+      "states": [
+        "recover"
+      ],
+      "target_ids": [
+        65553
+      ]
+    },
+    {
+      "area": "mp_angel_city, 128,-384,192",
+      "samples": 1,
+      "slots": [
+        2
+      ],
+      "height_median": 13.0,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65548
+      ]
+    }
+  ],
+  "longest_episodes": [
+    {
+      "kind": "blocked_hold",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 5,
+      "start": 95.02,
+      "end": 101.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 504.7,
+      "y": 3658.1,
+      "z": 299.0,
+      "target": 65551,
+      "height": -39.0
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 12,
+      "start": 205.02,
+      "end": 209.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 123.3,
+      "y": 1822.9,
+      "z": 128.0,
+      "target": 65550,
+      "height": 132.0
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 6,
+      "start": 147.02,
+      "end": 151.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -2026.9,
+      "y": 2408.9,
+      "z": 130.0,
+      "target": 65540,
+      "height": 90.4
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 6,
+      "start": 129.02,
+      "end": 131.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -2302.4,
+      "y": 3839.7,
+      "z": 120.0,
+      "target": 65550,
+      "height": 70.0
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 7,
+      "start": 517.02,
+      "end": 519.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 2329.5,
+      "y": -964.9,
+      "z": 152.0,
+      "target": 65549,
+      "height": 108.0
+    },
+    {
+      "kind": "empty",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 8,
+      "start": 171.02,
+      "end": 175.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 87.0,
+      "y": 588.5,
+      "z": 122.0,
+      "target": 655630,
+      "height": 8435.4
+    },
+    {
+      "kind": "empty",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 1,
+      "start": 83.02,
+      "end": 85.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -2521.6,
+      "y": 3096.0,
+      "z": 120.0,
+      "target": 65539,
+      "height": 293.2
+    },
+    {
+      "kind": "empty",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 1,
+      "start": 377.02,
+      "end": 377.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 2087.2,
+      "y": -732.9,
+      "z": 268.9,
+      "target": 2031846,
+      "height": 27.700000000000045
+    },
+    {
+      "kind": "empty",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 3,
+      "start": 549.02,
+      "end": 549.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 2343.3,
+      "y": -381.4,
+      "z": 203.2,
+      "target": 65541,
+      "height": 56.80000000000001
+    },
+    {
+      "kind": "empty",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 8,
+      "start": 219.02,
+      "end": 219.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -187.1,
+      "y": 2219.6,
+      "z": 169.9,
+      "target": 1900749,
+      "height": 3716.7
+    },
+    {
+      "kind": "reload",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 15,
+      "start": 459.02,
+      "end": 469.02,
+      "span": 10.0,
+      "count": 6,
+      "x": -538.0,
+      "y": 483.4,
+      "z": 120.0,
+      "target": 65553,
+      "height": 68.0
+    },
+    {
+      "kind": "reload",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 10,
+      "start": 177.02,
+      "end": 187.02,
+      "span": 10.0,
+      "count": 6,
+      "x": 2036.1,
+      "y": -190.2,
+      "z": 400.3,
+      "target": 655630,
+      "height": -103.69999999999999
+    },
+    {
+      "kind": "reload",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 7,
+      "start": 573.02,
+      "end": 581.02,
+      "span": 8.0,
+      "count": 5,
+      "x": 2162.2,
+      "y": -414.9,
+      "z": 120.0,
+      "target": 65545,
+      "height": 134.0
+    },
+    {
+      "kind": "reload",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 11,
+      "start": 461.02,
+      "end": 469.02,
+      "span": 8.0,
+      "count": 5,
+      "x": -416.6,
+      "y": 432.1,
+      "z": 120.0,
+      "target": 1442700,
+      "height": 8421.4
+    },
+    {
+      "kind": "reload",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 12,
+      "start": 559.02,
+      "end": 567.02,
+      "span": 8.0,
+      "count": 5,
+      "x": 2428.7,
+      "y": -1962.4,
+      "z": 200.0,
+      "target": 2163613,
+      "height": 94.69999999999999
+    },
+    {
+      "kind": "stall",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 4,
+      "start": 521.02,
+      "end": 527.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 2619.9,
+      "y": -2982.1,
+      "z": 200.0,
+      "target": 2163613,
+      "height": 9199.8
+    },
+    {
+      "kind": "stall",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 15,
+      "start": 567.02,
+      "end": 569.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 1575.5,
+      "y": 1152.0,
+      "z": 128.0,
+      "target": 65551,
+      "height": 52.0
+    },
+    {
+      "kind": "stall",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 2,
+      "start": 231.02,
+      "end": 233.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 174.9,
+      "y": -376.1,
+      "z": 175.0,
+      "target": 65548,
+      "height": 13.0
+    },
+    {
+      "kind": "stall",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 7,
+      "start": 321.02,
+      "end": 323.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 1580.7,
+      "y": 971.2,
+      "z": 128.0,
+      "target": 65553,
+      "height": 161.0
+    },
+    {
+      "kind": "stall",
+      "map": "mp_angel_city",
+      "epoch": 1,
+      "slot": 15,
+      "start": 543.02,
+      "end": 545.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 1635.3,
+      "y": 1152.0,
+      "z": 128.0,
+      "target": 65545,
+      "height": 100.0
+    }
+  ],
+  "target_churn": [
+    {
+      "epoch": "1",
+      "switches": 5155,
+      "reversals_within_half_second": 1776,
+      "both_visible_reversals": 897
+    }
+  ]
+}

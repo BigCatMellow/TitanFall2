@@ -1,0 +1,511 @@
+use itertools::Itertools;
+use rrplug::{
+    bindings::class_types::{cbaseentity::CBaseEntity, cplayer::CPlayer},
+    high::vector::Vector3,
+};
+use shared::utils::{get_player_index, nudge_type};
+use std::mem::MaybeUninit;
+
+use crate::{
+    bindings::{Action, CGameTrace, CTraceFilterSimple, CUserCmd, Ray, VectorAligned},
+    interfaces::ENGINE_INTERFACES,
+    navmesh::RECAST_DETOUR,
+};
+
+use super::{BotData, cmds_helper::CUserCmdHelper};
+
+pub(super) const GROUND_OFFSET: Vector3 = Vector3::new(0., 0., 20.);
+pub(super) const BOT_VISON_RANGE: f32 = 3000.;
+pub(super) const BOT_PATH_NODE_RANGE: f32 = 45.;
+pub(super) const BOT_PATH_RECAL_RANGE: f32 = 600.;
+
+pub(super) fn route_recovery_enabled(local: &BotData) -> bool {
+    super::ROUTE_RECOVERY_CONVAR.get().is_some_and(|c| c.get_value_bool())
+        && local.sim_type.unwrap_or_else(|| super::SIMULATE_TYPE_CONVAR.wait().get_value_i32()) == 6
+        && local.nav_query.as_ref().is_some_and(|q| q.hull == crate::navmesh::Hull::Human)
+}
+
+fn point(pos: Vector3) -> [f32; 3] { [pos.x, pos.y, pos.z] }
+
+fn clear_route(local: &mut BotData) {
+    if let Some(nav) = local.nav_query.as_mut() {
+        nav.path_points.clear();
+        nav.end_point = None;
+    }
+}
+
+fn start_recovery(local: &mut BotData, origin: Vector3, goal: Vector3,
+    helper: &CUserCmdHelper, reason: &str) {
+    clear_route(local);
+    local.recovery_until = time(helper) + 1.2;
+    note_recovery(local, origin, helper, reason);
+    if route_recovery_enabled(local) {
+        let retreat = local.route_recovery.stalled(time(helper), point(origin), point(goal));
+        if let Some(retreat) = retreat {
+            local.metrics.retreats = local.metrics.retreats.saturating_add(1);
+            local.recovery_until = time(helper);
+            local.last_bad_path = time(helper) - 2.;
+            if super::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
+                log::info!("BOT_ROUTE epoch={} t={:.2} slot={} reason=breadcrumb_retreat x={:.1} y={:.1} z={:.1} gx={:.1} gy={:.1} gz={:.1}",
+                    super::telemetry::epoch(), time(helper), local.edict, origin.x, origin.y, origin.z,
+                    retreat[0], retreat[1], retreat[2]);
+            }
+        }
+    }
+}
+
+pub fn look_at(origin: Vector3, target: Vector3) -> Vector3 {
+    let diff = target - origin;
+    let angley = diff.y.atan2(diff.x).to_degrees();
+    let anglex = diff
+        .z
+        .atan2((diff.x.powi(2) + diff.y.powi(2)).sqrt())
+        .to_degrees();
+
+    Vector3::new(-anglex, angley, 0.)
+}
+
+pub fn path_to_target(
+    cmd: &mut CUserCmd,
+    local_data: &mut BotData,
+    origin: Vector3,
+    target_pos: Vector3,
+    should_recalcute_path: bool,
+    helper: &CUserCmdHelper,
+) -> bool {
+    let adaptive = route_recovery_enabled(local_data);
+    let mut goal = target_pos;
+    if adaptive {
+        local_data.route_recovery.observe(point(origin));
+        let was_escaping = local_data.route_recovery.has_escape();
+        if let Some(retreat) = local_data.route_recovery.escape_goal(time(helper), point(origin)) {
+            goal = Vector3::new(retreat[0], retreat[1], retreat[2]);
+            local_data.metrics.state = "retreat";
+        } else if was_escaping {
+            clear_route(local_data);
+        }
+    }
+    let target_pos = goal;
+    if distance3(target_pos, origin)
+        <= BOT_PATH_NODE_RANGE + local_data.approach_range.unwrap_or(20.) {
+        local_data.movement_anchor = None;
+        return false;
+    }
+    if time(helper) < local_data.recovery_until {
+        face_toward(cmd, origin, target_pos, helper);
+        try_avoid_obstacle(cmd, local_data, helper);
+        return true;
+    }
+    if super::progress_watchdog::has_stalled(time(helper), &mut local_data.movement_anchor,
+        [origin.x, origin.y]) {
+        start_recovery(local_data, origin, target_pos, helper, "no_progress");
+        face_toward(cmd, origin, target_pos, helper);
+        try_avoid_obstacle(cmd, local_data, helper);
+        return true;
+    }
+    let dt_funcs = RECAST_DETOUR.wait();
+    let debug = ENGINE_INTERFACES.wait().debug_overlay;
+    let Some(nav) = local_data.nav_query.as_mut() else {
+        log::warn!("null nav");
+        return false;
+    };
+
+    _ = nav
+        .path_points
+        .last()
+        .map(|point| unsafe { debug.AddLineOverlay(&origin, point, 0, 255, 0, true, 0.1) });
+    nav.path_points
+        .iter()
+        .cloned()
+        .tuple_windows()
+        .for_each(|(p1, p2)| unsafe { debug.AddLineOverlay(&p1, &p2, 0, 255, 0, true, 0.5) });
+    _ = nav
+        .path_points
+        .last()
+        .map(|point| unsafe { debug.AddLineOverlay(point, &target_pos, 0, 255, 0, true, 0.1) });
+
+    if nav
+        .end_point
+        .map(|point| distance(point, target_pos) > BOT_PATH_RECAL_RANGE)
+        .map(|should_recalculate| should_recalculate || should_recalcute_path)
+        .unwrap_or(true)
+        || nav.path_points.is_empty()
+    {
+        local_data.last_time_node_reached = helper.globals.curTime;
+        local_data.next_target_pos = origin;
+
+        // this might be the reason of the sudden aim shift or not really idk
+        if local_data.last_bad_path + 1. >= helper.globals.curTime {
+            face_toward(cmd, origin, target_pos, helper);
+            try_avoid_obstacle(cmd, local_data, helper);
+
+            return false;
+        }
+
+        local_data.metrics.path_requests = local_data.metrics.path_requests.saturating_add(1);
+        if let Err(err) = nav.new_path(origin, target_pos, dt_funcs) {
+            local_data.metrics.path_failures = local_data.metrics.path_failures.saturating_add(1);
+            if adaptive {
+                local_data.route_recovery.fail(time(helper), point(origin), point(target_pos));
+                local_data.route_recovery.cancel_escape();
+            }
+            log::warn!("navigation pathing failed stuck somewhere probably! {err}");
+            face_toward(cmd, origin, target_pos, helper);
+            try_avoid_obstacle(cmd, local_data, helper);
+
+            local_data.last_bad_path = time(helper);
+
+            return false;
+        }
+    }
+
+    if nav
+        .end_point
+        .map(|point| distance(point, target_pos) > BOT_PATH_RECAL_RANGE)
+        .unwrap_or(true)
+        || nav.path_points.is_empty()
+    {
+        try_avoid_obstacle(cmd, local_data, helper);
+        face_toward(cmd, origin, target_pos, helper);
+
+        return true;
+    }
+
+    while distance(local_data.next_target_pos, origin) <= BOT_PATH_NODE_RANGE {
+        let Some(next) = nav.next_point() else { break; };
+        local_data.last_time_node_reached = helper.globals.curTime;
+        local_data.next_target_pos = next;
+    }
+
+    // Flat routes do not need a constant jump attempt. Finish a short press,
+    // then release it before trying again at a step or during recovery.
+    if super::jump_pulse::jump_pulse(time(helper), &mut local_data.jump_delay,
+        &mut local_data.jump_hold, local_data.next_target_pos.z - origin.z > 18.) {
+        cmd.buttons |= Action::Jump as u32;
+        cmd.move_.z = 1.0; // hmmm
+    }
+
+    face_toward(cmd, origin, local_data.next_target_pos, helper);
+    cmd.move_.x = 1.0;
+    cmd.buttons |= Action::Forward as u32 | Action::Speed as u32;
+
+    if is_timedout(local_data.last_time_node_reached, helper, 5.) {
+        // Repeating avoidance against the same stale route never escapes it.
+        start_recovery(local_data, origin, target_pos, helper, "waypoint_timeout");
+        try_avoid_obstacle(cmd, local_data, helper);
+    }
+
+    true
+}
+
+pub fn is_timedout(last_time: f32, helper: &CUserCmdHelper<'_>, time_elasped: f32) -> bool {
+    last_time + time_elasped <= time(helper)
+}
+
+fn face_toward(cmd: &mut CUserCmd, origin: Vector3, target: Vector3, helper: &CUserCmdHelper) {
+    // A duplicate start point has no direction; atan2(0, 0) would snap east.
+    if distance(origin, target) > 1. {
+        cmd.world_view_angles.y = super::behavior_tuning::turn_yaw(
+            helper.angles.y, look_at(origin, target).y,
+            540. * helper.globals.frameTime.clamp(0., 0.05));
+    }
+}
+
+// same here
+#[allow(clippy::mut_from_ref)]
+pub unsafe fn find_player_in_view<'a>(
+    pos: Vector3,
+    view: Option<Vector3>,
+    team: i32,
+    helper: &'a CUserCmdHelper,
+    player_index: Option<u32>,
+    targets_locks: Option<&[(f32, u32)]>,
+) -> Option<(&'a mut CPlayer, bool)> {
+    const BOT_VIEW: f32 = 270_f32;
+    let mut v = Vector3::ZERO;
+
+    if let Some(target) = unsafe {
+        let mut possible_targets = enemy_player_iterator(team, helper)
+            .chain(enemy_titan_iterator(helper, team))
+            .map(|player| (*player.get_origin(&mut v), player))
+            .filter(|(origin, _)| {
+                view.map(|view| dot(normalize(*origin - pos), view) > BOT_VIEW.to_radians().cos())
+                    .unwrap_or(true)
+            })
+            .map(|(target, player)| (target, player, distance(target, pos)))
+            .filter(|(_, _, dis)| *dis <= BOT_VISON_RANGE)
+            .collect::<Vec<(Vector3, &mut CPlayer, f32)>>();
+        possible_targets.sort_by(|(_, _, dis1), (_, _, dis2)| dis1.total_cmp(dis2));
+
+        possible_targets
+            .into_iter()
+            .filter(|(_, target, _)| {
+                (helper.sv_funcs.is_titan)(nudge_type::<&CBaseEntity>(target))
+                    || targets_locks
+                        .and_then(|l| l.get(get_player_index(target)))
+                        .copied()
+                        .map(|(last_shot, by)| {
+                            is_timedout(last_shot, helper, 0.5) || Some(by) == player_index
+                        })
+                        .unwrap_or(true)
+            })
+            .find_map(|(target, player, _)| {
+                Some(view_rate(helper, pos, target, player, false)).and_then(|(fraction, ent)| {
+                    (fraction == 1.0 || std::ptr::addr_eq(ent, player))
+                        .then(|| view_rate(helper, pos, target, player, true))
+                        .and_then(|(fraction, ent)| {
+                            (fraction == 1.0 || std::ptr::addr_eq(ent, player)).then_some(player)
+                        })
+                })
+            })
+    } {
+        return Some((target, true));
+    }
+
+    None
+}
+
+pub fn farthest_player<'a>(
+    pos: Vector3,
+    team: i32,
+    helper: &'a CUserCmdHelper,
+) -> Option<&'a mut CPlayer> {
+    distance_iterator(&pos, enemy_player_iterator(team, helper))
+        .reduce(|closer, other| if closer.0 < other.0 { other } else { closer })
+        .map(|(_, player)| player)
+}
+
+pub fn closest_player<'a>(
+    pos: Vector3,
+    team: i32,
+    helper: &'a CUserCmdHelper,
+) -> Option<&'a mut CPlayer> {
+    distance_iterator(&pos, enemy_player_iterator(team, helper))
+        .reduce(|closer, other| if closer.0 < other.0 { other } else { closer })
+        .map(|(_, player)| player)
+}
+
+pub fn enemy_player_iterator<'b, 'a: 'b>(
+    team: i32,
+    helper: &'a CUserCmdHelper,
+) -> impl Iterator<Item = &'a mut CPlayer> + 'b {
+    (0..32)
+        .filter_map(|i| unsafe { (helper.sv_funcs.get_player_by_index)(i + 1).as_mut() })
+        .filter(move |player| player.m_iTeamNum != team && player.m_iTeamNum != 0)
+        .filter(|player| unsafe {
+            (helper.sv_funcs.is_alive)(nudge_type::<&CBaseEntity>(player)) != 0
+        })
+}
+
+pub fn enemy_titan_iterator<'b, 'a: 'b>(
+    helper: &'b CUserCmdHelper<'_>,
+    team: i32,
+) -> impl Iterator<Item = &'a mut CPlayer> + 'b {
+    (0..32)
+        .filter_map(|i| unsafe { (helper.sv_funcs.get_player_by_index)(i + 1).as_mut() })
+        .filter(move |player| player.m_iTeamNum != team && player.m_iTeamNum != 0)
+        .filter_map(|player| {
+            unsafe {
+                (helper.sv_funcs.get_pet_titan)(player)
+                    .cast::<CPlayer>()
+                    .cast_mut()
+                    .as_mut()
+                    .and_then(|titan| {
+                        (helper.sv_funcs.is_alive)(nudge_type::<&CBaseEntity>(titan))
+                            .eq(&1)
+                            .then_some(titan)
+                    })
+            } // probably safe since the functions should be the same in the vtale, right?
+        })
+}
+
+pub fn player_iterator<'b, 'a: 'b>(
+    predicate: &'b impl Fn(&CPlayer) -> bool,
+    helper: &'a CUserCmdHelper,
+) -> impl Iterator<Item = &'a mut CPlayer> + 'b {
+    (0..32)
+        .filter_map(|i| unsafe { (helper.sv_funcs.get_player_by_index)(i + 1).as_mut() })
+        .filter(|player| predicate(player))
+        .filter(|player| unsafe {
+            (helper.sv_funcs.is_alive)(nudge_type::<&CBaseEntity>(player)) != 0
+        })
+}
+
+pub fn titan_iterator<'b, 'a: 'b>(
+    predicate: &'b impl Fn(&CPlayer) -> bool,
+    helper: &'a CUserCmdHelper,
+) -> impl Iterator<Item = &'a mut CPlayer> + 'b {
+    player_iterator(predicate, helper).filter_map(|player| {
+        unsafe {
+            (helper.sv_funcs.get_pet_titan)(player)
+                .cast::<CPlayer>()
+                .cast_mut()
+                .as_mut()
+        } // probably safe since the functions should be the same in the vtale, right?
+    })
+}
+
+pub fn distance_iterator<'b, 'a: 'b>(
+    pos: &'b Vector3,
+    players: impl Iterator<Item = &'a mut CPlayer> + 'b,
+) -> impl Iterator<Item = (i64, &'a mut CPlayer)> + 'b {
+    static mut V: Vector3 = Vector3::ZERO;
+    players
+        .map(|player| {
+            (
+                unsafe { *player.get_origin(std::ptr::addr_of_mut!(V)) },
+                player,
+            )
+        })
+        .map(|(target, player)| (distance(*pos, target) as i64, player))
+}
+
+#[allow(unused)]
+pub fn view_rate(
+    helper: &CUserCmdHelper,
+    v1: Vector3,
+    v2: Vector3,
+    player: *mut CPlayer,
+    corretness: bool,
+) -> (f32, *const CBaseEntity) {
+    const TRACE_MASK_SHOT: i32 = 1178615859;
+    const TRACE_MASK_SOLID_BRUSHONLY: i32 = 16907;
+    const TRACE_COLLISION_GROUP_BLOCK_WEAPONS: i32 = 0x12; // 18
+
+    // should maybe revist the consturction of ray
+    let mut result: MaybeUninit<CGameTrace> = MaybeUninit::zeroed();
+    let mut ray = Ray {
+        start: VectorAligned { vec: v1, w: 0. },
+        delta: VectorAligned {
+            vec: v2 - v1 + GROUND_OFFSET,
+            w: 0.,
+        },
+        offset: VectorAligned {
+            vec: Vector3::new(0., 0., 0.),
+            w: 0.,
+        },
+        unk3: 0.,
+        unk4: 0,
+        unk5: 0.,
+        unk6: 1103806595072,
+        unk7: 0.,
+        is_ray: true,
+        is_swept: false,
+        is_smth: false,
+        flags: 0,
+        unk8: 0,
+    };
+
+    if corretness {
+        let filter: *const CTraceFilterSimple = &CTraceFilterSimple {
+            vtable: helper.sv_funcs.simple_filter_vtable,
+            unk: 0,
+            pass_ent: player.cast(),
+            should_hit_func: std::ptr::null(),
+            collision_group: TRACE_COLLISION_GROUP_BLOCK_WEAPONS,
+        };
+
+        // could use this to get 100% result and trace ray for a aproximation of failure
+        unsafe {
+            (helper.engine_funcs.trace_ray_filter)(
+                (*helper.sv_funcs.ctraceengine) as *const libc::c_void,
+                &mut ray,
+                TRACE_MASK_SHOT as u32,
+                filter.cast(),
+                result.as_mut_ptr(),
+            )
+        };
+    } else {
+        unsafe {
+            (helper.engine_funcs.trace_ray)(
+                (*helper.sv_funcs.ctraceengine) as *const libc::c_void,
+                &mut ray,
+                TRACE_MASK_SHOT as u32,
+                result.as_mut_ptr(),
+            )
+        };
+    }
+    let result = unsafe { result.assume_init() };
+
+    if !result.start_solid && result.fraction_left_solid == 0.0 {
+        (result.fraction, result.hit_ent)
+    } else {
+        (0.0, result.hit_ent)
+    }
+}
+
+pub fn try_avoid_obstacle(cmd: &mut CUserCmd, local_data: &mut BotData, helper: &CUserCmdHelper) {
+    local_data.metrics.state = "recover";
+    let attempts = local_data.route_recovery.attempts();
+    if route_recovery_enabled(local_data) && attempts >= 2 {
+        // Reversing away from a repeated blockage differs from continually
+        // pressing forward. Give each bot a stable side for this attempt.
+        cmd.move_ = Vector3::new(-0.65,
+            if (local_data.edict as u32 + attempts as u32) % 2 == 0 { -0.65 } else { 0.65 }, 0.);
+        cmd.buttons &= !(Action::Forward as u32 | Action::Jump as u32);
+        cmd.buttons |= Action::Back as u32 | Action::Speed as u32;
+        return;
+    }
+    cmd.move_ = Vector3::new(
+        1.,
+        if helper.globals.frameCount / 100 % 2 == 0 {
+            -1.
+        } else {
+            1.
+        },
+        0.,
+    );
+    cmd.buttons |= Action::Forward as u32
+        | Action::Speed as u32;
+    let retry_jump = is_timedout(local_data.jump_delay, helper, 1.2);
+    if super::jump_pulse::jump_pulse(time(helper), &mut local_data.jump_delay,
+        &mut local_data.jump_hold, retry_jump) {
+        cmd.buttons |= Action::Jump as u32;
+    }
+}
+
+fn note_recovery(local: &mut BotData, origin: Vector3, helper: &CUserCmdHelper, reason: &str) {
+    local.metrics.recoveries = local.metrics.recoveries.saturating_add(1);
+    if super::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
+        log::info!("BOT_RECOVERY epoch={} t={:.2} slot={} reason={reason} x={:.1} y={:.1} z={:.1}",
+            super::telemetry::epoch(), time(helper), local.edict, origin.x, origin.y, origin.z);
+    }
+}
+
+pub fn time(helper: &CUserCmdHelper<'_>) -> f32 {
+    helper.globals.curTime
+}
+
+pub fn distance(pos: Vector3, target: Vector3) -> f32 {
+    ((pos.x - target.x).powi(2) + (pos.y - target.y).powi(2)).sqrt()
+}
+
+pub fn distance3(pos: Vector3, target: Vector3) -> f32 {
+    ((pos.x - target.x).powi(2) + (pos.y - target.y).powi(2) + (pos.z - target.z).powi(2)).sqrt()
+}
+
+pub fn dot(vec: Vector3, other_vec: Vector3) -> f32 {
+    (vec.x * other_vec.x) + (vec.y * other_vec.y) + (vec.z * other_vec.z)
+}
+
+pub fn normalize(vec: Vector3) -> Vector3 {
+    let length_recip = dot(vec, vec).sqrt().recip();
+    Vector3::new(
+        vec.x * length_recip,
+        vec.y * length_recip,
+        vec.z * length_recip,
+    )
+}
+
+pub fn get_velocity_length(helper: &CUserCmdHelper, player: &mut CPlayer, v: &mut Vector3) -> f32 {
+    let velocity = get_velocity_vector(helper, player, v);
+    (velocity.x.powi(2) + velocity.y.powi(2)).sqrt()
+}
+
+pub fn get_velocity_vector(
+    helper: &CUserCmdHelper,
+    player: &mut CPlayer,
+    v: &mut Vector3,
+) -> Vector3 {
+    unsafe { *(helper.sv_funcs.get_smoothed_velocity)(player, v) }
+}

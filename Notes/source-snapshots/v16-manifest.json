@@ -1,0 +1,12 @@
+{
+  "aim_error": 0.78,
+  "build": "combat-decisions-v16",
+  "players": 16,
+  "isolated_log": "nslog2026-10-24 23-10-17.txt",
+  "backup": "backups/before-combat-decisions-20261024-230020",
+  "source_zip_sha256": "ED2D282AEDEC3BA8F3EBC49F19972EC7DFFFDFFCB996BEAB98CF97D697CB40C9",
+  "status": "reversible solo trial",
+  "dll_sha256": "C6A60DC54A0B7230A71A5E6D972610B9A500435402CCE4AE868252E7DB191075",
+  "normal_log": "nslog2026-10-24 23-16-24.txt",
+  "tests_passed": 33
+}

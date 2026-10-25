@@ -1,0 +1,47 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\20261025-000402\\main\\maps\\01-mp_lf_meadow.log",
+  "summary": [
+    {
+      "map": "mp_lf_meadow",
+      "pilot_samples": 3822,
+      "bots": 16,
+      "weapons": [
+        "mp_weapon_rspn101"
+      ],
+      "tactics": [
+        {
+          "Name": "advance",
+          "Count": 2176
+        },
+        {
+          "Name": "range_hold",
+          "Count": 714
+        },
+        {
+          "Name": "range_retreat",
+          "Count": 9
+        },
+        {
+          "Name": "reload",
+          "Count": 510
+        },
+        {
+          "Name": "reload_hold",
+          "Count": 411
+        },
+        {
+          "Name": "reload_retreat",
+          "Count": 2
+        }
+      ],
+      "reload_samples": 864,
+      "moving_over_100": 1798,
+      "negative_clip_samples": 0,
+      "maximum_clip": 24.0
+    }
+  ],
+  "markers": [],
+  "error_count": 0,
+  "errors": [],
+  "limitations": "Two-second snapshots; a range hold can intentionally have low speed. Short random encounters and a largely idle human cannot establish improved difficulty or win rate."
+}

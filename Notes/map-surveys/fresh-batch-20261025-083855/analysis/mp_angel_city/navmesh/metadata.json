@@ -1,0 +1,21 @@
+{
+  "source": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_angel_city_small.nm",
+  "sha256": "75A1307CFABFA67755E1F2F7575ADCEB60D4A40B696A386AE97CC4BED2E2A836",
+  "set_version": 5,
+  "tile_version": 13,
+  "tiles": 277,
+  "vertices": 8867,
+  "surface_polygons": 3666,
+  "bounds": {
+    "min_z": -32.484161376953125,
+    "min_x": -5239.0166015625,
+    "max_y": 5854.6953125,
+    "max_z": 1190.1658935546875,
+    "min_y": -3953.304443359375,
+    "max_x": 4136.9833984375
+  },
+  "trailing_bytes": 22072,
+  "observations_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main\\reports\\01-mp_angel_city\\movement\\observations.csv",
+  "pilot_stall_samples": 32,
+  "limits": "Read-only surface geometry from installed navmesh; no adjacency/traversal validation, collision scenery, or in-game visual observation. Rendered heights overlap in top-down views. Stalls are two-second samples, not unique incidents."
+}

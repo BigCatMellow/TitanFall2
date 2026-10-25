@@ -1,0 +1,56 @@
+{
+  "state": "complete",
+  "updated": "2026-10-25T12:00:47.8752198-04:00",
+  "batch_state": "stopped_by_request",
+  "results": [
+    {
+      "map": "mp_black_water_canal",
+      "state": "complete",
+      "navigation_samples": 500,
+      "low_progress": 11,
+      "high_waypoints": 0,
+      "error": null
+    },
+    {
+      "map": "mp_colony02",
+      "state": "complete",
+      "navigation_samples": 494,
+      "low_progress": 18,
+      "high_waypoints": 0,
+      "error": null
+    },
+    {
+      "map": "mp_complex3",
+      "state": "complete",
+      "navigation_samples": 543,
+      "low_progress": 29,
+      "high_waypoints": 0,
+      "error": null
+    },
+    {
+      "map": "mp_crashsite3",
+      "state": "complete",
+      "navigation_samples": 422,
+      "low_progress": 0,
+      "high_waypoints": 0,
+      "error": null
+    },
+    {
+      "map": "mp_drydock",
+      "state": "complete",
+      "navigation_samples": 474,
+      "low_progress": 6,
+      "high_waypoints": 0,
+      "error": null
+    },
+    {
+      "map": "mp_forwardbase_kodai",
+      "state": "complete",
+      "navigation_samples": 452,
+      "low_progress": 9,
+      "high_waypoints": 1,
+      "error": null
+    }
+  ],
+  "failure": null
+}

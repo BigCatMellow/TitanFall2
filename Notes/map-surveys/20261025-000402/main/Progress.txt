@@ -1,0 +1,8 @@
+State: stopped_error
+Updated: 00:43:21
+Completed maps: 1 / 8
+Current: {"bots":"16","index":"1","kills":"153","militia":"67","imc":"86","elapsed":"430.1","map":"mp_eden"}
+Failure: Game error: [2026-10-25] [00:43:21] [SCRIPT CL] [info] SCRIPT ERROR: [CLIENT] Out of room for fx handles (playing effect of type 'P_enemy_jump_jet_WR_trails' on 'player' entity #14 at (4120.00, -355.00, 126.09), attach index #23). Max is PARTICLE_HANDLES_LIST_COUNT = 600
+
+Completed results:
+mp_lf_meadow: 186-200, score_limit, 682.5s

@@ -1,0 +1,34 @@
+[
+  {
+    "Map": "Kodai",
+    "BotSlots": 7,
+    "Samples": 49,
+    "AliveSamples": 47,
+    "SlotsWith200UnitDisplacement": 7,
+    "AliveSamplesBelow50Units": 5,
+    "MeanDisplacement": 932.6,
+    "DamagedOrDeadSamples": 14
+  },
+  {
+    "Map": "Relic",
+    "BotSlots": 7,
+    "Samples": 28,
+    "AliveSamples": 26,
+    "SlotsWith200UnitDisplacement": 7,
+    "AliveSamplesBelow50Units": 0,
+    "MeanDisplacement": 947.2,
+    "DamagedOrDeadSamples": 7
+  },
+  {
+    "Map": "Wargames",
+    "BotSlots": 7,
+    "Samples": 42,
+    "AliveSamples": 39,
+    "SlotsWith200UnitDisplacement": 7,
+    "AliveSamplesBelow50Units": 2,
+    "MeanDisplacement": 786.1,
+    "DamagedOrDeadSamples": 9
+  },
+  "Bot joins: 21",
+  "Script errors / crashes / panics: 0"
+]

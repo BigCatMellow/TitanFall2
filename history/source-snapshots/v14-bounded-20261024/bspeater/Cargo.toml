@@ -1,0 +1,34 @@
+[package]
+name = "bspeater"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+
+[dependencies]
+avian3d = { version = "0.5.*", features = ["simd", "parry-f32", "parallel", "f32", "3d", "collider-from-mesh"], default-features = false }
+bevy = { version = "0.18.*", features = ["bevy_mesh", "bevy_state"], default-features = false }
+clap = { version = "4.5.39", features = ["derive"] }
+itertools = { workspace = true }
+modular-bitfield = "0.12.0"
+oktree = { git = "https://github.com/catornot/oktree.git" }
+rayon = "1.*"
+bytemuck = { version = "1.23.1", features = ["derive", "pod_saturating"] }
+anyhow = { version = "1.0.99", features = ["backtrace"] }
+rkyv = "=0.8.17"
+parking_lot = "0.12.4"
+flume = { version = "0.11.1", default-features = false, optional = true }
+bonsai-bt = "0.10.0"
+indexmap = "2.11.4"
+hexasphere = "16.0.0"
+
+[features]
+# default = ["graphics"]
+graphics = ["oktree/bevy", "bevy/common_api", "bevy/wayland", "bevy/x11", "bevy/free_camera", "avian3d/debug-plugin", "bevy/3d", "dep:flume", "avian3d/bevy_picking"]
+
+[lib]
+name = "bspeater_lib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "bspeater"
+path = "src/main.rs"

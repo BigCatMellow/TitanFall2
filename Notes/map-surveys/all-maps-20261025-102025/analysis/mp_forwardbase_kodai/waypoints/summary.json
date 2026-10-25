@@ -1,0 +1,120 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\06-mp_forwardbase_kodai\\main\\raw-session.log",
+  "motion_lines": 1200,
+  "parsed": 1200,
+  "scope": "MAP_SURVEY_BEGIN through result or end of log; warmup excluded",
+  "pilot_context_samples": 653,
+  "navigation_samples": 452,
+  "low_progress_navigation_samples": 9,
+  "low_progress_states": [
+    {
+      "state": "pursue",
+      "samples": 8
+    },
+    {
+      "state": "recover",
+      "samples": 1
+    }
+  ],
+  "low_progress_waypoint_height_over_180": 1,
+  "low_progress_near_xy_other_height": 0,
+  "top_low_progress_areas": [
+    {
+      "area": "mp_forwardbase_kodai, -1280,1280,1088",
+      "samples": 1,
+      "slots": [
+        3
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": -95.78,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_forwardbase_kodai, -1280,2432,1152",
+      "samples": 1,
+      "slots": [
+        1
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": -43.18,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_forwardbase_kodai, -768,2304,1152",
+      "samples": 1,
+      "slots": [
+        3
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": -196.16,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_forwardbase_kodai, -896,2048,1088",
+      "samples": 1,
+      "slots": [
+        5
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": -130.88,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_forwardbase_kodai, 1024,1152,960",
+      "samples": 1,
+      "slots": [
+        2
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": 137.67,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_forwardbase_kodai, 1408,-384,1088",
+      "samples": 1,
+      "slots": [
+        5
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": -24.96,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_forwardbase_kodai, 384,-1792,832",
+      "samples": 1,
+      "slots": [
+        10
+      ],
+      "states": [
+        "recover"
+      ],
+      "waypoint_height_median": -32.11,
+      "near_xy_other_height": 0
+    },
+    {
+      "area": "mp_forwardbase_kodai, 768,-1664,960",
+      "samples": 1,
+      "slots": [
+        15
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": 7.27,
+      "near_xy_other_height": 0
+    }
+  ],
+  "limits": "Motion sampled about every 10 seconds. Context comes from preceding 2-second player/trace samples (max 3 wall seconds and 250 units); game time is approximate. Low progress is endpoint XY displacement below 50, not proof of continuous immobility. A next waypoint can be stale when path following is inactive; these records do not capture waypoint consumption, selected polygons, collision traces or active hull mapping. No causal diagnosis follows from height alone."
+}

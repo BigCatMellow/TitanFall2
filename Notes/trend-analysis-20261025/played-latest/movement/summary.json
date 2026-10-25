@@ -1,0 +1,98 @@
+[
+  {
+    "epoch": 1,
+    "map": "mp_eden",
+    "bot_slots": 15,
+    "player_slots": 16,
+    "observations": 2938,
+    "alive_observations": 2092,
+    "stalled_observations": 71,
+    "crowded_observations": 149,
+    "switches": 2799.0,
+    "recoveries": 123.0,
+    "path_failures": 218.0,
+    "path_requests": 33683.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.603,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 410.0
+  },
+  {
+    "epoch": 2,
+    "map": "mp_lobby",
+    "bot_slots": 0,
+    "player_slots": 1,
+    "observations": 0,
+    "alive_observations": 0,
+    "stalled_observations": 0,
+    "crowded_observations": 0,
+    "switches": null,
+    "recoveries": null,
+    "path_failures": null,
+    "path_requests": null,
+    "failed_goal_skips": null,
+    "retreats": null,
+    "mean_largest_pursuit_share": null,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 66.0
+  },
+  {
+    "epoch": 3,
+    "map": "mp_thaw",
+    "bot_slots": 15,
+    "player_slots": 16,
+    "observations": 3527,
+    "alive_observations": 2721,
+    "stalled_observations": 41,
+    "crowded_observations": 102,
+    "switches": 3343.0,
+    "recoveries": 139.0,
+    "path_failures": 657.0,
+    "path_requests": 30283.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.542,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 488.0
+  },
+  {
+    "epoch": 4,
+    "map": "mp_lobby",
+    "bot_slots": 0,
+    "player_slots": 1,
+    "observations": 0,
+    "alive_observations": 0,
+    "stalled_observations": 0,
+    "crowded_observations": 0,
+    "switches": null,
+    "recoveries": null,
+    "path_failures": null,
+    "path_requests": null,
+    "failed_goal_skips": null,
+    "retreats": null,
+    "mean_largest_pursuit_share": null,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 10.0
+  }
+]

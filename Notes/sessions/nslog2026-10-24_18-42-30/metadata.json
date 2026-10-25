@@ -1,0 +1,9 @@
+{
+  "source_log": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\logs\\nslog2026-10-24 18-42-30.txt",
+  "exported": "2026-10-24T19:58:41.6584406-04:00",
+  "structured": true,
+  "build_line": "[2026-10-24] [18:42:31] [BP-ORT000] [info] local build: escape-recovery-v15 (v12 targeting/navigation with bounded repeated-stall backstep)",
+  "bot_joins": 105,
+  "error_lines": 0,
+  "limitations": "Position samples, not screen video. Stall flags require <50 units of displacement over at least 10 seconds while pursuing/recovering. Clustering ignores walls. Legacy logs lack teams, human positions, targets and exact alive state."
+}

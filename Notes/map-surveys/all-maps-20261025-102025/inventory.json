@@ -1,0 +1,209 @@
+[
+  {
+    "map": "mp_angel_city",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_angel_city_small.nm",
+    "nav_sha256": "75A1307CFABFA67755E1F2F7575ADCEB60D4A40B696A386AE97CC4BED2E2A836",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_black_water_canal",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_black_water_canal_small.nm",
+    "nav_sha256": "E2B4DEE3A14641B55104B318A8EF6059460D6F67DD20E062A0D36CECD670E8B6",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_coliseum",
+    "category": "Coliseum arena",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_coliseum_small.nm",
+    "nav_sha256": "F53D6FEC15231F5DCCEDB6EBE4CC57C83B45913CDC1703AF9F3CECAA0B6BC179",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_coliseum_column",
+    "category": "Coliseum arena",
+    "nav_available": false,
+    "nav_path": null,
+    "nav_sha256": null,
+    "status": "unsupported_missing_nav",
+    "reason": "No installed navigation mesh for this map; no meaningful bot navigation benchmark"
+  },
+  {
+    "map": "mp_colony02",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_colony02_small.nm",
+    "nav_sha256": "B5CC215D447A1BA49629E21332984A77DFB8D86E99065C6E2685F5AB5EB3590B",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_complex3",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_complex3_small.nm",
+    "nav_sha256": "DDE2CA85F9D679C250E53FFED14F7BA8767E53BECF8F98600DD9C5E1918CC088",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_crashsite3",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_crashsite3_small.nm",
+    "nav_sha256": "4016A1895E9ABF2225CCE8B1BAB521D36FFA18DFF94F2A906469EAE9033B300A",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_drydock",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_drydock_small.nm",
+    "nav_sha256": "69BBCD548D85B4131955879CD3DFA4043B4F174C7D33647C312C703EF7E05667",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_eden",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_eden_small.nm",
+    "nav_sha256": "1A9E04927D758DB4C939B854610EE571B9CBC3C3EA3630999730190822B1B051",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_forwardbase_kodai",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_forwardbase_kodai_small.nm",
+    "nav_sha256": "4FCB85EE3E3895554E03DF8B28CC0A76F93F247EF16C2903AD276133471A2A62",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_glitch",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_glitch_small.nm",
+    "nav_sha256": "518157A0D39D3A0FD356EB896F1B9186DFC9F272C9E58A38D4CD4B1E6BA909A3",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_grave",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_grave_small.nm",
+    "nav_sha256": "25C1B115EB1779FC0F28B28DF6BB57BE2D6C01094E34CE960CD46E67BC266FBE",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_homestead",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_homestead_small.nm",
+    "nav_sha256": "FE7B75292EDA56BD02229021A5D76E9F1E2BEE23FF4DD549E7090EB619503802",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_lf_deck",
+    "category": "Live Fire arena in controlled TDM",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_lf_deck_small.nm",
+    "nav_sha256": "1B97647102FC41959AAB634352971F1C931010C729FCE096E0496CEB2C699004",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_lf_meadow",
+    "category": "Live Fire arena in controlled TDM",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_lf_meadow_small.nm",
+    "nav_sha256": "217A5B55A8ACEFB57D8A28D9B151DC48FD6C5ADF60FAB8090EB295102E48525E",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_lf_stacks",
+    "category": "Live Fire arena in controlled TDM",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_lf_stacks_small.nm",
+    "nav_sha256": "1153903C967161D16FAE2A7D7CBBE7C972F75A064CAF1ADE80AFC505153F68ED",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_lf_township",
+    "category": "Live Fire arena in controlled TDM",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_lf_township_small.nm",
+    "nav_sha256": "00C47070DFF526EA45A38415B47F2A0D6E50B893D50409C7A8887713D3DFD365",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_lf_traffic",
+    "category": "Live Fire arena in controlled TDM",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_lf_traffic_small.nm",
+    "nav_sha256": "B4C3865691CEEAF43081831A7A4FF858BC5ABCB1ECB82A331EEC98FAF7CC9544",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_lf_uma",
+    "category": "Live Fire arena in controlled TDM",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_lf_uma_small.nm",
+    "nav_sha256": "F0B5F5FABD8F4D40FCE08AF9B685F4A69AD8779EC1DFD03F73CEF158838B1244",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_relic02",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_relic02_small.nm",
+    "nav_sha256": "895D872595864F94048050EAE9382C99C472960075B84B7B8C8AD15AC276932F",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_rise",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_rise_small.nm",
+    "nav_sha256": "818064777EBB74DC939C855664BB195F75BE57952D03A62581C1072800F90D35",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_thaw",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_thaw_small.nm",
+    "nav_sha256": "1D46915EADFAE13747CD04CA7BBA826F349D8FC62009F4DFEBF21AC87F821544",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  },
+  {
+    "map": "mp_wargames",
+    "category": "Full-size multiplayer",
+    "nav_available": true,
+    "nav_path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_wargames_small.nm",
+    "nav_sha256": "5E51195D10C7234D6A7A18784DD9EC86FDFAAD29ABC0ECC8733C593ACC422F0F",
+    "status": "queued",
+    "reason": "Fresh-process 8v8 TDM trial"
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "map": "mp_angel_city",
+  "team_imc": 200,
+  "team_militia": 150,
+  "minutes": 12.6,
+  "ending": "score_limit",
+  "valid": "true",
+  "pilot_samples": 3766.0,
+  "stall_samples": 32.0,
+  "stall_percent": 0.85,
+  "target_switches": 5155.0,
+  "quick_switchbacks": 1776.0,
+  "quick_switchback_percent": 34.5,
+  "replay": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main\\reports\\01-mp_angel_city\\movement\\replay.html"
+}

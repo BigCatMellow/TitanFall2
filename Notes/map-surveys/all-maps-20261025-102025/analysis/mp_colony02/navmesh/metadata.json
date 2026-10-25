@@ -1,0 +1,21 @@
+{
+  "source": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_colony02_small.nm",
+  "sha256": "B5CC215D447A1BA49629E21332984A77DFB8D86E99065C6E2685F5AB5EB3590B",
+  "set_version": 5,
+  "tile_version": 13,
+  "tiles": 333,
+  "vertices": 8449,
+  "surface_polygons": 3532,
+  "bounds": {
+    "min_z": -260.0,
+    "max_y": 7026.548828125,
+    "min_x": -5203.80859375,
+    "max_z": 2374.0,
+    "max_x": 3388.191162109375,
+    "min_y": -3677.451171875
+  },
+  "trailing_bytes": 39360,
+  "observations_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\02-mp_colony02\\main\\reports\\01-mp_colony02\\movement\\observations.csv",
+  "pilot_stall_samples": 81,
+  "limits": "Read-only surface geometry from installed navmesh; no adjacency/traversal validation, collision scenery, or in-game visual observation. Rendered heights overlap in top-down views. Stalls are two-second samples, not unique incidents."
+}

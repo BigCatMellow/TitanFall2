@@ -1,0 +1,444 @@
+{
+  "state": "stopped_by_request",
+  "updated": "2026-10-25T12:00:25.7063055-04:00",
+  "current": null,
+  "planned": [
+    "mp_black_water_canal",
+    "mp_colony02",
+    "mp_complex3",
+    "mp_crashsite3",
+    "mp_drydock",
+    "mp_forwardbase_kodai",
+    "mp_grave",
+    "mp_homestead",
+    "mp_relic02",
+    "mp_rise",
+    "mp_thaw",
+    "mp_wargames",
+    "mp_eden",
+    "mp_glitch",
+    "mp_angel_city",
+    "mp_lf_deck",
+    "mp_lf_meadow",
+    "mp_lf_stacks",
+    "mp_lf_township",
+    "mp_lf_traffic",
+    "mp_lf_uma",
+    "mp_coliseum"
+  ],
+  "excluded_maps": [
+    {
+      "map": "mp_coliseum_column",
+      "reason": "Installed arena lacks bot navigation data; recorded as unsupported, not tested"
+    }
+  ],
+  "results": [
+    {
+      "map": "mp_black_water_canal",
+      "state": "complete",
+      "ending": "time_limit_or_rules",
+      "score": "156-178",
+      "elapsed": "891.5",
+      "stall_percent": 1.24,
+      "quick_reversal_percent": 29.5,
+      "top_stall_areas": [
+        {
+          "area": "mp_black_water_canal, 1024,-1024,128",
+          "samples": 4,
+          "slots": [
+            7,
+            8
+          ],
+          "height_median": 103.7,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65547,
+            65550,
+            65551,
+            65553
+          ]
+        },
+        {
+          "area": "mp_black_water_canal, 1024,-1024,0",
+          "samples": 2,
+          "slots": [
+            5,
+            7
+          ],
+          "height_median": 190.6,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65541,
+            65549
+          ]
+        },
+        {
+          "area": "mp_black_water_canal, -896,896,-64",
+          "samples": 2,
+          "slots": [
+            4,
+            14
+          ],
+          "height_median": 24.9,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65538,
+            65540
+          ]
+        }
+      ],
+      "failure": null,
+      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal"
+    },
+    {
+      "map": "mp_colony02",
+      "state": "complete",
+      "ending": "time_limit_or_rules",
+      "score": "163-180",
+      "elapsed": "891.5",
+      "stall_percent": 1.84,
+      "quick_reversal_percent": 45.7,
+      "top_stall_areas": [
+        {
+          "area": "mp_colony02, 1024,-384,256",
+          "samples": 8,
+          "slots": [
+            15
+          ],
+          "height_median": 177.0,
+          "states": [
+            "pursue",
+            "recover"
+          ],
+          "target_ids": [
+            65541
+          ]
+        },
+        {
+          "area": "mp_colony02, 2176,3712,64",
+          "samples": 7,
+          "slots": [
+            4,
+            6,
+            10,
+            12,
+            13,
+            14
+          ],
+          "height_median": 248.0,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65538,
+            65540,
+            65541,
+            65544,
+            65548,
+            6357148
+          ]
+        },
+        {
+          "area": "mp_colony02, 2176,3584,64",
+          "samples": 6,
+          "slots": [
+            6,
+            10,
+            14
+          ],
+          "height_median": 214.7,
+          "states": [
+            "embark",
+            "pursue"
+          ],
+          "target_ids": [
+            65540,
+            65542,
+            65544,
+            65550
+          ]
+        }
+      ],
+      "failure": null,
+      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\02-mp_colony02"
+    },
+    {
+      "map": "mp_complex3",
+      "state": "complete",
+      "ending": "time_limit_or_rules",
+      "score": "199-155",
+      "elapsed": "891.5",
+      "stall_percent": 2.54,
+      "quick_reversal_percent": 45.3,
+      "top_stall_areas": [
+        {
+          "area": "mp_complex3, -8448,-2048,576",
+          "samples": 52,
+          "slots": [
+            11
+          ],
+          "height_median": 112.60000000000002,
+          "states": [
+            "embark",
+            "pursue",
+            "recover"
+          ],
+          "target_ids": [
+            65539,
+            65541,
+            65543,
+            65545,
+            65549,
+            65551,
+            65553,
+            393846,
+            524922,
+            983632,
+            1704082
+          ]
+        },
+        {
+          "area": "mp_complex3, -2944,-3456,704",
+          "samples": 15,
+          "slots": [
+            3,
+            15,
+            16
+          ],
+          "height_median": 153.20000000000005,
+          "states": [
+            "embark",
+            "pursue",
+            "recover"
+          ],
+          "target_ids": [
+            65539,
+            65540,
+            65543,
+            65545,
+            65547,
+            65548,
+            65551,
+            65553
+          ]
+        },
+        {
+          "area": "mp_complex3, -8448,-2304,576",
+          "samples": 3,
+          "slots": [
+            11
+          ],
+          "height_median": 11634.4,
+          "states": [
+            "embark"
+          ],
+          "target_ids": [
+            65543,
+            983632,
+            1704082
+          ]
+        }
+      ],
+      "failure": null,
+      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3"
+    },
+    {
+      "map": "mp_crashsite3",
+      "state": "complete",
+      "ending": "time_limit_or_rules",
+      "score": "170-196",
+      "elapsed": "891.5",
+      "stall_percent": 0.42,
+      "quick_reversal_percent": 23.3,
+      "top_stall_areas": [
+        {
+          "area": "mp_crashsite3, -1664,-256,704",
+          "samples": 2,
+          "slots": [
+            5
+          ],
+          "height_median": 35.5,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65539,
+            65541
+          ]
+        },
+        {
+          "area": "mp_crashsite3, -1280,-1664,640",
+          "samples": 1,
+          "slots": [
+            3
+          ],
+          "height_median": 91.39999999999998,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65545
+          ]
+        },
+        {
+          "area": "mp_crashsite3, 384,1408,704",
+          "samples": 1,
+          "slots": [
+            15
+          ],
+          "height_median": -16.09999999999991,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65549
+          ]
+        }
+      ],
+      "failure": null,
+      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\04-mp_crashsite3"
+    },
+    {
+      "map": "mp_drydock",
+      "state": "complete",
+      "ending": "time_limit_or_rules",
+      "score": "172-170",
+      "elapsed": "891.5",
+      "stall_percent": 1.09,
+      "quick_reversal_percent": 28.8,
+      "top_stall_areas": [
+        {
+          "area": "mp_drydock, 128,1920,320",
+          "samples": 5,
+          "slots": [
+            4,
+            5,
+            7,
+            15
+          ],
+          "height_median": 122.39999999999998,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65539,
+            65548,
+            65552,
+            65553
+          ]
+        },
+        {
+          "area": "mp_drydock, 0,1920,256",
+          "samples": 3,
+          "slots": [
+            4,
+            7,
+            15
+          ],
+          "height_median": 265.5,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65539,
+            65548,
+            65553
+          ]
+        },
+        {
+          "area": "mp_drydock, 1664,1664,320",
+          "samples": 3,
+          "slots": [
+            10,
+            11,
+            14
+          ],
+          "height_median": 123.39999999999998,
+          "states": [
+            "pursue",
+            "recover"
+          ],
+          "target_ids": [
+            65538,
+            65542,
+            65553
+          ]
+        }
+      ],
+      "failure": null,
+      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\05-mp_drydock"
+    },
+    {
+      "map": "mp_forwardbase_kodai",
+      "state": "stopped_error",
+      "ending": "error",
+      "score": "last 141-98",
+      "elapsed": "745.1",
+      "stall_percent": 1.16,
+      "quick_reversal_percent": 24.5,
+      "top_stall_areas": [
+        {
+          "area": "mp_forwardbase_kodai, 768,-1664,960",
+          "samples": 5,
+          "slots": [
+            1,
+            7,
+            14,
+            15
+          ],
+          "height_median": 62.0,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65541,
+            65543,
+            65553,
+            1704254
+          ]
+        },
+        {
+          "area": "mp_forwardbase_kodai, 1408,-384,1024",
+          "samples": 3,
+          "slots": [
+            3,
+            4,
+            7
+          ],
+          "height_median": 322.29999999999995,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65545,
+            65550,
+            262426
+          ]
+        },
+        {
+          "area": "mp_forwardbase_kodai, 768,-896,1088",
+          "samples": 2,
+          "slots": [
+            3
+          ],
+          "height_median": 1.2999999999999545,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65543
+          ]
+        }
+      ],
+      "failure": "Game closed before the survey completed",
+      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\06-mp_forwardbase_kodai"
+    }
+  ],
+  "failure": null
+}

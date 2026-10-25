@@ -1,0 +1,9 @@
+[2026-10-24] [22:13:05] [SCRIPT SV] [info] RELOAD_TEST: PASS map=mp_eden gun=mp_weapon_g2 speedloader=false reload=2.2->1.98 empty=2.64->2.376
+[2026-10-24] [22:13:05] [SCRIPT SV] [info] RELOAD_TEST: PASS map=mp_eden gun=mp_weapon_g2 speedloader=true reload=1.54->1.386 empty=1.848->1.6632
+[2026-10-24] [22:13:05] [SCRIPT SV] [info] RELOAD_TEST: PASS map=mp_eden gun=mp_weapon_hemlok_smg speedloader=false reload=1.5->1.35 empty=2->1.8
+[2026-10-24] [22:13:06] [SCRIPT SV] [info] RELOAD_TEST: PASS map=mp_eden gun=mp_weapon_hemlok_smg speedloader=true reload=1.05->0.945 empty=1.4->1.26
+[2026-10-24] [22:13:06] [SCRIPT SV] [info] RELOAD_TEST: PASS map=mp_eden gun=mp_weapon_rspn101 speedloader=false reload=2.2->1.98 empty=2.92->2.628
+[2026-10-24] [22:13:06] [SCRIPT SV] [info] RELOAD_TEST: PASS map=mp_eden gun=mp_weapon_rspn101 speedloader=true reload=1.54->1.386 empty=2.044->1.8396
+[2026-10-24] [22:13:07] [SCRIPT SV] [info] RELOAD_TEST: PASS map=mp_eden gun=mp_weapon_car speedloader=false reload=1.8->1.62 empty=2.53->2.277
+[2026-10-24] [22:13:07] [SCRIPT SV] [info] RELOAD_TEST: PASS map=mp_eden gun=mp_weapon_car speedloader=true reload=1.26->1.134 empty=1.771->1.5939
+[2026-10-24] [22:13:19] [SCRIPT SV] [info] RELOAD_TEST: COMPLETE map=mp_eden bots_unchanged=15 bot_strip=false

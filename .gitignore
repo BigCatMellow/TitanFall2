@@ -7,3 +7,32 @@ bacon.toml
 
 # wiki
 book
+
+# Private state, installed games and generated builds
+local.settings.json
+.env
+.env.*
+!*.env.example
+**/auth.json
+**/save_data/
+**/test-saves/
+**/baseline/
+**/loadouts_[0-9]*.json
+**/previous_[0-9]*.json
+**/live-human*.json
+*.dll
+*.exe
+*.pdb
+*.dmp
+*.bin
+*.vpk
+*.starpak
+*.rpak
+*.mdl
+*.nm
+*.ain
+*.zip
+*.log
+*.tmp
+**/target/
+**/node_modules/

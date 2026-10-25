@@ -1,0 +1,9 @@
+{
+  "source_log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-24 15-25-08.txt",
+  "exported": "2026-10-24T15:29:39.0307562-04:00",
+  "structured": true,
+  "build_line": "[2026-10-24] [15:25:09] [BP-ORT000] [info] local build: route-recovery-v14 (bounded failed-goal memory and breadcrumb retreat; v12 combat)",
+  "bot_joins": 30,
+  "error_lines": 0,
+  "limitations": "Position samples, not screen video. Stall flags require <50 units of displacement over at least 10 seconds while pursuing/recovering. Clustering ignores walls. Legacy logs lack teams, human positions, targets and exact alive state."
+}

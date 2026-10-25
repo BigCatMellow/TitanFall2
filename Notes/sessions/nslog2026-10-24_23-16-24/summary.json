@@ -1,0 +1,170 @@
+[
+  {
+    "epoch": 1,
+    "map": "mp_eden",
+    "bot_slots": 15,
+    "player_slots": 16,
+    "observations": 3373,
+    "alive_observations": 2740,
+    "stalled_observations": 293,
+    "crowded_observations": 559,
+    "switches": 2162.0,
+    "recoveries": 340.0,
+    "path_failures": 309.0,
+    "path_requests": 52164.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.645,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 468.0
+  },
+  {
+    "epoch": 2,
+    "map": "mp_lobby",
+    "bot_slots": 0,
+    "player_slots": 1,
+    "observations": 0,
+    "alive_observations": 0,
+    "stalled_observations": 0,
+    "crowded_observations": 0,
+    "switches": null,
+    "recoveries": null,
+    "path_failures": null,
+    "path_requests": null,
+    "failed_goal_skips": null,
+    "retreats": null,
+    "mean_largest_pursuit_share": null,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 136.0
+  },
+  {
+    "epoch": 3,
+    "map": "mp_lf_meadow",
+    "bot_slots": 15,
+    "player_slots": 16,
+    "observations": 2214,
+    "alive_observations": 1504,
+    "stalled_observations": 1,
+    "crowded_observations": 89,
+    "switches": 2213.0,
+    "recoveries": 22.0,
+    "path_failures": 2.0,
+    "path_requests": 4062.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.549,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 308.0
+  },
+  {
+    "epoch": 4,
+    "map": "mp_lobby",
+    "bot_slots": 0,
+    "player_slots": 1,
+    "observations": 0,
+    "alive_observations": 0,
+    "stalled_observations": 0,
+    "crowded_observations": 0,
+    "switches": null,
+    "recoveries": null,
+    "path_failures": null,
+    "path_requests": null,
+    "failed_goal_skips": null,
+    "retreats": null,
+    "mean_largest_pursuit_share": null,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 64.0
+  },
+  {
+    "epoch": 5,
+    "map": "mp_lf_meadow",
+    "bot_slots": 15,
+    "player_slots": 16,
+    "observations": 2278,
+    "alive_observations": 1580,
+    "stalled_observations": 4,
+    "crowded_observations": 70,
+    "switches": 2580.0,
+    "recoveries": 35.0,
+    "path_failures": 8.0,
+    "path_requests": 3646.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.524,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 316.0
+  },
+  {
+    "epoch": 6,
+    "map": "mp_lobby",
+    "bot_slots": 0,
+    "player_slots": 1,
+    "observations": 0,
+    "alive_observations": 0,
+    "stalled_observations": 0,
+    "crowded_observations": 0,
+    "switches": null,
+    "recoveries": null,
+    "path_failures": null,
+    "path_requests": null,
+    "failed_goal_skips": null,
+    "retreats": null,
+    "mean_largest_pursuit_share": null,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 8.0
+  },
+  {
+    "epoch": 7,
+    "map": "mp_lobby",
+    "bot_slots": 0,
+    "player_slots": 1,
+    "observations": 0,
+    "alive_observations": 0,
+    "stalled_observations": 0,
+    "crowded_observations": 0,
+    "switches": null,
+    "recoveries": null,
+    "path_failures": null,
+    "path_requests": null,
+    "failed_goal_skips": null,
+    "retreats": null,
+    "mean_largest_pursuit_share": null,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 2.0
+  }
+]

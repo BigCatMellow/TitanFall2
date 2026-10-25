@@ -59,8 +59,15 @@ pub(crate) fn basic_combat(
     let origin = unsafe { *player.get_origin(v) };
     let team = player.m_iTeamNum;
     let is_titan = unsafe { (helper.sv_funcs.is_titan)(nudge_type::<&CBaseEntity>(player)) };
+    let combat_enabled = !is_titan && sim_type == 6
+        && crate::bots::COMBAT_DECISIONS_CONVAR.get().is_some_and(|c| c.get_value_bool());
+    let mut combat_target_is_titan = false;
+    if !combat_enabled { local_data.combat.tactic = "legacy"; }
 
-    let target = unsafe {
+    let target = if !is_titan && sim_type == 6
+        && crate::bots::COORDINATION_CONVAR.get().is_some_and(|c| c.get_value_bool()) {
+        unsafe { find_team_target(origin, team, player, helper, local_data, &shared_data.coordination) }
+    } else { unsafe {
         find_player_in_view(
             origin,
             Some(*(helper.sv_funcs.view_angles)(player, v)),
@@ -82,17 +89,43 @@ pub(crate) fn basic_combat(
             .map(|(_, player)| player)
             .map(|player| ((*player.get_origin(v), player), false))
         })
-    };
+    } };
+
+    let target_id = target.as_ref().map(|((_, target), _)| target.m_RefEHandle);
+    if local_data.metrics.target.is_some() && target_id.is_some()
+        && local_data.metrics.target != target_id {
+        local_data.metrics.switches = local_data.metrics.switches.saturating_add(1);
+        if crate::bots::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
+            log::info!("BOT_DECISION epoch={} t={:.2} slot={} old={} target={} reason={} actor={}",
+                crate::bots::telemetry::epoch(), time(helper), local_data.edict,
+                local_data.metrics.target.unwrap_or(-1), target_id.unwrap_or(-1),
+                if target.as_ref().is_some_and(|(_, visible)| *visible) { "engage" } else { "pursue" },
+                if is_titan { "titan" } else { "pilot" });
+        }
+    }
+    local_data.metrics.target = target_id;
+    local_data.metrics.visible = target.as_ref().is_some_and(|(_, visible)| *visible);
+    local_data.metrics.state = if local_data.metrics.visible { "engage" }
+        else if target_id.is_some() { "pursue" } else { "idle" };
+    if let Some(((pos, _), _)) = target.as_ref() {
+        local_data.metrics.target_pos = [pos.x, pos.y, pos.z];
+    }
+    if let Some(id) = target_id {
+        shared_data.coordination.commit(local_data.edict as usize, team, id, time(helper));
+    } else {
+        shared_data.coordination.clear(local_data.edict as usize);
+    }
 
     let mut cmd = CUserCmd::new_basic_move(Vector3::ZERO, 0, helper);
 
     match (sim_type, &target) {
         (6, target) if target.is_none() || matches!(target, Some((_, false))) => {
             if let Some(pet_titan) = unsafe { (helper.sv_funcs.get_pet_titan)(player).as_ref() } {
+                local_data.metrics.state = "embark";
                 path_to_target(
                     &mut cmd,
                     local_data,
-                    origin,
+                    player.m_vecAbsOrigin,
                     unsafe { *pet_titan.get_origin(v) },
                     local_data.should_recalculate_path,
                     helper,
@@ -101,7 +134,7 @@ pub(crate) fn basic_combat(
                 && path_to_target(
                     &mut cmd,
                     local_data,
-                    origin,
+                    player.m_vecAbsOrigin,
                     *target_pos,
                     local_data.last_target_index != get_player_index(target)
                         || local_data.should_recalculate_path,
@@ -119,7 +152,7 @@ pub(crate) fn basic_combat(
             _ = path_to_target(
                 &mut cmd,
                 local_data,
-                origin,
+                player.m_vecAbsOrigin,
                 local_data.target_pos,
                 local_data.should_recalculate_path,
                 helper,
@@ -155,7 +188,7 @@ pub(crate) fn basic_combat(
             _ = path_to_target(
                 &mut cmd,
                 local_data,
-                origin,
+                player.m_vecAbsOrigin,
                 new_target_pos,
                 should_recaculate.unwrap_or_else(|| local_data.target_pos != new_target_pos)
                     || local_data.should_recalculate_path,
@@ -213,7 +246,7 @@ pub(crate) fn basic_combat(
             _ = path_to_target(
                 &mut cmd,
                 local_data,
-                origin,
+                player.m_vecAbsOrigin,
                 new_target_pos,
                 should_recaculate.unwrap_or_else(|| local_data.target_pos != new_target_pos)
                     || local_data.should_recalculate_path,
@@ -334,6 +367,7 @@ pub(crate) fn basic_combat(
 
         let enemy_is_titan =
             unsafe { (helper.sv_funcs.is_titan)(nudge_type::<&mut CBaseEntity>(target_player)) };
+        combat_target_is_titan = enemy_is_titan;
 
         if should_shoot || sim_type == 5 || sim_type == 4 {
             // for some reason this makes the game freeze later in the frame????
@@ -349,7 +383,9 @@ pub(crate) fn basic_combat(
 
                 if length > AIM_PENALTY_VALUE.load(Ordering::Relaxed) as f32 && !enemy_is_titan {
                     let mut rng = thread_rng();
-                    let error_amount = (length + 50.).sqrt() / 7f32;
+                    let scale = crate::bots::behavior_tuning::aim_error_scale(
+                        crate::bots::AIM_ERROR_SCALE_CONVAR.get().map_or(1., |c| c.get_value_f32()));
+                    let error_amount = (length + 50.).sqrt() / 7f32 * scale;
 
                     Vector3 {
                         x: angles.x + error_amount * rng.gen_range(-2..=2) as f32,
@@ -370,26 +406,20 @@ pub(crate) fn basic_combat(
                 }
             };
 
-            const CLAMP: f32 = 10.;
-
             cmd.world_view_angles.x = angles.x;
-            cmd.world_view_angles.y = if angles.y.is_finite() {
-                {
-                    angles.y.clamp(
-                        cmd.world_view_angles.y - CLAMP,
-                        cmd.world_view_angles.y + CLAMP,
-                    )
-                }
-            } else {
-                angles.y
-            };
+            cmd.world_view_angles.y = crate::bots::behavior_tuning::turn_yaw(
+                cmd.world_view_angles.y, angles.y, 10.);
         } else {
             local_data.spread_offset = local_data.spread.len();
         }
 
-        if (!is_titan
-            && (origin.x - target.x).powi(2) * (origin.y - target.y).powi(2) < 81000.
-            && (origin.z - target.z).abs() < 50.)
+        if (!is_titan && if combat_enabled {
+            !enemy_is_titan && crate::bots::combat_decisions::pilot_melee(
+                origin.x - target.x, origin.y - target.y, origin.z - target.z)
+        } else {
+            (origin.x - target.x).powi(2) * (origin.y - target.y).powi(2) < 81000.
+                && (origin.z - target.z).abs() < 50.
+        })
             || (is_titan
                 && (origin.x - target.x).powi(2) * (origin.y - target.y).powi(2) < 850000.
                 && (origin.z - target.z).abs() < 200.)
@@ -448,9 +478,51 @@ pub(crate) fn basic_combat(
             local_data.counter += 1;
         }
     } else {
-        cmd.buttons |= Action::Reload as u32;
+        if !combat_enabled { cmd.buttons |= Action::Reload as u32; }
 
         cmd.world_view_angles.x = 0.;
+    }
+
+    if combat_enabled && !combat_target_is_titan
+        && local_data.metrics.state != "embark"
+        && unsafe { (helper.sv_funcs.get_pet_titan)(player) }.is_null()
+        && let Some(weapon) = lookup_ent(player.m_inventory.activeWeapon, helper.sv_funcs)
+            .and_then::<&CWeaponX, _>(|ent| ent.dynamic_cast())
+        && let Some(name) = get_weaponx_name(weapon, helper.sv_funcs)
+    {
+        use crate::bots::combat_decisions::Input;
+        let pos = Vector3::new(local_data.metrics.target_pos[0], local_data.metrics.target_pos[1], local_data.metrics.target_pos[2]);
+        let decision = local_data.combat.decide(Input {
+            now: time(helper), weapon_id: weapon.m_RefEHandle, weapon: name,
+            clip: weapon.m_ammoInClip, reloading: weapon.m_bInReload,
+            visible: local_data.metrics.visible, distance: distance(origin, pos),
+            height: origin.z - pos.z, slot: local_data.edict,
+        });
+        if decision.reload { cmd.buttons |= Action::Reload as u32; }
+        if decision.suppress_fire {
+            cmd.buttons &= !(Action::Attack as u32 | Action::Zoom as u32 | Action::Melee as u32
+                | Action::OffHand0 as u32 | Action::OffHand1 as u32 | Action::OffHand2 as u32
+                | Action::OffHand3 as u32 | Action::OffHand4 as u32 | Action::OffhandQuick as u32);
+        }
+        if let Some(forward) = decision.forward {
+            let state = &mut local_data.combat;
+            let yaw = cmd.world_view_angles.y;
+            if time(helper) >= state.step_next_at || (yaw - state.step_yaw).abs() > 40.
+                || state.step_side != decision.side || state.step_forward != forward {
+                state.step_next_at = time(helper) + 0.2;
+                state.step_yaw = yaw;
+                state.step_side = decision.side;
+                state.step_forward = forward;
+                state.step_clear = combat_step_clear(player, helper, yaw, forward, decision.side);
+                if !state.step_clear { state.blocked_steps = state.blocked_steps.saturating_add(1); }
+            }
+            cmd.buttons &= !(Action::Forward as u32 | Action::Back as u32 | Action::Speed as u32
+                | Action::Moveleft as u32 | Action::Moveright as u32);
+            cmd.move_ = if state.step_clear { Vector3::new(forward, decision.side, 0.) } else { Vector3::ZERO };
+            if cmd.move_.x < 0. { cmd.buttons |= Action::Back as u32; }
+            if cmd.move_.y < 0. { cmd.buttons |= Action::Moveleft as u32; }
+            if cmd.move_.y > 0. { cmd.buttons |= Action::Moveright as u32; }
+        }
     }
 
     let actions = [
@@ -494,9 +566,80 @@ pub(crate) fn basic_combat(
         local_data.next_check = helper.globals.curTime;
     }
 
+    local_data.metrics.neighbors = 0;
+    if !is_titan && sim_type == 6 && local_data.metrics.state != "recover"
+        && local_data.metrics.state != "embark" && cmd.move_.x > 0.
+        && crate::bots::COORDINATION_CONVAR.get().is_some_and(|c| c.get_value_bool()) {
+        let self_ptr = std::ptr::from_ref(player);
+        let allies: Vec<_> = (1..=32).filter_map(|index| {
+            let ptr = unsafe { (helper.sv_funcs.get_player_by_index)(index) };
+            if std::ptr::addr_eq(ptr, self_ptr) { return None; }
+            let ally = unsafe { ptr.as_ref()? };
+            (ally.m_iTeamNum == team && ally.m_lifeState == 0 && ally.m_iHealth > 0)
+                .then_some([ally.m_vecAbsOrigin.x, ally.m_vecAbsOrigin.y, ally.m_vecAbsOrigin.z])
+        }).collect();
+        let feet = player.m_vecAbsOrigin;
+        let (side, neighbors) = crate::bots::coordination::separation_side(local_data.edict as usize,
+            cmd.world_view_angles.y, [feet.x, feet.y, feet.z], &allies);
+        local_data.metrics.neighbors = neighbors;
+        if neighbors > 0 {
+            cmd.move_.y = (cmd.move_.y + side).clamp(-1., 1.);
+            local_data.metrics.spacing_commands = local_data.metrics.spacing_commands.saturating_add(1);
+        }
+    }
     cmd.camera_angles = cmd.world_view_angles;
 
     cmd
+}
+
+/// Small grounded steps only; tracing is cached at 5 Hz, outside navigation.
+fn combat_step_clear(player: &mut CPlayer, helper: &CUserCmdHelper, yaw: f32, forward: f32, side: f32) -> bool {
+    if !yaw.is_finite() || unsafe { (helper.sv_funcs.is_on_ground)(nudge_type::<&CBaseEntity>(player)) } == 0 { return false; }
+    let (sin, cos) = yaw.to_radians().sin_cos();
+    // Positive side movement is right in Source's command coordinates.
+    let direction = Vector3::new(cos * forward + sin * side, sin * forward - cos * side, 0.);
+    let length = (direction.x * direction.x + direction.y * direction.y).sqrt();
+    if length < 0.01 { return false; }
+    let start = player.m_vecAbsOrigin + Vector3::new(0., 0., 32.);
+    let end = start + Vector3::new(direction.x * 64. / length, direction.y * 64. / length, 0.);
+    // view_rate adds GROUND_OFFSET internally; subtract it to trace exact endpoints.
+    let (wall, _) = view_rate(helper, start, end - GROUND_OFFSET, player, true);
+    if wall < 0.98 { return false; }
+    let (ground, _) = view_rate(helper, end, end - Vector3::new(0., 0., 104.) - GROUND_OFFSET, player, true);
+    ground > 0.01 && ground < 0.95
+}
+
+unsafe fn find_team_target<'a>(
+    origin: Vector3, team: i32, player: &mut CPlayer, helper: &CUserCmdHelper,
+    local: &BotData, coordinator: &crate::bots::coordination::Coordinator,
+) -> Option<((Vector3, &'a mut CPlayer), bool)> {
+    use crate::bots::coordination::Candidate;
+    struct NativeTarget { candidate: Candidate, pos: Vector3, player: *mut CPlayer }
+    let mut v = Vector3::ZERO;
+    let view = unsafe { *(helper.sv_funcs.view_angles)(player, &mut v) };
+    let targets: Vec<_> = enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team))
+        .filter(|target| target.m_RefEHandle != -1)
+        .map(|target| {
+            let pos = unsafe { *target.get_origin(&mut v) };
+            NativeTarget { candidate: Candidate { id: target.m_RefEHandle, distance: distance(pos, origin) },
+                pos, player: std::ptr::from_mut(target) }
+        }).collect();
+    let candidates: Vec<_> = targets.iter().map(|t| t.candidate).collect();
+    let ranked = coordinator.rank(local.edict as usize, team, time(helper), &candidates);
+    // Prefer a shootable threat in team-aware order. A failed raycast never
+    // reserves a target or prevents checking the remaining visible enemies.
+    let visible = ranked.iter().copied().find(|index| {
+        let target = &targets[*index];
+        if target.candidate.distance > BOT_VISON_RANGE
+            || dot(normalize(target.pos - origin), view) <= 270_f32.to_radians().cos() { return false; }
+        let (fraction, hit) = view_rate(helper, origin, target.pos, target.player, false);
+        if fraction != 1. && !std::ptr::addr_eq(hit, target.player) { return false; }
+        let (fraction, hit) = view_rate(helper, origin, target.pos, target.player, true);
+        fraction == 1. || std::ptr::addr_eq(hit, target.player)
+    });
+    let selected = visible.or_else(|| ranked.first().copied())?;
+    let selected = &targets[selected];
+    Some(((selected.pos, unsafe { selected.player.as_mut()? }), visible.is_some()))
 }
 
 fn find_closest_battery(pos: Vector3, helper: &CUserCmdHelper) -> Option<Vector3> {

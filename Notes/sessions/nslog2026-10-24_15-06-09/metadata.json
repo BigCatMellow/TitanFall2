@@ -1,0 +1,9 @@
+{
+  "source_log": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\logs\\nslog2026-10-24 15-06-09.txt",
+  "exported": "2026-10-24T15:12:50.8012119-04:00",
+  "structured": true,
+  "build_line": "[2026-10-24] [15:06:10] [BP-ORT000] [info] local build: team-observer-v12 (team-local pursuit claims and structured telemetry)",
+  "bot_joins": 15,
+  "error_lines": 0,
+  "limitations": "Position samples, not screen video. Stall flags require <50 units of displacement over at least 10 seconds while pursuing/recovering. Clustering ignores walls. Legacy logs lack teams, human positions, targets and exact alive state."
+}

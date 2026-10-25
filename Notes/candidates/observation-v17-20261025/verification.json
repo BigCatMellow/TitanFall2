@@ -1,0 +1,8 @@
+{
+  "build": "observation-v17-candidate",
+  "deployment": "NOT DEPLOYED",
+  "unit_tests_passed": 34,
+  "source_archive_sha256": "8D07D5D2E3975554D15C50436D98D9218D0D5D76DCCDF176742D4E956D30AB8A",
+  "dll_sha256": "9FB6E5ACE50E858607D2CD3B04F592ABE45F1C5DB0E99EE54CDAC525DC74E2F9",
+  "differential": "PASS: 47058 evaluated combat decisions across 50000 commands match v16; skipped commands mark cached readings inactive."
+}

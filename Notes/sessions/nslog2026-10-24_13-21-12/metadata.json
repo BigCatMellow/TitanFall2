@@ -1,0 +1,9 @@
+{
+  "source_log": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\logs\\nslog2026-10-24 13-21-12.txt",
+  "exported": "2026-10-24T14:03:31.5882186-04:00",
+  "structured": false,
+  "bot_joins": 45,
+  "error_lines": 0,
+  "limitations": "Position samples, not screen video. Stall flags require <50 units of displacement over at least 10 seconds while pursuing/recovering. Clustering ignores walls. Legacy logs lack teams, human positions, targets and exact alive state.",
+  "build_line": "[2026-10-24] [13:21:13] [BP-ORT000] [info] local build: skill-steering-v11 (adjustable aim error; wrapped and bounded steering)"
+}

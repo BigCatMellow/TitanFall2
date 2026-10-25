@@ -1,0 +1,32 @@
+{
+  "survey_state": "paused_by_user",
+  "completed_maps": [
+    "mp_black_water_canal",
+    "mp_colony02",
+    "mp_complex3",
+    "mp_crashsite3",
+    "mp_drydock"
+  ],
+  "partial_map": "mp_forwardbase_kodai",
+  "remaining_maps": [
+    "mp_forwardbase_kodai",
+    "mp_grave",
+    "mp_homestead",
+    "mp_relic02",
+    "mp_rise",
+    "mp_thaw",
+    "mp_wargames",
+    "mp_eden",
+    "mp_glitch",
+    "mp_angel_city",
+    "mp_lf_deck",
+    "mp_lf_meadow",
+    "mp_lf_stacks",
+    "mp_lf_township",
+    "mp_lf_traffic",
+    "mp_lf_uma",
+    "mp_coliseum"
+  ],
+  "resume_requires_fresh_batch_and_current_save_baselines": true,
+  "automatic_resume": false
+}

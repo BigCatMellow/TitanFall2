@@ -1,0 +1,482 @@
+{
+  "rounds": [
+    {
+      "round": "1, mp_black_water_canal",
+      "pilot_samples": 4754,
+      "stalls": 59,
+      "stall_percent": 1.24,
+      "stall_height_over_180": 20,
+      "recover_samples": 282,
+      "hold_samples": 274,
+      "stopped_holds": 59,
+      "empty_not_reloading": 18
+    }
+  ],
+  "stall_clusters": [
+    {
+      "area": "mp_black_water_canal, 1024,-1024,128",
+      "samples": 4,
+      "slots": [
+        7,
+        8
+      ],
+      "height_median": 103.7,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65547,
+        65550,
+        65551,
+        65553
+      ]
+    },
+    {
+      "area": "mp_black_water_canal, 1024,-1024,0",
+      "samples": 2,
+      "slots": [
+        5,
+        7
+      ],
+      "height_median": 190.6,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65541,
+        65549
+      ]
+    },
+    {
+      "area": "mp_black_water_canal, -896,896,-64",
+      "samples": 2,
+      "slots": [
+        4,
+        14
+      ],
+      "height_median": 24.9,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65538,
+        65540
+      ]
+    },
+    {
+      "area": "mp_black_water_canal, -896,3200,-64",
+      "samples": 2,
+      "slots": [
+        6
+      ],
+      "height_median": 278.4,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65544
+      ]
+    },
+    {
+      "area": "mp_black_water_canal, 1152,-1024,0",
+      "samples": 2,
+      "slots": [
+        11,
+        12
+      ],
+      "height_median": 59.4,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65540,
+        1900803
+      ]
+    },
+    {
+      "area": "mp_black_water_canal, -896,3072,-128",
+      "samples": 2,
+      "slots": [
+        6
+      ],
+      "height_median": 78.3,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65544,
+        1376488
+      ]
+    },
+    {
+      "area": "mp_black_water_canal, 1024,-1024,64",
+      "samples": 2,
+      "slots": [
+        7,
+        8
+      ],
+      "height_median": 214.1,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65547,
+        65552
+      ]
+    },
+    {
+      "area": "mp_black_water_canal, -384,-896,128",
+      "samples": 2,
+      "slots": [
+        11
+      ],
+      "height_median": -32.3,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65541,
+        65549
+      ]
+    },
+    {
+      "area": "mp_black_water_canal, 3072,-1792,-64",
+      "samples": 2,
+      "slots": [
+        3,
+        9
+      ],
+      "height_median": 61.1,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65553
+      ]
+    },
+    {
+      "area": "mp_black_water_canal, 2048,-896,64",
+      "samples": 2,
+      "slots": [
+        5
+      ],
+      "height_median": -182.1,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        1900803
+      ]
+    }
+  ],
+  "longest_episodes": [
+    {
+      "kind": "blocked_hold",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 1,
+      "start": 65.02,
+      "end": 71.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 2094.3,
+      "y": -1343.0,
+      "z": 14.0,
+      "target": 65545,
+      "height": 118.69999999999999
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 8,
+      "start": 65.02,
+      "end": 71.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 1121.4,
+      "y": -1170.7,
+      "z": 72.7,
+      "target": 65538,
+      "height": 1.2999999999999972
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 6,
+      "start": 43.02,
+      "end": 47.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 1116.6,
+      "y": -565.5,
+      "z": 221.1,
+      "target": 65546,
+      "height": 46.900000000000006
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 11,
+      "start": 59.02,
+      "end": 61.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 2923.6,
+      "y": -845.0,
+      "z": -370.9,
+      "target": 65549,
+      "height": 54.69999999999999
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 10,
+      "start": 121.02,
+      "end": 123.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 1512.5,
+      "y": 1156.0,
+      "z": 82.0,
+      "target": 65550,
+      "height": -14.5
+    },
+    {
+      "kind": "empty",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 11,
+      "start": 353.02,
+      "end": 365.02,
+      "span": 12.0,
+      "count": 7,
+      "x": 2724.1,
+      "y": -1360.3,
+      "z": -84.7,
+      "target": 65545,
+      "height": 179.60000000000002
+    },
+    {
+      "kind": "empty",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 13,
+      "start": 409.02,
+      "end": 411.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 3330.3,
+      "y": -1396.8,
+      "z": -276.7,
+      "target": 65541,
+      "height": 60.5
+    },
+    {
+      "kind": "empty",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 1,
+      "start": 119.02,
+      "end": 119.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 59.6,
+      "y": 902.0,
+      "z": -0.6,
+      "target": 65539,
+      "height": 177.6
+    },
+    {
+      "kind": "empty",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 1,
+      "start": 237.02,
+      "end": 237.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 2681.5,
+      "y": -526.7,
+      "z": -348.6,
+      "target": 65539,
+      "height": 24.30000000000001
+    },
+    {
+      "kind": "empty",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 5,
+      "start": 59.02,
+      "end": 59.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 2978.1,
+      "y": -737.4,
+      "z": -385.3,
+      "target": 65549,
+      "height": 69.10000000000002
+    },
+    {
+      "kind": "reload",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 8,
+      "start": 449.02,
+      "end": 461.02,
+      "span": 12.0,
+      "count": 7,
+      "x": -930.9,
+      "y": 2650.0,
+      "z": -128.0,
+      "target": 65544,
+      "height": 57.0
+    },
+    {
+      "kind": "reload",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 13,
+      "start": 235.02,
+      "end": 239.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 1955.4,
+      "y": 612.0,
+      "z": -128.0,
+      "target": 65547,
+      "height": 316.0
+    },
+    {
+      "kind": "reload",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 10,
+      "start": 351.02,
+      "end": 355.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 2777.7,
+      "y": -61.8,
+      "z": -382.5,
+      "target": 65548,
+      "height": 378.5
+    },
+    {
+      "kind": "reload",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 6,
+      "start": 89.02,
+      "end": 91.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 1555.1,
+      "y": -1394.2,
+      "z": 8.0,
+      "target": 65538,
+      "height": 21.8
+    },
+    {
+      "kind": "reload",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 6,
+      "start": 179.02,
+      "end": 181.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 3646.1,
+      "y": -1527.1,
+      "z": -298.9,
+      "target": 65550,
+      "height": -15.900000000000034
+    },
+    {
+      "kind": "stall",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 8,
+      "start": 53.02,
+      "end": 59.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 1018.2,
+      "y": -958.1,
+      "z": 105.7,
+      "target": 65552,
+      "height": 53.499999999999986
+    },
+    {
+      "kind": "stall",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 6,
+      "start": 475.02,
+      "end": 481.02,
+      "span": 6.0,
+      "count": 4,
+      "x": -951.8,
+      "y": 3162.0,
+      "z": -128.0,
+      "target": 1376488,
+      "height": -71.1
+    },
+    {
+      "kind": "stall",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 7,
+      "start": 549.02,
+      "end": 553.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 1016.4,
+      "y": -976.1,
+      "z": 113.4,
+      "target": 65551,
+      "height": 35.900000000000006
+    },
+    {
+      "kind": "stall",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 10,
+      "start": 493.02,
+      "end": 497.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -1044.2,
+      "y": 2278.8,
+      "z": -120.0,
+      "target": 65546,
+      "height": -204.2
+    },
+    {
+      "kind": "stall",
+      "map": "mp_black_water_canal",
+      "epoch": 1,
+      "slot": 10,
+      "start": 893.02,
+      "end": 897.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -163.2,
+      "y": -1602.6,
+      "z": 344.0,
+      "target": 65542,
+      "height": -420.0
+    }
+  ],
+  "target_churn": [
+    {
+      "epoch": "1",
+      "switches": 5690,
+      "reversals_within_half_second": 1680,
+      "both_visible_reversals": 740
+    }
+  ]
+}

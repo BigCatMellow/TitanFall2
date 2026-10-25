@@ -48,6 +48,8 @@ pub(super) fn get_cmd(
             && let Some(ref mut query) = local_data.nav_query
         {
             _ = query.switch_query(desired_hull);
+            local_data.escape_recovery = Default::default();
+            local_data.combat = Default::default();
         }
     }
 
@@ -75,6 +77,12 @@ pub(super) fn get_cmd(
         }
 
         _ if unsafe { (helper.sv_funcs.is_alive)(nudge_type::<&CBaseEntity>(player)) == 0 } => {
+            local_data.escape_recovery = Default::default();
+            local_data.combat = Default::default();
+            shared.coordination.clear(local_data.edict as usize);
+            local_data.metrics.target = None;
+            local_data.metrics.visible = false;
+            local_data.metrics.state = "dead";
             if let Some(query) = local_data.nav_query.as_mut() {
                 query.path_points.clear()
             }
@@ -216,7 +224,7 @@ pub(super) fn get_cmd(
             if path_to_target(
                 &mut cmd,
                 local_data,
-                origin,
+                player.m_vecAbsOrigin,
                 target,
                 local_data.last_target_index != last_index,
                 &helper,
@@ -274,7 +282,7 @@ pub(super) fn get_cmd(
                 path_to_target(
                     &mut cmd,
                     local_data,
-                    origin,
+                    player.m_vecAbsOrigin,
                     titan_pos,
                     local_data.should_recalculate_path,
                     &helper,
@@ -296,13 +304,12 @@ pub(super) fn get_cmd(
         20 => slide_hopper::slide_hopper(&helper, player, local_data),
         21 => {
             let mut cmd = CUserCmd::new_empty(&helper);
-            let origin = unsafe { *player.get_origin(&mut v) };
 
             local_data.approach_range = Some(1.);
             _ = path_to_target(
                 &mut cmd,
                 local_data,
-                origin,
+                player.m_vecAbsOrigin,
                 local_data.target_pos,
                 local_data.should_recalculate_path,
                 &helper,

@@ -1,0 +1,453 @@
+{
+  "rounds": [
+    {
+      "round": "1, mp_crashsite3",
+      "pilot_samples": 4256,
+      "stalls": 18,
+      "stall_percent": 0.42,
+      "stall_height_over_180": 5,
+      "recover_samples": 254,
+      "hold_samples": 516,
+      "stopped_holds": 105,
+      "empty_not_reloading": 4
+    }
+  ],
+  "stall_clusters": [
+    {
+      "area": "mp_crashsite3, -1664,-256,704",
+      "samples": 2,
+      "slots": [
+        5
+      ],
+      "height_median": 35.5,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65539,
+        65541
+      ]
+    },
+    {
+      "area": "mp_crashsite3, -1280,-1664,640",
+      "samples": 1,
+      "slots": [
+        3
+      ],
+      "height_median": 91.39999999999998,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65545
+      ]
+    },
+    {
+      "area": "mp_crashsite3, 384,1408,704",
+      "samples": 1,
+      "slots": [
+        15
+      ],
+      "height_median": -16.09999999999991,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65549
+      ]
+    },
+    {
+      "area": "mp_crashsite3, 256,896,576",
+      "samples": 1,
+      "slots": [
+        5
+      ],
+      "height_median": 70.60000000000002,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65541
+      ]
+    },
+    {
+      "area": "mp_crashsite3, -8320,-2176,768",
+      "samples": 1,
+      "slots": [
+        12
+      ],
+      "height_median": 418.80000000000007,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65542
+      ]
+    },
+    {
+      "area": "mp_crashsite3, -640,-640,640",
+      "samples": 1,
+      "slots": [
+        8
+      ],
+      "height_median": 100.90000000000009,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65542
+      ]
+    },
+    {
+      "area": "mp_crashsite3, -640,-2176,960",
+      "samples": 1,
+      "slots": [
+        2
+      ],
+      "height_median": -178.20000000000005,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65548
+      ]
+    },
+    {
+      "area": "mp_crashsite3, -640,-2176,896",
+      "samples": 1,
+      "slots": [
+        8
+      ],
+      "height_median": -138.20000000000005,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        2687368
+      ]
+    },
+    {
+      "area": "mp_crashsite3, -5760,-1920,1024",
+      "samples": 1,
+      "slots": [
+        2
+      ],
+      "height_median": -238.29999999999995,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        2162923
+      ]
+    },
+    {
+      "area": "mp_crashsite3, -4736,1408,1152",
+      "samples": 1,
+      "slots": [
+        11
+      ],
+      "height_median": -61.59999999999991,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65549
+      ]
+    }
+  ],
+  "longest_episodes": [
+    {
+      "kind": "blocked_hold",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 10,
+      "start": 165.02,
+      "end": 171.02,
+      "span": 6.0,
+      "count": 4,
+      "x": -6070.8,
+      "y": -1159.6,
+      "z": 1002.9,
+      "target": 65542,
+      "height": 218.39999999999998
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 1,
+      "start": 343.02,
+      "end": 349.02,
+      "span": 6.0,
+      "count": 4,
+      "x": -3817.7,
+      "y": -2098.9,
+      "z": 794.0,
+      "target": 65553,
+      "height": 201.79999999999995
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 5,
+      "start": 55.02,
+      "end": 59.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -3603.0,
+      "y": -1208.1,
+      "z": 865.1,
+      "target": 65553,
+      "height": 32.60000000000002
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 12,
+      "start": 167.02,
+      "end": 171.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -6086.9,
+      "y": -1000.1,
+      "z": 1049.3,
+      "target": 65542,
+      "height": 159.20000000000005
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 11,
+      "start": 49.02,
+      "end": 51.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -3572.2,
+      "y": -1252.6,
+      "z": 846.5,
+      "target": 65547,
+      "height": 44.799999999999955
+    },
+    {
+      "kind": "empty",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 8,
+      "start": 699.02,
+      "end": 699.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -1251.6,
+      "y": -1975.4,
+      "z": 627.7,
+      "target": 65548,
+      "height": 124.19999999999993
+    },
+    {
+      "kind": "empty",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 9,
+      "start": 149.02,
+      "end": 149.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -4513.1,
+      "y": 1269.3,
+      "z": 1199.3,
+      "target": 65553,
+      "height": -134.79999999999995
+    },
+    {
+      "kind": "empty",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 10,
+      "start": 173.02,
+      "end": 173.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -6098.3,
+      "y": -1051.1,
+      "z": 1085.7,
+      "target": 65552,
+      "height": 15.099999999999909
+    },
+    {
+      "kind": "empty",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 10,
+      "start": 299.02,
+      "end": 299.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -5909.9,
+      "y": 1218.6,
+      "z": 1413.8,
+      "target": 65546,
+      "height": -294.70000000000005
+    },
+    {
+      "kind": "reload",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 9,
+      "start": 151.02,
+      "end": 161.02,
+      "span": 10.0,
+      "count": 6,
+      "x": -4505.4,
+      "y": 1099.7,
+      "z": 1323.2,
+      "target": 65553,
+      "height": -236.70000000000005
+    },
+    {
+      "kind": "reload",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 13,
+      "start": 355.02,
+      "end": 365.02,
+      "span": 10.0,
+      "count": 6,
+      "x": -5426.6,
+      "y": -3217.8,
+      "z": 1013.1,
+      "target": 65539,
+      "height": 52.80000000000007
+    },
+    {
+      "kind": "reload",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 1,
+      "start": 123.02,
+      "end": 131.02,
+      "span": 8.000000000000014,
+      "count": 5,
+      "x": -3478.3,
+      "y": -489.5,
+      "z": 828.2,
+      "target": 65541,
+      "height": 223.89999999999986
+    },
+    {
+      "kind": "reload",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 10,
+      "start": 307.02,
+      "end": 311.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -5138.7,
+      "y": 1139.0,
+      "z": 1192.2,
+      "target": 65552,
+      "height": -148.9000000000001
+    },
+    {
+      "kind": "reload",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 2,
+      "start": 307.02,
+      "end": 311.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -4785.9,
+      "y": 1293.1,
+      "z": 1157.7,
+      "target": 65540,
+      "height": 73.39999999999986
+    },
+    {
+      "kind": "stall",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 1,
+      "start": 621.02,
+      "end": 621.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 450.5,
+      "y": 923.4,
+      "z": 667.9,
+      "target": 65543,
+      "height": 159.39999999999998
+    },
+    {
+      "kind": "stall",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 12,
+      "start": 863.02,
+      "end": 863.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -8279.6,
+      "y": -2130.9,
+      "z": 746.4,
+      "target": 65542,
+      "height": 418.80000000000007
+    },
+    {
+      "kind": "stall",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 11,
+      "start": 175.02,
+      "end": 175.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -4730.9,
+      "y": 1350.1,
+      "z": 1166.0,
+      "target": 65549,
+      "height": -61.59999999999991
+    },
+    {
+      "kind": "stall",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 11,
+      "start": 161.02,
+      "end": 161.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -4314.6,
+      "y": 1182.9,
+      "z": 1172.7,
+      "target": 65549,
+      "height": -123.0
+    },
+    {
+      "kind": "stall",
+      "map": "mp_crashsite3",
+      "epoch": 1,
+      "slot": 9,
+      "start": 511.02,
+      "end": 511.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -3995.8,
+      "y": -1725.5,
+      "z": 875.6,
+      "target": 65541,
+      "height": 32.60000000000002
+    }
+  ],
+  "target_churn": [
+    {
+      "epoch": "1",
+      "switches": 5431,
+      "reversals_within_half_second": 1266,
+      "both_visible_reversals": 342
+    }
+  ]
+}

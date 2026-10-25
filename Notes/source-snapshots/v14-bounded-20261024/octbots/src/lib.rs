@@ -1,0 +1,317 @@
+#![feature(mpmc_channel, stmt_expr_attributes, if_let_guard, iter_collect_into)]
+
+use nav_points::vector3_to_tuvec;
+use once_cell::sync::OnceCell;
+use parking_lot::{Mutex, RwLock};
+use rrplug::{
+    bindings::plugin_abi::PluginColor,
+    exports::windows::Win32::Foundation::HMODULE,
+    high::squirrel::compile_string,
+    mid::{northstar::NORTHSTAR_DATA, squirrel::SQVM_SERVER},
+    prelude::*,
+};
+use shared::{
+    bindings::{
+        CLIENT_FUNCTIONS, ClientFunctions, ENGINE_FUNCTIONS, EngineFunctions, HostState,
+        MATSYS_FUNCTIONS, MatSysFunctions, SERVER_FUNCTIONS, ServerFunctions,
+    },
+    interfaces::{IVDebugOverlay, IVEngineServer},
+    persistence::ClientPersistence,
+    plugin_interfaces::{CURERENT_INTERFACE_VERSION, ExternalSimulations, rust_version_hash},
+};
+use std::{env, ffi::CStr, sync::Arc};
+
+use crate::async_pathfinding::JobMarket;
+
+mod async_pathfinding;
+mod behavior;
+mod difficulty;
+mod gamemode_cp;
+mod gamemode_ctf;
+mod loader;
+mod movement;
+mod nav_points;
+mod pathfinding;
+mod sqapi;
+mod targeting;
+
+const PLUGIN_DLL_NAME: *const i8 = c"octbots.dll".as_ptr();
+
+pub static ENGINE_INTERFACES: OnceCell<SourceInterfaces> = OnceCell::new();
+
+pub struct SourceInterfaces {
+    pub debug_overlay: &'static IVDebugOverlay, // since it's a ptr to class which has a ptr to vtable
+    pub engine_server: &'static IVEngineServer,
+}
+
+unsafe impl Sync for SourceInterfaces {}
+unsafe impl Send for SourceInterfaces {}
+
+pub struct OctBots {
+    #[allow(clippy::type_complexity)]
+    navmesh: Arc<RwLock<loader::Navmesh>>,
+    current_map: Mutex<String>,
+    simulations: OnceCell<&'static ExternalSimulations>,
+    job_market: JobMarket,
+    persistence: OnceCell<ClientPersistence>,
+    config: difficulty::ConfigArc,
+}
+
+impl Plugin for OctBots {
+    const PLUGIN_INFO: PluginInfo = PluginInfo::new_with_color(
+        c"octbots",
+        c" OCTBOTS ",
+        c"OCTBOTS",
+        PluginContext::all(),
+        PluginColor {
+            red: 255,
+            green: 127,
+            blue: 127,
+        },
+    );
+
+    fn new(_reloaded: bool) -> Self {
+        let mut navmesh = loader::Navmesh::default();
+
+        let is_dedicated = env::args().any(|arg| arg == "-dedicated");
+
+        if (env::args().all(|arg| arg != "-disable-building") && !is_dedicated)
+            || (env::args().any(|arg| arg == "-allow-building") && is_dedicated)
+        {
+            navmesh.allow_building();
+        }
+
+        let navmesh = Arc::new(RwLock::new(navmesh));
+
+        sqapi::octtree_register_sq_functions();
+
+        Self {
+            current_map: Mutex::new("".to_string()),
+            job_market: JobMarket::new(Arc::clone(&navmesh)),
+            navmesh,
+            simulations: OnceCell::new(),
+            persistence: OnceCell::new(),
+            config: difficulty::default_config(),
+        }
+    }
+
+    fn plugins_loaded(&self, _engine_token: EngineToken) {
+        if let Some(interface) =
+            unsafe { ExternalSimulations::from_dll_name("bp_ort.dll", "ExternalSimulation001") }
+                .iter()
+                .find(|interface| unsafe { interface.rust_version_hash() == rust_version_hash() })
+                .filter(|interface| unsafe {
+                    interface.interface_version() == CURERENT_INTERFACE_VERSION
+                })
+        {
+            _ = self.simulations.set(interface);
+
+            unsafe {
+                if !interface.set_bot_init(PLUGIN_DLL_NAME, behavior::init_bot) {
+                    log::error!("failed to register init_bot function");
+                }
+
+                if !interface.register_pre_simulate(PLUGIN_DLL_NAME, behavior::pre_simulate) {
+                    log::error!("failed to register pre_simulate function");
+                }
+
+                if !interface.register_simulation(
+                    PLUGIN_DLL_NAME,
+                    100,
+                    behavior::wallpathfining_bots,
+                ) {
+                    log::error!("100: failed to register a simulation function");
+                }
+
+                if !interface.register_simulation(
+                    PLUGIN_DLL_NAME,
+                    101,
+                    behavior::test_closest_navpoint,
+                ) {
+                    log::error!("101: failed to register a simulation function");
+                }
+            };
+
+            log::info!(
+                "loaded interfaces {} {}",
+                unsafe { interface.rust_version_hash() },
+                rust_version_hash()
+            );
+        } else {
+            log::error!("failed to load interfaces from bp_ort; unloading!");
+            log::error!(
+                "possibly because the plugin doesn't exist or was compiled on a different version of rustc or the interface version doesn't match"
+            );
+            let northstar_data = NORTHSTAR_DATA
+                .get()
+                .expect("northstar interface should exist");
+            unsafe { northstar_data.sys().unload(northstar_data.handle()) };
+        }
+    }
+
+    fn on_dll_load(&self, engine: Option<&EngineData>, dll_ptr: &DLLPointer, token: EngineToken) {
+        unsafe {
+            EngineFunctions::try_init(dll_ptr, &ENGINE_FUNCTIONS);
+            ClientFunctions::try_init(dll_ptr, &CLIENT_FUNCTIONS);
+            ServerFunctions::try_init(dll_ptr, &SERVER_FUNCTIONS);
+            MatSysFunctions::try_init(dll_ptr, &MATSYS_FUNCTIONS);
+        }
+
+        let Some(_) = engine else { return };
+
+        _ = unsafe {
+            ENGINE_INTERFACES.set(SourceInterfaces {
+                debug_overlay: IVDebugOverlay::from_dll_ptr(
+                    HMODULE(dll_ptr.get_dll_ptr() as isize),
+                    "VDebugOverlay004",
+                )
+                .unwrap(),
+                engine_server: IVEngineServer::from_dll_ptr(
+                    HMODULE(dll_ptr.get_dll_ptr() as isize),
+                    "VEngineServer022",
+                )
+                .unwrap(),
+            })
+        };
+
+        _ = self.persistence.set(ClientPersistence::new(
+            ENGINE_INTERFACES.wait().engine_server,
+            false,
+        ));
+
+        difficulty::init_difficulty(token, &self.config);
+    }
+
+    fn on_sqvm_destroyed(&self, sqvm_handle: &CSquirrelVMHandle, _engine_token: EngineToken) {
+        if sqvm_handle.get_context() != ScriptContext::SERVER {
+            return;
+        }
+
+        // self.trace_guard.lock().take();
+        behavior::drop_behaviors();
+    }
+
+    fn on_reload_request(&self) -> reloading::ReloadResponse {
+        if let Some(mut navmesh) = self.navmesh.try_write() {
+            navmesh.drop_navmesh();
+        }
+
+        unsafe { self.simulations.wait().drop_simulation(PLUGIN_DLL_NAME) };
+        self.job_market.stop();
+
+        // force the visualizer to stop and run other drop functions :skull: (didn't used to do that)
+        behavior::drop_behaviors();
+
+        // has to be reloadable
+        unsafe { reloading::ReloadResponse::allow_reload() }
+    }
+
+    fn runframe(&self, engine_token: EngineToken) {
+        if let Some(state) = unsafe {
+            ENGINE_FUNCTIONS
+                .get()
+                .and_then(|funcs| funcs.host_state.as_ref())
+        } && let Some(funcs) = SERVER_FUNCTIONS.get()
+        {
+            let current_name =
+                unsafe { CStr::from_ptr(state.level_name.as_ptr()).to_string_lossy() };
+            let mut load_nav = self.current_map.lock();
+
+            if *load_nav != current_name && state.current_state == HostState::Run {
+                self.navmesh.write().load_navmesh(current_name.as_ref());
+
+                *load_nav = current_name.to_string();
+            } else if let Some(mut navmesh) = self.navmesh.try_write() {
+                match &navmesh.navmesh {
+                    loader::NavmeshStatus::Unloaded if navmesh.is_building() => {
+                        navmesh.try_build_status()
+                    }
+                    loader::NavmeshStatus::Unloaded => {}
+                    loader::NavmeshStatus::Loading => {
+                        if let Some(true) = navmesh.try_loaded()
+                            && let cell_size = navmesh.cell_size
+                            && let is_glitch = matches!(navmesh.id.as_str(), "mp_glitch")
+                            && let loader::NavmeshStatus::Loaded(octtree) = &mut navmesh.navmesh
+                        {
+                            if ["cp", "mcp"].contains(
+                                &ConVarStruct::find_convar_by_name("mp_gamemode", engine_token)
+                                    .map(|convar| convar.get_value_string())
+                                    .unwrap_or_default()
+                                    .as_str(),
+                            ) {
+                                log::info!("loading extra hardpoints into navmesh");
+                                let neighbor = (-3..=3).flat_map(|x| {
+                                    (-3..=3).flat_map(move |y| (-2..=3).map(move |z| [x, y, z]))
+                                });
+
+                                let mut v = Vector3::ZERO;
+                                for point in
+                                    shared::utils::get_ents_by_class_name(c"info_hardpoint", funcs)
+                                        .flat_map(|ent| unsafe { ent.as_ref() })
+                                        .map(|ent| unsafe { *ent.get_origin(&mut v) })
+                                        .map(|origin| vector3_to_tuvec(cell_size, origin))
+                                        .flat_map(|point| {
+                                            neighbor.clone().flat_map(move |offset| {
+                                                Some(oktree::prelude::TUVec3u32::new(
+                                                    point.0.x.checked_add_signed(offset[0])?,
+                                                    point.0.y.checked_add_signed(offset[1])?,
+                                                    point.0.z.checked_add_signed(offset[2])?,
+                                                ))
+                                            })
+                                        })
+                                {
+                                    _ = octtree.insert(point);
+                                }
+                            }
+
+                            if is_glitch {
+                                let neighbors = (-3..=3).flat_map(|x| {
+                                    (-3..=3).flat_map(move |y| (-10..=10).map(move |z| [x, y, z]))
+                                });
+
+                                for point in [
+                                    Vector3::new(-4577.9033, -203.02658, 338.9362),
+                                    Vector3::new(4193.9033, 459.02658, 338.9362),
+                                ]
+                                .into_iter()
+                                .map(|origin| vector3_to_tuvec(cell_size, origin))
+                                .flat_map(|point| {
+                                    neighbors.clone().map(move |offset| {
+                                        oktree::prelude::TUVec3u32::new(
+                                            point.0.x.saturating_add_signed(offset[0]),
+                                            point.0.y.saturating_add_signed(offset[1]),
+                                            point.0.z.saturating_add_signed(offset[2]),
+                                        )
+                                    })
+                                }) {
+                                    _ = octtree.insert(point);
+                                }
+                            }
+                        } else if matches!(navmesh.navmesh, loader::NavmeshStatus::Unloaded)
+                            && let Ok(sqvm) = SQVM_SERVER.get(engine_token).try_borrow()
+                            && let Some(sqvm) = sqvm.as_ref().copied()
+                        {
+                            _ = compile_string(
+                                sqvm,
+                                SQFUNCTIONS.from_sqvm(sqvm),
+                                false,
+                                r#"
+                                thread void function() {
+                                   	while ( GetGameState() != eGameState.Playing )
+                                  		WaitFrame()
+
+                                    foreach ( entity player in GetPlayerArray() )    
+                                        SendHudMessage( player, "WARNING: couldn't load the bp_ort navmeshes for this map; building navmeshes for this map" , -1, 0.2, 255, 0, 0, 0, 0, 5, 0 )
+                                }()
+                                "#,
+                            );
+                        }
+                    }
+                    loader::NavmeshStatus::Loaded(_) => {}
+                }
+            }
+        }
+    }
+}
+
+entry!(OctBots);

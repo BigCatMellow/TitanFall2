@@ -1,0 +1,367 @@
+use std::ops::Not;
+
+use crate::bindings::*;
+use crate::*;
+use avian3d::parry::na::{SMatrix, Vector3};
+use bevy::asset::RenderAssetUsages;
+use bevy::math::DVec3;
+use itertools::Itertools;
+
+const EXTRA_FLAGS: &[(&str, [(i32, i32); 3])] = &[
+    (
+        "mp_black_water_canal",
+        [(0, 0), (0, Contents::WINDOW_NO_COLLIDE as i32), (0, 0)],
+    ),
+    (
+        "mp_colony02",
+        [(0, 0), (0, Contents::WINDOW_NO_COLLIDE as i32), (0, 0)],
+    ),
+];
+const SHOULD_CHECK_WINDOW_NO_COLLIDE: &[(&str, bool)] = &[
+    ("mp_angel_city", true),
+    ("mp_black_water_canal", true),
+    ("mp_grave", true),
+    ("mp_colony02", true),
+    ("mp_complex3", true),
+    ("mp_crashsite3", true),
+    ("mp_drydock", true),
+    ("mp_eden", true),
+    ("mp_thaw", true),
+    ("mp_forwardbase_kodai", true),
+    ("mp_glitch", true),
+    ("mp_homestead", true),
+    ("mp_relic02", true),
+    ("mp_rise", true),
+    ("mp_wargames", true),
+    ("mp_lobby", true),
+    ("mp_lf_deck", true),
+    ("mp_lf_meadow", true),
+    ("mp_lf_stacks", true),
+    ("mp_lf_township", true),
+    ("mp_lf_traffic", true),
+    ("mp_lf_uma", true),
+    ("mp_coliseum", true),
+    ("mp_coliseum_column", true),
+];
+
+pub fn geoset_to_meshes(
+    BSPData {
+        vertices,
+        tricoll_headers,
+        tricoll_triangles,
+        geo_sets,
+        col_primitives,
+        unique_contents,
+        brushes,
+        brush_side_plane_offsets,
+        brush_planes,
+        grid,
+        props,
+        model_data,
+        models,
+    }: BSPData,
+    entities: &[entities::Entity],
+    map_name: &str,
+) -> Vec<Mesh> {
+    let extra_flags = EXTRA_FLAGS
+        .iter()
+        .find_map(|(name, rest)| (*name == map_name).then_some(rest))
+        .copied()
+        .unwrap_or_default();
+    let should_check_window_no_collide = SHOULD_CHECK_WINDOW_NO_COLLIDE
+        .iter()
+        .find_map(|(name, rest)| (*name == map_name).then_some(rest))
+        .copied()
+        .unwrap_or_default();
+
+    // these are indices to MESHES not CM_BRUSHES, so we need a way to figure out a mapping between the two
+    let skip_models = entities
+        .iter()
+        .filter_map(|ent| ent.get_model_index())
+        .dedup()
+        .filter_map(|index| models.get(index))
+        .collect::<Vec<_>>();
+
+    geo_sets
+        .into_iter()
+        .flat_map(|geoset| {
+            col_primitives
+                .get(((geoset.prim_start >> 8) & 0x1FFFFF) as usize..)
+                .unwrap_or(&[])
+                .iter()
+                .take((geoset.prim_count.eq(&1).not() as usize) * geoset.prim_count as usize)
+                .map(|col_primative| col_primative.val)
+                .chain(geoset.prim_count.eq(&1).then_some(geoset.prim_start))
+        })
+        .filter_map(|primative| {
+            let ty =
+                PrimitiveType::try_from((primative >> 29) & 0x7).expect("invalid primative type");
+            let (flag, no_flag) = match ty {
+                PrimitiveType::Brush => (
+                    Contents::SOLID as i32 | Contents::PLAYER_CLIP as i32,
+                    Contents::WINDOW_NO_COLLIDE as i32,
+                ),
+                PrimitiveType::Tricoll => (
+                    Contents::SOLID as i32
+                        | Contents::PLAYER_CLIP as i32
+                        | Contents::BULLET_CLIP as i32,
+                    0,
+                ),
+                PrimitiveType::Prop => (Contents::SOLID as i32 | Contents::PLAYER_CLIP as i32, 0),
+            };
+
+            let extra_flags = extra_flags
+                .get((ty as usize).saturating_sub(1))
+                .copied()
+                .unwrap_or_default();
+            let (flag, no_flag) = (flag | extra_flags.0, no_flag | extra_flags.1);
+
+            // if it doesn't contain any
+            if unique_contents[primative as usize & 0xFF] & flag == 0
+                || unique_contents[primative as usize & 0xFF] & no_flag != 0
+            {
+                None
+            } else {
+                Some((
+                    ty,
+                    ((primative >> 8) & 0x1FFFFF) as usize,
+                    unique_contents[primative as usize & 0xFF],
+                    unique_contents[primative as usize & 0xFF],
+                ))
+            }
+        })
+        .collect::<std::collections::HashSet<(PrimitiveType, usize, i32, i32)>>()
+        // maybe this doesn't improve anything but it's cool
+        .into_par_iter()
+        .filter_map(|(ty, index, contents, flags)| {
+            let mut pushing_vertices: Vec<Vec3> = Vec::new();
+            let mut indices = Vec::new();
+
+            match ty {
+                PrimitiveType::Tricoll => tricoll_to_mesh(
+                    &tricoll_headers[index],
+                    &vertices,
+                    &tricoll_triangles,
+                    &mut pushing_vertices,
+                    &mut indices,
+                ),
+                PrimitiveType::Brush => brush_to_mesh(
+                    &brushes[index],
+                    &brush_side_plane_offsets,
+                    &brush_planes,
+                    grid,
+                    &mut pushing_vertices,
+                    &mut indices,
+                )?,
+                PrimitiveType::Prop => prop_to_mesh(
+                    &props,
+                    &model_data,
+                    index,
+                    &mut pushing_vertices,
+                    &mut indices,
+                )?,
+            }
+
+            // just check if the surface is not flat which means we have a huge wall here that is marked WINDOW_NO_COLLIDE therefore it needs to be gone
+            if should_check_window_no_collide
+                && flags & Contents::WINDOW_NO_COLLIDE as i32 != 0
+                && (pushing_vertices
+                    .iter()
+                    .map(|v| v.y as i64)
+                    .max()
+                    .unwrap_or_default()
+                    - pushing_vertices
+                        .iter()
+                        .map(|v| v.y as i64)
+                        .min()
+                        .unwrap_or_default())
+                .abs()
+                    > 200
+            {
+                return None;
+            }
+
+            Some(
+                Mesh::new(
+                    bevy::mesh::PrimitiveTopology::TriangleList,
+                    RenderAssetUsages::all(),
+                )
+                .with_inserted_attribute(
+                    Mesh::ATTRIBUTE_NORMAL,
+                    pushing_vertices.iter().map(|_| Vec3::ZERO).collect_vec(),
+                )
+                .with_inserted_attribute(
+                    Mesh::ATTRIBUTE_UV_0,
+                    pushing_vertices.iter().map(|_| Vec2::ONE).collect_vec(),
+                )
+                .with_inserted_attribute(
+                    ATTRIBUTE_UNIQUE_CONTENTS,
+                    vec![contents; pushing_vertices.len()],
+                )
+                .with_inserted_attribute(
+                    ATTRIBUTE_PRIMATIVE_TYPE,
+                    vec![ty as u32; pushing_vertices.len()],
+                )
+                .with_inserted_attribute(Mesh::ATTRIBUTE_POSITION, pushing_vertices)
+                .with_inserted_indices(bevy::mesh::Indices::U32(indices)),
+            )
+        })
+        .collect::<Vec<Mesh>>()
+}
+
+fn brush_to_mesh(
+    brush: &Brush,
+    brush_side_plane_offsets: &[u16],
+    brush_planes: &[Vec4],
+    grid: CMGrid,
+    pushing_vertices: &mut Vec<Vec3>,
+    indices: &mut Vec<u32>,
+) -> Option<()> {
+    let planes = (0..brush.num_plane_offsets as usize)
+        .map(|i| {
+            grid.base_plane_offset as usize + i + brush.brush_side_offset as usize
+                - brush_side_plane_offsets[brush.brush_side_offset as usize + i] as usize
+        })
+        .map(|index| brush_planes[index])
+        .collect::<Vec<_>>();
+
+    #[rustfmt::skip] let extend_planes =[
+        Vec4::new(1., 0., 0., brush.extends.x.abs()),
+        Vec4::new(-1., 0., 0., brush.extends.x.abs()),
+        Vec4::new(0., 1., 0., brush.extends.y.abs()),
+        Vec4::new(0., -1., 0., brush.extends.y.abs()),
+        Vec4::new(0., 0., 1., brush.extends.z.abs()),
+        Vec4::new(0., 0., -1., brush.extends.z.abs()),
+    ];
+
+    let transform = Transform::from_translation(brush.origin)
+        .to_matrix()
+        .inverse()
+        .transpose();
+    let planes = planes
+        .into_iter()
+        .map(|vec4| transform.mul_vec4(vec4))
+        .chain(extend_planes)
+        .collect_vec();
+
+    let points = &planes
+        .iter()
+        // .filter(|plane| plane.w != 0.) // hmm idk
+        .tuple_combinations()
+        .flat_map(|(p1, p2, p3)| {
+            let intersection = calculate_intersection_point([p1, p2, p3])?;
+            // If the intersection does not exist within the bounds the hull, discard it
+            if !contains_point(&planes, intersection) {
+                return None;
+            }
+
+            Some(intersection)
+        })
+        .map(|v| (v.as_vec3() + brush.origin).xzy())
+        .map(|v| v.into())
+        .collect::<Vec<_>>();
+
+    let (vertices, pindices) = avian3d::parry::transformation::try_convex_hull(points).ok()?;
+
+    pushing_vertices.extend(vertices.iter().map(|v| Vec3::new(v.x, v.y, v.z)));
+    indices.extend(pindices.iter().flatten());
+
+    Some(())
+}
+
+fn prop_to_mesh(
+    props: &[StaticProp],
+    model_data: &[Option<(Vec<Vec3>, Vec<u32>)>],
+    index: usize,
+    pushing_vertices: &mut Vec<Vec3>,
+    indices: &mut Vec<u32>,
+) -> Option<()> {
+    if props.len() <= index {
+        return None;
+    }
+
+    let static_prop = props[index];
+    let transform = Transform::from_translation(static_prop.origin.xzy())
+        .with_rotation(Quat::from_euler(
+            EulerRot::XYZ,
+            static_prop.angles.x.to_radians(),
+            static_prop.angles.y.to_radians(),
+            static_prop.angles.z.to_radians(),
+        ))
+        .with_scale(Vec3::splat(static_prop.scale))
+        .to_matrix();
+
+    if let Some(model_data) = model_data
+        .get(static_prop.model_index as usize)
+        .and_then(|o| o.as_ref())
+        .cloned()
+        // .or_else(|| Some(ico(Sphere::new(static_prop.scale * 3.), 3)))
+        .filter(|_| static_prop.solid == 6)
+    // figure what this actually is ^ rigth vphysics stuff I rember
+    {
+        indices.extend(&model_data.1);
+        pushing_vertices.extend(
+            model_data
+                .0
+                .iter()
+                .copied()
+                .map(|vert| transform.mul_vec4(vert.extend(1.)).xyz()),
+        );
+    } else {
+        // println!("no phys model");
+    }
+
+    Some(())
+}
+
+fn tricoll_to_mesh(
+    tricoll_header: &TricollHeader,
+    vertices: &[Vec3],
+    tricoll_triangles: &[TricollTri],
+    pushing_vertices: &mut Vec<Vec3>,
+    indices: &mut Vec<u32>,
+) {
+    let verts = &vertices[tricoll_header.first_vertex as usize..];
+    let triangles_base = &tricoll_triangles[tricoll_header.first_triangle as usize..];
+    for triangle in triangles_base
+        .iter()
+        .take(tricoll_header.num_triangles as usize)
+        .map(|triangle| triangle.data)
+    {
+        let vert0 = triangle & 0x3FF;
+        let vert1 = vert0 + ((triangle >> 10) & 0x7F);
+        let vert2 = vert0 + ((triangle >> 17) & 0x7F);
+
+        for vert_pos in [vert0, vert1, vert2].map(|vert| verts[vert as usize].xzy()) {
+            pushing_vertices.push(vert_pos);
+
+            indices.push(
+                pushing_vertices
+                    .iter()
+                    .zip([vert_pos].iter().cycle())
+                    .position(|(other, cmp)| other == cmp)
+                    .unwrap_or(pushing_vertices.len() - 1) as u32,
+            )
+        }
+    }
+}
+
+fn contains_point(planes: &[Vec4], point: DVec3) -> bool {
+    planes
+        .iter()
+        .map(|v| v.as_dvec4())
+        // .all(|plane| plane.dot(point.extend(1.)) < 0.001f64)
+        .all(|plane| plane.xyz().dot(point) - plane.w < 0.01f64)
+}
+
+fn calculate_intersection_point(planes: [&Vec4; 3]) -> Option<DVec3> {
+    let a = SMatrix::<_, 3, 3>::from_columns(&[
+        Vector3::new(planes[0].x, planes[0].y, planes[0].z),
+        Vector3::new(planes[1].x, planes[1].y, planes[1].z),
+        Vector3::new(planes[2].x, planes[2].y, planes[2].z),
+    ])
+    .transpose();
+    let b = Vector3::new(planes[0].w, planes[1].w, planes[2].w);
+
+    Some(Vec3::from_slice((a.try_inverse()? * b).as_slice()).as_dvec3())
+}

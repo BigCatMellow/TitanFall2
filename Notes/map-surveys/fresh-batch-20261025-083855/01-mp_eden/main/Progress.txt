@@ -1,0 +1,8 @@
+State: complete
+Updated: 08:55:47
+Completed maps: 1 / 1
+Current: {"bots":"16","index":"0","militia":"146","imc":"102","kills":"248","map":"mp_eden","elapsed":"890"}
+Failure: 
+
+Completed results:
+mp_eden: 102-146, time_limit_or_rules, 891.5s

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\candidates\\observation-v17-20261025\\before\\bots\\cmds_exec.rs",
+    "sha256": "229F20F367E13538D7BB5469542155438C9B5CC249790001DB70D5DBC1DA3F81"
+  },
+  {
+    "file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\candidates\\observation-v17-20261025\\before\\bots\\combat_decisions.rs",
+    "sha256": "2CBA9CB75F0C52E520D4F0B966243DCD4D359F31E613CBC9FDD79E4967E0DE06"
+  },
+  {
+    "file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\candidates\\observation-v17-20261025\\before\\bots\\cmds\\basic_combat.rs",
+    "sha256": "E82C348053E32173417955D04E6385D9EE5E52C94AA4FA43EF025F8BB82BC1D0"
+  },
+  {
+    "file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\candidates\\observation-v17-20261025\\before\\root\\lib.rs",
+    "sha256": "08CB735327E490A37775864130E05B6E9B1752C0B2181A64E6BA1509E72136D2"
+  }
+]

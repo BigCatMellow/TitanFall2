@@ -1,0 +1,267 @@
+{
+  "state": "complete",
+  "updated": "2026-10-25T09:27:08.2416529-04:00",
+  "current": null,
+  "planned": [
+    "mp_eden",
+    "mp_glitch",
+    "mp_angel_city"
+  ],
+  "results": [
+    {
+      "map": "mp_eden",
+      "state": "complete",
+      "ending": "time_limit_or_rules",
+      "score": "102-146",
+      "elapsed": "891.5",
+      "stall_percent": 8.38,
+      "quick_reversal_percent": 26.5,
+      "top_stall_areas": [
+        {
+          "area": "mp_eden, 4096,-256,128",
+          "samples": 224,
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            8,
+            10,
+            12,
+            14,
+            15,
+            16
+          ],
+          "height_median": 106.5,
+          "states": [
+            "embark",
+            "pursue",
+            "recover"
+          ],
+          "target_ids": [
+            65538,
+            65539,
+            65540,
+            65541,
+            65542,
+            65543,
+            65544,
+            65546,
+            65547,
+            65548,
+            65550,
+            65552,
+            65553,
+            459002
+          ]
+        },
+        {
+          "area": "mp_eden, 4096,-384,128",
+          "samples": 57,
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            8,
+            10,
+            12,
+            14,
+            15,
+            16
+          ],
+          "height_median": 104.0,
+          "states": [
+            "embark",
+            "pursue",
+            "recover"
+          ],
+          "target_ids": [
+            65538,
+            65539,
+            65540,
+            65541,
+            65542,
+            65544,
+            65545,
+            65546,
+            65547,
+            65548,
+            65550,
+            65552,
+            65553,
+            459002
+          ]
+        },
+        {
+          "area": "mp_eden, 4224,-256,128",
+          "samples": 26,
+          "slots": [
+            1,
+            2,
+            4,
+            5,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16
+          ],
+          "height_median": 101.39999999999999,
+          "states": [
+            "pursue",
+            "recover"
+          ],
+          "target_ids": [
+            65538,
+            65542,
+            65544,
+            65546,
+            65548,
+            65550,
+            65552,
+            459002
+          ]
+        }
+      ],
+      "failure": null,
+      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\01-mp_eden"
+    },
+    {
+      "map": "mp_glitch",
+      "state": "complete",
+      "ending": "time_limit_or_rules",
+      "score": "125-180",
+      "elapsed": "891.5",
+      "stall_percent": 1.36,
+      "quick_reversal_percent": 42.0,
+      "top_stall_areas": [
+        {
+          "area": "mp_glitch, 4352,768,320",
+          "samples": 13,
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            9
+          ],
+          "height_median": -84.79999999999998,
+          "states": [
+            "embark",
+            "pursue",
+            "recover"
+          ],
+          "target_ids": [
+            65548,
+            65551,
+            65553
+          ]
+        },
+        {
+          "area": "mp_glitch, -4864,-1664,320",
+          "samples": 5,
+          "slots": [
+            12
+          ],
+          "height_median": -274.4,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65544
+          ]
+        },
+        {
+          "area": "mp_glitch, 3840,128,384",
+          "samples": 5,
+          "slots": [
+            5,
+            11
+          ],
+          "height_median": -156.8,
+          "states": [
+            "embark",
+            "pursue"
+          ],
+          "target_ids": [
+            65543,
+            65551,
+            65553
+          ]
+        }
+      ],
+      "failure": null,
+      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\02-mp_glitch"
+    },
+    {
+      "map": "mp_angel_city",
+      "state": "complete",
+      "ending": "score_limit",
+      "score": "200-150",
+      "elapsed": "757.7",
+      "stall_percent": 0.85,
+      "quick_reversal_percent": 34.5,
+      "top_stall_areas": [
+        {
+          "area": "mp_angel_city, 1664,1152,128",
+          "samples": 7,
+          "slots": [
+            15
+          ],
+          "height_median": 124.0,
+          "states": [
+            "pursue",
+            "recover"
+          ],
+          "target_ids": [
+            65541,
+            65543,
+            65545,
+            65551,
+            1901476
+          ]
+        },
+        {
+          "area": "mp_angel_city, -128,2816,192",
+          "samples": 2,
+          "slots": [
+            12,
+            13
+          ],
+          "height_median": 102.10000000000002,
+          "states": [
+            "pursue"
+          ],
+          "target_ids": [
+            65539,
+            65546
+          ]
+        },
+        {
+          "area": "mp_angel_city, 2560,-2944,192",
+          "samples": 2,
+          "slots": [
+            4
+          ],
+          "height_median": 9199.8,
+          "states": [
+            "recover"
+          ],
+          "target_ids": [
+            2163613,
+            3997924
+          ]
+        }
+      ],
+      "failure": null,
+      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city"
+    }
+  ],
+  "failure": null
+}

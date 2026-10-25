@@ -1,0 +1,51 @@
+$ErrorActionPreference='Stop'
+$profile='C:\Users\james\northstar-crash-audit\local-test-profile'
+$games=@(Get-CimInstance Win32_Process -Filter "Name='NorthstarLauncher.exe'" | Where-Object {$_.CommandLine -like "*-profile=$profile*"})
+if ($games.Count -ne 1) { throw 'Expected exactly one running everyday solo instance.' }
+$game=Get-Process -Id $games[0].ProcessId
+$engine=@($game.Modules | Where-Object ModuleName -eq 'engine.dll')[0]
+if (-not $engine) { throw 'Game engine module not found.' }
+Add-Type -TypeDefinition @'
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+public static class JamesPdataBackup {
+ [DllImport("kernel32.dll", SetLastError=true)] static extern IntPtr OpenProcess(uint access,bool inherit,int id);
+ [DllImport("kernel32.dll", SetLastError=true)] static extern bool ReadProcessMemory(IntPtr process,IntPtr address,byte[] data,UIntPtr count,out UIntPtr read);
+ [DllImport("kernel32.dll")] static extern bool CloseHandle(IntPtr handle);
+ public static byte[] Read(int id,long address,int count) {
+  var handle=OpenProcess(0x10,false,id); if(handle==IntPtr.Zero)throw new Exception("Cannot open owned game for reading");
+  try {var data=new byte[count];UIntPtr read;if(!ReadProcessMemory(handle,new IntPtr(address),data,(UIntPtr)count,out read)||read.ToUInt64()!=(ulong)count)throw new Exception("Incomplete game-data read");return data;}finally{CloseHandle(handle);}
+ }
+ public static ulong Hash(byte[] bytes) {unchecked{ulong value=14695981039346656037UL;foreach(byte b in bytes)value=(value^b)*1099511628211UL;return value;}}
+ public static byte[] Encode(string uid,byte[] schema,byte[] payload) {
+  using(var memory=new MemoryStream())using(var writer=new BinaryWriter(memory)) {
+   byte[] owner=Encoding.ASCII.GetBytes(uid);writer.Write(Encoding.ASCII.GetBytes("JLPDATA1"));writer.Write(Hash(schema));writer.Write(Hash(payload));writer.Write((byte)owner.Length);writer.Write(owner);writer.Write((uint)payload.Length);writer.Write(payload);return memory.ToArray();
+  }
+ }
+}
+'@
+$clientAddress=$engine.BaseAddress.ToInt64()+0x12A53F90
+if (0x12A53F90+0xF520 -ge $engine.ModuleMemorySize) { throw 'Unexpected game engine image layout.' }
+$signon=[BitConverter]::ToInt32([JamesPdataBackup]::Read($game.Id,$clientAddress+0x2A0,4),0)
+$fake=[JamesPdataBackup]::Read($game.Id,$clientAddress+0x484,1)[0]
+$ready=[JamesPdataBackup]::Read($game.Id,$clientAddress+0x4A0,1)[0]
+$uid=[Text.Encoding]::ASCII.GetString([JamesPdataBackup]::Read($game.Id,$clientAddress+0xF500,32)).Trim([char]0)
+if ($signon -ne 8 -or $fake -ne 0 -or $ready -ne 3 -or $uid -notmatch '^[1-9][0-9]{0,30}$') { throw 'Client zero is not a connected local-only human with initialized persistence.' }
+$payload=[JamesPdataBackup]::Read($game.Id,$clientAddress+0x4FA,0xDDCD)
+if (-not ($payload | Where-Object {$_ -ne 0} | Select-Object -First 1)) { throw 'Refusing an empty persistence backup.' }
+$schemaPath=Join-Path $profile 'runtime\compiled\cfg\server\persistent_player_data_version_231.pdef'
+$schema=[IO.File]::ReadAllBytes($schemaPath)
+$document=[JamesPdataBackup]::Encode($uid,$schema,$payload)
+$backupRoot='C:\Users\james\northstar-crash-audit\Notes\backups\presets-before-v13'
+New-Item -ItemType Directory -Path $backupRoot -Force | Out-Null
+$stamp=Get-Date -Format yyyyMMdd-HHmmss
+$backupFile=Join-Path $backupRoot "live-human-$stamp.bin"
+[IO.File]::WriteAllBytes($backupFile,$document)
+$saveFolder=Join-Path $profile 'save_data\James.LocalPersistence'
+New-Item -ItemType Directory -Path $saveFolder -Force | Out-Null
+[IO.File]::WriteAllBytes((Join-Path $saveFolder "$uid.bin"),$document)
+[pscustomobject]@{captured=(Get-Date -Format o);process=$game.Id;payload_bytes=$payload.Length;schema_fingerprint=[JamesPdataBackup]::Hash($schema).ToString('X16');payload_checksum=[JamesPdataBackup]::Hash($payload).ToString('X16');backup=$backupFile;sha256=(Get-FileHash -LiteralPath $backupFile -Algorithm SHA256).Hash} |
+ ConvertTo-Json | Set-Content -LiteralPath (Join-Path $backupRoot "live-human-$stamp.json")
+"Preserved current local player data: $($payload.Length) bytes; $backupFile"

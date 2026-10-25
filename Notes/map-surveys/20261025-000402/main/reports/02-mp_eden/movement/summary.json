@@ -1,0 +1,26 @@
+[
+  {
+    "epoch": 2,
+    "map": "mp_eden",
+    "bot_slots": 16,
+    "player_slots": 17,
+    "observations": 3456,
+    "alive_observations": 2807,
+    "stalled_observations": 134,
+    "crowded_observations": 303,
+    "switches": 3200.0,
+    "recoveries": 175.0,
+    "path_failures": 408.0,
+    "path_requests": 45166.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.485,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 430.0
+  }
+]

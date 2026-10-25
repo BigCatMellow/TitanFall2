@@ -1,0 +1,62 @@
+[
+  {
+    "epoch": "1",
+    "slot": "8",
+    "t": "39.13",
+    "samples": 2,
+    "max_displacement": 96.9,
+    "closest_to_goal": 187.4,
+    "moved_128": false,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "8",
+    "t": "44.50",
+    "samples": 2,
+    "max_displacement": 67.6,
+    "closest_to_goal": 130.2,
+    "moved_128": false,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "2",
+    "t": "46.37",
+    "samples": 2,
+    "max_displacement": 71.5,
+    "closest_to_goal": 164.1,
+    "moved_128": false,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "8",
+    "t": "55.13",
+    "samples": 2,
+    "max_displacement": 285.4,
+    "closest_to_goal": 234.2,
+    "moved_128": true,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "10",
+    "t": "55.53",
+    "samples": 2,
+    "max_displacement": 160.6,
+    "closest_to_goal": 157.6,
+    "moved_128": true,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "6",
+    "t": "89.55",
+    "samples": 2,
+    "max_displacement": 224.5,
+    "closest_to_goal": 70.1,
+    "moved_128": true,
+    "near_goal": true
+  }
+]

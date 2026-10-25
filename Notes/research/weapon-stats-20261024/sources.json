@@ -1,0 +1,32 @@
+[
+  {
+    "Weapon": "mp_weapon_g2",
+    "Blob": "e1e44693801b0b626c1e1dc025396a82736b3ae1",
+    "Length": 18155
+  },
+  {
+    "Weapon": "mp_weapon_hemlok_smg",
+    "Blob": "01518db25034c7ed5a6568e454c36c53d82444be",
+    "Length": 19009
+  },
+  {
+    "Weapon": "mp_weapon_rspn101",
+    "Blob": "8793348d0ac660b90243bf5fa1f27a1488da8203",
+    "Length": 19368
+  },
+  {
+    "Weapon": "mp_weapon_shotgun",
+    "Blob": "0ed4cc77d15e3239c96bb73ec233de5ebcc6801d",
+    "Length": 17211
+  },
+  {
+    "Weapon": "mp_weapon_car",
+    "Blob": "887fe9a8439b4ba7711b977f01219f23ce9a5fc1",
+    "Length": 19007
+  },
+  {
+    "Weapon": "mp_weapon_sniper",
+    "Blob": "bc7fed999b964d8d7feb63a7770d580ef2f5795f",
+    "Length": 18334
+  }
+]

@@ -1,0 +1,11 @@
+WeaponData
+{
+    Mods
+    {
+        james_tactical_recharge
+        {
+            regen_ammo_refill_rate "*2.0"
+            regen_ammo_refill_start_delay "*0.5"
+        }
+    }
+}

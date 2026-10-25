@@ -1,0 +1,40 @@
+[
+  {
+    "epoch": 1,
+    "map": "mp_relic02",
+    "bot_slots": 15,
+    "player_slots": 16,
+    "observations": 538,
+    "alive_observations": 465,
+    "stalled_observations": 45,
+    "crowded_observations": 53,
+    "switches": 757.0,
+    "recoveries": 51.0,
+    "path_failures": 17.0,
+    "path_requests": 8475.0,
+    "mean_largest_pursuit_share": 0.932,
+    "coordination": [
+      0
+    ],
+    "duration": 90.0
+  },
+  {
+    "epoch": 2,
+    "map": "mp_wargames",
+    "bot_slots": 15,
+    "player_slots": 16,
+    "observations": 954,
+    "alive_observations": 891,
+    "stalled_observations": 59,
+    "crowded_observations": 248,
+    "switches": 1583.0,
+    "recoveries": 51.0,
+    "path_failures": 4.0,
+    "path_requests": 17953.0,
+    "mean_largest_pursuit_share": 0.741,
+    "coordination": [
+      0
+    ],
+    "duration": 150.0
+  }
+]

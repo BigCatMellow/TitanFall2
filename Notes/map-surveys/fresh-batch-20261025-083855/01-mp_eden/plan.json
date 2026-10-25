@@ -1,0 +1,16 @@
+{
+  "maps": [
+    {
+      "id": "mp_eden"
+    }
+  ],
+  "goal": 200,
+  "time_limit_minutes": 15,
+  "bots": 16,
+  "observer": 1,
+  "build": "combat-decisions-v16",
+  "dll_sha256": "C6A60DC54A0B7230A71A5E6D972610B9A500435402CCE4AE868252E7DB191075",
+  "aim_error": 0.78,
+  "real_save_sha256": "A77FB6C2ECC2A3E48BCA6A273269934499721E46E6A9A7F7833B0EE2142444E5",
+  "kind": "fresh-process batch member"
+}

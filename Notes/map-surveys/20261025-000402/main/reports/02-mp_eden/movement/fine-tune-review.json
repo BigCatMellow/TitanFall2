@@ -1,0 +1,500 @@
+{
+  "rounds": [
+    {
+      "round": "2, mp_eden",
+      "pilot_samples": 2391,
+      "stalls": 133,
+      "stall_percent": 5.56,
+      "stall_height_over_180": 19,
+      "recover_samples": 150,
+      "hold_samples": 203,
+      "stopped_holds": 42,
+      "empty_not_reloading": 7
+    }
+  ],
+  "stall_clusters": [
+    {
+      "area": "mp_eden, 4096,-256,128",
+      "samples": 84,
+      "slots": [
+        7,
+        9,
+        11,
+        13,
+        15
+      ],
+      "height_median": 120.80000000000001,
+      "states": [
+        "pursue",
+        "recover"
+      ],
+      "target_ids": [
+        131075,
+        131081,
+        131083,
+        131085,
+        131089
+      ]
+    },
+    {
+      "area": "mp_eden, 4096,-384,128",
+      "samples": 14,
+      "slots": [
+        7,
+        9,
+        11,
+        13,
+        15
+      ],
+      "height_median": 110.30000000000001,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        131075,
+        131081,
+        131085,
+        131089
+      ]
+    },
+    {
+      "area": "mp_eden, 4224,-256,128",
+      "samples": 7,
+      "slots": [
+        7,
+        11,
+        13
+      ],
+      "height_median": 82.0,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        131075,
+        131081,
+        131089
+      ]
+    },
+    {
+      "area": "mp_eden, 896,-512,64",
+      "samples": 3,
+      "slots": [
+        16
+      ],
+      "height_median": 11325.8,
+      "states": [
+        "embark"
+      ],
+      "target_ids": [
+        131074,
+        131086,
+        786643
+      ]
+    },
+    {
+      "area": "mp_eden, 1024,-512,128",
+      "samples": 3,
+      "slots": [
+        16
+      ],
+      "height_median": -9.300000000000011,
+      "states": [
+        "embark"
+      ],
+      "target_ids": [
+        131074,
+        131086
+      ]
+    },
+    {
+      "area": "mp_eden, 4096,-384,64",
+      "samples": 3,
+      "slots": [
+        11,
+        13
+      ],
+      "height_median": 324.9,
+      "states": [
+        "pursue",
+        "recover"
+      ],
+      "target_ids": [
+        131075,
+        131081,
+        131089
+      ]
+    },
+    {
+      "area": "mp_eden, 768,-384,64",
+      "samples": 2,
+      "slots": [
+        16
+      ],
+      "height_median": 193.10000000000002,
+      "states": [
+        "embark"
+      ],
+      "target_ids": [
+        131074,
+        131086
+      ]
+    },
+    {
+      "area": "mp_eden, 896,-384,64",
+      "samples": 2,
+      "slots": [
+        16
+      ],
+      "height_median": 209.10000000000002,
+      "states": [
+        "embark"
+      ],
+      "target_ids": [
+        131082,
+        131086
+      ]
+    },
+    {
+      "area": "mp_eden, 384,640,128",
+      "samples": 2,
+      "slots": [
+        14
+      ],
+      "height_median": 5.400000000000006,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        131076,
+        131086
+      ]
+    },
+    {
+      "area": "mp_eden, 1664,1920,192",
+      "samples": 2,
+      "slots": [
+        4,
+        16
+      ],
+      "height_median": -70.30000000000001,
+      "states": [
+        "embark",
+        "pursue"
+      ],
+      "target_ids": [
+        131084,
+        131088
+      ]
+    }
+  ],
+  "longest_episodes": [
+    {
+      "kind": "blocked_hold",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 15,
+      "start": 81.02,
+      "end": 83.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -114.6,
+      "y": 5.1,
+      "z": 63.8,
+      "target": 131083,
+      "height": 58.8
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 15,
+      "start": 75.02,
+      "end": 77.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -316.8,
+      "y": 27.5,
+      "z": 63.8,
+      "target": 131089,
+      "height": 60.3
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 3,
+      "start": 115.02,
+      "end": 117.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -861.7,
+      "y": 1283.6,
+      "z": 66.6,
+      "target": 131077,
+      "height": 58.60000000000001
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 11,
+      "start": 81.02,
+      "end": 83.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -351.8,
+      "y": -79.3,
+      "z": 62.1,
+      "target": 131083,
+      "height": 60.49999999999999
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 1,
+      "start": 97.02,
+      "end": 97.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 753.2,
+      "y": 378.7,
+      "z": 220.0,
+      "target": 131085,
+      "height": -7.0
+    },
+    {
+      "kind": "empty",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 4,
+      "start": 119.02,
+      "end": 121.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -153.1,
+      "y": 1480.4,
+      "z": 116.8,
+      "target": 131074,
+      "height": 9.799999999999997
+    },
+    {
+      "kind": "empty",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 1,
+      "start": 125.02,
+      "end": 125.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -891.7,
+      "y": 1391.8,
+      "z": 99.1,
+      "target": 131079,
+      "height": 32.900000000000006
+    },
+    {
+      "kind": "empty",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 5,
+      "start": 83.02,
+      "end": 83.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -382.0,
+      "y": -70.7,
+      "z": 62.8,
+      "target": 131083,
+      "height": 57.0
+    },
+    {
+      "kind": "empty",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 7,
+      "start": 161.02,
+      "end": 161.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -625.9,
+      "y": 1549.8,
+      "z": 86.8,
+      "target": 131087,
+      "height": 177.8
+    },
+    {
+      "kind": "empty",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 8,
+      "start": 97.02,
+      "end": 97.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -451.2,
+      "y": 1371.9,
+      "z": 66.6,
+      "target": 131080,
+      "height": 205.4
+    },
+    {
+      "kind": "reload",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 12,
+      "start": 95.02,
+      "end": 97.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 1196.6,
+      "y": 1347.5,
+      "z": 73.1,
+      "target": 131074,
+      "height": 202.9
+    },
+    {
+      "kind": "reload",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 12,
+      "start": 277.02,
+      "end": 279.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 2575.5,
+      "y": -754.1,
+      "z": 64.0,
+      "target": 131082,
+      "height": 59.8
+    },
+    {
+      "kind": "reload",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 6,
+      "start": 37.02,
+      "end": 39.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 807.4,
+      "y": 1115.3,
+      "z": 64.4,
+      "target": 131082,
+      "height": 116.6
+    },
+    {
+      "kind": "reload",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 6,
+      "start": 43.02,
+      "end": 45.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 214.6,
+      "y": 1307.8,
+      "z": 57.6,
+      "target": 131080,
+      "height": 132.5
+    },
+    {
+      "kind": "reload",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 9,
+      "start": 317.02,
+      "end": 319.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 1963.8,
+      "y": -14.2,
+      "z": 72.0,
+      "target": 131079,
+      "height": 48.900000000000006
+    },
+    {
+      "kind": "stall",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 16,
+      "start": 141.02,
+      "end": 163.02,
+      "span": 22.0,
+      "count": 12,
+      "x": 1044.0,
+      "y": -458.2,
+      "z": 135.9,
+      "target": 131086,
+      "height": -9.300000000000011
+    },
+    {
+      "kind": "stall",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 13,
+      "start": 411.02,
+      "end": 421.02,
+      "span": 10.0,
+      "count": 6,
+      "x": 4120.0,
+      "y": -325.0,
+      "z": 117.0,
+      "target": 131075,
+      "height": 110.30000000000001
+    },
+    {
+      "kind": "stall",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 9,
+      "start": 447.02,
+      "end": 455.02,
+      "span": 8.0,
+      "count": 5,
+      "x": 4124.4,
+      "y": -301.8,
+      "z": 125.5,
+      "target": 131081,
+      "height": 136.5
+    },
+    {
+      "kind": "stall",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 15,
+      "start": 391.02,
+      "end": 399.02,
+      "span": 8.0,
+      "count": 5,
+      "x": 4120.0,
+      "y": -310.8,
+      "z": 128.0,
+      "target": 131075,
+      "height": -2.0
+    },
+    {
+      "kind": "stall",
+      "map": "mp_eden",
+      "epoch": 2,
+      "slot": 9,
+      "start": 359.02,
+      "end": 367.02,
+      "span": 8.0,
+      "count": 5,
+      "x": 4136.4,
+      "y": -321.9,
+      "z": 127.5,
+      "target": 131085,
+      "height": 130.10000000000002
+    }
+  ],
+  "target_churn": [
+    {
+      "epoch": "2",
+      "switches": 3213,
+      "reversals_within_half_second": 882,
+      "both_visible_reversals": 279
+    }
+  ]
+}

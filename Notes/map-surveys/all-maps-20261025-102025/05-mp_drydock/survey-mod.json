@@ -1,0 +1,37 @@
+{
+  "LoadPriority": 60,
+  "ConVars": [
+    {
+      "Name": "james_survey_goal",
+      "DefaultValue": "200"
+    },
+    {
+      "Name": "james_survey_count",
+      "DefaultValue": "8"
+    },
+    {
+      "Name": "james_survey_index",
+      "DefaultValue": "0"
+    },
+    {
+      "Name": "james_survey_minutes",
+      "DefaultValue": "15"
+    },
+    {
+      "Name": "james_survey_smoke",
+      "DefaultValue": "0"
+    }
+  ],
+  "Description": "Isolated unattended 8v8 map survey",
+  "Name": "James.MapSurvey",
+  "Version": "1.0.0",
+  "Scripts": [
+    {
+      "Path": "james_map_survey.nut",
+      "RunOn": "SERVER && MP",
+      "ServerCallback": {
+        "After": "JamesMapSurvey_Init"
+      }
+    }
+  ]
+}

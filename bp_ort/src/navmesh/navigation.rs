@@ -7,6 +7,7 @@ use thiserror::Error;
 use super::{
     Hull, JumpTypes, RECAST_DETOUR, RecastDetour,
     bindings::{dtNavMeshQuery, dtPolyRef, dtQueryFilter},
+    path_buffers::fill_path_buffers,
 };
 
 const HUMAN_EXTENTS: Vector3 = Vector3::new(100.0, 100.0, 136.0);
@@ -21,6 +22,9 @@ pub enum NavigationError {
 
     #[error("path not found between {0:?} and {1:?}")]
     PathNotFound(Vector3, Vector3),
+
+    #[error("native pathfinder returned an invalid output count")]
+    InvalidOutputCount,
 }
 
 #[derive(Debug)]
@@ -98,6 +102,7 @@ impl Navigation {
         let mut end = Vector3::ZERO;
 
         self.end_point = None;
+        self.path_points.clear();
 
         let status = unsafe {
             if (dt_funcs.dtNavMeshQuery__findNearestPoly)(
@@ -124,36 +129,33 @@ impl Navigation {
 
         if !status || ref_end == 0 || ref_start == 0 {
             log::warn!("failed to find nearest poly, with goal {ref_end} start {ref_start}");
-            return Err(NavigationError::NoPoints(start, end, ref_start, ref_end));
+            return Err(NavigationError::NoPoints(start_point, end_point, ref_start, ref_end));
         }
 
-        let mut path_size = 0;
-        let unk: i64 = 0;
-
-        self.path.clear();
-
-        unsafe {
-            (dt_funcs.dtNavMeshQuery__findPath)(
-                &mut self.query,
-                ref_start,
-                ref_end,
-                &start,
-                &end,
-                &self.filter,
-                self.path.as_mut_ptr(),
-                (&unk as *const i64).cast(),
-                &mut path_size,
-                self.path.capacity() as i32,
-            )
-        };
-
-        unsafe {
-            self.path
-                .set_len(path_size.min(self.path.capacity() as u32) as usize)
-        };
+        // Titanfall's Detour ABI has TWO variable-sized outputs. The former
+        // eight-byte `unk` stack slot was overwritten by routes > 8 polygons.
+        let status = fill_path_buffers(
+            &mut self.path,
+            &mut self.jump_types,
+            |path, jumps, count| unsafe {
+                (dt_funcs.dtNavMeshQuery__findPath)(
+                    &mut self.query,
+                    ref_start,
+                    ref_end,
+                    &start,
+                    &end,
+                    &self.filter,
+                    path.as_mut_ptr(),
+                    jumps.as_mut_ptr(),
+                    count,
+                    path.len() as i32,
+                )
+            },
+        ).map_err(|_| NavigationError::InvalidOutputCount)?;
+        let path_size = self.path.len();
         self.path_points.clear();
 
-        if path_size == 0 {
+        if status & 0x40000000 == 0 || path_size == 0 {
             return Err(NavigationError::PathNotFound(start, end));
         }
 
@@ -179,21 +181,25 @@ impl Navigation {
             );
         }
 
+        if straight_size < 0 || straight_size as usize > PATH_CAPACITY {
+            return Err(NavigationError::InvalidOutputCount);
+        }
         if straight_size != 0 {
-            let straight_size = straight_size.min(self.path.capacity() as i32);
             unsafe {
-                self.jump_types.set_len(straight_size as usize);
                 self.straigth_path_jumps.set_len(straight_size as usize);
                 self.straigth_path_points.set_len(straight_size as usize);
                 self.straigth_path.set_len(straight_size as usize);
+                self.straigth_path_flags.set_len(straight_size as usize);
                 self.straigth_path_points.clone_into(&mut self.path_points);
-                self.path_points.push(end_point);
+                // The native straight path already ends at a reachable point.
+                // Appending an airborne/raw target bypasses that projection,
+                // particularly when findPath returned a partial corridor.
                 self.path_points.reverse();
                 self.straigth_path.clone_into(&mut self.path);
             }
         } else if path_size == 1 {
-            self.path_points.push(start_point);
-            self.path_points.push(end_point);
+            self.path_points.push(end);
+            self.path_points.push(start);
         } else {
             let mut prev_point = start;
             self.path

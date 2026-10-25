@@ -32,10 +32,10 @@ pub(crate) fn slide_hopper(
             local_data.has_started_to_slide_hop = false;
             local_data.should_recalculate_path = true;
         } else if !local_data.has_started_to_slide_hop && length <= 50. && touching_ground {
-            path_to_target(&mut cmd, local_data, origin, target, false, helper);
+            path_to_target(&mut cmd, local_data, player.m_vecAbsOrigin, target, false, helper);
             cmd.buttons |= Action::Jump as u32 | Action::Duck as u32;
         } else if !touching_ground {
-            path_to_target(&mut cmd, local_data, origin, target, false, helper);
+            path_to_target(&mut cmd, local_data, player.m_vecAbsOrigin, target, false, helper);
             cmd.buttons |= Action::Duck as u32;
         }
     } else {

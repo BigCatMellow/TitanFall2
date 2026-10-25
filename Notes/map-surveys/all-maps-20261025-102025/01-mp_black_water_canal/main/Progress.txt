@@ -1,0 +1,8 @@
+State: complete
+Updated: 10:38:53
+Completed maps: 1 / 1
+Current: {"map":"mp_black_water_canal","militia":"177","imc":"156","kills":"333","bots":"16","elapsed":"890","index":"0"}
+Failure: 
+
+Completed results:
+mp_black_water_canal: 156-178, time_limit_or_rules, 891.5s

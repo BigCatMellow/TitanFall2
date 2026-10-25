@@ -1,0 +1,486 @@
+{
+  "rounds": [
+    {
+      "round": "1, mp_glitch",
+      "pilot_samples": 4325,
+      "stalls": 59,
+      "stall_percent": 1.36,
+      "stall_height_over_180": 19,
+      "recover_samples": 311,
+      "hold_samples": 316,
+      "stopped_holds": 62,
+      "empty_not_reloading": 16
+    }
+  ],
+  "stall_clusters": [
+    {
+      "area": "mp_glitch, 4352,768,320",
+      "samples": 13,
+      "slots": [
+        1,
+        2,
+        3,
+        4,
+        9
+      ],
+      "height_median": -84.79999999999998,
+      "states": [
+        "embark",
+        "pursue",
+        "recover"
+      ],
+      "target_ids": [
+        65548,
+        65551,
+        65553
+      ]
+    },
+    {
+      "area": "mp_glitch, -4864,-1664,320",
+      "samples": 5,
+      "slots": [
+        12
+      ],
+      "height_median": -274.4,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65544
+      ]
+    },
+    {
+      "area": "mp_glitch, 3840,128,384",
+      "samples": 5,
+      "slots": [
+        5,
+        11
+      ],
+      "height_median": -156.8,
+      "states": [
+        "embark",
+        "pursue"
+      ],
+      "target_ids": [
+        65543,
+        65551,
+        65553
+      ]
+    },
+    {
+      "area": "mp_glitch, -4864,-1536,320",
+      "samples": 3,
+      "slots": [
+        4,
+        12
+      ],
+      "height_median": 41.89999999999998,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65544,
+        65546
+      ]
+    },
+    {
+      "area": "mp_glitch, -4224,128,384",
+      "samples": 2,
+      "slots": [
+        10,
+        11
+      ],
+      "height_median": -169.7,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65550,
+        590438
+      ]
+    },
+    {
+      "area": "mp_glitch, -4736,-1536,256",
+      "samples": 2,
+      "slots": [
+        8
+      ],
+      "height_median": -64.19999999999999,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65542
+      ]
+    },
+    {
+      "area": "mp_glitch, 3840,1152,384",
+      "samples": 2,
+      "slots": [
+        11
+      ],
+      "height_median": -148.79999999999998,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65553
+      ]
+    },
+    {
+      "area": "mp_glitch, 1536,-384,256",
+      "samples": 2,
+      "slots": [
+        1,
+        8
+      ],
+      "height_median": -36.099999999999994,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65542,
+        65545
+      ]
+    },
+    {
+      "area": "mp_glitch, 4224,768,320",
+      "samples": 2,
+      "slots": [
+        2,
+        4
+      ],
+      "height_median": -125.89999999999998,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65548
+      ]
+    },
+    {
+      "area": "mp_glitch, 1536,384,320",
+      "samples": 1,
+      "slots": [
+        11
+      ],
+      "height_median": -71.5,
+      "states": [
+        "embark"
+      ],
+      "target_ids": [
+        65539
+      ]
+    }
+  ],
+  "longest_episodes": [
+    {
+      "kind": "blocked_hold",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 3,
+      "start": 597.02,
+      "end": 601.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 1248.5,
+      "y": -461.5,
+      "z": 161.7,
+      "target": 65539,
+      "height": 72.30000000000001
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 13,
+      "start": 157.02,
+      "end": 161.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -652.6,
+      "y": -24.6,
+      "z": 128.0,
+      "target": 65551,
+      "height": -68.0
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 16,
+      "start": 55.02,
+      "end": 57.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -2523.4,
+      "y": 122.7,
+      "z": 175.0,
+      "target": 65538,
+      "height": -110.4
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 15,
+      "start": 781.02,
+      "end": 783.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -3641.4,
+      "y": 306.5,
+      "z": 16.4,
+      "target": 65539,
+      "height": 43.6
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 15,
+      "start": 157.02,
+      "end": 159.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -428.9,
+      "y": 1058.2,
+      "z": 0.0,
+      "target": 65541,
+      "height": 60.0
+    },
+    {
+      "kind": "empty",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 2,
+      "start": 715.02,
+      "end": 719.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -2059.2,
+      "y": -729.1,
+      "z": 0.8,
+      "target": 459103,
+      "height": 4049.1
+    },
+    {
+      "kind": "empty",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 9,
+      "start": 761.02,
+      "end": 763.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 1668.1,
+      "y": 961.5,
+      "z": 1.2,
+      "target": 65547,
+      "height": 179.60000000000002
+    },
+    {
+      "kind": "empty",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 14,
+      "start": 461.02,
+      "end": 463.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -646.7,
+      "y": -16.0,
+      "z": -16.1,
+      "target": 65548,
+      "height": 17.1
+    },
+    {
+      "kind": "empty",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 1,
+      "start": 779.02,
+      "end": 779.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -4119.2,
+      "y": 98.4,
+      "z": 147.3,
+      "target": 65539,
+      "height": -103.30000000000001
+    },
+    {
+      "kind": "empty",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 2,
+      "start": 389.02,
+      "end": 389.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -1998.9,
+      "y": 473.4,
+      "z": 202.0,
+      "target": 65548,
+      "height": 59.5
+    },
+    {
+      "kind": "reload",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 14,
+      "start": 551.02,
+      "end": 565.02,
+      "span": 14.0,
+      "count": 8,
+      "x": -4260.5,
+      "y": -281.3,
+      "z": 352.0,
+      "target": 65542,
+      "height": -167.0
+    },
+    {
+      "kind": "reload",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 7,
+      "start": 179.02,
+      "end": 189.02,
+      "span": 10.0,
+      "count": 6,
+      "x": 3487.5,
+      "y": 1104.8,
+      "z": -3.9,
+      "target": 65545,
+      "height": 66.2
+    },
+    {
+      "kind": "reload",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 16,
+      "start": 551.02,
+      "end": 559.02,
+      "span": 8.0,
+      "count": 5,
+      "x": -2808.9,
+      "y": 327.4,
+      "z": 10.3,
+      "target": 65542,
+      "height": 174.7
+    },
+    {
+      "kind": "reload",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 4,
+      "start": 641.02,
+      "end": 647.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 226.6,
+      "y": 1055.6,
+      "z": 13.0,
+      "target": 65548,
+      "height": 67.9
+    },
+    {
+      "kind": "reload",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 9,
+      "start": 553.02,
+      "end": 559.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 1489.1,
+      "y": 898.5,
+      "z": -2.8,
+      "target": 65547,
+      "height": 230.10000000000002
+    },
+    {
+      "kind": "stall",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 12,
+      "start": 95.02,
+      "end": 105.02,
+      "span": 10.0,
+      "count": 6,
+      "x": -4885.6,
+      "y": -1638.8,
+      "z": 322.0,
+      "target": 65544,
+      "height": -274.4
+    },
+    {
+      "kind": "stall",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 5,
+      "start": 189.02,
+      "end": 195.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 3849.3,
+      "y": 177.6,
+      "z": 368.0,
+      "target": 65543,
+      "height": -156.8
+    },
+    {
+      "kind": "stall",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 3,
+      "start": 217.02,
+      "end": 221.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 4312.8,
+      "y": 771.1,
+      "z": 322.6,
+      "target": 65553,
+      "height": -84.40000000000003
+    },
+    {
+      "kind": "stall",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 8,
+      "start": 341.02,
+      "end": 343.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -4775.8,
+      "y": -1596.8,
+      "z": 249.0,
+      "target": 65542,
+      "height": -64.19999999999999
+    },
+    {
+      "kind": "stall",
+      "map": "mp_glitch",
+      "epoch": 1,
+      "slot": 5,
+      "start": 211.02,
+      "end": 213.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 3875.7,
+      "y": 159.2,
+      "z": 398.8,
+      "target": 65553,
+      "height": -150.10000000000002
+    }
+  ],
+  "target_churn": [
+    {
+      "epoch": "1",
+      "switches": 6148,
+      "reversals_within_half_second": 2584,
+      "both_visible_reversals": 405
+    }
+  ]
+}

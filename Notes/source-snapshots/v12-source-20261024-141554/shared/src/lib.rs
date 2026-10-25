@@ -1,0 +1,10 @@
+#![feature(new_zeroed_alloc, if_let_guard, iter_collect_into)]
+#![allow(clippy::missing_safety_doc)]
+pub mod bindings;
+pub mod classes;
+pub mod cmds_helper;
+pub mod interfaces;
+pub mod persistence;
+pub mod plugin_interfaces;
+pub mod squtils;
+pub mod utils;

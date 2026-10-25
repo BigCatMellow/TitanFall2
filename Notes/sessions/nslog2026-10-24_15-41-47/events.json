@@ -1,0 +1,6122 @@
+[
+  {
+    "t": "19.68",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "1",
+    "target": "65540"
+  },
+  {
+    "t": "19.68",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131073",
+    "slot": "1",
+    "target": "65540"
+  },
+  {
+    "t": "23.78",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "127.9",
+    "reason": "no_progress",
+    "slot": "1",
+    "x": "4120.0",
+    "y": "-339.7"
+  },
+  {
+    "t": "25.15",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65538",
+    "slot": "5",
+    "target": "65551"
+  },
+  {
+    "t": "26.45",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "76.0",
+    "reason": "no_progress",
+    "slot": "7",
+    "x": "-2056.0",
+    "y": "1165.8"
+  },
+  {
+    "t": "26.98",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "128.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "4121.0",
+    "y": "-272.0"
+  },
+  {
+    "t": "27.40",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "72.0",
+    "reason": "no_progress",
+    "slot": "2",
+    "x": "3167.8",
+    "y": "-208.3"
+  },
+  {
+    "t": "28.52",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131073",
+    "slot": "4",
+    "target": "65552"
+  },
+  {
+    "t": "29.58",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "127.9",
+    "reason": "no_progress",
+    "slot": "1",
+    "x": "4120.0",
+    "y": "-272.0"
+  },
+  {
+    "t": "29.58",
+    "gy": "-359.7",
+    "epoch": "1",
+    "gx": "4316.0",
+    "kind": "route",
+    "z": "127.9",
+    "reason": "breadcrumb_retreat",
+    "gz": "133.0",
+    "slot": "1",
+    "x": "4120.0",
+    "y": "-272.0"
+  },
+  {
+    "t": "29.60",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "1",
+    "target": "65548"
+  },
+  {
+    "t": "29.60",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65540",
+    "slot": "1",
+    "target": "65548"
+  },
+  {
+    "t": "30.27",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "1",
+    "target": "65542"
+  },
+  {
+    "t": "30.27",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "1",
+    "target": "65542"
+  },
+  {
+    "t": "30.43",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131073",
+    "slot": "2",
+    "target": "65548"
+  },
+  {
+    "t": "30.75",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "1",
+    "target": "65550"
+  },
+  {
+    "t": "30.75",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65542",
+    "slot": "1",
+    "target": "65550"
+  },
+  {
+    "t": "31.20",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "1",
+    "target": "131073"
+  },
+  {
+    "t": "31.20",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65550",
+    "slot": "1",
+    "target": "131073"
+  },
+  {
+    "t": "32.02",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "94.4",
+    "reason": "no_progress",
+    "slot": "10",
+    "x": "3164.0",
+    "y": "-208.4"
+  },
+  {
+    "t": "32.17",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "3",
+    "target": "65551"
+  },
+  {
+    "t": "32.23",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131073",
+    "slot": "6",
+    "target": "65550"
+  },
+  {
+    "t": "32.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65545",
+    "slot": "9",
+    "target": "65551"
+  },
+  {
+    "t": "33.62",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "11",
+    "target": "65551"
+  },
+  {
+    "t": "33.62",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "13",
+    "target": "65539"
+  },
+  {
+    "t": "33.68",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "128.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "4120.0",
+    "y": "-292.1"
+  },
+  {
+    "t": "33.68",
+    "gy": "-311.7",
+    "epoch": "1",
+    "gx": "4316.0",
+    "kind": "route",
+    "z": "128.0",
+    "reason": "breadcrumb_retreat",
+    "gz": "133.0",
+    "slot": "6",
+    "x": "4120.0",
+    "y": "-292.1"
+  },
+  {
+    "t": "33.70",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "65542"
+  },
+  {
+    "t": "33.70",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65550",
+    "slot": "6",
+    "target": "65542"
+  },
+  {
+    "t": "33.85",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "13",
+    "target": "65551"
+  },
+  {
+    "t": "33.85",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "15",
+    "target": "65539"
+  },
+  {
+    "t": "34.63",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "15",
+    "target": "65551"
+  },
+  {
+    "t": "34.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65541",
+    "slot": "7",
+    "target": "65551"
+  },
+  {
+    "t": "36.47",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "5",
+    "target": "65541"
+  },
+  {
+    "t": "36.50",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65541",
+    "slot": "5",
+    "target": "65551"
+  },
+  {
+    "t": "36.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "3",
+    "target": "65541"
+  },
+  {
+    "t": "36.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "5",
+    "target": "65541"
+  },
+  {
+    "t": "36.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "7",
+    "target": "65545"
+  },
+  {
+    "t": "36.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "9",
+    "target": "65539"
+  },
+  {
+    "t": "36.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "11",
+    "target": "65541"
+  },
+  {
+    "t": "36.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "13",
+    "target": "65541"
+  },
+  {
+    "t": "36.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "15",
+    "target": "65541"
+  },
+  {
+    "t": "36.98",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131073",
+    "slot": "1",
+    "target": "65540"
+  },
+  {
+    "t": "38.40",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "72.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "4184.0",
+    "y": "-247.2"
+  },
+  {
+    "t": "38.42",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "131073"
+  },
+  {
+    "t": "38.42",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65542",
+    "slot": "6",
+    "target": "131073"
+  },
+  {
+    "t": "38.93",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65552",
+    "slot": "4",
+    "target": "65542"
+  },
+  {
+    "t": "38.93",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65542",
+    "slot": "8",
+    "target": "65550"
+  },
+  {
+    "t": "39.77",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "106.2",
+    "reason": "no_progress",
+    "slot": "10",
+    "x": "3236.9",
+    "y": "-208.0"
+  },
+  {
+    "t": "39.77",
+    "gy": "-327.4",
+    "epoch": "1",
+    "gx": "3722.1",
+    "kind": "route",
+    "z": "106.2",
+    "reason": "breadcrumb_retreat",
+    "gz": "132.0",
+    "slot": "10",
+    "x": "3236.9",
+    "y": "-208.0"
+  },
+  {
+    "t": "39.78",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131073"
+  },
+  {
+    "t": "39.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65544",
+    "slot": "10",
+    "target": "131073"
+  },
+  {
+    "t": "39.93",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "65546"
+  },
+  {
+    "t": "39.93",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131073",
+    "slot": "10",
+    "target": "65546"
+  },
+  {
+    "t": "40.08",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "65546"
+  },
+  {
+    "t": "40.08",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131073",
+    "slot": "6",
+    "target": "65546"
+  },
+  {
+    "t": "40.08",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "12",
+    "target": "65544"
+  },
+  {
+    "t": "40.60",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "4",
+    "target": "65540"
+  },
+  {
+    "t": "40.62",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "2",
+    "target": "65542"
+  },
+  {
+    "t": "40.63",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "7",
+    "target": "65541"
+  },
+  {
+    "t": "40.72",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "72.0",
+    "reason": "no_progress",
+    "slot": "8",
+    "x": "2118.7",
+    "y": "22.8"
+  },
+  {
+    "t": "41.35",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "2",
+    "target": "65550"
+  },
+  {
+    "t": "41.35",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65550",
+    "slot": "8",
+    "target": "65542"
+  },
+  {
+    "t": "41.40",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "128.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "4120.0",
+    "y": "-272.0"
+  },
+  {
+    "t": "41.40",
+    "gy": "-311.7",
+    "epoch": "1",
+    "gx": "4316.0",
+    "kind": "route",
+    "z": "128.0",
+    "reason": "breadcrumb_retreat",
+    "gz": "133.0",
+    "slot": "6",
+    "x": "4120.0",
+    "y": "-272.0"
+  },
+  {
+    "t": "41.42",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "65548"
+  },
+  {
+    "t": "41.42",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "6",
+    "target": "65548"
+  },
+  {
+    "t": "41.75",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65550",
+    "slot": "2",
+    "target": "65552"
+  },
+  {
+    "t": "42.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65541",
+    "slot": "3",
+    "target": "65539"
+  },
+  {
+    "t": "42.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65541",
+    "slot": "5",
+    "target": "65549"
+  },
+  {
+    "t": "42.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65541",
+    "slot": "7",
+    "target": "65545"
+  },
+  {
+    "t": "42.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65541",
+    "slot": "11",
+    "target": "65539"
+  },
+  {
+    "t": "42.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65541",
+    "slot": "13",
+    "target": "65539"
+  },
+  {
+    "t": "42.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65541",
+    "slot": "15",
+    "target": "65539"
+  },
+  {
+    "t": "42.23",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65552",
+    "slot": "2",
+    "target": "65540"
+  },
+  {
+    "t": "42.25",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "5",
+    "target": "65539"
+  },
+  {
+    "t": "42.90",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "7",
+    "target": "65549"
+  },
+  {
+    "t": "43.00",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65539",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "43.02",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "9",
+    "target": "65539"
+  },
+  {
+    "t": "43.12",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "7",
+    "target": "65539"
+  },
+  {
+    "t": "43.60",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65539",
+    "slot": "13",
+    "target": "65549"
+  },
+  {
+    "t": "44.30",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65544",
+    "slot": "12",
+    "target": "65540"
+  },
+  {
+    "t": "44.32",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65540",
+    "slot": "1",
+    "target": "65546"
+  },
+  {
+    "t": "44.32",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "7",
+    "target": "65549"
+  },
+  {
+    "t": "44.52",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65539",
+    "slot": "9",
+    "target": "65545"
+  },
+  {
+    "t": "44.62",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "7",
+    "target": "65539"
+  },
+  {
+    "t": "44.62",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "8",
+    "target": "65540"
+  },
+  {
+    "t": "44.88",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "11",
+    "target": "65549"
+  },
+  {
+    "t": "45.03",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65540",
+    "slot": "2",
+    "target": "65544"
+  },
+  {
+    "t": "45.03",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65540",
+    "slot": "8",
+    "target": "65542"
+  },
+  {
+    "t": "45.03",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65540",
+    "slot": "12",
+    "target": "65544"
+  },
+  {
+    "t": "46.15",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "46.15",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "13",
+    "target": "65545"
+  },
+  {
+    "t": "46.38",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "11",
+    "target": "65539"
+  },
+  {
+    "t": "46.95",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65545",
+    "slot": "13",
+    "target": "65539"
+  },
+  {
+    "t": "46.95",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65539",
+    "slot": "15",
+    "target": "65545"
+  },
+  {
+    "t": "47.02",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "8",
+    "target": "65548"
+  },
+  {
+    "t": "47.03",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "15",
+    "target": "65539"
+  },
+  {
+    "t": "47.22",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65544",
+    "slot": "2",
+    "target": "65548"
+  },
+  {
+    "t": "47.22",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "6",
+    "target": "65552"
+  },
+  {
+    "t": "47.22",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65544",
+    "slot": "12",
+    "target": "65548"
+  },
+  {
+    "t": "47.80",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "10",
+    "target": "65542"
+  },
+  {
+    "t": "47.93",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "5",
+    "target": "65549"
+  },
+  {
+    "t": "47.93",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "9",
+    "target": "65545"
+  },
+  {
+    "t": "47.93",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "11",
+    "target": "65549"
+  },
+  {
+    "t": "47.93",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65539",
+    "slot": "13",
+    "target": "65545"
+  },
+  {
+    "t": "47.93",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65539",
+    "slot": "15",
+    "target": "65549"
+  },
+  {
+    "t": "48.40",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65545",
+    "slot": "13",
+    "target": "65549"
+  },
+  {
+    "t": "48.52",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "8",
+    "target": "65550"
+  },
+  {
+    "t": "48.67",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "48.68",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65550",
+    "slot": "8",
+    "target": "65546"
+  },
+  {
+    "t": "48.73",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "9",
+    "target": "65545"
+  },
+  {
+    "t": "48.75",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "48.78",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "128.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "4120.4",
+    "y": "-272.0"
+  },
+  {
+    "t": "48.78",
+    "gy": "-311.7",
+    "epoch": "1",
+    "gx": "4316.0",
+    "kind": "route",
+    "z": "128.0",
+    "reason": "breadcrumb_retreat",
+    "gz": "133.0",
+    "slot": "6",
+    "x": "4120.4",
+    "y": "-272.0"
+  },
+  {
+    "t": "48.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "9",
+    "target": "65545"
+  },
+  {
+    "t": "48.80",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "65550"
+  },
+  {
+    "t": "48.80",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65552",
+    "slot": "6",
+    "target": "65550"
+  },
+  {
+    "t": "48.82",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "49.07",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "9",
+    "target": "65545"
+  },
+  {
+    "t": "49.60",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "49.60",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "15",
+    "target": "65545"
+  },
+  {
+    "t": "49.77",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "5",
+    "target": "65545"
+  },
+  {
+    "t": "49.77",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "9",
+    "target": "65545"
+  },
+  {
+    "t": "49.77",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "11",
+    "target": "65547"
+  },
+  {
+    "t": "49.77",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "13",
+    "target": "65545"
+  },
+  {
+    "t": "49.77",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "14",
+    "target": "65548"
+  },
+  {
+    "t": "51.68",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "8",
+    "target": "65550"
+  },
+  {
+    "t": "51.83",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65550",
+    "slot": "8",
+    "target": "65542"
+  },
+  {
+    "t": "52.00",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "13",
+    "target": "65547"
+  },
+  {
+    "t": "52.93",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65547",
+    "slot": "11",
+    "target": "65545"
+  },
+  {
+    "t": "53.20",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65542",
+    "slot": "10",
+    "target": "65550"
+  },
+  {
+    "t": "53.23",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65547",
+    "slot": "13",
+    "target": "65545"
+  },
+  {
+    "t": "53.23",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "15",
+    "target": "65547"
+  },
+  {
+    "t": "53.57",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "86.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "4169.3",
+    "y": "-273.8"
+  },
+  {
+    "t": "53.58",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "65552"
+  },
+  {
+    "t": "53.58",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65550",
+    "slot": "6",
+    "target": "65552"
+  },
+  {
+    "t": "54.30",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65548",
+    "slot": "14",
+    "target": "65540"
+  },
+  {
+    "t": "54.32",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "1",
+    "target": "65548"
+  },
+  {
+    "t": "55.00",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65550",
+    "slot": "10",
+    "target": "65540"
+  },
+  {
+    "t": "55.20",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65540",
+    "slot": "10",
+    "target": "65550"
+  },
+  {
+    "t": "55.53",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "65546"
+  },
+  {
+    "t": "55.53",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65552",
+    "slot": "6",
+    "target": "65546"
+  },
+  {
+    "t": "55.55",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "4",
+    "target": "65552"
+  },
+  {
+    "t": "55.57",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65550",
+    "slot": "10",
+    "target": "65540"
+  },
+  {
+    "t": "56.02",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65540",
+    "slot": "10",
+    "target": "65550"
+  },
+  {
+    "t": "56.12",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "8",
+    "target": "65548"
+  },
+  {
+    "t": "56.37",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "114.7",
+    "reason": "no_progress",
+    "slot": "1",
+    "x": "4120.2",
+    "y": "-316.1"
+  },
+  {
+    "t": "56.65",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65550",
+    "slot": "10",
+    "target": "65540"
+  },
+  {
+    "t": "56.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65540",
+    "slot": "10",
+    "target": "65550"
+  },
+  {
+    "t": "57.02",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "7",
+    "target": "65551"
+  },
+  {
+    "t": "57.02",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "9",
+    "target": "65547"
+  },
+  {
+    "t": "57.02",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "11",
+    "target": "65547"
+  },
+  {
+    "t": "57.02",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65545",
+    "slot": "13",
+    "target": "65551"
+  },
+  {
+    "t": "57.68",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65550",
+    "slot": "10",
+    "target": "65540"
+  },
+  {
+    "t": "57.75",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65552",
+    "slot": "4",
+    "target": "65540"
+  },
+  {
+    "t": "58.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65547",
+    "slot": "15",
+    "target": "65541"
+  },
+  {
+    "t": "58.38",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65551",
+    "slot": "3",
+    "target": "65541"
+  },
+  {
+    "t": "59.60",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65541",
+    "slot": "15",
+    "target": "65551"
+  },
+  {
+    "t": "60.15",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65540",
+    "slot": "10",
+    "target": "65548"
+  },
+  {
+    "t": "60.15",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "12",
+    "target": "65546"
+  },
+  {
+    "t": "60.98",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "13",
+    "target": "65547"
+  },
+  {
+    "t": "61.23",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "1",
+    "target": "65550"
+  },
+  {
+    "t": "61.23",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "128.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "4120.0",
+    "y": "-282.4"
+  },
+  {
+    "t": "61.23",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "10",
+    "target": "65550"
+  },
+  {
+    "t": "61.25",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "65552"
+  },
+  {
+    "t": "61.25",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "6",
+    "target": "65552"
+  },
+  {
+    "t": "61.30",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65547",
+    "slot": "9",
+    "target": "65541"
+  },
+  {
+    "t": "61.32",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65541",
+    "slot": "3",
+    "target": "65551"
+  },
+  {
+    "t": "61.67",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65550",
+    "slot": "2",
+    "target": "65546"
+  },
+  {
+    "t": "61.77",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65546",
+    "slot": "2",
+    "target": "65540"
+  },
+  {
+    "t": "61.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65541",
+    "slot": "9",
+    "target": "65539"
+  },
+  {
+    "t": "61.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "15",
+    "target": "65541"
+  },
+  {
+    "t": "61.82",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "9",
+    "target": "65541"
+  },
+  {
+    "t": "62.02",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65540",
+    "slot": "4",
+    "target": "65546"
+  },
+  {
+    "t": "62.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65551",
+    "slot": "3",
+    "target": "65539"
+  },
+  {
+    "t": "62.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "7",
+    "target": "65547"
+  },
+  {
+    "t": "63.13",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65540",
+    "slot": "2",
+    "target": "65550"
+  },
+  {
+    "t": "63.15",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65550",
+    "slot": "2",
+    "target": "65540"
+  },
+  {
+    "t": "63.47",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65550",
+    "slot": "1",
+    "target": "65546"
+  },
+  {
+    "t": "63.47",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65550",
+    "slot": "10",
+    "target": "65546"
+  },
+  {
+    "t": "63.47",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65541",
+    "slot": "15",
+    "target": "65547"
+  },
+  {
+    "t": "64.05",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65547",
+    "slot": "7",
+    "target": "65539"
+  },
+  {
+    "t": "64.07",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65540",
+    "slot": "2",
+    "target": "65546"
+  },
+  {
+    "t": "64.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65546",
+    "slot": "12",
+    "target": "65540"
+  },
+  {
+    "t": "64.13",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "3",
+    "target": "65549"
+  },
+  {
+    "t": "64.22",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "3",
+    "target": "65547"
+  },
+  {
+    "t": "64.25",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65547",
+    "slot": "3",
+    "target": "65549"
+  },
+  {
+    "t": "64.30",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "3",
+    "target": "65547"
+  },
+  {
+    "t": "64.35",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65547",
+    "slot": "3",
+    "target": "65549"
+  },
+  {
+    "t": "64.47",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65540",
+    "slot": "12",
+    "target": "65546"
+  },
+  {
+    "t": "64.50",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65546",
+    "slot": "12",
+    "target": "65540"
+  },
+  {
+    "t": "64.52",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65541",
+    "slot": "9",
+    "target": "65539"
+  },
+  {
+    "t": "64.68",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "7",
+    "target": "65547"
+  },
+  {
+    "t": "65.07",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65546",
+    "slot": "10",
+    "target": "65544"
+  },
+  {
+    "t": "65.08",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65552",
+    "slot": "6",
+    "target": "65546"
+  },
+  {
+    "t": "65.08",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65544",
+    "slot": "10",
+    "target": "65546"
+  },
+  {
+    "t": "65.12",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65540",
+    "slot": "12",
+    "target": "65546"
+  },
+  {
+    "t": "65.25",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65546",
+    "slot": "12",
+    "target": "65540"
+  },
+  {
+    "t": "65.32",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65539",
+    "slot": "9",
+    "target": "65547"
+  },
+  {
+    "t": "65.33",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65547",
+    "slot": "9",
+    "target": "65539"
+  },
+  {
+    "t": "66.08",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "128.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "4120.0",
+    "y": "-272.0"
+  },
+  {
+    "t": "66.10",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "65552"
+  },
+  {
+    "t": "66.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "6",
+    "target": "65552"
+  },
+  {
+    "t": "66.75",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65540",
+    "slot": "12",
+    "target": "65546"
+  },
+  {
+    "t": "67.20",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65547",
+    "slot": "5",
+    "target": "65549"
+  },
+  {
+    "t": "67.27",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "68.08",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "1",
+    "target": "65544"
+  },
+  {
+    "t": "68.08",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "2",
+    "target": "65552"
+  },
+  {
+    "t": "68.08",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "8",
+    "target": "65552"
+  },
+  {
+    "t": "68.08",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "10",
+    "target": "65544"
+  },
+  {
+    "t": "68.08",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "12",
+    "target": "65542"
+  },
+  {
+    "t": "68.52",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65547",
+    "slot": "7",
+    "target": "65539"
+  },
+  {
+    "t": "69.23",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "124.5",
+    "reason": "no_progress",
+    "slot": "8",
+    "x": "4139.9",
+    "y": "-289.9"
+  },
+  {
+    "t": "69.43",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65544",
+    "slot": "10",
+    "target": "65552"
+  },
+  {
+    "t": "69.58",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65552",
+    "slot": "2",
+    "target": "65544"
+  },
+  {
+    "t": "70.32",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65544",
+    "slot": "2",
+    "target": "65548"
+  },
+  {
+    "t": "70.32",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "11",
+    "target": "65539"
+  },
+  {
+    "t": "70.72",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "128.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "4120.0",
+    "y": "-332.2"
+  },
+  {
+    "t": "70.73",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "65544"
+  },
+  {
+    "t": "70.73",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65552",
+    "slot": "6",
+    "target": "65544"
+  },
+  {
+    "t": "71.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "12",
+    "target": "65548"
+  },
+  {
+    "t": "71.90",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "12",
+    "target": "65542"
+  },
+  {
+    "t": "73.30",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "5",
+    "target": "65547"
+  },
+  {
+    "t": "73.30",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65539",
+    "slot": "7",
+    "target": "65549"
+  },
+  {
+    "t": "73.35",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "12",
+    "target": "65548"
+  },
+  {
+    "t": "74.03",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65552",
+    "slot": "4",
+    "target": "65542"
+  },
+  {
+    "t": "74.03",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65552",
+    "slot": "8",
+    "target": "65544"
+  },
+  {
+    "t": "74.03",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65552",
+    "slot": "10",
+    "target": "65542"
+  },
+  {
+    "t": "74.18",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "128.0",
+    "reason": "no_progress",
+    "slot": "8",
+    "x": "4120.0",
+    "y": "-314.8"
+  },
+  {
+    "t": "74.18",
+    "gy": "-359.7",
+    "epoch": "1",
+    "gx": "4315.9",
+    "kind": "route",
+    "z": "128.0",
+    "reason": "breadcrumb_retreat",
+    "gz": "132.9",
+    "slot": "8",
+    "x": "4120.0",
+    "y": "-314.8"
+  },
+  {
+    "t": "74.20",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "8",
+    "target": "65550"
+  },
+  {
+    "t": "74.20",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65544",
+    "slot": "8",
+    "target": "65550"
+  },
+  {
+    "t": "74.42",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "8",
+    "target": "65542"
+  },
+  {
+    "t": "74.42",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65550",
+    "slot": "8",
+    "target": "65542"
+  },
+  {
+    "t": "74.72",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65542",
+    "slot": "14",
+    "target": "65544"
+  },
+  {
+    "t": "75.88",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "127.9",
+    "reason": "no_progress",
+    "slot": "1",
+    "x": "4120.0",
+    "y": "-272.4"
+  },
+  {
+    "t": "76.37",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65547",
+    "slot": "13",
+    "target": "65539"
+  },
+  {
+    "t": "79.47",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "4",
+    "target": "65548"
+  },
+  {
+    "t": "79.47",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65544",
+    "slot": "6",
+    "target": "65542"
+  },
+  {
+    "t": "79.73",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "4",
+    "target": "65542"
+  },
+  {
+    "t": "79.77",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "4",
+    "target": "65548"
+  },
+  {
+    "t": "79.93",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "4",
+    "target": "65542"
+  },
+  {
+    "t": "79.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "4",
+    "target": "65548"
+  },
+  {
+    "t": "80.10",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "72.0",
+    "reason": "no_progress",
+    "slot": "13",
+    "x": "-517.2",
+    "y": "334.0"
+  },
+  {
+    "t": "80.42",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65548",
+    "slot": "4",
+    "target": "65544"
+  },
+  {
+    "t": "80.53",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65544",
+    "slot": "4",
+    "target": "65548"
+  },
+  {
+    "t": "80.55",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "120.7",
+    "reason": "no_progress",
+    "slot": "1",
+    "x": "4120.0",
+    "y": "-364.7"
+  },
+  {
+    "t": "80.57",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "1",
+    "target": "65542"
+  },
+  {
+    "t": "80.57",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65544",
+    "slot": "1",
+    "target": "65542"
+  },
+  {
+    "t": "80.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "7",
+    "target": "65547"
+  },
+  {
+    "t": "80.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "11",
+    "target": "65549"
+  },
+  {
+    "t": "81.17",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65548",
+    "slot": "2",
+    "target": "65546"
+  },
+  {
+    "t": "81.17",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65548",
+    "slot": "4",
+    "target": "65546"
+  },
+  {
+    "t": "81.17",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65548",
+    "slot": "12",
+    "target": "65546"
+  },
+  {
+    "t": "81.23",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65546",
+    "slot": "4",
+    "target": "65542"
+  },
+  {
+    "t": "81.28",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65542",
+    "slot": "6",
+    "target": "65544"
+  },
+  {
+    "t": "81.60",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65547",
+    "slot": "5",
+    "target": "65541"
+  },
+  {
+    "t": "81.60",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65547",
+    "slot": "7",
+    "target": "65549"
+  },
+  {
+    "t": "81.78",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "113.2",
+    "reason": "no_progress",
+    "slot": "14",
+    "x": "3153.3",
+    "y": "-216.9"
+  },
+  {
+    "t": "82.17",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65539",
+    "slot": "3",
+    "target": "65549"
+  },
+  {
+    "t": "82.17",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65539",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "82.17",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65539",
+    "slot": "13",
+    "target": "65549"
+  },
+  {
+    "t": "82.37",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "9",
+    "target": "65541"
+  },
+  {
+    "t": "82.90",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65544",
+    "slot": "14",
+    "target": "65546"
+  },
+  {
+    "t": "82.97",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65541",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "83.00",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65542",
+    "slot": "1",
+    "target": "65544"
+  },
+  {
+    "t": "83.00",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65542",
+    "slot": "4",
+    "target": "65546"
+  },
+  {
+    "t": "83.00",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65542",
+    "slot": "8",
+    "target": "65544"
+  },
+  {
+    "t": "83.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "7",
+    "target": "65541"
+  },
+  {
+    "t": "83.15",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "9",
+    "target": "65551"
+  },
+  {
+    "t": "83.55",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65546",
+    "slot": "4",
+    "target": "65544"
+  },
+  {
+    "t": "83.57",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65551",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "83.88",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65546",
+    "slot": "14",
+    "target": "65544"
+  },
+  {
+    "t": "84.50",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65541",
+    "slot": "7",
+    "target": "65551"
+  },
+  {
+    "t": "84.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65544",
+    "slot": "1",
+    "target": "65546"
+  },
+  {
+    "t": "84.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65544",
+    "slot": "6",
+    "target": "65550"
+  },
+  {
+    "t": "84.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65544",
+    "slot": "8",
+    "target": "65546"
+  },
+  {
+    "t": "84.78",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65544",
+    "slot": "14",
+    "target": "65546"
+  },
+  {
+    "t": "85.47",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "128.0",
+    "reason": "no_progress",
+    "slot": "1",
+    "x": "4120.0",
+    "y": "-307.2"
+  },
+  {
+    "t": "85.48",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "1",
+    "target": "65552"
+  },
+  {
+    "t": "85.48",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "1",
+    "target": "65552"
+  },
+  {
+    "t": "86.65",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "125.5",
+    "reason": "no_progress",
+    "slot": "8",
+    "x": "4136.2",
+    "y": "-303.8"
+  },
+  {
+    "t": "87.35",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "72.0",
+    "reason": "no_progress",
+    "slot": "3",
+    "x": "-586.3",
+    "y": "1002.7"
+  },
+  {
+    "t": "87.82",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "72.0",
+    "reason": "no_progress",
+    "slot": "15",
+    "x": "-536.5",
+    "y": "336.0"
+  },
+  {
+    "t": "87.88",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "128.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "4120.0",
+    "y": "-282.2"
+  },
+  {
+    "t": "89.52",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "9",
+    "target": "65551"
+  },
+  {
+    "t": "89.65",
+    "epoch": "1",
+    "kind": "recovery",
+    "z": "123.3",
+    "reason": "no_progress",
+    "slot": "8",
+    "x": "4127.7",
+    "y": "-336.0"
+  },
+  {
+    "t": "89.65",
+    "gy": "-359.7",
+    "epoch": "1",
+    "gx": "4315.9",
+    "kind": "route",
+    "z": "123.3",
+    "reason": "breadcrumb_retreat",
+    "gz": "132.9",
+    "slot": "8",
+    "x": "4127.7",
+    "y": "-336.0"
+  },
+  {
+    "t": "89.67",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "8",
+    "target": "65540"
+  },
+  {
+    "t": "89.67",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65546",
+    "slot": "8",
+    "target": "65540"
+  },
+  {
+    "t": "90.50",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "11",
+    "target": "65551"
+  },
+  {
+    "t": "91.45",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "15",
+    "target": "65551"
+  },
+  {
+    "t": "91.45",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65549",
+    "slot": "15",
+    "target": "65551"
+  },
+  {
+    "t": "91.47",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65551",
+    "slot": "9",
+    "target": "65549"
+  },
+  {
+    "t": "92.10",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "65549",
+    "slot": "5",
+    "target": "65551"
+  },
+  {
+    "t": "93.37",
+    "epoch": "1",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "15",
+    "target": "65547"
+  },
+  {
+    "t": "93.37",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65551",
+    "slot": "15",
+    "target": "65547"
+  },
+  {
+    "t": "93.43",
+    "epoch": "1",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "65547",
+    "slot": "15",
+    "target": "65549"
+  },
+  {
+    "t": "24.95",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "262145",
+    "slot": "1",
+    "target": "131076"
+  },
+  {
+    "t": "27.82",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "262145",
+    "slot": "2",
+    "target": "131082"
+  },
+  {
+    "t": "28.45",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "1",
+    "target": "131084"
+  },
+  {
+    "t": "28.95",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "3",
+    "target": "131085"
+  },
+  {
+    "t": "28.95",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131077",
+    "slot": "5",
+    "target": "131085"
+  },
+  {
+    "t": "28.95",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "7",
+    "target": "131085"
+  },
+  {
+    "t": "29.40",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131075",
+    "slot": "11",
+    "target": "131085"
+  },
+  {
+    "t": "29.95",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "9",
+    "target": "131087"
+  },
+  {
+    "t": "29.98",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "3",
+    "target": "131087"
+  },
+  {
+    "t": "30.02",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "7",
+    "target": "131087"
+  },
+  {
+    "t": "30.48",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "12",
+    "target": "131088"
+  },
+  {
+    "t": "31.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "5",
+    "target": "131087"
+  },
+  {
+    "t": "32.70",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131082",
+    "slot": "2",
+    "target": "131086"
+  },
+  {
+    "t": "33.13",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "71.9",
+    "reason": "no_progress",
+    "slot": "1",
+    "x": "1757.7",
+    "y": "828.0"
+  },
+  {
+    "t": "33.25",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "15",
+    "target": "131085"
+  },
+  {
+    "t": "33.38",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "5",
+    "target": "131085"
+  },
+  {
+    "t": "33.38",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "12",
+    "target": "131078"
+  },
+  {
+    "t": "33.40",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "33.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "2",
+    "target": "131084"
+  },
+  {
+    "t": "33.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "14",
+    "target": "131086"
+  },
+  {
+    "t": "33.92",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "12",
+    "target": "131088"
+  },
+  {
+    "t": "34.38",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "112.0",
+    "reason": "waypoint_timeout",
+    "slot": "4",
+    "x": "1676.0",
+    "y": "-264.1"
+  },
+  {
+    "t": "34.48",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131085",
+    "slot": "11",
+    "target": "131087"
+  },
+  {
+    "t": "35.35",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "140.0",
+    "reason": "no_progress",
+    "slot": "10",
+    "x": "1900.0",
+    "y": "-809.9"
+  },
+  {
+    "t": "35.47",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "5",
+    "target": "131087"
+  },
+  {
+    "t": "35.47",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "14",
+    "target": "131078"
+  },
+  {
+    "t": "35.48",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "1",
+    "target": "131086"
+  },
+  {
+    "t": "35.58",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "112.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "1676.0",
+    "y": "-174.6"
+  },
+  {
+    "t": "35.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "12",
+    "target": "131078"
+  },
+  {
+    "t": "36.05",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131084",
+    "slot": "2",
+    "target": "131086"
+  },
+  {
+    "t": "36.07",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "5",
+    "target": "131085"
+  },
+  {
+    "t": "36.42",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "5",
+    "target": "131087"
+  },
+  {
+    "t": "36.50",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "2",
+    "target": "131078"
+  },
+  {
+    "t": "36.55",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "11",
+    "target": "131075"
+  },
+  {
+    "t": "36.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "13",
+    "target": "131075"
+  },
+  {
+    "t": "36.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "13",
+    "target": "131085"
+  },
+  {
+    "t": "36.85",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "15",
+    "target": "131087"
+  },
+  {
+    "t": "37.12",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "14",
+    "target": "131088"
+  },
+  {
+    "t": "37.15",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "14",
+    "target": "131078"
+  },
+  {
+    "t": "37.37",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "12",
+    "target": "131086"
+  },
+  {
+    "t": "37.65",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "3",
+    "target": "131085"
+  },
+  {
+    "t": "37.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "9",
+    "target": "131085"
+  },
+  {
+    "t": "38.15",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "2",
+    "target": "131088"
+  },
+  {
+    "t": "38.17",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "2",
+    "target": "131078"
+  },
+  {
+    "t": "38.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "15",
+    "target": "131085"
+  },
+  {
+    "t": "38.70",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "14",
+    "target": "131088"
+  },
+  {
+    "t": "38.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "14",
+    "target": "131078"
+  },
+  {
+    "t": "38.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "12",
+    "target": "131088"
+  },
+  {
+    "t": "39.15",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131085",
+    "slot": "3",
+    "target": "131087"
+  },
+  {
+    "t": "39.18",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "13",
+    "target": "131087"
+  },
+  {
+    "t": "39.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "13",
+    "target": "131085"
+  },
+  {
+    "t": "39.38",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "3",
+    "target": "131075"
+  },
+  {
+    "t": "39.38",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "11",
+    "target": "131087"
+  },
+  {
+    "t": "39.60",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "11",
+    "target": "131075"
+  },
+  {
+    "t": "39.62",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "9",
+    "target": "131087"
+  },
+  {
+    "t": "39.67",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131085",
+    "slot": "13",
+    "target": "131087"
+  },
+  {
+    "t": "39.67",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131085",
+    "slot": "15",
+    "target": "131087"
+  },
+  {
+    "t": "39.68",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "4",
+    "target": "131088"
+  },
+  {
+    "t": "40.70",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "3",
+    "target": "131087"
+  },
+  {
+    "t": "40.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "3",
+    "target": "131075"
+  },
+  {
+    "t": "40.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "5",
+    "target": "131075"
+  },
+  {
+    "t": "40.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "7",
+    "target": "131075"
+  },
+  {
+    "t": "40.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "9",
+    "target": "131075"
+  },
+  {
+    "t": "40.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "13",
+    "target": "131075"
+  },
+  {
+    "t": "40.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "15",
+    "target": "131075"
+  },
+  {
+    "t": "41.62",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "112.0",
+    "reason": "no_progress",
+    "slot": "4",
+    "x": "1676.0",
+    "y": "-222.9"
+  },
+  {
+    "t": "42.68",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131078"
+  },
+  {
+    "t": "42.68",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131082",
+    "slot": "10",
+    "target": "131078"
+  },
+  {
+    "t": "42.98",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131084",
+    "slot": "6",
+    "target": "131078"
+  },
+  {
+    "t": "42.98",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131080",
+    "slot": "8",
+    "target": "131084"
+  },
+  {
+    "t": "43.07",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "2",
+    "target": "131086"
+  },
+  {
+    "t": "43.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "3",
+    "target": "131079"
+  },
+  {
+    "t": "43.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "5",
+    "target": "131081"
+  },
+  {
+    "t": "43.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "7",
+    "target": "131079"
+  },
+  {
+    "t": "43.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "9",
+    "target": "131074"
+  },
+  {
+    "t": "43.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "11",
+    "target": "131081"
+  },
+  {
+    "t": "43.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "13",
+    "target": "131074"
+  },
+  {
+    "t": "43.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "15",
+    "target": "131077"
+  },
+  {
+    "t": "45.42",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "1",
+    "target": "131078"
+  },
+  {
+    "t": "45.42",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131081",
+    "slot": "5",
+    "target": "131074"
+  },
+  {
+    "t": "45.42",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "6",
+    "target": "131086"
+  },
+  {
+    "t": "46.02",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131077",
+    "slot": "15",
+    "target": "131074"
+  },
+  {
+    "t": "47.58",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131084",
+    "slot": "8",
+    "target": "131086"
+  },
+  {
+    "t": "48.00",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "3",
+    "target": "131074"
+  },
+  {
+    "t": "48.25",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "10",
+    "target": "131086"
+  },
+  {
+    "t": "48.28",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131084",
+    "slot": "12",
+    "target": "131078"
+  },
+  {
+    "t": "48.58",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "49.10",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "4",
+    "target": "131086"
+  },
+  {
+    "t": "49.13",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-40.0",
+    "reason": "no_progress",
+    "slot": "7",
+    "x": "-2936.0",
+    "y": "-139.2"
+  },
+  {
+    "t": "50.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "8",
+    "target": "131084"
+  },
+  {
+    "t": "50.58",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131074",
+    "slot": "3",
+    "target": "131083"
+  },
+  {
+    "t": "50.58",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131074",
+    "slot": "5",
+    "target": "131081"
+  },
+  {
+    "t": "50.58",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131074",
+    "slot": "9",
+    "target": "131079"
+  },
+  {
+    "t": "50.58",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131074",
+    "slot": "13",
+    "target": "131085"
+  },
+  {
+    "t": "50.58",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131074",
+    "slot": "15",
+    "target": "131081"
+  },
+  {
+    "t": "51.00",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-24.2",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "924.9",
+    "y": "-274.4"
+  },
+  {
+    "t": "51.15",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "6",
+    "target": "131086"
+  },
+  {
+    "t": "51.70",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131085",
+    "slot": "13",
+    "target": "131083"
+  },
+  {
+    "t": "52.83",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "12",
+    "target": "131086"
+  },
+  {
+    "t": "52.85",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "8",
+    "target": "131078"
+  },
+  {
+    "t": "54.40",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131081",
+    "slot": "5",
+    "target": "131085"
+  },
+  {
+    "t": "54.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131083",
+    "slot": "13",
+    "target": "131085"
+  },
+  {
+    "t": "54.90",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131085",
+    "slot": "5",
+    "target": "131083"
+  },
+  {
+    "t": "55.85",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "112.0",
+    "reason": "no_progress",
+    "slot": "4",
+    "x": "1676.0",
+    "y": "-251.1"
+  },
+  {
+    "t": "55.85",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-27.0",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "855.0",
+    "y": "-226.0"
+  },
+  {
+    "t": "55.85",
+    "gy": "103.8",
+    "epoch": "2",
+    "gx": "954.8",
+    "kind": "route",
+    "z": "-27.0",
+    "reason": "breadcrumb_retreat",
+    "gz": "-71.1",
+    "slot": "6",
+    "x": "855.0",
+    "y": "-226.0"
+  },
+  {
+    "t": "55.87",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "131076"
+  },
+  {
+    "t": "55.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "6",
+    "target": "131076"
+  },
+  {
+    "t": "56.08",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131085",
+    "slot": "13",
+    "target": "131081"
+  },
+  {
+    "t": "56.15",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "112.0",
+    "reason": "no_progress",
+    "slot": "14",
+    "x": "1676.0",
+    "y": "-180.5"
+  },
+  {
+    "t": "56.20",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "100.4",
+    "reason": "no_progress",
+    "slot": "2",
+    "x": "1957.6",
+    "y": "-336.0"
+  },
+  {
+    "t": "56.80",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "6",
+    "target": "131086"
+  },
+  {
+    "t": "57.07",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "4",
+    "target": "131088"
+  },
+  {
+    "t": "57.07",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "4",
+    "target": "131088"
+  },
+  {
+    "t": "57.47",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "4",
+    "target": "131078"
+  },
+  {
+    "t": "57.47",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131088",
+    "slot": "4",
+    "target": "131078"
+  },
+  {
+    "t": "57.60",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-128.0",
+    "reason": "no_progress",
+    "slot": "7",
+    "x": "-3334.0",
+    "y": "-94.9"
+  },
+  {
+    "t": "57.70",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-128.0",
+    "reason": "no_progress",
+    "slot": "3",
+    "x": "-2004.0",
+    "y": "644.0"
+  },
+  {
+    "t": "57.70",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "8",
+    "target": "131086"
+  },
+  {
+    "t": "57.82",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "4",
+    "target": "131088"
+  },
+  {
+    "t": "57.82",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "4",
+    "target": "131088"
+  },
+  {
+    "t": "58.42",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131088",
+    "slot": "4",
+    "target": "131086"
+  },
+  {
+    "t": "58.52",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "4",
+    "target": "131088"
+  },
+  {
+    "t": "58.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "4",
+    "target": "131088"
+  },
+  {
+    "t": "58.85",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-26.1",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "855.0",
+    "y": "-223.8"
+  },
+  {
+    "t": "58.85",
+    "gy": "103.8",
+    "epoch": "2",
+    "gx": "954.8",
+    "kind": "route",
+    "z": "-26.1",
+    "reason": "breadcrumb_retreat",
+    "gz": "-71.1",
+    "slot": "6",
+    "x": "855.0",
+    "y": "-223.8"
+  },
+  {
+    "t": "58.87",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "131078"
+  },
+  {
+    "t": "58.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "6",
+    "target": "131078"
+  },
+  {
+    "t": "58.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "14",
+    "target": "131086"
+  },
+  {
+    "t": "59.05",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131088",
+    "slot": "4",
+    "target": "131086"
+  },
+  {
+    "t": "59.12",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131081",
+    "slot": "13",
+    "target": "131083"
+  },
+  {
+    "t": "59.72",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "59.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "59.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "8",
+    "target": "131078"
+  },
+  {
+    "t": "59.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "8",
+    "target": "131086"
+  },
+  {
+    "t": "59.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "12",
+    "target": "131078"
+  },
+  {
+    "t": "59.90",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "112.0",
+    "reason": "no_progress",
+    "slot": "12",
+    "x": "1676.0",
+    "y": "-223.3"
+  },
+  {
+    "t": "60.60",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131083",
+    "slot": "5",
+    "target": "131087"
+  },
+  {
+    "t": "60.70",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "10",
+    "target": "131078"
+  },
+  {
+    "t": "60.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "5",
+    "target": "131083"
+  },
+  {
+    "t": "60.85",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "6",
+    "target": "131086"
+  },
+  {
+    "t": "60.85",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "10",
+    "target": "131086"
+  },
+  {
+    "t": "61.37",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131081",
+    "slot": "11",
+    "target": "131087"
+  },
+  {
+    "t": "61.85",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-38.8",
+    "reason": "no_progress",
+    "slot": "6",
+    "x": "855.0",
+    "y": "-224.3"
+  },
+  {
+    "t": "61.85",
+    "gy": "103.8",
+    "epoch": "2",
+    "gx": "954.8",
+    "kind": "route",
+    "z": "-38.8",
+    "reason": "breadcrumb_retreat",
+    "gz": "-71.1",
+    "slot": "6",
+    "x": "855.0",
+    "y": "-224.3"
+  },
+  {
+    "t": "61.87",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "61.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "61.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "11",
+    "target": "131083"
+  },
+  {
+    "t": "61.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131083",
+    "slot": "3",
+    "target": "131087"
+  },
+  {
+    "t": "61.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131083",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "61.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131083",
+    "slot": "11",
+    "target": "131081"
+  },
+  {
+    "t": "61.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131083",
+    "slot": "13",
+    "target": "131081"
+  },
+  {
+    "t": "62.12",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "6",
+    "target": "131086"
+  },
+  {
+    "t": "62.12",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "6",
+    "target": "131086"
+  },
+  {
+    "t": "62.23",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131077",
+    "slot": "5",
+    "target": "131081"
+  },
+  {
+    "t": "62.23",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131081",
+    "slot": "15",
+    "target": "131077"
+  },
+  {
+    "t": "62.75",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "14",
+    "target": "131078"
+  },
+  {
+    "t": "63.02",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131081",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "63.02",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131081",
+    "slot": "11",
+    "target": "131087"
+  },
+  {
+    "t": "63.02",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131081",
+    "slot": "13",
+    "target": "131079"
+  },
+  {
+    "t": "63.18",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-10.3",
+    "reason": "no_progress",
+    "slot": "7",
+    "x": "-3249.3",
+    "y": "-499.0"
+  },
+  {
+    "t": "63.22",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "13",
+    "target": "131077"
+  },
+  {
+    "t": "63.25",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131087"
+  },
+  {
+    "t": "63.28",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "3",
+    "target": "131079"
+  },
+  {
+    "t": "63.32",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "63.32",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "13",
+    "target": "131087"
+  },
+  {
+    "t": "63.32",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "14",
+    "target": "131086"
+  },
+  {
+    "t": "63.35",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "13",
+    "target": "131077"
+  },
+  {
+    "t": "63.37",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "13",
+    "target": "131087"
+  },
+  {
+    "t": "63.42",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "13",
+    "target": "131077"
+  },
+  {
+    "t": "63.43",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "63.43",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "13",
+    "target": "131087"
+  },
+  {
+    "t": "63.47",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "63.48",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "13",
+    "target": "131077"
+  },
+  {
+    "t": "63.50",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "63.50",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "13",
+    "target": "131087"
+  },
+  {
+    "t": "63.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "63.53",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "63.57",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "63.58",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "13",
+    "target": "131077"
+  },
+  {
+    "t": "63.62",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "63.62",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "13",
+    "target": "131087"
+  },
+  {
+    "t": "63.63",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "63.65",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "63.75",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "63.77",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "13",
+    "target": "131077"
+  },
+  {
+    "t": "63.80",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "63.80",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "13",
+    "target": "131087"
+  },
+  {
+    "t": "63.82",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "63.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "6",
+    "target": "131078"
+  },
+  {
+    "t": "63.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "6",
+    "target": "131086"
+  },
+  {
+    "t": "63.92",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "13",
+    "target": "131077"
+  },
+  {
+    "t": "64.03",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "64.07",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "64.10",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "64.12",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "64.17",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "64.20",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "64.23",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "64.28",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "64.30",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "64.32",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "64.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "64.37",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "64.38",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "64.42",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "64.42",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "6",
+    "target": "131078"
+  },
+  {
+    "t": "64.43",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "64.47",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "64.48",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "6",
+    "target": "131086"
+  },
+  {
+    "t": "64.53",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "64.53",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "6",
+    "target": "131078"
+  },
+  {
+    "t": "64.63",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "64.68",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "2",
+    "target": "131084"
+  },
+  {
+    "t": "64.70",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "2",
+    "target": "131078"
+  },
+  {
+    "t": "64.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "1",
+    "target": "131078"
+  },
+  {
+    "t": "64.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131086",
+    "slot": "4",
+    "target": "131078"
+  },
+  {
+    "t": "64.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131086",
+    "slot": "14",
+    "target": "131078"
+  },
+  {
+    "t": "65.83",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "65.83",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131077",
+    "slot": "15",
+    "target": "131087"
+  },
+  {
+    "t": "65.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "5",
+    "target": "131087"
+  },
+  {
+    "t": "65.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "5",
+    "target": "131079"
+  },
+  {
+    "t": "66.02",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "2",
+    "target": "131084"
+  },
+  {
+    "t": "66.02",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "11",
+    "target": "131085"
+  },
+  {
+    "t": "66.20",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "11",
+    "target": "131075"
+  },
+  {
+    "t": "66.28",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "11",
+    "target": "131087"
+  },
+  {
+    "t": "66.62",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "1",
+    "target": "131084"
+  },
+  {
+    "t": "66.62",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "66.62",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "12",
+    "target": "131084"
+  },
+  {
+    "t": "66.62",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "14",
+    "target": "131084"
+  },
+  {
+    "t": "67.37",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "11",
+    "target": "131085"
+  },
+  {
+    "t": "67.47",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131085",
+    "slot": "11",
+    "target": "131087"
+  },
+  {
+    "t": "68.47",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "11",
+    "target": "131079"
+  },
+  {
+    "t": "69.85",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-128.0",
+    "reason": "no_progress",
+    "slot": "7",
+    "x": "-3334.0",
+    "y": "-94.9"
+  },
+  {
+    "t": "69.97",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "11",
+    "target": "131087"
+  },
+  {
+    "t": "70.65",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "15",
+    "target": "131079"
+  },
+  {
+    "t": "71.12",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "11",
+    "target": "131079"
+  },
+  {
+    "t": "71.13",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "3",
+    "target": "131087"
+  },
+  {
+    "t": "71.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "3",
+    "target": "131079"
+  },
+  {
+    "t": "71.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "7",
+    "target": "131087"
+  },
+  {
+    "t": "71.48",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "11",
+    "target": "131075"
+  },
+  {
+    "t": "71.50",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "11",
+    "target": "131079"
+  },
+  {
+    "t": "71.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "11",
+    "target": "131075"
+  },
+  {
+    "t": "71.53",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131075",
+    "slot": "11",
+    "target": "131079"
+  },
+  {
+    "t": "71.60",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "11",
+    "target": "131075"
+  },
+  {
+    "t": "71.62",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131075",
+    "slot": "11",
+    "target": "131079"
+  },
+  {
+    "t": "73.37",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "11",
+    "target": "131083"
+  },
+  {
+    "t": "73.52",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.53",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "73.60",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.60",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.63",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "73.68",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.68",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.70",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "73.73",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.73",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.77",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131084",
+    "slot": "6",
+    "target": "131076"
+  },
+  {
+    "t": "73.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "73.80",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "73.80",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.80",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.83",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131084",
+    "slot": "6",
+    "target": "131076"
+  },
+  {
+    "t": "73.85",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "73.87",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131084",
+    "slot": "6",
+    "target": "131076"
+  },
+  {
+    "t": "73.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "73.90",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "73.90",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.90",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "73.93",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131084",
+    "slot": "6",
+    "target": "131076"
+  },
+  {
+    "t": "73.95",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "73.97",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131084",
+    "slot": "6",
+    "target": "131076"
+  },
+  {
+    "t": "73.98",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "74.00",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "74.00",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "74.00",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "74.03",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131084",
+    "slot": "6",
+    "target": "131076"
+  },
+  {
+    "t": "74.05",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131076",
+    "slot": "6",
+    "target": "131084"
+  },
+  {
+    "t": "74.20",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "74.23",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "74.23",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "74.23",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131083",
+    "slot": "11",
+    "target": "131079"
+  },
+  {
+    "t": "74.25",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "74.27",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "74.27",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "74.28",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "74.33",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "74.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "74.47",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "74.48",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "74.48",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "74.50",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "10",
+    "target": "131084"
+  },
+  {
+    "t": "75.50",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "3",
+    "target": "131087"
+  },
+  {
+    "t": "75.50",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "9",
+    "target": "131075"
+  },
+  {
+    "t": "75.50",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "11",
+    "target": "131074"
+  },
+  {
+    "t": "75.50",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131079",
+    "slot": "15",
+    "target": "131085"
+  },
+  {
+    "t": "75.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131074",
+    "slot": "11",
+    "target": "131087"
+  },
+  {
+    "t": "76.63",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "1",
+    "target": "131088"
+  },
+  {
+    "t": "76.63",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "2",
+    "target": "131076"
+  },
+  {
+    "t": "76.63",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "4",
+    "target": "131088"
+  },
+  {
+    "t": "76.63",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "8",
+    "target": "131078"
+  },
+  {
+    "t": "76.63",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "10",
+    "target": "131076"
+  },
+  {
+    "t": "76.63",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "12",
+    "target": "131088"
+  },
+  {
+    "t": "76.63",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131084",
+    "slot": "14",
+    "target": "131078"
+  },
+  {
+    "t": "77.77",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131085",
+    "slot": "15",
+    "target": "131087"
+  },
+  {
+    "t": "78.27",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-128.0",
+    "reason": "no_progress",
+    "slot": "13",
+    "x": "-3323.6",
+    "y": "224.2"
+  },
+  {
+    "t": "78.68",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "14",
+    "target": "131076"
+  },
+  {
+    "t": "78.93",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "8",
+    "target": "131076"
+  },
+  {
+    "t": "79.57",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "4",
+    "target": "131076"
+  },
+  {
+    "t": "79.62",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "1",
+    "target": "131076"
+  },
+  {
+    "t": "79.67",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "15",
+    "target": "131077"
+  },
+  {
+    "t": "79.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131075",
+    "slot": "9",
+    "target": "131087"
+  },
+  {
+    "t": "79.77",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "12",
+    "target": "131076"
+  },
+  {
+    "t": "79.95",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "3",
+    "target": "131081"
+  },
+  {
+    "t": "80.55",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-127.0",
+    "reason": "no_progress",
+    "slot": "5",
+    "x": "-2224.0",
+    "y": "337.6"
+  },
+  {
+    "t": "81.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131081",
+    "slot": "3",
+    "target": "131077"
+  },
+  {
+    "t": "81.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "9",
+    "target": "131081"
+  },
+  {
+    "t": "81.42",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "15",
+    "target": "131081"
+  },
+  {
+    "t": "81.85",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131083",
+    "slot": "5",
+    "target": "131087"
+  },
+  {
+    "t": "82.58",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131081",
+    "slot": "9",
+    "target": "131087"
+  },
+  {
+    "t": "82.83",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "5",
+    "target": "131081"
+  },
+  {
+    "t": "82.98",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "3",
+    "target": "131081"
+  },
+  {
+    "t": "83.00",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131081",
+    "slot": "15",
+    "target": "131077"
+  },
+  {
+    "t": "83.07",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "15",
+    "target": "131081"
+  },
+  {
+    "t": "84.57",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131081",
+    "slot": "15",
+    "target": "131077"
+  },
+  {
+    "t": "84.93",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131076",
+    "slot": "8",
+    "target": "131088"
+  },
+  {
+    "t": "85.02",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131081",
+    "slot": "3",
+    "target": "131077"
+  },
+  {
+    "t": "86.08",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131088",
+    "slot": "8",
+    "target": "131076"
+  },
+  {
+    "t": "86.83",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131076",
+    "slot": "8",
+    "target": "131078"
+  },
+  {
+    "t": "87.25",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-122.0",
+    "reason": "no_progress",
+    "slot": "9",
+    "x": "-2249.8",
+    "y": "683.5"
+  },
+  {
+    "t": "87.70",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "8",
+    "target": "131076"
+  },
+  {
+    "t": "88.22",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "15",
+    "target": "131081"
+  },
+  {
+    "t": "88.22",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131077",
+    "slot": "15",
+    "target": "131081"
+  },
+  {
+    "t": "88.42",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131081",
+    "slot": "15",
+    "target": "131077"
+  },
+  {
+    "t": "88.53",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "15",
+    "target": "131081"
+  },
+  {
+    "t": "88.53",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131077",
+    "slot": "15",
+    "target": "131081"
+  },
+  {
+    "t": "88.95",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131076",
+    "slot": "8",
+    "target": "131078"
+  },
+  {
+    "t": "88.97",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "8",
+    "target": "131076"
+  },
+  {
+    "t": "89.00",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131076",
+    "slot": "8",
+    "target": "131078"
+  },
+  {
+    "t": "89.02",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "8",
+    "target": "131076"
+  },
+  {
+    "t": "89.05",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131076",
+    "slot": "8",
+    "target": "131078"
+  },
+  {
+    "t": "89.07",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "8",
+    "target": "131076"
+  },
+  {
+    "t": "89.08",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131076",
+    "slot": "8",
+    "target": "131078"
+  },
+  {
+    "t": "89.10",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "8",
+    "target": "131076"
+  },
+  {
+    "t": "89.42",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-24.0",
+    "reason": "no_progress",
+    "slot": "14",
+    "x": "928.0",
+    "y": "253.1"
+  },
+  {
+    "t": "89.57",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131087",
+    "slot": "9",
+    "target": "131081"
+  },
+  {
+    "t": "89.58",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131081",
+    "slot": "5",
+    "target": "131077"
+  },
+  {
+    "t": "89.78",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131076",
+    "slot": "2",
+    "target": "131088"
+  },
+  {
+    "t": "89.88",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131076",
+    "slot": "10",
+    "target": "131088"
+  },
+  {
+    "t": "89.90",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131088",
+    "slot": "2",
+    "target": "131076"
+  },
+  {
+    "t": "90.03",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131081",
+    "slot": "15",
+    "target": "131077"
+  },
+  {
+    "t": "90.77",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131077",
+    "slot": "3",
+    "target": "131087"
+  },
+  {
+    "t": "90.77",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131077",
+    "slot": "5",
+    "target": "131087"
+  },
+  {
+    "t": "90.77",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131077",
+    "slot": "15",
+    "target": "131087"
+  },
+  {
+    "t": "94.13",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-37.0",
+    "reason": "no_progress",
+    "slot": "8",
+    "x": "921.2",
+    "y": "-143.0"
+  },
+  {
+    "t": "94.18",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131076",
+    "slot": "8",
+    "target": "131078"
+  },
+  {
+    "t": "94.22",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "3",
+    "target": "131085"
+  },
+  {
+    "t": "94.22",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "5",
+    "target": "131075"
+  },
+  {
+    "t": "94.22",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "7",
+    "target": "131081"
+  },
+  {
+    "t": "94.22",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "13",
+    "target": "131083"
+  },
+  {
+    "t": "94.22",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131087",
+    "slot": "15",
+    "target": "131079"
+  },
+  {
+    "t": "94.48",
+    "epoch": "2",
+    "kind": "recovery",
+    "z": "-122.0",
+    "reason": "no_progress",
+    "slot": "9",
+    "x": "-2251.5",
+    "y": "681.8"
+  },
+  {
+    "t": "95.00",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131079",
+    "slot": "15",
+    "target": "131074"
+  },
+  {
+    "t": "95.35",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131085",
+    "slot": "3",
+    "target": "131081"
+  },
+  {
+    "t": "95.35",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131078",
+    "slot": "8",
+    "target": "131076"
+  },
+  {
+    "t": "96.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "1",
+    "target": "131078"
+  },
+  {
+    "t": "96.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "2",
+    "target": "131088"
+  },
+  {
+    "t": "96.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "6",
+    "target": "131088"
+  },
+  {
+    "t": "96.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "8",
+    "target": "131078"
+  },
+  {
+    "t": "96.33",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131076",
+    "slot": "12",
+    "target": "131088"
+  },
+  {
+    "t": "97.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131078",
+    "slot": "8",
+    "target": "131088"
+  },
+  {
+    "t": "98.37",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131088",
+    "slot": "6",
+    "target": "131078"
+  },
+  {
+    "t": "98.52",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "engage",
+    "old": "131088",
+    "slot": "12",
+    "target": "131078"
+  },
+  {
+    "t": "98.72",
+    "epoch": "2",
+    "kind": "route",
+    "reason": "skip_failed_goal",
+    "slot": "15",
+    "target": "131081"
+  },
+  {
+    "t": "98.72",
+    "epoch": "2",
+    "kind": "decision",
+    "reason": "pursue",
+    "old": "131074",
+    "slot": "15",
+    "target": "131081"
+  }
+]

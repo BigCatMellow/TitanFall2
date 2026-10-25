@@ -1,0 +1,79 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\trend-analysis-20261025\\played-latest\\source.log",
+  "scope": "Whole log",
+  "switches": 6142,
+  "quick_reversals": 2561,
+  "quick_reversal_percent": 41.7,
+  "reversal_reason_pairs": [
+    {
+      "pair": "engage, engage",
+      "count": 942
+    },
+    {
+      "pair": "engage, pursue",
+      "count": 410
+    },
+    {
+      "pair": "pursue, engage",
+      "count": 422
+    },
+    {
+      "pair": "pursue, pursue",
+      "count": 787
+    }
+  ],
+  "by_prior_actor_context": [
+    {
+      "context": "dead_at_prior_frame",
+      "switches": 74,
+      "quick_reversals": 33,
+      "percent": 44.59
+    },
+    {
+      "context": "pilot_at_prior_frame",
+      "switches": 3573,
+      "quick_reversals": 1156,
+      "percent": 32.35
+    },
+    {
+      "context": "titan_at_prior_frame",
+      "switches": 2495,
+      "quick_reversals": 1372,
+      "percent": 54.99
+    }
+  ],
+  "by_exact_actor_when_logged": [
+    {
+      "actor": "unknown",
+      "switches": 6142,
+      "quick_reversals": 2561
+    }
+  ],
+  "quick_reversals_with_recent_pilot_context": 1156,
+  "those_with_both_targets_recently_observed_alive": 868,
+  "those_with_both_targets_within_400_xy": 105,
+  "matched_pilot_combat_snapshots": 2915,
+  "observed_weapons": [
+    "mp_weapon_rspn101"
+  ],
+  "empty_not_reloading_snapshots": 11,
+  "empty_snapshot_states": [
+    {
+      "state": "engage",
+      "count": 10
+    },
+    {
+      "state": "pursue",
+      "count": 1
+    }
+  ],
+  "combat_freshness_when_logged": [
+    {
+      "active": "unknown",
+      "samples": 2915
+    }
+  ],
+  "empty_current_command_snapshots": 0,
+  "nonlegacy_combat_snapshots_during_embark": 49,
+  "limits": "Quick reversal means adjacent logged A->B->A switches within0.5seconds, not proven wasted fire. Recent actor state is at most2.1seconds old; targets can move/die or lose visibility between snapshots. Both-inside400 uses observed XY distance, not a confirmed urgent-ranking cause. An engage/engage reason pair only says each selected target was shootable at its respective decision. CombatState can remain stale when its decision block is bypassed, especially while boarding or owning a pet Titan. Empty/blocked snapshots are investigative signals, not confirmed failures. Survey weapon coverage is reported explicitly."
+}

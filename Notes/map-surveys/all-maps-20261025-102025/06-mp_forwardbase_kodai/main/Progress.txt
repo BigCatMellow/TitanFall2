@@ -1,0 +1,7 @@
+State: stopped_error
+Updated: 11:59:57
+Completed maps: 0 / 1
+Current: {"map":"mp_forwardbase_kodai","index":"0","kills":"239","imc":"141","militia":"98","elapsed":"745.1","bots":"16"}
+Failure: Game closed before the survey completed
+
+Completed results:

@@ -1,0 +1,502 @@
+{
+  "rounds": [
+    {
+      "round": "1, mp_colony02",
+      "pilot_samples": 4414,
+      "stalls": 81,
+      "stall_percent": 1.84,
+      "stall_height_over_180": 23,
+      "recover_samples": 292,
+      "hold_samples": 427,
+      "stopped_holds": 86,
+      "empty_not_reloading": 24
+    }
+  ],
+  "stall_clusters": [
+    {
+      "area": "mp_colony02, 1024,-384,256",
+      "samples": 8,
+      "slots": [
+        15
+      ],
+      "height_median": 177.0,
+      "states": [
+        "pursue",
+        "recover"
+      ],
+      "target_ids": [
+        65541
+      ]
+    },
+    {
+      "area": "mp_colony02, 2176,3712,64",
+      "samples": 7,
+      "slots": [
+        4,
+        6,
+        10,
+        12,
+        13,
+        14
+      ],
+      "height_median": 248.0,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65538,
+        65540,
+        65541,
+        65544,
+        65548,
+        6357148
+      ]
+    },
+    {
+      "area": "mp_colony02, 2176,3584,64",
+      "samples": 6,
+      "slots": [
+        6,
+        10,
+        14
+      ],
+      "height_median": 214.7,
+      "states": [
+        "embark",
+        "pursue"
+      ],
+      "target_ids": [
+        65540,
+        65542,
+        65544,
+        65550
+      ]
+    },
+    {
+      "area": "mp_colony02, -128,-1024,384",
+      "samples": 5,
+      "slots": [
+        4,
+        11,
+        14
+      ],
+      "height_median": -131.39999999999998,
+      "states": [
+        "pursue",
+        "recover"
+      ],
+      "target_ids": [
+        65548,
+        65553
+      ]
+    },
+    {
+      "area": "mp_colony02, 896,-384,256",
+      "samples": 4,
+      "slots": [
+        15
+      ],
+      "height_median": 229.10000000000002,
+      "states": [
+        "recover"
+      ],
+      "target_ids": [
+        65541,
+        2556483
+      ]
+    },
+    {
+      "area": "mp_colony02, -384,-128,128",
+      "samples": 3,
+      "slots": [
+        1,
+        2,
+        13
+      ],
+      "height_median": 135.1,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65538,
+        65543,
+        65551
+      ]
+    },
+    {
+      "area": "mp_colony02, 768,2560,0",
+      "samples": 3,
+      "slots": [
+        8
+      ],
+      "height_median": 283.6,
+      "states": [
+        "pursue",
+        "recover"
+      ],
+      "target_ids": [
+        65542,
+        65552
+      ]
+    },
+    {
+      "area": "mp_colony02, -512,-128,128",
+      "samples": 3,
+      "slots": [
+        1,
+        15
+      ],
+      "height_median": 120.9,
+      "states": [
+        "pursue"
+      ],
+      "target_ids": [
+        65551,
+        65553
+      ]
+    },
+    {
+      "area": "mp_colony02, 2560,3328,128",
+      "samples": 3,
+      "slots": [
+        2,
+        14
+      ],
+      "height_median": 84.19999999999999,
+      "states": [
+        "embark",
+        "pursue",
+        "recover"
+      ],
+      "target_ids": [
+        65546,
+        6357148
+      ]
+    },
+    {
+      "area": "mp_colony02, 128,1280,64",
+      "samples": 2,
+      "slots": [
+        9
+      ],
+      "height_median": 175.3,
+      "states": [
+        "embark",
+        "recover"
+      ],
+      "target_ids": [
+        65541
+      ]
+    }
+  ],
+  "longest_episodes": [
+    {
+      "kind": "blocked_hold",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 9,
+      "start": 93.02,
+      "end": 101.02,
+      "span": 8.0,
+      "count": 5,
+      "x": -909.3,
+      "y": -169.4,
+      "z": 167.4,
+      "target": 65543,
+      "height": 60.29999999999998
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 6,
+      "start": 381.02,
+      "end": 387.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 371.6,
+      "y": 3542.9,
+      "z": 39.5,
+      "target": 65550,
+      "height": 31.5
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 10,
+      "start": 275.02,
+      "end": 277.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -317.4,
+      "y": -224.7,
+      "z": 244.0,
+      "target": 65548,
+      "height": -69.5
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 3,
+      "start": 709.02,
+      "end": 711.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 518.9,
+      "y": -1401.4,
+      "z": 289.7,
+      "target": 65549,
+      "height": 14.199999999999989
+    },
+    {
+      "kind": "blocked_hold",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 3,
+      "start": 117.02,
+      "end": 119.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 567.6,
+      "y": -1376.3,
+      "z": 274.1,
+      "target": 65541,
+      "height": -2.6000000000000227
+    },
+    {
+      "kind": "empty",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 12,
+      "start": 779.02,
+      "end": 787.02,
+      "span": 8.0,
+      "count": 5,
+      "x": -1130.1,
+      "y": 1764.1,
+      "z": 324.0,
+      "target": 3080854,
+      "height": 10994.4
+    },
+    {
+      "kind": "empty",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 1,
+      "start": 507.02,
+      "end": 511.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 120.9,
+      "y": -890.8,
+      "z": 513.3,
+      "target": 65545,
+      "height": -224.29999999999995
+    },
+    {
+      "kind": "empty",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 2,
+      "start": 263.02,
+      "end": 265.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 67.2,
+      "y": 63.6,
+      "z": 264.2,
+      "target": 65540,
+      "height": 177.40000000000003
+    },
+    {
+      "kind": "empty",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 1,
+      "start": 93.02,
+      "end": 93.02,
+      "span": 0.0,
+      "count": 1,
+      "x": 98.1,
+      "y": 543.8,
+      "z": 34.6,
+      "target": 65547,
+      "height": 148.9
+    },
+    {
+      "kind": "empty",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 15,
+      "start": 499.02,
+      "end": 499.02,
+      "span": 0.0,
+      "count": 1,
+      "x": -214.0,
+      "y": 1472.4,
+      "z": 28.3,
+      "target": 65539,
+      "height": 354.9
+    },
+    {
+      "kind": "reload",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 1,
+      "start": 817.02,
+      "end": 829.02,
+      "span": 12.0,
+      "count": 7,
+      "x": 1179.1,
+      "y": -2279.0,
+      "z": 371.6,
+      "target": 65549,
+      "height": -93.5
+    },
+    {
+      "kind": "reload",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 5,
+      "start": 815.02,
+      "end": 821.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 1092.9,
+      "y": -1816.1,
+      "z": 243.9,
+      "target": 65545,
+      "height": 25.799999999999983
+    },
+    {
+      "kind": "reload",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 6,
+      "start": 187.02,
+      "end": 191.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 1077.4,
+      "y": 97.3,
+      "z": 39.5,
+      "target": 65538,
+      "height": 55.2
+    },
+    {
+      "kind": "reload",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 12,
+      "start": 423.02,
+      "end": 427.02,
+      "span": 4.0,
+      "count": 3,
+      "x": -525.1,
+      "y": 2372.2,
+      "z": -2.5,
+      "target": 65546,
+      "height": 205.1
+    },
+    {
+      "kind": "reload",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 11,
+      "start": 393.02,
+      "end": 397.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 6.1,
+      "y": -78.6,
+      "z": 69.5,
+      "target": 65551,
+      "height": 236.5
+    },
+    {
+      "kind": "stall",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 15,
+      "start": 577.02,
+      "end": 599.02,
+      "span": 22.0,
+      "count": 12,
+      "x": 960.0,
+      "y": -440.0,
+      "z": 240.0,
+      "target": 65541,
+      "height": 207.60000000000002
+    },
+    {
+      "kind": "stall",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 8,
+      "start": 429.02,
+      "end": 435.02,
+      "span": 6.0,
+      "count": 4,
+      "x": 692.2,
+      "y": 2565.2,
+      "z": 5.9,
+      "target": 65542,
+      "height": 142.79999999999998
+    },
+    {
+      "kind": "stall",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 10,
+      "start": 741.02,
+      "end": 745.02,
+      "span": 4.0,
+      "count": 3,
+      "x": 2121.3,
+      "y": 3633.2,
+      "z": 53.3,
+      "target": 65540,
+      "height": 214.7
+    },
+    {
+      "kind": "stall",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 11,
+      "start": 749.02,
+      "end": 751.02,
+      "span": 2.0,
+      "count": 2,
+      "x": -215.5,
+      "y": -1021.9,
+      "z": 357.0,
+      "target": 65551,
+      "height": 54.39999999999998
+    },
+    {
+      "kind": "stall",
+      "map": "mp_colony02",
+      "epoch": 1,
+      "slot": 7,
+      "start": 585.02,
+      "end": 587.02,
+      "span": 2.0,
+      "count": 2,
+      "x": 1394.4,
+      "y": -781.1,
+      "z": 253.9,
+      "target": 65541,
+      "height": 163.1
+    }
+  ],
+  "target_churn": [
+    {
+      "epoch": "1",
+      "switches": 7870,
+      "reversals_within_half_second": 3595,
+      "both_visible_reversals": 1025
+    }
+  ]
+}

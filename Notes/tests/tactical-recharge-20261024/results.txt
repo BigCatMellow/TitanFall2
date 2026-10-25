@@ -1,0 +1,8 @@
+[2026-10-24] [21:26:44] [SCRIPT SV] [info] TACTICAL_TEST: PASS mp_ability_shifter base_rate=17.9995 half_rate=35.9991 duration=2 ammo=200
+[2026-10-24] [21:26:44] [SCRIPT SV] [info] TACTICAL_TEST: PASS mp_ability_holopilot base_rate=10.8 half_rate=21.6 duration=0 ammo=200
+[2026-10-24] [21:26:45] [SCRIPT SV] [info] TACTICAL_TEST: PASS mp_ability_heal base_rate=10.8 half_rate=21.6 duration=3 ammo=200
+[2026-10-24] [21:26:46] [SCRIPT SV] [info] TACTICAL_TEST: PASS mp_ability_cloak base_rate=13.5 half_rate=27 duration=15 ammo=200
+[2026-10-24] [21:26:46] [SCRIPT SV] [info] TACTICAL_TEST: PASS mp_weapon_grenade_sonar base_rate=10.8 half_rate=21.6 duration=0 ammo=200
+[2026-10-24] [21:26:47] [SCRIPT SV] [info] TACTICAL_TEST: PASS mp_weapon_deployable_cover base_rate=6.75 half_rate=13.5 duration=15 ammo=100
+[2026-10-24] [21:27:32] [SCRIPT SV] [info] TACTICAL_TEST: PASS grapple base=24.7 half=12.4 power_cell=true
+[2026-10-24] [21:27:34] [SCRIPT SV] [info] TACTICAL_TEST: COMPLETE bots_unchanged=15

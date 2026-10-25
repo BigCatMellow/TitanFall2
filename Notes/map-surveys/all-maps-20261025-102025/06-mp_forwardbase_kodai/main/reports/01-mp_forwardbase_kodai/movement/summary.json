@@ -1,0 +1,26 @@
+[
+  {
+    "epoch": 1,
+    "map": "mp_forwardbase_kodai",
+    "bot_slots": 16,
+    "player_slots": 17,
+    "observations": 6000,
+    "alive_observations": 4988,
+    "stalled_observations": 50,
+    "crowded_observations": 93,
+    "switches": 3864.0,
+    "recoveries": 211.0,
+    "path_failures": 478.0,
+    "path_requests": 48157.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.548,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 748.0
+  }
+]

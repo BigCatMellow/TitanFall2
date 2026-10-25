@@ -1,0 +1,7 @@
+"map","epoch","t","slot","old","target","reason","previous_reason","seconds_since_previous","quick_reversal","pilot_context","actor_context","exact_actor","both_targets_observed_alive","old_xy","new_xy","both_inside_400","old_titan","new_titan"
+"mp_eden","1","1.1","1","2","3","engage","",,"0","1","pilot_at_prior_frame","unknown","1","300","350","1","0","0"
+"mp_eden","1","1.2","1","3","2","engage","engage","0.1","1","1","pilot_at_prior_frame","unknown","1","350","300","1","0","0"
+"mp_eden","1","10.1","1","2","3","pursue","engage","8.9","0","1","pilot_at_prior_frame","unknown","0",,,"0",,
+"mp_eden","1","10.2","1","3","2","pursue","pursue","0.1","1","1","pilot_at_prior_frame","unknown","0",,,"0",,
+"mp_eden","1","11.1","1","2","3","engage","pursue","0.9","0","0","titan_at_prior_frame","titan","0",,,"0",,
+"mp_eden","1","11.2","1","3","2","engage","engage","0.1","1","0","titan_at_prior_frame","titan","0",,,"0",,

@@ -1,0 +1,142 @@
+[
+  {
+    "epoch": "1",
+    "slot": "14",
+    "t": "35.03",
+    "samples": 2,
+    "max_displacement": 296.2,
+    "closest_to_goal": 40.6,
+    "moved_128": true,
+    "near_goal": true
+  },
+  {
+    "epoch": "1",
+    "slot": "2",
+    "t": "38.98",
+    "samples": 2,
+    "max_displacement": 444.2,
+    "closest_to_goal": 164.3,
+    "moved_128": true,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "10",
+    "t": "55.67",
+    "samples": 2,
+    "max_displacement": 419.9,
+    "closest_to_goal": 200.5,
+    "moved_128": true,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "14",
+    "t": "56.13",
+    "samples": 2,
+    "max_displacement": 267.1,
+    "closest_to_goal": 192.8,
+    "moved_128": true,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "8",
+    "t": "76.78",
+    "samples": 2,
+    "max_displacement": 239.3,
+    "closest_to_goal": 117.3,
+    "moved_128": true,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "6",
+    "t": "82.63",
+    "samples": 2,
+    "max_displacement": 132.2,
+    "closest_to_goal": 103.1,
+    "moved_128": true,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "10",
+    "t": "84.28",
+    "samples": 2,
+    "max_displacement": 39.0,
+    "closest_to_goal": 143.4,
+    "moved_128": false,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "10",
+    "t": "87.28",
+    "samples": 2,
+    "max_displacement": 1.0,
+    "closest_to_goal": 162.4,
+    "moved_128": false,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "6",
+    "t": "89.18",
+    "samples": 1,
+    "max_displacement": 338.8,
+    "closest_to_goal": 183.6,
+    "moved_128": true,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "10",
+    "t": "90.28",
+    "samples": 1,
+    "max_displacement": 0.4,
+    "closest_to_goal": 162.5,
+    "moved_128": false,
+    "near_goal": false
+  },
+  {
+    "epoch": "1",
+    "slot": "8",
+    "t": "92.48",
+    "samples": 0,
+    "max_displacement": 0.0,
+    "closest_to_goal": null,
+    "moved_128": false,
+    "near_goal": false
+  },
+  {
+    "epoch": "2",
+    "slot": "14",
+    "t": "94.53",
+    "samples": 2,
+    "max_displacement": 259.2,
+    "closest_to_goal": 149.1,
+    "moved_128": true,
+    "near_goal": false
+  },
+  {
+    "epoch": "2",
+    "slot": "1",
+    "t": "100.33",
+    "samples": 2,
+    "max_displacement": 503.5,
+    "closest_to_goal": 215.6,
+    "moved_128": true,
+    "near_goal": false
+  },
+  {
+    "epoch": "2",
+    "slot": "12",
+    "t": "133.33",
+    "samples": 0,
+    "max_displacement": 0.0,
+    "closest_to_goal": null,
+    "moved_128": false,
+    "near_goal": false
+  }
+]

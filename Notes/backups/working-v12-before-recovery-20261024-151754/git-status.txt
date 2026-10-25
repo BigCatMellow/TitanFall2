@@ -1,0 +1,29 @@
+ M bp_ort/src/bots/cmds/basic_combat.rs
+ M bp_ort/src/bots/cmds/battery_yoinker.rs
+ M bp_ort/src/bots/cmds/hardpoint.rs
+ M bp_ort/src/bots/cmds/mod.rs
+ M bp_ort/src/bots/cmds/slide_hopper.rs
+ M bp_ort/src/bots/cmds_exec.rs
+ M bp_ort/src/bots/cmds_utils.rs
+ M bp_ort/src/bots/detour.rs
+ M bp_ort/src/bots/mod.rs
+ M bp_ort/src/bots/set_on_join.rs
+ M bp_ort/src/bots/simple_bot_manager.rs
+ M bp_ort/src/lib.rs
+ M bp_ort/src/navmesh/mod.rs
+ M bp_ort/src/navmesh/navigation.rs
+?? AGENTS.md
+?? CRASH-FIX.md
+?? James.BotLifecycle/
+?? James.LocalPersistence/
+?? MAP-CHANGE-FIX.md
+?? MOTION-FIX.md
+?? OCTBOTS-ASSESSMENT.md
+?? SKILL-STEERING.md
+?? bp_ort/src/bots/behavior_tuning.rs
+?? bp_ort/src/bots/coordination.rs
+?? bp_ort/src/bots/jump_pulse.rs
+?? bp_ort/src/bots/progress_watchdog.rs
+?? bp_ort/src/bots/telemetry.rs
+?? bp_ort/src/navmesh/path_buffers.rs
+?? tests/

@@ -1,0 +1,50 @@
+[
+  {
+    "epoch": 1,
+    "map": "mp_eden",
+    "bot_slots": 15,
+    "player_slots": 16,
+    "observations": 531,
+    "alive_observations": 446,
+    "stalled_observations": 23,
+    "crowded_observations": 61,
+    "switches": 314.0,
+    "recoveries": 44.0,
+    "path_failures": 3.0,
+    "path_requests": 601.0,
+    "failed_goal_skips": 11.0,
+    "retreats": 10.0,
+    "mean_largest_pursuit_share": 0.486,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      1
+    ],
+    "duration": 88.0
+  },
+  {
+    "epoch": 2,
+    "map": "mp_wargames",
+    "bot_slots": 15,
+    "player_slots": 16,
+    "observations": 808,
+    "alive_observations": 685,
+    "stalled_observations": 7,
+    "crowded_observations": 2,
+    "switches": 692.0,
+    "recoveries": 22.0,
+    "path_failures": 30.0,
+    "path_requests": 2260.0,
+    "failed_goal_skips": 31.0,
+    "retreats": 2.0,
+    "mean_largest_pursuit_share": 0.47,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      1
+    ],
+    "duration": 130.0
+  }
+]

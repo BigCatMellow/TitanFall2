@@ -1,0 +1,1083 @@
+diff --git a/bp_ort/src/bots/cmds/basic_combat.rs b/bp_ort/src/bots/cmds/basic_combat.rs
+index d973f96..7998198 100644
+--- a/bp_ort/src/bots/cmds/basic_combat.rs
++++ b/bp_ort/src/bots/cmds/basic_combat.rs
+@@ -60,7 +60,10 @@ pub(crate) fn basic_combat(
+     let team = player.m_iTeamNum;
+     let is_titan = unsafe { (helper.sv_funcs.is_titan)(nudge_type::<&CBaseEntity>(player)) };
+ 
+-    let target = unsafe {
++    let target = if !is_titan && sim_type == 6
++        && crate::bots::COORDINATION_CONVAR.get().is_some_and(|c| c.get_value_bool()) {
++        unsafe { find_team_target(origin, team, player, helper, local_data, &shared_data.coordination) }
++    } else { unsafe {
+         find_player_in_view(
+             origin,
+             Some(*(helper.sv_funcs.view_angles)(player, v)),
+@@ -82,17 +85,42 @@ pub(crate) fn basic_combat(
+             .map(|(_, player)| player)
+             .map(|player| ((*player.get_origin(v), player), false))
+         })
+-    };
++    } };
++
++    let target_id = target.as_ref().map(|((_, target), _)| target.m_RefEHandle);
++    if local_data.metrics.target.is_some() && target_id.is_some()
++        && local_data.metrics.target != target_id {
++        local_data.metrics.switches = local_data.metrics.switches.saturating_add(1);
++        if crate::bots::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
++            log::info!("BOT_DECISION epoch={} t={:.2} slot={} old={} target={} reason={}",
++                crate::bots::telemetry::epoch(), time(helper), local_data.edict,
++                local_data.metrics.target.unwrap_or(-1), target_id.unwrap_or(-1),
++                if target.as_ref().is_some_and(|(_, visible)| *visible) { "engage" } else { "pursue" });
++        }
++    }
++    local_data.metrics.target = target_id;
++    local_data.metrics.visible = target.as_ref().is_some_and(|(_, visible)| *visible);
++    local_data.metrics.state = if local_data.metrics.visible { "engage" }
++        else if target_id.is_some() { "pursue" } else { "idle" };
++    if let Some(((pos, _), _)) = target.as_ref() {
++        local_data.metrics.target_pos = [pos.x, pos.y, pos.z];
++    }
++    if let Some(id) = target_id {
++        shared_data.coordination.commit(local_data.edict as usize, team, id, time(helper));
++    } else {
++        shared_data.coordination.clear(local_data.edict as usize);
++    }
+ 
+     let mut cmd = CUserCmd::new_basic_move(Vector3::ZERO, 0, helper);
+ 
+     match (sim_type, &target) {
+         (6, target) if target.is_none() || matches!(target, Some((_, false))) => {
+             if let Some(pet_titan) = unsafe { (helper.sv_funcs.get_pet_titan)(player).as_ref() } {
++                local_data.metrics.state = "embark";
+                 path_to_target(
+                     &mut cmd,
+                     local_data,
+-                    origin,
++                    player.m_vecAbsOrigin,
+                     unsafe { *pet_titan.get_origin(v) },
+                     local_data.should_recalculate_path,
+                     helper,
+@@ -101,7 +129,7 @@ pub(crate) fn basic_combat(
+                 && path_to_target(
+                     &mut cmd,
+                     local_data,
+-                    origin,
++                    player.m_vecAbsOrigin,
+                     *target_pos,
+                     local_data.last_target_index != get_player_index(target)
+                         || local_data.should_recalculate_path,
+@@ -119,7 +147,7 @@ pub(crate) fn basic_combat(
+             _ = path_to_target(
+                 &mut cmd,
+                 local_data,
+-                origin,
++                player.m_vecAbsOrigin,
+                 local_data.target_pos,
+                 local_data.should_recalculate_path,
+                 helper,
+@@ -155,7 +183,7 @@ pub(crate) fn basic_combat(
+             _ = path_to_target(
+                 &mut cmd,
+                 local_data,
+-                origin,
++                player.m_vecAbsOrigin,
+                 new_target_pos,
+                 should_recaculate.unwrap_or_else(|| local_data.target_pos != new_target_pos)
+                     || local_data.should_recalculate_path,
+@@ -213,7 +241,7 @@ pub(crate) fn basic_combat(
+             _ = path_to_target(
+                 &mut cmd,
+                 local_data,
+-                origin,
++                player.m_vecAbsOrigin,
+                 new_target_pos,
+                 should_recaculate.unwrap_or_else(|| local_data.target_pos != new_target_pos)
+                     || local_data.should_recalculate_path,
+@@ -349,7 +377,9 @@ pub(crate) fn basic_combat(
+ 
+                 if length > AIM_PENALTY_VALUE.load(Ordering::Relaxed) as f32 && !enemy_is_titan {
+                     let mut rng = thread_rng();
+-                    let error_amount = (length + 50.).sqrt() / 7f32;
++                    let scale = crate::bots::behavior_tuning::aim_error_scale(
++                        crate::bots::AIM_ERROR_SCALE_CONVAR.get().map_or(1., |c| c.get_value_f32()));
++                    let error_amount = (length + 50.).sqrt() / 7f32 * scale;
+ 
+                     Vector3 {
+                         x: angles.x + error_amount * rng.gen_range(-2..=2) as f32,
+@@ -370,19 +400,9 @@ pub(crate) fn basic_combat(
+                 }
+             };
+ 
+-            const CLAMP: f32 = 10.;
+-
+             cmd.world_view_angles.x = angles.x;
+-            cmd.world_view_angles.y = if angles.y.is_finite() {
+-                {
+-                    angles.y.clamp(
+-                        cmd.world_view_angles.y - CLAMP,
+-                        cmd.world_view_angles.y + CLAMP,
+-                    )
+-                }
+-            } else {
+-                angles.y
+-            };
++            cmd.world_view_angles.y = crate::bots::behavior_tuning::turn_yaw(
++                cmd.world_view_angles.y, angles.y, 10.);
+         } else {
+             local_data.spread_offset = local_data.spread.len();
+         }
+@@ -494,11 +514,65 @@ pub(crate) fn basic_combat(
+         local_data.next_check = helper.globals.curTime;
+     }
+ 
++    local_data.metrics.neighbors = 0;
++    if !is_titan && sim_type == 6 && local_data.metrics.state != "recover"
++        && local_data.metrics.state != "embark" && cmd.move_.x > 0.
++        && crate::bots::COORDINATION_CONVAR.get().is_some_and(|c| c.get_value_bool()) {
++        let self_ptr = std::ptr::from_ref(player);
++        let allies: Vec<_> = (1..=32).filter_map(|index| {
++            let ptr = unsafe { (helper.sv_funcs.get_player_by_index)(index) };
++            if std::ptr::addr_eq(ptr, self_ptr) { return None; }
++            let ally = unsafe { ptr.as_ref()? };
++            (ally.m_iTeamNum == team && ally.m_lifeState == 0 && ally.m_iHealth > 0)
++                .then_some([ally.m_vecAbsOrigin.x, ally.m_vecAbsOrigin.y, ally.m_vecAbsOrigin.z])
++        }).collect();
++        let feet = player.m_vecAbsOrigin;
++        let (side, neighbors) = crate::bots::coordination::separation_side(local_data.edict as usize,
++            cmd.world_view_angles.y, [feet.x, feet.y, feet.z], &allies);
++        local_data.metrics.neighbors = neighbors;
++        if neighbors > 0 {
++            cmd.move_.y = (cmd.move_.y + side).clamp(-1., 1.);
++            local_data.metrics.spacing_commands = local_data.metrics.spacing_commands.saturating_add(1);
++        }
++    }
+     cmd.camera_angles = cmd.world_view_angles;
+ 
+     cmd
+ }
+ 
++unsafe fn find_team_target<'a>(
++    origin: Vector3, team: i32, player: &mut CPlayer, helper: &CUserCmdHelper,
++    local: &BotData, coordinator: &crate::bots::coordination::Coordinator,
++) -> Option<((Vector3, &'a mut CPlayer), bool)> {
++    use crate::bots::coordination::Candidate;
++    struct NativeTarget { candidate: Candidate, pos: Vector3, player: *mut CPlayer }
++    let mut v = Vector3::ZERO;
++    let view = unsafe { *(helper.sv_funcs.view_angles)(player, &mut v) };
++    let targets: Vec<_> = enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team))
++        .filter(|target| target.m_RefEHandle != -1)
++        .map(|target| {
++            let pos = unsafe { *target.get_origin(&mut v) };
++            NativeTarget { candidate: Candidate { id: target.m_RefEHandle, distance: distance(pos, origin) },
++                pos, player: std::ptr::from_mut(target) }
++        }).collect();
++    let candidates: Vec<_> = targets.iter().map(|t| t.candidate).collect();
++    let ranked = coordinator.rank(local.edict as usize, team, time(helper), &candidates);
++    // Prefer a shootable threat in team-aware order. A failed raycast never
++    // reserves a target or prevents checking the remaining visible enemies.
++    let visible = ranked.iter().copied().find(|index| {
++        let target = &targets[*index];
++        if target.candidate.distance > BOT_VISON_RANGE
++            || dot(normalize(target.pos - origin), view) <= 270_f32.to_radians().cos() { return false; }
++        let (fraction, hit) = view_rate(helper, origin, target.pos, target.player, false);
++        if fraction != 1. && !std::ptr::addr_eq(hit, target.player) { return false; }
++        let (fraction, hit) = view_rate(helper, origin, target.pos, target.player, true);
++        fraction == 1. || std::ptr::addr_eq(hit, target.player)
++    });
++    let selected = visible.or_else(|| ranked.first().copied())?;
++    let selected = &targets[selected];
++    Some(((selected.pos, unsafe { selected.player.as_mut()? }), visible.is_some()))
++}
++
+ fn find_closest_battery(pos: Vector3, helper: &CUserCmdHelper) -> Option<Vector3> {
+     let token = try_refresh_headhunter(helper);
+ 
+diff --git a/bp_ort/src/bots/cmds/battery_yoinker.rs b/bp_ort/src/bots/cmds/battery_yoinker.rs
+index ebaddf9..95ce5b5 100644
+--- a/bp_ort/src/bots/cmds/battery_yoinker.rs
++++ b/bp_ort/src/bots/cmds/battery_yoinker.rs
+@@ -70,7 +70,7 @@ pub(crate) fn battery_yoinker(
+ 
+     if let Some(rodeo_target) = maybe_rodeo_target {
+         if distance(origin, rodeo_target) > 100. {
+-            path_to_target(&mut cmd, local_data, origin, rodeo_target, false, helper);
++            path_to_target(&mut cmd, local_data, player.m_vecAbsOrigin, rodeo_target, false, helper);
+         } else if unsafe { (helper.sv_funcs.is_on_ground)(nudge_type::<&CBaseEntity>(player)) } != 0
+             && local_data.counter.div_euclid(10).is_multiple_of(4)
+         {
+diff --git a/bp_ort/src/bots/cmds/hardpoint.rs b/bp_ort/src/bots/cmds/hardpoint.rs
+index 347df6b..ae101eb 100644
+--- a/bp_ort/src/bots/cmds/hardpoint.rs
++++ b/bp_ort/src/bots/cmds/hardpoint.rs
+@@ -126,7 +126,7 @@ pub fn basic_cap_holding(
+     _ = path_to_target(
+         cmd,
+         local_data,
+-        origin,
++        player.m_vecAbsOrigin,
+         new_target_pos,
+         should_recaculate.unwrap_or_else(|| local_data.target_pos != new_target_pos)
+             || local_data.should_recalculate_path,
+diff --git a/bp_ort/src/bots/cmds/mod.rs b/bp_ort/src/bots/cmds/mod.rs
+index 208d8fe..8c7e312 100644
+--- a/bp_ort/src/bots/cmds/mod.rs
++++ b/bp_ort/src/bots/cmds/mod.rs
+@@ -75,6 +75,10 @@ pub(super) fn get_cmd(
+         }
+ 
+         _ if unsafe { (helper.sv_funcs.is_alive)(nudge_type::<&CBaseEntity>(player)) == 0 } => {
++            shared.coordination.clear(local_data.edict as usize);
++            local_data.metrics.target = None;
++            local_data.metrics.visible = false;
++            local_data.metrics.state = "dead";
+             if let Some(query) = local_data.nav_query.as_mut() {
+                 query.path_points.clear()
+             }
+@@ -216,7 +220,7 @@ pub(super) fn get_cmd(
+             if path_to_target(
+                 &mut cmd,
+                 local_data,
+-                origin,
++                player.m_vecAbsOrigin,
+                 target,
+                 local_data.last_target_index != last_index,
+                 &helper,
+@@ -274,7 +278,7 @@ pub(super) fn get_cmd(
+                 path_to_target(
+                     &mut cmd,
+                     local_data,
+-                    origin,
++                    player.m_vecAbsOrigin,
+                     titan_pos,
+                     local_data.should_recalculate_path,
+                     &helper,
+@@ -296,13 +300,12 @@ pub(super) fn get_cmd(
+         20 => slide_hopper::slide_hopper(&helper, player, local_data),
+         21 => {
+             let mut cmd = CUserCmd::new_empty(&helper);
+-            let origin = unsafe { *player.get_origin(&mut v) };
+ 
+             local_data.approach_range = Some(1.);
+             _ = path_to_target(
+                 &mut cmd,
+                 local_data,
+-                origin,
++                player.m_vecAbsOrigin,
+                 local_data.target_pos,
+                 local_data.should_recalculate_path,
+                 &helper,
+diff --git a/bp_ort/src/bots/cmds/slide_hopper.rs b/bp_ort/src/bots/cmds/slide_hopper.rs
+index 4a03047..31185c0 100644
+--- a/bp_ort/src/bots/cmds/slide_hopper.rs
++++ b/bp_ort/src/bots/cmds/slide_hopper.rs
+@@ -32,10 +32,10 @@ pub(crate) fn slide_hopper(
+             local_data.has_started_to_slide_hop = false;
+             local_data.should_recalculate_path = true;
+         } else if !local_data.has_started_to_slide_hop && length <= 50. && touching_ground {
+-            path_to_target(&mut cmd, local_data, origin, target, false, helper);
++            path_to_target(&mut cmd, local_data, player.m_vecAbsOrigin, target, false, helper);
+             cmd.buttons |= Action::Jump as u32 | Action::Duck as u32;
+         } else if !touching_ground {
+-            path_to_target(&mut cmd, local_data, origin, target, false, helper);
++            path_to_target(&mut cmd, local_data, player.m_vecAbsOrigin, target, false, helper);
+             cmd.buttons |= Action::Duck as u32;
+         }
+     } else {
+diff --git a/bp_ort/src/bots/cmds_exec.rs b/bp_ort/src/bots/cmds_exec.rs
+index d9e46d2..22b8116 100644
+--- a/bp_ort/src/bots/cmds_exec.rs
++++ b/bp_ort/src/bots/cmds_exec.rs
+@@ -7,7 +7,7 @@ use std::cell::UnsafeCell;
+ 
+ use super::{BOT_DATA_MAP, SHARED_BOT_DATA, SIMULATE_TYPE_CONVAR, cmds_helper::CUserCmdHelper};
+ use crate::{
+-    bindings::{CUserCmd, ENGINE_FUNCTIONS, SERVER_FUNCTIONS},
++    bindings::{Action, CUserCmd, ENGINE_FUNCTIONS, SERVER_FUNCTIONS},
+     utils::iterate_c_array_sized,
+ };
+ 
+@@ -19,6 +19,11 @@ pub fn replace_cmd() -> Option<&'static CUserCmd> {
+ }
+ 
+ pub fn run_bots_cmds(paused: bool) {
++    // Physics callbacks can run during map teardown/loading. Per-bot queries
++    // must not touch the old navmesh after its server VM has been destroyed.
++    if !crate::PLUGIN.wait().bots.server_vm_active.load(std::sync::atomic::Ordering::Acquire) {
++        return;
++    }
+     let sim_type = SIMULATE_TYPE_CONVAR.wait().get_value_i32();
+     let server_functions = SERVER_FUNCTIONS.wait();
+     let engine_functions = ENGINE_FUNCTIONS.wait();
+@@ -29,6 +34,28 @@ pub fn run_bots_cmds(paused: bool) {
+     let token = unsafe { EngineToken::new_unchecked() };
+     let mut bot_local_data = BOT_DATA_MAP.get(token).borrow_mut();
+     let mut bot_shared_data = SHARED_BOT_DATA.get(token).borrow_mut();
++    let interval = super::TELEMETRY_CONVAR.get().map_or(0., |c| c.get_value_f32());
++    let emit_trace = interval.is_finite() && interval > 0. && globals.curTime >= bot_shared_data.telemetry_next_at;
++    let epoch = super::telemetry::epoch();
++    let map = unsafe { engine_functions.server.as_ref() }
++        .and_then(|server| crate::utils::get_c_char_array(&server.m_szMapName)).unwrap_or("unknown");
++    if emit_trace {
++        bot_shared_data.telemetry_next_at = globals.curTime + interval.clamp(0.5, 10.);
++        let coordinated = super::COORDINATION_CONVAR.get().is_some_and(|c| c.get_value_bool());
++        log::info!("BOT_FRAME epoch={epoch} map={map} t={:.2} tick={} coordination={}",
++            globals.curTime, globals.tickCount, coordinated as u8);
++        for (slot, client) in unsafe { iterate_c_array_sized::<_, 32>(engine_functions.client_array.into()) }
++            .enumerate().filter(|(_, c)| c.m_nSignonState == SignonState::FULL) {
++            if let Some(player) = unsafe { player_by_index(slot as i32 + 1).as_ref() } {
++                let pos = player.m_vecAbsOrigin;
++                let alive = unsafe { (server_functions.is_alive)(std::ptr::from_ref(player).cast()) } != 0;
++                let titan = unsafe { (server_functions.is_titan)(std::ptr::from_ref(player).cast()) };
++                log::info!("BOT_PLAYER epoch={epoch} map={map} t={:.2} slot={slot} id={} team={} bot={} alive={} titan={} hp={} x={:.1} y={:.1} z={:.1}",
++                    globals.curTime, player.m_RefEHandle, player.m_iTeamNum, client.m_bFakePlayer as u8,
++                    alive as u8, titan as u8, player.m_iHealth, pos.x, pos.y, pos.z);
++            }
++        }
++    }
+ 
+     crate::PLUGIN
+         .wait()
+@@ -86,6 +113,37 @@ pub fn run_bots_cmds(paused: bool) {
+         };
+ 
+         cmd.frame_time = globals.frameTime;
++        local_data.metrics.command(cmd.world_view_angles.y, cmd.buttons & Action::Jump as u32 != 0);
++        if emit_trace {
++            let metrics = &local_data.metrics;
++            let velocity = player.m_vecAbsVelocity;
++            let speed = (velocity.x * velocity.x + velocity.y * velocity.y).sqrt();
++            let support = metrics.target.map_or(0, |target| bot_shared_data.coordination.supporters(
++                edict, player.m_iTeamNum, target, globals.curTime));
++            log::info!("BOT_TRACE epoch={epoch} map={map} t={:.2} slot={edict} target={} visible={} state={} tx={:.1} ty={:.1} tz={:.1} speed={speed:.1} yaw={:.1} switches={} recoveries={} path_failures={} path_requests={} jumps={} commands={} yaw_travel={:.1} supporters={support} nodes={} neighbors={} spacing={}",
++                globals.curTime, metrics.target.unwrap_or(-1), metrics.visible as u8, metrics.state,
++                metrics.target_pos[0], metrics.target_pos[1], metrics.target_pos[2], cmd.world_view_angles.y,
++                metrics.switches, metrics.recoveries, metrics.path_failures, metrics.path_requests,
++                metrics.jump_commands, metrics.commands, metrics.yaw_travel,
++                local_data.nav_query.as_ref().map_or(0, |n| n.path_points.len()), metrics.neighbors, metrics.spacing_commands);
++        }
++        if super::MOTION_DEBUG_CONVAR.get().is_some_and(|c| c.get_value_bool()) {
++            let origin = player.m_vecAbsOrigin;
++            if let Some((last, previous)) = local_data.motion_sample {
++                if globals.curTime - last >= 10. {
++                    let delta = origin - previous;
++                    let travel = (delta.x * delta.x + delta.y * delta.y).sqrt();
++                    log::info!("BOT_MOTION slot={edict} mode={} hp={} pos={origin:?} horizontal_delta={travel:.1} velocity={:?} move={:?} buttons={:#x} next={:?} route_nodes={} hold={} aim_error_scale={:.2}",
++                        local_data.sim_type.unwrap_or(sim_type), player.m_iHealth,
++                        player.m_vecAbsVelocity, cmd.move_, cmd.buttons, local_data.next_target_pos,
++                        local_data.nav_query.as_ref().map_or(0, |n| n.path_points.len()), local_data.jump_hold,
++                        super::behavior_tuning::aim_error_scale(super::AIM_ERROR_SCALE_CONVAR.get().map_or(1., |c| c.get_value_f32())));
++                    local_data.motion_sample = Some((globals.curTime, origin));
++                }
++            } else {
++                local_data.motion_sample = Some((globals.curTime, origin));
++            }
++        }
+         player.pl.fixangle = 0;
+         unsafe {
+             (server_functions.proccess_user_cmds)(player, &cmd, 1, 1, 0, false);
+diff --git a/bp_ort/src/bots/cmds_utils.rs b/bp_ort/src/bots/cmds_utils.rs
+index a28ce56..3896dd5 100644
+--- a/bp_ort/src/bots/cmds_utils.rs
++++ b/bp_ort/src/bots/cmds_utils.rs
+@@ -38,6 +38,28 @@ pub fn path_to_target(
+     should_recalcute_path: bool,
+     helper: &CUserCmdHelper,
+ ) -> bool {
++    if distance3(target_pos, origin)
++        <= BOT_PATH_NODE_RANGE + local_data.approach_range.unwrap_or(20.) {
++        local_data.movement_anchor = None;
++        return false;
++    }
++    if time(helper) < local_data.recovery_until {
++        face_toward(cmd, origin, target_pos, helper);
++        try_avoid_obstacle(cmd, local_data, helper);
++        return true;
++    }
++    if super::progress_watchdog::has_stalled(time(helper), &mut local_data.movement_anchor,
++        [origin.x, origin.y]) {
++        if let Some(nav) = local_data.nav_query.as_mut() {
++            nav.path_points.clear();
++            nav.end_point = None;
++        }
++        local_data.recovery_until = time(helper) + 1.2;
++        note_recovery(local_data, origin, helper, "no_progress");
++        face_toward(cmd, origin, target_pos, helper);
++        try_avoid_obstacle(cmd, local_data, helper);
++        return true;
++    }
+     let dt_funcs = RECAST_DETOUR.wait();
+     let debug = ENGINE_INTERFACES.wait().debug_overlay;
+     let Some(nav) = local_data.nav_query.as_mut() else {
+@@ -45,12 +67,6 @@ pub fn path_to_target(
+         return false;
+     };
+ 
+-    if distance3(target_pos, origin)
+-        <= BOT_PATH_NODE_RANGE + local_data.approach_range.unwrap_or(20.)
+-    {
+-        return false;
+-    }
+-
+     _ = nav
+         .path_points
+         .last()
+@@ -77,13 +93,17 @@ pub fn path_to_target(
+ 
+         // this might be the reason of the sudden aim shift or not really idk
+         if local_data.last_bad_path + 1. >= helper.globals.curTime {
++            face_toward(cmd, origin, target_pos, helper);
+             try_avoid_obstacle(cmd, local_data, helper);
+ 
+             return false;
+         }
+ 
++        local_data.metrics.path_requests = local_data.metrics.path_requests.saturating_add(1);
+         if let Err(err) = nav.new_path(origin, target_pos, dt_funcs) {
++            local_data.metrics.path_failures = local_data.metrics.path_failures.saturating_add(1);
+             log::warn!("navigation pathing failed stuck somewhere probably! {err}");
++            face_toward(cmd, origin, target_pos, helper);
+             try_avoid_obstacle(cmd, local_data, helper);
+ 
+             local_data.last_bad_path = time(helper);
+@@ -99,39 +119,37 @@ pub fn path_to_target(
+         || nav.path_points.is_empty()
+     {
+         try_avoid_obstacle(cmd, local_data, helper);
+-        cmd.world_view_angles.y = look_at(origin, target_pos).y;
++        face_toward(cmd, origin, target_pos, helper);
+ 
+         return true;
+     }
+ 
+-    if distance(local_data.next_target_pos, origin) <= BOT_PATH_NODE_RANGE {
++    while distance(local_data.next_target_pos, origin) <= BOT_PATH_NODE_RANGE {
++        let Some(next) = nav.next_point() else { break; };
+         local_data.last_time_node_reached = helper.globals.curTime;
+-        local_data.next_target_pos = nav
+-            .next_point()
+-            .expect("should always have enough points here");
++        local_data.next_target_pos = next;
+     }
+ 
+-    // origin is from the eyes?
+-    if local_data.next_target_pos.z - origin.z >= -40.
+-        && (is_timedout(local_data.jump_delay, helper, 0.5)
+-            .then(|| local_data.jump_hold = 4)
+-            .map(|_| true)
+-            .unwrap_or_default()
+-            || local_data.jump_hold != 0)
+-    {
+-        // log::info!("jumpiness: {}", local_data.next_target_pos.z - origin.z);
++    // Flat routes do not need a constant jump attempt. Finish a short press,
++    // then release it before trying again at a step or during recovery.
++    if super::jump_pulse::jump_pulse(time(helper), &mut local_data.jump_delay,
++        &mut local_data.jump_hold, local_data.next_target_pos.z - origin.z > 18.) {
+         cmd.buttons |= Action::Jump as u32;
+-        local_data.jump_delay = time(helper);
+         cmd.move_.z = 1.0; // hmmm
+-
+-        local_data.jump_hold = local_data.jump_hold.saturating_sub(1);
+     }
+ 
+-    cmd.world_view_angles.y = look_at(origin, local_data.next_target_pos).y;
++    face_toward(cmd, origin, local_data.next_target_pos, helper);
+     cmd.move_.x = 1.0;
+     cmd.buttons |= Action::Forward as u32 | Action::Speed as u32;
+ 
+     if is_timedout(local_data.last_time_node_reached, helper, 5.) {
++        // Repeating avoidance against the same stale route never escapes it.
++        if let Some(nav) = local_data.nav_query.as_mut() {
++            nav.path_points.clear();
++            nav.end_point = None;
++        }
++        local_data.recovery_until = time(helper) + 1.2;
++        note_recovery(local_data, origin, helper, "waypoint_timeout");
+         try_avoid_obstacle(cmd, local_data, helper);
+     }
+ 
+@@ -142,6 +160,15 @@ pub fn is_timedout(last_time: f32, helper: &CUserCmdHelper<'_>, time_elasped: f3
+     last_time + time_elasped <= time(helper)
+ }
+ 
++fn face_toward(cmd: &mut CUserCmd, origin: Vector3, target: Vector3, helper: &CUserCmdHelper) {
++    // A duplicate start point has no direction; atan2(0, 0) would snap east.
++    if distance(origin, target) > 1. {
++        cmd.world_view_angles.y = super::behavior_tuning::turn_yaw(
++            helper.angles.y, look_at(origin, target).y,
++            540. * helper.globals.frameTime.clamp(0., 0.05));
++    }
++}
++
+ // same here
+ #[allow(clippy::mut_from_ref)]
+ pub unsafe fn find_player_in_view<'a>(
+@@ -366,7 +393,7 @@ pub fn view_rate(
+ }
+ 
+ pub fn try_avoid_obstacle(cmd: &mut CUserCmd, local_data: &mut BotData, helper: &CUserCmdHelper) {
+-    local_data.jump_delay_obstacle = time(helper);
++    local_data.metrics.state = "recover";
+     cmd.move_ = Vector3::new(
+         1.,
+         if helper.globals.frameCount / 100 % 2 == 0 {
+@@ -377,14 +404,20 @@ pub fn try_avoid_obstacle(cmd: &mut CUserCmd, local_data: &mut BotData, helper:
+         0.,
+     );
+     cmd.buttons |= Action::Forward as u32
+-        | Action::Walk as u32
+-        | (is_timedout(local_data.jump_delay_obstacle, helper, 0.5)
+-            .then(|| local_data.jump_hold = 4))
+-        .or_else(|| (local_data.jump_hold != 0).then_some(()))
+-        .map(|_| Action::Jump as u32)
+-        .unwrap_or_default();
+-
+-    local_data.jump_hold = local_data.jump_hold.saturating_sub(0);
++        | Action::Speed as u32;
++    let retry_jump = is_timedout(local_data.jump_delay, helper, 1.2);
++    if super::jump_pulse::jump_pulse(time(helper), &mut local_data.jump_delay,
++        &mut local_data.jump_hold, retry_jump) {
++        cmd.buttons |= Action::Jump as u32;
++    }
++}
++
++fn note_recovery(local: &mut BotData, origin: Vector3, helper: &CUserCmdHelper, reason: &str) {
++    local.metrics.recoveries = local.metrics.recoveries.saturating_add(1);
++    if super::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
++        log::info!("BOT_RECOVERY epoch={} t={:.2} slot={} reason={reason} x={:.1} y={:.1} z={:.1}",
++            super::telemetry::epoch(), time(helper), local.edict, origin.x, origin.y, origin.z);
++    }
+ }
+ 
+ pub fn time(helper: &CUserCmdHelper<'_>) -> f32 {
+diff --git a/bp_ort/src/bots/detour.rs b/bp_ort/src/bots/detour.rs
+index 09f221e..9687340 100644
+--- a/bp_ort/src/bots/detour.rs
++++ b/bp_ort/src/bots/detour.rs
+@@ -31,6 +31,15 @@ fn physics_run_think_functions_hook(paused: bool) {
+     crate::holoplus::run_holo_frame();
+ 
+     unsafe { Physics_RunThinkFunctions.call(paused) }
++
++    // Fake-client joins execute server Squirrel callbacks. Run them on the
++    // server frame after simulation has released its bot-state borrows, not
++    // from the engine/render frame that may overlap a worker server thread.
++    // The native parameter is a simulation flag, despite the historical
++    // `paused` name above. Server readiness/cooldown checks gate joins.
++    crate::PLUGIN.wait().bots.server_frame(unsafe {
++        rrplug::prelude::EngineToken::new_unchecked()
++    });
+ }
+ 
+ fn create_null_cmd_hook(cmd: *mut CUserCmd) -> *mut CUserCmd {
+diff --git a/bp_ort/src/bots/mod.rs b/bp_ort/src/bots/mod.rs
+index 7b75f32..4ce4724 100644
+--- a/bp_ort/src/bots/mod.rs
++++ b/bp_ort/src/bots/mod.rs
+@@ -26,7 +26,7 @@ use std::{
+     cell::RefCell,
+     collections::HashMap,
+     ops::Not,
+-    sync::atomic::{AtomicI32, AtomicU32, Ordering},
++    sync::atomic::{AtomicBool, AtomicI32, AtomicU32, Ordering},
+ };
+ use windows_sys::Win32::System::LibraryLoader::GetModuleHandleA;
+ 
+@@ -51,6 +51,11 @@ pub mod cmds_utils;
+ mod convars;
+ mod debug_commands;
+ mod detour;
++mod jump_pulse;
++mod behavior_tuning;
++mod progress_watchdog;
++mod coordination;
++mod telemetry;
+ mod netvars;
+ mod persistence;
+ mod set_on_join;
+@@ -63,8 +68,14 @@ static BASE_AIM_PENALTY: OnceCell<ConVarStruct> = OnceCell::new();
+ static CLAN_TAG_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+ pub static SIMULATE_TYPE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+ pub static UWUFY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
++pub(super) static MOTION_DEBUG_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
++pub(super) static AIM_ERROR_SCALE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
++pub(super) static COORDINATION_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
++pub(super) static TELEMETRY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+ 
+ pub static AIM_PENALTY_VALUE: AtomicI32 = AtomicI32::new(100);
++static ENGINE_FRAME_THREAD: AtomicU32 = AtomicU32::new(0);
++static SERVER_FRAME_THREAD: AtomicU32 = AtomicU32::new(0);
+ 
+ pub(super) static BOT_DATA_MAP: EngineGlobal<RefCell<Lazy<[BotData; 64]>>> =
+     EngineGlobal::new(RefCell::new(Lazy::new(|| {
+@@ -83,8 +94,11 @@ pub(super) struct BotData {
+     next_target_pos: Vector3,
+     last_time_node_reached: f32,
+     jump_delay: f32,
+-    jump_delay_obstacle: f32,
+     jump_hold: u32,
++    motion_sample: Option<(f32, Vector3)>,
++    recovery_until: f32,
++    movement_anchor: Option<(f32, [f32; 2])>,
++    metrics: telemetry::Metrics,
+     last_bad_path: f32,
+     last_target_index: usize,
+     target_pos: Vector3,
+@@ -103,6 +117,8 @@ pub(super) struct BotData {
+ pub(super) struct BotShared {
+     reserved_targets: [(f32, u32); 64],
+     claimed_hardpoints: HashMap<Vector3, usize>,
++    coordination: coordination::Coordinator,
++    telemetry_next_at: f32,
+ }
+ 
+ impl Default for BotShared {
+@@ -110,12 +126,15 @@ impl Default for BotShared {
+         Self {
+             reserved_targets: std::array::from_fn(|_| Default::default()),
+             claimed_hardpoints: HashMap::new(),
++            coordination: coordination::Coordinator::default(),
++            telemetry_next_at: 0.,
+         }
+     }
+ }
+ 
+ #[derive(Debug)]
+ pub struct Bots {
++    pub server_vm_active: AtomicBool,
+     pub clang_tag: Mutex<String>,
+     pub generic_bot_names: Mutex<Vec<String>>,
+     pub next_bot_names: Mutex<Vec<String>>,
+@@ -208,6 +227,7 @@ impl Plugin for Bots {
+         }
+ 
+         Self {
++            server_vm_active: AtomicBool::new(false),
+             clang_tag: Mutex::new("BOT".into()),
+             next_bot_names: Mutex::new(bot_names.clone()),
+             generic_bot_names: Mutex::new(bot_names),
+@@ -227,6 +247,11 @@ impl Plugin for Bots {
+         }
+ 
+         cmds::reset_on_new_game();
++        telemetry::begin_map();
++
++        self.server_vm_active.store(false, Ordering::Release);
++        self.manager_data.lock().reset_for_map();
++        reset_bot_state(token);
+ 
+         SHARED_BOT_DATA.get(token).replace(BotShared::default());
+ 
+@@ -269,23 +294,29 @@ impl Plugin for Bots {
+ 
+         self.max_players.store(max_players, Ordering::Release);
+         self.max_teams.store(max_teams, Ordering::Release);
++        self.server_vm_active.store(true, Ordering::Release);
+     }
+ 
+-    fn on_sqvm_destroyed(&self, handle: &CSquirrelVMHandle, _token: EngineToken) {
++    fn on_sqvm_destroyed(&self, handle: &CSquirrelVMHandle, token: EngineToken) {
+         if let ScriptContext::SERVER = handle.get_context() {
++            // Navigation queries own native allocations and refer to this
++            // map's navmesh. Destroy them while the old map is still loaded,
++            // before a new fake client can observe stale per-slot state.
++            self.server_vm_active.store(false, Ordering::Release);
++            self.manager_data.lock().reset_for_map();
++            reset_bot_state(token);
+             let engine_functions = ENGINE_FUNCTIONS.wait();
+             unsafe {
+-                iterate_c_array_sized::<_, 32>(engine_functions.client_array.into())
++                let clients: Vec<*mut CClient> =
++                    iterate_c_array_sized::<_, 32>(engine_functions.client_array.into())
+                     .filter(|client| {
+                         client.m_nSignonState == SignonState::FULL && client.m_bFakePlayer
+                     })
+-                    .for_each(|client| {
+-                        (engine_functions.cclient_disconnect)(
+-                            (client as *const CClient).cast_mut(),
+-                            1,
+-                            c"no reason".as_ptr().cast(),
+-                        )
+-                    });
++                    .map(|client| (client as *const CClient).cast_mut())
++                    .collect();
++                for client in clients {
++                    (engine_functions.cclient_disconnect)(client, 1, c"map shutdown".as_ptr());
++                }
+             }
+         }
+     }
+@@ -328,6 +359,18 @@ impl Plugin for Bots {
+         )
+         .expect("failed to register the convar");
+         _ = BASE_AIM_PENALTY.set(convar);
++        _ = AIM_ERROR_SCALE_CONVAR.set(ConVarStruct::try_new(
++            &ConVarRegister::new("bot_aim_error_scale", "1", FCVAR_GAMEDLL as i32,
++                "pilot-target aiming error multiplier: smaller is harder; range 0.25 to 2"), token,
++        ).expect("failed to register bot_aim_error_scale"));
++        _ = COORDINATION_CONVAR.set(ConVarStruct::try_new(
++            &ConVarRegister::new("bot_team_coordination", "0", FCVAR_GAMEDLL as i32,
++                "team-aware pursuit allocation for legacy pilots; 0 restores legacy targeting"), token,
++        ).expect("failed to register bot_team_coordination"));
++        _ = TELEMETRY_CONVAR.set(ConVarStruct::try_new(
++            &ConVarRegister::new("bot_telemetry_interval", "0", FCVAR_GAMEDLL as i32,
++                "structured position/decision snapshots in seconds; 0 disables; minimum 0.5"), token,
++        ).expect("failed to register bot_telemetry_interval"));
+ 
+         let simulate_convar = ConVarStruct::try_new(&ConVarRegister::new(
+                 "bot_cmds_type",
+@@ -339,6 +382,11 @@ impl Plugin for Bots {
+ 
+         _ = SIMULATE_TYPE_CONVAR.set(simulate_convar);
+ 
++        _ = MOTION_DEBUG_CONVAR.set(ConVarStruct::try_new(
++            &ConVarRegister::new("bot_motion_debug", "0", FCVAR_GAMEDLL as i32,
++                "log bot movement and navigation every ten seconds"), token,
++        ).expect("failed to register bot_motion_debug"));
++
+         _ = UWUFY_CONVAR.set(
+             ConVarStruct::try_new(
+                 &ConVarRegister::new(
+@@ -366,8 +414,22 @@ impl Plugin for Bots {
+         simple_bot_manager::register_manager_vars(engine, token);
+     }
+ 
+-    fn runframe(&self, engine_token: EngineToken) {
+-        if self.manager_data.lock().enabled
++    fn runframe(&self, _engine_token: EngineToken) {
++        // HostState::FrameUpdate runs on the engine thread. A threaded server
++        // can still be executing scripts; never create fake clients here.
++        let thread = unsafe { windows_sys::Win32::System::Threading::GetCurrentThreadId() };
++        _ = ENGINE_FRAME_THREAD.compare_exchange(0, thread, Ordering::Relaxed, Ordering::Relaxed);
++    }
++}
++
++impl Bots {
++    pub(super) fn server_frame(&self, engine_token: EngineToken) {
++        let thread = unsafe { windows_sys::Win32::System::Threading::GetCurrentThreadId() };
++        if SERVER_FRAME_THREAD.compare_exchange(0, thread, Ordering::Relaxed, Ordering::Relaxed).is_ok() {
++            log::info!("bot scheduling: server thread {thread}, engine frame thread {}", ENGINE_FRAME_THREAD.load(Ordering::Relaxed));
++        }
++        if self.server_vm_active.load(Ordering::Acquire)
++            && self.manager_data.lock().enabled
+             && SQVM_SERVER
+                 .get(engine_token)
+                 .try_borrow()
+@@ -389,6 +451,16 @@ impl Plugin for Bots {
+     }
+ }
+ 
++fn reset_bot_state(token: EngineToken) {
++    simple_bot_manager::reset_round_ready(token);
++    let mut states = BOT_DATA_MAP.get(token).borrow_mut();
++    let queries = states.iter().filter(|state| state.nav_query.is_some()).count();
++    for state in states.iter_mut() {
++        *state = BotData::default();
++    }
++    log::info!("map lifecycle: reset bot slots and released {queries} navigation queries");
++}
++
+ fn spawn_fake_player(
+     name: String,
+     team: i32,
+diff --git a/bp_ort/src/bots/set_on_join.rs b/bp_ort/src/bots/set_on_join.rs
+index be1ba9b..1017dc6 100644
+--- a/bp_ort/src/bots/set_on_join.rs
++++ b/bp_ort/src/bots/set_on_join.rs
+@@ -13,6 +13,11 @@ const FUNNY_CLAN_TAGS: &[&str] = &[
+     ">~<", "owo", "uwu", ":o", ":D", "ADV", "CLAN", "HI!", "PETAR", "<3", "BOB",
+ ];
+ 
++// This standalone installation does not provide the optional name callbacks.
++// Skip them to avoid reporting missing functions on every player connection.
++// The native navigation buffer overflow is fixed separately in navigation.rs.
++const OPTIONAL_NAME_CALLBACKS_ENABLED: bool = false;
++
+ use super::UWUFY_CONVAR;
+ 
+ pub fn set_stuff_on_join(client: &mut CClient) {
+@@ -79,7 +84,7 @@ pub fn set_stuff_on_join(client: &mut CClient) {
+         set_c_char_array(&mut client.m_szServerName, &new_name);
+     }
+ 
+-    if let Some(new_name) = sqvm.as_ref().and_then(|sqvm| {
++    if OPTIONAL_NAME_CALLBACKS_ENABLED && let Some(new_name) = sqvm.as_ref().and_then(|sqvm| {
+         call_sq_function::<String, _>(
+             *sqvm,
+             SQFUNCTIONS.server.wait(),
+@@ -93,7 +98,7 @@ pub fn set_stuff_on_join(client: &mut CClient) {
+         set_c_char_array(&mut client.m_szServerName, new_name.as_str());
+     }
+ 
+-    if let Some(new_tag) = sqvm.as_ref().and_then(|sqvm| {
++    if OPTIONAL_NAME_CALLBACKS_ENABLED && let Some(new_tag) = sqvm.as_ref().and_then(|sqvm| {
+         call_sq_function::<String, _>(
+             *sqvm,
+             SQFUNCTIONS.server.wait(),
+diff --git a/bp_ort/src/bots/simple_bot_manager.rs b/bp_ort/src/bots/simple_bot_manager.rs
+index 265a4c7..5c836b3 100644
+--- a/bp_ort/src/bots/simple_bot_manager.rs
++++ b/bp_ort/src/bots/simple_bot_manager.rs
+@@ -23,6 +23,7 @@ static MAX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+ static MIN_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+ static TARGET_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+ static ENABLED_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
++static ROUND_READY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+ 
+ #[derive(Debug, Clone)]
+ pub struct ManagerData {
+@@ -33,6 +34,7 @@ pub struct ManagerData {
+     active: bool,
+     bots_to_spawn: u32,
+     bots_to_remove: u32,
++    last_spawn_at: Option<f32>,
+ }
+ 
+ impl Default for ManagerData {
+@@ -45,10 +47,20 @@ impl Default for ManagerData {
+             active: false,
+             bots_to_spawn: 0,
+             bots_to_remove: 0,
++            last_spawn_at: None,
+         }
+     }
+ }
+ 
++impl ManagerData {
++    pub fn reset_for_map(&mut self) {
++        self.active = false;
++        self.bots_to_spawn = 0;
++        self.bots_to_remove = 0;
++        self.last_spawn_at = None;
++    }
++}
++
+ pub fn register_manager_sq_functions() {
+     register_sq_functions(sq_bot_manager_max);
+     register_sq_functions(sq_bot_manager_target);
+@@ -56,6 +68,17 @@ pub fn register_manager_sq_functions() {
+ }
+ 
+ pub fn register_manager_vars(_: &EngineData, token: EngineToken) {
++    _ = ROUND_READY_CONVAR.set(
++        ConVarStruct::try_new(
++            &ConVarRegister::mandatory(
++                "bot_manager_round_ready",
++                "0",
++                FCVAR_GAMEDLL as i32,
++                "set by the bot lifecycle script after the match intro completes",
++            ),
++            token,
++        ).expect("couldn't register bot_manager_round_ready"),
++    );
+     _ = MAX_CONVAR.set(
+         ConVarStruct::try_new(
+             &ConVarRegister {
+@@ -121,6 +144,12 @@ pub fn register_manager_vars(_: &EngineData, token: EngineToken) {
+     );
+ }
+ 
++pub fn reset_round_ready(token: EngineToken) {
++    if let Some(ready) = ROUND_READY_CONVAR.get() {
++        ready.set_value_i32(0, token);
++    }
++}
++
+ fn kick_player(engine_funcs: &EngineFunctions) {
+     // remove extra bots
+     let engine_server = ENGINE_INTERFACES.wait().engine_server;
+@@ -165,6 +194,13 @@ pub fn check_player_amount(plugin: &super::Bots, token: EngineToken) -> Result<(
+         return Ok(());
+     }
+ 
++    // The script thread publishes readiness from its normal game-state event.
++    // Do not enter the VM from the engine frame while scripts initialize players.
++    if !ROUND_READY_CONVAR.get().is_some_and(ConVarStruct::get_value_bool) {
++        manager_data.active = false;
++        return Ok(());
++    }
++
+     unsafe {
+         let curr_level = cstring_to_string((*engine_funcs.server).m_szMapName.as_ptr());
+         const LOBBY: &str = "mp_lobby";
+@@ -218,15 +254,22 @@ pub fn check_player_amount(plugin: &super::Bots, token: EngineToken) -> Result<(
+ 
+     match (manager_data.bots_to_spawn, manager_data.bots_to_remove) {
+         (1.., _) => {
+-            // add bots
+-            spawn_fake_player(
++            // Signon FULL can precede the end of all script join callbacks.
++            // Leave a short gap between clients so their initialization settles.
++            let now = unsafe { engine_funcs.globals.as_ref() }.ok_or("missing globals")?.curTime;
++            if manager_data.last_spawn_at.is_some_and(|last| now >= last && now - last < 0.5) {
++                return Ok(());
++            }
++            if spawn_fake_player(
+                 get_bot_name(),
+                 choose_team(),
+                 None,
+                 server_funcs,
+                 engine_funcs,
+                 token,
+-            );
++            ).is_some() {
++                manager_data.last_spawn_at = Some(now);
++            }
+         }
+         (0, _r @ 1..) => {
+             kick_player(engine_funcs);
+diff --git a/bp_ort/src/lib.rs b/bp_ort/src/lib.rs
+index 3aa15c8..4ee24d0 100644
+--- a/bp_ort/src/lib.rs
++++ b/bp_ort/src/lib.rs
+@@ -65,6 +65,7 @@ impl Plugin for HooksPlugin {
+             panic!("bad things will happen if this is reloaded")
+         }
+         unsafe { std::env::set_var("RUST_BACKTRACE", "1") };
++        log::info!("local build: team-observer-v12 (team-local pursuit claims and structured telemetry)");
+ 
+         Self {
+             bots: Bots::new(reloaded),
+diff --git a/bp_ort/src/navmesh/mod.rs b/bp_ort/src/navmesh/mod.rs
+index fa4ef8a..cf52b80 100644
+--- a/bp_ort/src/navmesh/mod.rs
++++ b/bp_ort/src/navmesh/mod.rs
+@@ -8,6 +8,7 @@ use rrplug::{
+ 
+ pub mod bindings;
+ pub mod navigation;
++mod path_buffers;
+ pub mod sqapi;
+ 
+ use bindings::*;
+@@ -114,7 +115,7 @@ offset_functions! {
+         ZeroOutdtNavMesh = unsafe extern "C" fn(*mut dtNavMeshQuery) where offset(0x3e9560);
+         navmesh_maybe_init_filter = unsafe extern "C" fn(*mut dtQueryFilter) -> *mut dtQueryFilter where offset(0x3e95a0);
+         dtNavMeshQuery__closestPointOnPolyBoundary__variant = unsafe extern "C" fn(this: *const dtNavMeshQuery, _ref: dtPolyRef, pos: *const Vector3, closest: *mut Vector3, filter: *const dtQueryFilter) where offset(0x3ea750);
+-        dtNavMeshQuery__findPath = unsafe extern "C" fn(this: *mut dtNavMeshQuery,startRef: dtPolyRef,endRef: dtPolyRef, startPos: *const Vector3, endPos: *const Vector3, filter: *const dtQueryFilter, path: *mut dtPolyRef,unk: *const undefined, pathCount: *mut u32,maxPath: i32) -> dtStatus where offset(0x3ec310);
++        dtNavMeshQuery__findPath = unsafe extern "C" fn(this: *mut dtNavMeshQuery,startRef: dtPolyRef,endRef: dtPolyRef, startPos: *const Vector3, endPos: *const Vector3, filter: *const dtQueryFilter, path: *mut dtPolyRef,jumpTypes: *mut u8, pathCount: *mut u32,maxPath: i32) -> dtStatus where offset(0x3ec310);
+         dtNavMeshQuery__findStraightPath = FindStraightPath where offset(0x3ee980);
+         dtNavMeshQuery__SmthPathPortal = unsafe extern "C" fn() where offset(0x3ef820);
+         dtNavMeshQuery__getPolyWallSegments = unsafe extern "C" fn() where offset(0x3efe30);
+diff --git a/bp_ort/src/navmesh/navigation.rs b/bp_ort/src/navmesh/navigation.rs
+index a50ab33..74f5591 100644
+--- a/bp_ort/src/navmesh/navigation.rs
++++ b/bp_ort/src/navmesh/navigation.rs
+@@ -7,6 +7,7 @@ use thiserror::Error;
+ use super::{
+     Hull, JumpTypes, RECAST_DETOUR, RecastDetour,
+     bindings::{dtNavMeshQuery, dtPolyRef, dtQueryFilter},
++    path_buffers::fill_path_buffers,
+ };
+ 
+ const HUMAN_EXTENTS: Vector3 = Vector3::new(100.0, 100.0, 136.0);
+@@ -21,6 +22,9 @@ pub enum NavigationError {
+ 
+     #[error("path not found between {0:?} and {1:?}")]
+     PathNotFound(Vector3, Vector3),
++
++    #[error("native pathfinder returned an invalid output count")]
++    InvalidOutputCount,
+ }
+ 
+ #[derive(Debug)]
+@@ -98,6 +102,7 @@ impl Navigation {
+         let mut end = Vector3::ZERO;
+ 
+         self.end_point = None;
++        self.path_points.clear();
+ 
+         let status = unsafe {
+             if (dt_funcs.dtNavMeshQuery__findNearestPoly)(
+@@ -124,36 +129,33 @@ impl Navigation {
+ 
+         if !status || ref_end == 0 || ref_start == 0 {
+             log::warn!("failed to find nearest poly, with goal {ref_end} start {ref_start}");
+-            return Err(NavigationError::NoPoints(start, end, ref_start, ref_end));
++            return Err(NavigationError::NoPoints(start_point, end_point, ref_start, ref_end));
+         }
+ 
+-        let mut path_size = 0;
+-        let unk: i64 = 0;
+-
+-        self.path.clear();
+-
+-        unsafe {
+-            (dt_funcs.dtNavMeshQuery__findPath)(
+-                &mut self.query,
+-                ref_start,
+-                ref_end,
+-                &start,
+-                &end,
+-                &self.filter,
+-                self.path.as_mut_ptr(),
+-                (&unk as *const i64).cast(),
+-                &mut path_size,
+-                self.path.capacity() as i32,
+-            )
+-        };
+-
+-        unsafe {
+-            self.path
+-                .set_len(path_size.min(self.path.capacity() as u32) as usize)
+-        };
++        // Titanfall's Detour ABI has TWO variable-sized outputs. The former
++        // eight-byte `unk` stack slot was overwritten by routes > 8 polygons.
++        let status = fill_path_buffers(
++            &mut self.path,
++            &mut self.jump_types,
++            |path, jumps, count| unsafe {
++                (dt_funcs.dtNavMeshQuery__findPath)(
++                    &mut self.query,
++                    ref_start,
++                    ref_end,
++                    &start,
++                    &end,
++                    &self.filter,
++                    path.as_mut_ptr(),
++                    jumps.as_mut_ptr(),
++                    count,
++                    path.len() as i32,
++                )
++            },
++        ).map_err(|_| NavigationError::InvalidOutputCount)?;
++        let path_size = self.path.len();
+         self.path_points.clear();
+ 
+-        if path_size == 0 {
++        if status & 0x40000000 == 0 || path_size == 0 {
+             return Err(NavigationError::PathNotFound(start, end));
+         }
+ 
+@@ -179,21 +181,25 @@ impl Navigation {
+             );
+         }
+ 
++        if straight_size < 0 || straight_size as usize > PATH_CAPACITY {
++            return Err(NavigationError::InvalidOutputCount);
++        }
+         if straight_size != 0 {
+-            let straight_size = straight_size.min(self.path.capacity() as i32);
+             unsafe {
+-                self.jump_types.set_len(straight_size as usize);
+                 self.straigth_path_jumps.set_len(straight_size as usize);
+                 self.straigth_path_points.set_len(straight_size as usize);
+                 self.straigth_path.set_len(straight_size as usize);
++                self.straigth_path_flags.set_len(straight_size as usize);
+                 self.straigth_path_points.clone_into(&mut self.path_points);
+-                self.path_points.push(end_point);
++                // The native straight path already ends at a reachable point.
++                // Appending an airborne/raw target bypasses that projection,
++                // particularly when findPath returned a partial corridor.
+                 self.path_points.reverse();
+                 self.straigth_path.clone_into(&mut self.path);
+             }
+         } else if path_size == 1 {
+-            self.path_points.push(start_point);
+-            self.path_points.push(end_point);
++            self.path_points.push(end);
++            self.path_points.push(start);
+         } else {
+             let mut prev_point = start;
+             self.path

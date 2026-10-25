@@ -70,7 +70,7 @@ pub(crate) fn battery_yoinker(
 
     if let Some(rodeo_target) = maybe_rodeo_target {
         if distance(origin, rodeo_target) > 100. {
-            path_to_target(&mut cmd, local_data, origin, rodeo_target, false, helper);
+            path_to_target(&mut cmd, local_data, player.m_vecAbsOrigin, rodeo_target, false, helper);
         } else if unsafe { (helper.sv_funcs.is_on_ground)(nudge_type::<&CBaseEntity>(player)) } != 0
             && local_data.counter.div_euclid(10).is_multiple_of(4)
         {

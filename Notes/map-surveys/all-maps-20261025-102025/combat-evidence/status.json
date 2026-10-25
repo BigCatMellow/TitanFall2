@@ -1,0 +1,56 @@
+{
+  "state": "complete",
+  "updated": "2026-10-25T12:00:39.3443078-04:00",
+  "batch_state": "stopped_by_request",
+  "results": [
+    {
+      "map": "mp_black_water_canal",
+      "state": "complete",
+      "pilot_percent": 23.37,
+      "titan_percent": 41.48,
+      "embark_combat_samples": 49,
+      "error": null
+    },
+    {
+      "map": "mp_colony02",
+      "state": "complete",
+      "pilot_percent": 33.58,
+      "titan_percent": 59.22,
+      "embark_combat_samples": 73,
+      "error": null
+    },
+    {
+      "map": "mp_complex3",
+      "state": "complete",
+      "pilot_percent": 23.11,
+      "titan_percent": 59.09,
+      "embark_combat_samples": 57,
+      "error": null
+    },
+    {
+      "map": "mp_crashsite3",
+      "state": "complete",
+      "pilot_percent": 14.89,
+      "titan_percent": 33.56,
+      "embark_combat_samples": 55,
+      "error": null
+    },
+    {
+      "map": "mp_drydock",
+      "state": "complete",
+      "pilot_percent": 31.0,
+      "titan_percent": 24.99,
+      "embark_combat_samples": 79,
+      "error": null
+    },
+    {
+      "map": "mp_forwardbase_kodai",
+      "state": "complete",
+      "pilot_percent": 17.45,
+      "titan_percent": 38.04,
+      "embark_combat_samples": 65,
+      "error": null
+    }
+  ],
+  "failure": null
+}

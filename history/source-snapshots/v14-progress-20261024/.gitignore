@@ -1,0 +1,9 @@
+/target
+/result
+/result-*
+/output
+justfile
+bacon.toml
+
+# wiki
+book

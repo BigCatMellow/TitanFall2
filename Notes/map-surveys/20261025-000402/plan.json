@@ -1,0 +1,46 @@
+{
+  "time_limit_minutes": 15,
+  "observer": 1,
+  "created": "2026-10-25T00:04:02.2733593-04:00",
+  "aim_error": 0.78,
+  "maps": [
+    {
+      "label": "Meadow",
+      "id": "mp_lf_meadow"
+    },
+    {
+      "label": "Eden",
+      "id": "mp_eden"
+    },
+    {
+      "label": "Glitch",
+      "id": "mp_glitch"
+    },
+    {
+      "label": "Angel City",
+      "id": "mp_angel_city"
+    },
+    {
+      "label": "Forwardbase Kodai",
+      "id": "mp_forwardbase_kodai"
+    },
+    {
+      "label": "Rise",
+      "id": "mp_rise"
+    },
+    {
+      "label": "Relic",
+      "id": "mp_relic02"
+    },
+    {
+      "label": "Wargames",
+      "id": "mp_wargames"
+    }
+  ],
+  "bots": 16,
+  "real_save_sha256": "A77FB6C2ECC2A3E48BCA6A273269934499721E46E6A9A7F7833B0EE2142444E5",
+  "profile": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile",
+  "build": "combat-decisions-v16",
+  "dll_sha256": "C6A60DC54A0B7230A71A5E6D972610B9A500435402CCE4AE868252E7DB191075",
+  "goal": 200
+}

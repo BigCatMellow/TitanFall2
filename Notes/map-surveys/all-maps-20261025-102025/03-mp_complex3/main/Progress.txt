@@ -1,0 +1,8 @@
+State: complete
+Updated: 11:12:17
+Completed maps: 1 / 1
+Current: {"index":"0","kills":"353","map":"mp_complex3","bots":"16","imc":"198","militia":"155","elapsed":"890"}
+Failure: 
+
+Completed results:
+mp_complex3: 199-155, time_limit_or_rules, 891.5s

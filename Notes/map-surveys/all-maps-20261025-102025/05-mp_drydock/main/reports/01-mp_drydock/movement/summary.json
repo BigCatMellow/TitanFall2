@@ -1,0 +1,26 @@
+[
+  {
+    "epoch": 1,
+    "map": "mp_drydock",
+    "bot_slots": 16,
+    "player_slots": 17,
+    "observations": 7120,
+    "alive_observations": 5670,
+    "stalled_observations": 61,
+    "crowded_observations": 122,
+    "switches": 6174.0,
+    "recoveries": 254.0,
+    "path_failures": 1007.0,
+    "path_requests": 54107.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.556,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 888.0
+  }
+]

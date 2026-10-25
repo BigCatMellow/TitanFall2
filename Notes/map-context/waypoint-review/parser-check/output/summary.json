@@ -1,0 +1,32 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-context\\waypoint-review\\parser-check\\fixture.log",
+  "motion_lines": 2,
+  "parsed": 2,
+  "scope": "MAP_SURVEY_BEGIN through result or end of log; warmup excluded",
+  "pilot_context_samples": 1,
+  "navigation_samples": 1,
+  "low_progress_navigation_samples": 1,
+  "low_progress_states": [
+    {
+      "state": "pursue",
+      "samples": 1
+    }
+  ],
+  "low_progress_waypoint_height_over_180": 1,
+  "low_progress_near_xy_other_height": 1,
+  "top_low_progress_areas": [
+    {
+      "area": "mp_eden, 0,0,0",
+      "samples": 1,
+      "slots": [
+        1
+      ],
+      "states": [
+        "pursue"
+      ],
+      "waypoint_height_median": 200.0,
+      "near_xy_other_height": 1
+    }
+  ],
+  "limits": "Motion sampled about every 10 seconds. Context comes from preceding 2-second player/trace samples (max 3 wall seconds and 250 units); game time is approximate. Low progress is endpoint XY displacement below 50, not proof of continuous immobility. A next waypoint can be stale when path following is inactive; these records do not capture waypoint consumption, selected polygons, collision traces or active hull mapping. No causal diagnosis follows from height alone."
+}

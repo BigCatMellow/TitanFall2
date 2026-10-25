@@ -1,0 +1,10 @@
+{
+  "created": "2026-10-24T14:15:56.5985488-04:00",
+  "source_files": 139,
+  "archive": "C:\\Users\\james\\northstar-crash-audit\\Notes\\source-snapshots\\v12-source-20261024-141554.zip",
+  "archive_sha256": "D1EC169854B60CE777007F27FAAB6FC54883AF8B983E6C4B03486A5AD84789F2",
+  "tracked_diff": "C:\\Users\\james\\northstar-crash-audit\\Notes\\source-snapshots\\v12-tracked-changes-20261024-141554.patch",
+  "source_head": "2d0a5598345548f1c71fb32417f0f77b8c7fee80",
+  "build": "team-observer-v12",
+  "dll_sha256": "1183389B692F59758C569631F0C7BAB50703C7FB425212876DBB5ABB8DBE7D7A"
+}

@@ -1,0 +1,8 @@
+State: complete
+Updated: 11:29:04
+Completed maps: 1 / 1
+Current: {"militia":"196","map":"mp_crashsite3","kills":"366","bots":"16","elapsed":"890","index":"0","imc":"170"}
+Failure: 
+
+Completed results:
+mp_crashsite3: 170-196, time_limit_or_rules, 891.5s

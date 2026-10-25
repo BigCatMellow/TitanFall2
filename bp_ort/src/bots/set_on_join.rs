@@ -13,6 +13,11 @@ const FUNNY_CLAN_TAGS: &[&str] = &[
     ">~<", "owo", "uwu", ":o", ":D", "ADV", "CLAN", "HI!", "PETAR", "<3", "BOB",
 ];
 
+// This standalone installation does not provide the optional name callbacks.
+// Skip them to avoid reporting missing functions on every player connection.
+// The native navigation buffer overflow is fixed separately in navigation.rs.
+const OPTIONAL_NAME_CALLBACKS_ENABLED: bool = false;
+
 use super::UWUFY_CONVAR;
 
 pub fn set_stuff_on_join(client: &mut CClient) {
@@ -79,7 +84,7 @@ pub fn set_stuff_on_join(client: &mut CClient) {
         set_c_char_array(&mut client.m_szServerName, &new_name);
     }
 
-    if let Some(new_name) = sqvm.as_ref().and_then(|sqvm| {
+    if OPTIONAL_NAME_CALLBACKS_ENABLED && let Some(new_name) = sqvm.as_ref().and_then(|sqvm| {
         call_sq_function::<String, _>(
             *sqvm,
             SQFUNCTIONS.server.wait(),
@@ -93,7 +98,7 @@ pub fn set_stuff_on_join(client: &mut CClient) {
         set_c_char_array(&mut client.m_szServerName, new_name.as_str());
     }
 
-    if let Some(new_tag) = sqvm.as_ref().and_then(|sqvm| {
+    if OPTIONAL_NAME_CALLBACKS_ENABLED && let Some(new_tag) = sqvm.as_ref().and_then(|sqvm| {
         call_sq_function::<String, _>(
             *sqvm,
             SQFUNCTIONS.server.wait(),

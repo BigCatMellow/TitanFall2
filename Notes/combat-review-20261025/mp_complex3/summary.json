@@ -1,0 +1,69 @@
+{
+  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3\\main\\raw-session.log",
+  "scope": "Survey measurement only; warmup/post-result excluded",
+  "switches": 6566,
+  "quick_reversals": 2973,
+  "quick_reversal_percent": 45.28,
+  "reversal_reason_pairs": [
+    {
+      "pair": "engage, engage",
+      "count": 460
+    },
+    {
+      "pair": "engage, pursue",
+      "count": 377
+    },
+    {
+      "pair": "pursue, engage",
+      "count": 380
+    },
+    {
+      "pair": "pursue, pursue",
+      "count": 1756
+    }
+  ],
+  "by_prior_actor_context": [
+    {
+      "context": "dead_at_prior_frame",
+      "switches": 53,
+      "quick_reversals": 3,
+      "percent": 5.66
+    },
+    {
+      "context": "pilot_at_prior_frame",
+      "switches": 2441,
+      "quick_reversals": 564,
+      "percent": 23.11
+    },
+    {
+      "context": "titan_at_prior_frame",
+      "switches": 4072,
+      "quick_reversals": 2406,
+      "percent": 59.09
+    }
+  ],
+  "quick_reversals_with_recent_pilot_context": 564,
+  "those_with_both_targets_recently_observed_alive": 412,
+  "those_with_both_targets_within_400_xy": 32,
+  "matched_pilot_combat_snapshots": 2443,
+  "observed_weapons": [
+    "mp_weapon_rspn101"
+  ],
+  "empty_not_reloading_snapshots": 11,
+  "empty_snapshot_states": [
+    {
+      "state": "engage",
+      "count": 8
+    },
+    {
+      "state": "pursue",
+      "count": 2
+    },
+    {
+      "state": "recover",
+      "count": 1
+    }
+  ],
+  "nonlegacy_combat_snapshots_during_embark": 57,
+  "limits": "Quick reversal means adjacent logged A->B->A switches within0.5seconds, not proven wasted fire. Recent actor state is at most2.1seconds old; targets can move/die or lose visibility between snapshots. Both-inside400 uses observed XY distance, not a confirmed urgent-ranking cause. An engage/engage reason pair only says each selected target was shootable at its respective decision. CombatState can remain stale when its decision block is bypassed, especially while boarding or owning a pet Titan. Empty/blocked snapshots are investigative signals, not confirmed failures. Survey weapon coverage is reported explicitly."
+}

@@ -8,6 +8,7 @@ use rrplug::{
 
 pub mod bindings;
 pub mod navigation;
+mod path_buffers;
 pub mod sqapi;
 
 use bindings::*;
@@ -114,7 +115,7 @@ offset_functions! {
         ZeroOutdtNavMesh = unsafe extern "C" fn(*mut dtNavMeshQuery) where offset(0x3e9560);
         navmesh_maybe_init_filter = unsafe extern "C" fn(*mut dtQueryFilter) -> *mut dtQueryFilter where offset(0x3e95a0);
         dtNavMeshQuery__closestPointOnPolyBoundary__variant = unsafe extern "C" fn(this: *const dtNavMeshQuery, _ref: dtPolyRef, pos: *const Vector3, closest: *mut Vector3, filter: *const dtQueryFilter) where offset(0x3ea750);
-        dtNavMeshQuery__findPath = unsafe extern "C" fn(this: *mut dtNavMeshQuery,startRef: dtPolyRef,endRef: dtPolyRef, startPos: *const Vector3, endPos: *const Vector3, filter: *const dtQueryFilter, path: *mut dtPolyRef,unk: *const undefined, pathCount: *mut u32,maxPath: i32) -> dtStatus where offset(0x3ec310);
+        dtNavMeshQuery__findPath = unsafe extern "C" fn(this: *mut dtNavMeshQuery,startRef: dtPolyRef,endRef: dtPolyRef, startPos: *const Vector3, endPos: *const Vector3, filter: *const dtQueryFilter, path: *mut dtPolyRef,jumpTypes: *mut u8, pathCount: *mut u32,maxPath: i32) -> dtStatus where offset(0x3ec310);
         dtNavMeshQuery__findStraightPath = FindStraightPath where offset(0x3ee980);
         dtNavMeshQuery__SmthPathPortal = unsafe extern "C" fn() where offset(0x3ef820);
         dtNavMeshQuery__getPolyWallSegments = unsafe extern "C" fn() where offset(0x3efe30);

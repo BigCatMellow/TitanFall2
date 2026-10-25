@@ -1,0 +1,26 @@
+[
+  {
+    "epoch": 1,
+    "map": "mp_angel_city",
+    "bot_slots": 16,
+    "player_slots": 17,
+    "observations": 6064,
+    "alive_observations": 4564,
+    "stalled_observations": 35,
+    "crowded_observations": 132,
+    "switches": 5162.0,
+    "recoveries": 186.0,
+    "path_failures": 503.0,
+    "path_requests": 38984.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.678,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 756.0
+  }
+]

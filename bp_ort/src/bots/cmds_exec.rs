@@ -7,7 +7,7 @@ use std::cell::UnsafeCell;
 
 use super::{BOT_DATA_MAP, SHARED_BOT_DATA, SIMULATE_TYPE_CONVAR, cmds_helper::CUserCmdHelper};
 use crate::{
-    bindings::{CUserCmd, ENGINE_FUNCTIONS, SERVER_FUNCTIONS},
+    bindings::{Action, CUserCmd, ENGINE_FUNCTIONS, SERVER_FUNCTIONS},
     utils::iterate_c_array_sized,
 };
 
@@ -19,6 +19,11 @@ pub fn replace_cmd() -> Option<&'static CUserCmd> {
 }
 
 pub fn run_bots_cmds(paused: bool) {
+    // Physics callbacks can run during map teardown/loading. Per-bot queries
+    // must not touch the old navmesh after its server VM has been destroyed.
+    if !crate::PLUGIN.wait().bots.server_vm_active.load(std::sync::atomic::Ordering::Acquire) {
+        return;
+    }
     let sim_type = SIMULATE_TYPE_CONVAR.wait().get_value_i32();
     let server_functions = SERVER_FUNCTIONS.wait();
     let engine_functions = ENGINE_FUNCTIONS.wait();
@@ -29,6 +34,28 @@ pub fn run_bots_cmds(paused: bool) {
     let token = unsafe { EngineToken::new_unchecked() };
     let mut bot_local_data = BOT_DATA_MAP.get(token).borrow_mut();
     let mut bot_shared_data = SHARED_BOT_DATA.get(token).borrow_mut();
+    let interval = super::TELEMETRY_CONVAR.get().map_or(0., |c| c.get_value_f32());
+    let emit_trace = interval.is_finite() && interval > 0. && globals.curTime >= bot_shared_data.telemetry_next_at;
+    let epoch = super::telemetry::epoch();
+    let map = unsafe { engine_functions.server.as_ref() }
+        .and_then(|server| crate::utils::get_c_char_array(&server.m_szMapName)).unwrap_or("unknown");
+    if emit_trace {
+        bot_shared_data.telemetry_next_at = globals.curTime + interval.clamp(0.5, 10.);
+        let coordinated = super::COORDINATION_CONVAR.get().is_some_and(|c| c.get_value_bool());
+        log::info!("BOT_FRAME epoch={epoch} map={map} t={:.2} tick={} coordination={}",
+            globals.curTime, globals.tickCount, coordinated as u8);
+        for (slot, client) in unsafe { iterate_c_array_sized::<_, 32>(engine_functions.client_array.into()) }
+            .enumerate().filter(|(_, c)| c.m_nSignonState == SignonState::FULL) {
+            if let Some(player) = unsafe { player_by_index(slot as i32 + 1).as_ref() } {
+                let pos = player.m_vecAbsOrigin;
+                let alive = unsafe { (server_functions.is_alive)(std::ptr::from_ref(player).cast()) } != 0;
+                let titan = unsafe { (server_functions.is_titan)(std::ptr::from_ref(player).cast()) };
+                log::info!("BOT_PLAYER epoch={epoch} map={map} t={:.2} slot={slot} id={} team={} bot={} alive={} titan={} hp={} x={:.1} y={:.1} z={:.1}",
+                    globals.curTime, player.m_RefEHandle, player.m_iTeamNum, client.m_bFakePlayer as u8,
+                    alive as u8, titan as u8, player.m_iHealth, pos.x, pos.y, pos.z);
+            }
+        }
+    }
 
     crate::PLUGIN
         .wait()
@@ -64,6 +91,7 @@ pub fn run_bots_cmds(paused: bool) {
             continue;
         };
 
+        local_data.combat.begin_command();
         let mut cmd = {
             local_data.edict = edict as u16;
 
@@ -86,6 +114,44 @@ pub fn run_bots_cmds(paused: bool) {
         };
 
         cmd.frame_time = globals.frameTime;
+        local_data.metrics.command(cmd.world_view_angles.y, cmd.buttons & Action::Jump as u32 != 0);
+        if emit_trace {
+            let metrics = &local_data.metrics;
+            let combat = &local_data.combat;
+            if !combat.weapon.is_empty() {
+                log::info!("BOT_COMBAT epoch={epoch} map={map} t={:.2} slot={edict} weapon={} clip={} reloading={} tactic={} reload_requests={} holds={} retreats={} blocked_steps={} active={}",
+                    globals.curTime, combat.weapon, combat.clip, combat.reloading as u8, combat.tactic,
+                    combat.reload_requests, combat.holds, combat.retreats, combat.blocked_steps,
+                    combat.updated_this_frame(globals.curTime) as u8);
+            }
+            let velocity = player.m_vecAbsVelocity;
+            let speed = (velocity.x * velocity.x + velocity.y * velocity.y).sqrt();
+            let support = metrics.target.map_or(0, |target| bot_shared_data.coordination.supporters(
+                edict, player.m_iTeamNum, target, globals.curTime));
+            log::info!("BOT_TRACE epoch={epoch} map={map} t={:.2} slot={edict} target={} visible={} state={} tx={:.1} ty={:.1} tz={:.1} speed={speed:.1} yaw={:.1} switches={} recoveries={} path_failures={} path_requests={} jumps={} commands={} yaw_travel={:.1} supporters={support} nodes={} neighbors={} spacing={}",
+                globals.curTime, metrics.target.unwrap_or(-1), metrics.visible as u8, metrics.state,
+                metrics.target_pos[0], metrics.target_pos[1], metrics.target_pos[2], cmd.world_view_angles.y,
+                metrics.switches, metrics.recoveries, metrics.path_failures, metrics.path_requests,
+                metrics.jump_commands, metrics.commands, metrics.yaw_travel,
+                local_data.nav_query.as_ref().map_or(0, |n| n.path_points.len()), metrics.neighbors, metrics.spacing_commands);
+        }
+        if super::MOTION_DEBUG_CONVAR.get().is_some_and(|c| c.get_value_bool()) {
+            let origin = player.m_vecAbsOrigin;
+            if let Some((last, previous)) = local_data.motion_sample {
+                if globals.curTime - last >= 10. {
+                    let delta = origin - previous;
+                    let travel = (delta.x * delta.x + delta.y * delta.y).sqrt();
+                    log::info!("BOT_MOTION slot={edict} mode={} hp={} pos={origin:?} horizontal_delta={travel:.1} velocity={:?} move={:?} buttons={:#x} next={:?} route_nodes={} hold={} aim_error_scale={:.2}",
+                        local_data.sim_type.unwrap_or(sim_type), player.m_iHealth,
+                        player.m_vecAbsVelocity, cmd.move_, cmd.buttons, local_data.next_target_pos,
+                        local_data.nav_query.as_ref().map_or(0, |n| n.path_points.len()), local_data.jump_hold,
+                        super::behavior_tuning::aim_error_scale(super::AIM_ERROR_SCALE_CONVAR.get().map_or(1., |c| c.get_value_f32())));
+                    local_data.motion_sample = Some((globals.curTime, origin));
+                }
+            } else {
+                local_data.motion_sample = Some((globals.curTime, origin));
+            }
+        }
         player.pl.fixangle = 0;
         unsafe {
             (server_functions.proccess_user_cmds)(player, &cmd, 1, 1, 0, false);

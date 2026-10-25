@@ -1,0 +1,26 @@
+[
+  {
+    "epoch": 1,
+    "map": "mp_glitch",
+    "bot_slots": 16,
+    "player_slots": 17,
+    "observations": 7120,
+    "alive_observations": 5735,
+    "stalled_observations": 125,
+    "crowded_observations": 147,
+    "switches": 6166.0,
+    "recoveries": 218.0,
+    "path_failures": 1761.0,
+    "path_requests": 78074.0,
+    "failed_goal_skips": 0.0,
+    "retreats": 0.0,
+    "mean_largest_pursuit_share": 0.601,
+    "coordination": [
+      1
+    ],
+    "route_recovery": [
+      -1
+    ],
+    "duration": 888.0
+  }
+]

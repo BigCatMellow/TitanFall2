@@ -1,0 +1,171 @@
+#![feature(c_variadic, iter_array_chunks, iter_collect_into, if_let_guard)]
+#![allow(clippy::missing_transmute_annotations)] // too lazy to fix rn
+
+use holoplus::HoloPlus;
+use rrplug::{bindings::plugin_abi::PluginColor, prelude::*};
+
+use crate::{
+    admin_abuse::AdminAbuse,
+    bindings::{
+        CLIENT_FUNCTIONS, ClientFunctions, ENGINE_FUNCTIONS, EngineFunctions, MATSYS_FUNCTIONS,
+        MatSysFunctions, SERVER_FUNCTIONS, ServerFunctions,
+    },
+    bots::Bots,
+    devtoys::DevToys,
+    disguise::Disguise,
+    interfaces::Interfaces,
+    navmesh::{NavigationPlugin, RECAST_DETOUR, RecastDetour},
+    screen_detour::hook_materialsystem,
+    scripts::Scripts,
+    tickplus::TickPlus,
+};
+
+mod admin_abuse;
+mod bindings;
+mod bots;
+mod devtoys;
+mod disguise;
+mod holoplus;
+mod interfaces;
+mod navmesh;
+mod screen_detour;
+mod scripts;
+mod tickplus;
+mod utils;
+
+pub struct HooksPlugin {
+    pub bots: Bots,
+    pub disguise: Disguise,
+    pub interfaces: Interfaces,
+    pub admin_abuse: AdminAbuse,
+    pub devtoys: DevToys,
+    pub scripts: Scripts,
+    pub navigation: NavigationPlugin,
+    pub holoplus: HoloPlus,
+    pub tickplus: TickPlus,
+    is_dedicated_server: bool,
+    is_dev: bool,
+}
+
+impl Plugin for HooksPlugin {
+    const PLUGIN_INFO: PluginInfo = PluginInfo::new_with_color(
+        c"bp-ort",
+        c"BP-ORT000",
+        c"BP_ORT",
+        PluginContext::all(),
+        PluginColor {
+            red: 183,
+            green: 65,
+            blue: 14,
+        },
+    );
+
+    fn new(reloaded: bool) -> Self {
+        if reloaded {
+            panic!("bad things will happen if this is reloaded")
+        }
+        unsafe { std::env::set_var("RUST_BACKTRACE", "1") };
+        log::info!("local build: combat-decisions-v16 (v15 navigation plus optional weapon-range and ammo decisions)");
+
+        Self {
+            bots: Bots::new(reloaded),
+            disguise: Disguise::new(reloaded),
+            interfaces: Interfaces::new(reloaded),
+            admin_abuse: AdminAbuse::new(reloaded),
+            devtoys: DevToys::new(reloaded),
+            scripts: Scripts::new(reloaded),
+            navigation: NavigationPlugin::new(reloaded),
+            holoplus: HoloPlus::new(reloaded),
+            tickplus: TickPlus::new(reloaded),
+            is_dedicated_server: std::env::args().any(|cmd| cmd.starts_with("-dedicated")),
+            is_dev: std::env::args().any(|cmd| cmd.starts_with("-bp-ort-dev")),
+        }
+    }
+
+    fn on_dll_load(&self, engine: Option<&EngineData>, dll_ptr: &DLLPointer, token: EngineToken) {
+        unsafe {
+            EngineFunctions::try_init(dll_ptr, &ENGINE_FUNCTIONS);
+            ClientFunctions::try_init(dll_ptr, &CLIENT_FUNCTIONS);
+            ServerFunctions::try_init(dll_ptr, &SERVER_FUNCTIONS);
+            MatSysFunctions::try_init(dll_ptr, &MATSYS_FUNCTIONS);
+            RecastDetour::try_init(dll_ptr, &RECAST_DETOUR);
+        }
+
+        match dll_ptr.which_dll() {
+            WhichDll::Other(other) if *other == "materialsystem_dx11.dll" => {
+                hook_materialsystem(dll_ptr.get_dll_ptr())
+            }
+            WhichDll::Server => unsafe {
+                let base = SERVER_FUNCTIONS.wait().base as usize;
+                // patch(
+                //     base + 0x5a8241,
+                //     &[
+                //         0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90,
+                //         0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90,
+                //         0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90,
+                //     ],
+                // ); // removes the Client \'%s\' dropped %i packets to us spam
+                // patch(
+                //     base + 0x5a825d,
+                //     &[
+                //         0x90, 0x90, 0x90, 0x90, 0x90,
+                //     ],
+                // ); // same thing but less nops
+                utils::patch(
+                    base + 0x15191a,
+                    &[0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90],
+                ); // removes 1 max player on sp
+                utils::patch(
+                    base + 0x5aa016,
+                    &[
+                        0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90,
+                        0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90,
+                        0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90,
+                    ],
+                ); // removes the world view write in run_null_command
+                utils::patch(
+                    base + 0x5aa00c,
+                    &[0xc7, 0x83, 0xc0, 0x1b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01],
+                ); // corrects fix up angles in run_null_command
+            },
+            _ => {}
+        }
+        self.bots.on_dll_load(engine, dll_ptr, token);
+        self.disguise.on_dll_load(engine, dll_ptr, token);
+        self.interfaces.on_dll_load(engine, dll_ptr, token);
+        self.admin_abuse.on_dll_load(engine, dll_ptr, token);
+        self.devtoys.on_dll_load(engine, dll_ptr, token);
+        self.holoplus.on_dll_load(engine, dll_ptr, token);
+        self.tickplus.on_dll_load(engine, dll_ptr, token);
+    }
+
+    fn on_sqvm_created(&self, sqvm_handle: &CSquirrelVMHandle, token: EngineToken) {
+        self.bots.on_sqvm_created(sqvm_handle, token);
+        self.interfaces.on_sqvm_created(sqvm_handle, token);
+        self.admin_abuse.on_sqvm_created(sqvm_handle, token);
+        self.holoplus.on_sqvm_created(sqvm_handle, token);
+        self.tickplus.on_sqvm_created(sqvm_handle, token);
+    }
+
+    fn on_sqvm_destroyed(&self, sqvm_handle: &CSquirrelVMHandle, token: EngineToken) {
+        self.bots.on_sqvm_destroyed(sqvm_handle, token);
+        self.holoplus.on_sqvm_destroyed(sqvm_handle, token);
+        self.tickplus.on_sqvm_destroyed(sqvm_handle, token);
+    }
+
+    fn runframe(&self, token: EngineToken) {
+        self.interfaces.runframe(token);
+        self.devtoys.runframe(token);
+        self.bots.runframe(token);
+        self.holoplus.runframe(token);
+        self.tickplus.runframe(token);
+    }
+}
+
+impl HooksPlugin {
+    pub fn is_dedicated_server(&self) -> bool {
+        self.is_dedicated_server
+    }
+}
+
+entry!(HooksPlugin);
