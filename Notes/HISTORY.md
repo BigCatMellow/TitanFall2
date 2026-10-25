@@ -344,3 +344,33 @@ Computer Use missing from user's visible catalog; native screen helper failed.
 No live visual watching or installed recorder. Automatic time-matched bot-follow
 recording remains future work. Diagnosticv17 candidate remains NOT DEPLOYED;
 source checkout/target build are candidate, installed profiles remainv16.
+
+2026-10-25 project migration: canonical source/research repo is now
+C:\Users\james\northstar-crash-audit\TitanFall2-project,
+https://github.com/BigCatMellow/TitanFall2 (public). Upstream330commits preserved;
+initial local-project import c4145bc426758ab2453930054ea856e12534c531 pushed and
+remote-verified. Source, James add-ons, authored test harnesses, notes, expanded
+historical source, derived data/replays/plots and108 sanitized compressed logs
+included. Private saves/raw buffers, installed game/third-party packages and
+build/dump binaries stay local; import manifest records inclusions/exclusions.
+Original backups/profiles/desktop launchers were not moved or overwritten.
+Git author uses GitHub no-reply; only this exact checkout was added to real
+user Git safe.directory because sandbox-created ownership differs.
+
+Canonical tools/Test-Project.ps1 passed34 tests here; current-source whitespace,
+370 JSON files and publication scan passed. Inherited automatic release/deploy
+workflows archived .disabled, not active. Source is still diagnosticv17 candidate;
+installed stablev16 unchanged. No game was launched and map queue remains paused.
+
+Offline trend analysis completed in research/trends-20261025:16 recordings,
+10 maps; cohorts separate, lobby/intro/post-match trimmed from played samples.
+Stricter detector requires continuous sampled navigation in a10-13s low-net-
+progress window and same live pilot. Fixtures cover navigation/engagement/life.
+Controlled Eden aggregate7.21%; played Eden varies1.23%(latest) to9.72%(older).
+The same old hotspot repeats, but latest round was healthier on the samebuild.
+Do not interpret averaged6.2% played or changed measurement as a deployed fix.
+Latest played Exoplanet1.03%; controlledCrash Site.40%,AngelCity.72%,Drydock.98%.
+Overhead target selection persists in played Eden4.55%,Exoplanet5.87%visible
+pilot-engage snapshots (selection, not proven firing). Weapon data stillR-201,
+no reliable damage/hit/tactical-outcome study. See FINDINGS.md for priorities.
+User explicitly requested OFFLINE review only; no launch/deploy/resume until asked.

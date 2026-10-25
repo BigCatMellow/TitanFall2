@@ -18,7 +18,7 @@ local work. [Original README](docs/UPSTREAM-README.md).
   Newer human-played Eden/Exoplanet data is also retained. No automatic resume.
 
 Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
-[the latest review](Notes/review-paused-20261025/REVIEW.md) before changes.
+[the latest review](research/trends-20261025/FINDINGS.md) before changes.
 
 ## Contents
 
@@ -31,7 +31,8 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 | `James.TacticalRecharge/`, `James.WeaponReload/` | Human tactical/reload adjustments |
 | `Notes/` | Dated notes, results, failures, rollback records and tools |
 | `Notes/map-surveys/` | Per-match movement/combat data and restoration checks |
-| `Notes/trend-analysis-20261025/` | Latest played-session export; cohort review in progress |
+| `Notes/trend-analysis-20261025/` | Latest played-session export |
+| `research/trends-20261025/` | Phase-aware trends and improvement priorities |
 | `Notes/map-context/` | Derived navigation geometry, diagrams and references |
 | `automation/runtime-mods/` | Isolated authored harnesses; **not gameplay add-ons** |
 | `automation/legacy/` | Original machine-specific launch/audit scripts |
@@ -63,8 +64,8 @@ Configure those before use. Existing installed profiles/shortcuts were not moved
 
 These are gameplay logs and reconstructed paths, not live visual observation.
 Sample counts are not independent incidents or proof of improved AI. Human and
-unattended cohorts differ. Intros/post-match windows still need trimming from
-some older full-session exports before comparison. Bot weapon evidence is
+unattended cohorts differ. The trend report trims intros/post-match time;
+older full-session exports remain intact. Bot weapon evidence is
 mostly R-201, not a broad weapon/ability balance study.
 
 Sanitized logs are stored as `.log.gz`; expand a selected file with
@@ -72,7 +73,8 @@ Sanitized logs are stored as `.log.gz`; expand a selected file with
 Authentication material and personal saved state are excluded. Game packages,
 installed third-party bundles, dump/build binaries and private backup saves
 remain local. [The import manifest](docs/LOCAL-IMPORT-MANIFEST.json) records
-included/excluded artifacts and hashes. No local backup was deleted.
+included/excluded artifacts and hashes. [Data provenance](docs/DATA-PROVENANCE.md)
+explains sanitization and line-ending/hash differences. No local backup was deleted.
 
 Upstream release/deployment workflows are archived under `docs/upstream-workflows`
 with `.disabled` suffixes; this import does not publish releases or change the game.

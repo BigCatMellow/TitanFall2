@@ -1,0 +1,106 @@
+[
+  {
+    "map": "mp_angel_city",
+    "cohort": "controlled-complete",
+    "rounds": 1,
+    "pilot_samples": 3766.0,
+    "continuous_navigation_low_samples": 27.0,
+    "continuous_navigation_percent": 0.72
+  },
+  {
+    "map": "mp_black_water_canal",
+    "cohort": "controlled-complete",
+    "rounds": 1,
+    "pilot_samples": 4754.0,
+    "continuous_navigation_low_samples": 45.0,
+    "continuous_navigation_percent": 0.95
+  },
+  {
+    "map": "mp_colony02",
+    "cohort": "controlled-complete",
+    "rounds": 1,
+    "pilot_samples": 4414.0,
+    "continuous_navigation_low_samples": 76.0,
+    "continuous_navigation_percent": 1.72
+  },
+  {
+    "map": "mp_complex3",
+    "cohort": "controlled-complete",
+    "rounds": 1,
+    "pilot_samples": 4283.0,
+    "continuous_navigation_low_samples": 105.0,
+    "continuous_navigation_percent": 2.45
+  },
+  {
+    "map": "mp_crashsite3",
+    "cohort": "controlled-complete",
+    "rounds": 1,
+    "pilot_samples": 4256.0,
+    "continuous_navigation_low_samples": 17.0,
+    "continuous_navigation_percent": 0.4
+  },
+  {
+    "map": "mp_drydock",
+    "cohort": "controlled-complete",
+    "rounds": 1,
+    "pilot_samples": 4406.0,
+    "continuous_navigation_low_samples": 43.0,
+    "continuous_navigation_percent": 0.98
+  },
+  {
+    "map": "mp_eden",
+    "cohort": "controlled-complete",
+    "rounds": 2,
+    "pilot_samples": 9699.0,
+    "continuous_navigation_low_samples": 699.0,
+    "continuous_navigation_percent": 7.21
+  },
+  {
+    "map": "mp_glitch",
+    "cohort": "controlled-complete",
+    "rounds": 1,
+    "pilot_samples": 4325.0,
+    "continuous_navigation_low_samples": 57.0,
+    "continuous_navigation_percent": 1.32
+  },
+  {
+    "map": "mp_lf_meadow",
+    "cohort": "controlled-complete",
+    "rounds": 1,
+    "pilot_samples": 3822.0,
+    "continuous_navigation_low_samples": 0.0,
+    "continuous_navigation_percent": 0.0
+  },
+  {
+    "map": "mp_forwardbase_kodai",
+    "cohort": "controlled-partial",
+    "rounds": 1,
+    "pilot_samples": 4232.0,
+    "continuous_navigation_low_samples": 37.0,
+    "continuous_navigation_percent": 0.87
+  },
+  {
+    "map": "mp_eden",
+    "cohort": "played",
+    "rounds": 2,
+    "pilot_samples": 3934.0,
+    "continuous_navigation_low_samples": 244.0,
+    "continuous_navigation_percent": 6.2
+  },
+  {
+    "map": "mp_lf_meadow",
+    "cohort": "played",
+    "rounds": 2,
+    "pilot_samples": 2933.0,
+    "continuous_navigation_low_samples": 0.0,
+    "continuous_navigation_percent": 0.0
+  },
+  {
+    "map": "mp_thaw",
+    "cohort": "played",
+    "rounds": 1,
+    "pilot_samples": 1935.0,
+    "continuous_navigation_low_samples": 20.0,
+    "continuous_navigation_percent": 1.03
+  }
+]
