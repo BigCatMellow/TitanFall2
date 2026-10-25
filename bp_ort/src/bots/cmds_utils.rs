@@ -38,6 +38,7 @@ pub fn path_to_target(
     should_recalcute_path: bool,
     helper: &CUserCmdHelper,
 ) -> bool {
+    local_data.navigation_requested = true;
     if distance3(target_pos, origin)
         <= BOT_PATH_NODE_RANGE + local_data.approach_range.unwrap_or(20.) {
         local_data.movement_anchor = None;

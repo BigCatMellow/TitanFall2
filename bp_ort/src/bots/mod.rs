@@ -57,6 +57,8 @@ mod progress_watchdog;
 mod coordination;
 mod escape_recovery;
 mod combat_decisions;
+mod action_policy;
+mod action_bridge;
 mod telemetry;
 mod netvars;
 mod persistence;
@@ -76,6 +78,10 @@ pub(super) static COORDINATION_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static TELEMETRY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static ESCAPE_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static COMBAT_DECISIONS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static ACTION_POLICY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static TARGET_ELIGIBILITY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static NAVIGATION_CONTEXT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static STEP_RETRY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 
 pub static AIM_PENALTY_VALUE: AtomicI32 = AtomicI32::new(100);
 static ENGINE_FRAME_THREAD: AtomicU32 = AtomicU32::new(0);
@@ -102,6 +108,9 @@ pub(super) struct BotData {
     motion_sample: Option<(f32, Vector3)>,
     recovery_until: f32,
     movement_anchor: Option<(f32, [f32; 2])>,
+    navigation_requested: bool,
+    tactical_pulse: action_policy::Pulse,
+    ordnance_pulse: action_policy::Pulse,
     escape_recovery: escape_recovery::EscapeRecovery,
     combat: combat_decisions::CombatState,
     metrics: telemetry::Metrics,
@@ -164,6 +173,7 @@ impl Plugin for Bots {
         register_sq_functions(remember_name_override);
         register_sq_functions(remember_name_override_uid);
         simple_bot_manager::register_manager_sq_functions();
+        action_bridge::register();
         let external_simulations = unsafe {
             register_interface(
                 "ExternalSimulation001",
@@ -385,6 +395,15 @@ impl Plugin for Bots {
             &ConVarRegister::new("bot_telemetry_interval", "0", FCVAR_GAMEDLL as i32,
                 "structured position/decision snapshots in seconds; 0 disables; minimum 0.5"), token,
         ).expect("failed to register bot_telemetry_interval"));
+        for (cell, name, help) in [
+            (&ACTION_POLICY_CONVAR, "bot_action_policy", "fresh script readiness and bounded pilot offhand input"),
+            (&TARGET_ELIGIBILITY_CONVAR, "bot_target_eligibility", "exclude hotdropping pet Titans from coordinated selection and pursuit"),
+            (&NAVIGATION_CONTEXT_CONVAR, "bot_navigation_context", "do not age navigation watchdog across non-navigation commands"),
+            (&STEP_RETRY_CONVAR, "bot_step_retry", "try opposite combat step with the same wall and ground checks"),
+        ] {
+            _ = cell.set(ConVarStruct::try_new(&ConVarRegister::new(name, "0", FCVAR_GAMEDLL as i32, help), token)
+                .expect("failed to register candidate feature switch"));
+        }
 
         let simulate_convar = ConVarStruct::try_new(&ConVarRegister::new(
                 "bot_cmds_type",
@@ -466,6 +485,7 @@ impl Bots {
 }
 
 fn reset_bot_state(token: EngineToken) {
+    action_bridge::reset(token);
     simple_bot_manager::reset_round_ready(token);
     let mut states = BOT_DATA_MAP.get(token).borrow_mut();
     let queries = states.iter().filter(|state| state.nav_query.is_some()).count();

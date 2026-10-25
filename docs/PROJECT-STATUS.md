@@ -1,33 +1,44 @@
 # Project status — 2026-10-25
 
-Game closed; automated map testing paused. User requested offline trend review
-and complete project import to BigCatMellow/TitanFall2. No game launch/deployment.
+The reviewed decision changes are implemented, tested and installed in the
+normal solo profile. A fresh map survey was started after validation.
+See [candidate record](../Notes/candidates/decisions-v18-20261025/README.md).
 
 | Item | State |
 |---|---|
-| Installed native plugin | combat-decisions-v16 |
-| Installed SHA256 | `C6A60DC54A0B7230A71A5E6D972610B9A500435402CCE4AE868252E7DB191075` |
-| Source | observation-v17-candidate; diagnostics, not deployed/runtime-tested |
-| Candidate local SHA256 | `9FB6E5ACE50E858607D2CD3B04F592ABE45F1C5DB0E99EE54CDAC525DC74E2F9` |
-| Candidate validation |34 tests/7 suites;47058-decision comparison; native build passes |
-| Population/difficulty |8v8; human+15bots; aim0.78 |
-| Survey |5 completed, partial Kodai;17 trials remain; no auto-resume |
-| Latest played session |2026-10-25 12:03:27; Eden/Exoplanet/lobbies; clean shutdown12:21 |
-| Data work |Phase-aware review of16 recordings across10 maps; played/controlled/partial cohorts separate |
-| Latest analysis |235 deduplicated overhead target bursts;213 show descent,22 lack adjacent follow-up; watchdog timer-context reproduction and five strict compatible log cases |
-| Weapon/ability review |Archived human reload/recharge validation,16-recording cache coverage and readiness/action-suppression source audit; no new balance/deployment changes |
+| Installed native plugin | decisions-v18-candidate; all four new switches enabled |
+| Native SHA256 | F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648 |
+| Readiness script SHA256 | 30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78 |
+| Core runtime | Northstar1.31.14.0, verified in actual test logs |
+| Offline validation |41tests/8suites;47058 pure-controller decisions match v16; native build passes |
+| Full client integration |Passed progressive switches, five16-bot phases, Eden/Complex/Canal, six guns/seven suits, lobby and human+15bot return |
+| Final bridge retest |Passed matrix/lobby/normal return;866cost samples,38unaffordable tactical samples,0incorrectly-ready |
+| Normal deployment |19:48EDT; fresh backup; all3current save files hash-unchanged during deployment |
+| Preserved settings |8v8 human+15bots, aim0.78,50% human tactical recharge, four-gun0.9reload |
+| Survey |Fresh22-map frozen v18 queue started19:49EDT, Kodai first;200team points/15min,16bots+observer |
+| Earlier data |16recordings/10maps phase-aware v16 review; kept separate from v18 |
 
-Recorded stalled pilot samples: Crash Site0.42%, Angel City0.85%, Drydock1.09%.
-Eden6.23–8.38% has a repeated shared route hotspot; Complex has a concentrated
-slot11 case. These are sample fractions, not incident rates or FPS benchmarks.
+New behavior: clear movement-watchdog context after non-navigation commands;
+exclude hotdropping pet Titans before pilot target choice and pursuit; gate
+bounded offhand inputs on fresh engine readiness/resource reports; try the
+opposite strafe with the same wall/ground checks when the first side is blocked.
+Actual current-weapon/action diagnostics supplement the older combat cache.
 
-Other leads: separate pilot/Titan target switching; cached ammo during boarding;
-XY-only range checks admitting distant overhead targets, apparently incoming
-Titans. Bot weapon data is mostly R-201. Existing human reload/cooldown changes
-are separately validated; broad damage/ability buffs lack outcome evidence.
+The full suite sampled11known-hotdrop target selections in baseline and0with
+the filter enabled. These are integration observations, not a randomized outcome
+comparison. Pulse counters and tactical shot/resource snapshots are not cast
+totals. Default bots still use Grapple/frag; this change does not implement
+Grapple/A-Wall automation or broaden normal bot loadouts. No weapon damage,
+aim or ability cooldown values changed in this implementation.
 
-See research/trends-20261025/FINDINGS.md and
-research/decision-context-20261025/FINDINGS.md. Current instruction is organize data
-and identify good/bad trends before further gameplay changes. No new gameplay
-patch was made after that instruction. Historical archives include rejected
-builds; current status/deployment records establish what is live.
+Normal rollback backup: before-v18-normal-deploy-20261025-194834 under the
+private audit Notes/backups folder. Restore deployment files only, explicitly
+disable the new bridge when returning to v16, and keep current save_data.
+The abandoned fresh candidate profile still has an unresolved startup issue;
+successful tests used the backed-up original isolated profile. No temporary
+schema/native prewarm code or base-game edits remain.
+
+Read the latest handoff and live private survey status before touching a game
+process. Historical PIDs/status records do not establish current queue state.
+No visual match watching or recorder was used. Map-specific route hotspots,
+Titan behavior and hide-and-seek support remain further work.

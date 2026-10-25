@@ -1,0 +1,315 @@
+{
+  "core": "1.31.14.0",
+  "run": "decisions-v18-20261025-153058",
+  "state": "passed",
+  "source_sha256": "4e1488e7fc1640217f68e5edcc2346b3f7b805602925825f780e16cea5cbe4fe",
+  "checks": {
+    "watcher_completed_client_suite": true,
+    "actual_core_version": true,
+    "no_script_or_native_errors": true,
+    "all_phases_started": true,
+    "controlled_population_8v8": true,
+    "human_plus_15_bot_return": true,
+    "six_weapon_classes_observed": true,
+    "ability_pulses_observed": true,
+    "no_sampled_filtered_hotdrop_selection": true
+  },
+  "phases": [
+    {
+      "phase": 0,
+      "epoch": 1,
+      "map": "mp_eden",
+      "bots_at_begin": 16,
+      "imc_bots_at_begin": 8,
+      "live_pilot_trace_samples": 550,
+      "selected_known_hotdropping_pet_samples": 11,
+      "overhead_visible_engage_samples": 8,
+      "actual_current_weapon_samples": {
+        "mp_weapon_rspn101": 516,
+        "mp_weapon_defender": 32,
+        "melee_pilot_emptyhanded": 2
+      },
+      "tactical_observations": {
+        "mp_ability_grapple": {
+          "observations": 549,
+          "ready": 549,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        }
+      },
+      "largest_tactical_pulse_counter": 0,
+      "largest_ordnance_pulse_counter": 0,
+      "largest_blocked_request_counter": 0
+    },
+    {
+      "phase": 1,
+      "epoch": 2,
+      "map": "mp_eden",
+      "bots_at_begin": 16,
+      "imc_bots_at_begin": 8,
+      "live_pilot_trace_samples": 955,
+      "selected_known_hotdropping_pet_samples": 0,
+      "overhead_visible_engage_samples": 0,
+      "actual_current_weapon_samples": {
+        "mp_weapon_rspn101": 816,
+        "mp_weapon_defender": 139
+      },
+      "tactical_observations": {
+        "mp_ability_grapple": {
+          "observations": 955,
+          "ready": 955,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        }
+      },
+      "largest_tactical_pulse_counter": 0,
+      "largest_ordnance_pulse_counter": 0,
+      "largest_blocked_request_counter": 0
+    },
+    {
+      "phase": 2,
+      "epoch": 3,
+      "map": "mp_eden",
+      "bots_at_begin": 16,
+      "imc_bots_at_begin": 8,
+      "live_pilot_trace_samples": 1015,
+      "selected_known_hotdropping_pet_samples": 0,
+      "overhead_visible_engage_samples": 0,
+      "actual_current_weapon_samples": {
+        "mp_weapon_rspn101": 906,
+        "mp_ability_shifter": 1,
+        "melee_pilot_emptyhanded": 4,
+        "mp_weapon_defender": 104
+      },
+      "tactical_observations": {
+        "mp_ability_cloak": {
+          "observations": 199,
+          "ready": 189,
+          "not_ready": 10,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 0
+        },
+        "mp_weapon_grenade_sonar": {
+          "observations": 187,
+          "ready": 187,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 97
+        },
+        "mp_ability_holopilot": {
+          "observations": 130,
+          "ready": 130,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        },
+        "mp_weapon_deployable_cover": {
+          "observations": 128,
+          "ready": 128,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 100
+        },
+        "mp_ability_grapple": {
+          "observations": 133,
+          "ready": 133,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        },
+        "mp_ability_heal": {
+          "observations": 124,
+          "ready": 122,
+          "not_ready": 2,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 52
+        },
+        "mp_ability_shifter": {
+          "observations": 114,
+          "ready": 113,
+          "not_ready": 1,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        }
+      },
+      "largest_tactical_pulse_counter": 13,
+      "largest_ordnance_pulse_counter": 0,
+      "largest_blocked_request_counter": 132
+    },
+    {
+      "phase": 3,
+      "epoch": 4,
+      "map": "mp_complex3",
+      "bots_at_begin": 16,
+      "imc_bots_at_begin": 8,
+      "live_pilot_trace_samples": 907,
+      "selected_known_hotdropping_pet_samples": 0,
+      "overhead_visible_engage_samples": 0,
+      "actual_current_weapon_samples": {
+        "mp_weapon_rspn101": 725,
+        "mp_weapon_grenade_sonar": 9,
+        "mp_ability_shifter": 1,
+        "mp_weapon_defender": 170,
+        "melee_pilot_emptyhanded": 2
+      },
+      "tactical_observations": {
+        "mp_ability_cloak": {
+          "observations": 165,
+          "ready": 139,
+          "not_ready": 26,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 4
+        },
+        "mp_weapon_grenade_sonar": {
+          "observations": 167,
+          "ready": 158,
+          "not_ready": 9,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        },
+        "mp_ability_holopilot": {
+          "observations": 112,
+          "ready": 112,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 107
+        },
+        "mp_weapon_deployable_cover": {
+          "observations": 121,
+          "ready": 121,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 100
+        },
+        "mp_ability_grapple": {
+          "observations": 118,
+          "ready": 118,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        },
+        "mp_ability_heal": {
+          "observations": 104,
+          "ready": 103,
+          "not_ready": 1,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 83
+        },
+        "mp_ability_shifter": {
+          "observations": 119,
+          "ready": 118,
+          "not_ready": 1,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        }
+      },
+      "largest_tactical_pulse_counter": 12,
+      "largest_ordnance_pulse_counter": 0,
+      "largest_blocked_request_counter": 136
+    },
+    {
+      "phase": 4,
+      "epoch": 5,
+      "map": "mp_black_water_canal",
+      "bots_at_begin": 16,
+      "imc_bots_at_begin": 8,
+      "live_pilot_trace_samples": 891,
+      "selected_known_hotdropping_pet_samples": 0,
+      "overhead_visible_engage_samples": 0,
+      "actual_current_weapon_samples": {
+        "mp_weapon_shotgun": 147,
+        "mp_weapon_rspn101": 143,
+        "mp_weapon_g2": 112,
+        "mp_weapon_epg": 162,
+        "mp_weapon_lstar": 115,
+        "mp_weapon_car": 93,
+        "mp_weapon_grenade_sonar": 4,
+        "melee_pilot_emptyhanded": 4,
+        "mp_weapon_defender": 111
+      },
+      "tactical_observations": {
+        "mp_ability_cloak": {
+          "observations": 138,
+          "ready": 113,
+          "not_ready": 25,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 0
+        },
+        "mp_weapon_grenade_sonar": {
+          "observations": 152,
+          "ready": 145,
+          "not_ready": 7,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 97
+        },
+        "mp_ability_holopilot": {
+          "observations": 123,
+          "ready": 121,
+          "not_ready": 2,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 10
+        },
+        "mp_weapon_deployable_cover": {
+          "observations": 120,
+          "ready": 120,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 100
+        },
+        "mp_ability_grapple": {
+          "observations": 124,
+          "ready": 124,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        },
+        "mp_ability_heal": {
+          "observations": 134,
+          "ready": 131,
+          "not_ready": 3,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 50
+        },
+        "mp_ability_shifter": {
+          "observations": 99,
+          "ready": 98,
+          "not_ready": 1,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        }
+      },
+      "largest_tactical_pulse_counter": 11,
+      "largest_ordnance_pulse_counter": 0,
+      "largest_blocked_request_counter": 125
+    },
+    {
+      "phase": 6,
+      "epoch": 7,
+      "map": "mp_eden",
+      "bots_at_begin": 15,
+      "imc_bots_at_begin": 8,
+      "live_pilot_trace_samples": 597,
+      "selected_known_hotdropping_pet_samples": 0,
+      "overhead_visible_engage_samples": 0,
+      "actual_current_weapon_samples": {
+        "mp_weapon_rspn101": 592,
+        "melee_pilot_emptyhanded": 5
+      },
+      "tactical_observations": {
+        "mp_ability_grapple": {
+          "observations": 597,
+          "ready": 597,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        }
+      },
+      "largest_tactical_pulse_counter": 0,
+      "largest_ordnance_pulse_counter": 0,
+      "largest_blocked_request_counter": 0
+    }
+  ],
+  "limits": "Controlled smoke/integration coverage, not a randomized balance or stability guarantee. Ability shot/resource counters are observations, not cast-success totals. Native pulse counters reset across lives/hulls. Selected hotdrop counts use preceding reported state and two-second snapshots. Mixed loadouts occur only in the test harness. Private raw log and save data are not published."
+}

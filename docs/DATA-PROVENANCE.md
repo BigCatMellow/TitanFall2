@@ -17,8 +17,15 @@ Private persistence, installed third-party bundles, game assets and build/dump
 binaries are omitted. Logs are sanitized before gzip. PUBLICATION-CHECK.json
 records pattern/path/size checks, not a guarantee of detecting every secret.
 
-Current code is the undeployed observation-v17 candidate. Data is v16 unless
-explicitly labeled otherwise. Retainedv13 raw-persistence/v14 route experiments
+Current source and normal deployment are the tested decisions-v18 candidate.
+Historical research is v16 unless explicitly labeled otherwise. The v18 full
+integration suite and final readiness retest are separate under
+Notes/candidates/decisions-v18-20261025. Their published compressed evidence
+contains authored BOT_*/DECISION_TEST* diagnostics only; full logs remain local.
+The final bridge adds ammo-per-shot cost to the earlier shared-energy check;
+the focused retest records its exact hash separately from the full native suite.
+The new22-map survey is a fresh frozen v18 cohort, not a continuation of v16
+counts. Retainedv13 raw-persistence/v14 route experiments
 were rejected; filenames like final do not establish deployment or approval.
 
 Original notes preserve machine-specific paths and chronological statuses.

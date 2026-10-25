@@ -1,4 +1,7 @@
 //! Waypoint churn is not movement. Check displacement independently of paths.
+pub(super) fn finish_command(anchor: &mut Option<(f32, [f32; 2])>, navigation_requested: bool) {
+    if !navigation_requested { *anchor = None; }
+}
 pub(super) fn has_stalled(now: f32, anchor: &mut Option<(f32, [f32; 2])>, pos: [f32; 2]) -> bool {
     if let Some((last, previous)) = *anchor {
         let delta = [pos[0] - previous[0], pos[1] - previous[1]];
@@ -38,5 +41,15 @@ mod tests {
         let mut anchor = Some((100., [0., 0.]));
         assert!(!has_stalled(0., &mut anchor, [0., 0.]));
         assert!(has_stalled(3., &mut anchor, [0., 0.]));
+    }
+    #[test]
+    fn combat_gap_does_not_count_as_navigation_failure() {
+        let mut anchor = None;
+        assert!(!has_stalled(0., &mut anchor, [0., 0.]));
+        finish_command(&mut anchor, true);
+        finish_command(&mut anchor, false);
+        assert!(!has_stalled(4., &mut anchor, [0., 0.]));
+        finish_command(&mut anchor, true);
+        assert!(has_stalled(7., &mut anchor, [0., 0.]));
     }
 }

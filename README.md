@@ -7,15 +7,18 @@ local work. [Original README](docs/UPSTREAM-README.md).
 
 ## Current state
 
-- **Installed and played:** combat-decisions-v16,8v8 (human+15 bots), aim0.78.
-- **Current source:** observation-v17-candidate, diagnostics only, **not
-  deployed or runtime-tested**.34 offline tests and a47058-decision comparison
-  against v16 pass. [Candidate record](Notes/candidates/observation-v17-20261025/README.md).
+- **Installed:** tested decisions-v18-candidate,8v8 (human+15 bots), aim0.78.
+- **Current source:** navigation watchdog context, hotdropping-pet targeting,
+  readiness-gated offhand inputs and safe opposite-side combat stepping.
+  41 offline tests, a47058-decision controller comparison, full client/map/lobby
+  checks and a final mixed-loadout readiness retest pass.
+  [Candidate record](Notes/candidates/decisions-v18-20261025/README.md).
 - **Custom add-ons:** named loadout/basic progress persistence,50% shorter
   human tactical recharge,10% shorter human reloads on G2/Alternator/R-201/CAR.
-- **Map survey:** paused by James. Five new full trials plus partial Kodai;
-  17 trials remain. Earlier runs provide10 completed recordings on9 maps.
-  Newer human-played Eden/Exoplanet data is also retained. No automatic resume.
+- **Map survey:** a fresh22-map v18 cohort was started after validation, beginning
+  with Kodai.200team-point goal,15minute cap,16bots8v8 plus an inactive observer.
+  Earlier v16 trials and human-played sessions remain separate historical data.
+  See the latest handoff for live status and the stop-after-current marker.
 
 Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 [the map review](research/trends-20261025/FINDINGS.md) and
@@ -28,6 +31,7 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 | Rust workspace crates | Native bot/plugin source and upstream experimental tools |
 | `tests/` | Native-independent regression tests |
 | `James.BotLifecycle/` | Normal solo bot startup |
+| `James.BotDecisions/` | Native readiness and hotdrop-state bridge |
 | `James.LocalPersistence/` | Saved loadouts/basic XP and UI cache repair |
 | `James.TacticalRecharge/`, `James.WeaponReload/` | Human tactical/reload adjustments |
 | `Notes/` | Dated notes, results, failures, rollback records and tools |
@@ -69,7 +73,9 @@ These are gameplay logs and reconstructed paths, not live visual observation.
 Sample counts are not independent incidents or proof of improved AI. Human and
 unattended cohorts differ. The trend report trims intros/post-match time;
 older full-session exports remain intact. Bot weapon evidence is
-mostly R-201, not a broad weapon/ability balance study.
+mostly R-201 in the historical survey. The new isolated integration matrix
+observed six gun classes and seven suits, but is not a balance study. Default
+bot loadouts remain Grapple/frag; Grapple/A-Wall automation is not implemented.
 
 Sanitized logs are stored as `.log.gz`; expand a selected file with
 `tools/Expand-ResearchLog.ps1`. Replays and derived JSON/CSV/PNG are retained.

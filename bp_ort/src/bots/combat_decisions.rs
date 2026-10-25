@@ -32,6 +32,7 @@ pub(super) struct CombatState {
     holding: bool, retreat_at: Option<f32>, last_time: f32,
     sample_current: bool,
     pub step_next_at: f32, pub step_clear: bool, pub step_yaw: f32, pub step_side: f32, pub step_forward: f32,
+    pub step_output_side: f32,
 }
 impl Default for CombatState {
     fn default() -> Self { Self {
@@ -41,6 +42,7 @@ impl Default for CombatState {
         holding: false, retreat_at: None, last_time: 0.,
         sample_current: false,
         step_next_at: 0., step_clear: false, step_yaw: 0., step_side: 0., step_forward: 0.,
+        step_output_side: 0.,
     } }
 }
 impl CombatState {

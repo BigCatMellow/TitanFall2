@@ -1,0 +1,11 @@
+{
+  "Name": "James.DecisionTest",
+  "Description": "Disposable v18 phased native integration test; never install in normal play.",
+  "Version": "1.0.0",
+  "LoadPriority": 50,
+  "ConVars": [{"Name":"james_candidate_phase","DefaultValue":"0"},{"Name":"james_candidate_dedicated","DefaultValue":"0"},{"Name":"james_candidate_quick","DefaultValue":"0"}],
+  "Scripts": [
+    {"Path":"james_decision_test.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"JamesDecisionTest_Init"}},
+    {"Path":"james_decision_test_ui.nut","RunOn":"UI","UICallback":{"After":"JamesDecisionTest_UIInit"}}
+  ]
+}

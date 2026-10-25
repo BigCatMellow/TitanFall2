@@ -1,0 +1,49 @@
+{
+  "time": "2026-10-25T19:51:04.2749122-04:00",
+  "normal_deployment": "deployed",
+  "native_sha256": "F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648",
+  "bridge_sha256": "30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78",
+  "backup_name": "before-v18-normal-deploy-20261025-194834",
+  "normal_current_saves_unchanged": 3,
+  "existing_addons": {
+    "James.LocalPersistence": {
+      "files": 6,
+      "unchanged": true
+    },
+    "James.TacticalRecharge": {
+      "files": 10,
+      "unchanged": true
+    },
+    "James.WeaponReload": {
+      "files": 7,
+      "unchanged": true
+    },
+    "James.BotLifecycle": {
+      "files": 2,
+      "unchanged": true
+    }
+  },
+  "full_test": "decisions-v18-20261025-153058",
+  "final_bridge_test": "decisions-v18-20261025-194409",
+  "offline_tests": 41,
+  "offline_suites": 8,
+  "controller_decisions": 47058,
+  "controller_commands": 50000,
+  "native_build": "passed",
+  "base_game_writes": false,
+  "visual_match_watching": false,
+  "survey_batch": "decisions-v18-all-maps-20261025-194900",
+  "source_text_sha256_lf": {
+    "bp_ort/src/bots/cmds/basic_combat.rs": "5A4A39A722CFAADDCB057E1501914F7EAFFB1A3FBB35D4011D73EC768B29E8DA",
+    "bp_ort/src/bots/cmds/mod.rs": "1C09287C1C7FC5B6C9C1720998126FC398A713A9F891FE83419653E93240A902",
+    "bp_ort/src/bots/cmds_exec.rs": "EF3E374E447CE8FFC2BFF4ADADBD6B3AD85BB6CD5B947D35AE81CFE0C145D58C",
+    "bp_ort/src/bots/cmds_utils.rs": "E8F376188780B0834CF23ECE008D68675C93CBD999349CB005F57730653ED7AC",
+    "bp_ort/src/bots/combat_decisions.rs": "564905C158171F766E6657C45285370888E9394204E13BEFD4060A7EF6591D30",
+    "bp_ort/src/bots/mod.rs": "80CFB346CC8C949A0C9CA9DC81616D5F59A5D1EBAC9A5B5E4D1FB45FB1976869",
+    "bp_ort/src/bots/progress_watchdog.rs": "CFF2BF788D29A6A385FB3C14EC20E307C6489108F0EE4EB93486635CE4B17AC2",
+    "bp_ort/src/lib.rs": "B38EDE8DD676165BA033B8A436DA516E5CB24CC761B3B78388114FB1D676C9D4",
+    "bp_ort/src/bots/action_bridge.rs": "DC3446D12890C8245325C41A2B3D3E0D3D0FFCE8FB68A954C8D947CF617B3EA8",
+    "bp_ort/src/bots/action_policy.rs": "C64012E2E174BC6A6D0474FE2C7C31CBF0A501323655512DCFD81C199EF16C41",
+    "James.BotDecisions/mod/scripts/vscripts/james_bot_decisions.nut": "30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78"
+  }
+}

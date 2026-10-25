@@ -62,6 +62,8 @@ pub(crate) fn basic_combat(
     let combat_enabled = !is_titan && sim_type == 6
         && crate::bots::COMBAT_DECISIONS_CONVAR.get().is_some_and(|c| c.get_value_bool());
     let mut combat_target_is_titan = false;
+    let action_policy = !is_titan && sim_type == 6
+        && crate::bots::ACTION_POLICY_CONVAR.get().is_some_and(|c| c.get_value_bool());
     if !combat_enabled { local_data.combat.tactic = "legacy"; }
 
     let target = if !is_titan && sim_type == 6
@@ -483,6 +485,10 @@ pub(crate) fn basic_combat(
         cmd.world_view_angles.x = 0.;
     }
 
+    let defensive_tactical = action_policy && lookup_ent(player.m_inventory.offhandWeapons[1], helper.sv_funcs)
+        .and_then(|ent| get_weaponx_name(ent, helper.sv_funcs))
+        .is_some_and(|name| matches!(name, "mp_ability_heal" | "mp_ability_shifter"));
+    let defensive_request = if defensive_tactical { cmd.buttons & Action::OffHand1 as u32 } else { 0 };
     if combat_enabled && !combat_target_is_titan
         && local_data.metrics.state != "embark"
         && unsafe { (helper.sv_funcs.get_pet_titan)(player) }.is_null()
@@ -503,6 +509,8 @@ pub(crate) fn basic_combat(
             cmd.buttons &= !(Action::Attack as u32 | Action::Zoom as u32 | Action::Melee as u32
                 | Action::OffHand0 as u32 | Action::OffHand1 as u32 | Action::OffHand2 as u32
                 | Action::OffHand3 as u32 | Action::OffHand4 as u32 | Action::OffhandQuick as u32);
+            // Keep defensive intent; readiness filtering below still gates the request.
+            cmd.buttons |= defensive_request;
         }
         if let Some(forward) = decision.forward {
             let state = &mut local_data.combat;
@@ -513,18 +521,35 @@ pub(crate) fn basic_combat(
                 state.step_yaw = yaw;
                 state.step_side = decision.side;
                 state.step_forward = forward;
-                state.step_clear = combat_step_clear(player, helper, yaw, forward, decision.side);
+                let retry = crate::bots::STEP_RETRY_CONVAR.get().is_some_and(|c| c.get_value_bool());
+                let side = crate::bots::action_policy::clear_side(decision.side, retry,
+                    |side| combat_step_clear(player, helper, yaw, forward, side));
+                state.step_clear = side.is_some();
+                state.step_output_side = side.unwrap_or(0.);
                 if !state.step_clear { state.blocked_steps = state.blocked_steps.saturating_add(1); }
             }
             cmd.buttons &= !(Action::Forward as u32 | Action::Back as u32 | Action::Speed as u32
                 | Action::Moveleft as u32 | Action::Moveright as u32);
-            cmd.move_ = if state.step_clear { Vector3::new(forward, decision.side, 0.) } else { Vector3::ZERO };
+            cmd.move_ = if state.step_clear { Vector3::new(forward, state.step_output_side, 0.) } else { Vector3::ZERO };
             if cmd.move_.x < 0. { cmd.buttons |= Action::Back as u32; }
             if cmd.move_.y < 0. { cmd.buttons |= Action::Moveleft as u32; }
             if cmd.move_.y > 0. { cmd.buttons |= Action::Moveright as u32; }
         }
     }
 
+    if action_policy {
+        let token = unsafe { EngineToken::new_unchecked() };
+        let ready = crate::bots::action_bridge::readiness(player.m_RefEHandle, token);
+        let tactical_id = lookup_ent(player.m_inventory.offhandWeapons[1], helper.sv_funcs).map_or(-1, |w| w.m_RefEHandle);
+        let ordnance_id = lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs).map_or(-1, |w| w.m_RefEHandle);
+        let tactical = local_data.tactical_pulse.press(time(helper), tactical_id,
+            cmd.buttons & Action::OffHand1 as u32 != 0, ready.map(|r| r.tactical));
+        // At most one pilot offhand request at once, with defensive tactical priority.
+        let ordnance = local_data.ordnance_pulse.press(time(helper), ordnance_id,
+            !tactical && cmd.buttons & Action::OffHand0 as u32 != 0, ready.map(|r| r.ordnance));
+        if !tactical { cmd.buttons &= !(Action::OffHand1 as u32); }
+        if !ordnance { cmd.buttons &= !(Action::OffHand0 as u32); }
+    }
     let actions = [
         Action::OffHand0,
         Action::OffHand1,
@@ -617,9 +642,13 @@ unsafe fn find_team_target<'a>(
     struct NativeTarget { candidate: Candidate, pos: Vector3, player: *mut CPlayer }
     let mut v = Vector3::ZERO;
     let view = unsafe { *(helper.sv_funcs.view_angles)(player, &mut v) };
-    let targets: Vec<_> = enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team))
-        .filter(|target| target.m_RefEHandle != -1)
-        .map(|target| {
+    let filter_pet = crate::bots::TARGET_ELIGIBILITY_CONVAR.get().is_some_and(|c| c.get_value_bool());
+    let token = unsafe { EngineToken::new_unchecked() };
+    let targets: Vec<_> = enemy_player_iterator(team, helper).map(|t| (t, false))
+        .chain(enemy_titan_iterator(helper, team).map(|t| (t, true)))
+        .filter(|(target, pet)| target.m_RefEHandle != -1 && (!filter_pet || !pet
+            || crate::bots::action_bridge::target_allowed(target.m_RefEHandle, time(helper), token)))
+        .map(|(target, _)| {
             let pos = unsafe { *target.get_origin(&mut v) };
             NativeTarget { candidate: Candidate { id: target.m_RefEHandle, distance: distance(pos, origin) },
                 pos, player: std::ptr::from_mut(target) }

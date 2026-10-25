@@ -4,6 +4,7 @@ use rrplug::{
     prelude::EngineToken,
 };
 use std::cell::UnsafeCell;
+use rrplug::bindings::DynamicCast;
 
 use super::{BOT_DATA_MAP, SHARED_BOT_DATA, SIMULATE_TYPE_CONVAR, cmds_helper::CUserCmdHelper};
 use crate::{
@@ -92,6 +93,7 @@ pub fn run_bots_cmds(paused: bool) {
         };
 
         local_data.combat.begin_command();
+        local_data.navigation_requested = false;
         let mut cmd = {
             local_data.edict = edict as u16;
 
@@ -113,9 +115,24 @@ pub fn run_bots_cmds(paused: bool) {
             .unwrap_or_else(|| CUserCmd::new_empty(&helper))
         };
 
+        if super::NAVIGATION_CONTEXT_CONVAR.get().is_some_and(|c| c.get_value_bool()) {
+            super::progress_watchdog::finish_command(&mut local_data.movement_anchor, local_data.navigation_requested);
+        }
         cmd.frame_time = globals.frameTime;
         local_data.metrics.command(cmd.world_view_angles.y, cmd.buttons & Action::Jump as u32 != 0);
         if emit_trace {
+            if let Some(weapon) = crate::utils::lookup_ent(player.m_inventory.activeWeapon, server_functions)
+                .and_then::<&rrplug::bindings::class_types::cweaponx::CWeaponX, _>(|ent| ent.dynamic_cast()) {
+                if let Some(name) = crate::utils::get_weaponx_name(weapon, server_functions) {
+                    log::info!("BOT_WEAPON epoch={epoch} map={map} t={:.2} slot={edict} weapon={name} clip={} reloading={} selected={}",
+                        globals.curTime, weapon.m_ammoInClip, weapon.m_bInReload as u8, cmd.weaponselect);
+                }
+            }
+            log::info!("BOT_ACTION epoch={epoch} map={map} t={:.2} slot={edict} tactical_pulses={} ordnance_pulses={} blocked={} offhand={} attack={}",
+                globals.curTime, local_data.tactical_pulse.starts, local_data.ordnance_pulse.starts,
+                local_data.tactical_pulse.blocked.saturating_add(local_data.ordnance_pulse.blocked),
+                cmd.buttons & (crate::bindings::Action::OffHand0 as u32 | crate::bindings::Action::OffHand1 as u32),
+                (cmd.buttons & crate::bindings::Action::Attack as u32 != 0) as u8);
             let metrics = &local_data.metrics;
             let combat = &local_data.combat;
             if !combat.weapon.is_empty() {

@@ -328,3 +328,86 @@ defensive abilities. Grapple explicitly0/AWall absent in that activation branch.
 These are source findings, not measured casts/lostshots. No gameplay changes;
 next candidate should observe readiness/actions and improve decisions before
 buffing damage/cooldowns. Source remains diagnosticv17; installs stablev16.
+
+2026-10-25 user AUTHORIZED implementation/testing, then fresh map-by-map resume.
+Source now decisions-v18-candidate;41offline tests and current-source47058
+combat-decision comparison pass; native builds. Normal/former test profiles
+remain v16; new candidate-v18-profile is disposable. Backup implementation-v18-
+20261025-141109 preserves current DLLs/saves/configs. Candidate details/hashes in
+Notes/candidates/decisions-v18-20261025/README.md. Runtime NOT yet validated.
+Startup failures were missingPDEF in fresh profile; v16 control same profile also
+stalled, dedicated log and user dialog confirm schema error. Runtime cache is
+deleted on mod-load; do not keep blindly copying it before launch. Test-only
+filesystem preflight now reads matching stock schema through existing interface.
+No raw save/reset/schema-field edits or base-game writes. Current client retry
+decisions-v18-20261025-150624. Do not deploy normal/resume survey until checks pass.
+
+CORRECTION to startup diagnosis: fresh-profile construction omitted its root
+Northstar.dll, so launcher fell back to game-rootv1.30.2 rather than1.31.14.
+The old core did not enable the version-keyed copiedmods; only newbool add-ons
+appeared in compiledRSON. MissingPDEF/missingfunctions were setup errors, not
+valid AI trials. Copied matching1.31.14 runtime; regenerated enabledmods from
+manifests. Removed temporary schema override/nativeprewarm and UI forcedmap
+bootstrap. Launcher checks profileDLLversion; watcher checks actual logversion.
+Normal/originalisolated profiles unaffected throughout. Runtime validation still
+pending on corrected profile; refresh candidateDLLhash after clean rebuild.
+
+2026-10-25 19:51 EDT — implementation, tests, deployment and survey restart.
+This entry supersedes the earlier runtime-pending/preflight notes above.
+
+Canonical source: C:\Users\james\northstar-crash-audit\TitanFall2-project.
+Normal and working isolated now use decisions-v18-candidate native SHA256
+F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648.
+Final James.BotDecisions script SHA256
+30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78.
+All four new switches enabled: bot_navigation_context, bot_target_eligibility,
+bot_action_policy, bot_step_retry. Aim0.78, human+15bot8v8, existing human50%
+recharge/four-gun0.9reload modifiers and launcher unchanged.
+
+41 tests/8suites pass; current pure-controller47058decisions/50000commands
+match v16. Native build passes. Full client integration run153058 passed
+baseline/progressive switches, Eden/Complex/Canal, six guns/seven suits, lobby
+and human+15bot return at15:48. Known-hotdrop selections11baseline/0filtered.
+Final readiness-cost retest194409 passed matrix/lobby/15bots at19:48;866cost
+samples,38unaffordable tactical observations,0incorrectly-ready. The full suite
+used the earlier shared-energy check; final bridge adds ammo-per-shot cost.
+An int/float compile error in that refinement was fixed before final test.
+One quick launch intentionally stopped for argument-ordering error; corrected.
+No native changes after the full suite. No damage/aim/cooldown rebalance here.
+
+Normal deployed19:48; fresh private backup:
+C:\Users\james\northstar-crash-audit\Notes\backups\before-v18-normal-deploy-20261025-194834.
+All3CURRENT normal save files hash-identical during/after deployment; all25files
+in LocalPersistence/TacticalRecharge/WeaponReload/BotLifecycle unchanged from
+initial backup. No old save restoration or ns_resetpersistence. Rollback only
+DLL/config/enabledmods; explicitly disable James.BotDecisions1.0.0 when using
+v16 (absence from enabledmods may auto-enable it). Preserve current save_data.
+
+Startup correction: omitted profile Northstar.dll caused confirmed old-core
+fallback1.30.2.0. Even after correcting to1.31.14, fresh candidate-v18-profile
+remained startup-broken; do NOT use it or claim the remaining cause resolved.
+A v16 control worked in the original isolated profile. It was backed up and
+successfully tested with v18. ALL temporary native/schema/prewarm/UI-autoretry
+work removed. No base-game writes. Core version verified from actual logs.
+Dedicated startup attempts are invalid AI trials, not successful matches.
+
+New background survey batch:
+C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-all-maps-20261025-194900.
+Runner PID313660, initial Kodai PID307088 (verify live; historical once exited).
+Read status.json/plan.json and parent current-v18-session.json.22maps,16bots
+8v8+inactive observer,200team-point goal,15mincap, frozen DLL/core/bridge hashes,
+fresh process each map. Kodai confirmed running,16bots and advancing kills.
+Map mp_coliseum_column excluded because no navigation mesh. New v18 cohort;
+do not merge with old v16 totals or restart old paused queue. Runner stops on
+errors/uncontrolled population/noheartbeat/hash change. Create empty
+stop-after-current.txt in THIS batch folder to pause after the current map.
+Runner restores its pre-survey config/enabledmods/harness; it never restores
+old personal saves. Test harness disabled in isolated idle config and absent
+from normal. Never edit loaded DLLs/start another game while survey runs.
+
+Telemetry only; no visual watching/recorder. Default bots still Grapple/frag,
+whose legacy activation branch doesn't request them. Mixed weapons/suits are
+test-only; no new Grapple/A-Wall automation. Pulse/shot/resource counters aren't
+cast-success totals. Route hotspots/Titan-specific decisions/hide-and-seek
+remain further work. Source, sanitized test diagnostics and reports are in
+Notes/candidates/decisions-v18-20261025; private raw logs/binaries/saves stay local.

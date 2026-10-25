@@ -1,0 +1,53 @@
+{
+  "snapshot": "2026-10-25T19:51:04.3096133-04:00",
+  "batch": "decisions-v18-all-maps-20261025-194900",
+  "state_at_snapshot": "running",
+  "current_map": "mp_forwardbase_kodai",
+  "score": {
+    "map": "mp_forwardbase_kodai",
+    "militia": "9",
+    "kills": "16",
+    "bots": "16",
+    "imc": "7",
+    "index": "0",
+    "elapsed": "40"
+  },
+  "planned_maps": [
+    "mp_forwardbase_kodai",
+    "mp_grave",
+    "mp_homestead",
+    "mp_relic02",
+    "mp_rise",
+    "mp_thaw",
+    "mp_wargames",
+    "mp_eden",
+    "mp_glitch",
+    "mp_angel_city",
+    "mp_black_water_canal",
+    "mp_colony02",
+    "mp_complex3",
+    "mp_crashsite3",
+    "mp_drydock",
+    "mp_lf_deck",
+    "mp_lf_meadow",
+    "mp_lf_stacks",
+    "mp_lf_township",
+    "mp_lf_traffic",
+    "mp_lf_uma",
+    "mp_coliseum"
+  ],
+  "excluded": [
+    {
+      "map": "mp_coliseum_column",
+      "reason": "Installed arena lacks bot navigation data; recorded as unsupported, not tested"
+    }
+  ],
+  "native_sha256": "F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648",
+  "bridge_sha256": "30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78",
+  "core_sha256": "86007DD1DDAC9103508EECA520E2AB89B16DF92780A5F8A67497CCF29567EDB9",
+  "goal": 200,
+  "minutes": 15,
+  "bots": 16,
+  "observer": "inactive human",
+  "note": "Snapshot only; check live private status before acting. New v18 cohort, not v16 continuation."
+}

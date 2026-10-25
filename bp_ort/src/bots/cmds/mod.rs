@@ -50,6 +50,9 @@ pub(super) fn get_cmd(
             _ = query.switch_query(desired_hull);
             local_data.escape_recovery = Default::default();
             local_data.combat = Default::default();
+            local_data.movement_anchor = None;
+            local_data.tactical_pulse = Default::default();
+            local_data.ordnance_pulse = Default::default();
         }
     }
 
@@ -79,6 +82,9 @@ pub(super) fn get_cmd(
         _ if unsafe { (helper.sv_funcs.is_alive)(nudge_type::<&CBaseEntity>(player)) == 0 } => {
             local_data.escape_recovery = Default::default();
             local_data.combat = Default::default();
+            local_data.movement_anchor = None;
+            local_data.tactical_pulse = Default::default();
+            local_data.ordnance_pulse = Default::default();
             shared.coordination.clear(local_data.edict as usize);
             local_data.metrics.target = None;
             local_data.metrics.visible = false;
