@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "scope": "30 selectable pilot loadout weapons; excludes boost-only Smart Pistol and NPC/event-only weapon classes",
   "source": {
     "repository": "BigSpice/TitanFall-2-Skin-Modding",
     "commit": "bc13e6120e37b3ccdbc0cba55e61fd978bdcbe21",

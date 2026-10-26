@@ -4,7 +4,7 @@
 
 ## Evidence and authority
 
-- **30 named pilot weapons**, covering assault rifles, SMGs, LMGs, snipers, shotguns, grenadiers, pistols and anti-Titan equipment.
+- **30 selectable pilot loadout weapons**, covering assault rifles, SMGs, LMGs, snipers, shotguns, grenadiers, pistols and anti-Titan equipment. The boost-only **Smart Pistol** and NPC/event-only weapon classes are explicitly outside this comparison; automated target acquisition needs a separate evaluation.
 - Reference data: [BigSpice's published Titanfall 2 weapon scripts](https://github.com/BigSpice/TitanFall-2-Skin-Modding/tree/bc13e6120e37b3ccdbc0cba55e61fd978bdcbe21/Weapon_Scripts), pinned at commit `bc13e6120e37b3ccdbc0cba55e61fd978bdcbe21`, with a blob SHA per script in [reference-stats.json](reference-stats.json).
 - Used `MP_BASE` damage values, rather than single-player overrides or menu `stat_damage` ratings. `fire_rate` in weapon scripts is shots/second; nominal RPM is that number multiplied by 60.
 - **This is a third-party reference snapshot, not a live Northstar extraction.** Attachments, game modes, recoil curves, player/bot behavior and current installed changes can alter actual values. Do not treat this as proven active game state.
