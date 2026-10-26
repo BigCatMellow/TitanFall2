@@ -1,7 +1,7 @@
 {
   "Name": "James.WeaponReload",
-  "Description": "10% shorter reloads for the local solo human's G2, Alternator, R-201 and CAR.",
-  "Version": "1.0.0",
+  "Description": "10% shorter reloads for the local solo human's G2, Alternator, Volt, R-201 and CAR.",
+  "Version": "1.0.1",
   "LoadPriority": 41,
   "ConVars": [
     {

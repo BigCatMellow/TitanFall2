@@ -14,7 +14,9 @@ local work. [Original README](docs/UPSTREAM-README.md).
   checks and a final mixed-loadout readiness retest pass.
   [Candidate record](Notes/candidates/decisions-v18-20261025/README.md).
 - **Custom add-ons:** named loadout/basic progress persistence,50% shorter
-  human tactical recharge,10% shorter human reloads on G2/Alternator/R-201/CAR.
+  human tactical recharge,10% shorter human reloads on G2/Volt/R-201/CAR in
+  the tested installation. The prior notes misidentified Volt as Alternator;
+  source candidate1.0.1 adds the actual Alternator, pending runtime validation.
 - **Map survey complete:** all22supported maps have valid16-bot8v8 rounds.
   Three used the200-point goal;19used75points per team. A host cleanup race
   stopped the overnight run; Traffic was recovered and the last two maps
@@ -51,7 +53,8 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 
 ## Build and check
 
-Validated toolchain: `nightly-2025-09-11-x86_64-pc-windows-gnu` and LLVM-MinGW.
+Validated toolchain: 
+ightly-2025-09-11-x86_64-pc-windows-gnu` and LLVM-MinGW.
 With the toolchain installed and LLVM-MinGW's bin directory on PATH:
 
 ```powershell
