@@ -1,5 +1,13 @@
 # Pilot weapon reload adjustment — 2026-10-24
 
+> **2026-10-26 correction to historical evidence:** `mp_weapon_hemlok_smg`
+> is the **Volt**, not the Alternator. The archived 1.0.0 measurements labeled
+> "Alternator" were Volt measurements. The actual Alternator
+> (`mp_weapon_alternator_smg`) was not modified or runtime-tested in 1.0.0.
+> Source candidate 1.0.1 preserves the four previously affected weapons and
+> adds the Alternator, but requires a fresh isolated engine validation before
+> deployment. The original contemporaneous record below is preserved.
+
 Scope: James approved the modest weapon changes proposed in the read-only
 review. Implemented as James.WeaponReload 1.0.0: 10% shorter reloads on G2,
 Alternator, R-201 and CAR for the local insecure-solo human. Existing

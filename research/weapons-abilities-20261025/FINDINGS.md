@@ -1,5 +1,11 @@
 # Weapons and abilities: current changes and useful next steps
 
+> **Weapon-name correction (2026-10-26):** Every archived "Alternator" reload
+> result below actually belongs to the **Volt** (`mp_weapon_hemlok_smg`).
+> The real Alternator is `mp_weapon_alternator_smg` and was not part of the
+> 1.0.0 engine test. The 1.0.1 source candidate adds it without removing Volt;
+> no new in-game results are claimed by this note.
+
 The strongest next improvement is more selective bot ability use and better
 weapon/target transitions. Existing data does not support a broad damage,
 accuracy or cooldown increase. This review changes analysis files only; no game

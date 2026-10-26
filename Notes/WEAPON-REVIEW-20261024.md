@@ -1,5 +1,15 @@
 # Weapon review — 2026-10-24 (research only)
 
+> **2026-10-26 correction:** The prior table's "Alternator (hemlok_smg)"
+> row is actually the **Volt**. Northstar identifies the Alternator as
+> `mp_weapon_alternator_smg`, with reference MP near/far body damage 35/18,
+> fire rate 10 shots/sec (600 RPM), base magazine 20 and reload/empty reload
+> 2.3/2.7 seconds. The original research table is left as historical evidence,
+> not reinterpreted as a live Alternator measurement. The referenced 40-round
+> extended magazine and the loadout entries labeled "Alternator" also refer
+> to the Volt class in those records; actual private loadout names should be
+> confirmed in-game before drawing conclusions about saved weapon choices.
+
 James asked to look into weapon stats and possible improvements. No gameplay,
 weapon, bot or save settings changed and no game restart was performed.
 

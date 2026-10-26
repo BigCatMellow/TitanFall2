@@ -3,10 +3,10 @@
 struct Profile { near: f32, far: f32, reloadable: bool }
 fn profile(name: &str) -> Option<Profile> {
     let (near, far, reloadable) = match name {
-        "mp_weapon_shotgun" | "mp_weapon_shotgun_pistol" | "mp_weapon_shotgun_doublebarrel" => (90., 300., true),
-        "mp_weapon_car" | "mp_weapon_hemlok_smg" | "mp_weapon_r97" | "mp_weapon_pdw" | "mp_weapon_autopistol" => (180., 650., true),
-        "mp_weapon_rspn101" | "mp_weapon_rspn101_og" | "mp_weapon_vinson" | "mp_weapon_hemlok" | "mp_weapon_lmg" => (280., 1000., true),
-        "mp_weapon_g2" | "mp_weapon_wingman_n" | "mp_weapon_dmr" | "mp_weapon_doubletake" | "mp_weapon_sniper" => (400., 1350., true),
+        "mp_weapon_shotgun" | "mp_weapon_shotgun_pistol" | "mp_weapon_shotgun_doublebarrel" | "mp_weapon_mastiff" => (90., 300., true),
+        "mp_weapon_car" | "mp_weapon_alternator_smg" | "mp_weapon_hemlok_smg" | "mp_weapon_r97" | "mp_weapon_pdw" | "mp_weapon_autopistol" | "mp_weapon_semipistol" => (180., 650., true),
+        "mp_weapon_rspn101" | "mp_weapon_rspn101_og" | "mp_weapon_vinson" | "mp_weapon_hemlok" | "mp_weapon_lmg" | "mp_weapon_esaw" => (280., 1000., true),
+        "mp_weapon_g2" | "mp_weapon_wingman" | "mp_weapon_wingman_n" | "mp_weapon_dmr" | "mp_weapon_doubletake" | "mp_weapon_sniper" => (400., 1350., true),
         "mp_weapon_epg" | "mp_weapon_smr" | "mp_weapon_softball" => (300., 850., true),
         "mp_weapon_lstar" => (240., 900., false),
         _ => return None,
@@ -126,6 +126,32 @@ mod tests {
         let mut s = CombatState::default(); let mut i = input(1.);
         i.weapon = "mp_weapon_shotgun"; assert_eq!(s.decide(i).forward, None);
         let mut i = input(2.); i.weapon = "mp_weapon_sniper"; assert_eq!(s.decide(i).forward, Some(0.));
+    }
+    #[test] fn standard_pilot_weapons_get_class_specific_decisions() {
+        // Names follow Northstar's canonical weapon-code list. Specialized
+        // Cold War/anti-Titan handling needs ammo-cost and charge-aware logic.
+        for weapon in [
+            "mp_weapon_rspn101", "mp_weapon_rspn101_og", "mp_weapon_vinson",
+            "mp_weapon_hemlok", "mp_weapon_g2", "mp_weapon_car",
+            "mp_weapon_alternator_smg", "mp_weapon_hemlok_smg", "mp_weapon_r97",
+            "mp_weapon_lmg", "mp_weapon_esaw", "mp_weapon_lstar",
+            "mp_weapon_shotgun", "mp_weapon_mastiff", "mp_weapon_shotgun_pistol",
+            "mp_weapon_sniper", "mp_weapon_dmr", "mp_weapon_doubletake",
+            "mp_weapon_epg", "mp_weapon_smr", "mp_weapon_softball",
+            "mp_weapon_wingman", "mp_weapon_wingman_n", "mp_weapon_autopistol",
+            "mp_weapon_semipistol",
+        ] {
+            assert!(profile(weapon).is_some(), "missing combat profile for {weapon}");
+        }
+    }
+    #[test] fn newly_supported_weapons_handle_empty_magazines() {
+        for weapon in ["mp_weapon_alternator_smg", "mp_weapon_mastiff",
+                       "mp_weapon_esaw", "mp_weapon_wingman", "mp_weapon_semipistol"] {
+            let mut s = CombatState::default();
+            let mut i = input(1.); i.weapon = weapon; i.clip = 0;
+            let d = s.decide(i);
+            assert!(d.reload && d.suppress_fire, "empty {weapon} should reload");
+        }
     }
     #[test] fn range_hysteresis_prevents_boundary_chatter() {
         let mut s = CombatState::default(); assert_eq!(s.decide(input(1.)).forward, Some(0.));

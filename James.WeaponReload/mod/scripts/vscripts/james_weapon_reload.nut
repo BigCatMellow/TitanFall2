@@ -33,8 +33,10 @@ void function JamesWeaponReload_Apply( entity player )
         && player.GetUID() != "0" && NSIsPlayerLocalPlayer( player )
         && GetConVarBool( "ns_auth_allow_insecure" )
         && GetConVarBool( "james_weapon_reload" )
+    // hemlok_smg is the Volt, not the Alternator. Keep the existing Volt buff
+    // and include the actual Alternator class rather than silently removing it.
     array<string> supported = ["mp_weapon_g2", "mp_weapon_hemlok_smg",
-        "mp_weapon_rspn101", "mp_weapon_car"]
+        "mp_weapon_alternator_smg", "mp_weapon_rspn101", "mp_weapon_car"]
     foreach ( entity weapon in player.GetMainWeapons() )
     {
         if ( !IsValid( weapon ) || !supported.contains( weapon.GetWeaponClassName() ) ) continue

@@ -14,7 +14,10 @@ local work. [Original README](docs/UPSTREAM-README.md).
   checks and a final mixed-loadout readiness retest pass.
   [Candidate record](Notes/candidates/decisions-v18-20261025/README.md).
 - **Custom add-ons:** named loadout/basic progress persistence,50% shorter
-  human tactical recharge,10% shorter human reloads on G2/Alternator/R-201/CAR.
+  human tactical recharge,10% shorter human reloads on G2/Volt/R-201/CAR in
+  the tested installation. The prior notes misidentified Volt as Alternator;
+  source candidate James.WeaponReload1.0.1 also includes the true Alternator,
+  pending isolated game validation and deployment. [Weapon correction details](docs/WEAPON-BALANCE-CORRECTIONS-20261026.md).
 - **Map survey:** a fresh22-map v18 cohort was started after validation, beginning
   with Kodai.200team-point goal,15minute cap,16bots8v8 plus an inactive observer.
   Earlier v16 trials and human-played sessions remain separate historical data.
