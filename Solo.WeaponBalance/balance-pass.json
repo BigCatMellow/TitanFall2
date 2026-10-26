@@ -6,7 +6,12 @@
     "commit": "bc13e6120e37b3ccdbc0cba55e61fd978bdcbe21",
     "status": "Third-party published script reference, NOT verified installed baseline"
   },
-  "candidate_status": "SOURCE_ONLY_NOT_RUNTIME_VERIFIED",
+  "candidate_status": "RUNTIME_FIELDS_VERIFIED_SOLO_TRIAL",
+  "runtime_validation": {
+    "run": "weapons-v19-20261026-182749",
+    "record": "../Notes/candidates/weapons-v19-20261026/README.md",
+    "scope": "Effective fields, modifier stacking, ownership and lifecycle; not hit-rate or perceived-balance validation"
+  },
   "weapons": [
     {
       "name": "Flatline",

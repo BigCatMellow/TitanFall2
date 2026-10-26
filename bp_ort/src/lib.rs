@@ -65,7 +65,7 @@ impl Plugin for HooksPlugin {
             panic!("bad things will happen if this is reloaded")
         }
         unsafe { std::env::set_var("RUST_BACKTRACE", "1") };
-        log::info!("local build: decisions-v18-candidate (switchable navigation context, hotdrop eligibility, readiness pulses and safe step retry)");
+        log::info!("local build: weapons-v19-candidate (v18 decisions with corrected standard pilot weapon profiles)");
 
         Self {
             bots: Bots::new(reloaded),

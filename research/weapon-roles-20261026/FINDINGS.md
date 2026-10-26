@@ -11,7 +11,7 @@
 - Used `MP_BASE` damage values, rather than single-player overrides or menu `stat_damage` ratings. `fire_rate` in weapon scripts is shots/second; nominal RPM is that number multiplied by 60.
 - **This is a third-party reference snapshot, not a live Northstar extraction.** Attachments, game modes, recoil curves, player/bot behavior and current installed changes can alter actual values. Do not treat this as proven active game state.
 - Northstar's [weapon KeyValue reference](https://docs.northstar.tf/Modding/guides/keyvalue/weaponkeyvalues/) defines the underlying fields. We do not store or redistribute the full copyrighted game scripts.
-- Repo `main` remains unchanged. Separate draft [PR #1](https://github.com/BigCatMellow/TitanFall2/pull/1) corrects actual Alternator/Volt mapping, and [PR #2](https://github.com/BigCatMellow/TitanFall2/pull/2) tests 25%-shorter Flatline/G2 ADS for **the local human only**, default OFF. Neither is merged, installed or runtime-verified here.
+- The mapping correction, ADS trial and targeted four-gun role trial were subsequently integrated, runtime-field-tested and installed for the local human. Source defaults remain OFF; the normal profile explicitly opts in. See the [current rollout](../../Notes/candidates/weapons-v19-20261026/README.md). The reference snapshot and role hypotheses here remain distinct from a gameplay balance/hit-rate study.
 - Preserve the verified solo baseline (human + 15 bots, aim `0.78`, recharge/reload modifiers, saves, nav/teardown fixes). The private overnight survey state must be checked before any game or isolated-profile modification.
 
 ## Most useful numerical findings

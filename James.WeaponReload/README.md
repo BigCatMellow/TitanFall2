@@ -5,8 +5,10 @@ and CAR for the local human in James's insecure solo profile. Normal, empty and 
 reload times are multiplied by 0.9. Existing Speedloader multiplies normally
 (0.7 x 0.9 = 0.63 of base time).
 
-**Runtime status:** 1.0.1 is a source-only candidate, not yet tested in an
-isolated Northstar client or installed. The historical 1.0.0 test that was
+**Runtime status:** 1.0.1 was tested and installed October26: all five guns,
+Speedloader off/on, eight timing fields, duplicate/reversal, automatic application
+and bot stripping checks passed. See the [rollout record](../Notes/candidates/weapons-v19-20261026/README.md).
+The historical 1.0.0 test that was
 labeled Alternator actually exercised `mp_weapon_hemlok_smg` (Volt). The
 Alternator's real name is `mp_weapon_alternator_smg`. The candidate preserves
 the existing Volt modifier and adds the intended Alternator modifier. Do not

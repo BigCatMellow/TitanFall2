@@ -1,0 +1,11 @@
+{
+  "state": "passed",
+  "core": "1.31.14.0",
+  "build": "local build: weapons-v19-candidate (v18 decisions with corrected standard pilot weapon profiles)",
+  "restored_fields": 902,
+  "bots": 15,
+  "humans": 1,
+  "save_files_unchanged": 3,
+  "save_files": 3,
+  "failure": null
+}

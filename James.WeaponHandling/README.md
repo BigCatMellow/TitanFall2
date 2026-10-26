@@ -1,7 +1,11 @@
 # James.WeaponHandling — opt-in ADS trial
 
-Source-only candidate for James's local, insecure solo Northstar profile.
-**Disabled by default; not installed or runtime-verified.**
+Runtime-field-verified trial for the local insecure solo Northstar profile.
+**Source defaults OFF; enabled in the normal solo profile on October26.**
+Flatline/G2 effective ADS fields, reload/Speedloader and role-mod coexistence,
+automatic inventory application, forced-modifier stripping from bots, respawn
+and lobby return passed. Visual timing/feel and actual physical weapon pickup
+were not measured. [Rollout record](../Notes/candidates/weapons-v19-20261026/README.md).
 
 The named attachment `james_solo_ads_trial` multiplies **both** ADS transition
 durations by 0.75 (25% shorter) for only:
@@ -28,9 +32,10 @@ The script follows the local-player guard and inventory callbacks used by
 `James.WeaponReload`: solo local living human pilot only; mods already on the
 weapon are preserved, duplicate applications are skipped, and the trial mod
 is removed on eligible inventory callbacks when disabled or transferred to
-another owner. **That removal path has not yet been runtime-tested.**
+another owner. The explicit bot stripping path passed; physical pickup-event
+coverage remains a separate follow-up.
 
-## Isolated test procedure (no live deployment yet)
+## Isolated test procedure (reference and deeper follow-up)
 
 1. Check the private v18 overnight survey is finished and its test profile
    restored; do not modify a profile during a frozen map queue. Back up the

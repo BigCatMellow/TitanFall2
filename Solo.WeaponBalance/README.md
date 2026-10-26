@@ -1,6 +1,11 @@
 # Solo.WeaponBalance — role-specific pilot tuning v0.1
 
-**Candidate only. OFF by default. Not merged, installed, or tested in a running game.**
+**Runtime-field-verified solo trial, installed October26. Source defaults remain OFF.**
+The normal local profile explicitly enables the human trial and keeps bot opt-in
+OFF. Effective fields, combined ADS/reload modifiers, automatic application,
+forced-modifier stripping from bots, respawn and lobby return passed. This is
+technical validation, not proof of superior hit rate or subjective balance.
+See the [rollout record](../Notes/candidates/weapons-v19-20261026/README.md).
 
 This is the first *implementable* iteration following the [weapon-role assessment](https://github.com/BigCatMellow/TitanFall2/blob/research/weapon-roles-20261026/research/weapon-roles-20261026/GAP-ASSESSMENT.md) (draft PR #3). There is currently **no representative live hit-rate dataset** proving any of these changes necessary. We are testing targeted hypotheses, not claiming that the four weapons were conclusively over/underpowered.
 
@@ -34,6 +39,6 @@ There are **no damage, RPM, ammo, aim-assist, ADS-in/out timing or bot-aim chang
 5. Only after the human test succeeds, optionally enable `solo_weapon_balance_bots 1` in another isolated run. Validate bot attachments are applied, that bot behavior is not broken and existing aim 0.78 is unchanged. Never blend this run with old v18/map survey metrics.
 6. **Reject** an edit if it fails to create a useful role advantage, erases a control weapon's purpose, cannot coexist safely with current add-ons, causes KeyValue load errors, or changes bot outcomes unpredictably. Keep the other weapons unchanged; don't compensate by adjusting damage/RPM by guesswork.
 
-For immediate rollback set **both** convars to `0`, respawn/change the loadout, and confirm `WEAPON_BALANCE ... enabled=false`. For full rollback, close Northstar and remove/disable `Solo.WeaponBalance` in the isolated test profile. Do not restore older user saves. There has been **no production deployment** in this PR.
+For immediate rollback set **both** convars to `0`, respawn/change the loadout, and confirm `WEAPON_BALANCE ... enabled=false`. For full rollback, close Northstar and disable `Solo.WeaponBalance` in the affected profile. Do not restore older user saves. Current deployment and backup details are in the rollout record; the test protocol above remains the proposed deeper gameplay study.
 
 Relevant official Northstar docs: [weapon KeyValues](https://docs.northstar.tf/Modding/guides/keyvalue/weaponkeyvalues/), [weapon and KeyValue modding](https://docs.northstar.tf/Modding/guides/keyvalue/), [player inventory callbacks](https://docs.northstar.tf/Modding/reference/respawn/callbacks/).

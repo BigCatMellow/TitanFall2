@@ -416,3 +416,47 @@ metrics, proving the published subset supports reconstruction. No visual watchin
 Further tuning should use these map-specific leads; no native balance changes
 were made during recovery/analysis. Latest session pointer now references completed
 final supervisor; its current field is the last trial, NOT a live process.
+2026-10-26 18:46 EDT — USER WEAPON BRANCH WORK IMPLEMENTED AND INSTALLED.
+Integrated four remote branches with original commits/history preserved:
+fix/weapon-mapping-coverage-20261026(fd63b9c),trial/ads-handling-20261026(d5ec903),
+research/weapon-roles-20261026(da76335),tune/role-balance-v1-20261026(d569e4c).
+Local integrate/weapon-stats-20261026 includes merges and rollout/test additions.
+README conflict kept the completed map study and corrected the Volt/Alternator
+naming. Native now weapons-v19-candidate, SHA256
+9E8809146E17399B1CE572A5B479846C9A53633C48B7154A02159F47B19A4D6D.
+Northstar1.31.14/core and bridge30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78 unchanged.
+Native adds5standard profiles (Alternator/Mastiff/Devotion/B3Wingman/P2016),
+25ordinary pilot profiles covered; special ColdWar/antiTitan policy unchanged.
+Existing controller47058decisions/50000commands matchv16.46Rust/9suites and
+17Node weapon/role checks pass; native distribution build passes.
+
+Installed:James.WeaponReload1.0.1,James.WeaponHandling0.2.0,Solo.WeaponBalance0.1.0.
+Human-only trial:Flatline20%less ADS recoil;Volt25%less ADS recoil;R9730%less hip
+spread buildup/cap;Spitfire20%lower ADS movement scale;Flatline/G2ADS times0.75.
+Actual Alternator now reload0.9 (2.30->2.07normal,2.70->2.43empty), preserving
+Volt/G2/R201/CAR existing0.9. Speedloader composition0.63 and attachments checked.
+Normal convars james_ads_trial1,solo_weapon_balance1,solo_weapon_balance_bots0.
+8v8/aim0.78/human tactical0.5/damage/RPM/magazines preserved. No default bot
+loadout or bot aim buff. Source add-on defaults stayOFF; explicit normal opt-in.
+
+Isolated weapons-v19-20261026-182749 PASSED:11actual bot gun classes, readiness,
+lobby roundtrip/human+15bots,32reload/ADS/balance/automatic/strip cases, respawn.
+22role field values match expectedmultipliers. Forced bot-modifier stripping
+passed on Flatline/Volt/G2; actual physical dropping/pickup not exercised.
+No script/native errors detected. No visual timing/feel or hit-rate/TTK study.
+Normal startup weapons-v19-normal-20261026-183930 PASSED with902saved fields,
+15bots+1human and3savefiles byte-unchanged. First watcher attempt had a parameter
+typo, not gameplay failure; corrected and retained privately. No test session left
+running, isolated harness disabled, normal launcher/shortcut unchanged.
+
+Initial backup weapon-integration-20261026-181718; fresh deployment backup
+before-weapons-v19-deploy-20261026-183629 under private Notes/backups. CURRENT
+save_data copied for protection, never restored from older survey saves. Rollback
+onlydeployment files; explicitly disable newHandling/Balanceversions ifrestoring
+old enabledmods (absence can auto-enable). Keep current save_data.
+Functional package source/staged/installed hashes match; docs/reference metadata
+updated separately from executable fields. Public filtered runtime evidence,
+normal-startup projection and hashes are in Notes/candidates/weapons-v19-20261026.
+Map survey22rounds remainsFROZENv18(F3C41...), NOT a v19full-map validation.
+Deeper balance study and user feel feedback remain pending; don't infer success
+from paper DPS or effective variable arithmetic. Review current rollout README.

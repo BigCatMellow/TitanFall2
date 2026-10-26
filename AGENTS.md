@@ -8,13 +8,15 @@ entries before changes.
   Use backed-up candidates and isolated runtime/transition tests before normal
   deployment. User also authorized resuming map-by-map testing AFTER those
   checks; start a fresh frozen-build survey rather than changing old cohorts.
-- Normal and working isolated profiles now use tested decisions-v18-candidate,
-  DLL F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648.
-  Full client suite and final readiness retest passed. The fresh candidate clone
+- Normal and working isolated profiles now use tested weapons-v19-candidate,
+  DLL9E8809146E17399B1CE572A5B479846C9A53633C48B7154A02159F47B19A4D6D.
+  Eleven-gun bot matrix, human modifier checks, lobby/respawn and normal startup
+  passed. The fresh candidate clone
   remains startup-broken and is abandoned; use map-cycle-test-profile for tests.
   Verify actual hashes/logs before further claims. All four new switches are on.
 - Preserve8v8, aim0.78, current saves,50% human tactical recharge and the
-  existing four-gun human reload change unless asked to change them.
+  five-gun human reload change (G2/Volt/Alternator/R201/CAR). Human ADS and
+  role trials are enabled; solo_weapon_balance_bots stays0. See latest rollout.
 - Preserve two-buffer pathfinder and map-teardown fixes. Rejectedv13 raw
   persistence andv14 route/cache experiments are historical, not approved.
 - Back up CURRENT deployment files/saves. Never restore old survey saves
@@ -44,5 +46,8 @@ entries before changes.
   Overnight host cleanup raced a natural exit; Traffic was recovered from a
   clean completed log, then UMA/Coliseum finished today. No queue/game remains.
   Read research/maps-v18-20261026/FINDINGS.md and latest handoff; old PIDs/status
-  are historical. Native/ability hashes unchanged. Cleanup regression fixtures
+  are historical. Survey data is frozenv18, NOT the newv19 weapon build. Cleanup regression fixtures
   cover the race and exact process ownership. Failed attempts stay failures.
+- User authorized integration/install of all four weapon-work branches.
+  Notes/candidates/weapons-v19-20261026/README.md is the current rollout record.
+  Keep effective-variable validation distinct from feel/hit-rate/balance proof.

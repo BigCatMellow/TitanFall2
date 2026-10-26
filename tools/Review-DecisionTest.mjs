@@ -4,6 +4,7 @@ import zlib from 'node:zlib';
 import crypto from 'node:crypto';
 const args = process.argv.slice(2);
 const quick = args.includes('--quick');
+const weaponIntegration = args.includes('--weapons');
 const run = args[args.indexOf('--run') + 1], out = args[args.indexOf('--out') + 1];
 if (!args.includes('--run') || !args.includes('--out')) throw new Error('Use --run PRIVATE_RUN --out REPORT_DIRECTORY');
 const progress = JSON.parse(fs.readFileSync(path.join(run, 'progress.json'), 'utf8').replace(/^\uFEFF/, ''));
@@ -17,7 +18,7 @@ const key = r => `${r.epoch}|${(+r.t).toFixed(2)}|${r.slot}`;
 for (const line of lines) {
   if (line.includes('NorthstarLauncher version:')) core = line.split('version:')[1].trim();
   if (/SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked/.test(line)) errors.push(line.replace(/^.*?\] \[error\] /, ''));
-  const match = line.match(/\b(BOT_[A-Z_]+|DECISION_TEST[A-Z_]*)\b/);
+  const match = line.match(/\b(BOT_[A-Z_]+|DECISION_TEST[A-Z_]*|WEAPON_CHECK|WEAPON_VALUE|WEAPON_INTEGRATION)\b/);
   if (!match) continue;
   const kind = match[1], text = line.slice(match.index), f = fields(text);
   // Deliberately publish only authored bot/test diagnostics; no general log,
@@ -67,6 +68,12 @@ for (const start of beginnings) {
 }
 const matrix = phaseRows.find(r => r.phase === 4);
 const required = ['mp_weapon_rspn101','mp_weapon_car','mp_weapon_shotgun','mp_weapon_g2','mp_weapon_epg','mp_weapon_lstar'];
+const addedProfiles = ['mp_weapon_alternator_smg','mp_weapon_mastiff','mp_weapon_esaw','mp_weapon_wingman','mp_weapon_semipistol'];
+const weaponChecks=lines.filter(l=>l.includes('WEAPON_CHECK ')).map(fields);
+const weaponValues=lines.filter(l=>l.includes('WEAPON_VALUE ')).map(fields);
+const completeWeaponCheck=lines.some(l=>l.includes('WEAPON_INTEGRATION: COMPLETE')&&l.includes('respawn=true')&&l.includes('bots_opt_in=false'));
+const expectedWeaponCounts={reload:10,ads:4,balance:8,automatic:7,bot_exclusion_and_strip:3};
+const weaponCounts=Object.fromEntries(Object.keys(expectedWeaponCounts).map(k=>[k,weaponChecks.filter(r=>r.kind===k).length]));
 const costSamples = ready.filter(r => r.tactical_cost !== undefined && r.ordnance_cost !== undefined);
 const readinessCost = {
   samples: costSamples.length,
@@ -85,9 +92,14 @@ const checks = {
   ability_pulses_observed: phaseRows.some(r => r.phase >= 2 && r.largest_tactical_pulse_counter > 0),
   no_sampled_filtered_hotdrop_selection: phaseRows.filter(r => r.phase >= 1).every(r => r.selected_known_hotdropping_pet_samples === 0),
   ...(quick ? { final_cost_observed_and_respected: readinessCost.samples > 0 && readinessCost.incorrectly_ready_samples === 0 } : {}),
+  ...(weaponIntegration ? {
+    added_weapon_profiles_observed: !!matrix && addedProfiles.every(w=>matrix.actual_current_weapon_samples[w]>0),
+    human_weapon_matrix_completed: completeWeaponCheck && Object.entries(expectedWeaponCounts).every(([k,n])=>weaponCounts[k]===n),
+  } : {}),
 };
 const result = { core, run: path.basename(run), state: progress.state,
   source_sha256: crypto.createHash('sha256').update(bytes).digest('hex'), checks, readiness_cost: readinessCost, phases: phaseRows,
+  ...(weaponIntegration ? {weapon_check_counts:weaponCounts,weapon_checks:weaponChecks,weapon_values:weaponValues} : {}),
   limits: 'Controlled smoke/integration coverage, not a randomized balance or stability guarantee. Ability shot/resource counters are observations, not cast-success totals. Native pulse counters reset across lives/hulls. Selected hotdrop counts use preceding reported state and two-second snapshots. Mixed loadouts occur only in the test harness. Private raw log and save data are not published.' };
 fs.mkdirSync(out, { recursive: true });
 fs.writeFileSync(path.join(out, 'runtime-review.json'), JSON.stringify(result, null, 2) + '\n');

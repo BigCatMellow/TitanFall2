@@ -1,0 +1,32 @@
+{
+  "native_sha256": "9E8809146E17399B1CE572A5B479846C9A53633C48B7154A02159F47B19A4D6D",
+  "normal_and_isolated_match_tested_packages": true,
+  "source_text_sha256_lf": {
+    "bp_ort/src/lib.rs": "E7E74505F847E78E733241F477FC0005EDD16C90275E90E82F87EE5E1C21A890",
+    "bp_ort/src/bots/combat_decisions.rs": "CA06DC5E9A34FC00D97933E64000DBA6B3CCB568A46F0488ADD8313ED0AC48BB"
+  },
+  "rust_tests": 46,
+  "rust_suites": 9,
+  "node_checks": 17,
+  "compared_existing_decisions": 47058,
+  "comparison_commands": 50000,
+  "human_cases": 32,
+  "role_field_values": 22,
+  "bot_weapon_classes": 11,
+  "core": "1.31.14.0",
+  "normal_startup": "passed",
+  "loadout_fields_restored": 902,
+  "normal_saves_unchanged": 3,
+  "human_ads": true,
+  "human_balance": true,
+  "bot_balance": false,
+  "backup": "before-weapons-v19-deploy-20261026-183629",
+  "initial_backup": "weapon-integration-20261026-181718",
+  "source_branches": {
+    "balance": "d569e4ca93ef2e09656bdcfdf1381a9b757dd20f",
+    "research": "da763354c8abc50f084bd0c73a34ecff45dfa239",
+    "ads": "d5ec903df9551692907c9d29efc7ccefd2f3a1a8",
+    "mapping": "fd63b9ca7b94d0d34374d82603d9c4668556f8f2"
+  },
+  "limits": "Effective engine fields and lifecycle validation; no visual ADS/recoil, physical pickup, hit-rate, or perceived-balance acceptance claim"
+}

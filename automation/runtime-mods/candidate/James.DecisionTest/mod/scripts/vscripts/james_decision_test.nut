@@ -65,6 +65,8 @@ void function JamesDecisionTest_Loadout( entity bot )
     PilotLoadoutDef loadout = GetPilotLoadoutFromPersistentData( bot, 0 )
     array<string> suits = ["nomad","light","geist","medium","stalker","heavy","grapple"]
     array<string> guns = ["mp_weapon_rspn101","mp_weapon_car","mp_weapon_shotgun","mp_weapon_g2","mp_weapon_epg","mp_weapon_lstar"]
+    if ( GetConVarBool("james_candidate_weapons") )
+        guns.extend(["mp_weapon_alternator_smg","mp_weapon_mastiff","mp_weapon_esaw","mp_weapon_wingman","mp_weapon_semipistol"])
     int slot = bot.GetEntIndex()
     loadout.suit = suits[slot % suits.len()]
     if ( GetConVarInt("james_candidate_phase") == 4 ) loadout.primary = guns[slot % guns.len()]
@@ -128,6 +130,7 @@ void function JamesDecisionTest_Run()
     float began = Time()
     float duration = phase == 0 || phase == 6 ? 90.0 : 150.0
     if ( GetConVarBool("james_candidate_quick") ) duration = 60.0
+    if ( GetConVarBool("james_candidate_weapons") ) duration = 120.0
     while ( Time() - began < duration )
     {
         print( "DECISION_TEST_HEARTBEAT map=" + GetMapName() + " phase=" + phase + " elapsed=" + (Time()-began)

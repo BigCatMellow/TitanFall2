@@ -1,5 +1,10 @@
 # Which weapons actually need adjustment? — evidence triage
 
+**Implementation update:** the targeted human trial is now installed after
+effective-field, ownership and lifecycle checks. The lack of a representative
+hit-rate/feel study remains; hypotheses below are not proven balance findings.
+[Rollout record](../../Notes/candidates/weapons-v19-20261026/README.md).
+
 **Decision on 2026-10-26:** No weapon is yet *proven* underperforming in the installed solo game. Do **not** issue blanket buffs. The reference numbers do identify specific potential gaps that are worth checking, in a defined order.
 
 This is a follow-up to [the 30-weapon role review](FINDINGS.md), using its [pinned third-party reference-stat snapshot](reference-stats.json). The existing v16/v18 research has extensive bot-decision samples, but the weapon samples were dominated by R-201 and do **not** contain a representative shot/hit/damage matchup study. Do not infer accuracy, actual effective TTK or win rates from those recordings.

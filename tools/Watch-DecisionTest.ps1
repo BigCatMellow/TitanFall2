@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][int]$GameProcessId,[Parameter(Mandatory)][string]$Profile,[Parameter(Mandatory)][string]$RunDirectory,[switch]$Dedicated,[switch]$Quick)
+param([Parameter(Mandatory)][int]$GameProcessId,[Parameter(Mandatory)][string]$Profile,[Parameter(Mandatory)][string]$RunDirectory,[switch]$Dedicated,[switch]$Quick,[switch]$WeaponIntegration)
 $ErrorActionPreference='Stop'
 $started=Get-Date
 $state=[ordered]@{state='starting';pid=$GameProcessId;started=$started.ToString('o');dedicated=[bool]$Dedicated;quick=[bool]$Quick;phase=$null;completed=@();log=$null;failure=$null}
@@ -43,6 +43,7 @@ try{
             if($line-match'DECISION_TEST_HEARTBEAT'){$lastHeartbeat=Get-Date;$state.heartbeat=$line}
             if($line-match'DECISION_TEST_PHASE_PASS .*phase=(\d+)'){$state.completed+=([int]$Matches[1]);$state.state='transitioning';Save-State}
             if($line.Contains('DECISION_TEST_LOBBY:')){$state.lobby=$true;$lastHeartbeat=Get-Date;Save-State}
+            if($line.Contains('WEAPON_INTEGRATION: COMPLETE')){$state.weapon_integration=$true;Save-State}
             if($line.Contains('DECISION_TEST_DONE:')){$done=$true;break}
         }
         if(-not$done-and-not(Owned-Game)){throw 'Test game exited before completing phases'}
@@ -53,6 +54,7 @@ try{
     }
     $expected=if($Quick){'4,6'}else{'0,1,2,3,4,6'}
     if(($state.completed-join',')-ne$expected-or(-not$Dedicated-and-not$state.lobby)){throw 'Incomplete phase/lobby coverage'}
+    if($WeaponIntegration-and-not$state.weapon_integration){throw 'Weapon integration matrix did not complete'}
     $state.state='passed'
 }catch{$state.state='failed';$state.failure=[string]$_}
 finally{

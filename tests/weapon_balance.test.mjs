@@ -90,8 +90,9 @@ test('existing weapon mods are retained and the toggle is idempotent and reversi
   );
 });
 
-test('research provenance and runtime-unknown status are recorded', () => {
+test('research provenance and bounded runtime validation scope are recorded', () => {
   assert.equal(candidate.reference.commit, 'bc13e6120e37b3ccdbc0cba55e61fd978bdcbe21');
-  assert.equal(candidate.candidate_status, 'SOURCE_ONLY_NOT_RUNTIME_VERIFIED');
+  assert.equal(candidate.candidate_status, 'RUNTIME_FIELDS_VERIFIED_SOLO_TRIAL');
+  assert.match(candidate.runtime_validation.scope, /not hit-rate/);
   for (const weapon of candidate.weapons) assert.match(weapon.source_blob_sha, /^[a-f0-9]{40}$/);
 });

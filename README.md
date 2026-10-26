@@ -7,16 +7,15 @@ local work. [Original README](docs/UPSTREAM-README.md).
 
 ## Current state
 
-- **Installed:** tested decisions-v18-candidate,8v8 (human+15 bots), aim0.78.
-- **Current source:** navigation watchdog context, hotdropping-pet targeting,
-  readiness-gated offhand inputs and safe opposite-side combat stepping.
-  41 offline tests, a47058-decision controller comparison, full client/map/lobby
-  checks and a final mixed-loadout readiness retest pass.
-  [Candidate record](Notes/candidates/decisions-v18-20261025/README.md).
+- **Installed:** tested weapons-v19-candidate,8v8 (human+15 bots), aim0.78.
+- **Current source:** retains the v18 decision fixes and adds five missing
+  standard weapon profiles.46 Rust checks,17 Node checks, the existing-controller
+  comparison,11-gun runtime matrix and human stat/stacking/lifecycle checks pass.
+  [Current rollout](Notes/candidates/weapons-v19-20261026/README.md).
 - **Custom add-ons:** named loadout/basic progress persistence,50% shorter
-  human tactical recharge,10% shorter human reloads on G2/Volt/R-201/CAR in
-  the tested installation. The prior notes misidentified Volt as Alternator;
-  source candidate1.0.1 adds the actual Alternator, pending runtime validation.
+  human tactical recharge,10% shorter human reloads on G2/Volt/Alternator/R-201/CAR.
+  The correction keeps Volt's existing modifier and includes the real Alternator.
+  Human-only ADS and four-gun role trials are enabled; bot opt-in remains off.
 - **Map survey complete:** all22supported maps have valid16-bot8v8 rounds.
   Three used the200-point goal;19used75points per team. A host cleanup race
   stopped the overnight run; Traffic was recovered and the last two maps
@@ -39,6 +38,8 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 | `James.BotDecisions/` | Native readiness and hotdrop-state bridge |
 | `James.LocalPersistence/` | Saved loadouts/basic XP and UI cache repair |
 | `James.TacticalRecharge/`, `James.WeaponReload/` | Human tactical/reload adjustments |
+| `James.WeaponHandling/`, `Solo.WeaponBalance/` | Runtime-field-verified human ADS/role trials |
+| `research/weapon-roles-20261026/` | Thirty-weapon reference statistics and role hypotheses |
 | `Notes/` | Dated notes, results, failures, rollback records and tools |
 | `Notes/map-surveys/` | Per-match movement/combat data and restoration checks |
 | `Notes/trend-analysis-20261025/` | Latest played-session export |

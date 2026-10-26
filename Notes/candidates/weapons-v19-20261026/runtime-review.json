@@ -1,0 +1,521 @@
+{
+  "core": "1.31.14.0",
+  "run": "weapons-v19-20261026-182749",
+  "state": "passed",
+  "source_sha256": "5d1c965dd542ad2da3e2821049783a23c62577f4643bfb448f1114fe85246f83",
+  "checks": {
+    "watcher_completed_client_suite": true,
+    "actual_core_version": true,
+    "no_script_or_native_errors": true,
+    "all_phases_started": true,
+    "controlled_population_8v8": true,
+    "human_plus_15_bot_return": true,
+    "six_weapon_classes_observed": true,
+    "ability_pulses_observed": true,
+    "no_sampled_filtered_hotdrop_selection": true,
+    "final_cost_observed_and_respected": true,
+    "added_weapon_profiles_observed": true,
+    "human_weapon_matrix_completed": true
+  },
+  "readiness_cost": {
+    "samples": 1535,
+    "unaffordable_tactical_samples": 94,
+    "unaffordable_ordnance_samples": 0,
+    "incorrectly_ready_samples": 0
+  },
+  "phases": [
+    {
+      "phase": 4,
+      "epoch": 1,
+      "map": "mp_eden",
+      "bots_at_begin": 16,
+      "imc_bots_at_begin": 8,
+      "live_pilot_trace_samples": 764,
+      "selected_known_hotdropping_pet_samples": 0,
+      "overhead_visible_engage_samples": 0,
+      "actual_current_weapon_samples": {
+        "mp_weapon_shotgun": 85,
+        "mp_weapon_g2": 102,
+        "mp_weapon_epg": 94,
+        "mp_weapon_lstar": 105,
+        "mp_weapon_alternator_smg": 88,
+        "mp_weapon_mastiff": 49,
+        "mp_weapon_esaw": 52,
+        "mp_weapon_wingman": 43,
+        "mp_weapon_semipistol": 46,
+        "mp_weapon_rspn101": 46,
+        "mp_weapon_car": 49,
+        "melee_pilot_emptyhanded": 1,
+        "mp_weapon_defender": 4
+      },
+      "tactical_observations": {
+        "mp_ability_cloak": {
+          "observations": 147,
+          "ready": 66,
+          "not_ready": 81,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 0
+        },
+        "mp_weapon_grenade_sonar": {
+          "observations": 134,
+          "ready": 129,
+          "not_ready": 5,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 103
+        },
+        "mp_ability_holopilot": {
+          "observations": 96,
+          "ready": 94,
+          "not_ready": 2,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 26
+        },
+        "mp_weapon_deployable_cover": {
+          "observations": 99,
+          "ready": 99,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 100
+        },
+        "mp_ability_grapple": {
+          "observations": 85,
+          "ready": 85,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        },
+        "mp_ability_heal": {
+          "observations": 107,
+          "ready": 98,
+          "not_ready": 9,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 2
+        },
+        "mp_ability_shifter": {
+          "observations": 96,
+          "ready": 96,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        }
+      },
+      "largest_tactical_pulse_counter": 13,
+      "largest_ordnance_pulse_counter": 0,
+      "largest_blocked_request_counter": 526
+    },
+    {
+      "phase": 6,
+      "epoch": 3,
+      "map": "mp_eden",
+      "bots_at_begin": 15,
+      "imc_bots_at_begin": 8,
+      "live_pilot_trace_samples": 771,
+      "selected_known_hotdropping_pet_samples": 0,
+      "overhead_visible_engage_samples": 0,
+      "actual_current_weapon_samples": {
+        "mp_weapon_rspn101": 765,
+        "mp_weapon_hemlok_smg": 1,
+        "melee_pilot_emptyhanded": 2,
+        "mp_weapon_defender": 3
+      },
+      "tactical_observations": {
+        "mp_ability_grapple": {
+          "observations": 771,
+          "ready": 771,
+          "not_ready": 0,
+          "highest_shot_counter": 0,
+          "lowest_observed_clip": 200
+        }
+      },
+      "largest_tactical_pulse_counter": 0,
+      "largest_ordnance_pulse_counter": 0,
+      "largest_blocked_request_counter": 0
+    }
+  ],
+  "weapon_check_counts": {
+    "reload": 10,
+    "ads": 4,
+    "balance": 8,
+    "automatic": 7,
+    "bot_exclusion_and_strip": 3
+  },
+  "weapon_checks": [
+    {
+      "kind": "reload",
+      "gun": "mp_weapon_g2",
+      "speedloader": "false",
+      "normal": "2.2",
+      "enabled": "1.98",
+      "empty": "2.64",
+      "enabled_empty": "2.376"
+    },
+    {
+      "kind": "reload",
+      "gun": "mp_weapon_g2",
+      "speedloader": "true",
+      "normal": "1.54",
+      "enabled": "1.386",
+      "empty": "1.848",
+      "enabled_empty": "1.6632"
+    },
+    {
+      "kind": "reload",
+      "gun": "mp_weapon_hemlok_smg",
+      "speedloader": "false",
+      "normal": "1.5",
+      "enabled": "1.35",
+      "empty": "2",
+      "enabled_empty": "1.8"
+    },
+    {
+      "kind": "reload",
+      "gun": "mp_weapon_hemlok_smg",
+      "speedloader": "true",
+      "normal": "1.05",
+      "enabled": "0.945",
+      "empty": "1.4",
+      "enabled_empty": "1.26"
+    },
+    {
+      "kind": "reload",
+      "gun": "mp_weapon_alternator_smg",
+      "speedloader": "false",
+      "normal": "2.3",
+      "enabled": "2.07",
+      "empty": "2.7",
+      "enabled_empty": "2.43"
+    },
+    {
+      "kind": "reload",
+      "gun": "mp_weapon_alternator_smg",
+      "speedloader": "true",
+      "normal": "1.61",
+      "enabled": "1.449",
+      "empty": "1.89",
+      "enabled_empty": "1.701"
+    },
+    {
+      "kind": "reload",
+      "gun": "mp_weapon_rspn101",
+      "speedloader": "false",
+      "normal": "2.2",
+      "enabled": "1.98",
+      "empty": "2.92",
+      "enabled_empty": "2.628"
+    },
+    {
+      "kind": "reload",
+      "gun": "mp_weapon_rspn101",
+      "speedloader": "true",
+      "normal": "1.54",
+      "enabled": "1.386",
+      "empty": "2.044",
+      "enabled_empty": "1.8396"
+    },
+    {
+      "kind": "reload",
+      "gun": "mp_weapon_car",
+      "speedloader": "false",
+      "normal": "1.8",
+      "enabled": "1.62",
+      "empty": "2.53",
+      "enabled_empty": "2.277"
+    },
+    {
+      "kind": "reload",
+      "gun": "mp_weapon_car",
+      "speedloader": "true",
+      "normal": "1.26",
+      "enabled": "1.134",
+      "empty": "1.771",
+      "enabled_empty": "1.5939"
+    },
+    {
+      "kind": "ads",
+      "gun": "mp_weapon_vinson",
+      "speedloader": "false",
+      "before": "0.25",
+      "enabled": "0.1875"
+    },
+    {
+      "kind": "ads",
+      "gun": "mp_weapon_vinson",
+      "speedloader": "true",
+      "before": "0.25",
+      "enabled": "0.1875"
+    },
+    {
+      "kind": "ads",
+      "gun": "mp_weapon_g2",
+      "speedloader": "false",
+      "before": "0.25",
+      "enabled": "0.1875"
+    },
+    {
+      "kind": "ads",
+      "gun": "mp_weapon_g2",
+      "speedloader": "true",
+      "before": "0.25",
+      "enabled": "0.1875"
+    },
+    {
+      "kind": "balance",
+      "gun": "mp_weapon_vinson",
+      "speedloader": "false"
+    },
+    {
+      "kind": "balance",
+      "gun": "mp_weapon_vinson",
+      "speedloader": "true"
+    },
+    {
+      "kind": "balance",
+      "gun": "mp_weapon_hemlok_smg",
+      "speedloader": "false"
+    },
+    {
+      "kind": "balance",
+      "gun": "mp_weapon_hemlok_smg",
+      "speedloader": "true"
+    },
+    {
+      "kind": "balance",
+      "gun": "mp_weapon_r97",
+      "speedloader": "false"
+    },
+    {
+      "kind": "balance",
+      "gun": "mp_weapon_r97",
+      "speedloader": "true"
+    },
+    {
+      "kind": "balance",
+      "gun": "mp_weapon_lmg",
+      "speedloader": "false"
+    },
+    {
+      "kind": "balance",
+      "gun": "mp_weapon_lmg",
+      "speedloader": "true"
+    },
+    {
+      "kind": "automatic",
+      "gun": "mp_weapon_rspn101"
+    },
+    {
+      "kind": "automatic",
+      "gun": "mp_weapon_car"
+    },
+    {
+      "kind": "automatic",
+      "gun": "mp_weapon_g2"
+    },
+    {
+      "kind": "automatic",
+      "gun": "mp_weapon_vinson"
+    },
+    {
+      "kind": "automatic",
+      "gun": "mp_weapon_hemlok_smg"
+    },
+    {
+      "kind": "automatic",
+      "gun": "mp_weapon_r97"
+    },
+    {
+      "kind": "automatic",
+      "gun": "mp_weapon_lmg"
+    },
+    {
+      "kind": "bot_exclusion_and_strip",
+      "gun": "mp_weapon_vinson"
+    },
+    {
+      "kind": "bot_exclusion_and_strip",
+      "gun": "mp_weapon_hemlok_smg"
+    },
+    {
+      "kind": "bot_exclusion_and_strip",
+      "gun": "mp_weapon_g2"
+    }
+  ],
+  "weapon_values": [
+    {
+      "gun": "mp_weapon_vinson",
+      "speedloader": "false",
+      "index": "0",
+      "field": "292",
+      "before": "1.5",
+      "enabled": "1.2"
+    },
+    {
+      "gun": "mp_weapon_vinson",
+      "speedloader": "false",
+      "index": "1",
+      "field": "293",
+      "before": "2",
+      "enabled": "1.6"
+    },
+    {
+      "gun": "mp_weapon_vinson",
+      "speedloader": "true",
+      "index": "0",
+      "field": "292",
+      "before": "1.5",
+      "enabled": "1.2"
+    },
+    {
+      "gun": "mp_weapon_vinson",
+      "speedloader": "true",
+      "index": "1",
+      "field": "293",
+      "before": "2",
+      "enabled": "1.6"
+    },
+    {
+      "gun": "mp_weapon_hemlok_smg",
+      "speedloader": "false",
+      "index": "0",
+      "field": "292",
+      "before": "1.1",
+      "enabled": "0.825"
+    },
+    {
+      "gun": "mp_weapon_hemlok_smg",
+      "speedloader": "false",
+      "index": "1",
+      "field": "293",
+      "before": "1.1",
+      "enabled": "0.825"
+    },
+    {
+      "gun": "mp_weapon_hemlok_smg",
+      "speedloader": "true",
+      "index": "0",
+      "field": "292",
+      "before": "1.1",
+      "enabled": "0.825"
+    },
+    {
+      "gun": "mp_weapon_hemlok_smg",
+      "speedloader": "true",
+      "index": "1",
+      "field": "293",
+      "before": "1.1",
+      "enabled": "0.825"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "false",
+      "index": "0",
+      "field": "346",
+      "before": "0.5",
+      "enabled": "0.35"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "false",
+      "index": "1",
+      "field": "348",
+      "before": "0.5",
+      "enabled": "0.35"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "false",
+      "index": "2",
+      "field": "350",
+      "before": "0.5",
+      "enabled": "0.35"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "false",
+      "index": "3",
+      "field": "352",
+      "before": "2",
+      "enabled": "1.4"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "false",
+      "index": "4",
+      "field": "354",
+      "before": "2",
+      "enabled": "1.4"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "false",
+      "index": "5",
+      "field": "356",
+      "before": "2",
+      "enabled": "1.4"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "true",
+      "index": "0",
+      "field": "346",
+      "before": "0.5",
+      "enabled": "0.35"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "true",
+      "index": "1",
+      "field": "348",
+      "before": "0.5",
+      "enabled": "0.35"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "true",
+      "index": "2",
+      "field": "350",
+      "before": "0.5",
+      "enabled": "0.35"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "true",
+      "index": "3",
+      "field": "352",
+      "before": "2",
+      "enabled": "1.4"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "true",
+      "index": "4",
+      "field": "354",
+      "before": "2",
+      "enabled": "1.4"
+    },
+    {
+      "gun": "mp_weapon_r97",
+      "speedloader": "true",
+      "index": "5",
+      "field": "356",
+      "before": "2",
+      "enabled": "1.4"
+    },
+    {
+      "gun": "mp_weapon_lmg",
+      "speedloader": "false",
+      "index": "0",
+      "field": "51",
+      "before": "0.35",
+      "enabled": "0.28"
+    },
+    {
+      "gun": "mp_weapon_lmg",
+      "speedloader": "true",
+      "index": "0",
+      "field": "51",
+      "before": "0.35",
+      "enabled": "0.28"
+    }
+  ],
+  "limits": "Controlled smoke/integration coverage, not a randomized balance or stability guarantee. Ability shot/resource counters are observations, not cast-success totals. Native pulse counters reset across lives/hulls. Selected hotdrop counts use preceding reported state and two-second snapshots. Mixed loadouts occur only in the test harness. Private raw log and save data are not published."
+}

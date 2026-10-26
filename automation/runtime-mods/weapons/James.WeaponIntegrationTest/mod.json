@@ -1,0 +1,7 @@
+{
+  "Name": "James.WeaponIntegrationTest",
+  "Description": "Isolated v19 effective-stat/ownership/stacking validation; never install for normal play.",
+  "Version": "1.0.0",
+  "LoadPriority": 51,
+  "Scripts": [{"Path":"weapon_integration_test.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"WeaponIntegration_Init"}}]
+}

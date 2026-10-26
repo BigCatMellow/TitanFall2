@@ -1,5 +1,9 @@
 # Weapon mapping and bot coverage correction — 2026-10-26
 
+**Rollout update:** this correction was integrated, runtime-tested and installed
+in the local solo profile. See the [current deployment record](../Notes/candidates/weapons-v19-20261026/README.md).
+The source-only status and test plan below describe the original branch proposal.
+
 Status: **source-only candidate**. No live Northstar runtime verification,
 installation, deployment, saved-loadout edit, aim change, or damage/fire-rate
 change is claimed. The private unattended v18 survey state is unknown from

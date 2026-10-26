@@ -1,6 +1,6 @@
 param([string]$Profile='C:\Users\james\northstar-crash-audit\map-cycle-test-profile',
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
-    [string]$RunDirectory,[string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$DllPath,[switch]$Dedicated,[switch]$Quick)
+    [string]$RunDirectory,[string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$DllPath,[switch]$Dedicated,[switch]$Quick,[switch]$WeaponIntegration)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
 if(Get-Process NorthstarLauncher,Titanfall2 -ErrorAction SilentlyContinue){throw 'A game is already running; do not replace it'}
@@ -17,11 +17,13 @@ $argsList=@("-profile=$Profile",'-james_decision_test','-novid','-ip','127.0.0.1
 if($Dedicated){$argsList=@('-dedicated')+$argsList+@('+james_candidate_dedicated','1')}
 else{$argsList=@('-fullscreen')+$argsList}
 if($Quick){$argsList+=@('+james_candidate_quick','1')}
+if($WeaponIntegration){$argsList+=@('+james_candidate_weapons','1')}
 $argsList+=@('+mp_gamemode','tdm','+map','mp_eden')
 $game=Start-Process -FilePath $exe -WorkingDirectory $GameDirectory -ArgumentList $argsList -WindowStyle $(if($Dedicated){'Hidden'}else{'Normal'}) -PassThru
 $watchArgs=@('-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',"$repo/tools/Watch-DecisionTest.ps1",'-GameProcessId',$game.Id,'-Profile',$Profile,'-RunDirectory',$RunDirectory)
 if($Dedicated){$watchArgs+='-Dedicated'}
 if($Quick){$watchArgs+='-Quick'}
+if($WeaponIntegration){$watchArgs+='-WeaponIntegration'}
 $watch=Start-Process -FilePath (Get-Process -Id $PID).Path -WindowStyle Hidden -ArgumentList $watchArgs -RedirectStandardOutput "$RunDirectory/watcher.stdout.log" -RedirectStandardError "$RunDirectory/watcher.stderr.log" -PassThru
 [ordered]@{game_pid=$game.Id;watcher_pid=$watch.Id;profile=$Profile;run=$RunDirectory;quick=[bool]$Quick;dll_sha256=(Get-FileHash -LiteralPath $dll).Hash;bridge_sha256=(Get-FileHash -LiteralPath "$Profile/mods/James.BotDecisions/mod/scripts/vscripts/james_bot_decisions.nut").Hash;started=(Get-Date).ToString('o')}|ConvertTo-Json|Set-Content -LiteralPath "$RunDirectory/processes.json"
 Get-Content -LiteralPath "$RunDirectory/processes.json"
