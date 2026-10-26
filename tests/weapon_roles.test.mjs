@@ -5,6 +5,7 @@ import { test } from "node:test";
 const directory = new URL("../research/weapon-roles-20261026/", import.meta.url);
 const reference = JSON.parse(readFileSync(new URL("reference-stats.json", directory), "utf8"));
 const findings = readFileSync(new URL("FINDINGS.md", directory), "utf8");
+const gaps = readFileSync(new URL("GAP-ASSESSMENT.md", directory), "utf8");
 const byId = Object.fromEntries(reference.weapons.map((weapon) => [weapon.classname, weapon]));
 
 test("covers 30 unique weapons with pinned source hashes", () => {
@@ -77,4 +78,25 @@ test("special firing mechanisms are represented, not confused with continuous RP
   assert.equal(byId.mp_weapon_pulse_lmg.charge_s, 0.5);
   assert.equal(byId.mp_weapon_pulse_lmg.burst_count, 4);
   assert.equal(byId.mp_weapon_sniper.rechamber_s, 1.6);
+});
+
+test("targeted gaps preserve the calculated 100-HP thresholds and do not assume a buff", () => {
+  const ideal = (w, damage) => (Math.ceil(100 / damage) - 1) / w.fire_rate_shots_s_nominal;
+  const r201 = byId.mp_weapon_rspn101;
+  const flatline = byId.mp_weapon_vinson;
+  const car = byId.mp_weapon_car;
+  const volt = byId.mp_weapon_hemlok_smg;
+  const r97 = byId.mp_weapon_r97;
+  const spitfire = byId.mp_weapon_lmg;
+
+  assert.ok(ideal(flatline, flatline.damage_near) > ideal(r201, r201.damage_near));
+  assert.ok(ideal(flatline, flatline.damage_far) > ideal(r201, r201.damage_far));
+  assert.ok(ideal(volt, volt.damage_near) > ideal(car, car.damage_near));
+  assert.ok(ideal(volt, volt.damage_far) > ideal(car, car.damage_far));
+  assert.ok(ideal(r97, r97.damage_far) < ideal(car, car.damage_far));
+  assert.ok(Math.abs(ideal(spitfire, spitfire.damage_near) - ideal(r201, r201.damage_near)) < 1e-10);
+  assert.equal(byId.mp_weapon_hemlok.damage_near * byId.mp_weapon_hemlok.burst_count, 99);
+  assert.match(gaps, /NONE CONFIRMED/);
+  assert.match(gaps, /do \*\*not\*\* issue blanket buffs/i);
+  assert.match(findings, /GAP-ASSESSMENT\.md/);
 });
