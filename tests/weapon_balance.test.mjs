@@ -5,11 +5,11 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const modRoot = resolve(root, 'James.WeaponBalance');
+const modRoot = resolve(root, 'Solo.WeaponBalance');
 const read = (path) => readFileSync(resolve(modRoot, path), 'utf8');
 const candidate = JSON.parse(read('balance-pass.json'));
 const manifest = JSON.parse(read('mod.json'));
-const script = read('mod/scripts/vscripts/james_weapon_balance.nut');
+const script = read('mod/scripts/vscripts/solo_weapon_balance.nut');
 
 const kvPath = (weapon) => `keyvalues/scripts/weapons/${weapon.classname}.txt`;
 const fields = (s) => Object.fromEntries(
@@ -26,7 +26,7 @@ test('data manifest exactly matches four uniquely named weapon KeyValue attachme
     const content = read(kvPath(weapon));
     const kvFields = fields(content);
     assert.match(content, /^WeaponData\s*\{/);
-    assert.match(content, /\bMods\s*\{\s*james_role_balance_v1\s*\{/);
+    assert.match(content, /\bMods\s*\{\s*solo_role_balance_v1\s*\{/);
     assert.equal((content.match(/\{/g) ?? []).length, 3);
     assert.equal((content.match(/\}/g) ?? []).length, 3);
     assert.deepEqual(Object.keys(kvFields).sort(), Object.keys(weapon.fields).sort());
@@ -62,15 +62,15 @@ test('default-off human and bots with opt-in, insecure solo and inventory guards
   assert.deepEqual(
     manifest.ConVars,
     [
-      { Name: 'james_weapon_balance', DefaultValue: '0' },
-      { Name: 'james_weapon_balance_bots', DefaultValue: '0' },
+      { Name: 'solo_weapon_balance', DefaultValue: '0' },
+      { Name: 'solo_weapon_balance_bots', DefaultValue: '0' },
     ],
   );
   assert.equal(manifest.Scripts[0].RunOn, 'SERVER && MP');
   assert.match(script, /GetConVarBool\( "ns_auth_allow_insecure" \)/);
-  assert.match(script, /GetConVarBool\( "james_weapon_balance" \)/);
+  assert.match(script, /GetConVarBool\( "solo_weapon_balance" \)/);
   assert.match(script, /player\.GetUID\(\) != "0" && NSIsPlayerLocalPlayer\( player \)/);
-  assert.match(script, /player\.GetUID\(\) == "0" && GetConVarBool\( "james_weapon_balance_bots" \)/);
+  assert.match(script, /player\.GetUID\(\) == "0" && GetConVarBool\( "solo_weapon_balance_bots" \)/);
   assert.match(script, /!player\.IsTitan\(\) && !IsLobby\(\)/);
   assert.match(script, /AddCallback_OnPlayerRespawned/);
   assert.match(script, /AddCallback_OnPlayerInventoryChanged/);
@@ -80,10 +80,10 @@ test('default-off human and bots with opt-in, insecure solo and inventory guards
 test('existing weapon mods are retained and the toggle is idempotent and reversible', () => {
   assert.match(script, /array<string> mods = weapon\.GetMods\(\)/);
   assert.match(script, /if \( enabled == present \) continue/);
-  assert.match(script, /mods\.append\( JAMES_ROLE_BALANCE_MOD \)/);
-  assert.match(script, /mods\.removebyvalue\( JAMES_ROLE_BALANCE_MOD \)/);
+  assert.match(script, /mods\.append\( SOLO_ROLE_BALANCE_MOD \)/);
+  assert.match(script, /mods\.removebyvalue\( SOLO_ROLE_BALANCE_MOD \)/);
   assert.match(script, /weapon\.SetMods\( mods \)/);
-  assert.equal((script.match(/"james_role_balance_v1"/g) ?? []).length, 1);
+  assert.equal((script.match(/"solo_role_balance_v1"/g) ?? []).length, 1);
   assert.deepEqual(
     [...script.matchAll(/"(mp_weapon_[a-z0-9_]+)"/g)].map((m) => m[1]),
     candidate.weapons.map((w) => w.classname),

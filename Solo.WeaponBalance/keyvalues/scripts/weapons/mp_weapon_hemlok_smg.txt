@@ -2,7 +2,7 @@ WeaponData
 {
     Mods
     {
-        james_role_balance_v1
+        solo_role_balance_v1
         {
             viewkick_scale_min_ads "*0.75"
             viewkick_scale_max_ads "*0.75"

@@ -2,7 +2,7 @@ WeaponData
 {
     Mods
     {
-        james_role_balance_v1
+        solo_role_balance_v1
         {
             spread_kick_on_fire_stand_hip "*0.70"
             spread_kick_on_fire_crouch_hip "*0.70"
