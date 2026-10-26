@@ -1,0 +1,17 @@
+{
+  "Name": "James.WeaponBalance",
+  "Description": "Opt-in, role-specific pilot weapon balance candidate (Flatline, Volt, R-97, Spitfire).",
+  "Version": "0.1.0",
+  "LoadPriority": 43,
+  "ConVars": [
+    { "Name": "james_weapon_balance", "DefaultValue": "0" },
+    { "Name": "james_weapon_balance_bots", "DefaultValue": "0" }
+  ],
+  "Scripts": [
+    {
+      "Path": "james_weapon_balance.nut",
+      "RunOn": "SERVER && MP",
+      "ServerCallback": { "After": "JamesWeaponBalance_Init" }
+    }
+  ]
+}
