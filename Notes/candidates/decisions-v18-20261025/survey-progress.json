@@ -1,0 +1,46 @@
+{
+  "snapshot": "2026-10-25T20:50:08.0454302-04:00",
+  "native_sha256": "F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648",
+  "completed": [
+    {
+      "map": "mp_forwardbase_kodai",
+      "imc": 129,
+      "militia": 163,
+      "elapsed": 891.5,
+      "reason": "time_limit_or_rules",
+      "valid": "true",
+      "report_error": null
+    },
+    {
+      "map": "mp_grave",
+      "imc": 169,
+      "militia": 161,
+      "elapsed": 891.5,
+      "reason": "time_limit_or_rules",
+      "valid": "true",
+      "report_error": null
+    }
+  ],
+  "completed_count": 2,
+  "planned_count": 22,
+  "startup_failures": [
+    {
+      "match_began": false,
+      "batch": "decisions-v18-all-maps-20261025-194900",
+      "map": "mp_homestead",
+      "error": "Blank primary name in intro hud_icon lookup"
+    },
+    {
+      "match_began": false,
+      "batch": "decisions-v18-remaining-20261025-204531",
+      "map": "mp_homestead",
+      "error": "Blank weapon name in menu playermodel lookup"
+    }
+  ],
+  "current_attempt": "decisions-v18-observer-defaults-20261025-204736",
+  "observer_loadout_restore": false,
+  "normal_profile_modified_this_followup": false,
+  "limits": "Two completed bot-only matches; no balance conclusion. Homestead started with observer restore disabled after two failed starts; one successful startup is not proof of the precise cause or a fix to normal persistence. Separate observer configuration; private full logs retained locally.",
+  "current_state_at_snapshot": "running",
+  "current_map": "mp_homestead"
+}

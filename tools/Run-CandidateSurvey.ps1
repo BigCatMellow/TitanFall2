@@ -1,7 +1,7 @@
 param([Parameter(Mandatory)][string]$BatchDirectory,[Parameter(Mandatory)][string]$ValidationDirectory,[Parameter(Mandatory)][string]$ReadinessRetestDirectory,
     [string]$TestProfile='C:\Users\james\northstar-crash-audit\map-cycle-test-profile',
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
-    [string]$RepositoryRoot=(Split-Path $PSScriptRoot))
+    [string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$ResumeBatch,[switch]$ObserverDefaults)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
 $validation=Get-Content -Raw -LiteralPath "$ValidationDirectory/progress.json"|ConvertFrom-Json
@@ -31,11 +31,23 @@ if([regex]::Matches($template,'array<string> maps = \[[^\r\n]+\]').Count-ne1){th
 $oldPlan=Get-Content -Raw -LiteralPath "$repo/Notes/map-surveys/all-maps-20261025-102025/plan.json"|ConvertFrom-Json
 $priority=@('mp_forwardbase_kodai','mp_grave','mp_homestead','mp_relic02','mp_rise','mp_thaw','mp_wargames','mp_eden','mp_glitch','mp_angel_city')
 $maps=@($priority)+@($oldPlan.maps|Where-Object {$_-notin$priority})
+$completedPreviously=@()
+if($ResumeBatch){
+    $previous=Get-Content -Raw -LiteralPath "$ResumeBatch/status.json"|ConvertFrom-Json
+    $previousPlan=Get-Content -Raw -LiteralPath "$ResumeBatch/plan.json"|ConvertFrom-Json
+    if($previous.state-notin@('stopped_error','stopped_by_request')){throw 'Resume only a stopped batch'}
+    if($previousPlan.dll_sha256-ne$validated.dll_sha256-or$previousPlan.bridge_sha256-ne$retestBuild.bridge_sha256-or$previousPlan.core_sha256-ne(Get-FileHash "$TestProfile/Northstar.dll").Hash){throw 'Cannot resume across changed runtime builds'}
+    $completedPreviously=@($previous.results|Where-Object {$_.result.valid-eq'true'}|ForEach-Object {$_.map})
+    $maps=@($previousPlan.maps|Where-Object {$_-notin$completedPreviously})
+    if(-not$maps.Count){throw 'No remaining maps to resume'}
+}
 $dllHash=(Get-FileHash -LiteralPath "$TestProfile/plugins/bp_ort.dll").Hash
 $coreHash=(Get-FileHash -LiteralPath "$TestProfile/Northstar.dll").Hash
 $bridge="$TestProfile/mods/James.BotDecisions/mod/scripts/vscripts/james_bot_decisions.nut"
 $bridgeHash=(Get-FileHash -LiteralPath $bridge).Hash
 $plan=[ordered]@{created=(Get-Date).ToString('o');build='decisions-v18';dll_sha256=$dllHash;core_sha256=$coreHash;bridge_sha256=$bridgeHash;maps=$maps;excluded_maps=$oldPlan.excluded_maps;bots=16;observer=1;goal=200;minutes=15;aim=0.78;kind='Fresh-process listen-server candidate cohort; not mixed with v16';validation=$ValidationDirectory;readiness_retest=$ReadinessRetestDirectory}
+$plan.resumed_from=$ResumeBatch;$plan.completed_previously=$completedPreviously
+$plan.observer_loadout_restore=-not[bool]$ObserverDefaults
 $plan|ConvertTo-Json -Depth 5|Set-Content -LiteralPath "$BatchDirectory/plan.json"
 $state=[ordered]@{state='preparing';started=(Get-Date).ToString('o');current=$null;planned=$maps.Count;results=@();failure=$null}
 function Save-State {
@@ -48,7 +60,10 @@ function Stop-Owned($process){
     if(-not$process){return}
     $p=Get-CimInstance Win32_Process -Filter "ProcessId=$($process.Id)" -ErrorAction SilentlyContinue
     if($p-and$p.Name-eq'NorthstarLauncher.exe'-and$p.CommandLine-and$p.CommandLine.Contains("-profile=$TestProfile")){
-        Stop-Process -Id $p.ProcessId -Force;Wait-Process -Id $p.ProcessId -Timeout 15 -ErrorAction SilentlyContinue
+        Stop-Process -Id $p.ProcessId -Force;[void]$process.WaitForExit(15000)
+        # Process enumeration can briefly retain an exited process after kill.
+        $deadline=(Get-Date).AddSeconds(10)
+        while((Get-Process -Id $p.ProcessId -ErrorAction SilentlyContinue)-and(Get-Date)-lt$deadline){Start-Sleep -Milliseconds 250}
     }
 }
 $process=$null;$reader=$null
@@ -65,6 +80,7 @@ try{
     $text=$text.Replace('bot_manager_max 16','bot_manager_max 17').Replace('bot_manager_target 16','bot_manager_target 17')
     $text=[regex]::Replace($text,'(?m)^setplaylistvaroverrides .*$', 'setplaylistvaroverrides "max_players 17 timelimit 15 scorelimit 200"')
     $text+="`r`nns_allow_spectators 1`r`nns_should_return_to_lobby 0`r`nbot_navigation_context 1`r`nbot_target_eligibility 1`r`nbot_action_policy 1`r`nbot_step_retry 1`r`n"
+    if($ObserverDefaults){$text+="james_local_loadouts 0 // survey observer only; preserve saved files without restoring them`r`n"}
     Set-Content -LiteralPath $cfg -Value $text
     $index=0
     foreach($map in $maps){

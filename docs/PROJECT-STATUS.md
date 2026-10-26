@@ -15,7 +15,7 @@ See [candidate record](../Notes/candidates/decisions-v18-20261025/README.md).
 | Final bridge retest |Passed matrix/lobby/normal return;866cost samples,38unaffordable tactical samples,0incorrectly-ready |
 | Normal deployment |19:48EDT; fresh backup; all3current save files hash-unchanged during deployment |
 | Preserved settings |8v8 human+15bots, aim0.78,50% human tactical recharge, four-gun0.9reload |
-| Survey |Fresh22-map frozen v18 queue started19:49EDT, Kodai first;200team points/15min,16bots+observer |
+| Survey |2/22complete (Kodai/Boomtown); Homestead running in observer-defaults subcohort after two client startup failures;200team points/15min,16bots+observer |
 | Earlier data |16recordings/10maps phase-aware v16 review; kept separate from v18 |
 
 New behavior: clear movement-watchdog context after non-navigation commands;

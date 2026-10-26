@@ -19,6 +19,9 @@ local work. [Original README](docs/UPSTREAM-README.md).
   with Kodai.200team-point goal,15minute cap,16bots8v8 plus an inactive observer.
   Earlier v16 trials and human-played sessions remain separate historical data.
   See the latest handoff for live status and the stop-after-current marker.
+  [Latest progress](Notes/candidates/decisions-v18-20261025/SURVEY-PROGRESS.md):
+  Kodai and Boomtown completed; Homestead resumed with observer loadout
+  restoration disabled after two client startup errors. Regular play unchanged.
 
 Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 [the map review](research/trends-20261025/FINDINGS.md) and

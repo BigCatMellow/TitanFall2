@@ -322,3 +322,25 @@ test-only; no new Grapple/A-Wall automation. Pulse/shot/resource counters aren't
 cast-success totals. Route hotspots/Titan-specific decisions/hide-and-seek
 remain further work. Source, sanitized test diagnostics and reports are in
 Notes/candidates/decisions-v18-20261025; private raw logs/binaries/saves stay local.
+2026-10-25 20:49 EDT — survey follow-up.
+First v18 batch completed Kodai129-163 and Boomtown169-161 (IMC-Militia),
+both at15min. mp_grave is Boomtown, not Crash Site; conversational label corrected.
+Homestead startup hit blank weapon name in intro hud_icon lookup at20:23.
+Unchanged-build retry decisions-v18-remaining-20261025-204531 repeated the issue
+in menu playermodel lookup; neither began a valid controlled match. No claim
+that this is a native bot crash or that precise persistence cause is proven.
+First batch profile_restored=false due exited-process enumeration race; after
+confirming all games exited, idle cfg/enabledmods/survey script restored and
+newly installed survey manifest moved aside. No save restoration. Second failed
+attempt restored profile correctly. Runner now waits for owned exit and has
+ResumeBatch support with matching native/bridge/core hashes and completed-map skip.
+New ObserverDefaults switch disables james_local_loadouts only for the inactive
+survey observer; regular play profile is unchanged. New subcohort:
+C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-observer-defaults-20261025-204736.
+RunnerPID316532; HomesteadPID318188 (verify live).20maps remain including Homestead.
+Homestead startup passed,16bots8v8, observer dead, scores advancing at20:49.
+One successful control supports observer/persistence isolation, not a complete
+root-cause fix. Label observer-restoration configuration separately from prior
+trials. Normal3saves still hash-identical to before-v18-normal-deploy backup.
+Current session pointer updated. stop-after-current.txt belongs in NEW batch.
+Reports and sanitized aggregate progress in candidate SURVEY-PROGRESS.md/json.
