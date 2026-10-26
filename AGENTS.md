@@ -40,3 +40,7 @@ entries before changes.
 - Default bots still use Grapple/frag, which lack legacy activation requests.
   Mixed suits/weapons are test-only. Do not claim Grapple/A-Wall automation or
   improved damage/win rate from readiness/pulse diagnostics.
+- User authorized75-point unattended completion on2026-10-25. Current overnight
+  supervisor preserves3prior200-goal matches and runs19remaining maps at75.
+  Read candidate OVERNIGHT-75.md and live status/coverage, not stale PIDs. Do not
+  edit worker/native code during the frozen queue. Failed attempts stay failures.

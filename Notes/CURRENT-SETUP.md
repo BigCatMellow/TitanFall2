@@ -344,3 +344,33 @@ root-cause fix. Label observer-restoration configuration separately from prior
 trials. Normal3saves still hash-identical to before-v18-normal-deploy backup.
 Current session pointer updated. stop-after-current.txt belongs in NEW batch.
 Reports and sanitized aggregate progress in candidate SURVEY-PROGRESS.md/json.
+2026-10-25 21:06 EDT — user authorized75-point unattended completion while asleep.
+Homestead finished195-192 (IMC-Militia),15min, valid, no runtime errors detected;
+third completed v18 map. Old observer-defaults queue stopped_by_request and
+restored idle files cleanly. Preserve all3prior200-goal results separately.
+New supervisor C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-overnight75-20261025,
+PID320516 (verify live).19remaining maps, goal75perteam,15minfallback,16bots8v8
+plus inactive observer, same frozen native/core/bridge/aim. Relic first,
+child runner322112/game321636; actual MAP_SURVEY_BEGIN confirms engine75 and
+harness75,16bots8v8, observer dead. No normal deployment/profile changes here.
+Run-OvernightSurvey.ps1 reads private overnight75-request-20261025.json,
+waited for old queue to finish, skips prior completed maps, supervises one-map
+Run-CandidateSurvey.ps1 workers. At most2attempts/map, preserves failures and
+continues after map-specific errors. Stops globally on frozen hash changes,
+unrelated game/ownership conflict, failed config restoration or unknown faults.
+Windows system-awake request active for supervisor only; released at exit.
+All worker configuration restored between maps; normal save hashes guarded.
+Six fixture checks passed (selection/order/exclusion/PlanOnly/bounds/core mismatch).
+Live parent status.json includes child batch/PID/score. coverage.json aggregates
+prior/new/failed/remaining; final summary.json distinguishes complete from
+complete_with_failures. Failure is never successful coverage. Full private raw
+logs remain local. stop-after-current.txt belongs in SUPERVISOR batch now.
+Do not edit the frozen worker/native source while overnight queue is active.
+See candidate OVERNIGHT-75.md and overnight75-start.json. Existing study data
+continues to be telemetry only; do not infer win-rate/cast/geometry fixes yet.
+2026-10-25 21:10 EDT — first75-point end-to-end success.
+Relic ended75-18 at267.4s, score_limit, valid; reports generated without error,
+idle profile restored, supervisor automatically launched Rise.4/22completed
+including3prior200-goal matches and1new75-goal.18remain including running/starting
+Rise. First completed shorter trial plus automatic handoff verified. Keep the
+short lopsided Relic result distinct from full-length performance/balance claims.

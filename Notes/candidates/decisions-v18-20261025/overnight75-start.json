@@ -1,0 +1,77 @@
+{
+  "snapshot": "2026-10-25T21:08:33.6828377-04:00",
+  "batch": "decisions-v18-overnight75-20261025",
+  "state": "running_map",
+  "goal": 75,
+  "completed_prior": [
+    {
+      "goal": 200,
+      "map": "mp_forwardbase_kodai",
+      "result": {
+        "reason": "time_limit_or_rules",
+        "map": "mp_forwardbase_kodai",
+        "militia": "163",
+        "valid": "true",
+        "imc": "129",
+        "index": "0",
+        "elapsed": "891.5"
+      }
+    },
+    {
+      "goal": 200,
+      "map": "mp_grave",
+      "result": {
+        "reason": "time_limit_or_rules",
+        "map": "mp_grave",
+        "militia": "161",
+        "valid": "true",
+        "imc": "169",
+        "index": "0",
+        "elapsed": "891.5"
+      }
+    },
+    {
+      "goal": 200,
+      "map": "mp_homestead",
+      "result": {
+        "valid": "true",
+        "militia": "192",
+        "imc": "195",
+        "map": "mp_homestead",
+        "elapsed": "891.5",
+        "reason": "time_limit_or_rules",
+        "index": "0"
+      }
+    }
+  ],
+  "maps_remaining_at_start": 19,
+  "current_map": "mp_relic02",
+  "current_score": {
+    "map": "mp_relic02",
+    "kills": "55",
+    "bots": "16",
+    "elapsed": "170",
+    "index": "0",
+    "imc": "41",
+    "militia": "14"
+  },
+  "native_sha256": "F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648",
+  "runtime_begin": "MAP_SURVEY_BEGIN map=mp_relic02 goal=75 engine_goal=75 bots=16 imc=8 militia=8 observer_alive=0",
+  "planning_fixture_checks": 6,
+  "max_attempts": 2,
+  "observer_restore": false,
+  "temporary_awake_guard": true,
+  "normal_profile_modified": false,
+  "limits": "Start snapshot, not final coverage. Preserve200/75 goals and observer modes separately; failures do not count as passed maps.",
+  "first_short_match": {
+    "reports_generated": true,
+    "automatic_advance": true,
+    "map": "mp_relic02",
+    "militia": 18,
+    "elapsed": 267.4,
+    "profile_restored": true,
+    "next_map": "mp_rise",
+    "imc": 75,
+    "reason": "score_limit"
+  }
+}

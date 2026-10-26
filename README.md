@@ -22,6 +22,9 @@ local work. [Original README](docs/UPSTREAM-README.md).
   [Latest progress](Notes/candidates/decisions-v18-20261025/SURVEY-PROGRESS.md):
   Kodai and Boomtown completed; Homestead resumed with observer loadout
   restoration disabled after two client startup errors. Regular play unchanged.
+  [Overnight update](Notes/candidates/decisions-v18-20261025/OVERNIGHT-75.md):
+  Homestead also completed; the remaining19maps use75points per team, with
+  bounded retries and separately recorded failures.
 
 Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 [the map review](research/trends-20261025/FINDINGS.md) and

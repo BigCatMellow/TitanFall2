@@ -1,7 +1,8 @@
 param([Parameter(Mandatory)][string]$BatchDirectory,[Parameter(Mandatory)][string]$ValidationDirectory,[Parameter(Mandatory)][string]$ReadinessRetestDirectory,
     [string]$TestProfile='C:\Users\james\northstar-crash-audit\map-cycle-test-profile',
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
-    [string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$ResumeBatch,[switch]$ObserverDefaults)
+    [string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$ResumeBatch,[switch]$ObserverDefaults,
+    [ValidateRange(1,9999)][int]$Goal=200,[string[]]$MapNames)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
 $validation=Get-Content -Raw -LiteralPath "$ValidationDirectory/progress.json"|ConvertFrom-Json
@@ -41,11 +42,16 @@ if($ResumeBatch){
     $maps=@($previousPlan.maps|Where-Object {$_-notin$completedPreviously})
     if(-not$maps.Count){throw 'No remaining maps to resume'}
 }
+if($MapNames){
+    if($ResumeBatch){throw 'Use either explicit maps or resume selection'}
+    foreach($requested in $MapNames){if($requested-notin$maps){throw "Unsupported survey map: $requested"}}
+    $maps=@($MapNames|Select-Object -Unique)
+}
 $dllHash=(Get-FileHash -LiteralPath "$TestProfile/plugins/bp_ort.dll").Hash
 $coreHash=(Get-FileHash -LiteralPath "$TestProfile/Northstar.dll").Hash
 $bridge="$TestProfile/mods/James.BotDecisions/mod/scripts/vscripts/james_bot_decisions.nut"
 $bridgeHash=(Get-FileHash -LiteralPath $bridge).Hash
-$plan=[ordered]@{created=(Get-Date).ToString('o');build='decisions-v18';dll_sha256=$dllHash;core_sha256=$coreHash;bridge_sha256=$bridgeHash;maps=$maps;excluded_maps=$oldPlan.excluded_maps;bots=16;observer=1;goal=200;minutes=15;aim=0.78;kind='Fresh-process listen-server candidate cohort; not mixed with v16';validation=$ValidationDirectory;readiness_retest=$ReadinessRetestDirectory}
+$plan=[ordered]@{created=(Get-Date).ToString('o');build='decisions-v18';dll_sha256=$dllHash;core_sha256=$coreHash;bridge_sha256=$bridgeHash;maps=$maps;excluded_maps=$oldPlan.excluded_maps;bots=16;observer=1;goal=$Goal;minutes=15;aim=0.78;kind='Fresh-process listen-server candidate cohort; not mixed with v16';validation=$ValidationDirectory;readiness_retest=$ReadinessRetestDirectory}
 $plan.resumed_from=$ResumeBatch;$plan.completed_previously=$completedPreviously
 $plan.observer_loadout_restore=-not[bool]$ObserverDefaults
 $plan|ConvertTo-Json -Depth 5|Set-Content -LiteralPath "$BatchDirectory/plan.json"
@@ -78,7 +84,7 @@ try{
     $mods|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $enabled
     $text=Get-Content -Raw -LiteralPath "$BatchDirectory/backup/server.cfg"
     $text=$text.Replace('bot_manager_max 16','bot_manager_max 17').Replace('bot_manager_target 16','bot_manager_target 17')
-    $text=[regex]::Replace($text,'(?m)^setplaylistvaroverrides .*$', 'setplaylistvaroverrides "max_players 17 timelimit 15 scorelimit 200"')
+    $text=[regex]::Replace($text,'(?m)^setplaylistvaroverrides .*$', ('setplaylistvaroverrides "max_players 17 timelimit 15 scorelimit '+$Goal+'"'))
     $text+="`r`nns_allow_spectators 1`r`nns_should_return_to_lobby 0`r`nbot_navigation_context 1`r`nbot_target_eligibility 1`r`nbot_action_policy 1`r`nbot_step_retry 1`r`n"
     if($ObserverDefaults){$text+="james_local_loadouts 0 // survey observer only; preserve saved files without restoring them`r`n"}
     Set-Content -LiteralPath $cfg -Value $text
@@ -94,7 +100,7 @@ try{
         [IO.File]::WriteAllText($surveyScript,$one,[Text.UTF8Encoding]::new($false))
         $state.state='starting';$state.current=@{map=$map;index=$index;directory=$dir};Save-State
         $began=Get-Date;$seen=@(Get-ChildItem "$TestProfile/logs" -Filter 'nslog*.txt'|Select-Object -ExpandProperty Name)
-        $process=Start-Process -FilePath "$GameDirectory/NorthstarLauncher.exe" -WorkingDirectory $GameDirectory -WindowStyle Normal -PassThru -ArgumentList "-profile=$TestProfile",'-novid','-fullscreen','-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+setplaylist','tdm','+setplaylistvaroverrides','"max_players 17 scorelimit 200 timelimit 15"','+james_survey_goal','200','+james_survey_count','1','+james_survey_index','0','+james_survey_minutes','15','+james_survey_smoke','0','+mp_gamemode','tdm','+map',$map
+        $process=Start-Process -FilePath "$GameDirectory/NorthstarLauncher.exe" -WorkingDirectory $GameDirectory -WindowStyle Normal -PassThru -ArgumentList "-profile=$TestProfile",'-novid','-fullscreen','-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+setplaylist','tdm','+setplaylistvaroverrides',('"max_players 17 scorelimit '+$Goal+' timelimit 15"'),'+james_survey_goal',"$Goal",'+james_survey_count','1','+james_survey_index','0','+james_survey_minutes','15','+james_survey_smoke','0','+mp_gamemode','tdm','+map',$map
         $state.current.pid=$process.Id;Save-State
         $log=$null;$lastHeartbeat=Get-Date;$result=$null;$done=$false
         while(-not$done){
@@ -107,6 +113,7 @@ try{
                 if($line-match'SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|\[error\]'){throw "Game error: $line"}
                 if($line.Contains('MAP_SURVEY_BEGIN ')){
                     $f=Fields $line;if($f.bots-ne'16'-or$f.imc-ne'8'-or$f.militia-ne'8'-or$f.observer_alive-ne'0'){throw 'Uncontrolled survey population'}
+                    if([int]$f.goal-ne$Goal-or[int]$f.engine_goal-ne$Goal){throw 'Engine and harness score goals do not match the requested trial'}
                     $state.state='running';$lastHeartbeat=Get-Date
                 }
                 if($line.Contains('MAP_SURVEY_SCORE ')){$state.current.score=Fields $line;$lastHeartbeat=Get-Date;Save-State}
