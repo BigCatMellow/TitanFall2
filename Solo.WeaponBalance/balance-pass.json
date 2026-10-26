@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "name": "Pilot weapon roles — isolated candidate v0.1",
+  "reference": {
+    "repository": "BigSpice/TitanFall-2-Skin-Modding",
+    "commit": "bc13e6120e37b3ccdbc0cba55e61fd978bdcbe21",
+    "status": "Third-party published script reference, NOT verified installed baseline"
+  },
+  "candidate_status": "SOURCE_ONLY_NOT_RUNTIME_VERIFIED",
+  "weapons": [
+    {
+      "name": "Flatline",
+      "classname": "mp_weapon_vinson",
+      "source_blob_sha": "df3ddf1c00f6745274e5dfba51f87bc3380b59aa",
+      "direction": "buff",
+      "purpose": "Reward deliberate aimed fire without changing heavy-bullet TTK or hipfire identity",
+      "fields": {
+        "viewkick_scale_min_ads": { "reference": 1.5, "multiplier": 0.8, "nominal_trial": 1.2 },
+        "viewkick_scale_max_ads": { "reference": 2, "multiplier": 0.8, "nominal_trial": 1.6 }
+      }
+    },
+    {
+      "name": "Volt",
+      "classname": "mp_weapon_hemlok_smg",
+      "source_blob_sha": "01518db25034c7ed5a6568e454c36c53d82444be",
+      "direction": "buff",
+      "purpose": "Sharpen mid-range aim consistency while leaving the CAR the faster-killing SMG",
+      "fields": {
+        "viewkick_scale_min_ads": { "reference": 1.1, "multiplier": 0.75, "nominal_trial": 0.825 },
+        "viewkick_scale_max_ads": { "reference": 1.1, "multiplier": 0.75, "nominal_trial": 0.825 }
+      }
+    },
+    {
+      "name": "R-97",
+      "classname": "mp_weapon_r97",
+      "source_blob_sha": "b5306ca2b4a68b7ea54292d744380988424b6733",
+      "direction": "buff",
+      "purpose": "Sustain accurate high-volume mobile hipfire rather than copying CAR damage",
+      "fields": {
+        "spread_kick_on_fire_stand_hip": { "reference": 0.5, "multiplier": 0.7, "nominal_trial": 0.35 },
+        "spread_kick_on_fire_crouch_hip": { "reference": 0.5, "multiplier": 0.7, "nominal_trial": 0.35 },
+        "spread_kick_on_fire_air_hip": { "reference": 0.5, "multiplier": 0.7, "nominal_trial": 0.35 },
+        "spread_max_kick_stand_hip": { "reference": 2, "multiplier": 0.7, "nominal_trial": 1.4 },
+        "spread_max_kick_crouch_hip": { "reference": 2, "multiplier": 0.7, "nominal_trial": 1.4 },
+        "spread_max_kick_air_hip": { "reference": 2, "multiplier": 0.7, "nominal_trial": 1.4 }
+      }
+    },
+    {
+      "name": "Spitfire",
+      "classname": "mp_weapon_lmg",
+      "source_blob_sha": "0f19b3b88e4f066c2206d4f77babeb2da2be8d02",
+      "direction": "nerf",
+      "purpose": "Keep stationary suppressive power and 80-round magazine; reinforce its moving-ADS weakness",
+      "fields": {
+        "ads_move_speed_scale": { "reference": 0.35, "multiplier": 0.8, "nominal_trial": 0.28 }
+      }
+    }
+  ],
+  "explicit_non_changes": [
+    "damage and falloff",
+    "rate of fire and burst cadence",
+    "magazine, reload and movement outside ADS",
+    "ADS transition speed and aim assist",
+    "other pilot guns, Titans, tactical recharge, bot aim and native controller"
+  ]
+}

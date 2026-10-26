@@ -1,0 +1,15 @@
+WeaponData
+{
+    Mods
+    {
+        solo_role_balance_v1
+        {
+            spread_kick_on_fire_stand_hip "*0.70"
+            spread_kick_on_fire_crouch_hip "*0.70"
+            spread_kick_on_fire_air_hip "*0.70"
+            spread_max_kick_stand_hip "*0.70"
+            spread_max_kick_crouch_hip "*0.70"
+            spread_max_kick_air_hip "*0.70"
+        }
+    }
+}
