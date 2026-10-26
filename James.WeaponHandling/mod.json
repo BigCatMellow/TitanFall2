@@ -1,7 +1,7 @@
 {
   "Name": "James.WeaponHandling",
-  "Description": "Optional 10% faster ADS-in/out trial for the local solo human's Flatline and G2.",
-  "Version": "0.1.0",
+  "Description": "Optional 25% shorter ADS-in/out trial for the local solo human's Flatline and G2.",
+  "Version": "0.2.0",
   "LoadPriority": 42,
   "ConVars": [
     {

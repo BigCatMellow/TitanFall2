@@ -4,8 +4,8 @@ WeaponData
     {
         james_solo_ads_trial
         {
-            zoom_time_in "*0.9"
-            zoom_time_out "*0.9"
+            zoom_time_in "*0.75"
+            zoom_time_out "*0.75"
         }
     }
 }

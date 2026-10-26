@@ -4,17 +4,21 @@ Source-only candidate for James's local, insecure solo Northstar profile.
 **Disabled by default; not installed or runtime-verified.**
 
 The named attachment `james_solo_ads_trial` multiplies **both** ADS transition
-durations by 0.90 for only:
+durations by 0.75 (25% shorter) for only:
 
 | Weapon | Internal class | Reference ADS-in | Trial ADS-in | Reference ADS-out | Trial ADS-out |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Flatline | `mp_weapon_vinson` | 0.250 s | 0.225 s | 0.200 s | 0.180 s |
-| G2 | `mp_weapon_g2` | 0.250 s | 0.225 s | 0.200 s | 0.180 s |
+| Flatline | `mp_weapon_vinson` | 0.250 s | 0.1875 s | 0.200 s | 0.150 s |
+| G2 | `mp_weapon_g2` | 0.250 s | 0.1875 s | 0.200 s | 0.150 s |
 
 Reference times are from publicly available Titanfall 2 MP weapon scripts,
 not measurements of James's current installation. Verify those baselines in
 the isolated game profile before interpreting actual timings. Existing weapon
-attachments may further modify effective timings.
+attachments may further modify effective timings. This saves 62.5 ms entering
+ADS (about 3.75 frames at 60 FPS) and 50 ms leaving ADS (3 frames): a stronger
+handling experiment than the original 10% trial. It also brings these rifles
+to about SMG-level ADS speed, which could weaken weapon-class differentiation.
+Treat this as an upper-end test, not an automatically recommended final balance.
 
 Damage, fire rate, recoil, hipfire/ADS spread, aim assist, bot aim, ADS movement
 speed, deploy time, other weapons and Titans are unchanged. The existing reload
@@ -38,7 +42,8 @@ another owner. **That removal path has not yet been runtime-tested.**
    because `James.WeaponReload` also contributes `mp_weapon_g2.txt`.
 3. Equip Flatline and G2 without attachments. Record ADS-in/out with trial
    off, then set `james_ads_trial 1` and respawn/reselect loadout; record again.
-   Expect approx. 0.225 s in / 0.180 s out before other modifiers.
+   Expect approx. 0.1875 s in / 0.150 s out before other modifiers. Compare
+   with an SMG's ADS response so the rifles do not become overly responsive.
 4. Verify that their other stats do not change; check a CAR or R-201 as an
    unchanged control. Verify both enabled trial and disabled trial with
    `James.WeaponReload` and Speedloader still working on the G2.

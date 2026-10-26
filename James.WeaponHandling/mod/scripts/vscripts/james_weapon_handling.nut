@@ -54,6 +54,6 @@ void function JamesWeaponHandling_Apply( entity player )
         weapon.SetMods( mods )
 
         print( "WEAPON_HANDLING: weapon=" + weapon.GetWeaponClassName()
-            + " enabled=" + enabled + " zoom_scale=0.90" )
+            + " enabled=" + enabled + " zoom_scale=0.75" )
     }
 }

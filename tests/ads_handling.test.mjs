@@ -27,8 +27,8 @@ test("only G2 and Flatline have a named ADS-only KeyValue modifier", () => {
   for (const name of weapons) {
     const data = read(`keyvalues/scripts/weapons/${name}.txt`);
     assert.match(data, /^WeaponData\s*\{\s*Mods\s*\{\s*james_solo_ads_trial\s*\{/);
-    assert.equal((data.match(/zoom_time_in\s+"\*0\.9"/g) ?? []).length, 1);
-    assert.equal((data.match(/zoom_time_out\s+"\*0\.9"/g) ?? []).length, 1);
+    assert.equal((data.match(/zoom_time_in\s+"\*0\.75"/g) ?? []).length, 1);
+    assert.equal((data.match(/zoom_time_out\s+"\*0\.75"/g) ?? []).length, 1);
     const fields = [...data.matchAll(/^\s*(\w+)\s+"[^"\n]+"/gm)].map((match) => match[1]);
     assert.deepEqual(fields.sort(), ["zoom_time_in", "zoom_time_out"]);
   }
@@ -60,5 +60,5 @@ test("named modifier stays distinct from existing reload modifier", () => {
   const reloadMatch = reload.match(/JAMES_RELOAD_MOD = "([^"]+)"/);
   assert.ok(match && reloadMatch);
   assert.notEqual(match[1], reloadMatch[1]);
-  assert.match(script, /zoom_scale=0\.90/);
+  assert.match(script, /zoom_scale=0\.75/);
 });
