@@ -374,3 +374,45 @@ idle profile restored, supervisor automatically launched Rise.4/22completed
 including3prior200-goal matches and1new75-goal.18remain including running/starting
 Rise. First completed shorter trial plus automatic handoff verified. Keep the
 short lopsided Relic result distinct from full-length performance/balance claims.
+2026-10-26 12:38 EDT — ALL22SUPPORTED MAPS COMPLETE.
+Overnight supervisor stopped23:01Oct25 after16new matches (19aggregate). Traffic
+had also completed75-71 at301.3s with valid BEGIN/RESULT/DONE and zero detected
+runtime errors, but Stop-Process raced its natural quit, threw ProcessNotFound,
+and prevented final cleanup/status/result persistence. Original failed child
+state/stderr and overnight stopped_error are preserved; do not rewrite history
+as overnight completion. Recovered Traffic as a separate derived record:
+C:\Users\james\northstar-crash-audit\Notes\map-surveys\traffic-recovered-20261026-121941.
+Recovery backup survey-cleanup-recovery-20261026-121941 includes CURRENT normal
+and isolated saves plus prior files; only idle config/enabledmods/harness restored,
+no saved data restored. Traffic reports regenerated from the original clean log.
+Stop-OwnedSurveyGame now uses the original process handle with exact profile
+argument/name checks and treats an already-exited handle as successful shutdown.
+Eight regression fixtures cover the exact race/ownership/failure cases. Worker
+persists result before cleanup and always records cleanup/restoration failures.
+
+Final supervisor C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-last-maps-20261026,
+request last-maps-request-20261026.json. Read20completed records; ran only UMA
+(75-67,264.6s) and Coliseum (9-75,108.3s), finished12:30:31EDT with statecomplete,
+zero failed attempts/report errors.22unique supported maps complete:3goal200,
+19goal75. mp_coliseum_column still explicitly unsupported: no navigation data.
+No game processes remain; idle cfg/enabledmods hash-restored; temporary awake
+request released; all3CURRENT normal saves hash-unchanged during final trials.
+Normal installed native F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648
+and bridge30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78 unchanged.
+
+research/maps-v18-20261026 contains22round metrics, findings, manifest/hashes and
+22sanitized compressed diagnostic logs (only exact BOT_/MAP_SURVEY_ whitelist
+plus core/build headers). Private full logs, auth, personal saves stay local.
+No script/native error detected in completed-round logs; earlier startup failures
+and host cleanup exception remain separate.75goal median267.4s overall;
+regular-map subset12rounds median332.85s; short/long goals and observer modes
+remain separate. Strict phase-trimmed low-progress samples:WarGames330/4705=7.01%,
+Eden113/2273=4.97%,Drydock50/1242=4.03%. WarGames/Eden shared cells warrant targeted
+route work; Eden4096,-256,128 recurs in oldv16 too. No before/after causal claim.
+Zero>5000Zoverhead target selections in16332visible pilot-engage snapshots,
+not shot/cast/outcome proof. Four metric fixtures pass; three independent
+PowerShell reference counts match. Public Eden archive replay regenerated matching
+metrics, proving the published subset supports reconstruction. No visual watching.
+Further tuning should use these map-specific leads; no native balance changes
+were made during recovery/analysis. Latest session pointer now references completed
+final supervisor; its current field is the last trial, NOT a live process.

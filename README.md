@@ -15,16 +15,13 @@ local work. [Original README](docs/UPSTREAM-README.md).
   [Candidate record](Notes/candidates/decisions-v18-20261025/README.md).
 - **Custom add-ons:** named loadout/basic progress persistence,50% shorter
   human tactical recharge,10% shorter human reloads on G2/Alternator/R-201/CAR.
-- **Map survey:** a fresh22-map v18 cohort was started after validation, beginning
-  with Kodai.200team-point goal,15minute cap,16bots8v8 plus an inactive observer.
-  Earlier v16 trials and human-played sessions remain separate historical data.
-  See the latest handoff for live status and the stop-after-current marker.
-  [Latest progress](Notes/candidates/decisions-v18-20261025/SURVEY-PROGRESS.md):
-  Kodai and Boomtown completed; Homestead resumed with observer loadout
-  restoration disabled after two client startup errors. Regular play unchanged.
-  [Overnight update](Notes/candidates/decisions-v18-20261025/OVERNIGHT-75.md):
-  Homestead also completed; the remaining19maps use75points per team, with
-  bounded retries and separately recorded failures.
+- **Map survey complete:** all22supported maps have valid16-bot8v8 rounds.
+  Three used the200-point goal;19used75points per team. A host cleanup race
+  stopped the overnight run; Traffic was recovered and the last two maps
+  finished October26. No script/native error was detected in the completed
+  round logs. [Findings and evidence](research/maps-v18-20261026/FINDINGS.md).
+  War Games/Eden are the strongest route follow-ups. Historical v16/played
+  sessions, short/long goals and observer configurations remain separate.
 
 Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 [the map review](research/trends-20261025/FINDINGS.md) and

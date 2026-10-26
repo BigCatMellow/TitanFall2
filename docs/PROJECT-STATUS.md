@@ -1,7 +1,8 @@
-# Project status — 2026-10-25
+# Project status — 2026-10-26
 
 The reviewed decision changes are implemented, tested and installed in the
-normal solo profile. A fresh map survey was started after validation.
+normal solo profile. The22-map survey is now complete; the final two maps were
+finished today after fixing an overnight host-cleanup race.
 See [candidate record](../Notes/candidates/decisions-v18-20261025/README.md).
 
 | Item | State |
@@ -15,7 +16,9 @@ See [candidate record](../Notes/candidates/decisions-v18-20261025/README.md).
 | Final bridge retest |Passed matrix/lobby/normal return;866cost samples,38unaffordable tactical samples,0incorrectly-ready |
 | Normal deployment |19:48EDT; fresh backup; all3current save files hash-unchanged during deployment |
 | Preserved settings |8v8 human+15bots, aim0.78,50% human tactical recharge, four-gun0.9reload |
-| Survey |4/22complete including first75-point match (Relic75-18); automatically advanced to Rise;75-point queue,15min fallback,16bots+observer, bounded retries |
+| Survey |22/22supported maps complete:3at200goal,19at75goal;16bots8v8+observer; no detected script/native error in completed round logs |
+| Follow-up |War Games7.01%/Eden4.97%continuous low-progress samples; shared route cells recur. Single rounds, overlapping samples, not causal before/after evidence |
+| Cleanup |Natural-exit race fixed; Traffic recovered with original failure retained;8cleanup+6planning+4metric fixtures pass |
 | Earlier data |16recordings/10maps phase-aware v16 review; kept separate from v18 |
 
 New behavior: clear movement-watchdog context after non-navigation commands;
@@ -42,3 +45,5 @@ Read the latest handoff and live private survey status before touching a game
 process. Historical PIDs/status records do not establish current queue state.
 No visual match watching or recorder was used. Map-specific route hotspots,
 Titan behavior and hide-and-seek support remain further work.
+See research/maps-v18-20261026/FINDINGS.md for full results, evidence hashes,
+public replay/reference checks, phase limits and final environment verification.

@@ -1,8 +1,8 @@
 {
-  "checked": "2026-10-25T21:09:47.2725523-04:00",
-  "files": 3668,
-  "text_files": 3522,
-  "compressed_logs": 116,
+  "checked": "2026-10-26T12:40:59.0588742-04:00",
+  "files": 3699,
+  "text_files": 3531,
+  "compressed_logs": 138,
   "issues": [],
   "limits": "Pattern/size/path checks, not a guarantee against every secret. Imported account identifiers and auth fields are separately sanitized."
 }

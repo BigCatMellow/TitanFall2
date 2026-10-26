@@ -1,0 +1,13 @@
+{
+  "state": "complete",
+  "normal_saves_unchanged": 3,
+  "idle_configuration_restored": true,
+  "enabled_mods_restored": true,
+  "awake_request_active": false,
+  "native_sha256": "F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648",
+  "bridge_sha256": "30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78",
+  "running_games": 0,
+  "cleanup_regression_checks": 8,
+  "planning_checks": 6,
+  "core_sha256": "86007DD1DDAC9103508EECA520E2AB89B16DF92780A5F8A67497CCF29567EDB9"
+}

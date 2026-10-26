@@ -40,7 +40,9 @@ entries before changes.
 - Default bots still use Grapple/frag, which lack legacy activation requests.
   Mixed suits/weapons are test-only. Do not claim Grapple/A-Wall automation or
   improved damage/win rate from readiness/pulse diagnostics.
-- User authorized75-point unattended completion on2026-10-25. Current overnight
-  supervisor preserves3prior200-goal matches and runs19remaining maps at75.
-  Read candidate OVERNIGHT-75.md and live status/coverage, not stale PIDs. Do not
-  edit worker/native code during the frozen queue. Failed attempts stay failures.
+- The22-map survey is COMPLETE as of2026-10-26:3prior200-goal matches and19at75.
+  Overnight host cleanup raced a natural exit; Traffic was recovered from a
+  clean completed log, then UMA/Coliseum finished today. No queue/game remains.
+  Read research/maps-v18-20261026/FINDINGS.md and latest handoff; old PIDs/status
+  are historical. Native/ability hashes unchanged. Cleanup regression fixtures
+  cover the race and exact process ownership. Failed attempts stay failures.

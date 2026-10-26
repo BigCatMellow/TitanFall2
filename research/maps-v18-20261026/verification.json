@@ -1,0 +1,42 @@
+{
+  "completed": 22,
+  "short_rounds": 19,
+  "short_median_seconds": 267.4,
+  "short_min_seconds": 108.3,
+  "short_max_seconds": 718.2,
+  "log_errors": 0.0,
+  "overhead_engage_samples": 0.0,
+  "visible_engage_samples": 16332.0,
+  "reference_crosscheck": [
+    {
+      "low_samples": 330,
+      "map": "mp_wargames",
+      "pilot_samples": 4705,
+      "matched": true
+    },
+    {
+      "low_samples": 113,
+      "map": "mp_eden",
+      "pilot_samples": 2273,
+      "matched": true
+    },
+    {
+      "low_samples": 50,
+      "map": "mp_drydock",
+      "pilot_samples": 1242,
+      "matched": true
+    }
+  ],
+  "regular_short_rounds": 12,
+  "regular_short_median_seconds": 332.85,
+  "independent_reference_checks": 3,
+  "metric_fixtures": 4,
+  "published_eden_replay_matches": true,
+  "cleanup_race_recovered": true,
+  "excluded_maps": [
+    {
+      "map": "mp_coliseum_column",
+      "reason": "No bot navigation data"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "scope": "Exact whitelist of authored bot/survey diagnostics plus core/build headers; timestamps/auth/general logs/personal saved state omitted",
+  "files": [
+    {
+      "map": "mp_forwardbase_kodai",
+      "file": "mp_forwardbase_kodai.log.gz",
+      "lines": 42731,
+      "sha256": "07dc62fea58bea56f9ccdda7fa03a6321af35e4e0181541dbbc4a872ef6f6a66"
+    },
+    {
+      "map": "mp_grave",
+      "file": "mp_grave.log.gz",
+      "lines": 43465,
+      "sha256": "ab8b93c23e6005509fe73b1c6de79f0e5f491f6365ba37c600dbd7e69e5bc8e3"
+    },
+    {
+      "map": "mp_homestead",
+      "file": "mp_homestead.log.gz",
+      "lines": 43519,
+      "sha256": "2c293b7df37d6305a4813ffad5a38fe9c84d23875604339416fd75e54e660496"
+    },
+    {
+      "map": "mp_relic02",
+      "file": "mp_relic02.log.gz",
+      "lines": 13598,
+      "sha256": "3cdcd7626954e17b14ed00741b6f9da5204e5fe7e390725a1489c317db4b8135"
+    },
+    {
+      "map": "mp_rise",
+      "file": "mp_rise.log.gz",
+      "lines": 14031,
+      "sha256": "cfab7b1f402d8e5d91fd0dffe57002bea2698be3bd6125fe6f22fff05c6626ca"
+    },
+    {
+      "map": "mp_thaw",
+      "file": "mp_thaw.log.gz",
+      "lines": 18750,
+      "sha256": "c8a6f776a5fee3d86b318c85c182cd3cdabd8d0badabb5dae5f44832fcb694fe"
+    },
+    {
+      "map": "mp_wargames",
+      "file": "mp_wargames.log.gz",
+      "lines": 35216,
+      "sha256": "9297bd40299ecbd48b700c229d3d93c2a79fc3c39bd77d017a2e271937b377bf"
+    },
+    {
+      "map": "mp_eden",
+      "file": "mp_eden.log.gz",
+      "lines": 19978,
+      "sha256": "a8cf5a94227de2dae183bc2d9cd04d9dbf13d8b33464629a089bd7b38ba30b73"
+    },
+    {
+      "map": "mp_glitch",
+      "file": "mp_glitch.log.gz",
+      "lines": 20708,
+      "sha256": "de66af8c2d9986133eb5508ac31f7374ded4aff2e1dab812d3869cc5311bdba7"
+    },
+    {
+      "map": "mp_angel_city",
+      "file": "mp_angel_city.log.gz",
+      "lines": 11351,
+      "sha256": "e30cc0379feae3474bd1826726f8798c9239f29e8bad53325619ff5b9d2e0e7e"
+    },
+    {
+      "map": "mp_black_water_canal",
+      "file": "mp_black_water_canal.log.gz",
+      "lines": 16747,
+      "sha256": "3cadc8c831b931c0dca0facb2aa78ee7454328928ae1d794001c60dc501080cf"
+    },
+    {
+      "map": "mp_colony02",
+      "file": "mp_colony02.log.gz",
+      "lines": 18475,
+      "sha256": "d7fabf47c95c4fbd372e3c3ad6e7ba650888392430037d4e663419aaea984f43"
+    },
+    {
+      "map": "mp_complex3",
+      "file": "mp_complex3.log.gz",
+      "lines": 16637,
+      "sha256": "9666634915886e90a1b5e99a2f1742d933860c3e28412cd39e3363cc735d198f"
+    },
+    {
+      "map": "mp_crashsite3",
+      "file": "mp_crashsite3.log.gz",
+      "lines": 11706,
+      "sha256": "9c706b4c9f5d8362f0d5ae837f91da7cf9364490fe002a4caeb455c6cfe04747"
+    },
+    {
+      "map": "mp_drydock",
+      "file": "mp_drydock.log.gz",
+      "lines": 12212,
+      "sha256": "1b5d0d64d66ade3ba6bbd09a3b6a971efa9bca5e84a3267821137fa21ca9fc29"
+    },
+    {
+      "map": "mp_lf_deck",
+      "file": "mp_lf_deck.log.gz",
+      "lines": 14705,
+      "sha256": "030cf31bde9e3bdc396d5407af73c964cddc5f7d274605af1b7c579c46eb6bf6"
+    },
+    {
+      "map": "mp_lf_meadow",
+      "file": "mp_lf_meadow.log.gz",
+      "lines": 12187,
+      "sha256": "1e64e6ee4de0f9b2aea66f27fe72057e83d78474e2b173ff87b8643a7add9379"
+    },
+    {
+      "map": "mp_lf_stacks",
+      "file": "mp_lf_stacks.log.gz",
+      "lines": 11842,
+      "sha256": "d7cbd3aad4f650dfa79680073a32ff0551066d3de77897c1f5d8730239a7f26a"
+    },
+    {
+      "map": "mp_lf_township",
+      "file": "mp_lf_township.log.gz",
+      "lines": 15233,
+      "sha256": "169d757fe2871f355701525bf6c01d8ded11216bc097a90a869212d4ed8a3898"
+    },
+    {
+      "map": "mp_lf_traffic",
+      "file": "mp_lf_traffic.log.gz",
+      "lines": 16254,
+      "sha256": "f3464428e86bf9739e60f83d6f3acfe45aa154701012b41f990d7c8e56fe18a3"
+    },
+    {
+      "map": "mp_lf_uma",
+      "file": "mp_lf_uma.log.gz",
+      "lines": 13848,
+      "sha256": "0996277326a080b3a6b956e556c442475f3d5d1facc9fd2d83ad996ceeab7a55"
+    },
+    {
+      "map": "mp_coliseum",
+      "file": "mp_coliseum.log.gz",
+      "lines": 5154,
+      "sha256": "95fab3ffbeaf618ccde9c59fd038a576b4c0706d29cb427b861bab3041ab7ca2"
+    }
+  ]
+}

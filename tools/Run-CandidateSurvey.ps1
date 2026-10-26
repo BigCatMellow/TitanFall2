@@ -4,6 +4,7 @@ param([Parameter(Mandatory)][string]$BatchDirectory,[Parameter(Mandatory)][strin
     [string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$ResumeBatch,[switch]$ObserverDefaults,
     [ValidateRange(1,9999)][int]$Goal=200,[string[]]$MapNames)
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/Stop-OwnedSurveyGame.ps1"
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
 $validation=Get-Content -Raw -LiteralPath "$ValidationDirectory/progress.json"|ConvertFrom-Json
 if($validation.state-ne'passed'-or$validation.dedicated){throw 'Require completed client/transition/lobby integration checks before this listen-server survey'}
@@ -63,14 +64,7 @@ function Save-State {
 }
 function Fields($line){$f=@{};foreach($m in [regex]::Matches($line,'(?:^|\s)([a-z_]+)=([^\s]+)')){$f[$m.Groups[1].Value]=$m.Groups[2].Value};$f}
 function Stop-Owned($process){
-    if(-not$process){return}
-    $p=Get-CimInstance Win32_Process -Filter "ProcessId=$($process.Id)" -ErrorAction SilentlyContinue
-    if($p-and$p.Name-eq'NorthstarLauncher.exe'-and$p.CommandLine-and$p.CommandLine.Contains("-profile=$TestProfile")){
-        Stop-Process -Id $p.ProcessId -Force;[void]$process.WaitForExit(15000)
-        # Process enumeration can briefly retain an exited process after kill.
-        $deadline=(Get-Date).AddSeconds(10)
-        while((Get-Process -Id $p.ProcessId -ErrorAction SilentlyContinue)-and(Get-Date)-lt$deadline){Start-Sleep -Milliseconds 250}
-    }
+    Stop-OwnedSurveyGame -Process $process -Profile $TestProfile
 }
 $process=$null;$reader=$null
 try{
@@ -126,6 +120,9 @@ try{
             if(-not$done){Start-Sleep -Seconds 1}
         }
         if(-not$result){throw 'Missing completed match result'}
+        # Persist the completed match before shutdown, so cleanup cannot erase it.
+        Copy-Item -LiteralPath $log.FullName -Destination "$dir/raw-session.log"
+        $result|ConvertTo-Json|Set-Content -LiteralPath "$dir/result.json"
         $reader.Dispose();$reader=$null;Start-Sleep -Seconds 2;Stop-Owned $process;$process=$null
         Copy-Item -LiteralPath $log.FullName -Destination "$dir/raw-session.log"
         $result|ConvertTo-Json|Set-Content -LiteralPath "$dir/result.json"
@@ -142,8 +139,10 @@ try{
     if($log -and $dir -and (Test-Path -LiteralPath $log.FullName)){Copy-Item -LiteralPath $log.FullName -Destination "$dir/raw-session.log" -Force}
 }
 finally{
-    if($reader){$reader.Dispose()};Stop-Owned $process
-    if(-not(Get-Process NorthstarLauncher,Titanfall2 -ErrorAction SilentlyContinue)){
+    if($reader){$reader.Dispose()}
+    try{Stop-Owned $process}catch{$state.state='stopped_error';$state.failure+='; cleanup: '+[string]$_}
+    try{
+    if(-not(Get-Process NorthstarLauncher,Titanfall2 -ErrorAction SilentlyContinue|Where-Object {-not$_.HasExited})){
         Copy-Item -LiteralPath "$BatchDirectory/backup/server.cfg" -Destination $cfg -Force
         Copy-Item -LiteralPath "$BatchDirectory/backup/enabledmods.json" -Destination $enabled -Force
         if(Test-Path "$BatchDirectory/backup/survey.nut"){Copy-Item "$BatchDirectory/backup/survey.nut" $surveyScript -Force}
@@ -151,5 +150,6 @@ finally{
         elseif(Test-Path "$surveyDir/mod.json"){Move-Item -LiteralPath "$surveyDir/mod.json" -Destination "$BatchDirectory/survey-mod.json" -Force}
         $state.profile_restored=$true
     }else{$state.profile_restored=$false;$state.failure+='; game still running, did not edit loaded profile files'}
+    }catch{$state.state='stopped_error';$state.profile_restored=$false;$state.failure+='; restore: '+[string]$_}
     Save-State
 }
