@@ -35,7 +35,8 @@ fn dist(a: [f32; 2], b: [f32; 2]) -> f32 { (a[0] - b[0]).hypot(a[1] - b[1]) }
 pub(super) fn hulls_plausible(stand: ([f32; 3], [f32; 3]), duck: ([f32; 3], [f32; 3])) -> bool {
     let ok = |(min, max): ([f32; 3], [f32; 3])| min.iter().chain(max.iter()).all(|v| v.is_finite())
         && (-64. ..=-4.).contains(&min[0]) && (-64. ..=-4.).contains(&min[1]) && (-8. ..=8.).contains(&min[2])
-        && (4. ..=64.).contains(&max[0]) && (4. ..=64.).contains(&max[1]) && (16. ..=128.).contains(&max[2]);
+        && (4. ..=64.).contains(&max[0]) && (4. ..=64.).contains(&max[1]) && (16. ..=128.).contains(&max[2])
+        && min[2] + 18. < max[2];
     ok(stand) && ok(duck) && duck.1[2] + 4. < stand.1[2]
 }
 
@@ -108,7 +109,8 @@ impl CrouchRecovery {
 
 /// Classify two swept hull traces (fraction, start_solid) toward the route.
 pub(super) fn classify(stand: Option<(f32, bool)>, duck: Option<(f32, bool)>) -> Fit {
-    let clear = |t: Option<(f32, bool)>| t.map(|(f, solid)| f.is_finite() && !solid && f >= 0.999);
+    let clear = |t: Option<(f32, bool)>| t.and_then(|(f, solid)|
+        (f.is_finite() && (0. ..=1.).contains(&f)).then_some(!solid && f >= 0.999));
     match (clear(stand), clear(duck)) {
         (Some(true), _) => Fit::StandClear,
         (Some(false), Some(true)) => Fit::DuckOnly,
@@ -128,11 +130,16 @@ mod tests {
         assert_eq!(classify(Some((0.3, false)), Some((0.5, false))), Fit::Blocked);
         assert_eq!(classify(Some((1., true)), Some((1., false))), Fit::DuckOnly);
         assert_eq!(classify(None, Some((1., false))), Fit::Unknown);
-        assert_eq!(classify(Some((f32::NAN, false)), Some((1., false))), Fit::DuckOnly);
+        for fraction in [-1., 1.1, f32::INFINITY, f32::NAN] {
+            assert_eq!(classify(Some((fraction, false)), Some((1., false))), Fit::Unknown);
+            assert_eq!(classify(Some((0.3, false)), Some((fraction, false))), Fit::Unknown);
+        }
+        assert_eq!(classify(Some((f32::NAN, false)), Some((1., false))), Fit::Unknown);
     }
     #[test] fn hull_plausibility_rejects_garbage_layouts() {
         assert!(hulls_plausible(HULLS.0, HULLS.1));
         assert!(!hulls_plausible(HULLS.0, HULLS.0));
+        assert!(!hulls_plausible(HULLS.0, ([-16.,-16.,0.],[16.,16.,16.])));
         assert!(!hulls_plausible(([0.;3],[0.;3]), HULLS.1));
         assert!(!hulls_plausible(HULLS.0, ([-16.,-16.,0.],[16.,16.,f32::NAN])));
     }

@@ -158,6 +158,25 @@ pub(super) struct BotData {
     last_moved_from_cap: f32,
 }
 
+impl BotData {
+    // Per-life candidate state must not survive respawn or pilot/Titan transitions.
+    fn reset_candidate_state(&mut self) {
+        self.path_log = Default::default();
+        self.stall_log = Default::default();
+        self.stuck = Default::default();
+        self.view_checked = false;
+        self.current_corner = None;
+        self.route_target = None;
+        self.replan = Default::default();
+        self.unreachable = Default::default();
+        self.jump_timing = Default::default();
+        self.strafe = Default::default();
+        self.crouch = Default::default();
+        self.crouch_duck = false;
+        self.stall_event = None;
+    }
+}
+
 #[derive(Debug)]
 pub(super) struct BotShared {
     reserved_targets: [(f32, u32); 64],

@@ -83,9 +83,9 @@ Both default to `0`; with both off the recorder behaves exactly as 1.0.0.
 - `solo_weapon_notes_fire 1`: samples the local human's active weapon each frame
   and logs `WNOTE_FIRE` (rounds = magazine decreases, ADS rounds when the zoom
   query works, reloads) per gun/modifier/config. The analyzer adds `accuracy`
-  rows: recorded human **pilot** hits ÷ rounds, only for single-projectile guns.
-  Titan/minion hits are not recorded, so this is a lower bound and maps are never
-  pooled. It has its own error budget (`WNOTE_FIRE_ERROR`) and cannot disable the
+  rows as observed-expenditure proxies, matched by actor/life/time/config.
+  These are not accuracy or guaranteed lower bounds; magazine polling can miss
+  rounds. Invalid/over-unity denominators produce no ratio. It has its own error budget (`WNOTE_FIRE_ERROR`) and cannot disable the
   damage notebook.
 - `solo_weapon_notes_viewkick 1`: logs `WNOTE_KICK` per firing burst (eye-angle
   drift from the burst start). Includes aiming input; only meaningful in a
@@ -93,3 +93,10 @@ Both default to `0`; with both off the recorder behaves exactly as 1.0.0.
 
 Not compiled or run here; validate in the isolated profile first. See
 research/bot-capability-20261027/README.md for the blinded per-weapon protocol.
+
+Review correction: magazine polling now captures actor/life/time/config windows.
+It reports `pilot_hits_per_observed_round` only for valid matched windows;
+`pilot_hit_fraction` is null because an exact shot denominator is not proven.
+This proxy is not accuracy or a guaranteed lower bound. Missing intervals,
+reload ambiguity, invalid counts or over-unity results invalidate the ratio.
+Sampler runtime/API validation is still required before using it in trials.

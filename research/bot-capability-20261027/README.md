@@ -31,8 +31,9 @@ Weapon notebook (`Solo.WeaponNotes` 1.1.0) adds two opt-in convars, both default
 ADS share if `GetZoomFrac` exists, own error budget so it can never disable the
 damage notebook) and `solo_weapon_notes_viewkick` (eye-angle drift per burst;
 only meaningful in controlled no-input tests). The analyzer reports a
-**pilot-hit fraction** (recorded human pilot hits ÷ rounds) for single-projectile
-guns only; it is a lower bound because Titan/minion hits are not recorded.
+**observed-expenditure proxy** for matched actor/life/time/config windows.
+It is neither accuracy nor a guaranteed lower bound; magazine polling can miss
+rounds. Invalid denominators and over-unity windows produce no ratio.
 
 `tools/Analyze-NavDiagnostics.mjs` summarizes the diagnostic lines and applies
 the Experiment 1 decision rule (stall samples grouped into per-slot incidents).
@@ -119,7 +120,7 @@ enabled after one isolated session shows no `WNOTE_FIRE_ERROR`. Then run blinded
 per-match ON/OFF toggles of one weapon modifier at a time, 6–8 matches each
 (Flatline ADS time and ADS recoil separately; Volt reload and recoil
 separately). Revert if the change is not identified better than chance and the
-pilot-hit fraction differs by <5 points; revise if it dominates its control
+controlled hit-rate measurement differs by <5 points (the expenditure proxy alone is insufficient); revise if it dominates its control
 (R-201/CAR) in the same range band; keep only if perceptible, preferred, not
 dominant. View-kick: `solo_weapon_notes_viewkick 1`, fixed position, no mouse
 input, 10 bursts per condition.
@@ -130,3 +131,10 @@ Every behavior is a convar: set it to 0 (takes effect on the next command). Full
 rollback: close the game, restore the pre-trial DLL from the CURRENT backup, keep
 CURRENT saves, verify DLL/config hashes and startup/lobby return. The notebook
 1.1.0 with both new convars at 0 behaves as 1.0.0.
+
+Review correction: magazine polling now captures actor/life/time/config windows.
+It reports `pilot_hits_per_observed_round` only for valid matched windows;
+`pilot_hit_fraction` is null because an exact shot denominator is not proven.
+This proxy is not accuracy or a guaranteed lower bound. Missing intervals,
+reload ambiguity, invalid counts or over-unity results invalidate the ratio.
+Sampler runtime/API validation is still required before using it in trials.
