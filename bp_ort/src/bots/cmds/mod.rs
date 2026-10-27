@@ -48,6 +48,7 @@ pub(super) fn get_cmd(
             && let Some(ref mut query) = local_data.nav_query
         {
             _ = query.switch_query(desired_hull);
+            local_data.reset_candidate_state();
             local_data.escape_recovery = Default::default();
             local_data.combat = Default::default();
             local_data.movement_anchor = None;
@@ -80,6 +81,7 @@ pub(super) fn get_cmd(
         }
 
         _ if unsafe { (helper.sv_funcs.is_alive)(nudge_type::<&CBaseEntity>(player)) == 0 } => {
+            local_data.reset_candidate_state();
             local_data.escape_recovery = Default::default();
             local_data.combat = Default::default();
             local_data.movement_anchor = None;

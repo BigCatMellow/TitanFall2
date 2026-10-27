@@ -59,6 +59,26 @@ Launchers outside the repository (desktop shortcut, audit-root `.cmd`) keep
 working: the in-repo PowerShell defaults resolve to the same folders through
 `$env:USERPROFILE`.
 
-Rollback: close the game, restore the backed-up `enabledmods.json` and `.cfg`
-files from the migration backup folder. Old mod folders and old save data were
-never modified.
+Rollback: close the game and use the recorded migration backup, first as a dry run:
+
+```powershell
+./tools/Restore-BT7274Rename.ps1 -Profile <profile> -MigrationBackup <backup>
+```
+
+Then repeat with `-Apply`. This explicitly disables every installed renamed
+package, restores replaced packages (including Solo.WeaponNotes) and CFG files,
+and carries CURRENT migrated progress back to the old save keys only when the original
+migration completed and the renamed family is currently active. Otherwise the
+old current saves remain authoritative. It backs up
+both CURRENT save families and affected files before restoring anything. It
+never restores stale historical saves over newer play. A rollback receipt makes
+repeat runs no-ops so subsequent progress remains protected.
+
+Migration backups use GUID identities and exclusive creation. Package preflight
+covers every installed package before mutation; the manifest and complete package
+backups are written before installation. If an IO failure interrupts migration,
+keep the game closed and use that run's restore command before proceeding.
+A rerun snapshot with migrated enablement is refused as a rollback baseline;
+select the ORIGINAL pre-migration backup. The fixture tests cover missing-package preflight, equal-timestamp collisions,
+install/rollback, current progress, repeated rollback and partial-install recovery.
+Actual isolated Windows migration/startup verification is still required.

@@ -757,7 +757,12 @@ fn combat_route_move(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut 
         local.last_target_index = target_index;
     }
     local.should_recalculate_path = false;
-    if route.move_.x == 0. && route.move_.y == 0. { return; } // keep the legacy approach
+    if route.move_.x == 0. && route.move_.y == 0. {
+        cmd.move_ = Vector3::ZERO;
+        set_move_buttons(cmd);
+        cmd.buttons &= !(Action::Jump as u32);
+        return;
+    }
     let (f, s) = if local.metrics.state == "recover" {
         crate::bots::combat_movement::reframe(route.move_.x, route.move_.y, route.world_view_angles.y, aim_yaw)
     } else {
