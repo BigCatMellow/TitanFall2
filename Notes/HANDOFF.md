@@ -698,3 +698,8 @@ and human buffs unchanged. New: bot_height_response, bot_defensive_tactics
 bt7274_bot_tacticals, default 0), tools/Check-BalanceTarget.mjs. Enable one lever
 per step on Eden/Meadow/Traffic/War Games x2 matches; stop inside the band.
 Plan: research/bot-balance-20261027/README.md.
+Same branch, later: bot_skill_use (situational Stim/Phase/Cloak/Pulse Blade/
+Holo/A-Wall/grenade rules replacing shared timers; frag now handled; BOT_SKILL
+logs, counted by the played-session analyzer) and bot_personality (SMG rushers,
+marksmen, LMG anchors; movement intent only). BT7274.BotRoster skills now give
+each gun a matched tactical + ordnance. All default 0; not run in game.

@@ -32,6 +32,35 @@ R-201 in >99% of samples and never used a tactical.
 | `bt7274_bot_roster 1` | `BT7274.BotRoster` | Same 8-gun list per team by rank: R-201, G2, CAR, Flatline, DMR, Spitfire, Hemlok, R-97 (stock). No one-shot, splash or heat guns |
 | `bt7274_bot_tacticals 1` + `bot_defensive_tactics 1` | add-on + this PR | Stim on 3 of 8 ranks, Phase on 2; Stim/Phase fire whenever health <60 (readiness-gated; needs `bot_action_policy 1`, already on) |
 
+| `bot_skill_use 1` | this PR | Situational skill rules replacing the old shared timers (see below) |
+| `bot_personality 1` | this PR | Weapon-based behavior: SMG rushers push in, G2/DMR marksmen keep 600+ units away, Spitfire anchors hold with half-strength strafes |
+
+### Skills: what bots can use today
+
+Default bots carry Grapple + frag. Before this change: Grapple has no logic,
+frag was missing from the grenade list, and every other skill was pressed on a
+fixed shared timer while the target was visible — which is why skills were
+never seen. With `bot_skill_use 1` (readiness-gated through `bot_action_policy`):
+
+| Skill | When a bot uses it |
+|---|---|
+| Stim | Closing in on a visible enemy 350–1,400 units away, or health <60 |
+| Phase Shift | Visible enemy and health <45 (escape) |
+| Cloak | Approaching an unseen enemy within 1,800 units, or hurt while seen |
+| Pulse Blade | Enemy unseen within 300–1,500 units; thrown toward them |
+| Holo Pilot | Engaged within 1,500 units and health <80 |
+| A-Wall | Holding position at >500 units against an enemy on the same level |
+| Frag / Arc / Firestar / Gravity Star | Visible enemy 250–1,100 units away, within 250 units of height; thrown with an arc that grows with range |
+| Electric Smoke | Health <50 with an enemy within 700 units |
+| Grapple, satchel | Not used yet (need traversal / detonation logic) |
+
+Every press start is logged as `BOT_SKILL` (reason, personality, distance,
+health) and summarized per map by `tools/Analyze-PlayedWeaponSession.mjs`
+(`abilities.skill_reasons`). These are allowed requests, not confirmed casts;
+use the counts plus how matches feel to tune thresholds. Next candidates once
+data exists: marksman high-ground seeking, rusher slides, Grapple traversal,
+better A-Wall placement.
+
 Requires the v20 native candidate (PR #6) underneath; this branch is stacked on
 the rename (PR #7), so add-on names use the BT7274 prefix.
 
@@ -45,7 +74,8 @@ the rename (PR #7), so add-on names use the BT7274 prefix.
    1. combat movement + proximity fix
    2. height response
    3. bot roster
-   4. tacticals + defensive tactics
+   4. skills: `bot_skill_use` (+ `bt7274_bot_tacticals`, `bot_defensive_tactics`)
+   5. personalities: `bot_personality`
 3. **Stop** as soon as the pooled K/D is within 2.5–3.5. If a step overshoots
    (<2.5), turn that lever off or keep it on only for the enemy-heavy step
    below it; never compensate with aim.

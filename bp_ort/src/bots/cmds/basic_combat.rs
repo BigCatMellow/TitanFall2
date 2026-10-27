@@ -291,7 +291,30 @@ pub(crate) fn basic_combat(
         _ => {}
     }
 
-    cmd.buttons |= if matches!(target, Some((_, true))) && !is_titan {
+    let skills_on = !is_titan && sim_type == 6 && action_policy
+        && crate::bots::switch_on(&crate::bots::SKILL_USE_CONVAR);
+    let mut skill_plan: (Option<&'static str>, Option<(&'static str, f32)>) = (None, None);
+    if skills_on {
+        use crate::bots::skill_policy::{Situation, tactical as tactical_reason, ordnance as ordnance_reason};
+        let tp = local_data.metrics.target_pos;
+        let tpos = Vector3::new(tp[0], tp[1], tp[2]);
+        let tactic = local_data.combat.tactic;
+        let situation = Situation {
+            has_target: target.is_some(),
+            visible: local_data.metrics.visible,
+            distance: distance(origin, tpos),
+            height: tpos.z - origin.z,
+            health: player.m_iHealth,
+            holding: tactic.ends_with("hold"),
+            approaching: (local_data.metrics.visible && tactic == "advance") || local_data.metrics.state == "pursue",
+        };
+        let name = |slot: usize| lookup_ent(player.m_inventory.offhandWeapons[slot], helper.sv_funcs)
+            .and_then(|ent| get_weaponx_name(ent, helper.sv_funcs)).unwrap_or_default();
+        skill_plan = (tactical_reason(name(1), &situation), ordnance_reason(name(0), &situation));
+        if skill_plan.0.is_some() { cmd.buttons |= Action::OffHand1 as u32; }
+        if skill_plan.1.is_some() { cmd.buttons |= Action::OffHand0 as u32; }
+    }
+    cmd.buttons |= if matches!(target, Some((_, true))) && !is_titan && !skills_on {
         // pilot abilities TODO: check for cooldown
         match lookup_ent(player.m_inventory.offhandWeapons[1], helper.sv_funcs)
                 .and_then(|ent| get_weaponx_name(ent, helper.sv_funcs))
@@ -534,12 +557,19 @@ pub(crate) fn basic_combat(
     {
         use crate::bots::combat_decisions::Input;
         let pos = Vector3::new(local_data.metrics.target_pos[0], local_data.metrics.target_pos[1], local_data.metrics.target_pos[2]);
-        let decision = local_data.combat.decide(Input {
+        let mut decision = local_data.combat.decide(Input {
             now: time(helper), weapon_id: weapon.m_RefEHandle, weapon: name,
             clip: weapon.m_ammoInClip, reloading: weapon.m_bInReload,
             visible: local_data.metrics.visible, distance: distance(origin, pos),
             height: origin.z - pos.z, slot: local_data.edict,
         });
+        let archetype = crate::bots::personality::archetype(name);
+        let personality = crate::bots::switch_on(&crate::bots::PERSONALITY_CONVAR);
+        if personality {
+            decision.forward = crate::bots::personality::adjust_forward(archetype, decision.forward,
+                local_data.metrics.visible, distance(origin, pos), weapon.m_bInReload);
+        }
+        let strafe_scale = if personality { archetype.strafe_scale() } else { 1. };
         if decision.reload { cmd.buttons |= Action::Reload as u32; }
         if decision.suppress_fire {
             cmd.buttons &= !(Action::Attack as u32 | Action::Zoom as u32 | Action::Melee as u32
@@ -551,7 +581,7 @@ pub(crate) fn basic_combat(
         let movement = crate::bots::switch_on(&crate::bots::COMBAT_MOVEMENT_CONVAR);
         if movement && local_data.metrics.visible && !cover_active {
             if let Some(forward) = decision.forward {
-                combat_hold_move(player, helper, local_data, &mut cmd, forward);
+                combat_hold_move(player, helper, local_data, &mut cmd, forward, strafe_scale);
             } else if let Some(index) = target_index {
                 combat_route_move(player, helper, local_data, &mut cmd, pos, index);
             }
@@ -580,6 +610,7 @@ pub(crate) fn basic_combat(
         }
     }
 
+    let pulses_before = (local_data.tactical_pulse.starts, local_data.ordnance_pulse.starts);
     if action_policy {
         let token = unsafe { EngineToken::new_unchecked() };
         let ready = crate::bots::action_bridge::readiness(player.m_RefEHandle, token);
@@ -592,6 +623,30 @@ pub(crate) fn basic_combat(
             !tactical && cmd.buttons & Action::OffHand0 as u32 != 0, ready.map(|r| r.ordnance));
         if !tactical { cmd.buttons &= !(Action::OffHand1 as u32); }
         if !ordnance { cmd.buttons &= !(Action::OffHand0 as u32); }
+    }
+    if skills_on {
+        let tp = local_data.metrics.target_pos;
+        let tpos = Vector3::new(tp[0], tp[1], tp[2]);
+        if let Some((_, loft)) = skill_plan.1 && cmd.buttons & Action::OffHand0 as u32 != 0 {
+            // Throw toward the target with an arc; only during the brief press.
+            let aim = look_at(origin, tpos);
+            cmd.world_view_angles = Vector3::new((aim.x - loft).clamp(-89., 89.), aim.y, 0.);
+        }
+        if skill_plan.0 == Some("pulse_reveal") && cmd.buttons & Action::OffHand1 as u32 != 0 {
+            let aim = look_at(origin, tpos);
+            cmd.world_view_angles = Vector3::new((aim.x - 15.).clamp(-89., 89.), aim.y, 0.);
+        }
+        let started = (local_data.tactical_pulse.starts > pulses_before.0, local_data.ordnance_pulse.starts > pulses_before.1);
+        if (started.0 || started.1) && crate::bots::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
+            let weapon = lookup_ent(player.m_inventory.activeWeapon, helper.sv_funcs)
+                .and_then(|ent| get_weaponx_name(ent, helper.sv_funcs)).unwrap_or_default();
+            log::info!("BOT_SKILL epoch={} t={:.2} slot={} tactical={} ordnance={} archetype={} visible={} dist={:.0} dz={:.0} hp={}",
+                crate::bots::telemetry::epoch(), time(helper), local_data.edict,
+                if started.0 { skill_plan.0.unwrap_or("other") } else { "-" },
+                if started.1 { skill_plan.1.map_or("other", |o| o.0) } else { "-" },
+                crate::bots::personality::archetype(weapon).label(), local_data.metrics.visible as u8,
+                distance(origin, tpos), tpos.z - origin.z, player.m_iHealth);
+        }
     }
     let actions = [
         Action::OffHand0,
@@ -734,7 +789,7 @@ fn set_move_buttons(cmd: &mut CUserCmd) {
 
 /// In weapon range: full-strength randomized strafes with ranked alternatives.
 fn combat_hold_move(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut BotData,
-    cmd: &mut CUserCmd, forward: f32) {
+    cmd: &mut CUserCmd, forward: f32, strafe_scale: f32) {
     let now = time(helper);
     let yaw = cmd.world_view_angles.y;
     let side = local.strafe.side(now, local.edict);
@@ -756,7 +811,7 @@ fn combat_hold_move(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut B
         }
         local.strafe.airborne_output()
     };
-    cmd.move_ = Vector3::new(out.0, out.1, 0.);
+    cmd.move_ = Vector3::new(out.0, out.1 * strafe_scale, 0.);
     set_move_buttons(cmd);
 }
 

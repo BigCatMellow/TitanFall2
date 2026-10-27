@@ -45,12 +45,12 @@ export function analyzePlayed(events,log){
       }
     }
   }
-  const players=new Map(),frameHumans=new Map(),traces=new Map(),combats=new Map(),actions=new Map(),ready=[],starts=[];
+  const players=new Map(),frameHumans=new Map(),traces=new Map(),combats=new Map(),actions=new Map(),ready=[],skills=[],starts=[];
   let frame=null;const runtimeErrors=[];
   for(const line of log.split(/\r?\n/)){
     if(/SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked/.test(line))runtimeErrors.push(true);
     const note=parseNote(line);if(note?.type==='WNOTE_CONTEXT'){if(frame?.map!==note.map)throw new Error('Native frame map differs from recorder context');starts.push({map:note.map,epoch:frame?.epoch,start_t:+frame?.t});continue;}
-    const m=line.match(/^(?:\[[^\]\r\n]*\]\s*)*(BOT_FRAME|BOT_PLAYER|BOT_TRACE|BOT_COMBAT|BOT_ACTION|BOT_READY)(?:\s|$)/);if(!m)continue;
+    const m=line.match(/^(?:\[[^\]\r\n]*\]\s*)*(BOT_FRAME|BOT_PLAYER|BOT_TRACE|BOT_COMBAT|BOT_ACTION|BOT_READY|BOT_SKILL)(?:\s|$)/);if(!m)continue;
     const f=fields(line);
     if(m[1]==='BOT_FRAME')frame=f;
     if(m[1]==='BOT_PLAYER'){players.set(key(f),f);if(f.bot==='0')frameHumans.set(f.epoch+'|'+f.t,f);}
@@ -58,6 +58,7 @@ export function analyzePlayed(events,log){
     if(m[1]==='BOT_COMBAT')combats.set(key(f),f);
     if(m[1]==='BOT_ACTION')actions.set(key(f),f);
     if(m[1]==='BOT_READY'&&frame)ready.push({...f,epoch:frame.epoch});
+    if(m[1]==='BOT_SKILL')skills.push(f);
   }
   if(starts.length!==rounds.length)throw new Error('Recorder/native context count mismatch');
   for(let n=0;n<rounds.length;n++){
@@ -79,11 +80,13 @@ export function analyzePlayed(events,log){
       const b=+row.combat?.blocked_steps-(+prev.combat?.blocked_steps);if(b>=0)blocked+=b;
       if(row.combat?.active==='1'&&row.combat.tactic.endsWith('hold')){holdPairs++;if(b>0)blockedHoldPairs++;}
     }
-    const rr=ready.filter(inWindow),weapons={};for(const e of pilots)if(e.combat?.active==='1')weapons[e.combat.weapon]=(weapons[e.combat.weapon]||0)+1;
+    const rr=ready.filter(inWindow),sk=skills.filter(inWindow),weapons={};for(const e of pilots)if(e.combat?.active==='1')weapons[e.combat.weapon]=(weapons[e.combat.weapon]||0)+1;
     const pressure=new Map();for(const e of human){const k=e.epoch+'|'+e.t;pressure.set(k,(pressure.get(k)||0)+1);}
     r.movement={live_pilot_samples:pilots.length,navigation_low_samples:low.length,navigation_low_percent:pct(low.length,pilots.length),low_with_over_720deg_yaw:low.filter(e=>e.low_yaw_delta>=720).length,low_with_jump_command_fraction_over_20pct:low.filter(e=>e.low_jump_fraction>0.2).length,hotspots:[...grouped.values()].sort((a,b)=>b.samples-a.samples).slice(0,6).map(c=>({...c,slots:[...c.slots].sort((a,b)=>+a-+b)})),visible_engage_samples:engage.length,range_hold_samples:holds.length,range_hold_speed_median:median(holds.map(e=>+e.speed)),range_hold_under50_percent:pct(holds.filter(e=>+e.speed<50).length,holds.length),hold_samples_with_contiguous_previous:holdPairs,hold_samples_with_recent_blocked_step:blockedHoldPairs,hold_recent_blocked_percent:pct(blockedHoldPairs,holdPairs),blocked_step_counter_increments:blocked,jump_commands_observed:jumps,commands_observed:commands,jump_command_percent:pct(jumps,commands)};
     r.pressure={visible_human_engage_samples:human.length,human_hold_samples:humanHolds.length,human_hold_speed_median:median(humanHolds.map(e=>+e.speed)),human_hold_under50_percent:pct(humanHolds.filter(e=>+e.speed<50).length,humanHolds.length),human_vertical_gap_over180_percent:pct(human.filter(e=>Math.abs(+e.tz-(+e.z))>180).length,human.length),simultaneous_visible_human_max:pressure.size?Math.max(...pressure.values()):0,human_visible_frames:pressure.size,frames_with_2plus_visible_engagers:[...pressure.values()].filter(v=>v>=2).length};
-    r.abilities={ready_observations:rr.length,tactical_classes:[...new Set(rr.map(e=>e.tactical))],tactical_nonzero_shot_counter_observations:rr.filter(e=>+e.tactical_shots>0).length,ordnance_classes:[...new Set(rr.map(e=>e.ordnance))],ordnance_nonzero_shot_counter_observations:rr.filter(e=>+e.ordnance_shots>0).length};
+    r.abilities={ready_observations:rr.length,tactical_classes:[...new Set(rr.map(e=>e.tactical))],tactical_nonzero_shot_counter_observations:rr.filter(e=>+e.tactical_shots>0).length,ordnance_classes:[...new Set(rr.map(e=>e.ordnance))],ordnance_nonzero_shot_counter_observations:rr.filter(e=>+e.ordnance_shots>0).length,
+      // bot_skill_use presses that the readiness gate allowed (requests, not confirmed casts).
+      skill_starts:sk.length,skill_reasons:sk.reduce((o,e)=>{for(const k of [e.tactical,e.ordnance])if(k&&k!=='-')o[k]=(o[k]||0)+1;return o;},{}),skill_by_archetype:sk.reduce((o,e)=>{o[e.archetype]=(o[e.archetype]||0)+1;return o;},{})};
     r.bot_active_weapon_samples=weapons;
     r.fatal_bot_speed_median=median(r.fatal_bot_speeds);r.fatal_bot_speed_under50_percent=pct(r.fatal_bot_speeds.filter(v=>v<50).length,r.fatal_bot_speeds.length);delete r.fatal_bot_speeds;
     const kills=measured.deaths.filter(d=>d.context===r.context&&d.clean_health_episode&&d.attacker_kind==='human'&&d.victim_kind==='bot');

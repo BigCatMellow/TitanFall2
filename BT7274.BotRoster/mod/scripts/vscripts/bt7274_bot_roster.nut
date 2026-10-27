@@ -32,14 +32,20 @@ array<string> function BT7274BotRoster_Guns()
         "mp_weapon_dmr", "mp_weapon_lmg", "mp_weapon_hemlok", "mp_weapon_r97" ]
 }
 
-// Defensive tacticals the native controller already knows how to request
-// (Stim and Phase Shift); remaining ranks keep their current tactical.
+// Skills matched to the gun's personality (same index as BT7274BotRoster_Guns).
+// Every tactical/ordnance here has a situational rule in the native
+// skill policy (bot_skill_use): Grapple and satchels are deliberately absent.
 string function BT7274BotRoster_Tactical( int rank )
 {
-    int r = rank % 8
-    if ( r == 0 || r == 3 || r == 6 ) return "mp_ability_heal"
-    if ( r == 2 || r == 5 ) return "mp_ability_shifter"
-    return ""
+    array<string> tacticals = [ "mp_weapon_grenade_sonar", "mp_ability_cloak", "mp_ability_heal",
+        "mp_ability_holopilot", "mp_ability_cloak", "mp_weapon_deployable_cover", "mp_ability_shifter", "mp_ability_heal" ]
+    return tacticals[ rank % tacticals.len() ]
+}
+string function BT7274BotRoster_Ordnance( int rank )
+{
+    array<string> ordnance = [ "mp_weapon_frag_grenade", "mp_weapon_grenade_electric_smoke", "mp_weapon_frag_grenade",
+        "mp_weapon_grenade_emp", "mp_weapon_grenade_gravity", "mp_weapon_frag_grenade", "mp_weapon_thermite_grenade", "mp_weapon_grenade_emp" ]
+    return ordnance[ rank % ordnance.len() ]
 }
 
 array<string> function BT7274BotRoster_Suits()
@@ -63,7 +69,7 @@ int function BT7274BotRoster_Rank( entity bot )
 
 string function BT7274BotRoster_TacticalClass( entity bot )
 {
-    entity weapon = bot.GetOffhandWeapon( 1 ) // tactical slot (native reads offhandWeapons[1])
+    entity weapon = bot.GetOffhandWeapon( OFFHAND_LEFT ) // tactical slot, as in BT7274.BotDecisions
     return IsValid( weapon ) ? weapon.GetWeaponClassName() : "none"
 }
 
@@ -95,7 +101,9 @@ void function BT7274BotRoster_Apply( entity bot )
             loadout.primarySkinIndex = 0
             loadout.primaryCamoIndex = 0
         }
-        string wanted = GetConVarBool( "bt7274_bot_tacticals" ) ? BT7274BotRoster_Tactical( rank ) : ""
+        bool skills = GetConVarBool( "bt7274_bot_tacticals" )
+        string wanted = skills ? BT7274BotRoster_Tactical( rank ) : ""
+        if ( skills ) loadout.ordnance = BT7274BotRoster_Ordnance( rank )
         if ( wanted != "" && wanted in file.tacticalSuit ) loadout.suit = expect string( file.tacticalSuit[ wanted ] )
         BT7274BotRoster_Give( bot, loadout )
         // The suit -> tactical mapping is learned from the game instead of
@@ -112,7 +120,8 @@ void function BT7274BotRoster_Apply( entity bot )
         }
         print( "BOT_ROSTER map=" + GetMapName() + " slot=" + bot.GetEntIndex() + " team=" + bot.GetTeam()
             + " rank=" + rank + " primary=" + loadout.primary + " suit=" + loadout.suit
-            + " tactical=" + BT7274BotRoster_TacticalClass( bot ) + " wanted=" + ( wanted == "" ? "keep" : wanted ) )
+            + " tactical=" + BT7274BotRoster_TacticalClass( bot ) + " wanted=" + ( wanted == "" ? "keep" : wanted )
+            + " ordnance=" + loadout.ordnance )
     }
     catch ( error )
     {

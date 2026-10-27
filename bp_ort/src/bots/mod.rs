@@ -62,6 +62,8 @@ mod perception;
 mod combat_movement;
 mod crouch_recovery;
 mod height_response;
+mod skill_policy;
+mod personality;
 mod combat_decisions;
 mod action_policy;
 mod action_bridge;
@@ -99,6 +101,8 @@ pub(super) static CROUCH_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new
 // Balance candidate switches (default 0).
 pub(super) static DEFENSIVE_TACTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static HEIGHT_RESPONSE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static SKILL_USE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static PERSONALITY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 
 pub(super) fn switch_on(cell: &OnceCell<ConVarStruct>) -> bool {
     cell.get().is_some_and(|c| c.get_value_bool())
@@ -442,6 +446,8 @@ impl Plugin for Bots {
             (&PERCEPTION_FIX_CONVAR, "bot_perception_fix", "eye-angle facing and eye-level sight lines; same 180-degree hemisphere"),
             (&COMBAT_MOVEMENT_CONVAR, "bot_combat_movement", "route while engaged, full randomized strafes and blocked-step alternatives; aim unchanged"),
             (&DEFENSIVE_TACTICS_CONVAR, "bot_defensive_tactics", "Stim/Phase when health is low instead of only in the shared request window; needs bot_action_policy 1"),
+            (&SKILL_USE_CONVAR, "bot_skill_use", "situational pilot tactical/ordnance use (Stim, Phase, Cloak, Pulse Blade, Holo, A-Wall, grenades); needs bot_action_policy 1"),
+            (&PERSONALITY_CONVAR, "bot_personality", "weapon-based behavior: SMG rushers push in, marksmen keep distance, LMG anchors hold; aim unchanged"),
             (&HEIGHT_RESPONSE_CONVAR, "bot_height_response", "break line of sight from a visible enemy that stays 180+ units above; needs bot_combat_decisions 1"),
             (&CROUCH_RECOVERY_CONVAR, "bot_crouch_recovery", "stall-triggered crouch when the real stand hull is blocked and duck hull fits"),
         ] {
