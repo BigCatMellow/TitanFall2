@@ -661,3 +661,19 @@ collector exactly. Public research/played-weapons-20261026 contains onlyderived
 analysis/provenance hashes andfindings. Full18.8MB nslog/events/saves stayprivate.
 Approximate activity bounds: preceding native frame atPlaying tolastdamage/death;
 no exact winner/postmatch markers available. No visual watching occurred.
+
+2026-10-27 — BOT CAPABILITY v20 SOURCE CANDIDATE, NOT INSTALLED.
+User authorized implementing the review's recommendations as default-off
+candidates (no merge/deploy). Seven switches, all 0 by default:
+bot_nav_diagnostics, bot_route_guard, bot_jump_timing, bot_proximity_fix,
+bot_perception_fix, bot_combat_movement, bot_crouch_recovery. Notebook 1.1.0
+adds opt-in solo_weapon_notes_fire/solo_weapon_notes_viewkick. Aim 0.78, 0.8s
+warm-up, damage/RPM, team sizes, saves, two-buffer pathfinder, teardown and
+target sharing unchanged. Supersedes PR #5's ray-probe approach (stall-triggered,
+engine stand/duck hulls, player-clip mask, failure memory). Offline only: 99 Rust
+tests/15 suites and 8 Node suites pass; Windows-target cargo check clean; DLL
+cross-built on Linux with stable+build-std (not the pinned toolchain; rebuild on
+Windows). Hull-trace init, hull offsets, Detour partial bit, jump encoding and
+the Squirrel sampler are runtime-unverified. Protocol, decision rules and
+rollback: research/bot-capability-20261027/README.md. Run Experiment 1
+(diagnostics only) before enabling behavior switches.

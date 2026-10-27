@@ -25,6 +25,7 @@ accuracy or first-shot TTK. Test sessions are closed; the injector is disabled.
 | Reload correction |Version1.0.1 retains G2/Volt/R201/CAR and adds real Alternator; scale0.9, Speedloader composition verified|
 | Preserved settings |8v8, aim0.78, human tactical recharge0.5, damage/RPM/magazine values; bot balance opt-in remains0|
 | Map study |22/22 supported maps complete under historical v18, NOT the v19 weapon revision|
+| Source candidate |bot-capability-v20 (not built on Windows, not installed): seven default-off switches; see research/bot-capability-20261027|
 | Map follow-up |War Games/Eden shared route cells; single rounds and overlapping samples, not a causal comparison|
 
 The normal and isolated gameplay packages match the tested functional manifest.
