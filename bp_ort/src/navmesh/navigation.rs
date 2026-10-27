@@ -36,6 +36,13 @@ pub struct Navigation {
     path: Vec<dtPolyRef>,
     pub path_points: Vec<Vector3>,
     pub end_point: Option<Vector3>,
+    /// Per remaining point (same order as `path_points`): straight-path flag and
+    /// native traversal/jump type, when the native straight path supplied them.
+    pub corner_meta: Vec<(u8, u8)>,
+    /// Raw status of the most recent findPath call (diagnostics/route guard).
+    pub last_status: u32,
+    /// Projected end point of the most recent route, if any.
+    pub last_end: Option<Vector3>,
     jump_types: Vec<u8>,
     straigth_path_points: Vec<Vector3>,
     straigth_path: Vec<dtPolyRef>,
@@ -71,6 +78,9 @@ impl Navigation {
             path: Vec::with_capacity(PATH_CAPACITY),
             path_points: Vec::with_capacity(PATH_CAPACITY),
             end_point: None,
+            corner_meta: Vec::with_capacity(PATH_CAPACITY),
+            last_status: 0,
+            last_end: None,
             jump_types: vec![u8::MAX; PATH_CAPACITY],
             straigth_path: Vec::with_capacity(PATH_CAPACITY),
             straigth_path_points: Vec::with_capacity(PATH_CAPACITY),
@@ -103,6 +113,9 @@ impl Navigation {
 
         self.end_point = None;
         self.path_points.clear();
+        self.corner_meta.clear();
+        self.last_status = 0;
+        self.last_end = None;
 
         let status = unsafe {
             if (dt_funcs.dtNavMeshQuery__findNearestPoly)(
@@ -154,6 +167,7 @@ impl Navigation {
         ).map_err(|_| NavigationError::InvalidOutputCount)?;
         let path_size = self.path.len();
         self.path_points.clear();
+        self.last_status = status;
 
         if status & 0x40000000 == 0 || path_size == 0 {
             return Err(NavigationError::PathNotFound(start, end));
@@ -195,6 +209,10 @@ impl Navigation {
                 // Appending an airborne/raw target bypasses that projection,
                 // particularly when findPath returned a partial corridor.
                 self.path_points.reverse();
+                self.corner_meta.clear();
+                self.corner_meta.extend(self.straigth_path_flags.iter().copied()
+                    .zip(self.straigth_path_jumps.iter().copied()));
+                self.corner_meta.reverse();
                 self.straigth_path.clone_into(&mut self.path);
             }
         } else if path_size == 1 {
@@ -227,12 +245,25 @@ impl Navigation {
                 .rev()
                 .collect_into(&mut self.path_points);
         }
+        // Points are consumed from the back, so the first element is the end.
+        self.last_end = self.path_points.first().copied();
 
         Ok(())
     }
 
     pub fn next_point(&mut self) -> Option<Vector3> {
-        self.path_points.pop()
+        self.next_corner().map(|(point, _)| point)
+    }
+
+    /// Pops the next point with its straight-path metadata. Metadata is only
+    /// returned while it is still aligned with `path_points`; callers elsewhere
+    /// clear `path_points` directly, which drops the alignment rather than
+    /// misattributing a stale traversal type.
+    pub fn next_corner(&mut self) -> Option<(Vector3, Option<(u8, u8)>)> {
+        let aligned = self.corner_meta.len() == self.path_points.len();
+        let point = self.path_points.pop()?;
+        let meta = if aligned { self.corner_meta.pop() } else { self.corner_meta.clear(); None };
+        Some((point, meta))
     }
 
     pub fn random_point_around(
