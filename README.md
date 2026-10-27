@@ -38,6 +38,10 @@ local work. [Original README](docs/UPSTREAM-README.md).
   perception fixes, combat movement, stall-triggered crouch with engine hulls).
   [Switches, evidence, runtime protocol and rollback](research/bot-capability-20261027/README.md).
 
+- **Balance candidate, not installed:** target ~3:1 K/D (baseline 9.7). Height
+  response, defensive tactics and a symmetric bot roster, all default off.
+  [Plan and levers](research/bot-balance-20261027/README.md).
+
 Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 [the map review](research/trends-20261025/FINDINGS.md) and
 [the deeper decision review](research/decision-context-20261025/FINDINGS.md) before changes.
