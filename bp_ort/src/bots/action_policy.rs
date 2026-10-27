@@ -41,9 +41,20 @@ pub(super) fn clear_side(side: f32, retry: bool, mut trace: impl FnMut(f32) -> b
     else if retry && side != 0. && trace(-side) { Some(-side) }
     else { None }
 }
+/// `bot_defensive_tactics`: Stim/Phase as soon as health is low, instead of
+/// only inside the shared 10-of-25-second request window. Readiness gating in
+/// `Pulse` still applies, so an unavailable ability cannot hold the button.
+pub(super) fn defensive_now(tactical: &str, health: i32) -> bool {
+    matches!(tactical, "mp_ability_heal" | "mp_ability_shifter") && health > 0 && health < 60
+}
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test] fn defensive_tactics_only_for_stim_phase_when_hurt() {
+        assert!(defensive_now("mp_ability_heal", 40)); assert!(defensive_now("mp_ability_shifter", 59));
+        assert!(!defensive_now("mp_ability_heal", 60)); assert!(!defensive_now("mp_ability_heal", 0));
+        assert!(!defensive_now("mp_ability_grapple", 10)); assert!(!defensive_now("mp_ability_cloak", 10));
+    }
     fn ready(at: f32) -> Option<Ready> { Some(Ready { at, weapon: 7, ready: true }) }
     #[test] fn stale_future_wrong_weapon_and_unavailable_never_press() {
         for r in [None, ready(0.), ready(2.), Some(Ready {at: 1., weapon: 8, ready: true}), Some(Ready {at: 1.,weapon: 7,ready: false})] {

@@ -61,6 +61,7 @@ mod route_guard;
 mod perception;
 mod combat_movement;
 mod crouch_recovery;
+mod height_response;
 mod combat_decisions;
 mod action_policy;
 mod action_bridge;
@@ -95,6 +96,9 @@ pub(super) static PROXIMITY_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new()
 pub(super) static PERCEPTION_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static COMBAT_MOVEMENT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static CROUCH_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+// Balance candidate switches (default 0).
+pub(super) static DEFENSIVE_TACTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static HEIGHT_RESPONSE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 
 pub(super) fn switch_on(cell: &OnceCell<ConVarStruct>) -> bool {
     cell.get().is_some_and(|c| c.get_value_bool())
@@ -141,6 +145,7 @@ pub(super) struct BotData {
     strafe: combat_movement::Strafe,
     crouch: crouch_recovery::CrouchRecovery,
     crouch_duck: bool,
+    height: height_response::HeightResponse,
     stall_event: Option<&'static str>,
     combat: combat_decisions::CombatState,
     metrics: telemetry::Metrics,
@@ -436,6 +441,8 @@ impl Plugin for Bots {
             (&PROXIMITY_FIX_CONVAR, "bot_proximity_fix", "circular distance for titan boarding Use and titan melee (fixes axis-aligned aim snaps)"),
             (&PERCEPTION_FIX_CONVAR, "bot_perception_fix", "eye-angle facing and eye-level sight lines; same 180-degree hemisphere"),
             (&COMBAT_MOVEMENT_CONVAR, "bot_combat_movement", "route while engaged, full randomized strafes and blocked-step alternatives; aim unchanged"),
+            (&DEFENSIVE_TACTICS_CONVAR, "bot_defensive_tactics", "Stim/Phase when health is low instead of only in the shared request window; needs bot_action_policy 1"),
+            (&HEIGHT_RESPONSE_CONVAR, "bot_height_response", "break line of sight from a visible enemy that stays 180+ units above; needs bot_combat_decisions 1"),
             (&CROUCH_RECOVERY_CONVAR, "bot_crouch_recovery", "stall-triggered crouch when the real stand hull is blocked and duck hull fits"),
         ] {
             _ = cell.set(ConVarStruct::try_new(&ConVarRegister::new(name, "0", FCVAR_GAMEDLL as i32, help), token)

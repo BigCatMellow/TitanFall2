@@ -688,3 +688,13 @@ tools/Migrate-BT7274Rename.ps1 (dry run first, isolated profile first) before
 installing renamed packages, or LocalPersistence would start without saves.
 81 PowerShell files parse; migration fixture 15/15; all Rust/Node suites pass.
 See docs/BT7274-RENAME.md.
+
+2026-10-27 — SOLO BALANCE CANDIDATE (stacked on rename), NOT INSTALLED.
+Target agreed: ~3:1 human pilot K/D (band 2.5–3.5). Baseline from the published
+v19 played session: 9.7 (87/9). Levers allowed: bot movement/decisions, bot
+loadout mix, bot defensive tacticals; aim 0.78, warm-up, damage/RPM, team sizes
+and human buffs unchanged. New: bot_height_response, bot_defensive_tactics
+(native, default 0), BT7274.BotRoster add-on (bt7274_bot_roster,
+bt7274_bot_tacticals, default 0), tools/Check-BalanceTarget.mjs. Enable one lever
+per step on Eden/Meadow/Traffic/War Games x2 matches; stop inside the band.
+Plan: research/bot-balance-20261027/README.md.

@@ -97,6 +97,9 @@ pub(crate) fn basic_combat(
     let target_index = target.as_ref().map(|((_, target), _)| get_player_index(target));
     // Set again by whichever branch actually requests a pursuit route.
     local_data.route_target = None;
+    let cover_active = !is_titan && sim_type == 6
+        && crate::bots::switch_on(&crate::bots::HEIGHT_RESPONSE_CONVAR)
+        && local_data.height.active(time(helper)).is_some();
     if !local_data.view_checked && !is_titan && crate::bots::switch_on(&crate::bots::NAV_DIAGNOSTICS_CONVAR) {
         local_data.view_checked = true;
         log_view_and_hulls(player, helper, local_data);
@@ -141,6 +144,7 @@ pub(crate) fn basic_combat(
                     helper,
                 );
             } else if let Some(((target_pos, target), _)) = target
+                && !cover_active
                 && { local_data.route_target = Some(target.m_RefEHandle); true }
                 && path_to_target(
                     &mut cmd,
@@ -318,6 +322,16 @@ pub(crate) fn basic_combat(
     } else {
         0
     };
+
+    if !is_titan && action_policy && matches!(target, Some((_, true)))
+        && crate::bots::switch_on(&crate::bots::DEFENSIVE_TACTICS_CONVAR)
+        && lookup_ent(player.m_inventory.offhandWeapons[1], helper.sv_funcs)
+            .and_then(|ent| get_weaponx_name(ent, helper.sv_funcs))
+            .is_some_and(|name| crate::bots::action_policy::defensive_now(name, player.m_iHealth))
+    {
+        // Readiness gating below (Pulse) still decides whether it is pressed.
+        cmd.buttons |= Action::OffHand1 as u32;
+    }
 
     if let Some(((target, target_player), should_shoot)) = target {
         if let Some(target) = shared_data
@@ -535,7 +549,7 @@ pub(crate) fn basic_combat(
             cmd.buttons |= defensive_request;
         }
         let movement = crate::bots::switch_on(&crate::bots::COMBAT_MOVEMENT_CONVAR);
-        if movement && local_data.metrics.visible {
+        if movement && local_data.metrics.visible && !cover_active {
             if let Some(forward) = decision.forward {
                 combat_hold_move(player, helper, local_data, &mut cmd, forward);
             } else if let Some(index) = target_index {
@@ -641,6 +655,7 @@ pub(crate) fn basic_combat(
             local_data.metrics.spacing_commands = local_data.metrics.spacing_commands.saturating_add(1);
         }
     }
+    height_followups(player, helper, local_data, &mut cmd, is_titan, sim_type);
     route_followups(player, helper, local_data, &mut cmd, is_titan, sim_type);
     cmd.camera_angles = cmd.world_view_angles;
 
@@ -749,15 +764,22 @@ fn combat_hold_move(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut B
 /// aim stays on it. Movement is re-expressed relative to the aim yaw.
 fn combat_route_move(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut BotData,
     cmd: &mut CUserCmd, target_pos: Vector3, target_index: usize) {
-    let aim_yaw = cmd.world_view_angles.y;
-    let mut route = CUserCmd::new_basic_move(Vector3::ZERO, 0, helper);
     local.route_target = local.metrics.target;
     let recalc = local.last_target_index != target_index || local.should_recalculate_path;
-    if path_to_target(&mut route, local, player.m_vecAbsOrigin, target_pos, recalc, helper) {
+    if route_move_toward(player, helper, local, cmd, target_pos, recalc) {
         local.last_target_index = target_index;
     }
     local.should_recalculate_path = false;
-    if route.move_.x == 0. && route.move_.y == 0. { return; } // keep the legacy approach
+}
+
+/// Follow the navmesh route to `goal` while keeping the current aim; the move
+/// is re-expressed relative to the aim yaw. Returns path_to_target's result.
+fn route_move_toward(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut BotData,
+    cmd: &mut CUserCmd, goal: Vector3, recalc: bool) -> bool {
+    let aim_yaw = cmd.world_view_angles.y;
+    let mut route = CUserCmd::new_basic_move(Vector3::ZERO, 0, helper);
+    let routed = path_to_target(&mut route, local, player.m_vecAbsOrigin, goal, recalc, helper);
+    if route.move_.x == 0. && route.move_.y == 0. { return routed; } // keep the existing input
     let (f, s) = if local.metrics.state == "recover" {
         crate::bots::combat_movement::reframe(route.move_.x, route.move_.y, route.world_view_angles.y, aim_yaw)
     } else {
@@ -775,7 +797,66 @@ fn combat_route_move(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut 
     // sideways is not possible and would cancel the strafe component.
     if f > 0.85 { cmd.buttons |= Action::Speed as u32; }
     cmd.buttons |= route.buttons & Action::Jump as u32;
-    if local.metrics.state != "recover" { local.metrics.state = "engage"; }
+    if local.metrics.state != "recover" && local.metrics.visible { local.metrics.state = "engage"; }
+    routed
+}
+
+/// `bot_height_response`: move to a nearby point the overhead enemy cannot see.
+fn height_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut BotData,
+    cmd: &mut CUserCmd, is_titan: bool, sim_type: i32) {
+    use crate::bots::height_response::{Intent, candidate_ok};
+    use crate::bots::{switch_on, HEIGHT_RESPONSE_CONVAR, COMBAT_DECISIONS_CONVAR, NAV_DIAGNOSTICS_CONVAR};
+    if is_titan || sim_type != 6 || !switch_on(&HEIGHT_RESPONSE_CONVAR) || !switch_on(&COMBAT_DECISIONS_CONVAR)
+        || local.metrics.state == "embark" || player.m_lifeState != 0 || player.m_iHealth <= 0 {
+        local.height.cancel();
+        return;
+    }
+    let now = time(helper);
+    let o = player.m_vecAbsOrigin;
+    let tp = local.metrics.target_pos;
+    match local.height.update(now, local.metrics.visible, tp[2] - o.z) {
+        Intent::None => {}
+        Intent::NeedCover => {
+            let target_eye = Vector3::new(tp[0], tp[1], tp[2] + 60.);
+            let mut found = None;
+            let mut tried = 0;
+            for _ in 0..6 {
+                let Some(p) = local.nav_query.as_mut().and_then(|nav| nav.random_point_around(o, 500., Some(150.))) else { continue; };
+                tried += 1;
+                if !candidate_ok(v3(o), v3(p)) { continue; }
+                let eye = p + Vector3::new(0., 0., 56.);
+                let d = eye - target_eye;
+                let len = (d.x * d.x + d.y * d.y + d.z * d.z).sqrt();
+                if !len.is_finite() || len < 80. { continue; }
+                // Start just outside the target so its own hitboxes do not count as cover.
+                let start = target_eye + Vector3::new(d.x / len * 40., d.y / len * 40., d.z / len * 40.);
+                let (fraction, _) = view_rate(helper, start, eye - GROUND_OFFSET, player, true);
+                if fraction < 0.98 { found = Some(p); break; }
+            }
+            match found {
+                Some(p) => local.height.start(now, v3(p)),
+                None => local.height.none_found(now),
+            }
+            if switch_on(&NAV_DIAGNOSTICS_CONVAR) {
+                log::info!("BOT_COVER epoch={} t={now:.2} slot={} found={} tried={tried} gap={:.0} starts={} no_cover={} x={:.1} y={:.1} z={:.1} cx={:.1} cy={:.1} cz={:.1}",
+                    crate::bots::telemetry::epoch(), local.edict, found.is_some() as u8, tp[2] - o.z,
+                    local.height.starts, local.height.no_cover, o.x, o.y, o.z,
+                    found.map_or(0., |p| p.x), found.map_or(0., |p| p.y), found.map_or(0., |p| p.z));
+            }
+        }
+        Intent::Cover(point) => {
+            let goal = Vector3::new(point[0], point[1], point[2]);
+            let recalc = local.height.take_fresh();
+            local.route_target = None;
+            if distance(o, goal) > 60. {
+                route_move_toward(player, helper, local, cmd, goal, recalc);
+            } else {
+                // In cover: hold still; aim and firing remain unchanged.
+                cmd.move_ = Vector3::ZERO;
+                set_move_buttons(cmd);
+            }
+        }
+    }
 }
 
 /// Crouch recovery, stall diagnostics and double jumps for route following.
