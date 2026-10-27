@@ -75,3 +75,28 @@ node --preserve-symlinks --preserve-symlinks-main tests/weapon_notes.test.mjs
 node --preserve-symlinks --preserve-symlinks-main tests/weapon_notebook.test.mjs
 node --preserve-symlinks --preserve-symlinks-main tools/Build-WeaponNotebook.mjs
 ```
+
+## Opt-in rounds and view-kick sampling (Solo.WeaponNotes 1.1.0, source only)
+
+Both default to `0`; with both off the recorder behaves exactly as 1.0.0.
+
+- `solo_weapon_notes_fire 1`: samples the local human's active weapon each frame
+  and logs `WNOTE_FIRE` (rounds = magazine decreases, ADS rounds when the zoom
+  query works, reloads) per gun/modifier/config. The analyzer adds `accuracy`
+  rows as observed-expenditure proxies, matched by actor/life/time/config.
+  These are not accuracy or guaranteed lower bounds; magazine polling can miss
+  rounds. Invalid/over-unity denominators produce no ratio. It has its own error budget (`WNOTE_FIRE_ERROR`) and cannot disable the
+  damage notebook.
+- `solo_weapon_notes_viewkick 1`: logs `WNOTE_KICK` per firing burst (eye-angle
+  drift from the burst start). Includes aiming input; only meaningful in a
+  controlled test from a fixed position without mouse movement.
+
+Not compiled or run here; validate in the isolated profile first. See
+research/bot-capability-20261027/README.md for the blinded per-weapon protocol.
+
+Review correction: magazine polling now captures actor/life/time/config windows.
+It reports `pilot_hits_per_observed_round` only for valid matched windows;
+`pilot_hit_fraction` is null because an exact shot denominator is not proven.
+This proxy is not accuracy or a guaranteed lower bound. Missing intervals,
+reload ambiguity, invalid counts or over-unity results invalidate the ratio.
+Sampler runtime/API validation is still required before using it in trials.

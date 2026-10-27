@@ -56,6 +56,7 @@ pub fn path_to_target(
             nav.end_point = None;
         }
         local_data.recovery_until = time(helper) + 1.2;
+        local_data.stall_event = Some("no_progress");
         note_recovery(local_data, origin, helper, "no_progress");
         face_toward(cmd, origin, target_pos, helper);
         try_avoid_obstacle(cmd, local_data, helper);
@@ -82,12 +83,21 @@ pub fn path_to_target(
         .last()
         .map(|point| unsafe { debug.AddLineOverlay(point, &target_pos, 0, 255, 0, true, 0.1) });
 
-    if nav
+    let must_replan = nav
         .end_point
         .map(|point| distance(point, target_pos) > BOT_PATH_RECAL_RANGE)
         .map(|should_recalculate| should_recalculate || should_recalcute_path)
-        .unwrap_or(true)
-        || nav.path_points.is_empty()
+        .unwrap_or(true);
+    if !must_replan && nav.path_points.is_empty()
+        && super::switch_on(&super::ROUTE_GUARD_CONVAR)
+        && !local_data.replan.allow_consumed_replan(time(helper))
+    {
+        // A consumed partial route ends where the mesh stops; requesting the
+        // same route every frame only spins in place. Hold briefly instead.
+        face_toward(cmd, origin, target_pos, helper);
+        return true;
+    }
+    if must_replan || nav.path_points.is_empty()
     {
         local_data.last_time_node_reached = helper.globals.curTime;
         local_data.next_target_pos = origin;
@@ -101,7 +111,25 @@ pub fn path_to_target(
         }
 
         local_data.metrics.path_requests = local_data.metrics.path_requests.saturating_add(1);
-        if let Err(err) = nav.new_path(origin, target_pos, dt_funcs) {
+        let result = nav.new_path(origin, target_pos, dt_funcs);
+        let status = nav.last_status;
+        let partial = super::nav_diagnostics::is_partial(status);
+        let end_gap = nav.last_end.map_or(f32::INFINITY, |end| distance3(end, target_pos));
+        local_data.replan.note_plan(time(helper), partial);
+        if result.is_ok() && let Some(id) = local_data.route_target {
+            local_data.unreachable.note(time(helper), id, partial, end_gap);
+        }
+        if super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR)
+            && local_data.path_log.allow(time(helper), 1.) {
+            let links = nav.corner_meta.iter().filter(|(flags, jump)| *flags & 0x04 != 0 || (*jump != 0 && *jump != u8::MAX)).count();
+            let jumps: Vec<String> = nav.corner_meta.iter().rev().take(8).map(|(f, j)| format!("{f}:{j}")).collect();
+            log::info!("BOT_PATH epoch={} t={:.2} slot={} ok={} status={status:#x} partial={} points={} links={links} corners={} end_gap={:.0} sx={:.1} sy={:.1} sz={:.1} gx={:.1} gy={:.1} gz={:.1} target={} suppressed={}",
+                super::telemetry::epoch(), time(helper), local_data.edict, result.is_ok() as u8, partial as u8,
+                nav.path_points.len(), jumps.join(","), if end_gap.is_finite() { end_gap } else { -1. },
+                origin.x, origin.y, origin.z, target_pos.x, target_pos.y, target_pos.z,
+                local_data.route_target.unwrap_or(-1), local_data.path_log.take_suppressed());
+        }
+        if let Err(err) = result {
             local_data.metrics.path_failures = local_data.metrics.path_failures.saturating_add(1);
             log::warn!("navigation pathing failed stuck somewhere probably! {err}");
             face_toward(cmd, origin, target_pos, helper);
@@ -126,15 +154,26 @@ pub fn path_to_target(
     }
 
     while distance(local_data.next_target_pos, origin) <= BOT_PATH_NODE_RANGE {
-        let Some(next) = nav.next_point() else { break; };
+        let Some((next, meta)) = nav.next_corner() else { break; };
         local_data.last_time_node_reached = helper.globals.curTime;
         local_data.next_target_pos = next;
+        local_data.current_corner = meta;
+        if super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
+            log::info!("BOT_CORNER epoch={} t={:.2} slot={} flags={} jump={} remaining={} x={:.1} y={:.1} z={:.1} dz={:.1} dist={:.0}",
+                super::telemetry::epoch(), time(helper), local_data.edict,
+                meta.map_or(-1, |m| m.0 as i32), meta.map_or(-1, |m| m.1 as i32), nav.path_points.len(),
+                next.x, next.y, next.z, next.z - origin.z, distance(next, origin));
+        }
     }
 
     // Flat routes do not need a constant jump attempt. Finish a short press,
     // then release it before trying again at a step or during recovery.
+    let dz = local_data.next_target_pos.z - origin.z;
+    let step = if super::switch_on(&super::JUMP_TIMING_CONVAR) {
+        super::route_guard::step_jump_wanted(dz, distance(local_data.next_target_pos, origin))
+    } else { dz > 18. };
     if super::jump_pulse::jump_pulse(time(helper), &mut local_data.jump_delay,
-        &mut local_data.jump_hold, local_data.next_target_pos.z - origin.z > 18.) {
+        &mut local_data.jump_hold, step) {
         cmd.buttons |= Action::Jump as u32;
         cmd.move_.z = 1.0; // hmmm
     }
@@ -150,6 +189,7 @@ pub fn path_to_target(
             nav.end_point = None;
         }
         local_data.recovery_until = time(helper) + 1.2;
+        local_data.stall_event = Some("waypoint_timeout");
         note_recovery(local_data, origin, helper, "waypoint_timeout");
         try_avoid_obstacle(cmd, local_data, helper);
     }

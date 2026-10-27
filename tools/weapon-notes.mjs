@@ -6,13 +6,19 @@ export function parseNote(line){
   return {type:m[1],...Object.fromEntries([...line.slice(m.index).matchAll(/(?:^|\s)([a-z_]+)=([^\s]+)/g)].map(m=>[m[1],m[2]]))};
 }
 const median=a=>{const s=[...a].sort((a,b)=>a-b);return s.length?(s[Math.floor((s.length-1)/2)]+s[Math.floor(s.length/2)])/2:null};
+// Guns whose one magazine round can produce several damage events (pellets,
+// multi-projectile shots) or splash: hits/rounds is not a hit fraction there.
+export const multiHitGuns=new Set(['mp_weapon_shotgun','mp_weapon_shotgun_pistol','mp_weapon_mastiff','mp_weapon_doubletake','mp_weapon_epg','mp_weapon_smr','mp_weapon_softball','mp_weapon_pulse_lmg','mp_weapon_rocket_launcher','mp_weapon_arc_launcher','mp_weapon_defender']);
 const rangeBucket=n=>!Number.isFinite(n)||n<0?'unknown':n<500?'0-499u':n<1000?'500-999u':n<2000?'1000-1999u':'2000u+';
 export function analyzeNotes(events){
-  let context=0,meta=null;const hits=new Map(),episodes=new Map(),deaths=[],errors=[];
+  let context=0,meta=null;const hits=new Map(),episodes=new Map(),deaths=[],errors=[],fires=[],kicks=[];let fireErrors=0;
   const key=e=>`${context}|${e.victim}|${e.life}`;
   for(const e of events){
     if(e.type==='WNOTE_CONTEXT'){context++;meta=e;continue;}
     if(e.type==='WNOTE_ERROR'){errors.push(e);continue;}
+    if(e.type==='WNOTE_FIRE_ERROR'){fireErrors++;continue;}
+    if(e.type==='WNOTE_FIRE'){fires.push({...e,context,meta});continue;}
+    if(e.type==='WNOTE_KICK'){kicks.push({...e,context,meta});continue;}
     if(e.type==='WNOTE_LIFE'){for(const k of episodes.keys())if(k.startsWith(`${context}|${e.victim}|`))episodes.delete(k);continue;}
     if(e.type==='WNOTE_HIT'){
       const h={...e,context,meta,after:null,gap:false};hits.set(`${context}|${e.event}`,h);continue;
@@ -63,13 +69,53 @@ export function analyzeNotes(events){
     if(!grouped.has(k))grouped.set(k,[]);grouped.get(k).push(d);
   }
   const groups=[...grouped.values()].map(a=>({map:a[0].map,mode:a[0].mode,gun:a[0].gun,attacker_kind:a[0].attacker_kind,victim_kind:a[0].victim_kind,mods:a[0].mods,config:a[0].config,range_bucket:a[0].range_bucket,hitgroups:a[0].hitgroups,critical_scales:a[0].critical_scales,n:a.length,metric,median_s:median(a.map(d=>d.damage_span_s)),min_s:Math.min(...a.map(d=>d.damage_span_s)),max_s:Math.max(...a.map(d=>d.damage_span_s))}));
+  // Clip deltas are observed expenditure, not a verified shot counter. Match
+  // hits only to a recorded actor/life/time interval; never infer true accuracy.
+  const fireGroups=new Map();
+  const fireKey=e=>JSON.stringify([e.context,e.meta?.map??'unknown',e.meta?.mode??'unknown',e.owner??e.attacker,e.life??e.attacker_life,e.gun,e.mods,e.config]);
+  // A hit's life is the VICTIM life, so explicitly use attacker_life here.
+  const hitKey=h=>fireKey({...h,owner:h.attacker,life:h.attacker_life});
+  const windows=new Map();
+  for(const f of fires){
+    const k=fireKey(f); const start=Number(f.start),end=Number(f.end);
+    const rounds=Number(f.rounds),ads=Number(f.ads_rounds);
+    const valid=f.sampling_valid==='true'&&f.owner!==undefined&&f.life!==undefined
+      &&Number.isFinite(start)&&Number.isFinite(end)&&end>=start
+      &&Number.isInteger(rounds)&&rounds>=0&&Number.isInteger(ads)&&ads>=0&&ads<=rounds;
+    const g=fireGroups.get(k)||{map:f.meta?.map??'unknown',mode:f.meta?.mode??'unknown',owner:f.owner,life:f.life,gun:f.gun,mods:f.mods,config:f.config,rounds:0,ads_rounds:0,reloads:0,pilot_hits:0,zoom_known:true,sampling_valid:true};
+    g.rounds+=Number.isFinite(rounds)?rounds:0;g.ads_rounds+=Number.isFinite(ads)?ads:0;g.reloads+=+f.reloads||0;
+    g.sampling_valid&&=valid;if(f.zoom_known==='false')g.zoom_known=false;
+    fireGroups.set(k,g);
+    if(!windows.has(k))windows.set(k,[]);
+    const list=windows.get(k);
+    if(valid){if(list.some(w=>start<w.end&&end>w.start))g.sampling_valid=false;list.push({start,end});}
+  }
+  for(const h of hits.values()){
+    if(h.akind!=='human'||h.atitan==='true'||h.force==='true'||h.attacker===h.victim||h.ateam===h.vteam)continue;
+    const k=hitKey(h),g=fireGroups.get(k),t=Number(h.t);
+    if(g&&Number.isFinite(t)&&(windows.get(k)||[]).some(w=>t>w.start&&t<=w.end))g.pilot_hits++;
+  }
+  const accuracy=[...fireGroups.values()].map(g=>{
+    const single=!multiHitGuns.has(g.gun),valid=g.sampling_valid&&g.pilot_hits<=g.rounds;
+    return {...g,sampling_valid:valid,single_projectile:single,
+      pilot_hit_fraction:null, // Sampling cannot prove a complete shot denominator.
+      pilot_hits_per_observed_round:single&&valid&&g.rounds>0?g.pilot_hits/g.rounds:null,
+      ads_fraction:valid&&g.zoom_known&&g.rounds>0?g.ads_rounds/g.rounds:null};
+  });
+  const kickGroups=new Map();
+  for(const k of kicks){const key=JSON.stringify([k.gun,k.mods,k.config,k.ads]);if(!kickGroups.has(key))kickGroups.set(key,[]);kickGroups.get(key).push(k);}
+  const viewkick=[...kickGroups.values()].map(a=>({gun:a[0].gun,mods:a[0].mods,config:a[0].config,ads:a[0].ads==='true',bursts:a.length,
+    median_rounds:median(a.map(k=>+k.rounds)),median_abs_dpitch_per_round:median(a.map(k=>Math.abs(+k.dpitch)/Math.max(1,+k.rounds))),
+    median_max_dpitch:median(a.map(k=>+k.max_dpitch)),median_max_dyaw:median(a.map(k=>+k.max_dyaw))}));
   const exclusions={};for(const d of deaths)for(const reason of d.exclusions)exclusions[reason]=(exclusions[reason]||0)+1;
-  return {schema_version:1,metric,death_records:deaths.length,clean_health_episodes:deaths.filter(d=>d.clean_health_episode).length,logger_errors:errors.length,exclusion_counts:exclusions,groups,deaths,
-    limits:'Damage-to-death spans, NOT first-shot TTK, trigger-to-kill or accuracy. Damage events are not shots. Full-HP/single-attacker checks cannot rule out unobserved healing/buffs/shields; hitgroups remain numeric. Do not pool humans/bots, modes, maps, mods, configs, ranges or critical-hit contexts. Synthetic validation stays separate. Small n is exploratory.'};
+  return {schema_version:1,metric,death_records:deaths.length,clean_health_episodes:deaths.filter(d=>d.clean_health_episode).length,logger_errors:errors.length,fire_errors:fireErrors,exclusion_counts:exclusions,groups,deaths,accuracy,viewkick,
+    limits:'Damage-to-death spans, NOT first-shot TTK, trigger-to-kill or accuracy. Damage events are not shots. Full-HP/single-attacker checks cannot rule out unobserved healing/buffs/shields; hitgroups remain numeric. Do not pool humans/bots, modes, maps, mods, configs, ranges or critical-hit contexts. Synthetic validation stays separate. Small n is exploratory. Expenditure rows (opt-in solo_weapon_notes_fire) match pilot hits to sampled actor/life/time windows. Magazine sampling can miss rounds; pilot_hits_per_observed_round is an expenditure proxy, NOT accuracy or a guaranteed lower bound. Invalid or over-unity windows produce no ratio. View-kick rows (opt-in solo_weapon_notes_viewkick) include aiming input unless taken in a controlled no-input test.'};
 }
 export function writeNotes(out,events,metadata={}){
   fs.mkdirSync(out,{recursive:true});const result={...metadata,...analyzeNotes(events)};
   fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify(result,null,2)+'\n');
-  const md=['# Recorded weapon notes','',result.limits,'',`Deaths: ${result.death_records}; qualifying health episodes: ${result.clean_health_episodes}; recorder errors: ${result.logger_errors}.`,'','| Map/mode | Weapon | Actors | Range | Samples | Median damage span |','|---|---|---|---|---:|---:|',...result.groups.map(g=>`| ${g.map}/${g.mode} | ${g.gun} | ${g.attacker_kind}→${g.victim_kind} | ${g.range_bucket} | ${g.n} | ${g.median_s.toFixed(3)} s |`),'','Groups also remain separated by actual modifiers, configuration, hitgroups and critical scales in summary.json. ADS state and missed shots are not observed.'];
+  const md=['# Recorded weapon notes','',result.limits,'',`Deaths: ${result.death_records}; qualifying health episodes: ${result.clean_health_episodes}; recorder errors: ${result.logger_errors}.`,'','| Map/mode | Weapon | Actors | Range | Samples | Median damage span |','|---|---|---|---|---:|---:|',...result.groups.map(g=>`| ${g.map}/${g.mode} | ${g.gun} | ${g.attacker_kind}→${g.victim_kind} | ${g.range_bucket} | ${g.n} | ${g.median_s.toFixed(3)} s |`),'','Groups also remain separated by actual modifiers, configuration, hitgroups and critical scales in summary.json.',
+    ...(result.accuracy.length?['','## Observed expenditure (opt-in; not accuracy)','','| Map | Weapon | Mods | Rounds | ADS share | Pilot hits | Hits / observed round |','|---|---|---|---:|---:|---:|---:|',
+      ...result.accuracy.map(g=>`| ${g.map} | ${g.gun} | ${g.mods} | ${g.rounds} | ${g.ads_fraction===null?'n/a':(100*g.ads_fraction).toFixed(0)+'%'} | ${g.pilot_hits} | ${g.pilot_hits_per_observed_round===null?'n/a':(100*g.pilot_hits_per_observed_round).toFixed(1)+'%'} |`)]:['','Rounds fired were not recorded (solo_weapon_notes_fire 0); missed shots are not observed.'])];
   fs.writeFileSync(path.join(out,'NOTES.md'),md.join('\n')+'\n');return result;
 }

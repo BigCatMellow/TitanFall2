@@ -119,6 +119,19 @@ pub fn run_bots_cmds(paused: bool) {
             super::progress_watchdog::finish_command(&mut local_data.movement_anchor, local_data.navigation_requested);
         }
         cmd.frame_time = globals.frameTime;
+        if super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
+            // State-agnostic: also catches bots pressing into geometry while engaged.
+            let commanded = cmd.move_.x.hypot(cmd.move_.y) > 0.3;
+            let grounded = unsafe { (server_functions.is_on_ground)(std::ptr::from_ref(player).cast()) } != 0;
+            let velocity = player.m_vecAbsVelocity;
+            if let Some(age) = local_data.stuck.update(globals.curTime, commanded, grounded, velocity.x.hypot(velocity.y)) {
+                let titan = unsafe { (server_functions.is_titan)(std::ptr::from_ref(player).cast()) };
+                let pos = player.m_vecAbsOrigin;
+                log::info!("BOT_STUCK epoch={epoch} map={map} t={:.2} slot={edict} state={} visible={} titan={} age={age:.1} episodes={} duck_state={} x={:.1} y={:.1} z={:.1}",
+                    globals.curTime, local_data.metrics.state, local_data.metrics.visible as u8, titan as u8,
+                    local_data.stuck.episodes, player.m_duckState, pos.x, pos.y, pos.z);
+            }
+        }
         local_data.metrics.command(cmd.world_view_angles.y, cmd.buttons & Action::Jump as u32 != 0);
         if emit_trace {
             if let Some(weapon) = crate::utils::lookup_ent(player.m_inventory.activeWeapon, server_functions)

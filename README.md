@@ -33,6 +33,11 @@ local work. [Original README](docs/UPSTREAM-README.md).
   War Games/Eden are the strongest route follow-ups. Historical v16/played
   sessions, short/long goals and observer configurations remain separate.
 
+- **New source candidate, not installed:** bot capability v20 — seven default-off
+  switches (navigation diagnostics, route guard, jump timing, proximity and
+  perception fixes, combat movement, stall-triggered crouch with engine hulls).
+  [Switches, evidence, runtime protocol and rollback](research/bot-capability-20261027/README.md).
+
 Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 [the map review](research/trends-20261025/FINDINGS.md) and
 [the deeper decision review](research/decision-context-20261025/FINDINGS.md) before changes.

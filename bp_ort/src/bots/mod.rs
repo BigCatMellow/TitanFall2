@@ -56,6 +56,11 @@ mod behavior_tuning;
 mod progress_watchdog;
 mod coordination;
 mod escape_recovery;
+mod nav_diagnostics;
+mod route_guard;
+mod perception;
+mod combat_movement;
+mod crouch_recovery;
 mod combat_decisions;
 mod action_policy;
 mod action_bridge;
@@ -82,6 +87,18 @@ pub(super) static ACTION_POLICY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new()
 pub(super) static TARGET_ELIGIBILITY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static NAVIGATION_CONTEXT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static STEP_RETRY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+// v20 candidate switches; every one defaults to 0 (installed v19 behavior).
+pub(super) static NAV_DIAGNOSTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static ROUTE_GUARD_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static JUMP_TIMING_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static PROXIMITY_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static PERCEPTION_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static COMBAT_MOVEMENT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static CROUCH_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+
+pub(super) fn switch_on(cell: &OnceCell<ConVarStruct>) -> bool {
+    cell.get().is_some_and(|c| c.get_value_bool())
+}
 
 pub static AIM_PENALTY_VALUE: AtomicI32 = AtomicI32::new(100);
 static ENGINE_FRAME_THREAD: AtomicU32 = AtomicU32::new(0);
@@ -112,6 +129,19 @@ pub(super) struct BotData {
     tactical_pulse: action_policy::Pulse,
     ordnance_pulse: action_policy::Pulse,
     escape_recovery: escape_recovery::EscapeRecovery,
+    path_log: nav_diagnostics::RateGate,
+    stall_log: nav_diagnostics::RateGate,
+    stuck: nav_diagnostics::StuckMonitor,
+    view_checked: bool,
+    current_corner: Option<(u8, u8)>,
+    route_target: Option<i32>,
+    replan: route_guard::ReplanThrottle,
+    unreachable: route_guard::Unreachable,
+    jump_timing: route_guard::JumpTiming,
+    strafe: combat_movement::Strafe,
+    crouch: crouch_recovery::CrouchRecovery,
+    crouch_duck: bool,
+    stall_event: Option<&'static str>,
     combat: combat_decisions::CombatState,
     metrics: telemetry::Metrics,
     last_bad_path: f32,
@@ -126,6 +156,25 @@ pub(super) struct BotData {
     spread_offset: usize,
     patrol_target: Option<Vector3>,
     last_moved_from_cap: f32,
+}
+
+impl BotData {
+    // Per-life candidate state must not survive respawn or pilot/Titan transitions.
+    fn reset_candidate_state(&mut self) {
+        self.path_log = Default::default();
+        self.stall_log = Default::default();
+        self.stuck = Default::default();
+        self.view_checked = false;
+        self.current_corner = None;
+        self.route_target = None;
+        self.replan = Default::default();
+        self.unreachable = Default::default();
+        self.jump_timing = Default::default();
+        self.strafe = Default::default();
+        self.crouch = Default::default();
+        self.crouch_duck = false;
+        self.stall_event = None;
+    }
 }
 
 #[derive(Debug)]
@@ -400,6 +449,13 @@ impl Plugin for Bots {
             (&TARGET_ELIGIBILITY_CONVAR, "bot_target_eligibility", "exclude hotdropping pet Titans from coordinated selection and pursuit"),
             (&NAVIGATION_CONTEXT_CONVAR, "bot_navigation_context", "do not age navigation watchdog across non-navigation commands"),
             (&STEP_RETRY_CONVAR, "bot_step_retry", "try opposite combat step with the same wall and ground checks"),
+            (&NAV_DIAGNOSTICS_CONVAR, "bot_nav_diagnostics", "log route status, traversal corners, stuck episodes and stall hull fits; no input changes"),
+            (&ROUTE_GUARD_CONVAR, "bot_route_guard", "throttle replans of consumed partial routes and skip unreachable pursuit targets briefly"),
+            (&JUMP_TIMING_CONVAR, "bot_jump_timing", "step jumps only near the higher waypoint, plus one bounded double jump"),
+            (&PROXIMITY_FIX_CONVAR, "bot_proximity_fix", "circular distance for titan boarding Use and titan melee (fixes axis-aligned aim snaps)"),
+            (&PERCEPTION_FIX_CONVAR, "bot_perception_fix", "eye-angle facing and eye-level sight lines; same 180-degree hemisphere"),
+            (&COMBAT_MOVEMENT_CONVAR, "bot_combat_movement", "route while engaged, full randomized strafes and blocked-step alternatives; aim unchanged"),
+            (&CROUCH_RECOVERY_CONVAR, "bot_crouch_recovery", "stall-triggered crouch when the real stand hull is blocked and duck hull fits"),
         ] {
             _ = cell.set(ConVarStruct::try_new(&ConVarRegister::new(name, "0", FCVAR_GAMEDLL as i32, help), token)
                 .expect("failed to register candidate feature switch"));

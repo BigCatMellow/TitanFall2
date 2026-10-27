@@ -94,6 +94,13 @@ pub(crate) fn basic_combat(
     } };
 
     let target_id = target.as_ref().map(|((_, target), _)| target.m_RefEHandle);
+    let target_index = target.as_ref().map(|((_, target), _)| get_player_index(target));
+    // Set again by whichever branch actually requests a pursuit route.
+    local_data.route_target = None;
+    if !local_data.view_checked && !is_titan && crate::bots::switch_on(&crate::bots::NAV_DIAGNOSTICS_CONVAR) {
+        local_data.view_checked = true;
+        log_view_and_hulls(player, helper, local_data);
+    }
     if local_data.metrics.target.is_some() && target_id.is_some()
         && local_data.metrics.target != target_id {
         local_data.metrics.switches = local_data.metrics.switches.saturating_add(1);
@@ -124,6 +131,7 @@ pub(crate) fn basic_combat(
         (6, target) if target.is_none() || matches!(target, Some((_, false))) => {
             if let Some(pet_titan) = unsafe { (helper.sv_funcs.get_pet_titan)(player).as_ref() } {
                 local_data.metrics.state = "embark";
+                local_data.route_target = None;
                 path_to_target(
                     &mut cmd,
                     local_data,
@@ -133,6 +141,7 @@ pub(crate) fn basic_combat(
                     helper,
                 );
             } else if let Some(((target_pos, target), _)) = target
+                && { local_data.route_target = Some(target.m_RefEHandle); true }
                 && path_to_target(
                     &mut cmd,
                     local_data,
@@ -269,7 +278,11 @@ pub(crate) fn basic_combat(
             cmd.move_ = Vector3::new(1., 0., 0.);
             cmd.buttons |= Action::Forward as u32 | Action::Walk as u32;
 
-            local_data.should_recalculate_path = true;
+            // Combat movement keeps following the route while engaged, so the
+            // route is not invalidated every visible frame.
+            if !(combat_enabled && crate::bots::switch_on(&crate::bots::COMBAT_MOVEMENT_CONVAR)) {
+                local_data.should_recalculate_path = true;
+            }
         }
         _ => {}
     }
@@ -353,7 +366,12 @@ pub(crate) fn basic_combat(
 
                 let (dis, ent) = view_rate(helper, titan_pos, origin, player, true);
                 if dis >= 1.0 || ent == std::ptr::from_ref(titan) {
-                    if (origin.x - titan_pos.x).powi(2) * (origin.y - titan_pos.y).powi(2) < 81000.
+                    let near = if crate::bots::switch_on(&crate::bots::PROXIMITY_FIX_CONVAR) {
+                        crate::bots::perception::within_xy(origin.x - titan_pos.x, origin.y - titan_pos.y, 81000.)
+                    } else {
+                        (origin.x - titan_pos.x).powi(2) * (origin.y - titan_pos.y).powi(2) < 81000.
+                    };
+                    if near
                         && (helper.globals.frameCount / 2 % 4 != 0)
                     {
                         cmd.world_view_angles = look_at(origin, titan_pos);
@@ -423,7 +441,11 @@ pub(crate) fn basic_combat(
                 && (origin.z - target.z).abs() < 50.
         })
             || (is_titan
-                && (origin.x - target.x).powi(2) * (origin.y - target.y).powi(2) < 850000.
+                && if crate::bots::switch_on(&crate::bots::PROXIMITY_FIX_CONVAR) {
+                    crate::bots::perception::within_xy(origin.x - target.x, origin.y - target.y, 850000.)
+                } else {
+                    (origin.x - target.x).powi(2) * (origin.y - target.y).powi(2) < 850000.
+                }
                 && (origin.z - target.z).abs() < 200.)
         {
             cmd.buttons |= Action::Melee as u32;
@@ -512,7 +534,14 @@ pub(crate) fn basic_combat(
             // Keep defensive intent; readiness filtering below still gates the request.
             cmd.buttons |= defensive_request;
         }
-        if let Some(forward) = decision.forward {
+        let movement = crate::bots::switch_on(&crate::bots::COMBAT_MOVEMENT_CONVAR);
+        if movement && local_data.metrics.visible {
+            if let Some(forward) = decision.forward {
+                combat_hold_move(player, helper, local_data, &mut cmd, forward);
+            } else if let Some(index) = target_index {
+                combat_route_move(player, helper, local_data, &mut cmd, pos, index);
+            }
+        } else if let Some(forward) = decision.forward {
             let state = &mut local_data.combat;
             let yaw = cmd.world_view_angles.y;
             if time(helper) >= state.step_next_at || (yaw - state.step_yaw).abs() > 40.
@@ -612,9 +641,215 @@ pub(crate) fn basic_combat(
             local_data.metrics.spacing_commands = local_data.metrics.spacing_commands.saturating_add(1);
         }
     }
+    route_followups(player, helper, local_data, &mut cmd, is_titan, sim_type);
     cmd.camera_angles = cmd.world_view_angles;
 
     cmd
+}
+
+// ---- v20 candidate helpers (each gated by its own default-off switch) ----
+
+fn v3(a: Vector3) -> [f32; 3] { [a.x, a.y, a.z] }
+
+fn grounded(player: &mut CPlayer, helper: &CUserCmdHelper) -> bool {
+    unsafe { (helper.sv_funcs.is_on_ground)(nudge_type::<&CBaseEntity>(player)) != 0 }
+}
+
+static HULL_WARNED: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+
+/// Swept stand and duck hulls toward `dir`, using the player's own hull fields
+/// and a player-collision mask (includes player clip, unlike the shot mask).
+/// The bottom 18 units are ignored so ordinary steps do not read as blocked.
+fn hull_fit(player: &mut CPlayer, helper: &CUserCmdHelper, dir: [f32; 2], dist: f32)
+    -> crate::bots::crouch_recovery::Fit {
+    use crate::bindings::{Contents, TraceCollisionGroup};
+    use crate::bots::crouch_recovery::{Fit, classify, hulls_plausible};
+    let stand = (v3(player.m_StandHullMin), v3(player.m_StandHullMax));
+    let duck = (v3(player.m_DuckHullMin), v3(player.m_DuckHullMax));
+    if !hulls_plausible(stand, duck) {
+        if !HULL_WARNED.swap(true, Ordering::Relaxed) {
+            log::warn!("BOT_HULL implausible stand={stand:?} duck={duck:?}; hull-based features stay inert");
+        }
+        return Fit::Unknown;
+    }
+    let len = dir[0].hypot(dir[1]);
+    if !len.is_finite() || len < 0.01 || !dist.is_finite() { return Fit::Unknown; }
+    let start = player.m_vecAbsOrigin + Vector3::new(0., 0., 1.);
+    let end = start + Vector3::new(dir[0] / len * dist, dir[1] / len * dist, 0.);
+    let mask = || Contents::SOLID | Contents::MOVEABLE | Contents::WINDOW | Contents::MONSTER
+        | Contents::GRATE | Contents::PLAYER_CLIP;
+    let sweep = |(min, max): ([f32; 3], [f32; 3])| {
+        let trace = crate::utils::trace_hull(start, end,
+            Vector3::new(min[0], min[1], min[2] + 18.), Vector3::new(max[0], max[1], max[2]),
+            Some(nudge_type::<&CBaseEntity>(&*player)), TraceCollisionGroup::Player, mask(),
+            helper.sv_funcs, helper.engine_funcs);
+        Some((trace.fraction, trace.start_solid || trace.all_solid))
+    };
+    let stand_trace = sweep(stand);
+    let duck_trace = sweep(duck);
+    classify(stand_trace, duck_trace)
+}
+
+fn route_dir(player: &CPlayer, local: &BotData, yaw: f32) -> [f32; 2] {
+    let o = player.m_vecAbsOrigin;
+    let d = [local.next_target_pos.x - o.x, local.next_target_pos.y - o.y];
+    if d[0].hypot(d[1]) > 4. { d } else { let (s, c) = yaw.to_radians().sin_cos(); [c, s] }
+}
+
+fn log_view_and_hulls(player: &mut CPlayer, helper: &CUserCmdHelper, local: &BotData) {
+    let mut v = Vector3::ZERO;
+    let view = unsafe { *(helper.sv_funcs.view_angles)(player, &mut v) };
+    let eye = unsafe { *(helper.sv_funcs.get_eye_pos)(player, &mut v) };
+    let stand = (v3(player.m_StandHullMin), v3(player.m_StandHullMax));
+    let duck = (v3(player.m_DuckHullMin), v3(player.m_DuckHullMax));
+    let o = player.m_vecAbsOrigin;
+    log::info!("BOT_VIEWCHECK epoch={} slot={} eye_angles={:?} view_angles_raw={:?} eye_height={:.1} stand={stand:?} duck={duck:?} plausible={} duck_state={}",
+        crate::bots::telemetry::epoch(), local.edict, v3(helper.angles), v3(view), eye.z - o.z,
+        crate::bots::crouch_recovery::hulls_plausible(stand, duck) as u8, player.m_duckState);
+}
+
+fn set_move_buttons(cmd: &mut CUserCmd) {
+    cmd.buttons &= !(Action::Forward as u32 | Action::Back as u32 | Action::Speed as u32
+        | Action::Walk as u32 | Action::Moveleft as u32 | Action::Moveright as u32);
+    if cmd.move_.x > 0. { cmd.buttons |= Action::Forward as u32; }
+    if cmd.move_.x < 0. { cmd.buttons |= Action::Back as u32; }
+    if cmd.move_.y < 0. { cmd.buttons |= Action::Moveleft as u32; }
+    if cmd.move_.y > 0. { cmd.buttons |= Action::Moveright as u32; }
+}
+
+/// In weapon range: full-strength randomized strafes with ranked alternatives.
+fn combat_hold_move(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut BotData,
+    cmd: &mut CUserCmd, forward: f32) {
+    let now = time(helper);
+    let yaw = cmd.world_view_angles.y;
+    let side = local.strafe.side(now, local.edict);
+    let out = if !grounded(player, helper) {
+        local.strafe.airborne_output()
+    } else {
+        let state = &mut local.combat;
+        if now >= state.step_next_at || (yaw - state.step_yaw).abs() > 40.
+            || state.step_side != side || state.step_forward != forward {
+            state.step_next_at = now + 0.2;
+            state.step_yaw = yaw;
+            state.step_side = side;
+            state.step_forward = forward;
+            let choice = crate::bots::combat_movement::choose_step(forward, side,
+                |f, s| combat_step_clear(player, helper, yaw, f, s));
+            state.step_clear = choice.is_some();
+            if choice.is_none() { state.blocked_steps = state.blocked_steps.saturating_add(1); }
+            local.strafe.remember(choice.unwrap_or((0., 0.)));
+        }
+        local.strafe.airborne_output()
+    };
+    cmd.move_ = Vector3::new(out.0, out.1, 0.);
+    set_move_buttons(cmd);
+}
+
+/// Out of weapon range: follow the navmesh route toward the target while the
+/// aim stays on it. Movement is re-expressed relative to the aim yaw.
+fn combat_route_move(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut BotData,
+    cmd: &mut CUserCmd, target_pos: Vector3, target_index: usize) {
+    let aim_yaw = cmd.world_view_angles.y;
+    let mut route = CUserCmd::new_basic_move(Vector3::ZERO, 0, helper);
+    local.route_target = local.metrics.target;
+    let recalc = local.last_target_index != target_index || local.should_recalculate_path;
+    if path_to_target(&mut route, local, player.m_vecAbsOrigin, target_pos, recalc, helper) {
+        local.last_target_index = target_index;
+    }
+    local.should_recalculate_path = false;
+    if route.move_.x == 0. && route.move_.y == 0. {
+        cmd.move_ = Vector3::ZERO;
+        set_move_buttons(cmd);
+        cmd.buttons &= !(Action::Jump as u32);
+        return;
+    }
+    let (f, s) = if local.metrics.state == "recover" {
+        crate::bots::combat_movement::reframe(route.move_.x, route.move_.y, route.world_view_angles.y, aim_yaw)
+    } else {
+        let o = player.m_vecAbsOrigin;
+        let bearing = look_at(o, local.next_target_pos).y;
+        if distance(o, local.next_target_pos) > 1. {
+            crate::bots::combat_movement::reframe(1., 0., bearing, aim_yaw)
+        } else {
+            crate::bots::combat_movement::reframe(route.move_.x, route.move_.y, route.world_view_angles.y, aim_yaw)
+        }
+    };
+    cmd.move_ = Vector3::new(f, s, 0.);
+    set_move_buttons(cmd);
+    // Sprint only when the route is mostly ahead of the aim; sprinting
+    // sideways is not possible and would cancel the strafe component.
+    if f > 0.85 { cmd.buttons |= Action::Speed as u32; }
+    cmd.buttons |= route.buttons & Action::Jump as u32;
+    if local.metrics.state != "recover" { local.metrics.state = "engage"; }
+}
+
+/// Crouch recovery, stall diagnostics and double jumps for route following.
+fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut BotData,
+    cmd: &mut CUserCmd, is_titan: bool, sim_type: i32) {
+    use crate::bots::{switch_on, CROUCH_RECOVERY_CONVAR, NAV_DIAGNOSTICS_CONVAR, JUMP_TIMING_CONVAR};
+    if !switch_on(&NAV_DIAGNOSTICS_CONVAR) && !switch_on(&CROUCH_RECOVERY_CONVAR) && !switch_on(&JUMP_TIMING_CONVAR) {
+        // All three off: no native calls, no input changes (installed v19 path).
+        local.stall_event = None;
+        if local.crouch.is_active() || local.crouch_duck { local.crouch.cancel(); local.crouch_duck = false; }
+        return;
+    }
+    let now = time(helper);
+    let pilot_route = !is_titan && sim_type == 6 && local.navigation_requested
+        && player.m_lifeState == 0 && player.m_iHealth > 0
+        && local.nav_query.as_ref().is_some_and(|q| q.hull == crate::navmesh::Hull::Human);
+    let on_ground = !is_titan && grounded(player, helper);
+    let velocity = player.m_vecAbsVelocity;
+    let speed = velocity.x.hypot(velocity.y);
+    let o = player.m_vecAbsOrigin;
+    let yaw = cmd.world_view_angles.y;
+
+    if let Some(reason) = local.stall_event.take()
+        && pilot_route && switch_on(&NAV_DIAGNOSTICS_CONVAR) && local.stall_log.allow(now, 0.5) {
+        let dir = route_dir(player, local, yaw);
+        let fit = hull_fit(player, helper, dir, 40.);
+        let status = local.nav_query.as_ref().map_or(0, |n| n.last_status);
+        log::info!("BOT_STALL epoch={} t={now:.2} slot={} reason={reason} state={} visible={} grounded={} speed={speed:.0} corner_flags={} corner_jump={} next_dist={:.0} next_dz={:.1} partial={} fit={fit:?} duck_state={} x={:.1} y={:.1} z={:.1}",
+            crate::bots::telemetry::epoch(), local.edict, local.metrics.state, local.metrics.visible as u8,
+            on_ground as u8, local.current_corner.map_or(-1, |m| m.0 as i32),
+            local.current_corner.map_or(-1, |m| m.1 as i32), distance(local.next_target_pos, o),
+            local.next_target_pos.z - o.z, crate::bots::nav_diagnostics::is_partial(status) as u8,
+            player.m_duckState, o.x, o.y, o.z);
+    }
+
+    if switch_on(&CROUCH_RECOVERY_CONVAR) && pilot_route && local.metrics.state != "recover" {
+        use crate::bots::crouch_recovery::Intent;
+        let commanding = cmd.move_.x.hypot(cmd.move_.y) > 0.3;
+        let dir = route_dir(player, local, yaw);
+        let mut tested = None;
+        let intent = local.crouch.update(now, [o.x, o.y], on_ground, speed, commanding, || {
+            let fit = hull_fit(player, helper, dir, 40.);
+            tested = Some(fit);
+            fit
+        });
+        if intent == Intent::Crouch {
+            cmd.buttons &= !(Action::Speed as u32 | Action::Jump as u32);
+            cmd.buttons |= Action::Duck as u32;
+            cmd.move_.z = 0.;
+        }
+        let duck = intent == Intent::Crouch;
+        if switch_on(&NAV_DIAGNOSTICS_CONVAR) && (tested.is_some() || duck != local.crouch_duck || intent == Intent::Failed) {
+            log::info!("BOT_CROUCH epoch={} t={now:.2} slot={} intent={intent:?} fit={:?} duck={} duck_state={} attempts={} successes={} failures={} x={:.1} y={:.1} z={:.1}",
+                crate::bots::telemetry::epoch(), local.edict, tested, duck as u8, player.m_duckState,
+                local.crouch.attempts, local.crouch.successes, local.crouch.failures, o.x, o.y, o.z);
+        }
+        local.crouch_duck = duck;
+    } else if local.crouch.is_active() || local.crouch_duck {
+        local.crouch.cancel();
+        local.crouch_duck = false;
+    }
+
+    if switch_on(&JUMP_TIMING_CONVAR) && !is_titan && sim_type == 6 {
+        let wanted = local.jump_timing.double_jump(now, on_ground,
+            local.next_target_pos.z - o.z, distance(local.next_target_pos, o));
+        if wanted && pilot_route && local.metrics.state != "recover" && !local.crouch_duck {
+            cmd.buttons |= Action::Jump as u32;
+        }
+    }
 }
 
 /// Small grounded steps only; tracing is cached at 5 Hz, outside navigation.
@@ -657,16 +892,36 @@ unsafe fn find_team_target<'a>(
     let ranked = coordinator.rank(local.edict as usize, team, time(helper), &candidates);
     // Prefer a shootable threat in team-aware order. A failed raycast never
     // reserves a target or prevents checking the remaining visible enemies.
+    let perception = crate::bots::switch_on(&crate::bots::PERCEPTION_FIX_CONVAR);
+    let eye = if perception { unsafe { *(helper.sv_funcs.get_eye_pos)(player, &mut v) } } else { origin };
     let visible = ranked.iter().copied().find(|index| {
         let target = &targets[*index];
-        if target.candidate.distance > BOT_VISON_RANGE
-            || dot(normalize(target.pos - origin), view) <= 270_f32.to_radians().cos() { return false; }
-        let (fraction, hit) = view_rate(helper, origin, target.pos, target.player, false);
+        if target.candidate.distance > BOT_VISON_RANGE { return false; }
+        let (from, to) = if perception {
+            // Facing from known eye angles; sight line eye-to-target-upper-body,
+            // which is also the line the existing aim sends shots along.
+            let to = target.pos + Vector3::new(0., 0., crate::bots::perception::target_sight_height(
+                unsafe { (&*target.player).m_Collision.m_vecMaxs.z }));
+            if !crate::bots::perception::in_front_hemisphere(helper.angles.y,
+                [to.x - eye.x, to.y - eye.y, to.z - eye.z]) { return false; }
+            // view_rate adds GROUND_OFFSET to the end point; remove it for an exact line.
+            (eye, to - GROUND_OFFSET)
+        } else {
+            if dot(normalize(target.pos - origin), view) <= 270_f32.to_radians().cos() { return false; }
+            (origin, target.pos)
+        };
+        let (fraction, hit) = view_rate(helper, from, to, target.player, false);
         if fraction != 1. && !std::ptr::addr_eq(hit, target.player) { return false; }
-        let (fraction, hit) = view_rate(helper, origin, target.pos, target.player, true);
+        let (fraction, hit) = view_rate(helper, from, to, target.player, true);
         fraction == 1. || std::ptr::addr_eq(hit, target.player)
     });
-    let selected = visible.or_else(|| ranked.first().copied())?;
+    // Pursuit (not engagement) skips a target whose routes keep ending far
+    // short of it, so bots stop circling under unreachable positions.
+    let pursue = if crate::bots::switch_on(&crate::bots::ROUTE_GUARD_CONVAR) {
+        ranked.iter().copied().find(|i| !local.unreachable.blocks(time(helper), targets[*i].candidate.id))
+            .or_else(|| ranked.first().copied())
+    } else { ranked.first().copied() };
+    let selected = visible.or(pursue)?;
     let selected = &targets[selected];
     Some(((selected.pos, unsafe { selected.player.as_mut()? }), visible.is_some()))
 }

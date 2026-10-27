@@ -66,7 +66,10 @@ test("the ADS trial crosses stock SMG timing; remains a test, not a blanket reco
     assert.ok(Math.abs(rifle.ads_out_s * 0.75 - smg.ads_out_s) < 1e-10);
   }
   assert.match(findings, /source-only/i);
-  assert.match(findings, /Neither is merged, installed or runtime-verified here/i);
+  // Status after the October 26 integration: installed for the local human,
+  // still explicitly distinct from a gameplay balance or hit-rate study.
+  assert.match(findings, /runtime-field-tested and installed/i);
+  assert.match(findings, /distinct from a gameplay balance\/hit-rate study/i);
 });
 
 test("special firing mechanisms are represented, not confused with continuous RPM", () => {
