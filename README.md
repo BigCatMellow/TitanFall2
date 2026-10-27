@@ -12,6 +12,11 @@ local work. [Original README](docs/UPSTREAM-README.md).
   damage/life/kill notes. Includes a 30-weapon reference catalog and conditional
   ideal TTK models; observed damage-to-death spans remain separate.
   [How to use it and measurement limits](Notes/weapon-notebook/README.md).
+- **First played-session review:** four maps,533pilot death records and128
+  qualifying health episodes. War Games recorded33human pilot kills/6deaths.
+  Passive/blocked combat movement and unused default tacticals are the strongest
+  follow-ups; aim and weapon damage remain unchanged.
+  [Findings](research/played-weapons-20261026/FINDINGS.md).
 - **Current source:** retains the v18 decision fixes and adds five missing
   standard weapon profiles.46 Rust checks,17 Node checks, the existing-controller
   comparison,11-gun runtime matrix and human stat/stacking/lifecycle checks pass.

@@ -609,3 +609,55 @@ Use canonical Resolve-Path backslash profile when stopping normal CMD-owned game
 Stop-OwnedSurveyGame exact argument comparison does not normalize slash styles.
 A no-op ownership rejection must not be treated as successful shutdown. Final
 owned game/hidden failed launcher processes closed, collectors finalized.
+
+2026-10-26 21:03 EDT — FIRST PLAYED WEAPON/MOVEMENT/DIFFICULTY REVIEW.
+User reported30+kill/6death dominance and wants better bot decisions/movement,
+not unfair accuracy or being shot before responding. Reviewed completed real
+session20261026-201056-50da37bd, native9E8809...v19, four maps.533pilot death
+records/128qualifying health episodes,0logger and0script/native error markers.
+Played data and historical22-map v18bot-only survey remain separate. No game
+launched, no runtime files/saves/settings changed for this analysis.
+
+Recorded human pilot-victim kills/pilot deaths:Eden14/2(R20114),Meadow16/1(Volt15,
+smoke1),Traffic24/0(Kraber24),WarGames33/6(Spitfire26,SMR6,smoke1). These are
+matching lethal pilot events, not complete scoreboard/totalK/D/win-rate data.
+Independent PowerShell event count87/9matches Node attribution. Human clean
+health episodes24:R2013median.234s,Volt7median.9455s,Spit14median.23515s;
+these medians mix ranges/hitgroups and are NOT matched weapon rankings. Hit-event
+range medians~958/1455/950units respectively. Keep damage/RPM as is. Kraber24hits
+were all lethal, but projectile modifier stack unknown so0qualifiedtimings;
+no accuracy or trigger/first-shot TTK claim. Only1clean bot->human death(.567s),
+not enough to tune reaction windows.322/533death records multi-attacker.
+
+General lead:45.6–54.1%of visible range-hold bot samples move<50u/s acrossmaps;
+36.9–45.5%of contiguous hold samples have recent blocked-step counter increments.
+Source zeroes movement when checked sidestep unavailable; airborne is also false.
+Current fixedside.3/3.2sreversal/.6sretreat has no health/cover input. First proposed
+trial: safe checked alternative/bounded reposition after sustained denied side
+step, preserve grounded/cliff checks/trace caching/navbuffer safety. Log grounded
+and denial reason. Keep aim0.78,damage/RPM and existing.8sfiring warm-up unchanged;
+that sourcegate is not measured human-visible reaction time. Candidate NOT built
+or installed; no extra aim pressure recommended.
+
+Strict continuous-navigation low samples:Eden69/1712(4.03%),Meadow0/1404,
+Traffic1/1641(.06%),WarGames132/4252(3.10%). Recurring Eden4096,-256,128cell15
+samples/4slots;WG1664,-256,128also recurs, andnewlarger -2944,-128,-64cluster21
+samples/8slots.104/132WG low-progress windows include>=720deg accumulated yaw;
+0flaggedwindows havejump-button fraction>.2. More turning/recovery than sustained
+jump spam in those windows; overlapping samples not independent incidents. Near-
+zero LF stalls while human still dominates means routing alone won't fix combat.
+
+8983readiness samples:Grapple/fragonly,0nonzero primary-attack-count observations,
+source generates no automatic requests for them. Primary decision samples mostly
+R201. Small symmetric Stim/Phase subset may be a SECOND backed-up isolated trial;
+normal bots unchanged, Grapple traversal still unimplemented. Coordination is
+claims/nearby spacing, not tactical formations/flanking. Max4–5bots sampledseeing
+human atonce; don't remove sharing safeguards or focus everyone on human.
+
+Reproducible tools/Analyze-PlayedWeaponSession.mjs +4meaningfulfixtures pass:
+continuous turning vs jump requests;combat/death/gap/epoch guards;activeflag/native
+human-target identity/trim;repeatedmaps andeventIDreuse. Replayed533/128matches
+collector exactly. Public research/played-weapons-20261026 contains onlyderived
+analysis/provenance hashes andfindings. Full18.8MB nslog/events/saves stayprivate.
+Approximate activity bounds: preceding native frame atPlaying tolastdamage/death;
+no exact winner/postmatch markers available. No visual watching occurred.

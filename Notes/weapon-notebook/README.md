@@ -1,5 +1,10 @@
 # Automatic weapon notebook
 
+First played-session results are now available in the
+[weapon/movement/difficulty review](../../research/played-weapons-20261026/FINDINGS.md):
+four maps,533pilot death records,128qualifying episodes, including24human-attacker
+episodes. Reference stats below remain separate from those live observations.
+
 Launch **Northstar - Solo Bots (8v8)**, or `Play-Solo-Bots.cmd`, as usual. The
 launcher starts a local, read-only damage recorder alongside the game. No manual
 timestamps are needed. This is text telemetry, not video or audio recording.
