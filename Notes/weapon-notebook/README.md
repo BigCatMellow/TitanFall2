@@ -75,3 +75,21 @@ node --preserve-symlinks --preserve-symlinks-main tests/weapon_notes.test.mjs
 node --preserve-symlinks --preserve-symlinks-main tests/weapon_notebook.test.mjs
 node --preserve-symlinks --preserve-symlinks-main tools/Build-WeaponNotebook.mjs
 ```
+
+## Opt-in rounds and view-kick sampling (Solo.WeaponNotes 1.1.0, source only)
+
+Both default to `0`; with both off the recorder behaves exactly as 1.0.0.
+
+- `solo_weapon_notes_fire 1`: samples the local human's active weapon each frame
+  and logs `WNOTE_FIRE` (rounds = magazine decreases, ADS rounds when the zoom
+  query works, reloads) per gun/modifier/config. The analyzer adds `accuracy`
+  rows: recorded human **pilot** hits ÷ rounds, only for single-projectile guns.
+  Titan/minion hits are not recorded, so this is a lower bound and maps are never
+  pooled. It has its own error budget (`WNOTE_FIRE_ERROR`) and cannot disable the
+  damage notebook.
+- `solo_weapon_notes_viewkick 1`: logs `WNOTE_KICK` per firing burst (eye-angle
+  drift from the burst start). Includes aiming input; only meaningful in a
+  controlled test from a fixed position without mouse movement.
+
+Not compiled or run here; validate in the isolated profile first. See
+research/bot-capability-20261027/README.md for the blinded per-weapon protocol.
