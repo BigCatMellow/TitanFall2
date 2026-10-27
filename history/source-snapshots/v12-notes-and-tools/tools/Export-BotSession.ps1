@@ -2,7 +2,7 @@ param([string]$LogPath, [string]$OutputDirectory, [switch]$Open)
 $ErrorActionPreference = 'Stop'
 $culture = [Globalization.CultureInfo]::InvariantCulture
 if (-not $LogPath) {
-    $LogPath = (Get-ChildItem 'C:\Users\james\northstar-crash-audit\local-test-profile\logs\nslog*.txt' |
+    $LogPath = (Get-ChildItem "$env:USERPROFILE\northstar-crash-audit\local-test-profile\logs\nslog*.txt" |
         Sort-Object LastWriteTime -Descending | Select-Object -First 1).FullName
 }
 $LogPath = (Resolve-Path -LiteralPath $LogPath).Path

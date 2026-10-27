@@ -94,7 +94,7 @@
         }
       ],
       "failure": null,
-      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal"
+      "directory": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal"
     },
     {
       "map": "mp_colony02",
@@ -166,7 +166,7 @@
         }
       ],
       "failure": null,
-      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\02-mp_colony02"
+      "directory": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\02-mp_colony02"
     },
     {
       "map": "mp_complex3",
@@ -246,7 +246,7 @@
         }
       ],
       "failure": null,
-      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3"
+      "directory": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3"
     },
     {
       "map": "mp_crashsite3",
@@ -302,7 +302,7 @@
         }
       ],
       "failure": null,
-      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\04-mp_crashsite3"
+      "directory": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\04-mp_crashsite3"
     },
     {
       "map": "mp_drydock",
@@ -372,7 +372,7 @@
         }
       ],
       "failure": null,
-      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\05-mp_drydock"
+      "directory": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\05-mp_drydock"
     },
     {
       "map": "mp_forwardbase_kodai",
@@ -437,7 +437,7 @@
         }
       ],
       "failure": "Game closed before the survey completed",
-      "directory": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\06-mp_forwardbase_kodai",
+      "directory": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\06-mp_forwardbase_kodai",
       "watcher_state": "stopped_error",
       "operator_reason": "Interrupted under explicit user request to pause and play; not a reported game crash"
     }

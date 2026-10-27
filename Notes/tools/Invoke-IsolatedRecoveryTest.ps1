@@ -1,8 +1,8 @@
 param([ValidateSet(0,1)][int]$Enabled=1)
 $ErrorActionPreference='Stop'
-$profile='C:\Users\james\northstar-crash-audit\map-cycle-test-profile'
+$profile="$env:USERPROFILE\northstar-crash-audit\map-cycle-test-profile"
 $game='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2'
-$dll='C:\Users\james\bp-ort-fork\target\x86_64-pc-windows-gnu\distribution\bp_ort.dll'
+$dll="$env:USERPROFILE\bp-ort-fork\target\x86_64-pc-windows-gnu\distribution\bp_ort.dll"
 $old=Get-CimInstance Win32_Process -Filter "Name='NorthstarLauncher.exe'" |
     Where-Object {$_.CommandLine -like "*-profile=$profile*"}
 foreach($g in $old){$p=Get-Process -Id $g.ProcessId; Stop-Process -Id $p.Id -Force; if(-not $p.WaitForExit(10000)){throw 'Isolated game failed to exit'}}

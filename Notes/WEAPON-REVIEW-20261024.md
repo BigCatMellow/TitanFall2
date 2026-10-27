@@ -10,7 +10,7 @@
 > to the Volt class in those records; actual private loadout names should be
 > confirmed in-game before drawing conclusions about saved weapon choices.
 
-James asked to look into weapon stats and possible improvements. No gameplay,
+BT-7274 asked to look into weapon stats and possible improvements. No gameplay,
 weapon, bot or save settings changed and no game restart was performed.
 
 Northstar weapon KeyValues expose damage/falloff, headshot multipliers,
@@ -34,14 +34,14 @@ runtime values/modifiers should be read in the isolated game before tuning.
 
 Reference named attachment mods: pas_fast_reload multiplies reload and empty
 reload by 0.7 (30% shorter), extended_ammo sets G2 to18, Alternator40,
-R-201 to30 and CAR36. James's saved slots0/1 already use both extended_ammo
+R-201 to30 and CAR36. BT-7274's saved slots0/1 already use both extended_ammo
 and pas_fast_reload on G2/Alternator; slot2 R-201 uses extended_ammo and
 pas_run_and_gun. Saved slot3 EVA-8 has empty mod1/mod2. None were edited.
 
 Cautious proposal, not implemented: start with attachments already available
 on a chosen gun. If still desired, trial around10% shorter reload time or
 small handling improvements, one gun at a time. Avoid blanket damage/fire
-rate increases given James's reported high K/D and preference for close/fair
+rate increases given BT-7274's reported high K/D and preference for close/fair
 matches. Damage changes can cross shots-to-kill thresholds. Global weapon
 edits also affect bot-held copies; a human-only variant needs deliberate
 named-mod application and client/server validation. Weapon tuning alone does

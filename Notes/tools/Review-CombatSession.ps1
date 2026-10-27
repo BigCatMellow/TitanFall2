@@ -1,4 +1,4 @@
-param([string]$Session='C:\Users\james\northstar-crash-audit\Notes\sessions\nslog2026-10-24_23-16-24',[string]$Combat='C:\Users\james\northstar-crash-audit\Notes\sessions\combat-nslog2026-10-24_23-16-24\combat.csv')
+param([string]$Session="$env:USERPROFILE\northstar-crash-audit\Notes\sessions\nslog2026-10-24_23-16-24",[string]$Combat="$env:USERPROFILE\northstar-crash-audit\Notes\sessions\combat-nslog2026-10-24_23-16-24\combat.csv")
 $ErrorActionPreference='Stop'
 $rows=Import-Csv (Join-Path $Session 'observations.csv'); $combatRows=Import-Csv $Combat; $culture=[Globalization.CultureInfo]::InvariantCulture
 function Key($r) { "$($r.epoch)|$($r.slot)|$(([double]$r.t).ToString('F2',$culture))" }

@@ -3,7 +3,7 @@
   "updated": "2026-10-25T11:45:59.3373669-04:00",
   "smoke": false,
   "pid": 108180,
-  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 11-29-07.txt",
+  "log": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 11-29-07.txt",
   "current": {
     "kills": "342",
     "imc": "172",
@@ -24,7 +24,7 @@
       "militia": "170",
       "index": "0",
       "elapsed": "891.5",
-      "log_file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\05-mp_drydock\\main\\maps\\01-mp_drydock.log"
+      "log_file": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\05-mp_drydock\\main\\maps\\01-mp_drydock.log"
     }
   ],
   "failure": null,

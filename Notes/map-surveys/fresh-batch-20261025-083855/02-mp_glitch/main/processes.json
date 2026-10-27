@@ -1,6 +1,6 @@
 {
   "started": "2026-10-25T08:55:53.3669786-04:00",
-  "run": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\02-mp_glitch\\main",
+  "run": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\02-mp_glitch\\main",
   "game_pid": 250804,
   "watcher_pid": 250812
 }

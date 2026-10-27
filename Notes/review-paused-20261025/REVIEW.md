@@ -1,4 +1,4 @@
-# Review while James plays — 2026-10-25
+# Review while BT-7274 plays — 2026-10-25
 
 The automated map queue is paused by explicit user request. Five trials in
 that queue finished; Kodai was intentionally interrupted at its last recorded
@@ -8,10 +8,10 @@ their six reports and exited. remaining-maps.json lists17 trials to repeat
 or finish, starting with Kodai; resuming needs a NEW batch/current save
 baselines and another user request. Do not restart the old runner.
 
-James's regular stable-v16 solo session launched12:03:26EDT on Eden,
+BT-7274's regular stable-v16 solo session launched12:03:26EDT on Eden,
 fullscreen,1human+15bots/8v8. The log confirms902 named loadout fields restored.
 No diagnostic build, aim setting, navigation file or gameplay tuning was
-deployed. The new normal game may legitimately update saves as James plays;
+deployed. The new normal game may legitimately update saves as BT-7274 plays;
 do not restore old survey save backups over those updates.
 
 ## Map evidence collected

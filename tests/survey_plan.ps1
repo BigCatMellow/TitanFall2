@@ -1,9 +1,9 @@
-param([string]$Profile='C:\Users\james\northstar-crash-audit\map-cycle-test-profile')
+param([string]$Profile="$env:USERPROFILE\northstar-crash-audit\map-cycle-test-profile")
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot
 $dir=Join-Path $repo ('target/offline-checks/survey-plan-'+[guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path "$dir/prior" -Force|Out-Null
-$plan=@{dll_sha256=(Get-FileHash "$Profile/plugins/bp_ort.dll").Hash;core_sha256=(Get-FileHash "$Profile/Northstar.dll").Hash;bridge_sha256=(Get-FileHash "$Profile/mods/James.BotDecisions/mod/scripts/vscripts/james_bot_decisions.nut").Hash;goal=200}
+$plan=@{dll_sha256=(Get-FileHash "$Profile/plugins/bp_ort.dll").Hash;core_sha256=(Get-FileHash "$Profile/Northstar.dll").Hash;bridge_sha256=(Get-FileHash "$Profile/mods/BT7274.BotDecisions/mod/scripts/vscripts/bt7274_bot_decisions.nut").Hash;goal=200}
 $plan|ConvertTo-Json|Set-Content "$dir/prior/plan.json"
 @{results=@(@{map='mp_forwardbase_kodai';result=@{valid='true'}},@{map='mp_grave';result=@{valid='true'}},@{map='mp_homestead';result=@{valid='false'}})}|ConvertTo-Json -Depth 5|Set-Content "$dir/prior/status.json"
 $request=@{batch="$dir/never-created";profile=$Profile;goal=75;max_attempts=2;completed_batches=@("$dir/prior")}

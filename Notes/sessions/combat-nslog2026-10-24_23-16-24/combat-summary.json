@@ -1,5 +1,5 @@
 {
-  "log": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\logs\\nslog2026-10-24 23-16-24.txt",
+  "log": "%USERPROFILE%\\northstar-crash-audit\\local-test-profile\\logs\\nslog2026-10-24 23-16-24.txt",
   "summary": [
     {
       "map": "mp_eden",

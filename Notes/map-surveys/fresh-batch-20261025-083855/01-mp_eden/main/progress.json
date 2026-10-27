@@ -3,7 +3,7 @@
   "updated": "2026-10-25T08:55:47.5126491-04:00",
   "smoke": false,
   "pid": 248076,
-  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 08-39-10.txt",
+  "log": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 08-39-10.txt",
   "current": {
     "bots": "16",
     "index": "0",
@@ -22,7 +22,7 @@
       "index": "0",
       "militia": "146",
       "imc": "102",
-      "log_file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\01-mp_eden\\main\\maps\\01-mp_eden.log",
+      "log_file": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\01-mp_eden\\main\\maps\\01-mp_eden.log",
       "map": "mp_eden",
       "elapsed": "891.5"
     }

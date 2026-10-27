@@ -1,9 +1,9 @@
 param([string]$Label='working-v12')
 $ErrorActionPreference='Stop'
 if ($Label -notmatch '^[a-zA-Z0-9_-]+$') { throw 'Use a simple backup label.' }
-$repo='C:\Users\james\bp-ort-fork'
-$notes='C:\Users\james\northstar-crash-audit\Notes'
-$audit='C:\Users\james\northstar-crash-audit'
+$repo="$env:USERPROFILE\bp-ort-fork"
+$notes="$env:USERPROFILE\northstar-crash-audit\Notes"
+$audit="$env:USERPROFILE\northstar-crash-audit"
 $game='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2'
 $destination=Join-Path "$notes\backups" ($Label+'-'+(Get-Date -Format 'yyyyMMdd-HHmmss'))
 New-Item -ItemType Directory -Path "$destination\source" -Force | Out-Null

@@ -3,7 +3,7 @@
   "updated": "2026-10-25T11:29:04.1823115-04:00",
   "smoke": false,
   "pid": 263676,
-  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 11-12-24.txt",
+  "log": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 11-12-24.txt",
   "current": {
     "militia": "196",
     "map": "mp_crashsite3",
@@ -19,7 +19,7 @@
     {
       "militia": "196",
       "map": "mp_crashsite3",
-      "log_file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\04-mp_crashsite3\\main\\maps\\01-mp_crashsite3.log",
+      "log_file": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\04-mp_crashsite3\\main\\maps\\01-mp_crashsite3.log",
       "valid": "true",
       "reason": "time_limit_or_rules",
       "elapsed": "891.5",

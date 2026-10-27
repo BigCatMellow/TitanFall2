@@ -150,7 +150,7 @@ filtering, native target identity, phase trimming and repeated-map/event-ID reus
 
 ```powershell
 node --preserve-symlinks --preserve-symlinks-main tests/played_session.test.mjs
-node --preserve-symlinks --preserve-symlinks-main tools/Analyze-PlayedWeaponSession.mjs --session C:/Users/james/northstar-crash-audit/Notes/weapon-notebook/sessions/20261026-201056-50da37bd --profile C:/Users/james/northstar-crash-audit/local-test-profile --out research/played-weapons-20261026
+node --preserve-symlinks --preserve-symlinks-main tools/Analyze-PlayedWeaponSession.mjs --session %USERPROFILE%/northstar-crash-audit/Notes/weapon-notebook/sessions/20261026-201056-50da37bd --profile %USERPROFILE%/northstar-crash-audit/local-test-profile --out research/played-weapons-20261026
 ```
 
 Native windows begin at the frame before the recorder's Playing context and end

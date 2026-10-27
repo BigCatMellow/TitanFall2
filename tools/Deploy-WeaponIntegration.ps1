@@ -1,6 +1,6 @@
 param([Parameter(Mandatory)][string]$RunDirectory,
-    [string]$NormalProfile='C:\Users\james\northstar-crash-audit\local-test-profile',
-    [string]$TestProfile='C:\Users\james\northstar-crash-audit\map-cycle-test-profile',
+    [string]$NormalProfile="$env:USERPROFILE\northstar-crash-audit\local-test-profile",
+    [string]$TestProfile="$env:USERPROFILE\northstar-crash-audit\map-cycle-test-profile",
     [string]$InitialBackup,[string]$RepositoryRoot=(Split-Path $PSScriptRoot))
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
@@ -37,8 +37,8 @@ try{
     foreach($p in $packages.packages){Copy-Package "$repo/$($p.name)" "$NormalProfile/mods/$($p.name)";$enabled[$p.name]=@{$p.version=$true}}
     $enabled|ConvertTo-Json -Depth 7|Set-Content "$NormalProfile/enabledmods.json"
     $text=Get-Content -Raw $cfg
-    $text=[regex]::Replace($text,'(?m)^(james_ads_trial|solo_weapon_balance|solo_weapon_balance_bots)\s+.*\r?\n?','')
-    $text+="`r`n// Runtime-verified v19 human weapon trial; bot balance opt-in stays off.`r`njames_ads_trial 1`r`nsolo_weapon_balance 1`r`nsolo_weapon_balance_bots 0`r`n"
+    $text=[regex]::Replace($text,'(?m)^(bt7274_ads_trial|solo_weapon_balance|solo_weapon_balance_bots)\s+.*\r?\n?','')
+    $text+="`r`n// Runtime-verified v19 human weapon trial; bot balance opt-in stays off.`r`nbt7274_ads_trial 1`r`nsolo_weapon_balance 1`r`nsolo_weapon_balance_bots 0`r`n"
     Set-Content $cfg $text
     foreach($p in $packages.packages){foreach($f in $p.files){if((Get-FileHash -LiteralPath "$NormalProfile/mods/$($p.name)/$($f.path)").Hash-ne$f.sha256){throw 'Installed package hash mismatch'}}}
     foreach($s in $saves){if((Get-FileHash -LiteralPath $s.path).Hash-ne$s.hash){throw 'A current normal save changed during installation'}}
@@ -52,9 +52,9 @@ try{
 }
 # Return the isolated harness to idle, retaining tested gameplay packages only.
 $testEnabled=Get-Content -Raw "$TestProfile/enabledmods.json"|ConvertFrom-Json -AsHashtable
-foreach($name in @('James.DecisionTest','James.WeaponIntegrationTest','James.MapSurvey','James.BotCycleTest','James.MenuPreviewTest')){if($testEnabled.ContainsKey($name)){foreach($version in @($testEnabled[$name].Keys)){$testEnabled[$name][$version]=$false}}}
+foreach($name in @('BT7274.DecisionTest','BT7274.WeaponIntegrationTest','BT7274.MapSurvey','BT7274.BotCycleTest','BT7274.MenuPreviewTest')){if($testEnabled.ContainsKey($name)){foreach($version in @($testEnabled[$name].Keys)){$testEnabled[$name][$version]=$false}}}
 $testEnabled|ConvertTo-Json -Depth 7|Set-Content "$TestProfile/enabledmods.json"
 Copy-Item "$InitialBackup/map-cycle-test-profile/server.cfg" "$TestProfile/mods/Northstar.CustomServers/mod/cfg/autoexec_ns_server.cfg" -Force
-Add-Content "$TestProfile/mods/Northstar.CustomServers/mod/cfg/autoexec_ns_server.cfg" "`r`njames_ads_trial 1`r`nsolo_weapon_balance 1`r`nsolo_weapon_balance_bots 0"
+Add-Content "$TestProfile/mods/Northstar.CustomServers/mod/cfg/autoexec_ns_server.cfg" "`r`nbt7274_ads_trial 1`r`nsolo_weapon_balance 1`r`nsolo_weapon_balance_bots 0"
 [ordered]@{state='deployed';time=(Get-Date).ToString('o');backup=$backup;normal_profile=$NormalProfile;native_sha256=$dllHash;packages=$packages.packages;normal_saves_unchanged=$saves.Count;isolated_harness_disabled=$true;human_ads_enabled=$true;human_balance_enabled=$true;bot_balance_enabled=$false;runtime_run=$RunDirectory}|ConvertTo-Json -Depth 9|Set-Content "$backup/deployment.json"
 [ordered]@{state='deployed';backup=$backup;native_sha256=$dllHash;normal_saves_unchanged=$saves.Count;human_ads_enabled=$true;human_balance_enabled=$true;bot_balance_enabled=$false}|ConvertTo-Json

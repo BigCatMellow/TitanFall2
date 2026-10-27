@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {analyzeNotes,parseNote} from '../tools/weapon-notes.mjs';
 const ctx={type:'WNOTE_CONTEXT',map:'mp_eden',mode:'normal_play',tick:'0.016667'};
 const hit=(id,t,hp,after,extra={})=>[
-  {type:'WNOTE_HIT',event:String(id),t:String(t),victim:'20',life:'1',attacker:'10',attacker_life:'1',akind:'human',vkind:'bot',atitan:'false',ateam:'2',vteam:'3',gun:'mp_weapon_rspn101',mods:'james_solo_reload',config:'false:true:false:true:true',hp:String(hp),max_hp:'100',range:'400',hitgroup:'2',crit_scale:'1',force:'false',avx:'0',avy:'0',vvx:'0',vvy:'0',...extra},
+  {type:'WNOTE_HIT',event:String(id),t:String(t),victim:'20',life:'1',attacker:'10',attacker_life:'1',akind:'human',vkind:'bot',atitan:'false',ateam:'2',vteam:'3',gun:'mp_weapon_rspn101',mods:'bt7274_solo_reload',config:'false:true:false:true:true',hp:String(hp),max_hp:'100',range:'400',hitgroup:'2',crit_scale:'1',force:'false',avx:'0',avy:'0',vvx:'0',vvy:'0',...extra},
   {type:'WNOTE_POST',event:String(id),t:String(t),victim:'20',life:'1',hp_after:String(after)}];
 const death=(id,t)=>({type:'WNOTE_DEATH',event:String(id),t:String(t),victim:'20',life:'1'});
 const clean=()=>[ctx,...hit(1,1,100,75),...hit(2,1.1,75,50),...hit(3,1.2,50,25),...hit(4,1.3,25,0),death(4,1.3)];
@@ -18,9 +18,9 @@ test('one-tick kills retain zero spans without inventing shots; logger errors ar
 test('overwritten same-frame records cannot qualify as a clean episode',()=>{const a=clean();a.splice(4,0,{type:'WNOTE_GAP',event:'2'});assert.ok(analyzeNotes(a).deaths[0].exclusions.includes('missing_post_damage'));const b=clean();b.splice(2,1);assert.equal(analyzeNotes(b).clean_health_episodes,0);});
 test('parser ignores unrelated/auth logs and preserves only structured fields',()=>{assert.equal(parseNote('token_url secret'),null);assert.equal(parseNote('stack print("WNOTE_DEATH t=1")'),null);assert.deepEqual(parseNote('[info] WNOTE_DEATH t=1 victim=20 life=1 event=2'),{type:'WNOTE_DEATH',t:'1',victim:'20',life:'1',event:'2'});});
 test('opt-in rounds fired give a per-gun pilot-hit fraction, never pooled across mods or maps',()=>{
-  const fire=(rounds,ads,extra={})=>({type:'WNOTE_FIRE',t:'2',owner:'10',life:'1',gun:'mp_weapon_rspn101',mods:'james_solo_reload',config:'false:true:false:true:true',rounds:String(rounds),ads_rounds:String(ads),zoom_known:'true',reloads:'0',reason:'interval',...extra});
+  const fire=(rounds,ads,extra={})=>({type:'WNOTE_FIRE',t:'2',owner:'10',life:'1',gun:'mp_weapon_rspn101',mods:'bt7274_solo_reload',config:'false:true:false:true:true',rounds:String(rounds),ads_rounds:String(ads),zoom_known:'true',reloads:'0',reason:'interval',...extra});
   const r=analyzeNotes([...clean(),fire(10,6),fire(6,0),fire(5,5,{mods:'other'})]);
-  const main=r.accuracy.find(g=>g.mods==='james_solo_reload');
+  const main=r.accuracy.find(g=>g.mods==='bt7274_solo_reload');
   assert.equal(main.rounds,16);assert.equal(main.pilot_hits,4);assert.equal(main.pilot_hit_fraction,0.25);assert.equal(main.ads_fraction,6/16);
   assert.equal(r.accuracy.find(g=>g.mods==='other').pilot_hits,0);
   const shotgun=analyzeNotes([ctx,fire(4,0,{gun:'mp_weapon_shotgun'})]).accuracy[0];assert.equal(shotgun.pilot_hit_fraction,null);

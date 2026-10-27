@@ -14,8 +14,8 @@
  M bp_ort/src/navmesh/navigation.rs
 ?? AGENTS.md
 ?? CRASH-FIX.md
-?? James.BotLifecycle/
-?? James.LocalPersistence/
+?? BT7274.BotLifecycle/
+?? BT7274.LocalPersistence/
 ?? MAP-CHANGE-FIX.md
 ?? MOTION-FIX.md
 ?? OCTBOTS-ASSESSMENT.md

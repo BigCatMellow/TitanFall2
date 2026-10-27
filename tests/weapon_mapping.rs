@@ -1,13 +1,13 @@
 //! Offline consistency checks; these do not replace a Northstar runtime test.
-const SCRIPT: &str = include_str!("../James.WeaponReload/mod/scripts/vscripts/james_weapon_reload.nut");
-const MOD_JSON: &str = include_str!("../James.WeaponReload/mod.json");
+const SCRIPT: &str = include_str!("../BT7274.WeaponReload/mod/scripts/vscripts/bt7274_weapon_reload.nut");
+const MOD_JSON: &str = include_str!("../BT7274.WeaponReload/mod.json");
 
 const WEAPONS: [(&str, &str); 5] = [
-    ("mp_weapon_g2", include_str!("../James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt")),
-    ("mp_weapon_alternator_smg", include_str!("../James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_alternator_smg.txt")),
-    ("mp_weapon_hemlok_smg", include_str!("../James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt")),
-    ("mp_weapon_rspn101", include_str!("../James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt")),
-    ("mp_weapon_car", include_str!("../James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt")),
+    ("mp_weapon_g2", include_str!("../BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt")),
+    ("mp_weapon_alternator_smg", include_str!("../BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_alternator_smg.txt")),
+    ("mp_weapon_hemlok_smg", include_str!("../BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt")),
+    ("mp_weapon_rspn101", include_str!("../BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt")),
+    ("mp_weapon_car", include_str!("../BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt")),
 ];
 
 #[test]
@@ -26,7 +26,7 @@ fn supported_class_names_match_weapon_overrides() {
 #[test]
 fn each_weapon_override_scales_all_reload_checkpoints() {
     for (name, kv) in WEAPONS {
-        assert!(kv.contains("james_solo_reload"), "missing mod definition: {name}");
+        assert!(kv.contains("bt7274_solo_reload"), "missing mod definition: {name}");
         for field in [
             "reload_time", "reload_time_late1", "reload_time_late2", "reload_time_late3",
             "reloadempty_time", "reloadempty_time_late1", "reloadempty_time_late2",

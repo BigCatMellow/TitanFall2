@@ -1,4 +1,4 @@
-param([string]$Profile='C:\Users\james\northstar-crash-audit\local-test-profile',
+param([string]$Profile="$env:USERPROFILE\northstar-crash-audit\local-test-profile",
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
     [Parameter(Mandatory)][string]$RunDirectory)
 $ErrorActionPreference='Stop'

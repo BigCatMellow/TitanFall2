@@ -13,7 +13,7 @@ launch, deployment, save edits or map-queue resume occurred.
 
 ## Human weapon changes already present
 
-[James.WeaponReload](../../James.WeaponReload/README.md) applies a 0.9 reload-time
+[BT7274.WeaponReload](../../BT7274.WeaponReload/README.md) applies a 0.9 reload-time
 multiplier to G2, Alternator, R-201 and CAR for the local solo human. These
 archived engine-setting measurements are seconds without Speedloader:
 
@@ -35,7 +35,7 @@ Its injected transferred-CAR modifier-removal subcase was **not exercised**
 
 ## Human abilities already present
 
-[James.TacticalRecharge](../../James.TacticalRecharge/README.md) halves recharge
+[BT7274.TacticalRecharge](../../BT7274.TacticalRecharge/README.md) halves recharge
 time for Grapple, Cloak, Stim, Holo Pilot, Phase Shift, Pulse Blade and A-Wall.
 It doubles refill rates and halves refill-start delays. Duration, effect,
 range, charge count and cost are unchanged. This halves the recharge portion,

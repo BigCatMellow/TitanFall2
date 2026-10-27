@@ -20,7 +20,7 @@ was restored afterward, without restoring any saved data. Shutdown now waits
 for the owned process to disappear before checking restoration.
 
 A new subcohort disables named human loadout restoration for the inactive
-survey observer only (`james_local_loadouts 0`). It passed Homestead startup with
+survey observer only (`bt7274_local_loadouts 0`). It passed Homestead startup with
 16 bots, 8v8, observer dead, and advancing scores. This supports isolating the
 observer/persistence startup path, but does not prove a fix to normal play.
 Normal profile files/settings remain unchanged in this follow-up; all three

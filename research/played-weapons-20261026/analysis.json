@@ -146,7 +146,7 @@
           "gun": "mp_weapon_rspn101",
           "attacker_kind": "human",
           "victim_kind": "bot",
-          "mods": "james_solo_reload,redline_sight,extended_ammo,pas_run_and_gun,pro_screen",
+          "mods": "bt7274_solo_reload,redline_sight,extended_ammo,pas_run_and_gun,pro_screen",
           "config": "true:true:false:true:true",
           "range_bucket": "1000-1999u",
           "hitgroups": [
@@ -167,7 +167,7 @@
           "gun": "mp_weapon_rspn101",
           "attacker_kind": "human",
           "victim_kind": "bot",
-          "mods": "james_solo_reload,redline_sight,extended_ammo,pas_run_and_gun,pro_screen",
+          "mods": "bt7274_solo_reload,redline_sight,extended_ammo,pas_run_and_gun,pro_screen",
           "config": "true:true:false:true:true",
           "range_bucket": "0-499u",
           "hitgroups": [
@@ -189,7 +189,7 @@
           "gun": "mp_weapon_rspn101",
           "attacker_kind": "human",
           "victim_kind": "bot",
-          "mods": "james_solo_reload,redline_sight,extended_ammo,pas_run_and_gun,pro_screen",
+          "mods": "bt7274_solo_reload,redline_sight,extended_ammo,pas_run_and_gun,pro_screen",
           "config": "true:true:false:true:true",
           "range_bucket": "500-999u",
           "hitgroups": [
@@ -216,7 +216,7 @@
           "paired_health_loss": 1117,
           "damage_event_range_median": 957.587,
           "actual_mod_stacks": [
-            "james_solo_reload,redline_sight,extended_ammo,pas_run_and_gun,pro_screen"
+            "bt7274_solo_reload,redline_sight,extended_ammo,pas_run_and_gun,pro_screen"
           ]
         },
         {
@@ -303,7 +303,7 @@
           "gun": "mp_weapon_hemlok_smg",
           "attacker_kind": "human",
           "victim_kind": "bot",
-          "mods": "solo_role_balance_v1,james_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
           "config": "true:true:false:true:true",
           "range_bucket": "1000-1999u",
           "hitgroups": [
@@ -325,7 +325,7 @@
           "gun": "mp_weapon_hemlok_smg",
           "attacker_kind": "human",
           "victim_kind": "bot",
-          "mods": "solo_role_balance_v1,james_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
           "config": "true:true:false:true:true",
           "range_bucket": "2000u+",
           "hitgroups": [
@@ -349,7 +349,7 @@
           "gun": "mp_weapon_hemlok_smg",
           "attacker_kind": "human",
           "victim_kind": "bot",
-          "mods": "solo_role_balance_v1,james_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
           "config": "true:true:false:true:true",
           "range_bucket": "1000-1999u",
           "hitgroups": [
@@ -371,7 +371,7 @@
           "gun": "mp_weapon_hemlok_smg",
           "attacker_kind": "human",
           "victim_kind": "bot",
-          "mods": "solo_role_balance_v1,james_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
           "config": "true:true:false:true:true",
           "range_bucket": "1000-1999u",
           "hitgroups": [
@@ -392,7 +392,7 @@
           "gun": "mp_weapon_hemlok_smg",
           "attacker_kind": "human",
           "victim_kind": "bot",
-          "mods": "solo_role_balance_v1,james_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
           "config": "true:true:false:true:true",
           "range_bucket": "0-499u",
           "hitgroups": [
@@ -414,7 +414,7 @@
           "gun": "mp_weapon_hemlok_smg",
           "attacker_kind": "human",
           "victim_kind": "bot",
-          "mods": "solo_role_balance_v1,james_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
           "config": "true:true:false:true:true",
           "range_bucket": "1000-1999u",
           "hitgroups": [
@@ -441,7 +441,7 @@
           "paired_health_loss": 1703,
           "damage_event_range_median": 1454.91,
           "actual_mod_stacks": [
-            "solo_role_balance_v1,james_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload"
+            "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload"
           ]
         },
         {

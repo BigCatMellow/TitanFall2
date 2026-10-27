@@ -5,7 +5,7 @@ and `summary.json` before changing anything. Check the running executable,
 its profile, the newest log's build ID, and installed DLL hashes. Old reports
 are historical observations, not proof of the current installation.
 
-## What James asked for
+## What BT-7274 asked for
 
 1. Improve organization: reduce dogpiling, target churn, and teammate crowding.
 2. Observe actual bot behavior more closely, not merely successful bot joins.
@@ -18,7 +18,7 @@ deployment/test status is in CURRENT-SETUP.md.
 
 ## Source and build
 
-Checkout: `C:\Users\james\bp-ort-fork`. Upstream:
+Checkout: `%USERPROFILE%\bp-ort-fork`. Upstream:
 `https://github.com/catornot/bp-ort.git`, base HEAD `2d0a559`.
 Changes are local and uncommitted; no GitHub fork/PR has been published.
 Preserve existing edits. The source archive plus working checkout are both
@@ -29,9 +29,9 @@ PowerShell build:
 ```powershell
 $env:CARGO_PROFILE_DISTRIBUTION_STRIP='none'
 $env:CARGO_PROFILE_DISTRIBUTION_DEBUG='2'
-$env:PATH='C:\Users\james\Downloads\llvm-mingw-20261020-ucrt-x86_64\llvm-mingw-20261020-ucrt-x86_64\bin;'+$env:PATH
-Set-Location 'C:\Users\james\bp-ort-fork'
-& 'C:\Users\james\.cargo\bin\cargo.exe' +nightly-2025-09-11-x86_64-pc-windows-gnu build -p bp_ort --profile distribution --locked
+$env:PATH='%USERPROFILE%\Downloads\llvm-mingw-20261020-ucrt-x86_64\llvm-mingw-20261020-ucrt-x86_64\bin;'+$env:PATH
+Set-Location '%USERPROFILE%\bp-ort-fork'
+& '%USERPROFILE%\.cargo\bin\cargo.exe' +nightly-2025-09-11-x86_64-pc-windows-gnu build -p bp_ort --profile distribution --locked
 ```
 
 Output: `target\x86_64-pc-windows-gnu\distribution\bp_ort.dll`.

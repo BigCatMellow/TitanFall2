@@ -1,0 +1,17 @@
+WeaponData
+{
+    Mods
+    {
+        bt7274_solo_reload
+        {
+            reload_time "*0.9"
+            reload_time_late1 "*0.9"
+            reload_time_late2 "*0.9"
+            reload_time_late3 "*0.9"
+            reloadempty_time "*0.9"
+            reloadempty_time_late1 "*0.9"
+            reloadempty_time_late2 "*0.9"
+            reloadempty_time_late3 "*0.9"
+        }
+    }
+}

@@ -1,10 +1,10 @@
 [
   {
-    "Path": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\plugins\\bp_ort.dll",
+    "Path": "%USERPROFILE%\\northstar-crash-audit\\local-test-profile\\plugins\\bp_ort.dll",
     "Hash": "2A68A1CE0C0AB6294DE62C7E2742BE064C7ED086111C8251F1822FCCD22FA66C"
   },
   {
-    "Path": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\mods\\James.TacticalRecharge\\mod\\scripts\\vscripts\\james_tactical_recharge.nut",
+    "Path": "%USERPROFILE%\\northstar-crash-audit\\local-test-profile\\mods\\BT7274.TacticalRecharge\\mod\\scripts\\vscripts\\bt7274_tactical_recharge.nut",
     "Hash": "0D4CD082B008F2DA85FCFAF7E2C79BA4A950270ED03DEC3DCE42B55915164513"
   }
 ]

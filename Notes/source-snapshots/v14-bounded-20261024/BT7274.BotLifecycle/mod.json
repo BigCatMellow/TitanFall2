@@ -1,0 +1,14 @@
+{
+  "Name": "BT7274.BotLifecycle",
+  "Description": "Waits for the match intro to finish before the local bot manager adds players.",
+  "Version": "1.0.0",
+  "LoadPriority": 10,
+  "Scripts": [
+    {
+      "Path": "bt7274_bot_lifecycle.nut",
+      "RunOn": "SERVER && MP",
+      "ServerCallback": { "After": "BT7274BotLifecycle_Init" }
+    }
+  ],
+  "PluginDependencies": ["BP_ORT"]
+}

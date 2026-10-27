@@ -1,5 +1,5 @@
 {
-  "source_log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-24 15-29-16.txt",
+  "source_log": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-24 15-29-16.txt",
   "exported": "2026-10-24T15:32:07.1302851-04:00",
   "structured": true,
   "build_line": "[2026-10-24] [15:29:16] [BP-ORT000] [info] local build: route-recovery-v14 (bounded failed-goal memory and breadcrumb retreat; v12 combat)",

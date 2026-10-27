@@ -19,7 +19,7 @@
     "engage_target_over_5000_above": 138,
     "extreme_engage_percent": 8.49,
     "unique_extreme_targets": 41,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main\\reports\\01-mp_black_water_canal\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main\\reports\\01-mp_black_water_canal\\movement"
   },
   {
     "map": "mp_colony02",
@@ -40,7 +40,7 @@
     "engage_target_over_5000_above": 98,
     "extreme_engage_percent": 7.11,
     "unique_extreme_targets": 33,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\02-mp_colony02\\main\\reports\\01-mp_colony02\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\02-mp_colony02\\main\\reports\\01-mp_colony02\\movement"
   },
   {
     "map": "mp_complex3",
@@ -61,7 +61,7 @@
     "engage_target_over_5000_above": 0,
     "extreme_engage_percent": 0.0,
     "unique_extreme_targets": 0,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3\\main\\reports\\01-mp_complex3\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3\\main\\reports\\01-mp_complex3\\movement"
   },
   {
     "map": "mp_crashsite3",
@@ -82,7 +82,7 @@
     "engage_target_over_5000_above": 2,
     "extreme_engage_percent": 0.14,
     "unique_extreme_targets": 1,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\04-mp_crashsite3\\main\\reports\\01-mp_crashsite3\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\04-mp_crashsite3\\main\\reports\\01-mp_crashsite3\\movement"
   },
   {
     "map": "mp_drydock",
@@ -106,7 +106,7 @@
     "engage_target_over_5000_above": 24,
     "extreme_engage_percent": 1.75,
     "unique_extreme_targets": 14,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\05-mp_drydock\\main\\reports\\01-mp_drydock\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\05-mp_drydock\\main\\reports\\01-mp_drydock\\movement"
   },
   {
     "map": "mp_forwardbase_kodai",
@@ -130,7 +130,7 @@
     "engage_target_over_5000_above": 38,
     "extreme_engage_percent": 3.3,
     "unique_extreme_targets": 14,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\06-mp_forwardbase_kodai\\main\\reports\\01-mp_forwardbase_kodai\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\06-mp_forwardbase_kodai\\main\\reports\\01-mp_forwardbase_kodai\\movement"
   },
   {
     "map": "mp_eden",
@@ -162,7 +162,7 @@
     "engage_target_over_5000_above": 86,
     "extreme_engage_percent": 7.0,
     "unique_extreme_targets": 31,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\01-mp_eden\\main\\reports\\01-mp_eden\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\01-mp_eden\\main\\reports\\01-mp_eden\\movement"
   },
   {
     "map": "mp_glitch",
@@ -187,7 +187,7 @@
     "engage_target_over_5000_above": 4,
     "extreme_engage_percent": 0.31,
     "unique_extreme_targets": 4,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\02-mp_glitch\\main\\reports\\01-mp_glitch\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\02-mp_glitch\\main\\reports\\01-mp_glitch\\movement"
   },
   {
     "map": "mp_angel_city",
@@ -208,7 +208,7 @@
     "engage_target_over_5000_above": 102,
     "extreme_engage_percent": 6.82,
     "unique_extreme_targets": 34,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main\\reports\\01-mp_angel_city\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main\\reports\\01-mp_angel_city\\movement"
   },
   {
     "map": "mp_eden",
@@ -235,7 +235,7 @@
     "engage_target_over_5000_above": 87,
     "extreme_engage_percent": 7.29,
     "unique_extreme_targets": 27,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915\\main\\reports\\01-mp_eden\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915\\main\\reports\\01-mp_eden\\movement"
   },
   {
     "map": "mp_lf_meadow",
@@ -256,6 +256,6 @@
     "engage_target_over_5000_above": 0,
     "extreme_engage_percent": 0.0,
     "unique_extreme_targets": 0,
-    "movement_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\20261025-000402\\main\\reports\\01-mp_lf_meadow\\movement"
+    "movement_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\20261025-000402\\main\\reports\\01-mp_lf_meadow\\movement"
   }
 ]

@@ -61,7 +61,7 @@ mod tests {
     }
     #[test]
     fn replacing_a_snapshot_retains_a_previous_backup() {
-        let root=std::env::temp_dir().join(format!("james-presets-{}",std::process::id()));
+        let root=std::env::temp_dir().join(format!("bt7274-presets-{}",std::process::id()));
         let path=root.join("12345.bin");
         atomic_write(&path,b"first").unwrap(); atomic_write(&path,b"second").unwrap();
         assert_eq!(fs::read(&path).unwrap(),b"second");

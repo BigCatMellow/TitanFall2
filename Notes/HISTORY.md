@@ -46,7 +46,7 @@ nodes, and reduced repeated recovery jumping. Eleven regression tests passed.
 
 Raised manager max/target to 16 total players (one human, 15 bots). The solo
 launcher explicitly requests the 16-player playlist cap. Fifteen bot joins,
-movement, and combat were observed; James reported the result was great.
+movement, and combat were observed; BT-7274 reported the result was great.
 The code's 32-client ceiling has not been stress-tested as a solo match.
 
 ## Glitch round reviewed on 2026-10-24
@@ -83,7 +83,7 @@ match was opened for a third-map check.
 The user reported Pilot/Titan presets disappearing between solo instances.
 The direct local connection uses insecure authentication, whose core
 persistence-write path has no disk-save implementation. Added the Squirrel
-James.LocalPersistence 1.1.0 add-on using named persistent fields and Safe IO.
+BT7274.LocalPersistence 1.1.0 add-on using named persistent fields and Safe IO.
 It saves edits and changed fields on a one-second poll, restores on connect,
 and retains a previous snapshot. Empty enum values use stock helper empty
 strings so the JSON encoder does not drop them. The v12 bot DLL and chosen
@@ -123,7 +123,7 @@ Original real saves/add-on were backed up first. See PERSISTENCE-REPAIR-1.2.md.
 
 ## 2026-10-24 — deferred Hide and Seek issue
 
-James reports bots do not seem to work with Hide and Seek. Recorded as an
+BT-7274 reports bots do not seem to work with Hide and Seek. Recorded as an
 open compatibility issue for future investigation; explicitly not urgent.
 No reproduction/cause is confirmed and no game settings or code were changed.
 
@@ -167,7 +167,7 @@ saved equipment were unchanged. See PREVIEW-REPAIR-1.2.1.md.
 ## 2026-10-24 — half pilot tactical recharge
 
 User changed the requested recharge reduction from 30% to 50% before
-installation. Added James.TacticalRecharge 1.0.0 as a separate script/KV mod
+installation. Added BT7274.TacticalRecharge 1.0.0 as a separate script/KV mod
 for the local solo human's seven tacticals. Isolated actual loadout tests
 passed for all seven with Power Cell; Grapple refill measured 24.7 -> 12.4
 seconds. Other six refill rates doubled, delays halved, effects/ammo and
@@ -182,7 +182,7 @@ flag; video settings were set to fullscreen without changing resolution.
 
 ## 2026-10-24 — modest human weapon reload improvement
 
-James approved the weapon-review proposal. Added separate James.WeaponReload
+BT-7274 approved the weapon-review proposal. Added separate BT7274.WeaponReload
 1.0.0: G2/Alternator/R-201/CAR reload times multiplied by 0.9, human-only, multiplicative
 with Speedloader. No damage, fire rate, recoil, spread, magazine or handling
 change. Eight actual runtime timing cases and 15-bot exclusion passed;
@@ -194,7 +194,7 @@ measured timings, limitations, backups and disabling.
 
 ## 2026-10-24 — pilot combat decisions v16
 
-James chose combat decisions next. Backed up all working source and both
+BT-7274 chose combat decisions next. Backed up all working source and both
 v15 DLLs/configs/saves, then added optional weapon-range positioning,
 trace-checked brief retreats, ammo-aware reload timing and a corrected
 pilot melee distance formula. Preserved navigation/detour fixes, Titan
@@ -217,7 +217,7 @@ No DLL/config/save changes. Fresh replay and joined analysis are archived.
 
 ## 2026-10-25 — unattended map survey started
 
-James authorized letting bots play varied maps to a200-kill target. Added
+BT-7274 authorized letting bots play varied maps to a200-kill target. Added
 an isolated script harness and hidden watchdog, preserving the v16 native
 build. Two-map short-score validation passed; corrected spectator delayed
 respawn handling for the full run. Launched eight maps with16 bots,8v8 plus
@@ -346,10 +346,10 @@ recording remains future work. Diagnosticv17 candidate remains NOT DEPLOYED;
 source checkout/target build are candidate, installed profiles remainv16.
 
 2026-10-25 project migration: canonical source/research repo is now
-C:\Users\james\northstar-crash-audit\TitanFall2-project,
+%USERPROFILE%\northstar-crash-audit\TitanFall2-project,
 https://github.com/BigCatMellow/TitanFall2 (public). Upstream330commits preserved;
 initial local-project import c4145bc426758ab2453930054ea856e12534c531 pushed and
-remote-verified. Source, James add-ons, authored test harnesses, notes, expanded
+remote-verified. Source, BT-7274 add-ons, authored test harnesses, notes, expanded
 historical source, derived data/replays/plots and108 sanitized compressed logs
 included. Private saves/raw buffers, installed game/third-party packages and
 build/dump binaries stay local; import manifest records inclusions/exclusions.

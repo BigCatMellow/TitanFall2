@@ -5,8 +5,8 @@ set "NS_SOLO_PROFILE=%~dp0local-test-profile"
 
 if not exist "%NS_GAME_DIR%\NorthstarLauncher.exe" goto missing_game
 if not exist "%NS_SOLO_PROFILE%\plugins\bp_ort.dll" goto missing_profile
-if not exist "%NS_SOLO_PROFILE%\mods\James.BotLifecycle\mod.json" goto missing_profile
-if not exist "%NS_SOLO_PROFILE%\mods\James.LocalPersistence\mod.json" goto missing_profile
+if not exist "%NS_SOLO_PROFILE%\mods\BT7274.BotLifecycle\mod.json" goto missing_profile
+if not exist "%NS_SOLO_PROFILE%\mods\BT7274.LocalPersistence\mod.json" goto missing_profile
 
 if /I "%~1"=="--check" goto checked
 

@@ -1,5 +1,5 @@
 {
-  "source_log": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\logs\\nslog2026-10-24 13-21-12.txt",
+  "source_log": "%USERPROFILE%\\northstar-crash-audit\\local-test-profile\\logs\\nslog2026-10-24 13-21-12.txt",
   "exported": "2026-10-24T14:03:31.5882186-04:00",
   "structured": false,
   "bot_joins": 45,

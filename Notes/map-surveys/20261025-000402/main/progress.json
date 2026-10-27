@@ -3,7 +3,7 @@
   "updated": "2026-10-25T00:43:21.7141812-04:00",
   "smoke": false,
   "pid": 201012,
-  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 00-23-04.txt",
+  "log": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 00-23-04.txt",
   "current": {
     "bots": "16",
     "index": "1",
@@ -21,7 +21,7 @@
       "reason": "score_limit",
       "militia": "200",
       "valid": "true",
-      "log_file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\20261025-000402\\main\\maps\\01-mp_lf_meadow.log",
+      "log_file": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\20261025-000402\\main\\maps\\01-mp_lf_meadow.log",
       "imc": "186",
       "elapsed": "682.5",
       "map": "mp_lf_meadow"

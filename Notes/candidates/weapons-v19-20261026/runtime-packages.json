@@ -5,7 +5,7 @@
   "packages": [
     {
       "version": "1.0.1",
-      "name": "James.WeaponReload",
+      "name": "BT7274.WeaponReload",
       "files": [
         {
           "sha256": "48900C03291C3DCFC3AE547C5907A0BD2214973A82FC5D425C41BF50850EFCB5",
@@ -33,13 +33,13 @@
         },
         {
           "sha256": "2A6C0B0888555DE4CCD822EDACDBECD027CD91AA9B597C89269F5E556C5974F6",
-          "path": "mod/scripts/vscripts/james_weapon_reload.nut"
+          "path": "mod/scripts/vscripts/bt7274_weapon_reload.nut"
         }
       ]
     },
     {
       "version": "0.2.0",
-      "name": "James.WeaponHandling",
+      "name": "BT7274.WeaponHandling",
       "files": [
         {
           "sha256": "5C8B1BD043BC45670F2B3E2CE6EC6857C607DD4EA17BB8CE139745C50825CADC",
@@ -55,7 +55,7 @@
         },
         {
           "sha256": "8EF3B490B75A294AA90FA50FA1C6DE0B03867047B86C37183C781BA708C18E13",
-          "path": "mod/scripts/vscripts/james_weapon_handling.nut"
+          "path": "mod/scripts/vscripts/bt7274_weapon_handling.nut"
         }
       ]
     },

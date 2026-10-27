@@ -9,7 +9,7 @@ See [current rollout](candidates/weapons-v19-20261026/README.md).
 The existing solo shortcut now starts the automatic text weapon notebook.
 See [recording and reference stats](weapon-notebook/README.md). Current saves
 are retained; no injector is enabled in normal play. Source checkout is
-`C:\Users\james\northstar-crash-audit\TitanFall2-project`.
+`%USERPROFILE%\northstar-crash-audit\TitanFall2-project`.
 The v16 details below are historical; use the current rollout/status for changes.
 
 ## Historical v16 status (October 24)
@@ -24,14 +24,14 @@ The v16 details below are historical; use the current rollout/status for changes
 - v11 SHA256:
   `DBE7301BFCAEF61E16165B3456D9F8EF851807DF2F64EDD768E2A9928EC63C48`.
 - Northstar core: 1.31.14. OctBots is not active.
-- James.WeaponReload 1.0.0 gives the local solo human 10% shorter normal/empty
+- BT7274.WeaponReload 1.0.0 gives the local solo human 10% shorter normal/empty
   reloads on G2, Alternator, R-201 and CAR, preserving Speedloader. Other
   weapon stats and bots are unchanged. Read WEAPON-RELOAD.md for tests/rollback.
-- Pilot tacticals: James.TacticalRecharge 1.0.0 gives the local human half
+- Pilot tacticals: BT7274.TacticalRecharge 1.0.0 gives the local human half
   normal recharge time on all seven tacticals. Power Cell is preserved;
   bots/Titans/ordnance and ability effects are unchanged. All seven passed
   isolated game tests. Read TACTICAL-RECHARGE.md for tests and rollback.
-- Solo Pilot/Titan loadouts now use the script-only James.LocalPersistence
+- Solo Pilot/Titan loadouts now use the script-only BT7274.LocalPersistence
   1.2.1 add-on (902 fields, private-lobby saving, cache-only CLIENT/UI refresh
   and basic XP retention). Read PREVIEW-REPAIR-1.2.1.md and PERSISTENCE-REPAIR-1.2.md.
   The separate tiny aim trial
@@ -44,17 +44,17 @@ The v16 details below are historical; use the current rollout/status for changes
 |---|---|
 | Game | `C:\Program Files (x86)\Steam\steamapps\common\Titanfall2` |
 | Regular profile | Game directory + `\R2Northstar` |
-| Everyday solo profile | `C:\Users\james\northstar-crash-audit\local-test-profile` |
-| Isolated test profile | `C:\Users\james\northstar-crash-audit\map-cycle-test-profile` |
-| Solo launcher | `C:\Users\james\northstar-crash-audit\Play-Solo-Bots.cmd` |
-| Desktop shortcut | `C:\Users\james\Desktop\Northstar - Solo Bots (8v8).lnk` |
-| Source checkout | `C:\Users\james\northstar-crash-audit\TitanFall2-project` |
+| Everyday solo profile | `%USERPROFILE%\northstar-crash-audit\local-test-profile` |
+| Isolated test profile | `%USERPROFILE%\northstar-crash-audit\map-cycle-test-profile` |
+| Solo launcher | `%USERPROFILE%\northstar-crash-audit\Play-Solo-Bots.cmd` |
+| Desktop shortcut | `%USERPROFILE%\Desktop\Northstar - Solo Bots (8v8).lnk` |
+| Source checkout | `%USERPROFILE%\northstar-crash-audit\TitanFall2-project` |
 | Session logs | Each profile's `logs` directory |
 | Before-v12 backup | This folder's `backups\v12-before` |
 
 ## User preferences and settings
 
-James wants lively solo battles, working Titan controls, moderate difficulty,
+BT-7274 wants lively solo battles, working Titan controls, moderate difficulty,
 and enough bots to fill the map. 8v8 was enjoyable and is the selected size.
 
 ```
@@ -71,7 +71,7 @@ bot_escape_recovery 1
 bot_combat_decisions 1
 ```
 
-Sixteen is the total player count: James plus 15 bots. The launcher explicitly
+Sixteen is the total player count: BT-7274 plus 15 bots. The launcher explicitly
 uses `-maxplayersplaylist` and `+setplaylistvaroverrides "max_players 16"`.
 Keep localhost binding `-ip 127.0.0.1 -port 37025`, public listing off, and the
 existing solo authentication settings. Normal solo matches return to lobby.
@@ -88,8 +88,8 @@ launcher started the solo profile; all 15 bots joined and BOT_MOTION showed
 0.78. The 902-field loadout save restored with zero menu-cache mismatches.
 Use desktop Northstar - Solo Bots (8v8). See LAUNCHING-SOLO.md.
 
-The `James.BotLifecycle` server mod enables bot joins after the match intro.
-The automated `James.BotCycleTest` harness belongs only in the isolated profile.
+The `BT7274.BotLifecycle` server mod enables bot joins after the match intro.
+The automated `BT7274.BotCycleTest` harness belongs only in the isolated profile.
 
 The v12 options are `bot_team_coordination 1` and `bot_telemetry_interval 2`.
 Their plugin defaults are zero. Coordination affects legacy pilot mode 6;
@@ -229,10 +229,10 @@ recording remains future work. Diagnosticv17 candidate remains NOT DEPLOYED;
 source checkout/target build are candidate, installed profiles remainv16.
 
 2026-10-25 project migration: canonical source/research repo is now
-C:\Users\james\northstar-crash-audit\TitanFall2-project,
+%USERPROFILE%\northstar-crash-audit\TitanFall2-project,
 https://github.com/BigCatMellow/TitanFall2 (public). Upstream330commits preserved;
 initial local-project import c4145bc426758ab2453930054ea856e12534c531 pushed and
-remote-verified. Source, James add-ons, authored test harnesses, notes, expanded
+remote-verified. Source, BT-7274 add-ons, authored test harnesses, notes, expanded
 historical source, derived data/replays/plots and108 sanitized compressed logs
 included. Private saves/raw buffers, installed game/third-party packages and
 build/dump binaries stay local; import manifest records inclusions/exclusions.
@@ -276,10 +276,10 @@ Offline analysis/tools may be pushed; game testing/map queue remain paused.
 2026-10-25 19:51 EDT — implementation, tests, deployment and survey restart.
 This entry supersedes the earlier runtime-pending/preflight notes above.
 
-Canonical source: C:\Users\james\northstar-crash-audit\TitanFall2-project.
+Canonical source: %USERPROFILE%\northstar-crash-audit\TitanFall2-project.
 Normal and working isolated now use decisions-v18-candidate native SHA256
 F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648.
-Final James.BotDecisions script SHA256
+Final BT7274.BotDecisions script SHA256
 30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78.
 All four new switches enabled: bot_navigation_context, bot_target_eligibility,
 bot_action_policy, bot_step_retry. Aim0.78, human+15bot8v8, existing human50%
@@ -297,11 +297,11 @@ One quick launch intentionally stopped for argument-ordering error; corrected.
 No native changes after the full suite. No damage/aim/cooldown rebalance here.
 
 Normal deployed19:48; fresh private backup:
-C:\Users\james\northstar-crash-audit\Notes\backups\before-v18-normal-deploy-20261025-194834.
+%USERPROFILE%\northstar-crash-audit\Notes\backups\before-v18-normal-deploy-20261025-194834.
 All3CURRENT normal save files hash-identical during/after deployment; all25files
 in LocalPersistence/TacticalRecharge/WeaponReload/BotLifecycle unchanged from
 initial backup. No old save restoration or ns_resetpersistence. Rollback only
-DLL/config/enabledmods; explicitly disable James.BotDecisions1.0.0 when using
+DLL/config/enabledmods; explicitly disable BT7274.BotDecisions1.0.0 when using
 v16 (absence from enabledmods may auto-enable it). Preserve current save_data.
 
 Startup correction: omitted profile Northstar.dll caused confirmed old-core
@@ -313,7 +313,7 @@ work removed. No base-game writes. Core version verified from actual logs.
 Dedicated startup attempts are invalid AI trials, not successful matches.
 
 New background survey batch:
-C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-all-maps-20261025-194900.
+%USERPROFILE%\northstar-crash-audit\Notes\map-surveys\decisions-v18-all-maps-20261025-194900.
 Runner PID313660, initial Kodai PID307088 (verify live; historical once exited).
 Read status.json/plan.json and parent current-v18-session.json.22maps,16bots
 8v8+inactive observer,200team-point goal,15mincap, frozen DLL/core/bridge hashes,
@@ -344,9 +344,9 @@ confirming all games exited, idle cfg/enabledmods/survey script restored and
 newly installed survey manifest moved aside. No save restoration. Second failed
 attempt restored profile correctly. Runner now waits for owned exit and has
 ResumeBatch support with matching native/bridge/core hashes and completed-map skip.
-New ObserverDefaults switch disables james_local_loadouts only for the inactive
+New ObserverDefaults switch disables bt7274_local_loadouts only for the inactive
 survey observer; regular play profile is unchanged. New subcohort:
-C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-observer-defaults-20261025-204736.
+%USERPROFILE%\northstar-crash-audit\Notes\map-surveys\decisions-v18-observer-defaults-20261025-204736.
 RunnerPID316532; HomesteadPID318188 (verify live).20maps remain including Homestead.
 Homestead startup passed,16bots8v8, observer dead, scores advancing at20:49.
 One successful control supports observer/persistence isolation, not a complete
@@ -358,7 +358,7 @@ Reports and sanitized aggregate progress in candidate SURVEY-PROGRESS.md/json.
 Homestead finished195-192 (IMC-Militia),15min, valid, no runtime errors detected;
 third completed v18 map. Old observer-defaults queue stopped_by_request and
 restored idle files cleanly. Preserve all3prior200-goal results separately.
-New supervisor C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-overnight75-20261025,
+New supervisor %USERPROFILE%\northstar-crash-audit\Notes\map-surveys\decisions-v18-overnight75-20261025,
 PID320516 (verify live).19remaining maps, goal75perteam,15minfallback,16bots8v8
 plus inactive observer, same frozen native/core/bridge/aim. Relic first,
 child runner322112/game321636; actual MAP_SURVEY_BEGIN confirms engine75 and
@@ -391,7 +391,7 @@ runtime errors, but Stop-Process raced its natural quit, threw ProcessNotFound,
 and prevented final cleanup/status/result persistence. Original failed child
 state/stderr and overnight stopped_error are preserved; do not rewrite history
 as overnight completion. Recovered Traffic as a separate derived record:
-C:\Users\james\northstar-crash-audit\Notes\map-surveys\traffic-recovered-20261026-121941.
+%USERPROFILE%\northstar-crash-audit\Notes\map-surveys\traffic-recovered-20261026-121941.
 Recovery backup survey-cleanup-recovery-20261026-121941 includes CURRENT normal
 and isolated saves plus prior files; only idle config/enabledmods/harness restored,
 no saved data restored. Traffic reports regenerated from the original clean log.
@@ -400,7 +400,7 @@ argument/name checks and treats an already-exited handle as successful shutdown.
 Eight regression fixtures cover the exact race/ownership/failure cases. Worker
 persists result before cleanup and always records cleanup/restoration failures.
 
-Final supervisor C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-last-maps-20261026,
+Final supervisor %USERPROFILE%\northstar-crash-audit\Notes\map-surveys\decisions-v18-last-maps-20261026,
 request last-maps-request-20261026.json. Read20completed records; ran only UMA
 (75-67,264.6s) and Coliseum (9-75,108.3s), finished12:30:31EDT with statecomplete,
 zero failed attempts/report errors.22unique supported maps complete:3goal200,
@@ -440,12 +440,12 @@ Native adds5standard profiles (Alternator/Mastiff/Devotion/B3Wingman/P2016),
 Existing controller47058decisions/50000commands matchv16.46Rust/9suites and
 17Node weapon/role checks pass; native distribution build passes.
 
-Installed:James.WeaponReload1.0.1,James.WeaponHandling0.2.0,Solo.WeaponBalance0.1.0.
+Installed:BT7274.WeaponReload1.0.1,BT7274.WeaponHandling0.2.0,Solo.WeaponBalance0.1.0.
 Human-only trial:Flatline20%less ADS recoil;Volt25%less ADS recoil;R9730%less hip
 spread buildup/cap;Spitfire20%lower ADS movement scale;Flatline/G2ADS times0.75.
 Actual Alternator now reload0.9 (2.30->2.07normal,2.70->2.43empty), preserving
 Volt/G2/R201/CAR existing0.9. Speedloader composition0.63 and attachments checked.
-Normal convars james_ads_trial1,solo_weapon_balance1,solo_weapon_balance_bots0.
+Normal convars bt7274_ads_trial1,solo_weapon_balance1,solo_weapon_balance_bots0.
 8v8/aim0.78/human tactical0.5/damage/RPM/magazines preserved. No default bot
 loadout or bot aim buff. Source add-on defaults stayOFF; explicit normal opt-in.
 

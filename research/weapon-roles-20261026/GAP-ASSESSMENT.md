@@ -11,7 +11,7 @@ This is a follow-up to [the 30-weapon role review](FINDINGS.md), using its [pinn
 
 ## Evidence convention
 
-- **REFERENCE-VERIFIED:** a direct field in the pinned weapon script snapshot (not necessarily active in James's current profile).
+- **REFERENCE-VERIFIED:** a direct field in the pinned weapon script snapshot (not necessarily active in BT-7274's current profile).
 - **CALCULATED:** a transparent arithmetic comparison from those fields, under stated assumptions.
 - **HYPOTHESIS:** a possible violation of the intended weapon role; a test target, **not** a finding of poor balance.
 - **UNKNOWN:** requires the actual game, attachment/mod stack, recoil/crosshair behavior, bot weapon implementation and/or user feedback.

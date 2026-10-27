@@ -1,6 +1,6 @@
 # Northstar bot project — start here
 
-This folder is the project notebook and recovery kit for James's solo
+This folder is the project notebook and recovery kit for BT-7274's solo
 Titanfall 2 / Northstar bots. Everything here stays on this computer.
 
 - [Current setup and build status](CURRENT-SETUP.md)
@@ -19,7 +19,7 @@ its replay. Reports are saved in `sessions`, previous working files in
 
 To resume later, tell the assistant:
 
-> Read C:\Users\james\northstar-crash-audit\Notes\HANDOFF.md and
+> Read %USERPROFILE%\northstar-crash-audit\Notes\HANDOFF.md and
 > CURRENT-SETUP.md, then continue the Northstar bot project.
 
-The live source checkout is `C:\Users\james\bp-ort-fork`.
+The live source checkout is `%USERPROFILE%\bp-ort-fork`.

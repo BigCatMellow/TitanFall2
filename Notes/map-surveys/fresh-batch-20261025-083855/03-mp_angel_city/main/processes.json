@@ -1,6 +1,6 @@
 {
   "started": "2026-10-25T09:12:36.1627050-04:00",
-  "run": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main",
+  "run": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main",
   "game_pid": 246452,
   "watcher_pid": 246428
 }

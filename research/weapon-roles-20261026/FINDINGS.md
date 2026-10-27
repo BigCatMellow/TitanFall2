@@ -1,6 +1,6 @@
 # Titanfall 2 pilot weapon role and balance review — 2026-10-26
 
-**Decision:** do not change weapon damage or fire rate across the board. The available evidence is sufficient to map roles and isolate test priorities, but **not** to claim a weapon needs a numeric buff or nerf in James's installed game.
+**Decision:** do not change weapon damage or fire rate across the board. The available evidence is sufficient to map roles and isolate test priorities, but **not** to claim a weapon needs a numeric buff or nerf in BT-7274's installed game.
 
 **Targeted follow-up:** [Which specific roles may be failing, and what evidence would justify a weapon-specific adjustment?](GAP-ASSESSMENT.md). It distinguishes reference facts, arithmetic, hypotheses and unknown gameplay outcomes.
 

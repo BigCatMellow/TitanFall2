@@ -1,0 +1,15 @@
+{
+  "Name": "BT7274.TacticalProbe",
+  "Description": "Isolated read-only tactical definition probe.",
+  "Version": "0.0.1",
+  "LoadPriority": 50,
+  "Scripts": [
+    {
+      "Path": "bt7274_tactical_probe.nut",
+      "RunOn": "SERVER && MP",
+      "ServerCallback": {
+        "After": "BT7274TacticalProbe_Init"
+      }
+    }
+  ]
+}

@@ -19,16 +19,16 @@ Updated 2026-10-24. Deployment status must be checked here before further edits.
 |---|---|
 | Game | `C:\Program Files (x86)\Steam\steamapps\common\Titanfall2` |
 | Regular profile | Game directory + `\R2Northstar` |
-| Everyday solo profile | `C:\Users\james\northstar-crash-audit\local-test-profile` |
-| Isolated test profile | `C:\Users\james\northstar-crash-audit\map-cycle-test-profile` |
-| Solo launcher | `C:\Users\james\northstar-crash-audit\Play-Solo-Bots.cmd` |
-| Source checkout | `C:\Users\james\bp-ort-fork` |
+| Everyday solo profile | `%USERPROFILE%\northstar-crash-audit\local-test-profile` |
+| Isolated test profile | `%USERPROFILE%\northstar-crash-audit\map-cycle-test-profile` |
+| Solo launcher | `%USERPROFILE%\northstar-crash-audit\Play-Solo-Bots.cmd` |
+| Source checkout | `%USERPROFILE%\bp-ort-fork` |
 | Session logs | Each profile's `logs` directory |
 | Before-v12 backup | This folder's `backups\v12-before` |
 
 ## User preferences and settings
 
-James wants lively solo battles, working Titan controls, moderate difficulty,
+BT-7274 wants lively solo battles, working Titan controls, moderate difficulty,
 and enough bots to fill the map. 8v8 was enjoyable and is the selected size.
 
 ```
@@ -43,13 +43,13 @@ bot_team_coordination 1
 bot_telemetry_interval 2
 ```
 
-Sixteen is the total player count: James plus 15 bots. The launcher explicitly
+Sixteen is the total player count: BT-7274 plus 15 bots. The launcher explicitly
 uses `-maxplayersplaylist` and `+setplaylistvaroverrides "max_players 16"`.
 Keep localhost binding `-ip 127.0.0.1 -port 37025`, public listing off, and the
 existing solo authentication settings. Normal solo matches return to lobby.
 
-The `James.BotLifecycle` server mod enables bot joins after the match intro.
-The automated `James.BotCycleTest` harness belongs only in the isolated profile.
+The `BT7274.BotLifecycle` server mod enables bot joins after the match intro.
+The automated `BT7274.BotCycleTest` harness belongs only in the isolated profile.
 
 The v12 options are `bot_team_coordination 1` and `bot_telemetry_interval 2`.
 Their plugin defaults are zero. Coordination affects legacy pilot mode 6;

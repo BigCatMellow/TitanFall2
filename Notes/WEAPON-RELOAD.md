@@ -8,23 +8,23 @@
 > adds the Alternator, but requires a fresh isolated engine validation before
 > deployment. The original contemporaneous record below is preserved.
 
-Scope: James approved the modest weapon changes proposed in the read-only
-review. Implemented as James.WeaponReload 1.0.0: 10% shorter reloads on G2,
+Scope: BT-7274 approved the modest weapon changes proposed in the read-only
+review. Implemented as BT7274.WeaponReload 1.0.0: 10% shorter reloads on G2,
 Alternator, R-201 and CAR for the local insecure-solo human. Existing
 Speedloader stacks multiplicatively: 0.7 x 0.9 = 0.63 of stock reload time.
 Normal, empty and remaining reload checkpoint timings are scaled by0.9.
 Damage, fire rate, recoil, spread, handling, magazine and other guns unchanged.
 
-Source: C:\Users\james\bp-ort-fork\James.WeaponReload
-The named james_solo_reload weapon mod is added after respawn/loadout or
+Source: %USERPROFILE%\bp-ort-fork\BT7274.WeaponReload
+The named bt7274_solo_reload weapon mod is added after respawn/loadout or
 inventory change; existing attachment arrays are preserved. Repeated
 application cannot stack. For bots/other owners the modifier is removed on
 inventory change, covering a transferred human weapon. The addon has no
 persistent loadout writes. It does not edit native bot code or cooldown code.
 
-Disable: server convar james_weapon_reload 0 then respawn/reselect loadout.
+Disable: server convar bt7274_weapon_reload 0 then respawn/reselect loadout.
 For permanent disable add that setting to solo autoexec, or close Northstar
-and move James.WeaponReload outside the solo profile's mods directory.
+and move BT7274.WeaponReload outside the solo profile's mods directory.
 
 Backup: Notes/backups/before-weapon-reload-20261024-220310 (real saves,
 launcher, config, original test harness and hashes of unchanged components).
@@ -61,14 +61,14 @@ All 8 normal/empty/checkpoint timing fields matched 0.9 of baseline. Tests
 verified removal restores baseline, repeated application does not stack,
 Speedloader/extended-mag attachments survive, damage/fire rate/air spread/
 magazine are unchanged, and applying the modifier preserves loaded ammo.
-15 bots had no james_solo_reload modifier. The optional forced bot-strip
+15 bots had no bt7274_solo_reload modifier. The optional forced bot-strip
 branch was not reached because no bot held CAR; ownership cleanup is
 implemented through OnPlayerInventoryChanged but that transfer scenario was
 not separately exercised. Tests read native runtime settings, not recorded
 animation durations. Successful run had no script/compile/error entries.
 
-Test-only James.ReloadTest moved to Notes/tests/weapon-reload-20261024;
-results.txt beside it. Only James.WeaponReload was copied into the real
+Test-only BT7274.ReloadTest moved to Notes/tests/weapon-reload-20261024;
+results.txt beside it. Only BT7274.WeaponReload was copied into the real
 solo profile. Installed files hash-match tested source. Real save hash still
 matched pre-change backup immediately before the 22:14:19 normal launch.
 Native v15 DLL remains 2A68A1CE0C0AB6294DE62C7E2742BE064C7ED086111C8251F1822FCCD22FA66C.

@@ -12,7 +12,7 @@ $priority=@('mp_forwardbase_kodai','mp_grave','mp_homestead','mp_relic02','mp_ri
 $allMaps=@($priority)+@($catalog.maps|Where-Object {$_-notin$priority})
 $nativeHash=(Get-FileHash "$profile/plugins/bp_ort.dll").Hash
 $coreHash=(Get-FileHash "$profile/Northstar.dll").Hash
-$bridge="$profile/mods/James.BotDecisions/mod/scripts/vscripts/james_bot_decisions.nut"
+$bridge="$profile/mods/BT7274.BotDecisions/mod/scripts/vscripts/bt7274_bot_decisions.nut"
 $bridgeHash=(Get-FileHash $bridge).Hash
 function Read-QueueJson([string]$path){
     $stream=[IO.File]::Open($path,[IO.FileMode]::Open,[IO.FileAccess]::Read,([IO.FileShare]::ReadWrite-bor[IO.FileShare]::Delete))

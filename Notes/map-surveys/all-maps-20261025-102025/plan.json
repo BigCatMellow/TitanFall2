@@ -32,38 +32,38 @@
       "reason": "Installed arena lacks bot navigation data; recorded as unsupported, not tested"
     }
   ],
-  "template_control": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915",
+  "template_control": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915",
   "dll_sha256": "C6A60DC54A0B7230A71A5E6D972610B9A500435402CCE4AE868252E7DB191075",
   "real_save_sha256": "A77FB6C2ECC2A3E48BCA6A273269934499721E46E6A9A7F7833B0EE2142444E5",
   "protected_files": [
     {
       "label": "solo_dll",
-      "path": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\plugins\\bp_ort.dll",
+      "path": "%USERPROFILE%\\northstar-crash-audit\\local-test-profile\\plugins\\bp_ort.dll",
       "sha256": "C6A60DC54A0B7230A71A5E6D972610B9A500435402CCE4AE868252E7DB191075"
     },
     {
       "label": "isolated_dll",
-      "path": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\plugins\\bp_ort.dll",
+      "path": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\plugins\\bp_ort.dll",
       "sha256": "C6A60DC54A0B7230A71A5E6D972610B9A500435402CCE4AE868252E7DB191075"
     },
     {
       "label": "solo_config",
-      "path": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\mods\\Northstar.CustomServers\\mod\\cfg\\autoexec_ns_server.cfg",
+      "path": "%USERPROFILE%\\northstar-crash-audit\\local-test-profile\\mods\\Northstar.CustomServers\\mod\\cfg\\autoexec_ns_server.cfg",
       "sha256": "A1463F5924D858A24FC11AF3F9E9317F7EF2B7E493E323D0FBC63DEF0D258084"
     },
     {
       "label": "solo_loadouts",
-      "path": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\save_data\\James.LocalPersistence\\loadouts_LOCAL_PLAYER_UID.json",
+      "path": "%USERPROFILE%\\northstar-crash-audit\\local-test-profile\\save_data\\BT7274.LocalPersistence\\loadouts_LOCAL_PLAYER_UID.json",
       "sha256": "A77FB6C2ECC2A3E48BCA6A273269934499721E46E6A9A7F7833B0EE2142444E5"
     },
     {
       "label": "solo_previous_loadouts",
-      "path": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\save_data\\James.LocalPersistence\\previous_LOCAL_PLAYER_UID.json",
+      "path": "%USERPROFILE%\\northstar-crash-audit\\local-test-profile\\save_data\\BT7274.LocalPersistence\\previous_LOCAL_PLAYER_UID.json",
       "sha256": "0773D0FFD4D9DC0A7D3697FD811F9F9E255B9181E7E5BA67114BC2EB9C8C06EB"
     },
     {
       "label": "solo_launcher",
-      "path": "C:\\Users\\james\\northstar-crash-audit\\Play-Solo-Bots.cmd",
+      "path": "%USERPROFILE%\\northstar-crash-audit\\Play-Solo-Bots.cmd",
       "sha256": "5CC577A097712A57E5F4D11506352165DBC2240AD3342E19DB31DB101FEAA600"
     }
   ],

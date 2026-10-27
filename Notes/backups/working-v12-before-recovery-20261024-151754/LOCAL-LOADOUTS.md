@@ -8,7 +8,7 @@ Official context: https://docs.northstar.tf/Wiki/hosting-a-server-with-northstar
 
 ## Named-field save add-on
 
-Source: `C:\Users\james\bp-ort-fork\James.LocalPersistence`.
+Source: `%USERPROFILE%\bp-ort-fork\BT7274.LocalPersistence`.
 The Squirrel-only add-on uses Northstar Safe IO and the normal
 GetPersistentVar / SetPersistentVar APIs. It does not replace the stable
 team-observer-v12 bot DLL, change bot skill, or reset persistence.
@@ -19,7 +19,7 @@ and checks for changes every second. Only the local human with insecure
 local authentication is eligible; bots and remote players are ignored.
 
 Files live in:
-`C:\Users\james\northstar-crash-audit\local-test-profile\save_data\James.LocalPersistence`.
+`%USERPROFILE%\northstar-crash-audit\local-test-profile\save_data\BT7274.LocalPersistence`.
 `loadouts_<UID>.json` is current and `previous_<UID>.json` is the preceding
 snapshot. Files use format version 1 and 440 named fields. Empty enum values
 are normalized to empty strings, as stock loadout helpers do, because
@@ -27,7 +27,7 @@ Northstar's JSON encoder otherwise omits null entries.
 
 Existing unreadable, incompatible or failed-to-restore files pause autosaving
 and are preserved. Logs contain LOCAL_LOADOUTS messages. The setting
-`james_local_loadouts 0` disables the add-on. Removing the mod disables it
+`bt7274_local_loadouts 0` disables the add-on. Removing the mod disables it
 without erasing its save files. This is profile-local loadout saving, not
 cloud sync, match-preset saving, or XP/stat saving.
 
@@ -39,8 +39,8 @@ subsequent solo launches should restore them.
 
 ## Tests and recovery boundaries
 
-Tests use only `map-cycle-test-profile` and its James.BotCycleTest harness.
-The harness sets a synthetic first-slot name JAMES_LOCAL_SAVE_PROBE and G2
+Tests use only `map-cycle-test-profile` and its BT7274.BotCycleTest harness.
+The harness sets a synthetic first-slot name BT7274_LOCAL_SAVE_PROBE and G2
 primary, then checks both after reconnect/restart. Never copy its JSON or
 test harness to the everyday profile.
 

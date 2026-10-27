@@ -1,5 +1,5 @@
 {
-  "source": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_drydock_small.nm",
+  "source": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_drydock_small.nm",
   "sha256": "69BBCD548D85B4131955879CD3DFA4043B4F174C7D33647C312C703EF7E05667",
   "set_version": 5,
   "tile_version": 13,
@@ -15,7 +15,7 @@
     "min_y": -4966.49609375
   },
   "trailing_bytes": 30960,
-  "observations_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\05-mp_drydock\\main\\reports\\01-mp_drydock\\movement\\observations.csv",
+  "observations_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\05-mp_drydock\\main\\reports\\01-mp_drydock\\movement\\observations.csv",
   "pilot_stall_samples": 48,
   "limits": "Read-only surface geometry from installed navmesh; no adjacency/traversal validation, collision scenery, or in-game visual observation. Rendered heights overlap in top-down views. Stalls are two-second samples, not unique incidents."
 }

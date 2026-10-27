@@ -1,5 +1,5 @@
 param(
-    [string]$AuditRoot='C:\Users\james\northstar-crash-audit',
+    [string]$AuditRoot="$env:USERPROFILE\northstar-crash-audit",
     [string]$RepositoryRoot=(Split-Path $PSScriptRoot),
     [switch]$RecoverExisting,
     [switch]$HistoryOnly
@@ -10,7 +10,7 @@ $repo=[IO.Path]::GetFullPath($RepositoryRoot)
 $audit=[IO.Path]::GetFullPath($AuditRoot)
 $notes=Join-Path $audit 'Notes'
 $manifest=[Collections.Generic.List[object]]::new()
-$accountIds=@(Get-ChildItem -LiteralPath "$audit\local-test-profile\save_data\James.LocalPersistence" -Filter 'loadouts_*.json'|ForEach-Object{if($_.BaseName-match'^loadouts_(\d+)$'){$Matches[1]}})
+$accountIds=@(Get-ChildItem -LiteralPath "$audit\local-test-profile\save_data\BT7274.LocalPersistence" -Filter 'loadouts_*.json'|ForEach-Object{if($_.BaseName-match'^loadouts_(\d+)$'){$Matches[1]}})
 function Clean([string]$text){
     foreach($account in $accountIds){$text=$text.Replace($account,'LOCAL_PLAYER_UID')}
     $text=[regex]::Replace($text,'(?i)https?://[^\s"<>]+',{
@@ -71,7 +71,7 @@ foreach($file in Get-ChildItem -LiteralPath $notes -Recurse -File){
 }
 # Runtime-only authored harnesses were not all present in the Rust checkout.
 foreach($profile in @('local-test-profile','map-cycle-test-profile')){
-    foreach($mod in Get-ChildItem -LiteralPath "$audit\$profile\mods" -Directory|Where-Object Name -like 'James.*'){
+    foreach($mod in Get-ChildItem -LiteralPath "$audit\$profile\mods" -Directory|Where-Object Name -like 'BT7274.*'){
         foreach($file in Get-ChildItem -LiteralPath $mod.FullName -Recurse -File){
             $rel=$file.FullName.Substring($mod.FullName.Length+1).Replace('\','/')
             Publish $file.FullName ("runtime-mods/$profile/$($mod.Name)/$rel") ("automation/runtime-mods/$profile/$($mod.Name)/$rel")
