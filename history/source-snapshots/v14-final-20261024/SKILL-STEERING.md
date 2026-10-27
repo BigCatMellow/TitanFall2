@@ -22,7 +22,7 @@ tests also pass. These changes address specific steering/recovery defects;
 the legacy navigation mesh can still miss pilot rooftops and airborne goals.
 
 DLLs before this change and the solo config are backed up in
-`C:\Users\james\northstar-crash-audit\skill-steering-v11`.
+`%USERPROFILE%\northstar-crash-audit\skill-steering-v11`.
 
 The bot/client iteration and native server binding have 32 client slots.
 That makes 32 total participants (one human plus 31 bots) the ceiling this

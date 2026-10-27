@@ -3,7 +3,7 @@
 Double-click Capture-Latest.cmd, or run:
 
 ```powershell
-pwsh -NoProfile -File 'C:\Users\james\northstar-crash-audit\Notes\tools\Export-BotSession.ps1' -Open
+pwsh -NoProfile -File '%USERPROFILE%\northstar-crash-audit\Notes\tools\Export-BotSession.ps1' -Open
 ```
 
 For a specific session, add `-LogPath '<full nslog path>'`. Re-exporting a

@@ -1,5 +1,5 @@
 {
-  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-context\\waypoint-review\\parser-check\\fixture.log",
+  "log": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-context\\waypoint-review\\parser-check\\fixture.log",
   "motion_lines": 2,
   "parsed": 2,
   "scope": "MAP_SURVEY_BEGIN through result or end of log; warmup excluded",

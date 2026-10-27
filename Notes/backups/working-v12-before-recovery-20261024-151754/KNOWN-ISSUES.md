@@ -28,7 +28,7 @@
    Program Files profile has its own DLL backup, which may require elevated
    filesystem access to restore.
 
-`C:\Users\james\northstar-crash-audit\Read-CrashDump.ps1` can inspect dumps.
+`%USERPROFILE%\northstar-crash-audit\Read-CrashDump.ps1` can inspect dumps.
 Its raw stack-pointer candidates are not a trustworthy unwound call stack.
 Keep matching DLL debug symbols and the exact build hash when interpreting one.
 
@@ -39,7 +39,7 @@ to investigate a navigation problem.
 ## Local loadouts
 
 Direct-map solo sessions bypass cloud loadout persistence. The everyday
-profile now uses James.LocalPersistence; see LOCAL-LOADOUTS.md. This stores
+profile now uses BT7274.LocalPersistence; see LOCAL-LOADOUTS.md. This stores
 Pilot/Titan equipment locally, not match presets or XP. Keep the mod folder
 name and profile path stable. Presets lost before installation may need to
 be recreated once. Never use the archived raw-buffer v13 restore experiment.

@@ -1,5 +1,5 @@
 {
-  "source_log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-24 15-56-07.txt",
+  "source_log": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-24 15-56-07.txt",
   "exported": "2026-10-24T16:00:13.6063936-04:00",
   "structured": true,
   "build_line": "[2026-10-24] [15:56:08] [BP-ORT000] [info] local build: escape-recovery-v15 (v12 targeting/navigation with bounded repeated-stall backstep)",

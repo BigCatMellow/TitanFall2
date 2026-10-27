@@ -1,16 +1,16 @@
-global function JamesBotCycleTest_Init
+global function BT7274BotCycleTest_Init
 
-void function JamesBotCycleTest_Init()
+void function BT7274BotCycleTest_Init()
 {
-    AddCallback_GameStateEnter( eGameState.Playing, JamesBotCycleTest_Start )
+    AddCallback_GameStateEnter( eGameState.Playing, BT7274BotCycleTest_Start )
 }
 
-void function JamesBotCycleTest_Start()
+void function BT7274BotCycleTest_Start()
 {
-    thread JamesBotCycleTest_Run()
+    thread BT7274BotCycleTest_Run()
 }
 
-void function JamesBotCycleTest_Run()
+void function BT7274BotCycleTest_Run()
 {
     string current = GetMapName()
     wait 75.0

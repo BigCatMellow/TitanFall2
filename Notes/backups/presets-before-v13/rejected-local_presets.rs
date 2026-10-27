@@ -30,7 +30,7 @@ fn owner(client: &CClient) -> Option<String> {
     let uid=crate::utils::get_c_char_array(&client.m_UID)?;
     preset_file::valid_owner(uid).then(||uid.to_owned())
 }
-fn path(uid: &str) -> PathBuf { profile().join("save_data/James.LocalPersistence").join(format!("{uid}.bin")) }
+fn path(uid: &str) -> PathBuf { profile().join("save_data/BT7274.LocalPersistence").join(format!("{uid}.bin")) }
 pub(super) fn register(token: EngineToken) {
     _=OPTION.set(ConVarStruct::try_new(&ConVarRegister::new("bot_local_presets","0",
         rrplug::bindings::cvar::convar::FCVAR_GAMEDLL as i32,
@@ -38,7 +38,7 @@ pub(super) fn register(token: EngineToken) {
         .expect("register bot_local_presets"));
 }
 
-#[rrplug::sqfunction(VM="Server", ExportName="JamesRestoreLocalPresets")]
+#[rrplug::sqfunction(VM="Server", ExportName="BT7274RestoreLocalPresets")]
 pub(super) fn restore(player: Option<&mut CPlayer>) -> bool {
     if !enabled() { return false; }
     let Some(player)=player else {return false;};
@@ -65,7 +65,7 @@ pub(super) fn restore(player: Option<&mut CPlayer>) -> bool {
     true
 }
 
-#[rrplug::sqfunction(VM="Server", ExportName="JamesSaveLocalPresets")]
+#[rrplug::sqfunction(VM="Server", ExportName="BT7274SaveLocalPresets")]
 pub(super) fn save(player: Option<&mut CPlayer>) -> bool {
     if player.is_none_or(|p|shared::utils::get_player_index(p)!=0){return false;}
     save_now()

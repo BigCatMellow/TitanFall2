@@ -7,7 +7,7 @@ The source-only status and test plan below describe the original branch proposal
 Status: **source-only candidate**. No live Northstar runtime verification,
 installation, deployment, saved-loadout edit, aim change, or damage/fire-rate
 change is claimed. The private unattended v18 survey state is unknown from
-GitHub; inspect its live supervisor status before staging anything on James's PC.
+GitHub; inspect its live supervisor status before staging anything on BT-7274's PC.
 
 ## Confirmed mapping mistake
 
@@ -18,7 +18,7 @@ Northstar's weapon-code reference identifies:
 | `mp_weapon_alternator_smg` | Alternator | 35 / 600 | 2.30s / 2.70s |
 | `mp_weapon_hemlok_smg` | Volt | 25 / 660 | 1.50s / 2.00s |
 
-The original James.WeaponReload 1.0.0 modifier targeted `hemlok_smg` while
+The original BT7274.WeaponReload 1.0.0 modifier targeted `hemlok_smg` while
 calling it Alternator. Therefore its eight archived runtime comparisons
 validated G2, **Volt**, R-201 and CAR (with/without Speedloader), not the
 Alternator. Its old numeric test outputs remain historically intact, with

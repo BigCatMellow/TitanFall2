@@ -1,6 +1,6 @@
-param([string]$Profile='C:\Users\james\northstar-crash-audit\local-test-profile',
+param([string]$Profile="$env:USERPROFILE\northstar-crash-audit\local-test-profile",
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
-    [string]$NotesRoot='C:\Users\james\northstar-crash-audit\Notes\weapon-notebook\sessions',
+    [string]$NotesRoot="$env:USERPROFILE\northstar-crash-audit\Notes\weapon-notebook\sessions",
     [ValidateSet('normal_play','controlled_validation')][string]$Mode='normal_play')
 $ErrorActionPreference='Stop'
 if(Get-Process NorthstarLauncher,Titanfall2 -ErrorAction SilentlyContinue){throw 'A game is already running'}
@@ -12,12 +12,12 @@ $stream=[IO.File]::OpenRead("$Profile/plugins/bp_ort.dll")
 $hasher=[Security.Cryptography.SHA256]::Create()
 try{$nativeHash=[BitConverter]::ToString($hasher.ComputeHash($stream)).Replace('-','')}finally{$stream.Dispose();$hasher.Dispose()}
 $core=(Get-Item "$Profile/Northstar.dll").VersionInfo.FileVersion
-$mods=@(Get-ChildItem "$Profile/mods" -Filter mod.json -Recurse|ForEach-Object{Get-Content -Raw -LiteralPath $_.FullName|ConvertFrom-Json}|Where-Object {$_.Name-like'Solo.*'-or$_.Name-like'James.*'}|ForEach-Object{@{name=$_.Name;version=$_.Version}})
+$mods=@(Get-ChildItem "$Profile/mods" -Filter mod.json -Recurse|ForEach-Object{Get-Content -Raw -LiteralPath $_.FullName|ConvertFrom-Json}|Where-Object {$_.Name-like'Solo.*'-or$_.Name-like'BT7274.*'}|ForEach-Object{@{name=$_.Name;version=$_.Version}})
 $enabled=Get-Content "$Profile/enabledmods.json" -Raw|ConvertFrom-Json
 $cfg="$Profile/mods/Northstar.CustomServers/mod/cfg/autoexec_ns_server.cfg"
 $settings=[ordered]@{}
 foreach($line in Get-Content $cfg){
-    if($line-match '^\s*(bot_[a-z_]+|james_[a-z_]+|solo_weapon_balance[a-z_]*)\s+([-0-9.a-z]+)(?:\s|$)'){
+    if($line-match '^\s*(bot_[a-z_]+|bt7274_[a-z_]+|solo_weapon_balance[a-z_]*)\s+([-0-9.a-z]+)(?:\s|$)'){
         # Regex captures are plain strings. Windows PowerShell 5.1 otherwise
         # serializes Get-Content's attached provider/drive object graph.
         $settings[$Matches[1]]=$Matches[2]

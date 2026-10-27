@@ -1,5 +1,5 @@
 {
-  "source": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_angel_city_small.nm",
+  "source": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_angel_city_small.nm",
   "sha256": "75A1307CFABFA67755E1F2F7575ADCEB60D4A40B696A386AE97CC4BED2E2A836",
   "set_version": 5,
   "tile_version": 13,

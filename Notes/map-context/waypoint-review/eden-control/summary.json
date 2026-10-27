@@ -1,5 +1,5 @@
 {
-  "log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915\\main\\raw-session.log",
+  "log": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915\\main\\raw-session.log",
   "motion_lines": 1425,
   "parsed": 1425,
   "scope": "MAP_SURVEY_BEGIN through result or end of log; warmup excluded",

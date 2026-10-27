@@ -1,5 +1,5 @@
 {
-  "source": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_black_water_canal_small.nm",
+  "source": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_black_water_canal_small.nm",
   "sha256": "E2B4DEE3A14641B55104B318A8EF6059460D6F67DD20E062A0D36CECD670E8B6",
   "set_version": 5,
   "tile_version": 13,
@@ -15,7 +15,7 @@
     "min_y": -5880.6015625
   },
   "trailing_bytes": 73472,
-  "observations_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main\\reports\\01-mp_black_water_canal\\movement\\observations.csv",
+  "observations_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main\\reports\\01-mp_black_water_canal\\movement\\observations.csv",
   "pilot_stall_samples": 59,
   "limits": "Read-only surface geometry from installed navmesh; no adjacency/traversal validation, collision scenery, or in-game visual observation. Rendered heights overlap in top-down views. Stalls are two-second samples, not unique incidents."
 }

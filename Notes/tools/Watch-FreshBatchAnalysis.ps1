@@ -3,7 +3,7 @@ param([Parameter(Mandatory=$true)][string]$BatchDirectory)
 # writes reports only. It never starts/stops a game or edits a game profile.
 $ErrorActionPreference='Stop'
 $batch=[IO.Path]::GetFullPath($BatchDirectory)
-$allowed='C:\Users\james\northstar-crash-audit\Notes\map-surveys\'
+$allowed="$env:USERPROFILE\northstar-crash-audit\Notes\map-surveys\"
 if(-not $batch.StartsWith($allowed,[StringComparison]::OrdinalIgnoreCase)){throw 'Unexpected batch path'}
 $out=Join-Path $batch 'analysis'
 New-Item -ItemType Directory -Path $out -Force|Out-Null
@@ -44,7 +44,7 @@ try {
                 $record.low_progress=$m.low_progress_navigation_samples
                 $record.high_waypoints=$m.low_progress_waypoint_height_over_180
                 $obs=Join-Path $r.directory ("main\reports\01-$($r.map)\movement\observations.csv")
-                $nav="C:\Users\james\northstar-crash-audit\map-cycle-test-profile\mods\Northstar.CustomServers\mod\maps\navmesh\$($r.map)_small.nm"
+                $nav="$env:USERPROFILE\northstar-crash-audit\map-cycle-test-profile\mods\Northstar.CustomServers\mod\maps\navmesh\$($r.map)_small.nm"
                 if((Test-Path -LiteralPath $obs)-and(Test-Path -LiteralPath $nav)){
                     & "$PSScriptRoot\Export-NavMeshContext.ps1" -NavPath $nav -OutputDirectory "$mapOut\navmesh" -Observations $obs|Out-Null
                 }else{throw 'Completed-match observations or mesh missing'}

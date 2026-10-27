@@ -1,0 +1,21 @@
+{
+  "Name": "BT7274.WeaponHandling",
+  "Description": "Optional 25% shorter ADS-in/out trial for the local solo human's Flatline and G2.",
+  "Version": "0.2.0",
+  "LoadPriority": 42,
+  "ConVars": [
+    {
+      "Name": "bt7274_ads_trial",
+      "DefaultValue": "0"
+    }
+  ],
+  "Scripts": [
+    {
+      "Path": "bt7274_weapon_handling.nut",
+      "RunOn": "SERVER && MP",
+      "ServerCallback": {
+        "After": "BT7274WeaponHandling_Init"
+      }
+    }
+  ]
+}

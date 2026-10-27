@@ -10,7 +10,7 @@ launcher starts a local, read-only damage recorder alongside the game. No manual
 timestamps are needed. This is text telemetry, not video or audio recording.
 
 Each launch gets its own folder under
-`C:\Users\james\northstar-crash-audit\Notes\weapon-notebook\sessions`:
+`%USERPROFILE%\northstar-crash-audit\Notes\weapon-notebook\sessions`:
 
 - `NOTES.md`: readable summary, refreshed every 15 seconds and after exit.
 - `summary.json`: grouped damage spans, individual deaths and exclusion reasons.

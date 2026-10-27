@@ -1,6 +1,6 @@
 # Installed solo launcher source
 
-Copy Play-Solo-Bots.cmd to C:\Users\james\northstar-crash-audit.
+Copy Play-Solo-Bots.cmd to %USERPROFILE%\northstar-crash-audit.
 Its relative paths assume that installed location, beside local-test-profile and
 TitanFall2-project. The existing Desktop shortcut targets that installed copy.
 The launcher starts tools/Start-SoloWeaponSession.ps1, which preserves the 8v8

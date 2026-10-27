@@ -56,7 +56,7 @@ still stops on script/compile/native errors. A UI debug probe briefly contained
 an unsupported GetMapName call; removed before further tests.
 
 The previously working v16 DLL in the same disposable profile also stalled.
-Dedicated startup exposed a missing persistent definition; James confirmed the
+Dedicated startup exposed a missing persistent definition; BT-7274 confirmed the
 same client dialog. A temporary test-only filesystem/schema preflight got past
 that error, then exposed missing core script functions. It has been REMOVED.
 
@@ -136,7 +136,7 @@ With the game fully closed, use the new `before-v18-normal-deploy-*` backup
 recorded in the final handoff. Restore only its plugin DLL, server.cfg and
 enabledmods.json to the same normal-profile locations. If the bridge did not
 exist before deployment, explicitly set
-`"James.BotDecisions": {"1.0.0": false}` in enabledmods.json; absence alone may
+`"BT7274.BotDecisions": {"1.0.0": false}` in enabledmods.json; absence alone may
 auto-enable an installed mod. If it existed, restore its backed-up source too.
 Do not copy backup save_data over current progression/loadouts. The first
 implementation backup and old checkout remain available as historical fallbacks.

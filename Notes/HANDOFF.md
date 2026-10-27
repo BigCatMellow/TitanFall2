@@ -11,7 +11,7 @@ and `summary.json` before changing anything. Check the running executable,
 its profile, the newest log's build ID, and installed DLL hashes. Old reports
 are historical observations, not proof of the current installation.
 
-## What James asked for
+## What BT-7274 asked for
 
 1. Improve organization: reduce dogpiling, target churn, and teammate crowding.
 2. Observe actual bot behavior more closely, not merely successful bot joins.
@@ -53,7 +53,7 @@ saves/add-ons. Full pre-change source is backed up; don't reset upstream.
 
 ## Source and build
 
-Checkout: `C:\Users\james\bp-ort-fork`. Upstream:
+Checkout: `%USERPROFILE%\bp-ort-fork`. Upstream:
 `https://github.com/catornot/bp-ort.git`, base HEAD `2d0a559`.
 Changes are local and uncommitted; no GitHub fork/PR has been published.
 Preserve existing edits. The source archive plus working checkout are both
@@ -64,9 +64,9 @@ PowerShell build:
 ```powershell
 $env:CARGO_PROFILE_DISTRIBUTION_STRIP='none'
 $env:CARGO_PROFILE_DISTRIBUTION_DEBUG='2'
-$env:PATH='C:\Users\james\Downloads\llvm-mingw-20261020-ucrt-x86_64\llvm-mingw-20261020-ucrt-x86_64\bin;'+$env:PATH
-Set-Location 'C:\Users\james\bp-ort-fork'
-& 'C:\Users\james\.cargo\bin\cargo.exe' +nightly-2025-09-11-x86_64-pc-windows-gnu build -p bp_ort --profile distribution --locked
+$env:PATH='%USERPROFILE%\Downloads\llvm-mingw-20261020-ucrt-x86_64\llvm-mingw-20261020-ucrt-x86_64\bin;'+$env:PATH
+Set-Location '%USERPROFILE%\bp-ort-fork'
+& '%USERPROFILE%\.cargo\bin\cargo.exe' +nightly-2025-09-11-x86_64-pc-windows-gnu build -p bp_ort --profile distribution --locked
 ```
 
 Output: `target\x86_64-pc-windows-gnu\distribution\bp_ort.dll`.
@@ -95,12 +95,12 @@ bounds, jump release, movement progress, wrapped steering, and coordination.
 
 ## Important boundaries
 
-James.WeaponReload 1.0.0 is a separate solo-human-only add-on: 10% shorter
+BT7274.WeaponReload 1.0.0 is a separate solo-human-only add-on: 10% shorter
 reloads for G2/Alternator/R-201/CAR; no damage/recoil/fire-rate changes.
 Eight native-runtime cases passed with/without Speedloader; 15 bots excluded.
 Read WEAPON-RELOAD.md for scope, test limitations, backups and disable path.
 
-James.TacticalRecharge 1.0.0 applies 50% shorter recharge to the local human's
+BT7274.TacticalRecharge 1.0.0 applies 50% shorter recharge to the local human's
 seven pilot tacticals (user revised 30% to 50%). It is a separate script/KV
 mod, not a native bot change. Read TACTICAL-RECHARGE.md before editing it;
 Grapple uses player ClassMods, the other six use named weapon Mods. Preserve
@@ -108,7 +108,7 @@ existing modifiers, Power Cell, duration and bot exclusion. Actual seven-suit
 tests and 15-bot exclusion checks passed. Disable via convar 0 and respawn.
 
 The solo direct-map authentication path does not save normal cloud loadouts.
-James.LocalPersistence 1.2.1 saves named Pilot/Titan/basic XP fields through
+BT7274.LocalPersistence 1.2.1 saves named Pilot/Titan/basic XP fields through
 Safe IO and explicitly handles private-lobby entry and CLIENT/UI caches.
 Read PERSISTENCE-REPAIR-1.2.md before changing it. Match-only server-field
 tests missed the earlier lobby save gap; always test a real lobby edit and
@@ -119,7 +119,7 @@ it clears 3D previews and caused the post-round tactical-equip race fixed in
 three real preview/equip passes. Preserve cache-only refresh.
 Do not reuse the rejected raw-buffer v13 restore DLL, raw snapshots or capture
 tool from backups/presets-before-v13. The stable DLL remains v12. Never copy
-isolated loadout-probe JSON or James.BotCycleTest into the everyday profile.
+isolated loadout-probe JSON or BT7274.BotCycleTest into the everyday profile.
 
 The confirmed old crash was a native pathfinder buffer overflow. Disabling
 name callbacks/client hooks was speculative. Authentication failure was an
@@ -269,10 +269,10 @@ recording remains future work. Diagnosticv17 candidate remains NOT DEPLOYED;
 source checkout/target build are candidate, installed profiles remainv16.
 
 2026-10-25 project migration: canonical source/research repo is now
-C:\Users\james\northstar-crash-audit\TitanFall2-project,
+%USERPROFILE%\northstar-crash-audit\TitanFall2-project,
 https://github.com/BigCatMellow/TitanFall2 (public). Upstream330commits preserved;
 initial local-project import c4145bc426758ab2453930054ea856e12534c531 pushed and
-remote-verified. Source, James add-ons, authored test harnesses, notes, expanded
+remote-verified. Source, BT-7274 add-ons, authored test harnesses, notes, expanded
 historical source, derived data/replays/plots and108 sanitized compressed logs
 included. Private saves/raw buffers, installed game/third-party packages and
 build/dump binaries stay local; import manifest records inclusions/exclusions.
@@ -355,10 +355,10 @@ pending on corrected profile; refresh candidateDLLhash after clean rebuild.
 2026-10-25 19:51 EDT — implementation, tests, deployment and survey restart.
 This entry supersedes the earlier runtime-pending/preflight notes above.
 
-Canonical source: C:\Users\james\northstar-crash-audit\TitanFall2-project.
+Canonical source: %USERPROFILE%\northstar-crash-audit\TitanFall2-project.
 Normal and working isolated now use decisions-v18-candidate native SHA256
 F3C41DE2D11C84959454A16C8DCE9ED8B03BCD5E05E59090E32E87C6B78F3648.
-Final James.BotDecisions script SHA256
+Final BT7274.BotDecisions script SHA256
 30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78.
 All four new switches enabled: bot_navigation_context, bot_target_eligibility,
 bot_action_policy, bot_step_retry. Aim0.78, human+15bot8v8, existing human50%
@@ -376,11 +376,11 @@ One quick launch intentionally stopped for argument-ordering error; corrected.
 No native changes after the full suite. No damage/aim/cooldown rebalance here.
 
 Normal deployed19:48; fresh private backup:
-C:\Users\james\northstar-crash-audit\Notes\backups\before-v18-normal-deploy-20261025-194834.
+%USERPROFILE%\northstar-crash-audit\Notes\backups\before-v18-normal-deploy-20261025-194834.
 All3CURRENT normal save files hash-identical during/after deployment; all25files
 in LocalPersistence/TacticalRecharge/WeaponReload/BotLifecycle unchanged from
 initial backup. No old save restoration or ns_resetpersistence. Rollback only
-DLL/config/enabledmods; explicitly disable James.BotDecisions1.0.0 when using
+DLL/config/enabledmods; explicitly disable BT7274.BotDecisions1.0.0 when using
 v16 (absence from enabledmods may auto-enable it). Preserve current save_data.
 
 Startup correction: omitted profile Northstar.dll caused confirmed old-core
@@ -392,7 +392,7 @@ work removed. No base-game writes. Core version verified from actual logs.
 Dedicated startup attempts are invalid AI trials, not successful matches.
 
 New background survey batch:
-C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-all-maps-20261025-194900.
+%USERPROFILE%\northstar-crash-audit\Notes\map-surveys\decisions-v18-all-maps-20261025-194900.
 Runner PID313660, initial Kodai PID307088 (verify live; historical once exited).
 Read status.json/plan.json and parent current-v18-session.json.22maps,16bots
 8v8+inactive observer,200team-point goal,15mincap, frozen DLL/core/bridge hashes,
@@ -424,9 +424,9 @@ confirming all games exited, idle cfg/enabledmods/survey script restored and
 newly installed survey manifest moved aside. No save restoration. Second failed
 attempt restored profile correctly. Runner now waits for owned exit and has
 ResumeBatch support with matching native/bridge/core hashes and completed-map skip.
-New ObserverDefaults switch disables james_local_loadouts only for the inactive
+New ObserverDefaults switch disables bt7274_local_loadouts only for the inactive
 survey observer; regular play profile is unchanged. New subcohort:
-C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-observer-defaults-20261025-204736.
+%USERPROFILE%\northstar-crash-audit\Notes\map-surveys\decisions-v18-observer-defaults-20261025-204736.
 RunnerPID316532; HomesteadPID318188 (verify live).20maps remain including Homestead.
 Homestead startup passed,16bots8v8, observer dead, scores advancing at20:49.
 One successful control supports observer/persistence isolation, not a complete
@@ -439,7 +439,7 @@ Reports and sanitized aggregate progress in candidate SURVEY-PROGRESS.md/json.
 Homestead finished195-192 (IMC-Militia),15min, valid, no runtime errors detected;
 third completed v18 map. Old observer-defaults queue stopped_by_request and
 restored idle files cleanly. Preserve all3prior200-goal results separately.
-New supervisor C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-overnight75-20261025,
+New supervisor %USERPROFILE%\northstar-crash-audit\Notes\map-surveys\decisions-v18-overnight75-20261025,
 PID320516 (verify live).19remaining maps, goal75perteam,15minfallback,16bots8v8
 plus inactive observer, same frozen native/core/bridge/aim. Relic first,
 child runner322112/game321636; actual MAP_SURVEY_BEGIN confirms engine75 and
@@ -474,7 +474,7 @@ runtime errors, but Stop-Process raced its natural quit, threw ProcessNotFound,
 and prevented final cleanup/status/result persistence. Original failed child
 state/stderr and overnight stopped_error are preserved; do not rewrite history
 as overnight completion. Recovered Traffic as a separate derived record:
-C:\Users\james\northstar-crash-audit\Notes\map-surveys\traffic-recovered-20261026-121941.
+%USERPROFILE%\northstar-crash-audit\Notes\map-surveys\traffic-recovered-20261026-121941.
 Recovery backup survey-cleanup-recovery-20261026-121941 includes CURRENT normal
 and isolated saves plus prior files; only idle config/enabledmods/harness restored,
 no saved data restored. Traffic reports regenerated from the original clean log.
@@ -483,7 +483,7 @@ argument/name checks and treats an already-exited handle as successful shutdown.
 Eight regression fixtures cover the exact race/ownership/failure cases. Worker
 persists result before cleanup and always records cleanup/restoration failures.
 
-Final supervisor C:\Users\james\northstar-crash-audit\Notes\map-surveys\decisions-v18-last-maps-20261026,
+Final supervisor %USERPROFILE%\northstar-crash-audit\Notes\map-surveys\decisions-v18-last-maps-20261026,
 request last-maps-request-20261026.json. Read20completed records; ran only UMA
 (75-67,264.6s) and Coliseum (9-75,108.3s), finished12:30:31EDT with statecomplete,
 zero failed attempts/report errors.22unique supported maps complete:3goal200,
@@ -524,12 +524,12 @@ Native adds5standard profiles (Alternator/Mastiff/Devotion/B3Wingman/P2016),
 Existing controller47058decisions/50000commands matchv16.46Rust/9suites and
 17Node weapon/role checks pass; native distribution build passes.
 
-Installed:James.WeaponReload1.0.1,James.WeaponHandling0.2.0,Solo.WeaponBalance0.1.0.
+Installed:BT7274.WeaponReload1.0.1,BT7274.WeaponHandling0.2.0,Solo.WeaponBalance0.1.0.
 Human-only trial:Flatline20%less ADS recoil;Volt25%less ADS recoil;R9730%less hip
 spread buildup/cap;Spitfire20%lower ADS movement scale;Flatline/G2ADS times0.75.
 Actual Alternator now reload0.9 (2.30->2.07normal,2.70->2.43empty), preserving
 Volt/G2/R201/CAR existing0.9. Speedloader composition0.63 and attachments checked.
-Normal convars james_ads_trial1,solo_weapon_balance1,solo_weapon_balance_bots0.
+Normal convars bt7274_ads_trial1,solo_weapon_balance1,solo_weapon_balance_bots0.
 8v8/aim0.78/human tactical0.5/damage/RPM/magazines preserved. No default bot
 loadout or bot aim buff. Source add-on defaults stayOFF; explicit normal opt-in.
 
@@ -677,3 +677,14 @@ Windows). Hull-trace init, hull offsets, Detour partial bit, jump encoding and
 the Squirrel sampler are runtime-unverified. Protocol, decision rules and
 rollback: research/bot-capability-20261027/README.md. Run Experiment 1
 (diagnostics only) before enabling behavior switches.
+
+2026-10-27 — BT-7274 RENAME CANDIDATE (stacked on the v20 candidate), NOT DEPLOYED.
+Owner now referred to as BT-7274; add-on prefix BT7274 (folders, mod names,
+script globals, convars bt7274_*, weapon attachments, script files) across all
+tracked text, historical snapshots and published .gz logs. Machine paths use
+%USERPROFILE% / $env:USERPROFILE. Recorded hashes were not rewritten (pre-rename
+records). Installed profiles still use the old names: run
+tools/Migrate-BT7274Rename.ps1 (dry run first, isolated profile first) before
+installing renamed packages, or LocalPersistence would start without saves.
+81 PowerShell files parse; migration fixture 15/15; all Rust/Node suites pass.
+See docs/BT7274-RENAME.md.

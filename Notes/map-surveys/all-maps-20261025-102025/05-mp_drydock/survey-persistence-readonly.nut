@@ -1,6 +1,6 @@
 untyped
-global function JamesLocalPersistence_Init
-global function JamesLocalPersistence_SaveNow
+global function BT7274LocalPersistence_Init
+global function BT7274LocalPersistence_SaveNow
 
 struct {
     table ready
@@ -10,58 +10,58 @@ struct {
     array<string> paths
 } file
 
-void function JamesLocalPersistence_Init()
+void function BT7274LocalPersistence_Init()
 {
-    file.paths = JamesLocalPersistence_Paths( true )
-    AddClientCommandCallback( "james_local_ready", JamesLocalPersistence_ClientReadyCommand )
-    thread JamesLocalPersistence_WatchLocalPlayer()
-    AddCallback_OnClientConnecting( JamesLocalPersistence_OnConnect )
-    AddCallback_OnClientConnected( JamesLocalPersistence_OnConnect )
-    AddCallback_OnClientDisconnected( JamesLocalPersistence_OnDisconnect )
+    file.paths = BT7274LocalPersistence_Paths( true )
+    AddClientCommandCallback( "bt7274_local_ready", BT7274LocalPersistence_ClientReadyCommand )
+    thread BT7274LocalPersistence_WatchLocalPlayer()
+    AddCallback_OnClientConnecting( BT7274LocalPersistence_OnConnect )
+    AddCallback_OnClientConnected( BT7274LocalPersistence_OnConnect )
+    AddCallback_OnClientDisconnected( BT7274LocalPersistence_OnDisconnect )
     foreach ( string command in ["SetPersistentLoadoutValue","SwapSecondaryAndWeapon3PersistentLoadoutData","RequestPilotLoadout","RequestTitanLoadout","LoadoutMenuClosed","InGameMPMenuClosed"] )
-        AddClientCommandNotifyCallback( command, JamesLocalPersistence_OnEdit )
+        AddClientCommandNotifyCallback( command, BT7274LocalPersistence_OnEdit )
 }
 
-bool function JamesLocalPersistence_ClientReadyCommand( entity player, array<string> args )
+bool function BT7274LocalPersistence_ClientReadyCommand( entity player, array<string> args )
 {
-    JamesLocalPersistence_OnConnect( player )
+    BT7274LocalPersistence_OnConnect( player )
     return true
 }
 
-void function JamesLocalPersistence_WatchLocalPlayer()
+void function BT7274LocalPersistence_WatchLocalPlayer()
 {
     // Private lobby does not run the ordinary connecting/connected callbacks.
     wait 1.0
     while ( true )
     {
         foreach ( entity player in GetPlayerArray() )
-            if ( JamesLocalPersistence_IsHuman( player )
+            if ( BT7274LocalPersistence_IsHuman( player )
                 && ( !( player.GetUID() in file.loading ) || file.loading[ player.GetUID() ] != player ) )
-                JamesLocalPersistence_OnConnect( player )
+                BT7274LocalPersistence_OnConnect( player )
         wait 1.0
     }
 }
 
-bool function JamesLocalPersistence_IsHuman( entity player )
+bool function BT7274LocalPersistence_IsHuman( entity player )
 {
     return IsValid( player ) && player.GetUID() != "0" && NSIsPlayerLocalPlayer( player )
-        && GetConVarBool( "ns_auth_allow_insecure" ) && GetConVarBool( "james_local_loadouts" )
+        && GetConVarBool( "ns_auth_allow_insecure" ) && GetConVarBool( "bt7274_local_loadouts" )
 }
 
-string function JamesLocalPersistence_File( string uid )
+string function BT7274LocalPersistence_File( string uid )
 {
     return "loadouts_" + uid + ".json"
 }
 
-void function JamesLocalPersistence_OnConnect( entity player )
+void function BT7274LocalPersistence_OnConnect( entity player )
 {
-    thread JamesLocalPersistence_Load( player )
+    thread BT7274LocalPersistence_Load( player )
 }
 
-void function JamesLocalPersistence_Load( entity player )
+void function BT7274LocalPersistence_Load( entity player )
 {
     wait 0.5
-    if ( !JamesLocalPersistence_IsHuman( player ) )
+    if ( !BT7274LocalPersistence_IsHuman( player ) )
         return
     string uid = player.GetUID()
     if ( uid in file.loading && file.loading[ uid ] == player ) return
@@ -79,17 +79,17 @@ void function JamesLocalPersistence_Load( entity player )
         }
         wait 0.1
     }
-    if ( !JamesLocalPersistence_IsHuman( player ) ) return
-    string path = JamesLocalPersistence_File( uid )
+    if ( !BT7274LocalPersistence_IsHuman( player ) ) return
+    string path = BT7274LocalPersistence_File( uid )
     if ( !NSDoesFileExist( path ) )
     {
         print( "LOCAL_LOADOUTS: first local snapshot" )
-        JamesLocalPersistence_Start( player )
+        BT7274LocalPersistence_Start( player )
         return
     }
     NSLoadJSONFile( path, void function( table data ) : ( player, uid )
     {
-        if ( !JamesLocalPersistence_IsHuman( player ) )
+        if ( !BT7274LocalPersistence_IsHuman( player ) )
             return
         if ( !( "version" in data ) || ( data.version != 1 && data.version != 2 ) || !( "owner" in data ) || data.owner != uid || !( "fields" in data ) )
         {
@@ -113,7 +113,7 @@ void function JamesLocalPersistence_Load( entity player )
             thread UpdateCachedLoadouts()
             file.snapshots[ uid ] <- data
             print( "LOCAL_LOADOUTS: restored " + restored + " named fields" )
-            JamesLocalPersistence_Start( player )
+            BT7274LocalPersistence_Start( player )
         }
         catch ( ex )
         {
@@ -125,42 +125,42 @@ void function JamesLocalPersistence_Load( entity player )
     } )
 }
 
-void function JamesLocalPersistence_Start( entity player )
+void function BT7274LocalPersistence_Start( entity player )
 {
     file.ready[ player.GetUID() ] <- true
-    JamesLocalPersistence_SaveNow( player )
-    thread JamesLocalPersistence_SaveLoop( player )
+    BT7274LocalPersistence_SaveNow( player )
+    thread BT7274LocalPersistence_SaveLoop( player )
 }
 
-void function JamesLocalPersistence_SaveLoop( entity player )
+void function BT7274LocalPersistence_SaveLoop( entity player )
 {
     player.EndSignal( "OnDestroy" )
     while ( IsValid( player ) )
     {
         wait 1.0
         if ( IsValid( player ) )
-            JamesLocalPersistence_SaveNow( player )
+            BT7274LocalPersistence_SaveNow( player )
     }
 }
 
-void function JamesLocalPersistence_SaveNow( entity player )
+void function BT7274LocalPersistence_SaveNow( entity player )
 {
     // Unattended survey only: restore valid defaults but never save spectator state.
 }
 
-void function JamesLocalPersistence_OnEdit( entity player, array<string> args )
+void function BT7274LocalPersistence_OnEdit( entity player, array<string> args )
 {
-    thread JamesLocalPersistence_SaveAfterEdit( player )
+    thread BT7274LocalPersistence_SaveAfterEdit( player )
 }
 
-void function JamesLocalPersistence_SaveAfterEdit( entity player )
+void function BT7274LocalPersistence_SaveAfterEdit( entity player )
 {
     WaitEndFrame()
     if ( IsValid( player ) )
-        JamesLocalPersistence_SaveNow( player )
+        BT7274LocalPersistence_SaveNow( player )
 }
 
-void function JamesLocalPersistence_OnDisconnect( entity player )
+void function BT7274LocalPersistence_OnDisconnect( entity player )
 {
-    JamesLocalPersistence_SaveNow( player )
+    BT7274LocalPersistence_SaveNow( player )
 }

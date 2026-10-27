@@ -1,10 +1,10 @@
 {
-  "Name": "James.MenuPreviewTest",
+  "Name": "BT7274.MenuPreviewTest",
   "Description": "Isolated post-round pilot preview preservation regression probe.",
   "Version": "1.0.0",
   "LoadPriority": 30,
   "Scripts": [
-    {"Path":"james_menu_preview_test.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"JamesMenuPreviewTest_Init"}},
-    {"Path":"james_menu_preview_test_client.nut","RunOn":"CLIENT && MP","ClientCallback":{"After":"JamesMenuPreviewTest_ClientInit"}}
+    {"Path":"bt7274_menu_preview_test.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"BT7274MenuPreviewTest_Init"}},
+    {"Path":"bt7274_menu_preview_test_client.nut","RunOn":"CLIENT && MP","ClientCallback":{"After":"BT7274MenuPreviewTest_ClientInit"}}
   ]
 }

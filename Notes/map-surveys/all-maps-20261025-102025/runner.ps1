@@ -1,6 +1,6 @@
 param([Parameter(Mandatory=$true)][string]$BatchDirectory)
 $ErrorActionPreference='Stop'
-$audit='C:\Users\james\northstar-crash-audit'
+$audit="$env:USERPROFILE\northstar-crash-audit"
 $profile=Join-Path $audit 'map-cycle-test-profile'
 $allowed=Join-Path $audit 'Notes\map-surveys'
 $batch=[IO.Path]::GetFullPath($BatchDirectory)
@@ -23,24 +23,24 @@ function SaveStatus {
 }
 function RestoreFiles([string]$root){
     Copy-Item -LiteralPath "$root\backup\autoexec_ns_server.cfg" -Destination "$profile\mods\Northstar.CustomServers\mod\cfg\autoexec_ns_server.cfg" -Force
-    Copy-Item -LiteralPath "$root\backup\cycle-mod.json" -Destination "$profile\mods\James.BotCycleTest\mod.json" -Force
-    Copy-Item -LiteralPath "$root\backup\persistence-server.nut" -Destination "$profile\mods\James.LocalPersistence\mod\scripts\vscripts\james_local_persistence.nut" -Force
-    Copy-Item -LiteralPath "$root\backup\survey-harness.nut" -Destination "$profile\mods\James.MapSurvey\mod\scripts\vscripts\james_map_survey.nut" -Force
-    foreach($f in Get-ChildItem "$root\backup\test-saves" -Filter '*.json'){Copy-Item -LiteralPath $f.FullName -Destination "$profile\save_data\James.LocalPersistence" -Force}
-    $disabled="$profile\mods\James.BotCycleTest\mod.json.map-survey-disabled"
+    Copy-Item -LiteralPath "$root\backup\cycle-mod.json" -Destination "$profile\mods\BT7274.BotCycleTest\mod.json" -Force
+    Copy-Item -LiteralPath "$root\backup\persistence-server.nut" -Destination "$profile\mods\BT7274.LocalPersistence\mod\scripts\vscripts\bt7274_local_persistence.nut" -Force
+    Copy-Item -LiteralPath "$root\backup\survey-harness.nut" -Destination "$profile\mods\BT7274.MapSurvey\mod\scripts\vscripts\bt7274_map_survey.nut" -Force
+    foreach($f in Get-ChildItem "$root\backup\test-saves" -Filter '*.json'){Copy-Item -LiteralPath $f.FullName -Destination "$profile\save_data\BT7274.LocalPersistence" -Force}
+    $disabled="$profile\mods\BT7274.BotCycleTest\mod.json.map-survey-disabled"
     if(Test-Path $disabled){Remove-Item -LiteralPath $disabled -Force}
-    if(Test-Path "$profile\mods\James.MapSurvey\mod.json"){Move-Item -LiteralPath "$profile\mods\James.MapSurvey\mod.json" -Destination "$root\survey-mod.json" -Force}
+    if(Test-Path "$profile\mods\BT7274.MapSurvey\mod.json"){Move-Item -LiteralPath "$profile\mods\BT7274.MapSurvey\mod.json" -Destination "$root\survey-mod.json" -Force}
 }
 function CheckRestored([string]$root){
     $pairs=@(
         @('autoexec_ns_server.cfg','mods\Northstar.CustomServers\mod\cfg\autoexec_ns_server.cfg'),
-        @('cycle-mod.json','mods\James.BotCycleTest\mod.json'),
-        @('persistence-server.nut','mods\James.LocalPersistence\mod\scripts\vscripts\james_local_persistence.nut'),
-        @('survey-harness.nut','mods\James.MapSurvey\mod\scripts\vscripts\james_map_survey.nut'))
+        @('cycle-mod.json','mods\BT7274.BotCycleTest\mod.json'),
+        @('persistence-server.nut','mods\BT7274.LocalPersistence\mod\scripts\vscripts\bt7274_local_persistence.nut'),
+        @('survey-harness.nut','mods\BT7274.MapSurvey\mod\scripts\vscripts\bt7274_map_survey.nut'))
     $checks=@(foreach($pair in $pairs){[pscustomobject]@{file=$pair[0];matches=(Get-FileHash "$root\backup\$($pair[0])").Hash -eq (Get-FileHash "$profile\$($pair[1])").Hash}})
-    $checks+=@(foreach($f in Get-ChildItem "$root\backup\test-saves" -Filter '*.json'){[pscustomobject]@{file=$f.Name;matches=(Get-FileHash $f.FullName).Hash -eq (Get-FileHash "$profile\save_data\James.LocalPersistence\$($f.Name)").Hash}})
-    $checks+=[pscustomobject]@{file='survey disabled';matches=-not(Test-Path "$profile\mods\James.MapSurvey\mod.json")}
-    $checks+=[pscustomobject]@{file='normal save unchanged';matches=(Get-FileHash "$audit\local-test-profile\save_data\James.LocalPersistence\loadouts_LOCAL_PLAYER_UID.json").Hash -eq $plan.real_save_sha256}
+    $checks+=@(foreach($f in Get-ChildItem "$root\backup\test-saves" -Filter '*.json'){[pscustomobject]@{file=$f.Name;matches=(Get-FileHash $f.FullName).Hash -eq (Get-FileHash "$profile\save_data\BT7274.LocalPersistence\$($f.Name)").Hash}})
+    $checks+=[pscustomobject]@{file='survey disabled';matches=-not(Test-Path "$profile\mods\BT7274.MapSurvey\mod.json")}
+    $checks+=[pscustomobject]@{file='normal save unchanged';matches=(Get-FileHash "$audit\local-test-profile\save_data\BT7274.LocalPersistence\loadouts_LOCAL_PLAYER_UID.json").Hash -eq $plan.real_save_sha256}
     foreach($protected in @($plan.protected_files)){
         if($null-eq$protected){continue}
         $checks+=[pscustomobject]@{file=$protected.label;matches=(Get-FileHash -LiteralPath $protected.path).Hash -eq $protected.sha256}
@@ -59,10 +59,10 @@ try{
         $root=Join-Path $batch ('{0:D2}-{1}' -f $i,$map)
         New-Item -ItemType Directory -Path "$root\backup\test-saves" -Force|Out-Null
         Copy-Item "$profile\mods\Northstar.CustomServers\mod\cfg\autoexec_ns_server.cfg" "$root\backup\autoexec_ns_server.cfg"
-        Copy-Item "$profile\mods\James.BotCycleTest\mod.json" "$root\backup\cycle-mod.json"
-        Copy-Item "$profile\mods\James.LocalPersistence\mod\scripts\vscripts\james_local_persistence.nut" "$root\backup\persistence-server.nut"
-        Copy-Item "$profile\mods\James.MapSurvey\mod\scripts\vscripts\james_map_survey.nut" "$root\backup\survey-harness.nut"
-        Get-ChildItem "$profile\save_data\James.LocalPersistence" -Filter '*.json'|ForEach-Object {Copy-Item $_.FullName "$root\backup\test-saves"}
+        Copy-Item "$profile\mods\BT7274.BotCycleTest\mod.json" "$root\backup\cycle-mod.json"
+        Copy-Item "$profile\mods\BT7274.LocalPersistence\mod\scripts\vscripts\bt7274_local_persistence.nut" "$root\backup\persistence-server.nut"
+        Copy-Item "$profile\mods\BT7274.MapSurvey\mod\scripts\vscripts\bt7274_map_survey.nut" "$root\backup\survey-harness.nut"
+        Get-ChildItem "$profile\save_data\BT7274.LocalPersistence" -Filter '*.json'|ForEach-Object {Copy-Item $_.FullName "$root\backup\test-saves"}
         Copy-Item "$template\survey-mod.json" "$root\survey-mod.json"
         Copy-Item "$template\survey-persistence-readonly.nut" "$root\survey-persistence-readonly.nut"
         Copy-Item "$template\watcher-template.ps1" "$root\watcher-template.ps1"
@@ -73,7 +73,7 @@ try{
         $harness=[regex]::Replace($harness,'array<string> maps = \[[^\r\n]+\]',('array<string> maps = ["'+$map+'"]'))
         [IO.File]::WriteAllText("$root\survey-one-map.nut",$harness,[Text.UTF8Encoding]::new($false))
         $starter=(Get-Content -Raw "$template\Start-EdenControl.ps1").Replace("'mp_eden'",("'"+$map+"'"))
-        $stage='Copy-Item -LiteralPath "$root\survey-one-map.nut" -Destination "$profile\mods\James.MapSurvey\mod\scripts\vscripts\james_map_survey.nut" -Force'
+        $stage='Copy-Item -LiteralPath "$root\survey-one-map.nut" -Destination "$profile\mods\BT7274.MapSurvey\mod\scripts\vscripts\bt7274_map_survey.nut" -Force'
         $starter=$starter.Replace('$cfg=Join-Path $profile',($stage+"`r`n"+'$cfg=Join-Path $profile'))
         [IO.File]::WriteAllText("$root\Start-Match.ps1",$starter,[Text.UTF8Encoding]::new($false))
         $tokens=$null;$parseErrors=$null

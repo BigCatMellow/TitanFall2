@@ -85,7 +85,7 @@ Reports: sessions/combat-nslog2026-10-24_23-10-17/combat-summary.json and
 combat.csv via tools/Export-CombatDecisions.ps1. General movement report and
 replay use sessions/nslog2026-10-24_23-10-17 via Export-BotSession.ps1.
 The test harness is archived in tests/combat-decisions-v16. The original
-James.BotCycleTest harness was restored after testing.
+BT7274.BotCycleTest harness was restored after testing.
 
 Everyday launch: nslog2026-10-24 23-16-24.txt, build v16. At 23:17:12 restored
 902 fields and applied player recharge/reload modifiers; UI cache mismatch 0.
@@ -104,7 +104,7 @@ and value: `bot_combat_decisions 0`). To persist, change the solo autoexec's
 setting to 0. This retains v16 telemetry and all v15 safety/lifecycle fixes.
 Full rollback: close Northstar and run Restore-Before-Combat.cmd. It verifies
 and restores the solo v15 DLL/config, preserving current save files and
-James.LocalPersistence 1.2.1, TacticalRecharge and WeaponReload. It does not
+BT7274.LocalPersistence 1.2.1, TacticalRecharge and WeaponReload. It does not
 replace the working source checkout. Regular Program Files remains v12.
 
 Final normal-profile check: all16 occupied player slots sampled; new

@@ -85,10 +85,10 @@ $lines+=@(foreach($g in $result|Group-Object cohort){
 })
 $lines|Set-Content -LiteralPath "$out/COVERAGE.md"
 foreach($rel in @('Notes/tests/weapon-reload-20261024/results.txt','Notes/tests/tactical-recharge-20261024/results.txt',
-    'Notes/tests/weapon-reload-20261024/James.ReloadTest/mod/scripts/vscripts/james_reload_test.nut',
-    'Notes/tests/tactical-recharge-20261024/James.TacticalProbe/mod/scripts/vscripts/james_tactical_probe.nut',
+    'Notes/tests/weapon-reload-20261024/BT7274.ReloadTest/mod/scripts/vscripts/bt7274_reload_test.nut',
+    'Notes/tests/tactical-recharge-20261024/BT7274.TacticalProbe/mod/scripts/vscripts/bt7274_tactical_probe.nut',
     'bp_ort/src/bots/cmds/basic_combat.rs','bp_ort/src/bots/combat_decisions.rs')){$inputFiles.Add($rel)}
-foreach($mod in @('James.WeaponReload','James.TacticalRecharge')){
+foreach($mod in @('BT7274.WeaponReload','BT7274.TacticalRecharge')){
     Get-ChildItem -LiteralPath "$repo/$mod" -Recurse -File|ForEach-Object{$inputFiles.Add($_.FullName.Substring($repo.Length+1).Replace('\','/'))}
 }
 $hashes=@(foreach($rel in $inputFiles|Sort-Object -Unique){

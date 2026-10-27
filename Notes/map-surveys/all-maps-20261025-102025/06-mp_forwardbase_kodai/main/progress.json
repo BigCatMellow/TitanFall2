@@ -3,7 +3,7 @@
   "updated": "2026-10-25T11:59:57.7352287-04:00",
   "smoke": false,
   "pid": 267228,
-  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 11-46-00.txt",
+  "log": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 11-46-00.txt",
   "current": {
     "map": "mp_forwardbase_kodai",
     "index": "0",

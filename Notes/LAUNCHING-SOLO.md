@@ -1,7 +1,7 @@
 # Launch the custom solo setup
 
 Double-click the desktop shortcut **Northstar - Solo Bots (8v8)**.
-It runs `C:\Users\james\northstar-crash-audit\Play-Solo-Bots.cmd` through
+It runs `%USERPROFILE%\northstar-crash-audit\Play-Solo-Bots.cmd` through
 Windows cmd.exe, with a literal absolute script argument. This avoids
 user-known-folder shortcut resolution changing the target in a sandbox.
 The assistant is not needed to launch or keep the game running.
@@ -32,7 +32,7 @@ For a file/path preflight without launching:
 `Play-Solo-Bots.cmd --check`.
 
 Northstar parses the raw command line for -profile=. Quote only its value:
-`-profile="C:\Users\james\northstar-crash-audit\local-test-profile"`.
+`-profile="%USERPROFILE%\northstar-crash-audit\local-test-profile"`.
 Quoting the whole argument as "-profile=..." leaves a trailing quote in
 Northstar's parsed directory and triggers the misleading writable-log warning.
 This was reproduced and corrected during launcher testing; no permission

@@ -1,5 +1,5 @@
 {
-  "source_log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915\\main\\maps\\01-mp_eden.log",
+  "source_log": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915\\main\\maps\\01-mp_eden.log",
   "exported": "2026-10-25T08:35:46.4245488-04:00",
   "structured": true,
   "build_line": "[2026-10-25] [08:19:19] [BP-ORT000] [info] local build: combat-decisions-v16 (v15 navigation plus optional weapon-range and ammo decisions)",

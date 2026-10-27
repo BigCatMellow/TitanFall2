@@ -1,6 +1,6 @@
 {
   "watcher_pid": 262724,
   "started": "2026-10-25T11:46:00.5933393-04:00",
-  "run": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\06-mp_forwardbase_kodai\\main",
+  "run": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\06-mp_forwardbase_kodai\\main",
   "game_pid": 267228
 }

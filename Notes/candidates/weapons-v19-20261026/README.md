@@ -20,7 +20,7 @@ map-survey history and the Alternator/Volt correction.
 Damage, RPM, magazine values, bot aim0.78, human tactical recharge0.5 and normal
 human+15bot8v8 remain preserved. Role balance is human-only; bot opt-in stays0.
 Source add-on defaults remain opt-in/off, while the normal profile explicitly
-sets `james_ads_trial 1` and `solo_weapon_balance 1`. Existing shortcut/solo launcher
+sets `bt7274_ads_trial 1` and `solo_weapon_balance 1`. Existing shortcut/solo launcher
 continues loading this profile; no new launcher is needed.
 
 The thirty-weapon reference snapshot remains research, not a blanket stat
@@ -62,9 +62,9 @@ deployment backup: before-weapons-v19-deploy-20261026-183629, both under the
 audit Notes/backups folder. Current saves were copied for protection, never
 restored from historical surveys. Core/game installation files were not changed.
 
-For only the new handling/role trial: set `james_ads_trial 0`,
+For only the new handling/role trial: set `bt7274_ads_trial 0`,
 `solo_weapon_balance 0` and `solo_weapon_balance_bots 0`, then respawn/reselect.
 For full rollback, close the game, restore the backup native DLL, server.cfg,
 enabledmods.json and prior reload folder; explicitly disable the newly installed
-James.WeaponHandling0.2.0 and Solo.WeaponBalance0.1.0. Absence from enabledmods
+BT7274.WeaponHandling0.2.0 and Solo.WeaponBalance0.1.0. Absence from enabledmods
 can auto-enable an installed add-on. Never overwrite current save_data.

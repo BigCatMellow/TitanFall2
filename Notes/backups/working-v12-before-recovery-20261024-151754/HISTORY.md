@@ -46,7 +46,7 @@ nodes, and reduced repeated recovery jumping. Eleven regression tests passed.
 
 Raised manager max/target to 16 total players (one human, 15 bots). The solo
 launcher explicitly requests the 16-player playlist cap. Fifteen bot joins,
-movement, and combat were observed; James reported the result was great.
+movement, and combat were observed; BT-7274 reported the result was great.
 The code's 32-client ceiling has not been stress-tested as a solo match.
 
 ## Glitch round reviewed on 2026-10-24
@@ -83,7 +83,7 @@ match was opened for a third-map check.
 The user reported Pilot/Titan presets disappearing between solo instances.
 The direct local connection uses insecure authentication, whose core
 persistence-write path has no disk-save implementation. Added the Squirrel
-James.LocalPersistence 1.1.0 add-on using named persistent fields and Safe IO.
+BT7274.LocalPersistence 1.1.0 add-on using named persistent fields and Safe IO.
 It saves edits and changed fields on a one-second poll, restores on connect,
 and retains a previous snapshot. Empty enum values use stock helper empty
 strings so the JSON encoder does not drop them. The v12 bot DLL and chosen

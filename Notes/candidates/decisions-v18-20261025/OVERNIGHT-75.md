@@ -1,6 +1,6 @@
 # Overnight map survey — 2026-10-25
 
-James authorized a 75-point team goal for the remaining maps and unattended
+BT-7274 authorized a 75-point team goal for the remaining maps and unattended
 completion while asleep. The already-running Homestead round was preserved:
 195–192 at the 15-minute cap. Kodai, Boomtown and Homestead are now complete.
 Their configured goal was 200; keep that cohort separate from the shorter runs.
@@ -39,7 +39,7 @@ not evidence for changing difficulty or a claim about its full-length outcome.
 
 ## Current session and recovery
 
-Private root: `C:\Users\james\northstar-crash-audit\Notes\map-surveys`.
+Private root: `%USERPROFILE%\northstar-crash-audit\Notes\map-surveys`.
 Read `current-v18-session.json`, then the current batch's `status.json`.
 The new batch is `decisions-v18-overnight75-20261025`.
 

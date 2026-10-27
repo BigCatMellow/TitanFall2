@@ -1,0 +1,21 @@
+{
+  "Name": "BT7274.WeaponReload",
+  "Description": "10% shorter reloads for the local solo human's G2, Alternator, R-201 and CAR.",
+  "Version": "1.0.0",
+  "LoadPriority": 41,
+  "ConVars": [
+    {
+      "Name": "bt7274_weapon_reload",
+      "DefaultValue": "1"
+    }
+  ],
+  "Scripts": [
+    {
+      "Path": "bt7274_weapon_reload.nut",
+      "RunOn": "SERVER && MP",
+      "ServerCallback": {
+        "After": "BT7274WeaponReload_Init"
+      }
+    }
+  ]
+}

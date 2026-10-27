@@ -3,7 +3,7 @@
 ## Bot limitations
 
 - **Hide and Seek compatibility — deferred, user-reported 2026-10-24.**
-  James reports bots do not seem to work in this mode. Not urgent; preserve
+  BT-7274 reports bots do not seem to work in this mode. Not urgent; preserve
   the working solo setup and investigate in a future pass. Exact symptoms
   (not spawning, idle movement, or incorrect hider/seeker behavior), mode
   implementation and reproduction steps are not yet verified. Inspect
@@ -39,7 +39,7 @@
    Program Files profile has its own DLL backup, which may require elevated
    filesystem access to restore.
 
-`C:\Users\james\northstar-crash-audit\Read-CrashDump.ps1` can inspect dumps.
+`%USERPROFILE%\northstar-crash-audit\Read-CrashDump.ps1` can inspect dumps.
 Its raw stack-pointer candidates are not a trustworthy unwound call stack.
 Keep matching DLL debug symbols and the exact build hash when interpreting one.
 
@@ -57,7 +57,7 @@ Read RESULTS-v14.md and verify the current approved hash in CURRENT-SETUP.md.
 ## Local loadouts
 
 Direct-map solo sessions bypass cloud loadout persistence. The everyday
-profile now uses James.LocalPersistence; see LOCAL-LOADOUTS.md. Current version 1.2.1 stores 902 named equipment/basic XP fields locally; see PERSISTENCE-REPAIR-1.2.md. It does not save every statistic or purchase. Keep the mod folder
+profile now uses BT7274.LocalPersistence; see LOCAL-LOADOUTS.md. Current version 1.2.1 stores 902 named equipment/basic XP fields locally; see PERSISTENCE-REPAIR-1.2.md. It does not save every statistic or purchase. Keep the mod folder
 name and profile path stable. Presets lost before installation may need to
 be recreated once. Never use the archived raw-buffer v13 restore experiment.
 

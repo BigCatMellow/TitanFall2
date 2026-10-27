@@ -1,6 +1,6 @@
 {
   "watcher_pid": 254132,
   "started": "2026-10-25T10:55:41.0001899-04:00",
-  "run": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3\\main",
+  "run": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3\\main",
   "game_pid": 258132
 }

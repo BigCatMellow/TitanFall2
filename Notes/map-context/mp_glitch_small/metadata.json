@@ -1,5 +1,5 @@
 {
-  "source": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_glitch_small.nm",
+  "source": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_glitch_small.nm",
   "sha256": "518157A0D39D3A0FD356EB896F1B9186DFC9F272C9E58A38D4CD4B1E6BA909A3",
   "set_version": 5,
   "tile_version": 13,

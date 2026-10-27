@@ -1,5 +1,5 @@
 {
-  "source_log": "C:\\Users\\james\\northstar-crash-audit\\local-test-profile\\logs\\nslog2026-10-24 14-13-53.txt",
+  "source_log": "%USERPROFILE%\\northstar-crash-audit\\local-test-profile\\logs\\nslog2026-10-24 14-13-53.txt",
   "exported": "2026-10-24T15:12:53.5278231-04:00",
   "structured": true,
   "build_line": "[2026-10-24] [14:13:54] [BP-ORT000] [info] local build: team-observer-v12 (team-local pursuit claims and structured telemetry)",

@@ -12,10 +12,10 @@ if ($VerifyOnly) { "Verified v11 rollback files and DLL hash: $expected"; return
 if (Get-Process NorthstarLauncher -ErrorAction SilentlyContinue) {
     throw 'Close Northstar before restoring the previous solo build.'
 }
-$profile='C:\Users\james\northstar-crash-audit\local-test-profile'
+$profile="$env:USERPROFILE\northstar-crash-audit\local-test-profile"
 Copy-Item -LiteralPath $dll -Destination "$profile\plugins\bp_ort.dll" -Force
 Copy-Item -LiteralPath (Join-Path $backup 'solo-autoexec.cfg') -Destination "$profile\mods\Northstar.CustomServers\mod\cfg\autoexec_ns_server.cfg" -Force
-Copy-Item -LiteralPath (Join-Path $backup 'Play-Solo-Bots.cmd') -Destination 'C:\Users\james\northstar-crash-audit\Play-Solo-Bots.cmd' -Force
+Copy-Item -LiteralPath (Join-Path $backup 'Play-Solo-Bots.cmd') -Destination "$env:USERPROFILE\northstar-crash-audit\Play-Solo-Bots.cmd" -Force
 if ((Get-FileHash -LiteralPath "$profile\plugins\bp_ort.dll" -Algorithm SHA256).Hash -ne $expected) { throw 'Restored DLL verification failed.' }
 "Restored v11 solo 8v8 build: $expected"
 "$(Get-Date -Format o): Restored v11 solo DLL/config/launcher using Restore-Previous-Solo.ps1." |

@@ -10,71 +10,71 @@
       "sha256": "3f11dfee7a820eb7024346e8b6b2695e2afea5989d2e687c344216a19d971d3a"
     },
     {
-      "file": "James.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
+      "file": "BT7274.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
       "sha256": "d3ebb2295891f7d11331e422efa9d7e72d0fa3b7a861ce0bb22d49364d4e431d"
     },
     {
-      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
+      "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
       "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
     },
     {
-      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
+      "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
       "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
     },
     {
-      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
+      "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
       "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
     },
     {
-      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
+      "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
       "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
     },
     {
-      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_deployable_cover.txt",
+      "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_deployable_cover.txt",
       "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
     },
     {
-      "file": "James.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_grenade_sonar.txt",
+      "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_grenade_sonar.txt",
       "sha256": "f4e5a1133242014d8809ca56161646f2f4d42d2564468d862a6fefdef195531e"
     },
     {
-      "file": "James.TacticalRecharge/mod.json",
+      "file": "BT7274.TacticalRecharge/mod.json",
       "sha256": "bbb369920817d6a2075ee052adf4614d7e66a785c16b3a1853cef5e499b55321"
     },
     {
-      "file": "James.TacticalRecharge/mod/scripts/vscripts/james_tactical_recharge.nut",
+      "file": "BT7274.TacticalRecharge/mod/scripts/vscripts/bt7274_tactical_recharge.nut",
       "sha256": "0d4cd082b008f2da85fcfaf7e2c79ba4a950270ed03dec3dce42b55915164513"
     },
     {
-      "file": "James.TacticalRecharge/README.md",
+      "file": "BT7274.TacticalRecharge/README.md",
       "sha256": "3a685196eb83d01d479d45795c30ad9f11e9f8d9cb514b19aa701f9964f10ac4"
     },
     {
-      "file": "James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt",
+      "file": "BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt",
       "sha256": "ba85f538f5a4993abbe0d7a5f8fda26bf694209770a92896e1331bc39f18d7e8"
     },
     {
-      "file": "James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt",
+      "file": "BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt",
       "sha256": "ba85f538f5a4993abbe0d7a5f8fda26bf694209770a92896e1331bc39f18d7e8"
     },
     {
-      "file": "James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt",
+      "file": "BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt",
       "sha256": "ba85f538f5a4993abbe0d7a5f8fda26bf694209770a92896e1331bc39f18d7e8"
     },
     {
-      "file": "James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt",
+      "file": "BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt",
       "sha256": "ba85f538f5a4993abbe0d7a5f8fda26bf694209770a92896e1331bc39f18d7e8"
     },
     {
-      "file": "James.WeaponReload/mod.json",
+      "file": "BT7274.WeaponReload/mod.json",
       "sha256": "9710b9b6ec9284d58bd2cbbcac9209ab7e7bda55e4b9d96657bf5ac0e2c7a1b9"
     },
     {
-      "file": "James.WeaponReload/mod/scripts/vscripts/james_weapon_reload.nut",
+      "file": "BT7274.WeaponReload/mod/scripts/vscripts/bt7274_weapon_reload.nut",
       "sha256": "d8f2f9f782b7ff05cac6d11be33935a3efd5577b885954ccd07f408c050ed0b7"
     },
     {
-      "file": "James.WeaponReload/README.md",
+      "file": "BT7274.WeaponReload/README.md",
       "sha256": "0c3df281742666cf573ea39da5ba742df53a055d589a1ce50bb47be8ffa1512f"
     },
     {
@@ -222,7 +222,7 @@
       "sha256": "45e282e829003460a03cf3700822d2558c5eb738546c16ab1c1a93167ae7001c"
     },
     {
-      "file": "Notes/tests/tactical-recharge-20261024/James.TacticalProbe/mod/scripts/vscripts/james_tactical_probe.nut",
+      "file": "Notes/tests/tactical-recharge-20261024/BT7274.TacticalProbe/mod/scripts/vscripts/bt7274_tactical_probe.nut",
       "sha256": "72a7454dd4533f3bcdd55277f124bdf615e25c369ade438a69e354313e7b582f"
     },
     {
@@ -230,7 +230,7 @@
       "sha256": "f303b1f85c4f54853c59c5ae557d1babd992af415024e560ac30683999a478a0"
     },
     {
-      "file": "Notes/tests/weapon-reload-20261024/James.ReloadTest/mod/scripts/vscripts/james_reload_test.nut",
+      "file": "Notes/tests/weapon-reload-20261024/BT7274.ReloadTest/mod/scripts/vscripts/bt7274_reload_test.nut",
       "sha256": "6bc11ff4c40ce7b1f172501a4dc07c225e81b70bd1884c6f7312141fbf73c8b8"
     },
     {

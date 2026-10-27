@@ -43,8 +43,8 @@ int function WeaponNotes_Life(entity player)
 }
 string function WeaponNotes_Config()
 {
-    return string(GetConVarBool("james_ads_trial"))+":"+string(GetConVarBool("solo_weapon_balance"))+":"
-        +string(GetConVarBool("solo_weapon_balance_bots"))+":"+string(GetConVarBool("james_weapon_reload"))+":"+string(GetConVarBool("james_tactical_recharge"))
+    return string(GetConVarBool("bt7274_ads_trial"))+":"+string(GetConVarBool("solo_weapon_balance"))+":"
+        +string(GetConVarBool("solo_weapon_balance_bots"))+":"+string(GetConVarBool("bt7274_weapon_reload"))+":"+string(GetConVarBool("bt7274_tactical_recharge"))
 }
 void function WeaponNotes_Context()
 {

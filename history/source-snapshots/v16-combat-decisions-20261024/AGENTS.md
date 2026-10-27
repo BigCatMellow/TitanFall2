@@ -1,9 +1,9 @@
 # Northstar solo bot workspace
 
-This is James's live bot development checkout. Before continuing, read:
+This is BT-7274's live bot development checkout. Before continuing, read:
 
-- `C:\Users\james\northstar-crash-audit\Notes\CURRENT-SETUP.md`
-- `C:\Users\james\northstar-crash-audit\Notes\HANDOFF.md`
+- `%USERPROFILE%\northstar-crash-audit\Notes\CURRENT-SETUP.md`
+- `%USERPROFILE%\northstar-crash-audit\Notes\HANDOFF.md`
 
 Keep the user's selected 8v8 population. Latest aim-error choice is 0.78,
 a tiny step from 0.80 saved on 2026-10-24; verify current runtime logs before

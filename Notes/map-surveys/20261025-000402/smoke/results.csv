@@ -1,3 +1,3 @@
 "valid","log_file","reason","map","militia","elapsed","imc","index"
-"true","C:\Users\james\northstar-crash-audit\Notes\map-surveys\20261025-000402\smoke\maps\01-mp_lf_meadow.log","score_limit","mp_lf_meadow","15","65.3","22","0"
-"true","C:\Users\james\northstar-crash-audit\Notes\map-surveys\20261025-000402\smoke\maps\02-mp_eden.log","score_limit","mp_eden","19","115.4","21","1"
+"true","%USERPROFILE%\northstar-crash-audit\Notes\map-surveys\20261025-000402\smoke\maps\01-mp_lf_meadow.log","score_limit","mp_lf_meadow","15","65.3","22","0"
+"true","%USERPROFILE%\northstar-crash-audit\Notes\map-surveys\20261025-000402\smoke\maps\02-mp_eden.log","score_limit","mp_eden","19","115.4","21","1"

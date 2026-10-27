@@ -1,13 +1,13 @@
 {
-  "Name": "James.BotCycleTest",
+  "Name": "BT7274.BotCycleTest",
   "Description": "Isolated map-change regression harness; not installed in the regular profile.",
   "Version": "1.0.0",
   "LoadPriority": 20,
   "Scripts": [
     {
-      "Path": "james_bot_cycle_test.nut",
+      "Path": "bt7274_bot_cycle_test.nut",
       "RunOn": "SERVER && MP",
-      "ServerCallback": { "After": "JamesBotCycleTest_Init" }
+      "ServerCallback": { "After": "BT7274BotCycleTest_Init" }
     }
   ]
 }

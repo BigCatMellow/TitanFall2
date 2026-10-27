@@ -1,6 +1,6 @@
 {
   "watcher_pid": 257172,
   "started": "2026-10-25T10:22:14.7053210-04:00",
-  "run": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main",
+  "run": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main",
   "game_pid": 255920
 }

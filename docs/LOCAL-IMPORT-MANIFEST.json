@@ -1322,8 +1322,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.BotLifecycle/mod.json",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.BotLifecycle/mod.json",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.BotLifecycle/mod.json",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -1331,8 +1331,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -1340,8 +1340,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/mod.json",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/mod.json",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/mod.json",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/mod.json",
     "bytes": 715,
     "sha256": "D74C2E8EDA820B9CCB5A109344C347EB668C2BC42B18E468BD187DBD4F4D6534",
     "published_sha256": "D74C2E8EDA820B9CCB5A109344C347EB668C2BC42B18E468BD187DBD4F4D6534",
@@ -1349,8 +1349,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/README.md",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/README.md",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/README.md",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/README.md",
     "bytes": 1912,
     "sha256": "72F517389FBE3C531FCB645C6643B5C36889BA716C3AE92565C36CDD72461A61",
     "published_sha256": "72F517389FBE3C531FCB645C6643B5C36889BA716C3AE92565C36CDD72461A61",
@@ -1358,8 +1358,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_client.nut",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_client.nut",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_client.nut",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_client.nut",
     "bytes": 1719,
     "sha256": "38748F46D2B625CE80C1B782A46799E8D0E8941DDC3F01A067370688A48A460E",
     "published_sha256": "38748F46D2B625CE80C1B782A46799E8D0E8941DDC3F01A067370688A48A460E",
@@ -1367,8 +1367,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_paths.nut",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_paths.nut",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_paths.nut",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_paths.nut",
     "bytes": 2228,
     "sha256": "24C4C2BCE5E05B57DED2935ECBBFDE26571A76095670D48EC859224259FF781B",
     "published_sha256": "24C4C2BCE5E05B57DED2935ECBBFDE26571A76095670D48EC859224259FF781B",
@@ -1376,8 +1376,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_ui.nut",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_ui.nut",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_ui.nut",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_ui.nut",
     "bytes": 1604,
     "sha256": "B2D16C06FA1191115D2450B12C027AE8DD6848290FB72EF7559088045F8DFE5D",
     "published_sha256": "B2D16C06FA1191115D2450B12C027AE8DD6848290FB72EF7559088045F8DFE5D",
@@ -1385,8 +1385,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6578,
     "sha256": "16D81350D439870ECF690C2CE757F6BCB20FF9657BB02A11DD281A5A60A6C8C7",
     "published_sha256": "16D81350D439870ECF690C2CE757F6BCB20FF9657BB02A11DD281A5A60A6C8C7",
@@ -1394,8 +1394,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/mod.json",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/mod.json",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/mod.json",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/mod.json",
     "bytes": 408,
     "sha256": "BBB369920817D6A2075EE052ADF4614D7E66A785C16B3A1853CEF5E499B55321",
     "published_sha256": "BBB369920817D6A2075EE052ADF4614D7E66A785C16B3A1853CEF5E499B55321",
@@ -1403,8 +1403,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/README.md",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/README.md",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/README.md",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/README.md",
     "bytes": 1364,
     "sha256": "3A685196EB83D01D479D45795C30AD9F11E9F8D9CB514B19AA701F9964F10AC4",
     "published_sha256": "3A685196EB83D01D479D45795C30AD9F11E9F8D9CB514B19AA701F9964F10AC4",
@@ -1412,8 +1412,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
     "bytes": 235,
     "sha256": "D3EBB2295891F7D11331E422EFA9D7E72D0FA3B7A861CE0BB22D49364D4E431D",
     "published_sha256": "D3EBB2295891F7D11331E422EFA9D7E72D0FA3B7A861CE0BB22D49364D4E431D",
@@ -1421,8 +1421,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -1430,8 +1430,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -1439,8 +1439,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -1448,8 +1448,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -1457,7 +1457,7 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_deployable_cover.txt",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_deployable_cover.txt",
     "published": null,
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -1465,7 +1465,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_grenade_sonar.txt",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_grenade_sonar.txt",
     "published": null,
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -1473,8 +1473,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/mod/scripts/vscripts/james_tactical_recharge.nut",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.TacticalRecharge/mod/scripts/vscripts/james_tactical_recharge.nut",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/mod/scripts/vscripts/bt7274_tactical_recharge.nut",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.TacticalRecharge/mod/scripts/vscripts/bt7274_tactical_recharge.nut",
     "bytes": 2919,
     "sha256": "0D4CD082B008F2DA85FCFAF7E2C79BA4A950270ED03DEC3DCE42B55915164513",
     "published_sha256": "0D4CD082B008F2DA85FCFAF7E2C79BA4A950270ED03DEC3DCE42B55915164513",
@@ -1482,8 +1482,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.WeaponReload/mod.json",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.WeaponReload/mod.json",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.WeaponReload/mod.json",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.WeaponReload/mod.json",
     "bytes": 452,
     "sha256": "9710B9B6EC9284D58BD2CBBCAC9209AB7E7BDA55E4B9D96657BF5AC0E2C7A1B9",
     "published_sha256": "9710B9B6EC9284D58BD2CBBCAC9209AB7E7BDA55E4B9D96657BF5AC0E2C7A1B9",
@@ -1491,8 +1491,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.WeaponReload/README.md",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.WeaponReload/README.md",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.WeaponReload/README.md",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.WeaponReload/README.md",
     "bytes": 950,
     "sha256": "0C3DF281742666CF573EA39DA5BA742DF53A055D589A1CE50BB47BE8FFA1512F",
     "published_sha256": "0C3DF281742666CF573EA39DA5BA742DF53A055D589A1CE50BB47BE8FFA1512F",
@@ -1500,7 +1500,7 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -1508,7 +1508,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -1516,7 +1516,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -1524,7 +1524,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -1532,8 +1532,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/source/James.WeaponReload/mod/scripts/vscripts/james_weapon_reload.nut",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/James.WeaponReload/mod/scripts/vscripts/james_weapon_reload.nut",
+    "source": "backups/before-combat-decisions-20261024-230020/source/BT7274.WeaponReload/mod/scripts/vscripts/bt7274_weapon_reload.nut",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/source/BT7274.WeaponReload/mod/scripts/vscripts/bt7274_weapon_reload.nut",
     "bytes": 2017,
     "sha256": "D8F2F9F782B7FF05CAC6D11BE33935A3EFD5577B885954CCD07F408C050ED0B7",
     "published_sha256": "D8F2F9F782B7FF05CAC6D11BE33935A3EFD5577B885954CCD07F408C050ED0B7",
@@ -2036,8 +2036,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-combat-decisions-20261024-230020/test-harness/mod/scripts/vscripts/james_bot_cycle_test.nut",
-    "published": "Notes/backups/before-combat-decisions-20261024-230020/test-harness/mod/scripts/vscripts/james_bot_cycle_test.nut",
+    "source": "backups/before-combat-decisions-20261024-230020/test-harness/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
+    "published": "Notes/backups/before-combat-decisions-20261024-230020/test-harness/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
     "bytes": 1908,
     "sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
     "published_sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
@@ -2096,8 +2096,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-tactical-recharge-20261024-210739/test-harness/mod/scripts/vscripts/james_bot_cycle_test.nut",
-    "published": "Notes/backups/before-tactical-recharge-20261024-210739/test-harness/mod/scripts/vscripts/james_bot_cycle_test.nut",
+    "source": "backups/before-tactical-recharge-20261024-210739/test-harness/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
+    "published": "Notes/backups/before-tactical-recharge-20261024-210739/test-harness/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
     "bytes": 1908,
     "sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
     "published_sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
@@ -2165,8 +2165,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/before-weapon-reload-20261024-220310/test-harness/mod/scripts/vscripts/james_bot_cycle_test.nut",
-    "published": "Notes/backups/before-weapon-reload-20261024-220310/test-harness/mod/scripts/vscripts/james_bot_cycle_test.nut",
+    "source": "backups/before-weapon-reload-20261024-220310/test-harness/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
+    "published": "Notes/backups/before-weapon-reload-20261024-220310/test-harness/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
     "bytes": 1908,
     "sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
     "published_sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
@@ -2219,8 +2219,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/persistence-before-repair-20261024-164632/addon-1.1.0/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "Notes/backups/persistence-before-repair-20261024-164632/addon-1.1.0/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "backups/persistence-before-repair-20261024-164632/addon-1.1.0/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "Notes/backups/persistence-before-repair-20261024-164632/addon-1.1.0/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6268,
     "sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
     "published_sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
@@ -2285,8 +2285,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/persistence-before-repair-20261024-164632/test-harness-before/mod/scripts/vscripts/james_bot_cycle_test.nut",
-    "published": "Notes/backups/persistence-before-repair-20261024-164632/test-harness-before/mod/scripts/vscripts/james_bot_cycle_test.nut",
+    "source": "backups/persistence-before-repair-20261024-164632/test-harness-before/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
+    "published": "Notes/backups/persistence-before-repair-20261024-164632/test-harness-before/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
     "bytes": 1908,
     "sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
     "published_sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
@@ -2303,8 +2303,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/persistence-before-repair-20261024-164632/validated-lobby-flow-harness/mod/scripts/vscripts/james_bot_cycle_test.nut",
-    "published": "Notes/backups/persistence-before-repair-20261024-164632/validated-lobby-flow-harness/mod/scripts/vscripts/james_bot_cycle_test.nut",
+    "source": "backups/persistence-before-repair-20261024-164632/validated-lobby-flow-harness/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
+    "published": "Notes/backups/persistence-before-repair-20261024-164632/validated-lobby-flow-harness/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
     "bytes": 3243,
     "sha256": "9645E8E6183B177E89573700B8608E419D21C0F12C46C41AFA3828630C895B1F",
     "published_sha256": "9645E8E6183B177E89573700B8608E419D21C0F12C46C41AFA3828630C895B1F",
@@ -2312,8 +2312,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/persistence-before-repair-20261024-164632/validated-lobby-flow-harness/mod/scripts/vscripts/james_preset_lobby_probe.nut",
-    "published": "Notes/backups/persistence-before-repair-20261024-164632/validated-lobby-flow-harness/mod/scripts/vscripts/james_preset_lobby_probe.nut",
+    "source": "backups/persistence-before-repair-20261024-164632/validated-lobby-flow-harness/mod/scripts/vscripts/bt7274_preset_lobby_probe.nut",
+    "published": "Notes/backups/persistence-before-repair-20261024-164632/validated-lobby-flow-harness/mod/scripts/vscripts/bt7274_preset_lobby_probe.nut",
     "bytes": 557,
     "sha256": "D849031051FDBF6F140A431B51F15DA4F28A426FE9B4CBF097E762F19C63D1DF",
     "published_sha256": "D849031051FDBF6F140A431B51F15DA4F28A426FE9B4CBF097E762F19C63D1DF",
@@ -2443,8 +2443,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/james_local_persistence_client.nut",
-    "published": "Notes/backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/james_local_persistence_client.nut",
+    "source": "backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/bt7274_local_persistence_client.nut",
+    "published": "Notes/backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/bt7274_local_persistence_client.nut",
     "bytes": 1527,
     "sha256": "C497BF06639111956EBF32BFB84501DA63465E9EF4327CF271BC12CFBC8AC256",
     "published_sha256": "C497BF06639111956EBF32BFB84501DA63465E9EF4327CF271BC12CFBC8AC256",
@@ -2452,8 +2452,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/james_local_persistence_paths.nut",
-    "published": "Notes/backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/james_local_persistence_paths.nut",
+    "source": "backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/bt7274_local_persistence_paths.nut",
+    "published": "Notes/backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/bt7274_local_persistence_paths.nut",
     "bytes": 2228,
     "sha256": "24C4C2BCE5E05B57DED2935ECBBFDE26571A76095670D48EC859224259FF781B",
     "published_sha256": "24C4C2BCE5E05B57DED2935ECBBFDE26571A76095670D48EC859224259FF781B",
@@ -2461,8 +2461,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/james_local_persistence_ui.nut",
-    "published": "Notes/backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/james_local_persistence_ui.nut",
+    "source": "backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/bt7274_local_persistence_ui.nut",
+    "published": "Notes/backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/bt7274_local_persistence_ui.nut",
     "bytes": 1564,
     "sha256": "213F5CF1406A35EC8397A35372DB56A91DD4B5CCD70CA06A7080AE251B06E263",
     "published_sha256": "213F5CF1406A35EC8397A35372DB56A91DD4B5CCD70CA06A7080AE251B06E263",
@@ -2470,8 +2470,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "Notes/backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "Notes/backups/preview-error-before-repair-20261024-203952/addon-1.2.0/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6578,
     "sha256": "16D81350D439870ECF690C2CE757F6BCB20FF9657BB02A11DD281A5A60A6C8C7",
     "published_sha256": "16D81350D439870ECF690C2CE757F6BCB20FF9657BB02A11DD281A5A60A6C8C7",
@@ -2512,8 +2512,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/preview-error-before-repair-20261024-203952/test-harness-before/mod/scripts/vscripts/james_bot_cycle_test.nut",
-    "published": "Notes/backups/preview-error-before-repair-20261024-203952/test-harness-before/mod/scripts/vscripts/james_bot_cycle_test.nut",
+    "source": "backups/preview-error-before-repair-20261024-203952/test-harness-before/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
+    "published": "Notes/backups/preview-error-before-repair-20261024-203952/test-harness-before/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
     "bytes": 1908,
     "sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
     "published_sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
@@ -2530,8 +2530,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/preview-error-before-repair-20261024-203952/validated-preview-test/mod/scripts/vscripts/james_menu_preview_test_client.nut",
-    "published": "Notes/backups/preview-error-before-repair-20261024-203952/validated-preview-test/mod/scripts/vscripts/james_menu_preview_test_client.nut",
+    "source": "backups/preview-error-before-repair-20261024-203952/validated-preview-test/mod/scripts/vscripts/bt7274_menu_preview_test_client.nut",
+    "published": "Notes/backups/preview-error-before-repair-20261024-203952/validated-preview-test/mod/scripts/vscripts/bt7274_menu_preview_test_client.nut",
     "bytes": 2101,
     "sha256": "67252DC5C7B3201CBAE75FABB1B2E5795E3D5285CF7DDB7FA0E646AB35BA9777",
     "published_sha256": "67252DC5C7B3201CBAE75FABB1B2E5795E3D5285CF7DDB7FA0E646AB35BA9777",
@@ -2539,8 +2539,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/preview-error-before-repair-20261024-203952/validated-preview-test/mod/scripts/vscripts/james_menu_preview_test.nut",
-    "published": "Notes/backups/preview-error-before-repair-20261024-203952/validated-preview-test/mod/scripts/vscripts/james_menu_preview_test.nut",
+    "source": "backups/preview-error-before-repair-20261024-203952/validated-preview-test/mod/scripts/vscripts/bt7274_menu_preview_test.nut",
+    "published": "Notes/backups/preview-error-before-repair-20261024-203952/validated-preview-test/mod/scripts/vscripts/bt7274_menu_preview_test.nut",
     "bytes": 448,
     "sha256": "4FE879008EE6EA7269E458DB388B4C7F724D2AD2F1E985FEF5B839B1B2E0C2DA",
     "published_sha256": "4FE879008EE6EA7269E458DB388B4C7F724D2AD2F1E985FEF5B839B1B2E0C2DA",
@@ -2800,7 +2800,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/regular/mods/James.BotLifecycle/mod.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/regular/mods/BT7274.BotLifecycle/mod.json",
     "published": null,
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -2808,7 +2808,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/regular/mods/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "backups/working-v12-before-recovery-20261024-151754/regular/mods/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "published": null,
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -9424,7 +9424,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/solo/mods/James.BotLifecycle/mod.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/solo/mods/BT7274.BotLifecycle/mod.json",
     "published": null,
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -9432,7 +9432,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/solo/mods/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "backups/working-v12-before-recovery-20261024-151754/solo/mods/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "published": null,
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -9440,7 +9440,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/solo/mods/James.LocalPersistence/mod.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/solo/mods/BT7274.LocalPersistence/mod.json",
     "published": null,
     "bytes": 425,
     "sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
@@ -9448,7 +9448,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/solo/mods/James.LocalPersistence/README.md",
+    "source": "backups/working-v12-before-recovery-20261024-151754/solo/mods/BT7274.LocalPersistence/README.md",
     "published": null,
     "bytes": 1024,
     "sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
@@ -9456,7 +9456,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/solo/mods/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "backups/working-v12-before-recovery-20261024-151754/solo/mods/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "published": null,
     "bytes": 6268,
     "sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
@@ -16040,7 +16040,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/solo/save_data/James.LocalPersistence/LOCAL_PLAYER_UID.bin",
+    "source": "backups/working-v12-before-recovery-20261024-151754/solo/save_data/BT7274.LocalPersistence/LOCAL_PLAYER_UID.bin",
     "published": null,
     "bytes": 56823,
     "sha256": "1945FB6CF2491EC00AA494D369C5C24FE54B7625475D264E272C1333DCB35242",
@@ -16048,7 +16048,7 @@
     "reason": "Personal/runtime state or generated build tree"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/solo/save_data/James.LocalPersistence/loadouts_LOCAL_PLAYER_UID.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/solo/save_data/BT7274.LocalPersistence/loadouts_LOCAL_PLAYER_UID.json",
     "published": null,
     "bytes": 17881,
     "sha256": "62A5D4FEB3B9A451E8B066A8D7098C9876C972729505D55129C23AE714CF35A5",
@@ -16056,7 +16056,7 @@
     "reason": "Personal/runtime state or generated build tree"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/solo/save_data/James.LocalPersistence/previous_LOCAL_PLAYER_UID.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/solo/save_data/BT7274.LocalPersistence/previous_LOCAL_PLAYER_UID.json",
     "published": null,
     "bytes": 17881,
     "sha256": "4A7733EA88F5118118A2B3FA8DBCFBF93855BBC37B734ABF2ABEF43784B819A5",
@@ -16933,8 +16933,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/source/James.BotLifecycle/mod.json",
-    "published": "Notes/backups/working-v12-before-recovery-20261024-151754/source/James.BotLifecycle/mod.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/source/BT7274.BotLifecycle/mod.json",
+    "published": "Notes/backups/working-v12-before-recovery-20261024-151754/source/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -16942,8 +16942,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/source/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "Notes/backups/working-v12-before-recovery-20261024-151754/source/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "backups/working-v12-before-recovery-20261024-151754/source/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "Notes/backups/working-v12-before-recovery-20261024-151754/source/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -16951,8 +16951,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/source/James.LocalPersistence/mod.json",
-    "published": "Notes/backups/working-v12-before-recovery-20261024-151754/source/James.LocalPersistence/mod.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/source/BT7274.LocalPersistence/mod.json",
+    "published": "Notes/backups/working-v12-before-recovery-20261024-151754/source/BT7274.LocalPersistence/mod.json",
     "bytes": 425,
     "sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
     "published_sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
@@ -16960,8 +16960,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/source/James.LocalPersistence/README.md",
-    "published": "Notes/backups/working-v12-before-recovery-20261024-151754/source/James.LocalPersistence/README.md",
+    "source": "backups/working-v12-before-recovery-20261024-151754/source/BT7274.LocalPersistence/README.md",
+    "published": "Notes/backups/working-v12-before-recovery-20261024-151754/source/BT7274.LocalPersistence/README.md",
     "bytes": 1024,
     "sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
     "published_sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
@@ -16969,8 +16969,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/source/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "Notes/backups/working-v12-before-recovery-20261024-151754/source/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "backups/working-v12-before-recovery-20261024-151754/source/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "Notes/backups/working-v12-before-recovery-20261024-151754/source/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6268,
     "sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
     "published_sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
@@ -17487,7 +17487,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/James.BotCycleTest/mod.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/BT7274.BotCycleTest/mod.json",
     "published": null,
     "bytes": 344,
     "sha256": "4A6DB689CA00DAA9A29B4A15CB8B4AD607D3ECD9A9E5C729274F79EEBD8E3AAA",
@@ -17495,7 +17495,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/James.BotCycleTest/mod/scripts/vscripts/james_bot_cycle_test.nut",
+    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/BT7274.BotCycleTest/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
     "published": null,
     "bytes": 1741,
     "sha256": "A83BFDEF11B8B8255C2BC0570085E1758566482499C0142D654FB32E39BCBF24",
@@ -17503,7 +17503,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/James.BotLifecycle/mod.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/BT7274.BotLifecycle/mod.json",
     "published": null,
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -17511,7 +17511,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "published": null,
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -17519,7 +17519,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/James.LocalPersistence/mod.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/BT7274.LocalPersistence/mod.json",
     "published": null,
     "bytes": 425,
     "sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
@@ -17527,7 +17527,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "backups/working-v12-before-recovery-20261024-151754/test/mods/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "published": null,
     "bytes": 6268,
     "sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
@@ -24111,7 +24111,7 @@
     "reason": "Installed third-party/game mod backup; use upstream distribution"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/test/save_data/James.LocalPersistence/LOCAL_PLAYER_UID.bak",
+    "source": "backups/working-v12-before-recovery-20261024-151754/test/save_data/BT7274.LocalPersistence/LOCAL_PLAYER_UID.bak",
     "published": null,
     "bytes": 56823,
     "sha256": "1945FB6CF2491EC00AA494D369C5C24FE54B7625475D264E272C1333DCB35242",
@@ -24119,7 +24119,7 @@
     "reason": "Personal/runtime state or generated build tree"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/test/save_data/James.LocalPersistence/LOCAL_PLAYER_UID.bin",
+    "source": "backups/working-v12-before-recovery-20261024-151754/test/save_data/BT7274.LocalPersistence/LOCAL_PLAYER_UID.bin",
     "published": null,
     "bytes": 56823,
     "sha256": "8CA600DBAC16737E78E97F7C8E34FA50067F03FDBE75F06F26E657D01AB8BFD5",
@@ -24127,7 +24127,7 @@
     "reason": "Personal/runtime state or generated build tree"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/test/save_data/James.LocalPersistence/loadouts_LOCAL_PLAYER_UID.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/test/save_data/BT7274.LocalPersistence/loadouts_LOCAL_PLAYER_UID.json",
     "published": null,
     "bytes": 17882,
     "sha256": "99BCFB1AD36CB0F828C3F0EE60643D5904545F24B6A2F8ED34335FAB6378FFDB",
@@ -24135,7 +24135,7 @@
     "reason": "Personal/runtime state or generated build tree"
   },
   {
-    "source": "backups/working-v12-before-recovery-20261024-151754/test/save_data/James.LocalPersistence/previous_LOCAL_PLAYER_UID.json",
+    "source": "backups/working-v12-before-recovery-20261024-151754/test/save_data/BT7274.LocalPersistence/previous_LOCAL_PLAYER_UID.json",
     "published": null,
     "bytes": 17882,
     "sha256": "B30E47EB1F890EA9A5F088A29B7AD67286E40A7DDE6F229D0FE6C1D3E71A3EED",
@@ -31826,8 +31826,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "source-snapshots/v12-source-20261024-141554/James.BotLifecycle/mod.json",
-    "published": "Notes/source-snapshots/v12-source-20261024-141554/James.BotLifecycle/mod.json",
+    "source": "source-snapshots/v12-source-20261024-141554/BT7274.BotLifecycle/mod.json",
+    "published": "Notes/source-snapshots/v12-source-20261024-141554/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -31835,8 +31835,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v12-source-20261024-141554/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "Notes/source-snapshots/v12-source-20261024-141554/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "source-snapshots/v12-source-20261024-141554/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "Notes/source-snapshots/v12-source-20261024-141554/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -33136,8 +33136,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "source-snapshots/v14-bounded-20261024/James.BotLifecycle/mod.json",
-    "published": "Notes/source-snapshots/v14-bounded-20261024/James.BotLifecycle/mod.json",
+    "source": "source-snapshots/v14-bounded-20261024/BT7274.BotLifecycle/mod.json",
+    "published": "Notes/source-snapshots/v14-bounded-20261024/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -33145,8 +33145,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-bounded-20261024/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "Notes/source-snapshots/v14-bounded-20261024/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "source-snapshots/v14-bounded-20261024/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "Notes/source-snapshots/v14-bounded-20261024/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -33154,8 +33154,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-bounded-20261024/James.LocalPersistence/mod.json",
-    "published": "Notes/source-snapshots/v14-bounded-20261024/James.LocalPersistence/mod.json",
+    "source": "source-snapshots/v14-bounded-20261024/BT7274.LocalPersistence/mod.json",
+    "published": "Notes/source-snapshots/v14-bounded-20261024/BT7274.LocalPersistence/mod.json",
     "bytes": 425,
     "sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
     "published_sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
@@ -33163,8 +33163,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-bounded-20261024/James.LocalPersistence/README.md",
-    "published": "Notes/source-snapshots/v14-bounded-20261024/James.LocalPersistence/README.md",
+    "source": "source-snapshots/v14-bounded-20261024/BT7274.LocalPersistence/README.md",
+    "published": "Notes/source-snapshots/v14-bounded-20261024/BT7274.LocalPersistence/README.md",
     "bytes": 1024,
     "sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
     "published_sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
@@ -33172,8 +33172,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-bounded-20261024/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "Notes/source-snapshots/v14-bounded-20261024/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "source-snapshots/v14-bounded-20261024/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "Notes/source-snapshots/v14-bounded-20261024/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6268,
     "sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
     "published_sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
@@ -34554,8 +34554,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "source-snapshots/v14-candidate-20261024-1525/James.BotLifecycle/mod.json",
-    "published": "Notes/source-snapshots/v14-candidate-20261024-1525/James.BotLifecycle/mod.json",
+    "source": "source-snapshots/v14-candidate-20261024-1525/BT7274.BotLifecycle/mod.json",
+    "published": "Notes/source-snapshots/v14-candidate-20261024-1525/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -34563,8 +34563,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-candidate-20261024-1525/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "Notes/source-snapshots/v14-candidate-20261024-1525/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "source-snapshots/v14-candidate-20261024-1525/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "Notes/source-snapshots/v14-candidate-20261024-1525/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -34572,8 +34572,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-candidate-20261024-1525/James.LocalPersistence/mod.json",
-    "published": "Notes/source-snapshots/v14-candidate-20261024-1525/James.LocalPersistence/mod.json",
+    "source": "source-snapshots/v14-candidate-20261024-1525/BT7274.LocalPersistence/mod.json",
+    "published": "Notes/source-snapshots/v14-candidate-20261024-1525/BT7274.LocalPersistence/mod.json",
     "bytes": 425,
     "sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
     "published_sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
@@ -34581,8 +34581,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-candidate-20261024-1525/James.LocalPersistence/README.md",
-    "published": "Notes/source-snapshots/v14-candidate-20261024-1525/James.LocalPersistence/README.md",
+    "source": "source-snapshots/v14-candidate-20261024-1525/BT7274.LocalPersistence/README.md",
+    "published": "Notes/source-snapshots/v14-candidate-20261024-1525/BT7274.LocalPersistence/README.md",
     "bytes": 1024,
     "sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
     "published_sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
@@ -34590,8 +34590,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-candidate-20261024-1525/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "Notes/source-snapshots/v14-candidate-20261024-1525/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "source-snapshots/v14-candidate-20261024-1525/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "Notes/source-snapshots/v14-candidate-20261024-1525/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6268,
     "sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
     "published_sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
@@ -35972,8 +35972,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "source-snapshots/v14-final-20261024/James.BotLifecycle/mod.json",
-    "published": "Notes/source-snapshots/v14-final-20261024/James.BotLifecycle/mod.json",
+    "source": "source-snapshots/v14-final-20261024/BT7274.BotLifecycle/mod.json",
+    "published": "Notes/source-snapshots/v14-final-20261024/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -35981,8 +35981,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-final-20261024/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "Notes/source-snapshots/v14-final-20261024/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "source-snapshots/v14-final-20261024/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "Notes/source-snapshots/v14-final-20261024/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -35990,8 +35990,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-final-20261024/James.LocalPersistence/mod.json",
-    "published": "Notes/source-snapshots/v14-final-20261024/James.LocalPersistence/mod.json",
+    "source": "source-snapshots/v14-final-20261024/BT7274.LocalPersistence/mod.json",
+    "published": "Notes/source-snapshots/v14-final-20261024/BT7274.LocalPersistence/mod.json",
     "bytes": 425,
     "sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
     "published_sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
@@ -35999,8 +35999,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-final-20261024/James.LocalPersistence/README.md",
-    "published": "Notes/source-snapshots/v14-final-20261024/James.LocalPersistence/README.md",
+    "source": "source-snapshots/v14-final-20261024/BT7274.LocalPersistence/README.md",
+    "published": "Notes/source-snapshots/v14-final-20261024/BT7274.LocalPersistence/README.md",
     "bytes": 1024,
     "sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
     "published_sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
@@ -36008,8 +36008,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-final-20261024/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "Notes/source-snapshots/v14-final-20261024/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "source-snapshots/v14-final-20261024/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "Notes/source-snapshots/v14-final-20261024/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6268,
     "sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
     "published_sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
@@ -37390,8 +37390,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "source-snapshots/v14-progress-20261024/James.BotLifecycle/mod.json",
-    "published": "Notes/source-snapshots/v14-progress-20261024/James.BotLifecycle/mod.json",
+    "source": "source-snapshots/v14-progress-20261024/BT7274.BotLifecycle/mod.json",
+    "published": "Notes/source-snapshots/v14-progress-20261024/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -37399,8 +37399,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-progress-20261024/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "Notes/source-snapshots/v14-progress-20261024/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "source-snapshots/v14-progress-20261024/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "Notes/source-snapshots/v14-progress-20261024/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -37408,8 +37408,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-progress-20261024/James.LocalPersistence/mod.json",
-    "published": "Notes/source-snapshots/v14-progress-20261024/James.LocalPersistence/mod.json",
+    "source": "source-snapshots/v14-progress-20261024/BT7274.LocalPersistence/mod.json",
+    "published": "Notes/source-snapshots/v14-progress-20261024/BT7274.LocalPersistence/mod.json",
     "bytes": 425,
     "sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
     "published_sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
@@ -37417,8 +37417,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-progress-20261024/James.LocalPersistence/README.md",
-    "published": "Notes/source-snapshots/v14-progress-20261024/James.LocalPersistence/README.md",
+    "source": "source-snapshots/v14-progress-20261024/BT7274.LocalPersistence/README.md",
+    "published": "Notes/source-snapshots/v14-progress-20261024/BT7274.LocalPersistence/README.md",
     "bytes": 1024,
     "sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
     "published_sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
@@ -37426,8 +37426,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v14-progress-20261024/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "Notes/source-snapshots/v14-progress-20261024/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "source-snapshots/v14-progress-20261024/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "Notes/source-snapshots/v14-progress-20261024/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6268,
     "sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
     "published_sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
@@ -38817,8 +38817,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "source-snapshots/v15-escape-20261024/James.BotLifecycle/mod.json",
-    "published": "Notes/source-snapshots/v15-escape-20261024/James.BotLifecycle/mod.json",
+    "source": "source-snapshots/v15-escape-20261024/BT7274.BotLifecycle/mod.json",
+    "published": "Notes/source-snapshots/v15-escape-20261024/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -38826,8 +38826,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v15-escape-20261024/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "Notes/source-snapshots/v15-escape-20261024/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "source-snapshots/v15-escape-20261024/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "Notes/source-snapshots/v15-escape-20261024/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -38835,8 +38835,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v15-escape-20261024/James.LocalPersistence/mod.json",
-    "published": "Notes/source-snapshots/v15-escape-20261024/James.LocalPersistence/mod.json",
+    "source": "source-snapshots/v15-escape-20261024/BT7274.LocalPersistence/mod.json",
+    "published": "Notes/source-snapshots/v15-escape-20261024/BT7274.LocalPersistence/mod.json",
     "bytes": 425,
     "sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
     "published_sha256": "1E608AB0139279E95F4F5808DD95D4CC7A932849B43206F7622157E487B3F008",
@@ -38844,8 +38844,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v15-escape-20261024/James.LocalPersistence/README.md",
-    "published": "Notes/source-snapshots/v15-escape-20261024/James.LocalPersistence/README.md",
+    "source": "source-snapshots/v15-escape-20261024/BT7274.LocalPersistence/README.md",
+    "published": "Notes/source-snapshots/v15-escape-20261024/BT7274.LocalPersistence/README.md",
     "bytes": 1024,
     "sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
     "published_sha256": "577E69F0043C3834F88221476BE20F33539013A124928CE19797AEF4F579FF6C",
@@ -38853,8 +38853,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "source-snapshots/v15-escape-20261024/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "Notes/source-snapshots/v15-escape-20261024/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "source-snapshots/v15-escape-20261024/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "Notes/source-snapshots/v15-escape-20261024/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6268,
     "sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
     "published_sha256": "35EB9CA355ADB6CE4600DC792EC269D5F005BB35F8A1B9AD2C294DA0A0F2C150",
@@ -39348,8 +39348,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "tests/combat-decisions-v16/james_combat_test.nut",
-    "published": "Notes/tests/combat-decisions-v16/james_combat_test.nut",
+    "source": "tests/combat-decisions-v16/bt7274_combat_test.nut",
+    "published": "Notes/tests/combat-decisions-v16/bt7274_combat_test.nut",
     "bytes": 3242,
     "sha256": "BE9B080CA6106329C6BE29539F7772CA08BE616653CFF10145E8D4B0046314EC",
     "published_sha256": "BE9B080CA6106329C6BE29539F7772CA08BE616653CFF10145E8D4B0046314EC",
@@ -39366,8 +39366,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "tests/tactical-recharge-20261024/James.TacticalProbe/mod.json",
-    "published": "Notes/tests/tactical-recharge-20261024/James.TacticalProbe/mod.json",
+    "source": "tests/tactical-recharge-20261024/BT7274.TacticalProbe/mod.json",
+    "published": "Notes/tests/tactical-recharge-20261024/BT7274.TacticalProbe/mod.json",
     "bytes": 343,
     "sha256": "58D25A3300BE94A42140BFB544199A8737C16457B79693B87DB8B1C6D42B271D",
     "published_sha256": "58D25A3300BE94A42140BFB544199A8737C16457B79693B87DB8B1C6D42B271D",
@@ -39375,8 +39375,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "tests/tactical-recharge-20261024/James.TacticalProbe/mod/scripts/vscripts/james_tactical_probe.nut",
-    "published": "Notes/tests/tactical-recharge-20261024/James.TacticalProbe/mod/scripts/vscripts/james_tactical_probe.nut",
+    "source": "tests/tactical-recharge-20261024/BT7274.TacticalProbe/mod/scripts/vscripts/bt7274_tactical_probe.nut",
+    "published": "Notes/tests/tactical-recharge-20261024/BT7274.TacticalProbe/mod/scripts/vscripts/bt7274_tactical_probe.nut",
     "bytes": 5026,
     "sha256": "9C0CB50085F69F1809F728485D6B58E3926DB5F9209B1AAF95B14B275A3E7788",
     "published_sha256": "9C0CB50085F69F1809F728485D6B58E3926DB5F9209B1AAF95B14B275A3E7788",
@@ -39425,8 +39425,8 @@
     "reason": "Personal/runtime state or generated build tree"
   },
   {
-    "source": "tests/weapon-reload-20261024/James.ReloadTest/mod.json",
-    "published": "Notes/tests/weapon-reload-20261024/James.ReloadTest/mod.json",
+    "source": "tests/weapon-reload-20261024/BT7274.ReloadTest/mod.json",
+    "published": "Notes/tests/weapon-reload-20261024/BT7274.ReloadTest/mod.json",
     "bytes": 183,
     "sha256": "BFE78035354883451A1CF9C40EB69DBF12492CF75DE14C2C70BDC98AF9257E06",
     "published_sha256": "BFE78035354883451A1CF9C40EB69DBF12492CF75DE14C2C70BDC98AF9257E06",
@@ -39434,8 +39434,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "tests/weapon-reload-20261024/James.ReloadTest/mod/scripts/vscripts/james_reload_test.nut",
-    "published": "Notes/tests/weapon-reload-20261024/James.ReloadTest/mod/scripts/vscripts/james_reload_test.nut",
+    "source": "tests/weapon-reload-20261024/BT7274.ReloadTest/mod/scripts/vscripts/bt7274_reload_test.nut",
+    "published": "Notes/tests/weapon-reload-20261024/BT7274.ReloadTest/mod/scripts/vscripts/bt7274_reload_test.nut",
     "bytes": 5069,
     "sha256": "C98D7ABE9038E54468F61CDB3C2CFA802A0B6A5945079A77E05E46AEA66FBD6A",
     "published_sha256": "C98D7ABE9038E54468F61CDB3C2CFA802A0B6A5945079A77E05E46AEA66FBD6A",
@@ -39794,8 +39794,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.BotLifecycle/mod.json",
-    "published": "automation/runtime-mods/local-test-profile/James.BotLifecycle/mod.json",
+    "source": "runtime-mods/local-test-profile/BT7274.BotLifecycle/mod.json",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -39803,8 +39803,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "automation/runtime-mods/local-test-profile/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "runtime-mods/local-test-profile/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -39812,8 +39812,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.LocalPersistence/mod.json",
-    "published": "automation/runtime-mods/local-test-profile/James.LocalPersistence/mod.json",
+    "source": "runtime-mods/local-test-profile/BT7274.LocalPersistence/mod.json",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.LocalPersistence/mod.json",
     "bytes": 715,
     "sha256": "D74C2E8EDA820B9CCB5A109344C347EB668C2BC42B18E468BD187DBD4F4D6534",
     "published_sha256": "D74C2E8EDA820B9CCB5A109344C347EB668C2BC42B18E468BD187DBD4F4D6534",
@@ -39821,8 +39821,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.LocalPersistence/README.md",
-    "published": "automation/runtime-mods/local-test-profile/James.LocalPersistence/README.md",
+    "source": "runtime-mods/local-test-profile/BT7274.LocalPersistence/README.md",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.LocalPersistence/README.md",
     "bytes": 1912,
     "sha256": "72F517389FBE3C531FCB645C6643B5C36889BA716C3AE92565C36CDD72461A61",
     "published_sha256": "72F517389FBE3C531FCB645C6643B5C36889BA716C3AE92565C36CDD72461A61",
@@ -39830,8 +39830,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_client.nut",
-    "published": "automation/runtime-mods/local-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_client.nut",
+    "source": "runtime-mods/local-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_client.nut",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_client.nut",
     "bytes": 1719,
     "sha256": "38748F46D2B625CE80C1B782A46799E8D0E8941DDC3F01A067370688A48A460E",
     "published_sha256": "38748F46D2B625CE80C1B782A46799E8D0E8941DDC3F01A067370688A48A460E",
@@ -39839,8 +39839,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_paths.nut",
-    "published": "automation/runtime-mods/local-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_paths.nut",
+    "source": "runtime-mods/local-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_paths.nut",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_paths.nut",
     "bytes": 2228,
     "sha256": "24C4C2BCE5E05B57DED2935ECBBFDE26571A76095670D48EC859224259FF781B",
     "published_sha256": "24C4C2BCE5E05B57DED2935ECBBFDE26571A76095670D48EC859224259FF781B",
@@ -39848,8 +39848,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_ui.nut",
-    "published": "automation/runtime-mods/local-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_ui.nut",
+    "source": "runtime-mods/local-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_ui.nut",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_ui.nut",
     "bytes": 1604,
     "sha256": "B2D16C06FA1191115D2450B12C027AE8DD6848290FB72EF7559088045F8DFE5D",
     "published_sha256": "B2D16C06FA1191115D2450B12C027AE8DD6848290FB72EF7559088045F8DFE5D",
@@ -39857,8 +39857,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "automation/runtime-mods/local-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "runtime-mods/local-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6578,
     "sha256": "16D81350D439870ECF690C2CE757F6BCB20FF9657BB02A11DD281A5A60A6C8C7",
     "published_sha256": "16D81350D439870ECF690C2CE757F6BCB20FF9657BB02A11DD281A5A60A6C8C7",
@@ -39866,8 +39866,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.TacticalRecharge/mod.json",
-    "published": "automation/runtime-mods/local-test-profile/James.TacticalRecharge/mod.json",
+    "source": "runtime-mods/local-test-profile/BT7274.TacticalRecharge/mod.json",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.TacticalRecharge/mod.json",
     "bytes": 408,
     "sha256": "BBB369920817D6A2075EE052ADF4614D7E66A785C16B3A1853CEF5E499B55321",
     "published_sha256": "BBB369920817D6A2075EE052ADF4614D7E66A785C16B3A1853CEF5E499B55321",
@@ -39875,8 +39875,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.TacticalRecharge/README.md",
-    "published": "automation/runtime-mods/local-test-profile/James.TacticalRecharge/README.md",
+    "source": "runtime-mods/local-test-profile/BT7274.TacticalRecharge/README.md",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.TacticalRecharge/README.md",
     "bytes": 1364,
     "sha256": "3A685196EB83D01D479D45795C30AD9F11E9F8D9CB514B19AA701F9964F10AC4",
     "published_sha256": "3A685196EB83D01D479D45795C30AD9F11E9F8D9CB514B19AA701F9964F10AC4",
@@ -39884,8 +39884,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
-    "published": "automation/runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
+    "source": "runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
     "bytes": 235,
     "sha256": "D3EBB2295891F7D11331E422EFA9D7E72D0FA3B7A861CE0BB22D49364D4E431D",
     "published_sha256": "D3EBB2295891F7D11331E422EFA9D7E72D0FA3B7A861CE0BB22D49364D4E431D",
@@ -39893,8 +39893,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
-    "published": "automation/runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
+    "source": "runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -39902,8 +39902,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
-    "published": "automation/runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
+    "source": "runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -39911,8 +39911,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
-    "published": "automation/runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
+    "source": "runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -39920,8 +39920,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
-    "published": "automation/runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
+    "source": "runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -39929,7 +39929,7 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_deployable_cover.txt",
+    "source": "runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_deployable_cover.txt",
     "published": null,
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -39937,7 +39937,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_grenade_sonar.txt",
+    "source": "runtime-mods/local-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_grenade_sonar.txt",
     "published": null,
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -39945,8 +39945,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.TacticalRecharge/mod/scripts/vscripts/james_tactical_recharge.nut",
-    "published": "automation/runtime-mods/local-test-profile/James.TacticalRecharge/mod/scripts/vscripts/james_tactical_recharge.nut",
+    "source": "runtime-mods/local-test-profile/BT7274.TacticalRecharge/mod/scripts/vscripts/bt7274_tactical_recharge.nut",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.TacticalRecharge/mod/scripts/vscripts/bt7274_tactical_recharge.nut",
     "bytes": 2919,
     "sha256": "0D4CD082B008F2DA85FCFAF7E2C79BA4A950270ED03DEC3DCE42B55915164513",
     "published_sha256": "0D4CD082B008F2DA85FCFAF7E2C79BA4A950270ED03DEC3DCE42B55915164513",
@@ -39954,8 +39954,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.WeaponReload/mod.json",
-    "published": "automation/runtime-mods/local-test-profile/James.WeaponReload/mod.json",
+    "source": "runtime-mods/local-test-profile/BT7274.WeaponReload/mod.json",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.WeaponReload/mod.json",
     "bytes": 452,
     "sha256": "9710B9B6EC9284D58BD2CBBCAC9209AB7E7BDA55E4B9D96657BF5AC0E2C7A1B9",
     "published_sha256": "9710B9B6EC9284D58BD2CBBCAC9209AB7E7BDA55E4B9D96657BF5AC0E2C7A1B9",
@@ -39963,8 +39963,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.WeaponReload/README.md",
-    "published": "automation/runtime-mods/local-test-profile/James.WeaponReload/README.md",
+    "source": "runtime-mods/local-test-profile/BT7274.WeaponReload/README.md",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.WeaponReload/README.md",
     "bytes": 950,
     "sha256": "0C3DF281742666CF573EA39DA5BA742DF53A055D589A1CE50BB47BE8FFA1512F",
     "published_sha256": "0C3DF281742666CF573EA39DA5BA742DF53A055D589A1CE50BB47BE8FFA1512F",
@@ -39972,7 +39972,7 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt",
+    "source": "runtime-mods/local-test-profile/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -39980,7 +39980,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt",
+    "source": "runtime-mods/local-test-profile/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -39988,7 +39988,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt",
+    "source": "runtime-mods/local-test-profile/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -39996,7 +39996,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt",
+    "source": "runtime-mods/local-test-profile/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -40004,8 +40004,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/local-test-profile/James.WeaponReload/mod/scripts/vscripts/james_weapon_reload.nut",
-    "published": "automation/runtime-mods/local-test-profile/James.WeaponReload/mod/scripts/vscripts/james_weapon_reload.nut",
+    "source": "runtime-mods/local-test-profile/BT7274.WeaponReload/mod/scripts/vscripts/bt7274_weapon_reload.nut",
+    "published": "automation/runtime-mods/local-test-profile/BT7274.WeaponReload/mod/scripts/vscripts/bt7274_weapon_reload.nut",
     "bytes": 2017,
     "sha256": "D8F2F9F782B7FF05CAC6D11BE33935A3EFD5577B885954CCD07F408C050ED0B7",
     "published_sha256": "D8F2F9F782B7FF05CAC6D11BE33935A3EFD5577B885954CCD07F408C050ED0B7",
@@ -40013,8 +40013,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.BotCycleTest/mod.json",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.BotCycleTest/mod.json",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.BotCycleTest/mod.json",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.BotCycleTest/mod.json",
     "bytes": 344,
     "sha256": "4A6DB689CA00DAA9A29B4A15CB8B4AD607D3ECD9A9E5C729274F79EEBD8E3AAA",
     "published_sha256": "4A6DB689CA00DAA9A29B4A15CB8B4AD607D3ECD9A9E5C729274F79EEBD8E3AAA",
@@ -40022,8 +40022,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.BotCycleTest/mod/scripts/vscripts/james_bot_cycle_test.nut",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.BotCycleTest/mod/scripts/vscripts/james_bot_cycle_test.nut",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.BotCycleTest/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.BotCycleTest/mod/scripts/vscripts/bt7274_bot_cycle_test.nut",
     "bytes": 1908,
     "sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
     "published_sha256": "55D8F8CE2C6991CE763CCAE82DCB6FDD0899DCEC0A34D1F75D837A64A1CE2710",
@@ -40031,8 +40031,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.BotLifecycle/mod.json",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.BotLifecycle/mod.json",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.BotLifecycle/mod.json",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -40040,8 +40040,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
@@ -40049,8 +40049,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.LocalPersistence/mod.json",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.LocalPersistence/mod.json",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/mod.json",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/mod.json",
     "bytes": 715,
     "sha256": "D74C2E8EDA820B9CCB5A109344C347EB668C2BC42B18E468BD187DBD4F4D6534",
     "published_sha256": "D74C2E8EDA820B9CCB5A109344C347EB668C2BC42B18E468BD187DBD4F4D6534",
@@ -40058,8 +40058,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.LocalPersistence/README.md",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.LocalPersistence/README.md",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/README.md",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/README.md",
     "bytes": 1466,
     "sha256": "47728CC725D5A1F1FF3AFABAE1AE527F3DC8394C02BB2AB8D37911B384964962",
     "published_sha256": "47728CC725D5A1F1FF3AFABAE1AE527F3DC8394C02BB2AB8D37911B384964962",
@@ -40067,8 +40067,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_client.nut",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_client.nut",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_client.nut",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_client.nut",
     "bytes": 1719,
     "sha256": "38748F46D2B625CE80C1B782A46799E8D0E8941DDC3F01A067370688A48A460E",
     "published_sha256": "38748F46D2B625CE80C1B782A46799E8D0E8941DDC3F01A067370688A48A460E",
@@ -40076,8 +40076,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_paths.nut",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_paths.nut",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_paths.nut",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_paths.nut",
     "bytes": 2228,
     "sha256": "24C4C2BCE5E05B57DED2935ECBBFDE26571A76095670D48EC859224259FF781B",
     "published_sha256": "24C4C2BCE5E05B57DED2935ECBBFDE26571A76095670D48EC859224259FF781B",
@@ -40085,8 +40085,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_ui.nut",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence_ui.nut",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_ui.nut",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_ui.nut",
     "bytes": 1604,
     "sha256": "B2D16C06FA1191115D2450B12C027AE8DD6848290FB72EF7559088045F8DFE5D",
     "published_sha256": "B2D16C06FA1191115D2450B12C027AE8DD6848290FB72EF7559088045F8DFE5D",
@@ -40094,8 +40094,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.LocalPersistence/mod/scripts/vscripts/james_local_persistence.nut",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut",
     "bytes": 6578,
     "sha256": "16D81350D439870ECF690C2CE757F6BCB20FF9657BB02A11DD281A5A60A6C8C7",
     "published_sha256": "16D81350D439870ECF690C2CE757F6BCB20FF9657BB02A11DD281A5A60A6C8C7",
@@ -40103,8 +40103,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.MapSurvey/mod/scripts/vscripts/james_map_survey.nut",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.MapSurvey/mod/scripts/vscripts/james_map_survey.nut",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.MapSurvey/mod/scripts/vscripts/bt7274_map_survey.nut",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.MapSurvey/mod/scripts/vscripts/bt7274_map_survey.nut",
     "bytes": 7280,
     "sha256": "FECFE95A8F04AEB598E21717A020CDD6E0D289CCE9B4D0499DDE3C7595014183",
     "published_sha256": "FECFE95A8F04AEB598E21717A020CDD6E0D289CCE9B4D0499DDE3C7595014183",
@@ -40112,8 +40112,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.TacticalRecharge/mod.json",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.TacticalRecharge/mod.json",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/mod.json",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/mod.json",
     "bytes": 408,
     "sha256": "BBB369920817D6A2075EE052ADF4614D7E66A785C16B3A1853CEF5E499B55321",
     "published_sha256": "BBB369920817D6A2075EE052ADF4614D7E66A785C16B3A1853CEF5E499B55321",
@@ -40121,8 +40121,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.TacticalRecharge/README.md",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.TacticalRecharge/README.md",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/README.md",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/README.md",
     "bytes": 1364,
     "sha256": "3A685196EB83D01D479D45795C30AD9F11E9F8D9CB514B19AA701F9964F10AC4",
     "published_sha256": "3A685196EB83D01D479D45795C30AD9F11E9F8D9CB514B19AA701F9964F10AC4",
@@ -40130,8 +40130,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set",
     "bytes": 235,
     "sha256": "D3EBB2295891F7D11331E422EFA9D7E72D0FA3B7A861CE0BB22D49364D4E431D",
     "published_sha256": "D3EBB2295891F7D11331E422EFA9D7E72D0FA3B7A861CE0BB22D49364D4E431D",
@@ -40139,8 +40139,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -40148,8 +40148,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -40157,8 +40157,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -40166,8 +40166,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt",
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
     "published_sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -40175,7 +40175,7 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_deployable_cover.txt",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_deployable_cover.txt",
     "published": null,
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -40183,7 +40183,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_grenade_sonar.txt",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_grenade_sonar.txt",
     "published": null,
     "bytes": 179,
     "sha256": "F4E5A1133242014D8809CA56161646F2F4D42D2564468D862A6FEFDEF195531E",
@@ -40191,8 +40191,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.TacticalRecharge/mod/scripts/vscripts/james_tactical_recharge.nut",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.TacticalRecharge/mod/scripts/vscripts/james_tactical_recharge.nut",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/mod/scripts/vscripts/bt7274_tactical_recharge.nut",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.TacticalRecharge/mod/scripts/vscripts/bt7274_tactical_recharge.nut",
     "bytes": 2919,
     "sha256": "0D4CD082B008F2DA85FCFAF7E2C79BA4A950270ED03DEC3DCE42B55915164513",
     "published_sha256": "0D4CD082B008F2DA85FCFAF7E2C79BA4A950270ED03DEC3DCE42B55915164513",
@@ -40200,8 +40200,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.WeaponReload/mod.json",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.WeaponReload/mod.json",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.WeaponReload/mod.json",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.WeaponReload/mod.json",
     "bytes": 452,
     "sha256": "9710B9B6EC9284D58BD2CBBCAC9209AB7E7BDA55E4B9D96657BF5AC0E2C7A1B9",
     "published_sha256": "9710B9B6EC9284D58BD2CBBCAC9209AB7E7BDA55E4B9D96657BF5AC0E2C7A1B9",
@@ -40209,8 +40209,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.WeaponReload/README.md",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.WeaponReload/README.md",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.WeaponReload/README.md",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.WeaponReload/README.md",
     "bytes": 950,
     "sha256": "0C3DF281742666CF573EA39DA5BA742DF53A055D589A1CE50BB47BE8FFA1512F",
     "published_sha256": "0C3DF281742666CF573EA39DA5BA742DF53A055D589A1CE50BB47BE8FFA1512F",
@@ -40218,7 +40218,7 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -40226,7 +40226,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -40234,7 +40234,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -40242,7 +40242,7 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt",
     "published": null,
     "bytes": 386,
     "sha256": "BA85F538F5A4993ABBE0D7A5F8FDA26BF694209770A92896E1331BC39F18D7E8",
@@ -40250,8 +40250,8 @@
     "reason": "Extracted game resource; research conclusions retained"
   },
   {
-    "source": "runtime-mods/map-cycle-test-profile/James.WeaponReload/mod/scripts/vscripts/james_weapon_reload.nut",
-    "published": "automation/runtime-mods/map-cycle-test-profile/James.WeaponReload/mod/scripts/vscripts/james_weapon_reload.nut",
+    "source": "runtime-mods/map-cycle-test-profile/BT7274.WeaponReload/mod/scripts/vscripts/bt7274_weapon_reload.nut",
+    "published": "automation/runtime-mods/map-cycle-test-profile/BT7274.WeaponReload/mod/scripts/vscripts/bt7274_weapon_reload.nut",
     "bytes": 2017,
     "sha256": "D8F2F9F782B7FF05CAC6D11BE33935A3EFD5577B885954CCD07F408C050ED0B7",
     "published_sha256": "D8F2F9F782B7FF05CAC6D11BE33935A3EFD5577B885954CCD07F408C050ED0B7",
@@ -40420,8 +40420,8 @@
     "reason": "Binary/game asset or machine snapshot; hashes retained, rebuild/reinstall separately"
   },
   {
-    "source": "audit-history/navigation-map-lifecycle-v7/mods/James.BotLifecycle/mod.json",
-    "published": "automation/history/navigation-map-lifecycle-v7/mods/James.BotLifecycle/mod.json",
+    "source": "audit-history/navigation-map-lifecycle-v7/mods/BT7274.BotLifecycle/mod.json",
+    "published": "automation/history/navigation-map-lifecycle-v7/mods/BT7274.BotLifecycle/mod.json",
     "bytes": 380,
     "sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
     "published_sha256": "B3466F61F6162E7BCCD60526C809D7EA4633D6390AF0C2AF333E4A919A2ED407",
@@ -40429,8 +40429,8 @@
     "reason": "Authored source, notes or derived research; account/auth text sanitized"
   },
   {
-    "source": "audit-history/navigation-map-lifecycle-v7/mods/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
-    "published": "automation/history/navigation-map-lifecycle-v7/mods/James.BotLifecycle/mod/scripts/vscripts/james_bot_lifecycle.nut",
+    "source": "audit-history/navigation-map-lifecycle-v7/mods/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
+    "published": "automation/history/navigation-map-lifecycle-v7/mods/BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut",
     "bytes": 1233,
     "sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",
     "published_sha256": "98CA5C4EE5587D3AC4FAF987B6B025475DE56FA48B2F033013E7FD01719EFF3B",

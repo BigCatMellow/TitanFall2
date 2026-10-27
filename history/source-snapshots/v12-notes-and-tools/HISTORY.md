@@ -46,7 +46,7 @@ nodes, and reduced repeated recovery jumping. Eleven regression tests passed.
 
 Raised manager max/target to 16 total players (one human, 15 bots). The solo
 launcher explicitly requests the 16-player playlist cap. Fifteen bot joins,
-movement, and combat were observed; James reported the result was great.
+movement, and combat were observed; BT-7274 reported the result was great.
 The code's 32-client ceiling has not been stress-tested as a solo match.
 
 ## Glitch round reviewed on 2026-10-24

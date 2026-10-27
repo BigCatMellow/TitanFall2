@@ -1,6 +1,6 @@
 # Titanfall 2 solo Northstar project
 
-James's bot development, custom add-ons, stability fixes, experiments, test
+BT-7274's bot development, custom add-ons, stability fixes, experiments, test
 automation and research notebook. This repository preserves the original
 [catornot/bp-ort](https://github.com/catornot/bp-ort) Git history and adds our
 local work. [Original README](docs/UPSTREAM-README.md).
@@ -48,11 +48,11 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 |---|---|
 | Rust workspace crates | Native bot/plugin source and upstream experimental tools |
 | `tests/` | Native-independent regression tests |
-| `James.BotLifecycle/` | Normal solo bot startup |
-| `James.BotDecisions/` | Native readiness and hotdrop-state bridge |
-| `James.LocalPersistence/` | Saved loadouts/basic XP and UI cache repair |
-| `James.TacticalRecharge/`, `James.WeaponReload/` | Human tactical/reload adjustments |
-| `James.WeaponHandling/`, `Solo.WeaponBalance/` | Runtime-field-verified human ADS/role trials |
+| `BT7274.BotLifecycle/` | Normal solo bot startup |
+| `BT7274.BotDecisions/` | Native readiness and hotdrop-state bridge |
+| `BT7274.LocalPersistence/` | Saved loadouts/basic XP and UI cache repair |
+| `BT7274.TacticalRecharge/`, `BT7274.WeaponReload/` | Human tactical/reload adjustments |
+| `BT7274.WeaponHandling/`, `Solo.WeaponBalance/` | Runtime-field-verified human ADS/role trials |
 | `research/weapon-roles-20261026/` | Thirty-weapon reference statistics and role hypotheses |
 | `Notes/` | Dated notes, results, failures, rollback records and tools |
 | `Notes/weapon-notebook/`, `Solo.WeaponNotes/` | Reference catalog, recording methods, validation and read-only telemetry |

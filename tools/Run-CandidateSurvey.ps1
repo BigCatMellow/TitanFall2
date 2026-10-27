@@ -1,5 +1,5 @@
 param([Parameter(Mandatory)][string]$BatchDirectory,[Parameter(Mandatory)][string]$ValidationDirectory,[Parameter(Mandatory)][string]$ReadinessRetestDirectory,
-    [string]$TestProfile='C:\Users\james\northstar-crash-audit\map-cycle-test-profile',
+    [string]$TestProfile="$env:USERPROFILE\northstar-crash-audit\map-cycle-test-profile",
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
     [string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$ResumeBatch,[switch]$ObserverDefaults,
     [ValidateRange(1,9999)][int]$Goal=200,[string[]]$MapNames)
@@ -13,21 +13,21 @@ if(($validation.completed-join',')-ne'0,1,2,3,4,6'){throw 'Full native integrati
 $retest=Get-Content -Raw -LiteralPath "$ReadinessRetestDirectory/progress.json"|ConvertFrom-Json
 $retestBuild=Get-Content -Raw -LiteralPath "$ReadinessRetestDirectory/processes.json"|ConvertFrom-Json
 if($retest.state-ne'passed'-or-not$retest.quick-or$retestBuild.dll_sha256-ne$validated.dll_sha256){throw 'Final readiness retest did not pass with the same native build'}
-if((Get-FileHash -LiteralPath "$TestProfile/mods/James.BotDecisions/mod/scripts/vscripts/james_bot_decisions.nut").Hash-ne$retestBuild.bridge_sha256){throw 'Bridge differs from the tested final readiness script'}
+if((Get-FileHash -LiteralPath "$TestProfile/mods/BT7274.BotDecisions/mod/scripts/vscripts/bt7274_bot_decisions.nut").Hash-ne$retestBuild.bridge_sha256){throw 'Bridge differs from the tested final readiness script'}
 if((Get-FileHash -LiteralPath "$TestProfile/plugins/bp_ort.dll").Hash-ne$validated.dll_sha256){throw 'Profile DLL differs from the validated candidate'}
 if(Test-Path -LiteralPath $BatchDirectory){throw 'Preserve the previous batch; create a fresh directory'}
 if(Get-Process NorthstarLauncher,Titanfall2 -ErrorAction SilentlyContinue){throw 'Another game is already running'}
 New-Item -ItemType Directory -Path "$BatchDirectory/backup" -Force|Out-Null
 $cfg="$TestProfile/mods/Northstar.CustomServers/mod/cfg/autoexec_ns_server.cfg"
 $enabled="$TestProfile/enabledmods.json"
-$surveyDir="$TestProfile/mods/James.MapSurvey"
-$surveyScript="$surveyDir/mod/scripts/vscripts/james_map_survey.nut"
+$surveyDir="$TestProfile/mods/BT7274.MapSurvey"
+$surveyScript="$surveyDir/mod/scripts/vscripts/bt7274_map_survey.nut"
 $hadManifest=Test-Path -LiteralPath "$surveyDir/mod.json"
 Copy-Item -LiteralPath $cfg -Destination "$BatchDirectory/backup/server.cfg"
 Copy-Item -LiteralPath $enabled -Destination "$BatchDirectory/backup/enabledmods.json"
 if(Test-Path -LiteralPath $surveyScript){Copy-Item -LiteralPath $surveyScript -Destination "$BatchDirectory/backup/survey.nut"}
 if($hadManifest){Copy-Item -LiteralPath "$surveyDir/mod.json" -Destination "$BatchDirectory/backup/survey-mod.json"}
-$sourceScript="$repo/automation/runtime-mods/map-cycle-test-profile/James.MapSurvey/mod/scripts/vscripts/james_map_survey.nut"
+$sourceScript="$repo/automation/runtime-mods/map-cycle-test-profile/BT7274.MapSurvey/mod/scripts/vscripts/bt7274_map_survey.nut"
 $template=Get-Content -Raw -LiteralPath $sourceScript
 if([regex]::Matches($template,'array<string> maps = \[[^\r\n]+\]').Count-ne1){throw 'Unexpected survey template map declaration'}
 $oldPlan=Get-Content -Raw -LiteralPath "$repo/Notes/map-surveys/all-maps-20261025-102025/plan.json"|ConvertFrom-Json
@@ -50,7 +50,7 @@ if($MapNames){
 }
 $dllHash=(Get-FileHash -LiteralPath "$TestProfile/plugins/bp_ort.dll").Hash
 $coreHash=(Get-FileHash -LiteralPath "$TestProfile/Northstar.dll").Hash
-$bridge="$TestProfile/mods/James.BotDecisions/mod/scripts/vscripts/james_bot_decisions.nut"
+$bridge="$TestProfile/mods/BT7274.BotDecisions/mod/scripts/vscripts/bt7274_bot_decisions.nut"
 $bridgeHash=(Get-FileHash -LiteralPath $bridge).Hash
 $plan=[ordered]@{created=(Get-Date).ToString('o');build='decisions-v18';dll_sha256=$dllHash;core_sha256=$coreHash;bridge_sha256=$bridgeHash;maps=$maps;excluded_maps=$oldPlan.excluded_maps;bots=16;observer=1;goal=$Goal;minutes=15;aim=0.78;kind='Fresh-process listen-server candidate cohort; not mixed with v16';validation=$ValidationDirectory;readiness_retest=$ReadinessRetestDirectory}
 $plan.resumed_from=$ResumeBatch;$plan.completed_previously=$completedPreviously
@@ -69,18 +69,18 @@ function Stop-Owned($process){
 $process=$null;$reader=$null
 try{
     New-Item -ItemType Directory -Path (Split-Path $surveyScript) -Force|Out-Null
-    Copy-Item -LiteralPath "$repo/automation/runtime-mods/survey/James.MapSurvey/mod.json" -Destination "$surveyDir/mod.json" -Force
+    Copy-Item -LiteralPath "$repo/automation/runtime-mods/survey/BT7274.MapSurvey/mod.json" -Destination "$surveyDir/mod.json" -Force
     $mods=Get-Content -Raw -LiteralPath $enabled|ConvertFrom-Json -AsHashtable
-    foreach($name in @('James.DecisionTest','James.BotCycleTest','James.MenuPreviewTest')){
+    foreach($name in @('BT7274.DecisionTest','BT7274.BotCycleTest','BT7274.MenuPreviewTest')){
         if($mods.ContainsKey($name)){foreach($version in @($mods[$name].Keys)){$mods[$name][$version]=$false}}
     }
-    $mods['James.MapSurvey']=@{'1.0.0'=$true};$mods['James.BotDecisions']=@{'1.0.0'=$true}
+    $mods['BT7274.MapSurvey']=@{'1.0.0'=$true};$mods['BT7274.BotDecisions']=@{'1.0.0'=$true}
     $mods|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $enabled
     $text=Get-Content -Raw -LiteralPath "$BatchDirectory/backup/server.cfg"
     $text=$text.Replace('bot_manager_max 16','bot_manager_max 17').Replace('bot_manager_target 16','bot_manager_target 17')
     $text=[regex]::Replace($text,'(?m)^setplaylistvaroverrides .*$', ('setplaylistvaroverrides "max_players 17 timelimit 15 scorelimit '+$Goal+'"'))
     $text+="`r`nns_allow_spectators 1`r`nns_should_return_to_lobby 0`r`nbot_navigation_context 1`r`nbot_target_eligibility 1`r`nbot_action_policy 1`r`nbot_step_retry 1`r`n"
-    if($ObserverDefaults){$text+="james_local_loadouts 0 // survey observer only; preserve saved files without restoring them`r`n"}
+    if($ObserverDefaults){$text+="bt7274_local_loadouts 0 // survey observer only; preserve saved files without restoring them`r`n"}
     Set-Content -LiteralPath $cfg -Value $text
     $index=0
     foreach($map in $maps){
@@ -94,7 +94,7 @@ try{
         [IO.File]::WriteAllText($surveyScript,$one,[Text.UTF8Encoding]::new($false))
         $state.state='starting';$state.current=@{map=$map;index=$index;directory=$dir};Save-State
         $began=Get-Date;$seen=@(Get-ChildItem "$TestProfile/logs" -Filter 'nslog*.txt'|Select-Object -ExpandProperty Name)
-        $process=Start-Process -FilePath "$GameDirectory/NorthstarLauncher.exe" -WorkingDirectory $GameDirectory -WindowStyle Normal -PassThru -ArgumentList "-profile=$TestProfile",'-novid','-fullscreen','-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+setplaylist','tdm','+setplaylistvaroverrides',('"max_players 17 scorelimit '+$Goal+' timelimit 15"'),'+james_survey_goal',"$Goal",'+james_survey_count','1','+james_survey_index','0','+james_survey_minutes','15','+james_survey_smoke','0','+mp_gamemode','tdm','+map',$map
+        $process=Start-Process -FilePath "$GameDirectory/NorthstarLauncher.exe" -WorkingDirectory $GameDirectory -WindowStyle Normal -PassThru -ArgumentList "-profile=$TestProfile",'-novid','-fullscreen','-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+setplaylist','tdm','+setplaylistvaroverrides',('"max_players 17 scorelimit '+$Goal+' timelimit 15"'),'+bt7274_survey_goal',"$Goal",'+bt7274_survey_count','1','+bt7274_survey_index','0','+bt7274_survey_minutes','15','+bt7274_survey_smoke','0','+mp_gamemode','tdm','+map',$map
         $state.current.pid=$process.Id;Save-State
         $log=$null;$lastHeartbeat=Get-Date;$result=$null;$done=$false
         while(-not$done){

@@ -3,7 +3,7 @@
   "updated": "2026-10-25T10:55:39.6981535-04:00",
   "smoke": false,
   "pid": 260504,
-  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 10-38-58.txt",
+  "log": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 10-38-58.txt",
   "current": {
     "index": "0",
     "elapsed": "890",
@@ -20,7 +20,7 @@
       "valid": "true",
       "index": "0",
       "elapsed": "891.5",
-      "log_file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\02-mp_colony02\\main\\maps\\01-mp_colony02.log",
+      "log_file": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\02-mp_colony02\\main\\maps\\01-mp_colony02.log",
       "imc": "163",
       "map": "mp_colony02",
       "reason": "time_limit_or_rules",

@@ -1,5 +1,5 @@
 {
-  "source_log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main\\maps\\01-mp_angel_city.log",
+  "source_log": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\fresh-batch-20261025-083855\\03-mp_angel_city\\main\\maps\\01-mp_angel_city.log",
   "exported": "2026-10-25T09:26:58.2101487-04:00",
   "structured": true,
   "build_line": "[2026-10-25] [09:12:37] [BP-ORT000] [info] local build: combat-decisions-v16 (v15 navigation plus optional weapon-range and ammo decisions)",

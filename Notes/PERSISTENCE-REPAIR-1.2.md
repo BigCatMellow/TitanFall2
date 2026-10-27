@@ -6,7 +6,7 @@ fixes below remain. Read PREVIEW-REPAIR-1.2.1.md before restoring this version.
 
 The user reported loadouts and levels resetting again. Their real match log
 and JSON showed loadout edits were saved during gameplay. However, the
-private lobby ran JamesLocalPersistence_Init without running the normal
+private lobby ran BT7274LocalPersistence_Init without running the normal
 connecting/connected callbacks used to start the save loop. The add-on was
 therefore not initialized for lobby edits. A test that checked only server
 fields during matches did not cover this flow or the separate UI cache.
@@ -27,10 +27,10 @@ fields during matches did not cover this flow or the separate UI cache.
   version-1 saves cannot be claimed recovered. This is basic progression,
   not all challenge/statistic/purchase history or cloud synchronization.
 
-Source: `C:\Users\james\bp-ort-fork\James.LocalPersistence`.
-Real saves: `local-test-profile\save_data\James.LocalPersistence`.
+Source: `%USERPROFILE%\bp-ort-fork\BT7274.LocalPersistence`.
+Real saves: `local-test-profile\save_data\BT7274.LocalPersistence`.
 Current and previous JSON snapshots remain separate. The convar
-james_local_loadouts controls the whole add-on. Read failures pause writing.
+bt7274_local_loadouts controls the whole add-on. Read failures pause writing.
 The v15 bot DLL, 8v8 population and aim 0.80 are unchanged.
 
 ## Verified integration paths
@@ -44,7 +44,7 @@ The v15 bot DLL, 8v8 population and aim 0.80 are unchanged.
   pass exposed the missing server save initialization there.
 - `nslog2026-10-24 18-40-43.txt`: cold private-lobby start restored 902 fields
   at 18:41:24. At 18:41:27 the CLIENT test sent the ordinary
-  SetPersistentLoadoutValue command to rename slot 0 JAMES_LOBBY_EDIT_PROBE.
+  SetPersistentLoadoutValue command to rename slot 0 BT7274_LOBBY_EDIT_PROBE.
   The lobby server saved it immediately; UI reflected it at 18:41:30. Rise
   restored it at 18:41:46, passed the XP/equipment assertions, and displayed
   the same name/equipment in UI cache at 18:41:47. No script/compile errors

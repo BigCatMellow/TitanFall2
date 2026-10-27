@@ -1,6 +1,6 @@
 param([Parameter(Mandatory=$true)][int]$GameProcessId,[Parameter(Mandatory=$true)][string]$RunDirectory,[Parameter(Mandatory=$true)][string]$RootDirectory,[switch]$Smoke)
 $ErrorActionPreference='Stop'
-$audit='C:\Users\james\northstar-crash-audit'; $profile=Join-Path $audit 'map-cycle-test-profile'
+$audit="$env:USERPROFILE\northstar-crash-audit"; $profile=Join-Path $audit 'map-cycle-test-profile'
 $allowed=Join-Path $audit 'Notes\map-surveys'
 $root=[IO.Path]::GetFullPath($RootDirectory)
 $run=[IO.Path]::GetFullPath($RunDirectory)
@@ -76,7 +76,7 @@ try {
     if($writer){$writer.Dispose();$writer=$null};$reader.Dispose();$reader=$null
     Copy-Item -LiteralPath $logPath -Destination "$run\raw-session.log" -Force
     foreach($r in $results){
-        $saved=Join-Path "$profile\save_data\James.MapSurvey" ("result_$($r.index)_$($r.map).json")
+        $saved=Join-Path "$profile\save_data\BT7274.MapSurvey" ("result_$($r.index)_$($r.map).json")
         if(Test-Path $saved){Copy-Item -LiteralPath $saved -Destination "$run\maps" -Force}
     }
     if(-not $Smoke){
@@ -102,14 +102,14 @@ try {
     if(-not $Smoke){
         try{
             Copy-Item -LiteralPath "$root\backup\autoexec_ns_server.cfg" -Destination "$profile\mods\Northstar.CustomServers\mod\cfg\autoexec_ns_server.cfg" -Force
-            Copy-Item -LiteralPath "$root\backup\cycle-mod.json" -Destination "$profile\mods\James.BotCycleTest\mod.json" -Force
-            if(Test-Path "$root\backup\persistence-server.nut"){ Copy-Item -LiteralPath "$root\backup\persistence-server.nut" -Destination "$profile\mods\James.LocalPersistence\mod\scripts\vscripts\james_local_persistence.nut" -Force }
-            foreach($json in Get-ChildItem "$root\backup\test-saves" -Filter '*.json'){ Copy-Item -LiteralPath $json.FullName -Destination "$profile\save_data\James.LocalPersistence" -Force }
-            Copy-Item -LiteralPath "$root\backup\survey-harness.nut" -Destination "$profile\mods\James.MapSurvey\mod\scripts\vscripts\james_map_survey.nut" -Force
-            $disabled="$profile\mods\James.BotCycleTest\mod.json.map-survey-disabled"
+            Copy-Item -LiteralPath "$root\backup\cycle-mod.json" -Destination "$profile\mods\BT7274.BotCycleTest\mod.json" -Force
+            if(Test-Path "$root\backup\persistence-server.nut"){ Copy-Item -LiteralPath "$root\backup\persistence-server.nut" -Destination "$profile\mods\BT7274.LocalPersistence\mod\scripts\vscripts\bt7274_local_persistence.nut" -Force }
+            foreach($json in Get-ChildItem "$root\backup\test-saves" -Filter '*.json'){ Copy-Item -LiteralPath $json.FullName -Destination "$profile\save_data\BT7274.LocalPersistence" -Force }
+            Copy-Item -LiteralPath "$root\backup\survey-harness.nut" -Destination "$profile\mods\BT7274.MapSurvey\mod\scripts\vscripts\bt7274_map_survey.nut" -Force
+            $disabled="$profile\mods\BT7274.BotCycleTest\mod.json.map-survey-disabled"
             if(Test-Path $disabled){Remove-Item -LiteralPath $disabled -Force}
-            if(Test-Path "$profile\mods\James.MapSurvey\mod.json"){
-                Move-Item -LiteralPath "$profile\mods\James.MapSurvey\mod.json" -Destination "$root\survey-mod.json" -Force
+            if(Test-Path "$profile\mods\BT7274.MapSurvey\mod.json"){
+                Move-Item -LiteralPath "$profile\mods\BT7274.MapSurvey\mod.json" -Destination "$root\survey-mod.json" -Force
             }
         }catch{$analysisErrors.Add("Cleanup: $_")}
     }

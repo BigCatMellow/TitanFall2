@@ -1,5 +1,5 @@
 {
-  "source": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_eden_small.nm",
+  "source": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\mods\\Northstar.CustomServers\\mod\\maps\\navmesh\\mp_eden_small.nm",
   "sha256": "1A9E04927D758DB4C939B854610EE571B9CBC3C3EA3630999730190822B1B051",
   "set_version": 5,
   "tile_version": 13,
@@ -15,7 +15,7 @@
     "min_z": -288.3844299316406
   },
   "trailing_bytes": 15496,
-  "observations_source": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915\\main\\reports\\01-mp_eden\\movement\\observations.csv",
+  "observations_source": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\eden-control-20261025-081915\\main\\reports\\01-mp_eden\\movement\\observations.csv",
   "pilot_stall_samples": 306,
   "limits": "Read-only surface geometry from installed navmesh; no adjacency/traversal validation, collision scenery, or in-game visual observation. Rendered heights overlap in top-down views. Stalls are two-second samples, not unique incidents."
 }

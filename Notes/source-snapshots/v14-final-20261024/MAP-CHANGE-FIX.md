@@ -17,7 +17,7 @@ The final build changes these lifecycle and scheduling behaviors:
 2. The manager's `is_alive` test becomes true during dropship player setup.
    The first regression runs produced script errors for incomplete persistent
    data or null player script entities while bots joined that intro. The
-   manager now reads a readiness convar published by the `James.BotLifecycle`
+   manager now reads a readiness convar published by the `BT7274.BotLifecycle`
    server script from normal game-state callbacks. It leaves 0.5 seconds between
    joins so FULL signon does not imply all join callbacks have settled.
 
@@ -35,7 +35,7 @@ Installed build: `navigation-map-lifecycle-v7`.
 SHA256: `24D2B848E5DF564C034DB983A3516648155722C55F67A9F820DCEF44950E7194`.
 The original navigation-output-buffer fix and its three tests are retained.
 
-The isolated `map-cycle-test-profile` uses a separate `James.BotCycleTest`
+The isolated `map-cycle-test-profile` uses a separate `BT7274.BotCycleTest`
 script to change Eden -> Relic -> Wargames after 25 seconds of each active
 match. It keeps seven bots, localhost binding, and no public listing. The
 playlist round timer was not sufficient for deterministic cycling, so the test
@@ -64,7 +64,7 @@ bots, so that was not a valid seven-bot test. v7 removes that incorrect gate.
 - 21 successful bot joins, zero SCRIPT ERROR/crash/panic entries.
 
 The three path-buffer regression tests pass, and `git diff --check` is clean.
-The tested DLL and `James.BotLifecycle` helper were installed in both the regular
+The tested DLL and `BT7274.BotLifecycle` helper were installed in both the regular
 R2Northstar profile and the everyday local solo profile. Previous DLLs and a
 copy of the passing log are under the `navigation-map-lifecycle-v7` audit folder.
 The map-cycle harness is absent from the everyday profile. Its seven-bot target

@@ -1,13 +1,13 @@
 # Tactical recharge, 2026-10-24
 
-James requested 30% less pilot tactical recharge, then changed the target to
+BT-7274 requested 30% less pilot tactical recharge, then changed the target to
 50% while implementation was underway. Only the 50% version was installed.
 
 ## Installed scope
 
-James.TacticalRecharge 1.0.0 is a separate script/KeyValues mod in the
+BT7274.TacticalRecharge 1.0.0 is a separate script/KeyValues mod in the
 everyday solo profile and isolated test profile. Source:
-`C:\Users\james\bp-ort-fork\James.TacticalRecharge`.
+`%USERPROFILE%\bp-ort-fork\BT7274.TacticalRecharge`.
 
 The local human's Grapple, Cloak, Stim, Holo Pilot, Phase Shift, Pulse Blade
 and A-Wall use half their normal recharge time. Native refill rates are
@@ -49,16 +49,16 @@ were checked and had neither the named player nor weapon recharge modifier.
 No script compile/runtime errors were logged during this test.
 
 The isolated cycle harness was restored from its pre-change backup and the
-test-only James.TacticalProbe was moved outside active mods after validation.
+test-only BT7274.TacticalProbe was moved outside active mods after validation.
 The test loadouts never touched the real save. The real save SHA256 matched
 its pre-change backup immediately before the normal-profile restart.
 
 ## Disable / rollback
 
-Server console: `james_tactical_recharge 0`, then respawn or reselect the
+Server console: `bt7274_tactical_recharge 0`, then respawn or reselect the
 loadout. Use 1 to enable, followed by respawn/reselection. For persistent
 disable, add the 0 setting to the solo autoexec_ns_server.cfg. Alternatively,
-close the game and move James.TacticalRecharge out of the solo mods folder.
+close the game and move BT7274.TacticalRecharge out of the solo mods folder.
 Do not restore old save JSON just to remove this mod.
 
 Backup before work:

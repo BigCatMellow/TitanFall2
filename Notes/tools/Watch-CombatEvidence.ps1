@@ -2,7 +2,7 @@ param([Parameter(Mandatory=$true)][string]$BatchDirectory)
 # Read-only follow-up. The match queue and its navigation reports are independent.
 $ErrorActionPreference='Stop'
 $batch=[IO.Path]::GetFullPath($BatchDirectory)
-if(-not $batch.StartsWith('C:\Users\james\northstar-crash-audit\Notes\map-surveys\',[StringComparison]::OrdinalIgnoreCase)){throw 'Unexpected batch directory'}
+if(-not $batch.StartsWith("$env:USERPROFILE\northstar-crash-audit\Notes\map-surveys\",[StringComparison]::OrdinalIgnoreCase)){throw 'Unexpected batch directory'}
 $out=Join-Path $batch 'combat-evidence'
 New-Item -ItemType Directory -Path $out -Force|Out-Null
 $plan=Get-Content -Raw -LiteralPath "$batch\plan.json"|ConvertFrom-Json

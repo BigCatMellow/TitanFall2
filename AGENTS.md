@@ -1,8 +1,13 @@
 # Project instructions
 
-Canonical development repo for James's solo Northstar project. Read README.md,
+Canonical development repo for BT-7274's solo Northstar project. Read README.md,
 docs/PROJECT-STATUS.md, Notes/CURRENT-SETUP.md and the latest Notes/HANDOFF.md
 entries before changes.
+
+- Refer to the owner only as BT-7274 (prose) / BT7274 (identifiers) in every
+  file, filename and commit message; never by a personal name. See
+  docs/BT7274-RENAME.md before deploying renamed add-ons (profiles need
+  tools/Migrate-BT7274Rename.ps1 so saves keep working).
 
 - User authorized implementing and testing the reviewed changes on2026-10-25.
   Use backed-up candidates and isolated runtime/transition tests before normal

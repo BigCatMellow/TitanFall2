@@ -1,5 +1,5 @@
 {
-  "source_log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main\\maps\\01-mp_black_water_canal.log",
+  "source_log": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main\\maps\\01-mp_black_water_canal.log",
   "exported": "2026-10-25T10:38:44.4026811-04:00",
   "structured": true,
   "build_line": "[2026-10-25] [10:22:15] [BP-ORT000] [info] local build: combat-decisions-v16 (v15 navigation plus optional weapon-range and ammo decisions)",

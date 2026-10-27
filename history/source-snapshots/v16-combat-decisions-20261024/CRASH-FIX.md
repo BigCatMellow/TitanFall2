@@ -36,7 +36,7 @@ a capacity of 256. Routes exceeding eight polygons write past that stack slot.
 From this checkout, using the installed nightly toolchain and LLVM-MinGW PATH:
 
 ```powershell
-& C:\Users\james\.cargo\bin\rustc.exe +nightly-2025-09-11-x86_64-pc-windows-gnu --test --edition=2024 tests\navigation_buffers.rs -o target\path-buffers-tests.exe
+& %USERPROFILE%\.cargo\bin\rustc.exe +nightly-2025-09-11-x86_64-pc-windows-gnu --test --edition=2024 tests\navigation_buffers.rs -o target\path-buffers-tests.exe
 & .\target\path-buffers-tests.exe
 ```
 
@@ -51,7 +51,7 @@ address it and the earlier attribution to the join detour was incorrect.
 
 ## Live validation
 
-An isolated profile at `C:\Users\james\northstar-crash-audit\local-test-profile`
+An isolated profile at `%USERPROFILE%\northstar-crash-audit\local-test-profile`
 uses the normal core mods and the candidate DLL. Its server config disables
 public listing and uses Northstar's documented local connection mode. The
 launcher binds to loopback on port 37025. The regular installed server config
@@ -80,5 +80,5 @@ Build identifier: `navigation-output-buffers-v1`.
 SHA256: `BF14476DCC5770FFBA0FED6DE56CF0E038C105A1EBA240587D507BACFF130109`.
 
 Candidate and prior hook-disabled DLL are preserved under:
-`C:\Users\james\northstar-crash-audit\navigation-fix-v1`.
+`%USERPROFILE%\northstar-crash-audit\navigation-fix-v1`.
 The full prior Northstar install remains in the dated Documents backup.

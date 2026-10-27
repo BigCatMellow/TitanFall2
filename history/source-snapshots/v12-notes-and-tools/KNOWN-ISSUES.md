@@ -28,7 +28,7 @@
    Program Files profile has its own DLL backup, which may require elevated
    filesystem access to restore.
 
-`C:\Users\james\northstar-crash-audit\Read-CrashDump.ps1` can inspect dumps.
+`%USERPROFILE%\northstar-crash-audit\Read-CrashDump.ps1` can inspect dumps.
 Its raw stack-pointer candidates are not a trustworthy unwound call stack.
 Keep matching DLL debug symbols and the exact build hash when interpreting one.
 

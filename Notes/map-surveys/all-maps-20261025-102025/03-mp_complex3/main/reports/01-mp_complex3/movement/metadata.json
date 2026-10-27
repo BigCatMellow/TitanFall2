@@ -1,5 +1,5 @@
 {
-  "source_log": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3\\main\\maps\\01-mp_complex3.log",
+  "source_log": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\03-mp_complex3\\main\\maps\\01-mp_complex3.log",
   "exported": "2026-10-25T11:12:08.8600115-04:00",
   "structured": true,
   "build_line": "[2026-10-25] [10:55:41] [BP-ORT000] [info] local build: combat-decisions-v16 (v15 navigation plus optional weapon-range and ammo decisions)",

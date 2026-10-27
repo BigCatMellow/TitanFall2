@@ -57,7 +57,7 @@ not prove cross-map carryover caused the prior600-FX-handle error.
 - [Map geometry exporter source](https://gist.github.com/warmist/c9efdd4d84f8f97aff806fdbb3853ac8)
 - [Navigation tooling author's explanation](https://www.kawe-dev.com/navmesh-tooling)
 - Local binary-layout reference:
-  C:/Users/james/bp-ort-fork/bp_ort/src/navmesh/bindings.rs
+  %USERPROFILE%/bp-ort-fork/bp_ort/src/navmesh/bindings.rs
 
 The extraction tool is ../tools/Export-NavMeshContext.ps1. Full scenery/collision
 geometry from the packaged BSPs has not yet been exported. No live visual

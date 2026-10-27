@@ -3,7 +3,7 @@
   "updated": "2026-10-25T10:38:53.3601812-04:00",
   "smoke": false,
   "pid": 255920,
-  "log": "C:\\Users\\james\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 10-22-14.txt",
+  "log": "%USERPROFILE%\\northstar-crash-audit\\map-cycle-test-profile\\logs\\nslog2026-10-25 10-22-14.txt",
   "current": {
     "map": "mp_black_water_canal",
     "militia": "177",
@@ -22,7 +22,7 @@
       "valid": "true",
       "imc": "156",
       "elapsed": "891.5",
-      "log_file": "C:\\Users\\james\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main\\maps\\01-mp_black_water_canal.log",
+      "log_file": "%USERPROFILE%\\northstar-crash-audit\\Notes\\map-surveys\\all-maps-20261025-102025\\01-mp_black_water_canal\\main\\maps\\01-mp_black_water_canal.log",
       "index": "0",
       "reason": "time_limit_or_rules"
     }

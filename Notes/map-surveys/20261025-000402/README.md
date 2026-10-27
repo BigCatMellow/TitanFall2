@@ -34,7 +34,7 @@ launcher, saves and installed DLL were untouched. The real save SHA256 was
 verified unchanged after staging. Config/cycle harness/test saves backed up
 in backup/. No native bot source or DLL was rebuilt for this survey.
 
-James.BotCycleTest is temporarily disabled; James.MapSurvey controls maps.
+BT7274.BotCycleTest is temporarily disabled; BT7274.MapSurvey controls maps.
 The final watchdog restores the original isolated autoexec/cycle-mod metadata
 and moves the survey's active mod metadata out of mods after the game closes.
 The observer uses privateMatchState and the stock spectator flow. The short
@@ -65,7 +65,7 @@ and reports/<map>/movement/replay.html plus combat and joined diagnostics.
 Reports compare stall samples and rapid target switch-backs; those are
 heuristics, not proof of a specific obstacle or bad decision. This run helps
 map reliability, navigation and combat consistency. Difficulty against a
-moving human still requires James's gameplay feedback.
+moving human still requires BT-7274's gameplay feedback.
 
 Tools: Notes/tools/Start-MapSurvey.ps1, Watch-MapSurvey.ps1,
 Summarize-MapSurvey.ps1, Export-BotSession.ps1, Export-CombatDecisions.ps1,
@@ -80,7 +80,7 @@ attempt-1-startup-error; it is not a completed match. The normal save
 remained hash-identical to its pre-survey copy.
 
 The full run restores the valid test JSON from backup and uses a temporary
-restore-only copy of James.LocalPersistence's server file: SaveNow is empty,
+restore-only copy of BT7274.LocalPersistence's server file: SaveNow is empty,
 while the established restore/client-cache path remains enabled. The game
 therefore gets valid presets without writing spectator/transient fields.
 The watchdog restores the original test server script and the two original
