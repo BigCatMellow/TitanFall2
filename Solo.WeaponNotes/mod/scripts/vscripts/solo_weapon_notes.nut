@@ -156,8 +156,11 @@ void function WeaponNotes_FireFlush(entity player,table s,string reason)
 {
     if(expect int(s.rounds)<=0&&expect int(s.reloads)<=0)return
     print("WNOTE_FIRE t="+Time()+" owner="+player.GetEncodedEHandle()+" life="+s.life+" gun="+s.gun+" mods="+s.mods
-        +" config="+WeaponNotes_Config()+" rounds="+s.rounds+" ads_rounds="+s.ads+" zoom_known="+file.zoomOk
+        +" config="+s.config+" start="+s.start+" end="+s.last+" sampling_valid="+s.valid
+        +" rounds="+s.rounds+" ads_rounds="+s.ads+" zoom_known="+file.zoomOk
         +" reloads="+s.reloads+" reason="+reason)
+    s.start=s.last
+    s.valid=true
     s.rounds=0
     s.ads=0
     s.reloads=0
@@ -166,7 +169,7 @@ void function WeaponNotes_FireFlush(entity player,table s,string reason)
 void function WeaponNotes_KickFlush(table s)
 {
     if(expect int(s.burst)>=3)
-        print("WNOTE_KICK t="+Time()+" gun="+s.gun+" mods="+s.mods+" config="+WeaponNotes_Config()+" ads="+s.burstAds
+        print("WNOTE_KICK t="+Time()+" gun="+s.gun+" mods="+s.mods+" config="+s.config+" ads="+s.burstAds
             +" rounds="+s.burst+" dpitch="+s.dpitch+" dyaw="+s.dyaw+" max_dpitch="+s.maxPitch+" max_dyaw="+s.maxYaw
             +" duration="+(expect float(s.burstLast)-expect float(s.burstStart)))
     s.burst=0
@@ -191,6 +194,7 @@ void function WeaponNotes_FireSampler(entity player,int life)
     player.EndSignal("OnDeath")
     player.EndSignal("OnDestroy")
     table s={weapon=null,clip=-1,gun="none",mods="none",life=life,rounds=0,ads=0,reloads=0,flushAt=Time()+2.0,
+        config=WeaponNotes_Config(),start=Time(),last=Time(),valid=true,
         burst=0,burstAds=false,burstStart=0.0,burstLast=0.0,origin=<0,0,0>,prev=<0,0,0>,dpitch=0.0,dyaw=0.0,maxPitch=0.0,maxYaw=0.0}
     OnThreadEnd(
         function():(player,s)
@@ -211,13 +215,18 @@ void function WeaponNotes_FireSampler(entity player,int life)
         try{
             entity weapon=player.GetActiveWeapon()
             string mods=IsValid(weapon)?WeaponNotes_Mods(weapon):"none"
-            if(weapon!=s.weapon||mods!=s.mods){
+            string config=WeaponNotes_Config()
+            if(weapon!=s.weapon||mods!=s.mods||config!=s.config){
                 WeaponNotes_FireFlush(player,s,"change")
                 WeaponNotes_KickFlush(s)
                 s.weapon=weapon
                 s.clip=-1
                 s.gun=IsValid(weapon)?weapon.GetWeaponClassName():"none"
                 s.mods=mods
+                s.config=config
+                s.start=Time()
+                s.last=Time()
+                s.valid=true
             }
             vector angles=player.EyeAngles()
             if(IsValid(weapon)){
@@ -237,9 +246,12 @@ void function WeaponNotes_FireSampler(entity player,int life)
                     }
                 }else if(expect int(s.clip)>=0&&clip>expect int(s.clip)){
                     s.reloads=expect int(s.reloads)+1
+                    s.valid=false // Reload boundaries can hide a shot between samples.
                 }
+                if(expect int(s.clip)<0)s.start=Time()
                 s.clip=clip
-            }
+                s.last=Time()
+            }else{s.valid=false}
             if(kick&&expect int(s.burst)>0){
                 vector origin=expect vector(s.origin)
                 float dp=WeaponNotes_AngleDelta(angles.x,origin.x)
@@ -253,6 +265,8 @@ void function WeaponNotes_FireSampler(entity player,int life)
             s.prev=angles
             if(Time()>=expect float(s.flushAt))WeaponNotes_FireFlush(player,s,"interval")
         }catch(error){
+            s.valid=false
+            s.clip=-1 // Never bridge an unknown sampling gap.
             file.fireErrors++
             print("WNOTE_FIRE_ERROR count="+file.fireErrors)
             print(string(error)) // General private game log only; the collector ignores it.

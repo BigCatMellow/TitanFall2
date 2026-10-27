@@ -2,9 +2,9 @@
 //! bot stops standing in the open below it and moves to a nearby navmesh point
 //! that the enemy cannot see, holds briefly, then resumes normal behavior.
 //!
-//! Played data: 59-81% of bot views of the human on Eden/Meadow had a vertical
-//! gap over 180 units, where the range controller deliberately does nothing and
-//! the bot walked straight at an unreachable target. Aim and firing are not
+//! Played data includes large ABSOLUTE vertical gaps (above or below), which
+//! motivates testing vertical positioning but does not prove overhead prevalence
+//! or a particular cause of bot deaths. Aim and firing are not
 //! touched: a bot moving to cover still shoots whenever it can see the target.
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -15,6 +15,7 @@ pub(super) struct HeightResponse {
     above_since: Option<f32>,
     plan: Option<([f32; 3], f32)>,
     fresh: bool,
+    released: bool,
     cooldown_until: f32,
     last_time: f32,
     pub starts: u32,
@@ -30,8 +31,8 @@ impl HeightResponse {
 
     fn sane(&mut self, now: f32) -> bool {
         if !now.is_finite() || now < self.last_time {
-            let (s, n) = (self.starts, self.no_cover);
-            *self = Self { starts: s, no_cover: n, ..Default::default() };
+            let (s, n, released) = (self.starts, self.no_cover, self.released || self.plan.is_some());
+            *self = Self { starts: s, no_cover: n, released, ..Default::default() };
             if !now.is_finite() { return false; }
         }
         self.last_time = now;
@@ -43,12 +44,14 @@ impl HeightResponse {
         if !self.sane(now) { return None; }
         match self.plan {
             Some((point, until)) if now < until && until - now <= Self::HOLD => Some(point),
-            Some(_) => { self.plan = None; None }
+            Some(_) => { self.plan = None; self.released = true; None }
             None => None,
         }
     }
 
     /// True once after a new plan starts, so the route is recalculated once.
+    pub fn take_released(&mut self) -> bool { std::mem::take(&mut self.released) }
+
     pub fn take_fresh(&mut self) -> bool { std::mem::take(&mut self.fresh) }
 
     /// `gap` = target height minus bot height (positive: target above).
@@ -76,7 +79,7 @@ impl HeightResponse {
         self.no_cover = self.no_cover.saturating_add(1);
     }
 
-    pub fn cancel(&mut self) { self.plan = None; self.above_since = None; self.fresh = false; }
+    pub fn cancel(&mut self) { self.released |= self.plan.is_some(); self.plan = None; self.above_since = None; self.fresh = false; }
 }
 
 /// Candidate filter: same floor as the bot, not on top of it, not too far.
@@ -89,6 +92,14 @@ pub(super) fn candidate_ok(bot: [f32; 3], point: [f32; 3]) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test] fn expiry_cancel_and_clock_reset_release_route_ownership_once() {
+        for mode in 0..3 {
+            let mut h=HeightResponse::default(); h.start(10.,[100.,0.,0.]);
+            assert!(h.take_fresh()); assert!(!h.take_released());
+            match mode {0=>{assert_eq!(h.active(15.),None);},1=>h.cancel(),_=>{assert_eq!(h.active(1.),None);}}
+            assert!(h.take_released()); assert!(!h.take_released());
+        }
+    }
     #[test] fn sustained_overhead_target_requests_cover_once_confirmed() {
         let mut h = HeightResponse::default();
         assert_eq!(h.update(0., true, 300.), Intent::None);

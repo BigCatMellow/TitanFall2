@@ -34,3 +34,8 @@ per-weapon combat profiles; Stim/Phase use is the native controller's
 `BOT_ROSTER` log lines record each assignment and the resulting tactical class;
 `BOT_ROSTER_ERROR` disables the add-on after 3 errors. Protocol, target and
 rollback: research/bot-balance-20261027/README.md.
+
+Review gate: unresolved mappings restore the saved pre-trial baseline; success
+is printed only after desired tactical readback. Inventory readback waits for
+end-of-frame. Verify independent loadout copies and interruption/error restoration
+in the isolated game before enabling this add-on.

@@ -97,9 +97,12 @@ pub(crate) fn basic_combat(
     let target_index = target.as_ref().map(|((_, target), _)| get_player_index(target));
     // Set again by whichever branch actually requests a pursuit route.
     local_data.route_target = None;
-    let cover_active = !is_titan && sim_type == 6
+    let height_enabled = !is_titan && sim_type == 6
         && crate::bots::switch_on(&crate::bots::HEIGHT_RESPONSE_CONVAR)
-        && local_data.height.active(time(helper)).is_some();
+        && crate::bots::switch_on(&crate::bots::COMBAT_DECISIONS_CONVAR);
+    if !height_enabled { local_data.height.cancel(); }
+    let cover_active = height_enabled && local_data.height.active(time(helper)).is_some();
+    release_cover_route(local_data);
     if !local_data.view_checked && !is_titan && crate::bots::switch_on(&crate::bots::NAV_DIAGNOSTICS_CONVAR) {
         local_data.view_checked = true;
         log_view_and_hulls(player, helper, local_data);
@@ -834,7 +837,13 @@ fn route_move_toward(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut 
     let aim_yaw = cmd.world_view_angles.y;
     let mut route = CUserCmd::new_basic_move(Vector3::ZERO, 0, helper);
     let routed = path_to_target(&mut route, local, player.m_vecAbsOrigin, goal, recalc, helper);
-    if route.move_.x == 0. && route.move_.y == 0. { return routed; } // keep the existing input
+    if route.move_.x == 0. && route.move_.y == 0. {
+        cmd.move_ = Vector3::ZERO;
+        set_move_buttons(cmd);
+        cmd.buttons &= !(Action::Jump as u32);
+        return routed;
+    }
+
     let (f, s) = if local.metrics.state == "recover" {
         crate::bots::combat_movement::reframe(route.move_.x, route.move_.y, route.world_view_angles.y, aim_yaw)
     } else {
@@ -856,6 +865,18 @@ fn route_move_toward(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut 
     routed
 }
 
+// Clear the old corridor BEFORE normal pursuit can reuse it, even for the
+// same enemy within the normal 600-unit goal-change threshold.
+fn release_cover_route(local: &mut BotData) {
+    if !local.height.take_released() { return; }
+    if let Some(nav) = local.nav_query.as_mut() { nav.path_points.clear(); nav.end_point = None; }
+    local.route_target = None;
+    local.current_corner = None;
+    local.replan = Default::default();
+    local.last_target_index = usize::MAX;
+    local.should_recalculate_path = true;
+}
+
 /// `bot_height_response`: move to a nearby point the overhead enemy cannot see.
 fn height_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut BotData,
     cmd: &mut CUserCmd, is_titan: bool, sim_type: i32) {
@@ -864,6 +885,7 @@ fn height_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut B
     if is_titan || sim_type != 6 || !switch_on(&HEIGHT_RESPONSE_CONVAR) || !switch_on(&COMBAT_DECISIONS_CONVAR)
         || local.metrics.state == "embark" || player.m_lifeState != 0 || player.m_iHealth <= 0 {
         local.height.cancel();
+        release_cover_route(local);
         return;
     }
     let now = time(helper);

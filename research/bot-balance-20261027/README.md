@@ -18,9 +18,11 @@ trials stay as installed).
 | War Games | 5.5 (33/6) | 29.5 |
 | **All** | **9.7 (87/9)** | — |
 
-Median damage-to-death of bots you killed (clean episodes): 0.33 s, about the
-theoretical minimum for those guns, i.e. bots are not evading. On Eden/Meadow
-59–81% of bot views of you had a vertical gap over 180 units. Bots carried the
+The available grouped damage-to-death summaries cannot reconstruct a pooled
+median. Their weighted subgroup-median summary excludes acquisition and misses;
+it does not establish whether bots evade effectively. On Eden/Meadow
+59–81% of sampled bot views had absolute vertical separation over 180 units
+(above OR below). This does not establish overhead-only prevalence. Bots carried the
 R-201 in >99% of samples and never used a tactical.
 
 ## Levers (all default off)
@@ -30,7 +32,7 @@ R-201 in >99% of samples and never used a tactical.
 | `bot_combat_movement 1` (+ `bot_proximity_fix 1`) | PR #6 | Route toward visible targets, full randomized strafes, blocked-step alternatives |
 | `bot_height_response 1` | this PR | Enemy 180+ units above and visible for 1 s → move to a nearby navmesh point it cannot see (≤6 candidates, same floor, 100–600 units), hold 4 s, 10 s cooldown. Still aims/fires when it sees you |
 | `bt7274_bot_roster 1` | `BT7274.BotRoster` | Same 8-gun list per team by rank: R-201, G2, CAR, Flatline, DMR, Spitfire, Hemlok, R-97 (stock). No one-shot, splash or heat guns |
-| `bt7274_bot_tacticals 1` + `bot_defensive_tactics 1` | add-on + this PR | Stim on 3 of 8 ranks, Phase on 2; Stim/Phase fire whenever health <60 (readiness-gated; needs `bot_action_policy 1`, already on) |
+| `bt7274_bot_tacticals 1` + `bot_defensive_tactics 1` | add-on + this PR | Weapon-matched Pulse/Cloak/Stim/Holo/Cloak/A-Wall/Phase/Stim; Stim/Phase fire whenever health <60 (readiness-gated; needs `bot_action_policy 1`, already on) |
 
 | `bot_skill_use 1` | this PR | Situational skill rules replacing the old shared timers (see below) |
 | `bot_personality 1` | this PR | Weapon-based behavior: SMG rushers push in, G2/DMR marksmen keep 600+ units away, Spitfire anchors hold with half-strength strafes |
@@ -84,8 +86,8 @@ the rename (PR #7), so add-on names use the BT7274 prefix.
    and your 1–5 fun/fairness rating (must not fall — "harder" must not feel
    cheap).
 
-Expected direction, not a promise: movement should lengthen the 0.33 s bot
-damage-to-death; height response should cut the free kills from above
+Expected direction, not a promise: movement may improve survivability;
+height response may reduce exposed positioning against enemies above
 (Meadow/Eden); the roster adds threat at the 1,000–1,500-unit ranges you
 fight at; Stim/Phase add escapes. Weapon-role questions about your own guns
 (Volt recoil etc.) come after the K/D is in band.
@@ -102,3 +104,14 @@ unverified. Errors stop the add-on after 3 and are logged.
 
 Every lever is a convar → 0 (roster/tacticals apply at the next respawn).
 Disable `BT7274.BotRoster` in enabledmods.json for full removal; keep CURRENT saves.
+
+Review fixes: cover-route expiry/cancellation now invalidates the cover corridor
+before ordinary pursuit resumes. Grouped damage summaries remain explicitly
+separate from raw-episode medians. Roster probes wait until end-of-frame for
+readback, and unresolved/interrupted assignments restore the saved baseline and
+log failure instead of leaving an arbitrary suit equipped. In isolated runtime,
+force a missing tactical mapping, interrupt during a probe, and toggle off mid-
+assignment: require restoration, no success record and preserved human loadouts.
+Also verify the engine returns independent baseline loadout structs, actual
+post-frame tactical readback, and correct native route-ownership transitions.
+None of these game/API checks has been run here.

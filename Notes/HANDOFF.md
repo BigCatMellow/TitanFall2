@@ -703,3 +703,19 @@ Holo/A-Wall/grenade rules replacing shared timers; frag now handled; BOT_SKILL
 logs, counted by the played-session analyzer) and bot_personality (SMG rushers,
 marksmen, LMG anchors; movement intent only). BT7274.BotRoster skills now give
 each gun a matched tactical + ordnance. All default 0; not run in game.
+
+2026-10-27 — PR6/7/8 SOURCE REVIEW FIXES, NOT DEPLOYED.
+Corrected invalid hull trace handling/adjusted hull bounds, intentional route
+holds, per-life candidate resets and cover-route ownership release. Notebook
+expenditure is actor/life/time/config matched, not accuracy; pooled episode
+median is unknown rather than inferred from subgroup medians. Roster waits for
+post-frame readback and restores baseline on unresolved/interrupted assignment.
+Migration now has unique backups, complete preflight and an explicit restore
+command. Restore rejects migrated rerun baselines and inactive partial saves,
+preserves CURRENT progress and disables renamed packages before resumed play.
+Independent source re-reviews pass. Combined pinned checks:86pure Rust tests,
+47Node tests,33PowerShell assertions,85PowerShell scripts parse, Windows-target
+cargo check and distribution cross-build pass (Linux/GCC MinGW). No game was
+run or profile migrated. Installed state remains v19 pending isolated Windows
+startup, hull/posture/traversal, Squirrel APIs, save migration/rollback, lifecycle
+and performance checks. New switches remain default0. Binary not published.

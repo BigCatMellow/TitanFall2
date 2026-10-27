@@ -77,7 +77,12 @@ void function BT7274BotRoster_Give( entity bot, PilotLoadoutDef loadout )
 {
     UpdateDerivedPilotLoadoutData( loadout )
     GivePilotLoadout( bot, loadout )
+    // GivePilotLoadout may apply inventory at end-of-frame. Never cache stale readback.
+    WaitEndFrame()
+    if ( !IsValid( bot ) || !IsAlive( bot ) || bot.IsTitan() || !BT7274BotRoster_Enabled() )
+        throw "Roster assignment interrupted"
     string tactical = BT7274BotRoster_TacticalClass( bot )
+    if ( tactical == "none" ) throw "Tactical readback unavailable"
     file.suitTactical[ loadout.suit ] <- tactical
     file.tacticalSuit[ tactical ] <- loadout.suit
 }
@@ -86,8 +91,28 @@ void function BT7274BotRoster_Apply( entity bot )
 {
     WaitEndFrame()
     if ( !IsValid( bot ) || !IsAlive( bot ) || bot.IsTitan() || !BT7274BotRoster_Enabled() ) return
+    bot.EndSignal( "OnDeath" )
+    bot.EndSignal( "OnDestroy" )
+    table restore = { baseline = null, committed = false }
+    OnThreadEnd(
+        function():(bot,restore)
+        {
+            if ( restore.committed || restore.baseline == null || !IsValid( bot ) || !IsAlive( bot ) || bot.IsTitan() ) return
+            try {
+                // The saved pre-trial baseline is retained independently of the probe loadout.
+                UpdateDerivedPilotLoadoutData( restore.baseline )
+                GivePilotLoadout( bot, restore.baseline )
+                print( "BOT_ROSTER_RESTORED slot=" + bot.GetEntIndex() )
+            } catch ( restoreError ) {
+                file.errors++
+                print( "BOT_ROSTER_ERROR stage=restore count=" + file.errors )
+                print( string( restoreError ) )
+            }
+        }
+    )
     try
     {
+        restore.baseline = GetPilotLoadoutFromPersistentData( bot, 0 )
         int rank = BT7274BotRoster_Rank( bot )
         PilotLoadoutDef loadout = GetPilotLoadoutFromPersistentData( bot, 0 )
         if ( GetConVarBool( "bt7274_bot_roster" ) )
@@ -118,6 +143,12 @@ void function BT7274BotRoster_Apply( entity bot )
                 if ( BT7274BotRoster_TacticalClass( bot ) == wanted ) break
             }
         }
+        if ( wanted != "" && BT7274BotRoster_TacticalClass( bot ) != wanted ) {
+            // Do not leave the last arbitrary probe suit equipped or call it success.
+            throw "No verified suit mapping for requested tactical: " + wanted
+        }
+        if ( !BT7274BotRoster_Enabled() ) throw "Roster disabled before assignment committed"
+        restore.committed = true
         print( "BOT_ROSTER map=" + GetMapName() + " slot=" + bot.GetEntIndex() + " team=" + bot.GetTeam()
             + " rank=" + rank + " primary=" + loadout.primary + " suit=" + loadout.suit
             + " tactical=" + BT7274BotRoster_TacticalClass( bot ) + " wanted=" + ( wanted == "" ? "keep" : wanted )

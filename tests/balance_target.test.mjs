@@ -23,3 +23,9 @@ test('target band classifies easy, on-target and hard outcomes', () => {
   assert.equal(summarize([round(30, 10)]).maps[0].kills_per_10min, 30);
   assert.equal(TARGET.kd, 3);
 });
+
+test('subgroup summaries never masquerade as pooled medians or coerce null to zero',()=>{
+ const a={rounds:[{map:'m',qualifying_human_damage_groups:[{victim_kind:'bot',n:3,median_s:10},{victim_kind:'bot',n:1,median_s:1},{victim_kind:'bot',n:999,median_s:null}]}]};
+ const s=summarize([a]);assert.equal(s.bot_damage_to_death_median_s,null);assert.equal(s.weighted_group_median_s,10);assert.equal(s.bot_damage_samples,4);
+ assert.match(s.limits,/NOT a pooled/);
+});
