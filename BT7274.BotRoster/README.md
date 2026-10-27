@@ -1,7 +1,9 @@
-# BT7274.BotRoster — optional bot loadout balance trial (0.1.0)
+# BT7274.BotRoster — optional bot loadout balance trial (0.1.1)
 
-**Source candidate, not installed or run.** Both convars default to `0`; with
-the add-on enabled and both at 0 nothing changes.
+Windows-tested and installed with both switches off in the normal Movement
+preset. The isolated run verified8primaries,6tactical readbacks and interrupted
+assignment restoration. Both convars default to `0`; with both at0nothing changes.
+See Notes/candidates/bot-capability-v20-20261027 for the actual rollout and limits.
 
 - `bt7274_bot_roster 1`: bots (UID "0") get a primary by team rank:
   R-201, G2, CAR, Flatline, DMR (Longbow), Spitfire, Hemlok, R-97 — stock, no

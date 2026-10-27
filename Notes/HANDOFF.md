@@ -719,3 +719,67 @@ cargo check and distribution cross-build pass (Linux/GCC MinGW). No game was
 run or profile migrated. Installed state remains v19 pending isolated Windows
 startup, hull/posture/traversal, Squirrel APIs, save migration/rollback, lifecycle
 and performance checks. New switches remain default0. Binary not published.
+
+2026-10-27 18:05 EDT — REVIEWED REPO STACK BUILT/TESTED/INSTALLED FOR PLAYTEST.
+Fetched main44ffeb7 (PR6/7/8,plus a5d skill/personality). Older unmerged low-
+clearance prototype is superseded and was NOT merged. New native v20 built with
+pinned nightly2025-09-11GNU/LLVM-MinGW, SHA3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89.
+Normal and working isolated now use this binary and BT7274 packages. Normal CMD/
+Desktop defaults Movement: combat_movement1,proximity_fix1,nav_diagnostics1,
+weapon_notes_fire1; all other new behavior andviewkick0. Isolated idle Baseline.
+Same16total8v8,aim.78,.8swarm-up,damage/RPM,human tactical.5,reload.9,ADS/roles,
+solo_weapon_balance_bots0. Human presets and3old normal savefiles unchanged.
+
+47Node tests/9suites and86pureRust/17suites pass; migration/rollback/versioned
+fixtures and preset invariants/file idempotency pass. Windows runtime found and
+fixed: sampler d<-180 lexer(newslot)->comparison (logger1.1.1); roster var->typed
+struct/cast unsupported -> capture typed baseline directly in protected closure
+(roster0.1.1); Northstar1.31Version1 bare false ignored/autoenabled -> per-version
+falseobjects, clone before disabling, same helper inrollback; profilepathguards.
+Game Assert was inactive! Critical test assertions now explicitly throw. Starter
+fixes observer population AFTER autoexec and can force isolated UI map bootstrap.
+Failed/wrong-population cohorts kept private and NOT counted as successes.
+
+Compatibility-20261027-172824 PASSED: actual1.31.14.0,16bot observer (17players),
+11gun classes,32human modifier/control/strip cases,respawn,lobby andhuman+15return.
+Node reviewer checks pass. Staged capability-20261027-173602 PASSED7phases:
+diagnostics,move/prox,roster,skills/personality/height,switch-off/respawn,lobby/
+Meadow movement,cancelled roster assignment.8primaries natively observed,6tactical
+readbacks,35assignments,64skill requests,12cover selections.2independentloadout
+copies. Probe cancellation had1expected caught error+baseline restore,no probe
+success (3OTHER bot assignments in same phase were legitimate and segregated).
+Sampler APIs worked,zoomknowntrue,2samples4SIMULATED magazine rounds; no accuracy
+or real firing/recoil measurement. All unexpected runtime errors0.
+
+109plausible view/hull observations: stand72/duck47 inobservedcases. Raw view_angles
+was UNIT FORWARD (norm~1,errorvsEyeAngles-derivedvector<=1.3e-7), not degrees.
+Keep perception0; eyeline change stillneedsA/B. Diagnostic46stallincidents,
+link/partialshare.54348,duckonly0,partialroutefraction.010676; mixedshortfunctional
+phases NOT a controlledroute/crouchstudy. Crouch/route/jump remain off inpresets.
+No visual watching,FPS/p95certificate,K/D/3:1balance/fairness claim.
+
+LIVE ORIGINAL migration rollback onisolated PASSED using initialmigrationsbackup:
+CURRENTBTprogress carriedback tooldkeys,originalv19DLL+SoloNotes1.0/oldfamily loaded,
+902fields restored,bots,no errors. Then re-migratedisolated toBT/v20withharnesses
+off andBaseline settings. Never restore historicalsaves. Original normalbackup
+before-v20-normal-20261027-175459; initialbefore-v20-20261027-165920 bothprivate.
+Normalmigration usedcorrectedhelper; fullrollbackusesORIGINALnormalmigrationrun,
+restoresDLL/CMDandcarriesCURRENTprogressback. Namespacefolders retained.
+
+ActualnormalWindowsPSshortcut session20261027-175504-e803a3c6 PASSED:Movement,
+902fields,62same-framehuman+15bot observations,0runtimeerrors,0presetdefinition
+changes,3originalsavefilesbyteunchanged. Collectorcomplete44pilotdeaths/5qualifying,
+0damage/fireerrors. Testgameclosed. NormalprogresscontinuesinBTsavekey;oldkeys
+retaineddisabled. All9functionalpackage/sourcehashes matchnormal+isolated.
+
+Launch presets baseline/movement(default)/height/roster/skills/full cumulative.
+Allgatedgeometry/perceptionandviewkickoff. Wrapper requiresmatchingnative receipt
+for explicittrials. Presetwriter updatesONLYnewtrial/samplerflags, atomicreplace
+with uniqueconfigbackup; settingspersistacrossmapsbecauseCLI+vars canbeoverwritten
+byautoexec. DefaultshortcutresetsMovement. MetadatarecordsTrial/actualoverrides.
+ReadOnly Node/Squirreltelemetry stilldoesnotaltergameplay. Keep presets separate
+when analyzing playeddata. Privatefullrawlogs/IDs/saves/binaries notpublished.
+Rolloutaggregate/provenance:Notes/candidates/bot-capability-v20-20261027.
+Optional Desktop shortcut Northstar - Full Bot Trial (8v8).lnk was created and
+verified: same installedCMD/profile with argument full; usualshortcut stays
+Movement. Both use CURRENT normalprogress. Shortcut binary stays local.

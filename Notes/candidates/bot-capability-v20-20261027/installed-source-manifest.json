@@ -1,0 +1,190 @@
+[
+  {
+    "sha256": "058E3D26DDE5C09D10F3F4674A22E1F06D24B8BBF84145E3ECA8914EE428B6BA",
+    "file": "BT7274.BotLifecycle/mod.json"
+  },
+  {
+    "sha256": "30E711BBF9F85B4E0CF9D8A7033CA192383351523791870B836D33B1F03B9DE8",
+    "file": "BT7274.BotLifecycle/mod/scripts/vscripts/bt7274_bot_lifecycle.nut"
+  },
+  {
+    "sha256": "587F6125DA4A1ED1D09A53C2567CD6B5D0500FC5AE7038E8FFDA31F30E3676C5",
+    "file": "BT7274.BotDecisions/mod.json"
+  },
+  {
+    "sha256": "66BCABBF6FCEEC10387E8EA3BB53A14A282B5BD3A16C293BDFA542C9D1928AFE",
+    "file": "BT7274.BotDecisions/README.md"
+  },
+  {
+    "sha256": "9C43719868D28121E6D59A07C3317882E135A50FF3C91AA1340A12C1219C4598",
+    "file": "BT7274.BotDecisions/mod/scripts/vscripts/bt7274_bot_decisions.nut"
+  },
+  {
+    "sha256": "AC0673B60D66BD86625E7BFC3B829F4E7C10370EB3C623082DCBCDA6C5D72EC1",
+    "file": "BT7274.LocalPersistence/mod.json"
+  },
+  {
+    "sha256": "276F3EE8BB68482F0BA9AE66860D9A31BDC07CA029AAA2A24B690F08CB5631E5",
+    "file": "BT7274.LocalPersistence/README.md"
+  },
+  {
+    "sha256": "2E3FCB9EEE183E0448A7F296364BFEBFEDA5F8D79A785F32FFECE95F091A2E8B",
+    "file": "BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_client.nut"
+  },
+  {
+    "sha256": "7D1FFAF614113113B588F1BCFF72C28ECC8A0655E932D2DC4EE3E1AE17C02952",
+    "file": "BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_paths.nut"
+  },
+  {
+    "sha256": "3ACC5F5891C988B7378DF7FEFCD07C99466D69DABA93AE81BD023D8975A762FF",
+    "file": "BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence_ui.nut"
+  },
+  {
+    "sha256": "FC5E85C58C366443A00430974AED84DEC7941B01C4AF405FD88AFF04E0942A33",
+    "file": "BT7274.LocalPersistence/mod/scripts/vscripts/bt7274_local_persistence.nut"
+  },
+  {
+    "sha256": "9531D3B7C0CB8407E5ABE6B054FCE535E5EEE476E712FD587DA3FAAAAD50CF1D",
+    "file": "BT7274.TacticalRecharge/mod.json"
+  },
+  {
+    "sha256": "0BD1CC3877796EA9D1145ADD6BF8DDCD64A261ECDFA945005EF52ADEF8DFCCE6",
+    "file": "BT7274.TacticalRecharge/README.md"
+  },
+  {
+    "sha256": "35F03E036336A092F23DA16CD8F12C49E7AAFA9E087FFD4996E433E928A5A3F4",
+    "file": "BT7274.TacticalRecharge/keyvalues/scripts/players/mp/pilot_mp.set"
+  },
+  {
+    "sha256": "635A8FEFCFF6042CC1DA71E7BC74C7C09E737A3272815A8FDEAA70BB5CA210E2",
+    "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_cloak.txt"
+  },
+  {
+    "sha256": "635A8FEFCFF6042CC1DA71E7BC74C7C09E737A3272815A8FDEAA70BB5CA210E2",
+    "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_heal.txt"
+  },
+  {
+    "sha256": "635A8FEFCFF6042CC1DA71E7BC74C7C09E737A3272815A8FDEAA70BB5CA210E2",
+    "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_holopilot.txt"
+  },
+  {
+    "sha256": "635A8FEFCFF6042CC1DA71E7BC74C7C09E737A3272815A8FDEAA70BB5CA210E2",
+    "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_ability_shifter.txt"
+  },
+  {
+    "sha256": "635A8FEFCFF6042CC1DA71E7BC74C7C09E737A3272815A8FDEAA70BB5CA210E2",
+    "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_deployable_cover.txt"
+  },
+  {
+    "sha256": "635A8FEFCFF6042CC1DA71E7BC74C7C09E737A3272815A8FDEAA70BB5CA210E2",
+    "file": "BT7274.TacticalRecharge/keyvalues/scripts/weapons/mp_weapon_grenade_sonar.txt"
+  },
+  {
+    "sha256": "07F9B698BCB867912425A986A9A9910C06D8F42013FD5918F8F5BA199C1DD95C",
+    "file": "BT7274.TacticalRecharge/mod/scripts/vscripts/bt7274_tactical_recharge.nut"
+  },
+  {
+    "sha256": "E9AFDB51BB71DB1A1560E0886FDB94854E33E43598113D81BBE9298E6F1B6FDA",
+    "file": "BT7274.WeaponHandling/mod.json"
+  },
+  {
+    "sha256": "78B57A02CBB4D3339F8AEE151F3C268B1D8E5D9FB125B464DFCC3AEEEA3EF20B",
+    "file": "BT7274.WeaponHandling/README.md"
+  },
+  {
+    "sha256": "651A48870B7FE46987526314DFDB4F13ED1749697DC183B99BD1BB8B510CBDB2",
+    "file": "BT7274.WeaponHandling/keyvalues/scripts/weapons/mp_weapon_g2.txt"
+  },
+  {
+    "sha256": "651A48870B7FE46987526314DFDB4F13ED1749697DC183B99BD1BB8B510CBDB2",
+    "file": "BT7274.WeaponHandling/keyvalues/scripts/weapons/mp_weapon_vinson.txt"
+  },
+  {
+    "sha256": "1B13D3C36A7A8E1915693A2FF5CEBDAEBF008385D1B97CBBC2D8C13E7F5F9E0E",
+    "file": "BT7274.WeaponHandling/mod/scripts/vscripts/bt7274_weapon_handling.nut"
+  },
+  {
+    "sha256": "214A2D2CA60E98C25197C401C41E85EE4F538C28DB84B4C0BF05E1701EA0CB46",
+    "file": "BT7274.WeaponReload/mod.json"
+  },
+  {
+    "sha256": "4010A779EE3566E80261C595A3C3F7628A46DD5AA1BFFBA8FC20D077B6F1C4BB",
+    "file": "BT7274.WeaponReload/README.md"
+  },
+  {
+    "sha256": "502CBF2222254AD44531455DD32A2D6B98C39BD7009AFC1FB5AFA4D5FA1E1AFD",
+    "file": "BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_alternator_smg.txt"
+  },
+  {
+    "sha256": "502CBF2222254AD44531455DD32A2D6B98C39BD7009AFC1FB5AFA4D5FA1E1AFD",
+    "file": "BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_car.txt"
+  },
+  {
+    "sha256": "502CBF2222254AD44531455DD32A2D6B98C39BD7009AFC1FB5AFA4D5FA1E1AFD",
+    "file": "BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_g2.txt"
+  },
+  {
+    "sha256": "502CBF2222254AD44531455DD32A2D6B98C39BD7009AFC1FB5AFA4D5FA1E1AFD",
+    "file": "BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt"
+  },
+  {
+    "sha256": "502CBF2222254AD44531455DD32A2D6B98C39BD7009AFC1FB5AFA4D5FA1E1AFD",
+    "file": "BT7274.WeaponReload/keyvalues/scripts/weapons/mp_weapon_rspn101.txt"
+  },
+  {
+    "sha256": "67642703EA33CF96FDA62CC32DE4723F1F3BE4C5FB230E590CB2287F4DFF501F",
+    "file": "BT7274.WeaponReload/mod/scripts/vscripts/bt7274_weapon_reload.nut"
+  },
+  {
+    "sha256": "3508D6E48E012C4CC5B0A638988FDB8A9746EDB26412C77CC13D448747A04765",
+    "file": "BT7274.BotRoster/mod.json"
+  },
+  {
+    "sha256": "4FD57C6194E4EF5E88DDB40688C071E8317336FB0A9F6180967C26C145012E94",
+    "file": "BT7274.BotRoster/README.md"
+  },
+  {
+    "sha256": "9CAA0F68D1B8CB468D56BFA3448C97842309ACC04DBB81CD50F58EE112FDD537",
+    "file": "BT7274.BotRoster/mod/scripts/vscripts/bt7274_bot_roster.nut"
+  },
+  {
+    "sha256": "7762AE576BB8EF03DFD96F4C16EC3E5A27D7E47704AAF594D4A5CCD4B1E7ACD1",
+    "file": "Solo.WeaponNotes/mod.json"
+  },
+  {
+    "sha256": "B6EAA06713273B7B03FBE48DB3E74E24E34DEE79D0D07D19BD68D50DA39BEC36",
+    "file": "Solo.WeaponNotes/mod/scripts/vscripts/solo_weapon_notes.nut"
+  },
+  {
+    "sha256": "55AABB48C129E97865B29E7A8C6A6693A0055B8DD32F82C243A80C12BF07DA67",
+    "file": "Solo.WeaponBalance/balance-pass.json"
+  },
+  {
+    "sha256": "C7120027FC900FF20D9C0A5ACA5837EB6A52FDDA6B03DED2EE99C6760B97491B",
+    "file": "Solo.WeaponBalance/mod.json"
+  },
+  {
+    "sha256": "E19EF0F2012182E92B2203F9E35CA73AC14CD68CA678200289DAE6CEDA1AB14E",
+    "file": "Solo.WeaponBalance/README.md"
+  },
+  {
+    "sha256": "643253E34F1356C36B16215CB7F45198F2040ABF3C26462E7B325800C08FA75F",
+    "file": "Solo.WeaponBalance/keyvalues/scripts/weapons/mp_weapon_hemlok_smg.txt"
+  },
+  {
+    "sha256": "12AF404BD5398550344F4CE84AA5680231D1D11C70579D9DABF4515C14BC00E7",
+    "file": "Solo.WeaponBalance/keyvalues/scripts/weapons/mp_weapon_lmg.txt"
+  },
+  {
+    "sha256": "6676096A39D49CAF8D7FFE6DCB8C08392620DB60142C95F6EE2D681AA02A61DA",
+    "file": "Solo.WeaponBalance/keyvalues/scripts/weapons/mp_weapon_r97.txt"
+  },
+  {
+    "sha256": "78B48CDEE67E649C89D9C655AFBBF17B5FB3A8DB3EF0DC40A46052DDF5858890",
+    "file": "Solo.WeaponBalance/keyvalues/scripts/weapons/mp_weapon_vinson.txt"
+  },
+  {
+    "sha256": "313ABF9E9A522DF22362868C943D545280E2145D0AF16A77FE2B323633ADA2FD",
+    "file": "Solo.WeaponBalance/mod/scripts/vscripts/solo_weapon_balance.nut"
+  }
+]

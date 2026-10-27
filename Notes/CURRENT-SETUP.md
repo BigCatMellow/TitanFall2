@@ -1,10 +1,13 @@
 # Current setup
 
-Updated 2026-10-26. Current deployment is weapons-v19-candidate, native SHA256
-9E8809146E17399B1CE572A5B479846C9A53633C48B7154A02159F47B19A4D6D,
+Updated 2026-10-27. Current deployment is the Windows-tested v20 playtest, native SHA256
+3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89,
 Northstar1.31.14. Human+15 bots,8v8,aim0.78, human tactical recharge0.5,
 five-gun reload0.9 and human ADS/role trials enabled; bot balance opt-in stays0.
-See [current rollout](candidates/weapons-v19-20261026/README.md).
+The normal shortcut defaults to Movement (movement/proximity fixes). Other
+explicit presets add height response, roster, skills and personalities. Gated
+crouch/route/jump/perception switches stay off. Both profiles use renamed BT7274
+add-ons and current migrated saves. See [current rollout](candidates/bot-capability-v20-20261027/README.md).
 
 The existing solo shortcut now starts the automatic text weapon notebook.
 See [recording and reference stats](weapon-notebook/README.md). Current saves

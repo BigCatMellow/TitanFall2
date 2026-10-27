@@ -99,6 +99,11 @@ void function BT7274DecisionTest_Start()
 {
     if ( file.started ) return
     file.started = true
+    // Apply after autoexec and the Playing transition, not before server.cfg
+    // can reset it. Observer phases need 16 bots plus the inactive human.
+    int population = GetConVarBool("bt7274_candidate_dedicated") || GetConVarInt("bt7274_candidate_phase") == 6 ? 16 : 17
+    SetConVarInt("bot_manager_max",population)
+    SetConVarInt("bot_manager_target",population)
     thread BT7274DecisionTest_Run()
 }
 void function BT7274DecisionTest_Run()
@@ -115,7 +120,7 @@ void function BT7274DecisionTest_Run()
     while ( GetPlayerArray().len() < expectedPlayers && Time() - warmup < 60.0 ) wait 0.25
     array<entity> bots
     foreach ( entity p in GetPlayerArray() ) if ( p.GetUID() == "0" ) bots.append(p)
-    Assert( bots.len() == (phase == 6 && !dedicated ? 15 : 16), "Candidate bot population mismatch" )
+    BT7274DecisionTest_Require( bots.len() == (phase == 6 && !dedicated ? 15 : 16), "Candidate bot population mismatch" )
     int imc = 0
     foreach ( entity bot in bots ) if ( bot.GetTeam() == TEAM_IMC ) imc++
     foreach ( entity bot in bots )
@@ -147,7 +152,12 @@ void function BT7274DecisionTest_Run()
         return
     }
     array<string> nextMaps = ["mp_eden","mp_eden","mp_complex3","mp_black_water_canal","mp_lobby"]
-    Assert( phase >= 0 && phase < nextMaps.len(), "Unexpected candidate phase" )
+    BT7274DecisionTest_Require( phase >= 0 && phase < nextMaps.len(), "Unexpected candidate phase" )
     SetConVarInt( "bt7274_candidate_phase", phase + 1 )
     GameRules_ChangeMap( nextMaps[phase], "tdm" )
+}
+
+void function BT7274DecisionTest_Require(bool condition,string message)
+{
+    if(!condition)throw message
 }

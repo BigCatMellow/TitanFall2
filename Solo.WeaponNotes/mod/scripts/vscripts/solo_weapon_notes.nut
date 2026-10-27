@@ -182,7 +182,7 @@ float function WeaponNotes_AngleDelta(float a,float b)
 {
     float d=a-b
     while(d>180.0)d-=360.0
-    while(d<-180.0)d+=360.0
+    while(d < -180.0)d+=360.0
     return d
 }
 void function WeaponNotes_FireSampler(entity player,int life)

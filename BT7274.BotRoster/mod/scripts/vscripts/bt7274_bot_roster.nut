@@ -93,15 +93,20 @@ void function BT7274BotRoster_Apply( entity bot )
     if ( !IsValid( bot ) || !IsAlive( bot ) || bot.IsTitan() || !BT7274BotRoster_Enabled() ) return
     bot.EndSignal( "OnDeath" )
     bot.EndSignal( "OnDestroy" )
-    table restore = { baseline = null, committed = false }
+    try
+    {
+    // Capture the typed struct directly. Respawn's Squirrel dialect cannot
+    // cast a var/table slot back to a complex PilotLoadoutDef struct.
+    PilotLoadoutDef baseline = GetPilotLoadoutFromPersistentData( bot, 0 )
+    table restore = { committed = false }
     OnThreadEnd(
-        function():(bot,restore)
+        function():(bot,restore,baseline)
         {
-            if ( restore.committed || restore.baseline == null || !IsValid( bot ) || !IsAlive( bot ) || bot.IsTitan() ) return
+            if ( restore.committed || !IsValid( bot ) || !IsAlive( bot ) || bot.IsTitan() ) return
             try {
                 // The saved pre-trial baseline is retained independently of the probe loadout.
-                UpdateDerivedPilotLoadoutData( restore.baseline )
-                GivePilotLoadout( bot, restore.baseline )
+                UpdateDerivedPilotLoadoutData( baseline )
+                GivePilotLoadout( bot, baseline )
                 print( "BOT_ROSTER_RESTORED slot=" + bot.GetEntIndex() )
             } catch ( restoreError ) {
                 file.errors++
@@ -110,9 +115,6 @@ void function BT7274BotRoster_Apply( entity bot )
             }
         }
     )
-    try
-    {
-        restore.baseline = GetPilotLoadoutFromPersistentData( bot, 0 )
         int rank = BT7274BotRoster_Rank( bot )
         PilotLoadoutDef loadout = GetPilotLoadoutFromPersistentData( bot, 0 )
         if ( GetConVarBool( "bt7274_bot_roster" ) )

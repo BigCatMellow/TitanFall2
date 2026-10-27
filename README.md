@@ -7,7 +7,11 @@ local work. [Original README](docs/UPSTREAM-README.md).
 
 ## Current state
 
-- **Installed:** tested weapons-v19-candidate,8v8 (human+15 bots), aim0.78.
+- **Installed for playtesting:** Windows-tested v20 candidate,8v8 (human+15 bots),
+  aim0.78. The usual solo shortcut selects Movement (movement/proximity fixes).
+  `Play-Solo-Bots.cmd full` selects the broader height/roster/skills/personality
+  trial. Aim, firing warm-up, damage and human buffs are preserved.
+  [Validation, presets and rollback](Notes/candidates/bot-capability-v20-20261027/README.md).
 - **Weapon notebook:** the solo shortcut automatically records local pilot
   damage/life/kill notes. Includes a 30-weapon reference catalog and conditional
   ideal TTK models; observed damage-to-death spans remain separate.
@@ -73,11 +77,11 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 
 ## Build and check
 
-Validated toolchain: 
-ightly-2025-09-11-x86_64-pc-windows-gnu` and LLVM-MinGW.
+Validated toolchain: `nightly-2025-09-11-x86_64-pc-windows-gnu` and LLVM-MinGW.
 With the toolchain installed and LLVM-MinGW's bin directory on PATH:
 
 ```powershell
+$env:RUSTUP_TOOLCHAIN='nightly-2025-09-11-x86_64-pc-windows-gnu'
 ./tools/Test-Project.ps1
 $env:CARGO_PROFILE_DISTRIBUTION_STRIP='none'
 $env:CARGO_PROFILE_DISTRIBUTION_DEBUG='2'

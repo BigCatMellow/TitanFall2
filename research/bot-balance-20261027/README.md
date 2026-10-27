@@ -1,5 +1,10 @@
 # Solo balance plan and candidate — 2026-10-27
 
+Windows functional smoke and first-stage installation are complete. Use the
+[rollout record and preset instructions](../../Notes/candidates/bot-capability-v20-20261027/README.md)
+for actual tested/deployed state. The3:1target below still requires human
+playtesting; it has not been demonstrated by the unattended smoke.
+
 **Goal agreed with BT-7274: about 3:1 human pilot K/D** (band 2.5–3.5) in normal
 8v8 solo play. Allowed levers: bot movement/decisions, a bot loadout mix and bot
 defensive tacticals. Not used: aim (stays 0.78), the 0.8 s firing warm-up,

@@ -1,7 +1,7 @@
 {
   "Name": "BT7274.BotRoster",
   "Description": "Optional symmetric bot primary-weapon roster and defensive tacticals for solo balance trials. Both switches default off.",
-  "Version": "0.1.0",
+  "Version": "0.1.1",
   "LoadPriority": 43,
   "ConVars": [
     {

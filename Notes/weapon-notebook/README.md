@@ -1,5 +1,10 @@
 # Automatic weapon notebook
 
+Updated October27: installed logger1.1.1 includes opt-in magazine-expenditure
+sampling, enabled by the playtest presets. This is not accuracy. View-kick sampling
+stays off. Windows runtime checks confirmed ammo/zoom API access; controlled
+magazine drops exercised the sampler. See [v20 validation](../candidates/bot-capability-v20-20261027/README.md).
+
 First played-session results are now available in the
 [weapon/movement/difficulty review](../../research/played-weapons-20261026/FINDINGS.md):
 four maps,533pilot death records,128qualifying episodes, including24human-attacker

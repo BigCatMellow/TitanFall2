@@ -13,8 +13,10 @@ try{
         & $exe
         if($LASTEXITCODE-ne0){throw "Tests failed: $name"}
     }
-    & "$repo\tests\migrate_rename.ps1"
-    if(-not$?){throw 'Migration fixture failed'}
+    foreach($fixture in @('migrate_rename','migrate_rollback','migrate_versioned','trial_settings')){
+        & "$repo\tests\$fixture.ps1"
+        if(-not$?){throw "Fixture failed: $fixture"}
+    }
     & git diff --check -- bp_ort shared tests tools README.md AGENTS.md NOTICE
     if($LASTEXITCODE-ne0){throw 'Source whitespace check failed'}
 }finally{Pop-Location}

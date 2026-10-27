@@ -1,6 +1,12 @@
 # Bot capability candidate v20 — 2026-10-27
 
-**UNDEPLOYED SOURCE CANDIDATE.** Seven new switches, all default `0`. With every
+**Windows playtest installed October27.** Normal defaults to Movement; gated
+geometry/perception switches stay off. See
+[actual validation and presets](../../Notes/candidates/bot-capability-v20-20261027/README.md).
+The original source design/protocol below is retained; statements about unrun
+checks describe that earlier source stage, not the current rollout.
+
+Seven new switches, all source defaults `0`. With every
 switch at 0 the command path matches installed v19 (same inputs; the only extra
 work is bookkeeping in per-bot structs). Nothing here was run in the game.
 Aim `0.78`, the existing 0.8 s firing warm-up, weapon damage/RPM, team sizes,
@@ -50,7 +56,7 @@ the Experiment 1 decision rule (stall samples grouped into per-slot incidents).
 - Failure handed off to jump/diagonal recovery under the ceiling and retried the
   same spot. This remembers failed spots and never adds jump while crouching.
 
-## Validation done (offline only)
+## Original source-stage validation (historical)
 
 - 15 Rust pure suites (99 tests; 5 new suites, 24 new tests) and 8 Node suites pass
   on Linux. `tests/weapon_roles.test.mjs` had a stale assertion on main (it

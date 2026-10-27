@@ -1,0 +1,7 @@
+{
+  "Name":"BT7274.CapabilityTest","Version":"1.0.0","LoadPriority":60,
+  "Description":"Disposable v20 functional smoke and transition tests; never enable in normal play.",
+  "ConVars":[{"Name":"bt7274_capability_test","DefaultValue":"0"},{"Name":"bt7274_capability_stage","DefaultValue":"1"}],
+  "Scripts":[{"Path":"bt7274_capability_test.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"BT7274CapabilityTest_Init"}},
+    {"Path":"bt7274_capability_test_ui.nut","RunOn":"UI","UICallback":{"After":"BT7274CapabilityTest_UIInit"}}]
+}

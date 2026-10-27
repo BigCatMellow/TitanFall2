@@ -1,0 +1,54 @@
+{
+  "state": "passed",
+  "run": "capability-20261027-173602",
+  "native_sha256": "3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89",
+  "core": "1.31.14.0",
+  "completed_phases": [
+    "diagnostics_only",
+    "movement_proximity",
+    "roster_readback",
+    "skills_personality_height_smoke",
+    "switch_off_respawn",
+    "new_map_movement",
+    "roster_cancel"
+  ],
+  "unexpected_runtime_errors": 0,
+  "deliberate_cancellation_errors": 1,
+  "cancellation_restored": true,
+  "loadout_snapshot_checks": 2,
+  "roster_assignments": 35,
+  "roster_primaries": [
+    "mp_weapon_car",
+    "mp_weapon_dmr",
+    "mp_weapon_g2",
+    "mp_weapon_hemlok",
+    "mp_weapon_lmg",
+    "mp_weapon_r97",
+    "mp_weapon_rspn101",
+    "mp_weapon_vinson"
+  ],
+  "actual_native_roster_primaries_observed": true,
+  "tactical_readbacks": [
+    "mp_ability_cloak",
+    "mp_ability_heal",
+    "mp_ability_holopilot",
+    "mp_ability_shifter",
+    "mp_weapon_deployable_cover",
+    "mp_weapon_grenade_sonar"
+  ],
+  "skill_requests": 64,
+  "ammo_samples": 2,
+  "observed_expenditure": 4,
+  "zoom_observed": true,
+  "plausible_hull_samples": 109,
+  "raw_view_vector_samples": 109,
+  "raw_view_norm_range": [
+    0.9999999537372704,
+    1.0000000379708642
+  ],
+  "raw_view_forward_max_error": 1.2756443925656754e-7,
+  "cover_diagnostics": 12,
+  "cover_found_samples": 12,
+  "private_log_sha256": "855c227d8f3debd0ab65c2c7aedc6bde03b236cb233190737ec9d5a3323d1391",
+  "limits": "Functional isolated smoke, not a balance, fun, performance or route-success study. Ammo drops were deliberately simulated; expenditure is not accuracy. Skill requests are not confirmed casts. Crouch, route/jump and perception trials remain off. Eye/view samples describe these observed states only. Raw logs, saved state and account data stay local."
+}

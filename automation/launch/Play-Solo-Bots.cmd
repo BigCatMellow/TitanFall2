@@ -11,6 +11,12 @@ if not exist "%NS_SOLO_PROFILE%\mods\BT7274.LocalPersistence\mod.json" goto miss
 if not exist "%NS_SOLO_PROFILE%\mods\Solo.WeaponNotes\mod.json" goto missing_profile
 if not exist "%~dp0TitanFall2-project\tools\Start-SoloWeaponSession.ps1" goto missing_profile
 if /I "%~1"=="--check" goto checked
+set "NS_TRIAL=Movement"
+if /I "%~1"=="baseline" set "NS_TRIAL=Baseline"
+if /I "%~1"=="height" set "NS_TRIAL=Height"
+if /I "%~1"=="roster" set "NS_TRIAL=Roster"
+if /I "%~1"=="skills" set "NS_TRIAL=Skills"
+if /I "%~1"=="full" set "NS_TRIAL=Full"
 
 tasklist /FI "IMAGENAME eq NorthstarLauncher.exe" /NH 2>nul | find /I "NorthstarLauncher.exe" >nul
 if not errorlevel 1 goto already_running
@@ -21,7 +27,7 @@ echo Launching your Northstar solo profile: 8v8 bots on Eden.
 echo Bots join after the match intro finishes.
 echo Automatic weapon notes are saved locally for this session.
 cd /d "%NS_GAME_DIR%"
-powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "%~dp0TitanFall2-project\tools\Start-SoloWeaponSession.ps1" -Profile "%NS_SOLO_PROFILE%" -GameDirectory "%NS_GAME_DIR%"
+powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "%~dp0TitanFall2-project\tools\Start-SoloWeaponSession.ps1" -Profile "%NS_SOLO_PROFILE%" -GameDirectory "%NS_GAME_DIR%" -Trial "%NS_TRIAL%"
 if errorlevel 1 goto launch_failed
 exit /b 0
 

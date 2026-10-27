@@ -5,6 +5,7 @@ param([Parameter(Mandatory)][string]$Profile,
       [Parameter(Mandatory)][string]$MigrationBackup,
       [switch]$Apply)
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/Northstar-ModState.ps1"
 $Profile=(Resolve-Path -LiteralPath $Profile).Path
 $MigrationBackup=(Resolve-Path -LiteralPath $MigrationBackup).Path
 if(Get-Process -Name NorthstarLauncher,Titanfall2 -ErrorAction SilentlyContinue){throw 'Close Northstar/Titanfall 2 before rollback.'}
@@ -24,7 +25,7 @@ if(Test-Path -LiteralPath $receiptPath){
 }
 $enabled=Get-Content -Raw -LiteralPath (Join-Path $MigrationBackup 'enabledmods.json') | ConvertFrom-Json
 foreach($prop in @($enabled.PSObject.Properties)){
-    if($prop.Name -like 'BT7274.*' -and $prop.Value -eq $true){
+    if($prop.Name -like 'BT7274.*' -and (Test-NorthstarModEnabled $prop.Value)){
         throw 'This backup already contains migrated enablement. Select the ORIGINAL pre-migration backup, not a rerun snapshot.'
     }
 }
@@ -32,12 +33,12 @@ $currentEnabled=Get-Content -Raw -LiteralPath (Join-Path $Profile 'enabledmods.j
 $committed=Test-Path -LiteralPath (Join-Path $MigrationBackup 'completed') -PathType Leaf
 # Explicit false keys are essential: absence can auto-enable an installed mod.
 foreach($d in @(Get-ChildItem -LiteralPath (Join-Path $Profile 'mods') -Directory -Filter 'BT7274.*')){
-    $enabled | Add-Member -NotePropertyName $d.Name -NotePropertyValue $false -Force
+    Disable-NorthstarMod $enabled $d.Name $Profile
 }
 foreach($p in @($m.packages)){
     if($p.name -notmatch '^(BT7274\.[A-Za-z0-9]+|Solo\.WeaponNotes)$'){throw 'Invalid package in manifest.'}
     if($p.existed -and -not(Test-Path -LiteralPath (Join-Path $MigrationBackup "mods-replaced/$($p.name)") -PathType Container)){throw "Missing package backup: $($p.name)"}
-    if(-not $p.existed){$enabled | Add-Member -NotePropertyName $p.name -NotePropertyValue $false -Force}
+    if(-not $p.existed){Disable-NorthstarMod $enabled $p.name $Profile}
 }
 foreach($cfg in @($m.cfg)){if(-not(Test-Path -LiteralPath (Within $MigrationBackup "cfg/$cfg") -PathType Leaf)){throw "Missing configuration backup: $cfg"};$null=Within $Profile $cfg}
 foreach($name in @($m.saves)){if($name -notmatch ('^'+[regex]::Escape($m.old_prefix)+'\.[A-Za-z0-9]+$')){throw 'Invalid save directory in manifest.'}}
@@ -67,7 +68,7 @@ foreach($name in @($m.saves)){
     $src=Join-Path $Profile "save_data/$newName";$dest=Join-Path $Profile "save_data/$name"
     $activeNew=$currentEnabled.PSObject.Properties[$newName]
     $activeOld=$currentEnabled.PSObject.Properties[$name]
-    if($committed -and $activeNew -and $activeNew.Value -eq $true -and (-not $activeOld -or $activeOld.Value -eq $false) -and (Test-Path -LiteralPath $src)){
+    if($committed -and $activeNew -and (Test-NorthstarModEnabled $activeNew.Value) -and (-not $activeOld -or -not (Test-NorthstarModEnabled $activeOld.Value)) -and (Test-Path -LiteralPath $src)){
         # Only a completed migration with the renamed family active can own progress.
         # An interrupted/inactive partial copy must never replace old current saves.
         # Copy into a sibling staging directory and verify BEFORE changing old keys.
@@ -77,6 +78,8 @@ foreach($name in @($m.saves)){
             $rel=$f.FullName.Substring($src.Length).TrimStart('\','/')
             if((Get-FileHash -LiteralPath $f.FullName).Hash -ne (Get-FileHash -LiteralPath (Join-Path $stage $rel)).Hash){throw 'Current save verification failed.'}
         }
+        Assert-NorthstarProfilePath $Profile $dest
+        Assert-NorthstarProfilePath $Profile $stage
         if(Test-Path -LiteralPath $dest){Remove-Item -LiteralPath $dest -Recurse}
         Move-Item -LiteralPath $stage -Destination $dest
     }
@@ -84,6 +87,7 @@ foreach($name in @($m.saves)){
 foreach($p in @($m.packages)){
     if($p.existed){
         $dest=Join-Path $Profile "mods/$($p.name)"
+        Assert-NorthstarProfilePath $Profile $dest
         if(Test-Path -LiteralPath $dest){Remove-Item -LiteralPath $dest -Recurse}
         Copy-Item -LiteralPath (Join-Path $MigrationBackup "mods-replaced/$($p.name)") -Destination $dest -Recurse
     }

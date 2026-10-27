@@ -1,48 +1,46 @@
-# Project status — 2026-10-26
+# Project status — 2026-10-27
 
-Weapon work from all four user branches is integrated, tested and installed.
-See [current rollout](../Notes/candidates/weapons-v19-20261026/README.md).
+The reviewed v20 stack is built on Windows, tested and installed for playtesting.
+Use the existing solo shortcut: default Movement enables combat movement and the
+proximity correction. [Presets, evidence and rollback](../Notes/candidates/bot-capability-v20-20261027/README.md).
 
-Automatic text weapon recording is installed through the existing solo shortcut.
-The [weapon notebook](../Notes/weapon-notebook/README.md) contains 30 reference
-records, conditional ideal models, actual v19 runtime checks and isolated/normal
-recorder validation. Normal launch restored 902 fields and human+15 bots with no
-runtime error markers. The recorder changes no gameplay variables; 44 existing
-gameplay files remain hash-identical. Current progress was retained and preset
-definitions were unchanged. This is damage-to-death telemetry, not video,
-accuracy or first-shot TTK. Test sessions are closed; the injector is disabled.
-
-| Item | State |
+| Item | Current state |
 |---|---|
-| Installed plugin | weapons-v19-candidate; v18 decision switches retained; 25 standard pilot weapon profiles |
-| Native SHA256 |9E8809146E17399B1CE572A5B479846C9A53633C48B7154A02159F47B19A4D6D|
-| Readiness bridge SHA256 |30A3B738433A3F04F048C505D1EF04DAF98552D3A943CA6AD32B498264BD0E78|
-| Core | Northstar 1.31.14.0, verified in actual runtime |
-| Offline checks |46 Rust tests/9 suites;17 Node checks;47,058 existing-controller decisions match v16; native build passes|
-| Isolated runtime |11 bot gun classes;32 human/control/bot-strip cases; respawn, lobby and human+15 bot return pass|
-| Normal installation |18:36 EDT; startup restored 902 named fields, human+15 bots; all 3 saves byte-unchanged|
-| Human trial |Flatline/Volt ADS recoil, R-97 hip spread, Spitfire ADS movement; Flatline/G2 ADS scale0.75|
-| Reload correction |Version1.0.1 retains G2/Volt/R201/CAR and adds real Alternator; scale0.9, Speedloader composition verified|
-| Preserved settings |8v8, aim0.78, human tactical recharge0.5, damage/RPM/magazine values; bot balance opt-in remains0|
-| Map study |22/22 supported maps complete under historical v18, NOT the v19 weapon revision|
-| Source candidate |bot-capability-v20 (not built on Windows, not installed): seven default-off switches; see research/bot-capability-20261027|
-| Map follow-up |War Games/Eden shared route cells; single rounds and overlapping samples, not a causal comparison|
+| Native |bot-capability-v20-candidate|
+| Native SHA256 |3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89|
+| Core |Northstar1.31.14.0|
+| Profiles |Normal Movement; working isolated candidate Baseline; test harnesses disabled|
+| Preserved |8v8,human+15bots,aim0.78,existing0.8sfiring warm-up,damage/RPM|
+| Human changes retained |Tactical recharge0.5,five-gun reload0.9,ADS/role trials; bot weapon-balance opt-in0|
+| Naming/save migration |BT7274 add-ons;902restored fields;0preset-definition changes;3old normal saves unchanged|
+| Current package fixes |Solo.WeaponNotes1.1.1,BT7274.BotRoster0.1.1; version-aware migration/rollback|
+| Offline |86Rust tests/17suites,47Node tests/9suites,migration/rollback/versioned and preset fixtures|
+| Compatibility |16bot observer phase,11gun classes,32human modifier/control/strip cases,lobby/human+15return|
+| Staged smoke |8roster primaries/6tacticals;skills/height/personality;switch-off,respawn,lobby/new map,cancelled assignment restored|
+| Live rollback |v19/native+old add-on family started with902fields/current progress and no errors, then candidate restaged|
+| Normal shortcut |Actual WindowsPowerShell Movement launch,62same-frame8v8observations,no runtime errors; collector complete44pilot deaths/5qualifying episodes|
+| Gated OFF |Crouch recovery,route guard,jump timing,perception correction,view-kick sampling|
 
-The normal and isolated gameplay packages match the tested functional manifest.
-Test harnesses are disabled. No game is left running. Effective-variable checks
-are not visual recoil/ADS measurements, hit-rate tests or proof of balance quality.
-The normal startup used real saved loadouts; no old saves were restored.
+`Play-Solo-Bots.cmd baseline` is the immediate behavior rollback. Cumulative
+height/roster/skills/full presets are available for deliberate comparison. The
+normal launcher resets to Movement each start. Preset selection atomically writes
+only the trial switches, records metadata and backs up previous server config so
+autoexec cannot silently overwrite a requested trial. No game is left running
+from verification. Current gameplay progress stays in the normal profile.
 
-Current rollback backup: before-weapons-v19-deploy-20261026-183629 under private
-audit Notes/backups. Initial complete backup: weapon-integration-20261026-181718.
-Close the game before restoring deployment files, explicitly disable the newly
-installed handling/balance add-ons when returning to the older setup, and keep
-current save_data. The older v18 rollout/backup records remain historical.
+The sampler is read-only magazine expenditure, not accuracy. Skill requests are
+not confirmed casts. Diagnostics showed plausible72/47stand/duck hull heights and
+109raw view vectors matching forward direction, not raw degrees. Perception
+therefore remains off. Short mixed diagnostic phases do not establish route/crouch
+success, fairness, K/D balance or FPS/p95 performance. The3:1human pilot K/D target
+still requires human map pairs/feedback; no claim it has been achieved.
 
-The completed map survey and its evidence are in research/maps-v18-20261026.
-The new thirty-weapon reference/role assessment is in research/weapon-roles-20261026;
-reference statistics remain distinct from installed effective values. No live
-visual observation or gameplay recorder was used in those historical studies.
-The new text recorder does not retroactively supply weapon TTK for them. Native waypoint-buffer,
-teardown and persistence safeguards remain preserved. The abandoned fresh
-candidate clone is still startup-broken; use the working isolated profile.
+Backups: before-v20-normal-20261027-175459 (normal cutover),
+before-v20-20261027-165920 (initial profiles/failed-attempt history), under private
+audit Notes/backups. Full restore uses the ORIGINAL migration backup and carries
+CURRENT progress back. Never copy historical save_data over newer play.
+
+The v19 weapon rollout and completed22-map v18survey remain historical cohorts.
+See research/played-weapons-20261026 and research/maps-v18-20261026 for prior
+findings. No live visual watching occurred. Private raw logs, account data,
+personal saves and binaries remain local; source and aggregate evidence are public.

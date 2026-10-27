@@ -13,10 +13,13 @@ entries before changes.
   Use backed-up candidates and isolated runtime/transition tests before normal
   deployment. User also authorized resuming map-by-map testing AFTER those
   checks; start a fresh frozen-build survey rather than changing old cohorts.
-- Normal and working isolated profiles now use tested weapons-v19-candidate,
-  DLL9E8809146E17399B1CE572A5B479846C9A53633C48B7154A02159F47B19A4D6D.
-  Eleven-gun bot matrix, human modifier checks, lobby/respawn and normal startup
-  passed. The fresh candidate clone
+- Normal and working isolated profiles now use the Windows-tested v20 candidate,
+  DLL3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89.
+  Normal launcher defaults to Movement (movement+proximity, diagnostics/sampler).
+  Height/Roster/Skills/Full are explicit cumulative playtest presets. Crouch,
+  route/jump and perception remain OFF. Read Notes/candidates/bot-capability-v20-20261027.
+  Eight-gun/six-tactical readback,32human modifier checks, cancellation restore,
+  lobby/map changes, live v19 rollback and normal startup passed. The fresh candidate clone
   remains startup-broken and is abandoned; use map-cycle-test-profile for tests.
   Verify actual hashes/logs before further claims. All four new switches are on.
 - Preserve8v8, aim0.78, current saves,50% human tactical recharge and the
@@ -26,10 +29,14 @@ entries before changes.
   persistence andv14 route/cache experiments are historical, not approved.
 - Back up CURRENT deployment files/saves. Never restore old survey saves
   over new play. No raw persistence buffers or routine ns_resetpersistence.
+- Northstar1.31 Version1 enabledmods MUST disable per-version entries, not a
+  bare false (loader auto-enables that). Use tools/Northstar-ModState.ps1 in
+  migration/rollback; clone version objects before disabling old family.
+  Game Assert is inactive in this runtime: test harnesses must throw explicitly.
 - Keep played/unattended/partial/different-build cohorts separate. Samples
   are not video, independent incidents, simultaneous visibility or proven harm.
 - No live visual watching occurred. Do not claim spectator video from telemetry.
-  Solo.WeaponNotes1.0.0 now records TEXT pilot damage/life/death events through
+  Solo.WeaponNotes1.1.1 now records TEXT pilot damage/life/death events through
   the solo shortcut; see Notes/weapon-notebook/README.md and VALIDATION.md.
   It measures first-positive-health-damage-to-death, NOT first-shot TTK or
   accuracy. Post-damage callbacks still see old HP: preserve end-of-frame reads,
@@ -49,9 +56,9 @@ entries before changes.
 - A new22-map v18 cohort was started after validation. Read the latest handoff
   and private current-v18-session/status.json; never infer a live PID from notes.
   Pause with stop-after-current.txt, not by restoring old survey saves.
-- Default bots still use Grapple/frag, which lack legacy activation requests.
-  Mixed suits/weapons are test-only. Do not claim Grapple/A-Wall automation or
-  improved damage/win rate from readiness/pulse diagnostics.
+- Movement/default bots still use Grapple/frag. Roster/Skills/Full opt into
+  tested loadout/skill candidates. Grapple traversal remains unimplemented;
+  requests/readiness are not confirmed casts or proof of improved win rate.
 - The22-map survey is COMPLETE as of2026-10-26:3prior200-goal matches and19at75.
   Overnight host cleanup raced a natural exit; Traffic was recovered from a
   clean completed log, then UMA/Coliseum finished today. No queue/game remains.
@@ -64,7 +71,8 @@ entries before changes.
 - Latest played review:research/played-weapons-20261026/FINDINGS.md. Four maps,
   533pilot deaths,128qualifying episodes;33/6recorded human pilot K/D on WarGames.
   Counts exclude Titan victims and are not scoreboards. Grounded combat-step
-  alternatives/blocked holds and map-cell recovery are proposed, NOT installed.
+  alternatives/blocked holds are installed as the Movement playtest; map-cell
+  recovery remains a separate follow-up.
   Preserve aim0.78 and existing0.8sfiring warm-up; user explicitly dislikes
   instant/unfair bot shooting. No damage/reaction buff justified by this cohort.
   Default Grapple/frag still unused; any defensive-tactical mix needs a separate

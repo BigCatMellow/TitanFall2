@@ -1,6 +1,6 @@
 param([string]$Profile="$env:USERPROFILE\northstar-crash-audit\map-cycle-test-profile",
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
-    [string]$RunDirectory,[string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$DllPath,[switch]$Dedicated,[switch]$Quick,[switch]$WeaponIntegration)
+    [string]$RunDirectory,[string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$DllPath,[switch]$Dedicated,[switch]$Quick,[switch]$WeaponIntegration,[switch]$ForceMapBootstrap)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
 if(Get-Process NorthstarLauncher,Titanfall2 -ErrorAction SilentlyContinue){throw 'A game is already running; do not replace it'}
@@ -14,10 +14,13 @@ New-Item -ItemType Directory -Path $RunDirectory -Force|Out-Null
 Copy-Item -LiteralPath $dll -Destination "$Profile/plugins/bp_ort.dll" -Force
 $exe=Join-Path $GameDirectory 'NorthstarLauncher.exe'
 $argsList=@("-profile=$Profile",'-bt7274_decision_test','-novid','-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+ns_auth_allow_insecure','1','+ns_report_server_to_masterserver','0','+setplaylist','tdm','+setplaylistvaroverrides','"max_players 17 scorelimit 9999 timelimit 30"','+bt7274_candidate_phase',$(if($Quick){'4'}else{'0'}))
+$population=if($Dedicated){16}else{17}
+$argsList+=@('+bot_manager_target',[string]$population,'+bot_manager_max',[string]$population)
 if($Dedicated){$argsList=@('-dedicated')+$argsList+@('+bt7274_candidate_dedicated','1')}
 else{$argsList=@('-fullscreen')+$argsList}
 if($Quick){$argsList+=@('+bt7274_candidate_quick','1')}
 if($WeaponIntegration){$argsList+=@('+bt7274_candidate_weapons','1')}
+if($ForceMapBootstrap){$argsList+='-bt7274_force_map_bootstrap'}
 $argsList+=@('+mp_gamemode','tdm','+map','mp_eden')
 $game=Start-Process -FilePath $exe -WorkingDirectory $GameDirectory -ArgumentList $argsList -WindowStyle $(if($Dedicated){'Hidden'}else{'Normal'}) -PassThru
 $watchArgs=@('-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',"$repo/tools/Watch-DecisionTest.ps1",'-GameProcessId',$game.Id,'-Profile',$Profile,'-RunDirectory',$RunDirectory)

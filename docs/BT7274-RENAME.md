@@ -1,8 +1,14 @@
 # BT-7274 rename — 2026-10-27
 
 The repository owner is referred to as **BT-7274** everywhere (prose), and the
-former personal add-on prefix is now **`BT7274`** in identifiers. This is a
-source change only; the installed profiles keep their old names until migrated.
+former personal add-on prefix is now **`BT7274`** in identifiers. The rename
+includes an explicit profile migration so current saves keep working.
+
+October27 Windows rollout: both working profiles have now been migrated and
+validated. See Notes/candidates/bot-capability-v20-20261027. The original helper's
+bare-false disablement was incompatible with Version1 enabledmods: migration and
+rollback now preserve per-version objects and clone enablement before disabling
+the old family. A live v19 rollback restored902fields and current progress.
 
 ## What changed
 
@@ -81,4 +87,5 @@ keep the game closed and use that run's restore command before proceeding.
 A rerun snapshot with migrated enablement is refused as a rollback baseline;
 select the ORIGINAL pre-migration backup. The fixture tests cover missing-package preflight, equal-timestamp collisions,
 install/rollback, current progress, repeated rollback and partial-install recovery.
-Actual isolated Windows migration/startup verification is still required.
+Actual isolated Windows migration, startup, live rollback and normal startup
+verification passed on October27; see the current rollout record.

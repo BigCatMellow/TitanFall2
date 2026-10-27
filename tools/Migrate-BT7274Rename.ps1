@@ -29,6 +29,7 @@ param(
     [switch]$Force
 )
 $ErrorActionPreference = 'Stop'
+. "$PSScriptRoot/Northstar-ModState.ps1"
 $NewPrefix = 'BT7274'
 $Suffixes = 'LocalPersistence','BotLifecycle','BotDecisions','TacticalRecharge','WeaponHandling',
     'WeaponReload','MapSurvey','BotCycleTest','DecisionTest','WeaponIntegrationTest','TacticalProbe','ReloadTest'
@@ -129,7 +130,9 @@ foreach ($dir in $oldSaves) {
     Say "Copy save_data $($dir.Name.Substring($OldPrefix.Length)) -> $(Split-Path $dest -Leaf) ($((Hash-Tree $dir.FullName).Count) files)"
     if ($Apply) {
         if (Test-Path -LiteralPath $dest) {
+            New-Item -ItemType Directory -Path (Join-Path $backup 'save_data-replaced') -Force | Out-Null
             Copy-Item -LiteralPath $dest -Destination (Join-Path $backup "save_data-replaced/$(Split-Path $dest -Leaf)") -Recurse
+            Assert-NorthstarProfilePath $Profile $dest
             Remove-Item -LiteralPath $dest -Recurse
         }
         Copy-Item -LiteralPath $dir.FullName -Destination $dest -Recurse
@@ -143,6 +146,7 @@ if ($InstallFrom) {
         Say "Install package $name"
         if ($Apply) {
             if (Test-Path -LiteralPath $dest) {
+                Assert-NorthstarProfilePath $Profile $dest
                 Remove-Item -LiteralPath $dest -Recurse
             }
             Copy-Item -LiteralPath $src -Destination $dest -Recurse
@@ -160,11 +164,13 @@ foreach ($prop in @($enabled.PSObject.Properties)) {
     $existing = $enabled.PSObject.Properties[$newName]
     # A previous run already disabled the old key; never let that false value
     # switch off the migrated add-on on a rerun.
-    if ($existing -and -not $prop.Value) { continue }
+    if ($existing -and -not (Test-NorthstarModEnabled $prop.Value)) { continue }
     Say "enabledmods: $newName = $($prop.Value); previous key -> false"
-    if ($existing) { $enabled.$newName = $prop.Value }
-    else { $enabled | Add-Member -NotePropertyName $newName -NotePropertyValue $prop.Value }
-    $prop.Value = $false
+    # Clone before disabling: the two names must never share a version object.
+    $newState=Copy-NorthstarModState $prop.Value
+    if ($existing) { $enabled.$newName = $newState }
+    else { $enabled | Add-Member -NotePropertyName $newName -NotePropertyValue $newState }
+    Disable-NorthstarMod $enabled $prop.Name $Profile
     $changes++
 }
 if ($Apply -and $changes) {

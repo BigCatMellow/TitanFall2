@@ -1,0 +1,30 @@
+{
+  "restored_fields": 902,
+  "state": "passed",
+  "backup": "before-v20-normal-20261027-175459",
+  "preset_definition_changes": 0,
+  "human_plus_15_bot_frames": 62,
+  "native_sha256": "3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89",
+  "core": "1.31.14.0",
+  "legacy_save_files_unchanged": 3,
+  "selected_trial_settings": {
+    "bot_nav_diagnostics": 1,
+    "bot_route_guard": 0,
+    "bot_jump_timing": 0,
+    "bot_proximity_fix": 1,
+    "bot_perception_fix": 0,
+    "bot_combat_movement": 1,
+    "bot_crouch_recovery": 0,
+    "bot_height_response": 0,
+    "bot_defensive_tactics": 0,
+    "bot_skill_use": 0,
+    "bot_personality": 0,
+    "bt7274_bot_roster": 0,
+    "bt7274_bot_tacticals": 0,
+    "solo_weapon_notes_fire": 1,
+    "solo_weapon_notes_viewkick": 0
+  },
+  "unexpected_errors": 0,
+  "trial": "Movement",
+  "session": "20261027-175504-e803a3c6"
+}
