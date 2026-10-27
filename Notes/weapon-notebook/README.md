@@ -1,0 +1,72 @@
+# Automatic weapon notebook
+
+Launch **Northstar - Solo Bots (8v8)**, or `Play-Solo-Bots.cmd`, as usual. The
+launcher starts a local, read-only damage recorder alongside the game. No manual
+timestamps are needed. This is text telemetry, not video or audio recording.
+
+Each launch gets its own folder under
+`C:\Users\james\northstar-crash-audit\Notes\weapon-notebook\sessions`:
+
+- `NOTES.md`: readable summary, refreshed every 15 seconds and after exit.
+- `summary.json`: grouped damage spans, individual deaths and exclusion reasons.
+- `events.jsonl`: structured pilot damage/life/death events for later reanalysis.
+- `session.json`: core/native version, installed add-ons and session conditions.
+
+Use the solo shortcut for automatic collection. Launching Northstar directly
+does not start the notebook collector. Results stay local; no automatic upload.
+The recorder reads the owned session's log and does not change weapons, bots,
+health, cooldowns, saved loadouts or progression. Close the game normally to
+finish the session. A stopped collector cannot stop the game.
+
+## What the numbers mean
+
+[Reference table](REFERENCE.md) and [catalog](catalog.json) cover the 30 selectable
+pilot weapons. Pinned reference damage, nominal RPM, magazine, range, handling
+and provenance stay distinct from the v19 runtime-field validation and from
+observed combat. Scalar ideal TTK is only calculated for the listed steady
+weapons under explicit assumptions. Other firing mechanisms need dedicated
+models. Never substitute inherited/null fields with zero.
+
+Live matches measure **first positive health damage to death**, not first-trigger
+or first-shot TTK. A damage event is not necessarily one shot. Misses, shots
+fired, ADS state and accuracy are not available from these hooks. Range is
+engine units; numeric hitgroups/critical scales are retained without guessed
+headshot labels. Titans are outside this initial pilot-only notebook.
+
+Qualifying episodes begin at full 100 HP and end in an observed lethal event
+with matched before/after health. Shared attackers, weapon/mod/config changes,
+unknown modifier stacks, injured starts, observed healing, unaccounted health
+loss, friendly/self/forced damage and incomplete sequences are excluded from
+the clean groups. Full health returning between fights starts a new episode.
+The checks cannot prove the absence of unobserved shields, healing or buffs.
+Small samples remain exploratory, with sample count and min/median/max shown.
+
+Groups keep map, session mode, weapon, human/bot actor kinds, actual modifiers,
+configuration, first-damage range bucket and hitgroup/critical contexts separate.
+Targets may move across range bands during an episode; per-hit range and velocity
+remain in the raw structured records. Synthetic
+validation has its own `controlled_validation` mode and never joins normal play.
+Use the same build and conditions for comparisons. No automatic balance changes
+are driven by these measurements.
+
+## Implementation and validation
+
+`Solo.WeaponNotes` registers damage-final, death and respawn callbacks and reads
+nonlethal health at the end of the frame. The Node collector accepts only structured lines beginning with
+`WNOTE_`, ignores general/authentication logs, and writes anonymous entity/life
+identifiers, not account IDs or names. Source logs and private saves stay local.
+
+Hook semantics are based on the official
+[callback reference](https://docs.northstar.tf/Modding/reference/respawn/callbacks/)
+and [DamageInfo reference](https://docs.northstar.tf/Modding/reference/respawn/native_server/damageinfo/).
+The separate isolated test harness deliberately injects damage to validate
+attribution and health sequencing; it is never enabled in the normal profile.
+See [validation record](VALIDATION.md) for actual test results and limitations.
+
+Offline checks:
+
+```powershell
+node --preserve-symlinks --preserve-symlinks-main tests/weapon_notes.test.mjs
+node --preserve-symlinks --preserve-symlinks-main tests/weapon_notebook.test.mjs
+node --preserve-symlinks --preserve-symlinks-main tools/Build-WeaponNotebook.mjs
+```

@@ -1,0 +1,30 @@
+[
+  {
+    "sha256": "7EF34ACF0398E50266270184A0C5CA9E08E700C1000EFB4A24AF14EE8D2A87D0",
+    "file": "Solo.WeaponNotes/mod.json"
+  },
+  {
+    "sha256": "1817A042016F471DBEACC7488BD4CAAA326BE34766A14F37E4E5C608806E5984",
+    "file": "Solo.WeaponNotes/mod/scripts/vscripts/solo_weapon_notes.nut"
+  },
+  {
+    "sha256": "AA205EC244BDC76AB331C5CE16FDC42699A82279483DBA5CEF97AD8F85301E83",
+    "file": "tools/weapon-notes.mjs"
+  },
+  {
+    "sha256": "8588B8959442B4F3B6C72F5241447699AB29FA039D85F388A163A2F8AD365834",
+    "file": "tools/Record-WeaponNotes.mjs"
+  },
+  {
+    "sha256": "8BC9EC7BD8A9A7EF805EF707E45762D15112E2B5DE628E432E8BEDF6850EE50B",
+    "file": "tools/Start-SoloWeaponSession.ps1"
+  },
+  {
+    "sha256": "72B5F68F7A3699F55ED2BEFE722999B18F4D9D57F1974087E4AC9A98A2DB99E0",
+    "file": "tools/Build-WeaponNotebook.mjs"
+  },
+  {
+    "sha256": "6C8FD4F12D856C4B21E64192B665940E8D8DE3B03FF2FAF4CB29A4D09BBBC36C",
+    "file": "automation/launch/Play-Solo-Bots.cmd"
+  }
+]

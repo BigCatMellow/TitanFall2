@@ -1,0 +1,1 @@
+{"Name":"Solo.WeaponNotesTest","Version":"1.0.0","Description":"ISOLATED ONLY: synthetic health/attribution validation; not a weapon balance test.","LoadPriority":45,"Scripts":[{"Path":"weapon_notes_test.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"WeaponNotesTest_Init"}}]}

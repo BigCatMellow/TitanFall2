@@ -1,8 +1,18 @@
 # Current setup
 
-Updated 2026-10-24. Deployment status must be checked here before further edits.
+Updated 2026-10-26. Current deployment is weapons-v19-candidate, native SHA256
+9E8809146E17399B1CE572A5B479846C9A53633C48B7154A02159F47B19A4D6D,
+Northstar1.31.14. Human+15 bots,8v8,aim0.78, human tactical recharge0.5,
+five-gun reload0.9 and human ADS/role trials enabled; bot balance opt-in stays0.
+See [current rollout](candidates/weapons-v19-20261026/README.md).
 
-## Status
+The existing solo shortcut now starts the automatic text weapon notebook.
+See [recording and reference stats](weapon-notebook/README.md). Current saves
+are retained; no injector is enabled in normal play. Source checkout is
+`C:\Users\james\northstar-crash-audit\TitanFall2-project`.
+The v16 details below are historical; use the current rollout/status for changes.
+
+## Historical v16 status (October 24)
 
 - Everyday solo profile: **combat-decisions-v16**, a reversible pilot combat
   trial on v15 navigation: weapon-aware positioning, ammo-aware reloads and
@@ -38,7 +48,7 @@ Updated 2026-10-24. Deployment status must be checked here before further edits.
 | Isolated test profile | `C:\Users\james\northstar-crash-audit\map-cycle-test-profile` |
 | Solo launcher | `C:\Users\james\northstar-crash-audit\Play-Solo-Bots.cmd` |
 | Desktop shortcut | `C:\Users\james\Desktop\Northstar - Solo Bots (8v8).lnk` |
-| Source checkout | `C:\Users\james\bp-ort-fork` |
+| Source checkout | `C:\Users\james\northstar-crash-audit\TitanFall2-project` |
 | Session logs | Each profile's `logs` directory |
 | Before-v12 backup | This folder's `backups\v12-before` |
 

@@ -3,6 +3,15 @@
 Weapon work from all four user branches is integrated, tested and installed.
 See [current rollout](../Notes/candidates/weapons-v19-20261026/README.md).
 
+Automatic text weapon recording is installed through the existing solo shortcut.
+The [weapon notebook](../Notes/weapon-notebook/README.md) contains 30 reference
+records, conditional ideal models, actual v19 runtime checks and isolated/normal
+recorder validation. Normal launch restored 902 fields and human+15 bots with no
+runtime error markers. The recorder changes no gameplay variables; 44 existing
+gameplay files remain hash-identical. Current progress was retained and preset
+definitions were unchanged. This is damage-to-death telemetry, not video,
+accuracy or first-shot TTK. Test sessions are closed; the injector is disabled.
+
 | Item | State |
 |---|---|
 | Installed plugin | weapons-v19-candidate; v18 decision switches retained; 25 standard pilot weapon profiles |
@@ -32,6 +41,7 @@ current save_data. The older v18 rollout/backup records remain historical.
 The completed map survey and its evidence are in research/maps-v18-20261026.
 The new thirty-weapon reference/role assessment is in research/weapon-roles-20261026;
 reference statistics remain distinct from installed effective values. No live
-visual observation or gameplay recorder was used. Native waypoint-buffer,
+visual observation or gameplay recorder was used in those historical studies.
+The new text recorder does not retroactively supply weapon TTK for them. Native waypoint-buffer,
 teardown and persistence safeguards remain preserved. The abandoned fresh
 candidate clone is still startup-broken; use the working isolated profile.

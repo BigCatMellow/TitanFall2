@@ -1,0 +1,18 @@
+{
+  "state": "passed",
+  "session": "20261026-200132-0b819922",
+  "launcher": "Play-Solo-Bots.cmd using Windows PowerShell",
+  "mode": "normal_play",
+  "core_runtime_13114": true,
+  "native_sha256": "9E8809146E17399B1CE572A5B479846C9A53633C48B7154A02159F47B19A4D6D",
+  "restored_fields": 902,
+  "human_plus_15_bot_frames": 39,
+  "runtime_error_markers": 0,
+  "existing_gameplay_files_hash_unchanged": 44,
+  "notes_metadata_written": true,
+  "save_preservation": "Current saves retained. Two named-state JSON files changed for XP/weapon XP/kill counters/selected slots during the game sessions; zero preset-definition fields changed. No saved data restored.",
+  "limits": "Eden startup/combat smoke, not a full-map stability or balance study.",
+  "collector_final_state": "complete",
+  "death_records": 29,
+  "qualifying_health_episodes": 8
+}

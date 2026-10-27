@@ -23,8 +23,13 @@ entries before changes.
   over new play. No raw persistence buffers or routine ns_resetpersistence.
 - Keep played/unattended/partial/different-build cohorts separate. Samples
   are not video, independent incidents, simultaneous visibility or proven harm.
-- No live visual watching occurred. Capture helper was unavailable; do not
-  claim spectator video from telemetry. No recorder has been installed.
+- No live visual watching occurred. Do not claim spectator video from telemetry.
+  Solo.WeaponNotes1.0.0 now records TEXT pilot damage/life/death events through
+  the solo shortcut; see Notes/weapon-notebook/README.md and VALIDATION.md.
+  It measures first-positive-health-damage-to-death, NOT first-shot TTK or
+  accuracy. Post-damage callbacks still see old HP: preserve end-of-frame reads,
+  overlap exclusions, life/config boundaries and known-modifier requirements.
+  Sessions stay private; only reviewed derived aggregates may be published.
 - Native candidates require authorized isolated runtime/transition checks,
   movement/combat, population, saves and errors before deployment.
 - Keep credentials, personal saves, game assets, installed third-party

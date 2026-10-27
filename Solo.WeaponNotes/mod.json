@@ -1,0 +1,8 @@
+{
+  "Name":"Solo.WeaponNotes",
+  "Description":"Read-only pilot damage/life/kill telemetry for the solo weapon notebook.",
+  "Version":"1.0.0",
+  "LoadPriority":44,
+  "ConVars":[{"Name":"solo_weapon_notes","DefaultValue":"1"},{"Name":"solo_notes_mode","DefaultValue":"normal_play"}],
+  "Scripts":[{"Path":"solo_weapon_notes.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"WeaponNotes_Init"}}]
+}

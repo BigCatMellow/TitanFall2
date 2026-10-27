@@ -1,0 +1,53 @@
+{
+  "state": "passed",
+  "metric": "first_positive_health_damage_to_death_s",
+  "cases": [
+    {
+      "name": "four_hits",
+      "passed": true,
+      "damage_events": 4,
+      "damage_span_s": 0.40000000000000213,
+      "qualifying": false,
+      "exclusions": [
+        "unknown_mod_stack"
+      ]
+    },
+    {
+      "name": "mixed_attackers",
+      "passed": true,
+      "damage_events": 2,
+      "damage_span_s": 0.10000000000000142,
+      "qualifying": false,
+      "exclusions": [
+        "multiple_attackers",
+        "unknown_mod_stack"
+      ]
+    },
+    {
+      "name": "injured_start",
+      "passed": true,
+      "damage_events": 2,
+      "damage_span_s": 0.10000000000000142,
+      "qualifying": false,
+      "exclusions": [
+        "not_full_100hp_start",
+        "unknown_mod_stack"
+      ]
+    },
+    {
+      "name": "healing",
+      "passed": true,
+      "damage_events": 2,
+      "damage_span_s": 0.1999999999999993,
+      "qualifying": false,
+      "exclusions": [
+        "unknown_mod_stack",
+        "healing_observed"
+      ]
+    }
+  ],
+  "natural_bot_damage_events": 117,
+  "natural_qualifying_episodes": 9,
+  "logger_errors": 0,
+  "limits": "Synthetic damage validates hooks and attribution, not weapon TTK or balance. Injected damage has an unknown modifier stack and stays excluded. Subsequent natural combat is still a controlled_validation session. No first-shot, shot-count, accuracy or visual evidence."
+}

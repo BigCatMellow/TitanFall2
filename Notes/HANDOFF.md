@@ -554,3 +554,58 @@ normal-startup projection and hashes are in Notes/candidates/weapons-v19-2026102
 Map survey22rounds remainsFROZENv18(F3C41...), NOT a v19full-map validation.
 Deeper balance study and user feel feedback remain pending; don't infer success
 from paper DPS or effective variable arithmetic. Review current rollout README.
+
+2026-10-26 20:06 EDT — AUTOMATIC WEAPON NOTEBOOK INSTALLED.
+User explicitly chose automatic match recording. Solo.WeaponNotes1.0.0 is a
+read-only SERVER/MP pilot damage/life/death logger in both working profiles.
+Existing audit-root Play-Solo-Bots.cmd and Desktop shortcut now start the game
+plus hidden Node collector through tools/Start-SoloWeaponSession.ps1. 8v8,
+fullscreen/Eden/loopback, aim0.78, native9E8809..., all weapon/tactical/saving
+add-ons and normal server CFG preserved:44existing gameplay files hash-identical.
+No native build or gameplay stat change for this task. Test injector is disabled
+in isolated enabledmods and absent from normal; no game/test remains running.
+
+Notes/weapon-notebook has30pinned reference records, per-gun v19 runtime checks,
+explicit steady-body ideal models, methods, source hashes and sanitized validation
+projections. Runtime sessions stay LOCAL under audit Notes/weapon-notebook/sessions:
+session.json, events.jsonl, summary.json, NOTES.md (15s refresh and final on exit).
+Do not auto-publish raw sessions, account IDs, saves or auth. No video/audio capture.
+Measured metric is first_positive_health_damage_to_death_s, NOT first-shot/trigger
+TTK, shot count, accuracy or visual ADS timing. Numeric hitgroups/crit scales,
+range/velocity, actual mod stack, humans/bots, map/mode and config are separated.
+Exclude mixed/unknown/mod-changing/injured/healed/incomplete/forced/self/friendly
+sequences; end-frame overlaps are conservatively incomplete. Small n exploratory.
+
+Important runtime discovery: AddPostDamageCallback still sees PRE-DEDUCTION HP.
+Use damage-final pre-hook + deferred WaitEndFrame health for nonlethal hits, killed
+callback for lethal0. Preserve life/event guards and pending-overlap exclusion.
+Synthetic TakeDamage has unknown weapon modifiers and correctly stays excluded;
+real bot combat supplies known-modifier qualifying episodes. Do not fake current
+attacker weapon attribution for delayed projectiles. Synthetic four-hit case
+100->75->50->25->0 matched actual0.4s injection span, not nominal wait0.3 or R201TTK.
+Initial Squirrel syntax/typing errors, blank test-loadout intro and WindowsPS
+metadata issues fixed before final normal verification; failed attempts retained.
+
+14offline checks passed:10episode/parser,3ideal-model,1live-tail/exit fixture.
+Isolated session20261026-195319-09a37c7c:4synthetic cases+real combat,0callback
+errors; reviewed snapshot117bot damage events/9qualifying episodes. Final normal
+ACTUAL CMD/WindowsPS session20261026-200132-0b819922 PASSED:core1.31.14.0,
+902named fields restored,39human+15bot frames,0script/native markers; finalized
+29death records/8qualifying episodes, collector complete. No all-map/feel/balance
+claim. Native unchanged; v18map survey remains historically separate.
+
+Backup before-weapon-notes-20261026-193842 includes both CURRENT profiles' then
+saves/config/enabledmods and prior CMD. No normal save restored. Final normal
+JSON state changed in8XP/weaponXP/TitanXP/kill-counter/selected-slot fields during
+sessions;0preset-definition changes. Keep CURRENT progress, not backup copies.
+Isolated blank survey presets were seeded from CURRENT normal named copies only;
+never copy isolated data back to normal. Rollback launcher and explicitly disable
+Solo.WeaponNotes1.0.0 while retaining CURRENT save_data and weapon-v19 packages.
+
+WindowsPS shortcut: no Get-FileHash helper available in its inherited module
+context; .NET SHA256 used. ConvertTo-Json expands Get-Content string provider
+properties: startup settings must be plain regex captures in an ordered dictionary.
+Use canonical Resolve-Path backslash profile when stopping normal CMD-owned game;
+Stop-OwnedSurveyGame exact argument comparison does not normalize slash styles.
+A no-op ownership rejection must not be treated as successful shutdown. Final
+owned game/hidden failed launcher processes closed, collectors finalized.

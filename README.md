@@ -8,6 +8,10 @@ local work. [Original README](docs/UPSTREAM-README.md).
 ## Current state
 
 - **Installed:** tested weapons-v19-candidate,8v8 (human+15 bots), aim0.78.
+- **Weapon notebook:** the solo shortcut automatically records local pilot
+  damage/life/kill notes. Includes a 30-weapon reference catalog and conditional
+  ideal TTK models; observed damage-to-death spans remain separate.
+  [How to use it and measurement limits](Notes/weapon-notebook/README.md).
 - **Current source:** retains the v18 decision fixes and adds five missing
   standard weapon profiles.46 Rust checks,17 Node checks, the existing-controller
   comparison,11-gun runtime matrix and human stat/stacking/lifecycle checks pass.
@@ -41,6 +45,7 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 | `James.WeaponHandling/`, `Solo.WeaponBalance/` | Runtime-field-verified human ADS/role trials |
 | `research/weapon-roles-20261026/` | Thirty-weapon reference statistics and role hypotheses |
 | `Notes/` | Dated notes, results, failures, rollback records and tools |
+| `Notes/weapon-notebook/`, `Solo.WeaponNotes/` | Reference catalog, recording methods, validation and read-only telemetry |
 | `Notes/map-surveys/` | Per-match movement/combat data and restoration checks |
 | `Notes/trend-analysis-20261025/` | Latest played-session export |
 | `research/trends-20261025/` | Phase-aware trends and improvement priorities |

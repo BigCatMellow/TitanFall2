@@ -1,0 +1,2343 @@
+{
+  "schema_version": 1,
+  "source": {
+    "repository": "BigSpice/TitanFall-2-Skin-Modding",
+    "commit": "bc13e6120e37b3ccdbc0cba55e61fd978bdcbe21",
+    "directory": "Weapon_Scripts",
+    "kind": "third-party published Titanfall 2 keyvalue script copies",
+    "status": "REFERENCE ONLY: not current installed gameplay values",
+    "script_path_pattern": "Weapon_Scripts/{classname}.txt"
+  },
+  "runtime_evidence": "Notes/candidates/weapons-v19-20261026/runtime-review.json",
+  "runtime_build": "weapons-v19-candidate",
+  "runtime_native_sha256": "9E8809146E17399B1CE572A5B479846C9A53633C48B7154A02159F47B19A4D6D",
+  "limits": "Reference values are not a dump of the installed game. Models are conditional estimates, not measured TTK. Observed combat is stored separately per session; null means not yet measured here.",
+  "weapons": [
+    {
+      "name": "R-201",
+      "classname": "mp_weapon_rspn101",
+      "category": "AR",
+      "reference": {
+        "name": "R-201",
+        "category": "AR",
+        "classname": "mp_weapon_rspn101",
+        "source_blob_sha": "8793348d0ac660b90243bf5fa1f27a1488da8203",
+        "fire_mode": "auto",
+        "damage_near": 25,
+        "damage_far": 17,
+        "damage_very_far": 12,
+        "range_near_units": 1500,
+        "range_far_units": 2000,
+        "range_very_far_units": 3500,
+        "fire_rate_shots_s_nominal": 13.5,
+        "rpm_nominal": 810,
+        "magazine": 24,
+        "hip_spread_standing": 2,
+        "hip_spread_moving": 2,
+        "hip_spread_air": 2,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.25,
+        "ads_out_s": 0.2,
+        "deploy_s": 0.7,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.25,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": null,
+        "explosion_damage": 0,
+        "viewkick_spring": "rspn101",
+        "spread_kick_shot_hip": 0.5,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 25,
+          "hits": 4,
+          "ideal_first_hit_to_lethal_s": 0.2222222222222222,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 17,
+          "hits": 6,
+          "ideal_first_hit_to_lethal_s": 0.37037037037037035,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 12,
+          "hits": 9,
+          "ideal_first_hit_to_lethal_s": 0.5925925925925926,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [
+        {
+          "kind": "reload",
+          "gun": "mp_weapon_rspn101",
+          "speedloader": "false",
+          "normal": "2.2",
+          "enabled": "1.98",
+          "empty": "2.92",
+          "enabled_empty": "2.628"
+        },
+        {
+          "kind": "reload",
+          "gun": "mp_weapon_rspn101",
+          "speedloader": "true",
+          "normal": "1.54",
+          "enabled": "1.386",
+          "empty": "2.044",
+          "enabled_empty": "1.8396"
+        },
+        {
+          "kind": "automatic",
+          "gun": "mp_weapon_rspn101"
+        }
+      ],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "R-101",
+      "classname": "mp_weapon_rspn101_og",
+      "category": "AR",
+      "reference": {
+        "name": "R-101",
+        "category": "AR",
+        "classname": "mp_weapon_rspn101_og",
+        "source_blob_sha": "bcb29fac201b072d78d3d218502ec39cfed3dc8a",
+        "fire_mode": "auto",
+        "damage_near": 25,
+        "damage_far": 17,
+        "damage_very_far": 12,
+        "range_near_units": 1500,
+        "range_far_units": 2000,
+        "range_very_far_units": 3500,
+        "fire_rate_shots_s_nominal": 13.5,
+        "rpm_nominal": 810,
+        "magazine": 24,
+        "hip_spread_standing": 2,
+        "hip_spread_moving": 2,
+        "hip_spread_air": 2,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.25,
+        "ads_out_s": 0.2,
+        "deploy_s": 0.7,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.25,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": null,
+        "explosion_damage": 0,
+        "viewkick_spring": "rspn101",
+        "spread_kick_shot_hip": 0.5,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 25,
+          "hits": 4,
+          "ideal_first_hit_to_lethal_s": 0.2222222222222222,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 17,
+          "hits": 6,
+          "ideal_first_hit_to_lethal_s": 0.37037037037037035,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 12,
+          "hits": 9,
+          "ideal_first_hit_to_lethal_s": 0.5925925925925926,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Hemlok",
+      "classname": "mp_weapon_hemlok",
+      "category": "AR",
+      "reference": {
+        "name": "Hemlok",
+        "category": "AR",
+        "classname": "mp_weapon_hemlok",
+        "source_blob_sha": "ae15c0facaad7c2d2594ae11302dce000d732959",
+        "fire_mode": "semi-auto",
+        "damage_near": 33,
+        "damage_far": 25,
+        "damage_very_far": 20,
+        "range_near_units": 1500,
+        "range_far_units": 2000,
+        "range_very_far_units": 3500,
+        "fire_rate_shots_s_nominal": 15.5,
+        "rpm_nominal": 930,
+        "magazine": 24,
+        "hip_spread_standing": 5.5,
+        "hip_spread_moving": 8,
+        "hip_spread_air": 11,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.25,
+        "ads_out_s": 0.2,
+        "deploy_s": 1.13,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.95,
+        "viewkick_yaw_base": 0.1,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "hemlok",
+        "spread_kick_shot_hip": 0.6,
+        "spread_kick_shot_ads": 0,
+        "burst_count": 3,
+        "burst_delay_s": 0.25,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Flatline",
+      "classname": "mp_weapon_vinson",
+      "category": "AR",
+      "reference": {
+        "name": "Flatline",
+        "category": "AR",
+        "classname": "mp_weapon_vinson",
+        "source_blob_sha": "df3ddf1c00f6745274e5dfba51f87bc3380b59aa",
+        "fire_mode": "auto",
+        "damage_near": 30,
+        "damage_far": 20,
+        "damage_very_far": 15,
+        "range_near_units": 1500,
+        "range_far_units": 2000,
+        "range_very_far_units": 3500,
+        "fire_rate_shots_s_nominal": 10,
+        "rpm_nominal": 600,
+        "magazine": 30,
+        "hip_spread_standing": 1,
+        "hip_spread_moving": 1,
+        "hip_spread_air": 5,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.25,
+        "ads_out_s": 0.2,
+        "deploy_s": 0.7,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": 0,
+        "viewkick_yaw_base": -0.25,
+        "projectile_speed_units_s": null,
+        "explosion_damage": 0,
+        "viewkick_spring": "rspn101",
+        "spread_kick_shot_hip": 0.5,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 30,
+          "hits": 4,
+          "ideal_first_hit_to_lethal_s": 0.3,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 20,
+          "hits": 5,
+          "ideal_first_hit_to_lethal_s": 0.4,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 15,
+          "hits": 7,
+          "ideal_first_hit_to_lethal_s": 0.6,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [
+        {
+          "kind": "ads",
+          "gun": "mp_weapon_vinson",
+          "speedloader": "false",
+          "before": "0.25",
+          "enabled": "0.1875"
+        },
+        {
+          "kind": "ads",
+          "gun": "mp_weapon_vinson",
+          "speedloader": "true",
+          "before": "0.25",
+          "enabled": "0.1875"
+        },
+        {
+          "kind": "balance",
+          "gun": "mp_weapon_vinson",
+          "speedloader": "false"
+        },
+        {
+          "kind": "balance",
+          "gun": "mp_weapon_vinson",
+          "speedloader": "true"
+        },
+        {
+          "kind": "automatic",
+          "gun": "mp_weapon_vinson"
+        },
+        {
+          "kind": "bot_exclusion_and_strip",
+          "gun": "mp_weapon_vinson"
+        }
+      ],
+      "runtime_role_fields": [
+        {
+          "gun": "mp_weapon_vinson",
+          "speedloader": "false",
+          "index": "0",
+          "field": "292",
+          "before": "1.5",
+          "enabled": "1.2"
+        },
+        {
+          "gun": "mp_weapon_vinson",
+          "speedloader": "false",
+          "index": "1",
+          "field": "293",
+          "before": "2",
+          "enabled": "1.6"
+        },
+        {
+          "gun": "mp_weapon_vinson",
+          "speedloader": "true",
+          "index": "0",
+          "field": "292",
+          "before": "1.5",
+          "enabled": "1.2"
+        },
+        {
+          "gun": "mp_weapon_vinson",
+          "speedloader": "true",
+          "index": "1",
+          "field": "293",
+          "before": "2",
+          "enabled": "1.6"
+        }
+      ],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "G2",
+      "classname": "mp_weapon_g2",
+      "category": "AR",
+      "reference": {
+        "name": "G2",
+        "category": "AR",
+        "classname": "mp_weapon_g2",
+        "source_blob_sha": "e1e44693801b0b626c1e1dc025396a82736b3ae1",
+        "fire_mode": "semi-auto",
+        "damage_near": 40,
+        "damage_far": 35,
+        "damage_very_far": null,
+        "range_near_units": 1500,
+        "range_far_units": 2000,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 5.5,
+        "rpm_nominal": 330,
+        "magazine": 14,
+        "hip_spread_standing": 5.5,
+        "hip_spread_moving": 8,
+        "hip_spread_air": 11,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.25,
+        "ads_out_s": 0.2,
+        "deploy_s": 0.8,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.17,
+        "viewkick_yaw_base": 0.1,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "hemlok",
+        "spread_kick_shot_hip": 0.7,
+        "spread_kick_shot_ads": 0.075,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 40,
+          "hits": 3,
+          "ideal_first_hit_to_lethal_s": 0.36363636363636365,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 35,
+          "hits": 3,
+          "ideal_first_hit_to_lethal_s": 0.36363636363636365,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Missing or invalid damage/rate/health."
+        }
+      },
+      "runtime_checks": [
+        {
+          "kind": "reload",
+          "gun": "mp_weapon_g2",
+          "speedloader": "false",
+          "normal": "2.2",
+          "enabled": "1.98",
+          "empty": "2.64",
+          "enabled_empty": "2.376"
+        },
+        {
+          "kind": "reload",
+          "gun": "mp_weapon_g2",
+          "speedloader": "true",
+          "normal": "1.54",
+          "enabled": "1.386",
+          "empty": "1.848",
+          "enabled_empty": "1.6632"
+        },
+        {
+          "kind": "ads",
+          "gun": "mp_weapon_g2",
+          "speedloader": "false",
+          "before": "0.25",
+          "enabled": "0.1875"
+        },
+        {
+          "kind": "ads",
+          "gun": "mp_weapon_g2",
+          "speedloader": "true",
+          "before": "0.25",
+          "enabled": "0.1875"
+        },
+        {
+          "kind": "automatic",
+          "gun": "mp_weapon_g2"
+        },
+        {
+          "kind": "bot_exclusion_and_strip",
+          "gun": "mp_weapon_g2"
+        }
+      ],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "CAR",
+      "classname": "mp_weapon_car",
+      "category": "SMG",
+      "reference": {
+        "name": "CAR",
+        "category": "SMG",
+        "classname": "mp_weapon_car",
+        "source_blob_sha": "887fe9a8439b4ba7711b977f01219f23ce9a5fc1",
+        "fire_mode": "auto",
+        "damage_near": 25,
+        "damage_far": 13,
+        "damage_very_far": 10,
+        "range_near_units": 1000,
+        "range_far_units": 1500,
+        "range_very_far_units": 3000,
+        "fire_rate_shots_s_nominal": 14.1,
+        "rpm_nominal": 846,
+        "magazine": 30,
+        "hip_spread_standing": 0,
+        "hip_spread_moving": 0,
+        "hip_spread_air": 1.5,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.66,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.2,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "car",
+        "spread_kick_shot_hip": 0,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 25,
+          "hits": 4,
+          "ideal_first_hit_to_lethal_s": 0.2127659574468085,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 13,
+          "hits": 8,
+          "ideal_first_hit_to_lethal_s": 0.49645390070921985,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 10,
+          "hits": 10,
+          "ideal_first_hit_to_lethal_s": 0.6382978723404256,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [
+        {
+          "kind": "reload",
+          "gun": "mp_weapon_car",
+          "speedloader": "false",
+          "normal": "1.8",
+          "enabled": "1.62",
+          "empty": "2.53",
+          "enabled_empty": "2.277"
+        },
+        {
+          "kind": "reload",
+          "gun": "mp_weapon_car",
+          "speedloader": "true",
+          "normal": "1.26",
+          "enabled": "1.134",
+          "empty": "1.771",
+          "enabled_empty": "1.5939"
+        },
+        {
+          "kind": "automatic",
+          "gun": "mp_weapon_car"
+        }
+      ],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Alternator",
+      "classname": "mp_weapon_alternator_smg",
+      "category": "SMG",
+      "reference": {
+        "name": "Alternator",
+        "category": "SMG",
+        "classname": "mp_weapon_alternator_smg",
+        "source_blob_sha": "f613d0bfc30e556968aed8c220da5d867343bd29",
+        "fire_mode": "auto",
+        "damage_near": 35,
+        "damage_far": 18,
+        "damage_very_far": 14,
+        "range_near_units": 1000,
+        "range_far_units": 1500,
+        "range_very_far_units": 3000,
+        "fire_rate_shots_s_nominal": 10,
+        "rpm_nominal": 600,
+        "magazine": 20,
+        "hip_spread_standing": 0,
+        "hip_spread_moving": 0,
+        "hip_spread_air": 1.5,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.63,
+        "holster_s": 0.4,
+        "viewkick_pitch_base": 0,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "car",
+        "spread_kick_shot_hip": 0,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 35,
+          "hits": 3,
+          "ideal_first_hit_to_lethal_s": 0.2,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 18,
+          "hits": 6,
+          "ideal_first_hit_to_lethal_s": 0.5,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 14,
+          "hits": 8,
+          "ideal_first_hit_to_lethal_s": 0.7,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [
+        {
+          "kind": "reload",
+          "gun": "mp_weapon_alternator_smg",
+          "speedloader": "false",
+          "normal": "2.3",
+          "enabled": "2.07",
+          "empty": "2.7",
+          "enabled_empty": "2.43"
+        },
+        {
+          "kind": "reload",
+          "gun": "mp_weapon_alternator_smg",
+          "speedloader": "true",
+          "normal": "1.61",
+          "enabled": "1.449",
+          "empty": "1.89",
+          "enabled_empty": "1.701"
+        }
+      ],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Volt",
+      "classname": "mp_weapon_hemlok_smg",
+      "category": "SMG",
+      "reference": {
+        "name": "Volt",
+        "category": "SMG",
+        "classname": "mp_weapon_hemlok_smg",
+        "source_blob_sha": "01518db25034c7ed5a6568e454c36c53d82444be",
+        "fire_mode": "auto",
+        "damage_near": 25,
+        "damage_far": 15,
+        "damage_very_far": 12,
+        "range_near_units": 1000,
+        "range_far_units": 1500,
+        "range_very_far_units": 3000,
+        "fire_rate_shots_s_nominal": 11,
+        "rpm_nominal": 660,
+        "magazine": 33,
+        "hip_spread_standing": 0,
+        "hip_spread_moving": 0,
+        "hip_spread_air": 1.5,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.4,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.15,
+        "viewkick_yaw_base": 0.1,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "car",
+        "spread_kick_shot_hip": 0,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 25,
+          "hits": 4,
+          "ideal_first_hit_to_lethal_s": 0.2727272727272727,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 15,
+          "hits": 7,
+          "ideal_first_hit_to_lethal_s": 0.5454545454545454,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 12,
+          "hits": 9,
+          "ideal_first_hit_to_lethal_s": 0.7272727272727273,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [
+        {
+          "kind": "reload",
+          "gun": "mp_weapon_hemlok_smg",
+          "speedloader": "false",
+          "normal": "1.5",
+          "enabled": "1.35",
+          "empty": "2",
+          "enabled_empty": "1.8"
+        },
+        {
+          "kind": "reload",
+          "gun": "mp_weapon_hemlok_smg",
+          "speedloader": "true",
+          "normal": "1.05",
+          "enabled": "0.945",
+          "empty": "1.4",
+          "enabled_empty": "1.26"
+        },
+        {
+          "kind": "balance",
+          "gun": "mp_weapon_hemlok_smg",
+          "speedloader": "false"
+        },
+        {
+          "kind": "balance",
+          "gun": "mp_weapon_hemlok_smg",
+          "speedloader": "true"
+        },
+        {
+          "kind": "automatic",
+          "gun": "mp_weapon_hemlok_smg"
+        },
+        {
+          "kind": "bot_exclusion_and_strip",
+          "gun": "mp_weapon_hemlok_smg"
+        }
+      ],
+      "runtime_role_fields": [
+        {
+          "gun": "mp_weapon_hemlok_smg",
+          "speedloader": "false",
+          "index": "0",
+          "field": "292",
+          "before": "1.1",
+          "enabled": "0.825"
+        },
+        {
+          "gun": "mp_weapon_hemlok_smg",
+          "speedloader": "false",
+          "index": "1",
+          "field": "293",
+          "before": "1.1",
+          "enabled": "0.825"
+        },
+        {
+          "gun": "mp_weapon_hemlok_smg",
+          "speedloader": "true",
+          "index": "0",
+          "field": "292",
+          "before": "1.1",
+          "enabled": "0.825"
+        },
+        {
+          "gun": "mp_weapon_hemlok_smg",
+          "speedloader": "true",
+          "index": "1",
+          "field": "293",
+          "before": "1.1",
+          "enabled": "0.825"
+        }
+      ],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "R-97",
+      "classname": "mp_weapon_r97",
+      "category": "SMG",
+      "reference": {
+        "name": "R-97",
+        "category": "SMG",
+        "classname": "mp_weapon_r97",
+        "source_blob_sha": "b5306ca2b4a68b7ea54292d744380988424b6733",
+        "fire_mode": "auto",
+        "damage_near": 20,
+        "damage_far": 12,
+        "damage_very_far": 10,
+        "range_near_units": 1000,
+        "range_far_units": 1500,
+        "range_very_far_units": 3000,
+        "fire_rate_shots_s_nominal": 18,
+        "rpm_nominal": 1080,
+        "magazine": 40,
+        "hip_spread_standing": 0,
+        "hip_spread_moving": 0,
+        "hip_spread_air": 1.5,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.66,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.2,
+        "viewkick_yaw_base": -0.1,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "car",
+        "spread_kick_shot_hip": 0.5,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 20,
+          "hits": 5,
+          "ideal_first_hit_to_lethal_s": 0.2222222222222222,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 12,
+          "hits": 9,
+          "ideal_first_hit_to_lethal_s": 0.4444444444444444,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 10,
+          "hits": 10,
+          "ideal_first_hit_to_lethal_s": 0.5,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [
+        {
+          "kind": "balance",
+          "gun": "mp_weapon_r97",
+          "speedloader": "false"
+        },
+        {
+          "kind": "balance",
+          "gun": "mp_weapon_r97",
+          "speedloader": "true"
+        },
+        {
+          "kind": "automatic",
+          "gun": "mp_weapon_r97"
+        }
+      ],
+      "runtime_role_fields": [
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "false",
+          "index": "0",
+          "field": "346",
+          "before": "0.5",
+          "enabled": "0.35"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "false",
+          "index": "1",
+          "field": "348",
+          "before": "0.5",
+          "enabled": "0.35"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "false",
+          "index": "2",
+          "field": "350",
+          "before": "0.5",
+          "enabled": "0.35"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "false",
+          "index": "3",
+          "field": "352",
+          "before": "2",
+          "enabled": "1.4"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "false",
+          "index": "4",
+          "field": "354",
+          "before": "2",
+          "enabled": "1.4"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "false",
+          "index": "5",
+          "field": "356",
+          "before": "2",
+          "enabled": "1.4"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "true",
+          "index": "0",
+          "field": "346",
+          "before": "0.5",
+          "enabled": "0.35"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "true",
+          "index": "1",
+          "field": "348",
+          "before": "0.5",
+          "enabled": "0.35"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "true",
+          "index": "2",
+          "field": "350",
+          "before": "0.5",
+          "enabled": "0.35"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "true",
+          "index": "3",
+          "field": "352",
+          "before": "2",
+          "enabled": "1.4"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "true",
+          "index": "4",
+          "field": "354",
+          "before": "2",
+          "enabled": "1.4"
+        },
+        {
+          "gun": "mp_weapon_r97",
+          "speedloader": "true",
+          "index": "5",
+          "field": "356",
+          "before": "2",
+          "enabled": "1.4"
+        }
+      ],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Spitfire",
+      "classname": "mp_weapon_lmg",
+      "category": "LMG",
+      "reference": {
+        "name": "Spitfire",
+        "category": "LMG",
+        "classname": "mp_weapon_lmg",
+        "source_blob_sha": "0f19b3b88e4f066c2206d4f77babeb2da2be8d02",
+        "fire_mode": "auto",
+        "damage_near": 35,
+        "damage_far": 25,
+        "damage_very_far": 20,
+        "range_near_units": 1800,
+        "range_far_units": 2000,
+        "range_very_far_units": 3000,
+        "fire_rate_shots_s_nominal": 9,
+        "rpm_nominal": 540,
+        "magazine": 80,
+        "hip_spread_standing": 1.5,
+        "hip_spread_moving": 1.5,
+        "hip_spread_air": 5,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.3,
+        "ads_out_s": 0.3,
+        "deploy_s": 0.9,
+        "holster_s": 0.6,
+        "viewkick_pitch_base": -1,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "lmg",
+        "spread_kick_shot_hip": 1.5,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 35,
+          "hits": 3,
+          "ideal_first_hit_to_lethal_s": 0.2222222222222222,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 25,
+          "hits": 4,
+          "ideal_first_hit_to_lethal_s": 0.3333333333333333,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 20,
+          "hits": 5,
+          "ideal_first_hit_to_lethal_s": 0.4444444444444444,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [
+        {
+          "kind": "balance",
+          "gun": "mp_weapon_lmg",
+          "speedloader": "false"
+        },
+        {
+          "kind": "balance",
+          "gun": "mp_weapon_lmg",
+          "speedloader": "true"
+        },
+        {
+          "kind": "automatic",
+          "gun": "mp_weapon_lmg"
+        }
+      ],
+      "runtime_role_fields": [
+        {
+          "gun": "mp_weapon_lmg",
+          "speedloader": "false",
+          "index": "0",
+          "field": "51",
+          "before": "0.35",
+          "enabled": "0.28"
+        },
+        {
+          "gun": "mp_weapon_lmg",
+          "speedloader": "true",
+          "index": "0",
+          "field": "51",
+          "before": "0.35",
+          "enabled": "0.28"
+        }
+      ],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Devotion",
+      "classname": "mp_weapon_esaw",
+      "category": "LMG",
+      "reference": {
+        "name": "Devotion",
+        "category": "LMG",
+        "classname": "mp_weapon_esaw",
+        "source_blob_sha": "deb75e9b18d76e91914227624e164266e143c915",
+        "fire_mode": "auto",
+        "damage_near": 25,
+        "damage_far": 20,
+        "damage_very_far": 15,
+        "range_near_units": 1500,
+        "range_far_units": 1800,
+        "range_very_far_units": 2200,
+        "fire_rate_shots_s_nominal": 5,
+        "rpm_nominal": 300,
+        "magazine": 55,
+        "hip_spread_standing": 2,
+        "hip_spread_moving": 2,
+        "hip_spread_air": 5,
+        "ads_spread_standing": 0.4,
+        "ads_spread_air": 0.5,
+        "ads_in_s": 0.3,
+        "ads_out_s": 0.3,
+        "deploy_s": 0.7,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.17,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "lmg",
+        "spread_kick_shot_hip": 0,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": 15,
+        "fire_rate_ramp_time_s": 1.75,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "L-STAR",
+      "classname": "mp_weapon_lstar",
+      "category": "LMG",
+      "reference": {
+        "name": "L-STAR",
+        "category": "LMG",
+        "classname": "mp_weapon_lstar",
+        "source_blob_sha": "e97e0dca8f5fb86a345b35add03c40f281da4a34",
+        "fire_mode": "auto",
+        "damage_near": 25,
+        "damage_far": 18,
+        "damage_very_far": null,
+        "range_near_units": 1800,
+        "range_far_units": 2000,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 12,
+        "rpm_nominal": 720,
+        "magazine": 35,
+        "hip_spread_standing": 1,
+        "hip_spread_moving": 1,
+        "hip_spread_air": 3,
+        "ads_spread_standing": 1,
+        "ads_spread_air": 1,
+        "ads_in_s": 0.3,
+        "ads_out_s": 0.3,
+        "deploy_s": 1,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": 0.25,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": 3500,
+        "explosion_damage": 30,
+        "viewkick_spring": "lstar",
+        "spread_kick_shot_hip": 0,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Kraber",
+      "classname": "mp_weapon_sniper",
+      "category": "Sniper",
+      "reference": {
+        "name": "Kraber",
+        "category": "Sniper",
+        "classname": "mp_weapon_sniper",
+        "source_blob_sha": "bc7fed999b964d8d7feb63a7770d580ef2f5795f",
+        "fire_mode": "semi-auto",
+        "damage_near": 350,
+        "damage_far": 350,
+        "damage_very_far": null,
+        "range_near_units": 2000,
+        "range_far_units": 15000,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 1.85,
+        "rpm_nominal": 111,
+        "magazine": 4,
+        "hip_spread_standing": 10,
+        "hip_spread_moving": 12,
+        "hip_spread_air": 12,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.4,
+        "ads_out_s": 0.3,
+        "deploy_s": 0.8,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.5625,
+        "viewkick_yaw_base": -0.135,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "sniper",
+        "spread_kick_shot_hip": null,
+        "spread_kick_shot_ads": null,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": 1.6,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Longbow DMR",
+      "classname": "mp_weapon_dmr",
+      "category": "Sniper",
+      "reference": {
+        "name": "Longbow DMR",
+        "category": "Sniper",
+        "classname": "mp_weapon_dmr",
+        "source_blob_sha": "139c85e48b4a9185654370485c427631f2a35046",
+        "fire_mode": "semi-auto",
+        "damage_near": 55,
+        "damage_far": 55,
+        "damage_very_far": null,
+        "range_near_units": 4500,
+        "range_far_units": 4500,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 3,
+        "rpm_nominal": 180,
+        "magazine": 6,
+        "hip_spread_standing": 8,
+        "hip_spread_moving": 10,
+        "hip_spread_air": 10,
+        "ads_spread_standing": 0.05,
+        "ads_spread_air": 0.15,
+        "ads_in_s": 0.4,
+        "ads_out_s": 0.3,
+        "deploy_s": 0.8,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.61,
+        "viewkick_yaw_base": -0.5,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "semisniper",
+        "spread_kick_shot_hip": null,
+        "spread_kick_shot_ads": null,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Double Take",
+      "classname": "mp_weapon_doubletake",
+      "category": "Sniper",
+      "reference": {
+        "name": "Double Take",
+        "category": "Sniper",
+        "classname": "mp_weapon_doubletake",
+        "source_blob_sha": "ac37ced4fc1fe0bf69f5ce965fd344509906311b",
+        "fire_mode": "semi-auto",
+        "damage_near": 30,
+        "damage_far": 30,
+        "damage_very_far": null,
+        "range_near_units": 4500,
+        "range_far_units": 15000,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 2,
+        "rpm_nominal": 120,
+        "magazine": 12,
+        "hip_spread_standing": 8,
+        "hip_spread_moving": 8,
+        "hip_spread_air": 8,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.4,
+        "ads_out_s": 0.3,
+        "deploy_s": 0.6,
+        "holster_s": 0.45,
+        "viewkick_pitch_base": -0.61,
+        "viewkick_yaw_base": 0.05,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "semisniper",
+        "spread_kick_shot_hip": 4,
+        "spread_kick_shot_ads": null,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "EVA-8",
+      "classname": "mp_weapon_shotgun",
+      "category": "Shotgun",
+      "reference": {
+        "name": "EVA-8",
+        "category": "Shotgun",
+        "classname": "mp_weapon_shotgun",
+        "source_blob_sha": "0ed4cc77d15e3239c96bb73ec233de5ebcc6801d",
+        "fire_mode": "auto",
+        "damage_near": 200,
+        "damage_far": 10,
+        "damage_very_far": null,
+        "range_near_units": 100,
+        "range_far_units": 750,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 2.75,
+        "rpm_nominal": 165,
+        "magazine": 6,
+        "hip_spread_standing": 8,
+        "hip_spread_moving": 8,
+        "hip_spread_air": 8,
+        "ads_spread_standing": 8,
+        "ads_spread_air": 8,
+        "ads_in_s": 0.25,
+        "ads_out_s": 0.2,
+        "deploy_s": 0.8,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -1.75,
+        "viewkick_yaw_base": -0.65,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "shotgun",
+        "spread_kick_shot_hip": null,
+        "spread_kick_shot_ads": null,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Mastiff",
+      "classname": "mp_weapon_mastiff",
+      "category": "Shotgun",
+      "reference": {
+        "name": "Mastiff",
+        "category": "Shotgun",
+        "classname": "mp_weapon_mastiff",
+        "source_blob_sha": "e48bb70d72e73aea4194ade2520cce80be6d9b71",
+        "fire_mode": "semi-auto",
+        "damage_near": 20,
+        "damage_far": 12,
+        "damage_very_far": null,
+        "range_near_units": 350,
+        "range_far_units": 750,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 1.3,
+        "rpm_nominal": 78,
+        "magazine": 4,
+        "hip_spread_standing": 0,
+        "hip_spread_moving": 0,
+        "hip_spread_air": 0,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.25,
+        "ads_out_s": 0.2,
+        "deploy_s": 0.8,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -1.25,
+        "viewkick_yaw_base": -0.35,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "rspn101",
+        "spread_kick_shot_hip": null,
+        "spread_kick_shot_ads": null,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Mozambique",
+      "classname": "mp_weapon_shotgun_pistol",
+      "category": "Shotgun",
+      "reference": {
+        "name": "Mozambique",
+        "category": "Shotgun",
+        "classname": "mp_weapon_shotgun_pistol",
+        "source_blob_sha": "689074a5bb5d8b0435f084cace02b4d9b856cb85",
+        "fire_mode": "auto",
+        "damage_near": 30,
+        "damage_far": 25,
+        "damage_very_far": null,
+        "range_near_units": 750,
+        "range_far_units": 1000,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 3,
+        "rpm_nominal": 180,
+        "magazine": 6,
+        "hip_spread_standing": 0,
+        "hip_spread_moving": 0,
+        "hip_spread_air": 0,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.4,
+        "holster_s": 0.3,
+        "viewkick_pitch_base": -2.25,
+        "viewkick_yaw_base": -0.95,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "shotgun",
+        "spread_kick_shot_hip": null,
+        "spread_kick_shot_ads": null,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "EPG",
+      "classname": "mp_weapon_epg",
+      "category": "Grenadier",
+      "reference": {
+        "name": "EPG",
+        "category": "Grenadier",
+        "classname": "mp_weapon_epg",
+        "source_blob_sha": "dabd4b0d303fd5fba1da74488c4c6c876f8157e1",
+        "fire_mode": "semi-auto",
+        "damage_near": 100,
+        "damage_far": 100,
+        "damage_very_far": null,
+        "range_near_units": 2000,
+        "range_far_units": 2500,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 1,
+        "rpm_nominal": 60,
+        "magazine": 5,
+        "hip_spread_standing": 0,
+        "hip_spread_moving": 0,
+        "hip_spread_air": 0,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": null,
+        "holster_s": null,
+        "viewkick_pitch_base": -0.05,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": 2000,
+        "explosion_damage": 90,
+        "viewkick_spring": "lstar",
+        "spread_kick_shot_hip": 0,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Softball",
+      "classname": "mp_weapon_softball",
+      "category": "Grenadier",
+      "reference": {
+        "name": "Softball",
+        "category": "Grenadier",
+        "classname": "mp_weapon_softball",
+        "source_blob_sha": "2144aca6e4a1eef76da544b5acaef815a708c9ce",
+        "fire_mode": "semi-auto",
+        "damage_near": 10,
+        "damage_far": 10,
+        "damage_very_far": null,
+        "range_near_units": 100,
+        "range_far_units": 1500,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 2,
+        "rpm_nominal": 120,
+        "magazine": 6,
+        "hip_spread_standing": 0.25,
+        "hip_spread_moving": 0.25,
+        "hip_spread_air": 0.25,
+        "ads_spread_standing": 0.35,
+        "ads_spread_air": 0.35,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.63,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.3,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": 2500,
+        "explosion_damage": 90,
+        "viewkick_spring": "launcher",
+        "spread_kick_shot_hip": 0.1,
+        "spread_kick_shot_ads": 0.075,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Cold War",
+      "classname": "mp_weapon_pulse_lmg",
+      "category": "Grenadier",
+      "reference": {
+        "name": "Cold War",
+        "category": "Grenadier",
+        "classname": "mp_weapon_pulse_lmg",
+        "source_blob_sha": "39d4a78a4892d6f1b5e9f6381b1ff3bce4320f31",
+        "fire_mode": "semi-auto",
+        "damage_near": 30,
+        "damage_far": 30,
+        "damage_very_far": null,
+        "range_near_units": 1250,
+        "range_far_units": 15000,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 12,
+        "rpm_nominal": 720,
+        "magazine": 12,
+        "hip_spread_standing": 0.5,
+        "hip_spread_moving": 2.5,
+        "hip_spread_air": 5.5,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.66,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.05,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": 3500,
+        "explosion_damage": 30,
+        "viewkick_spring": "lstar",
+        "spread_kick_shot_hip": 0.075,
+        "spread_kick_shot_ads": 0.075,
+        "burst_count": 4,
+        "burst_delay_s": 0.5,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": 0.5
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "SMR",
+      "classname": "mp_weapon_smr",
+      "category": "Grenadier",
+      "reference": {
+        "name": "SMR",
+        "category": "Grenadier",
+        "classname": "mp_weapon_smr",
+        "source_blob_sha": "19c046a826737f465cd976392b70dee3bd36249d",
+        "fire_mode": null,
+        "damage_near": 50,
+        "damage_far": 50,
+        "damage_very_far": null,
+        "range_near_units": 1800,
+        "range_far_units": 15000,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 9,
+        "rpm_nominal": 540,
+        "magazine": 20,
+        "hip_spread_standing": 0.5,
+        "hip_spread_moving": 0.5,
+        "hip_spread_air": 0.5,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.8,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.25,
+        "viewkick_yaw_base": 0.1,
+        "projectile_speed_units_s": 3300,
+        "explosion_damage": 15,
+        "viewkick_spring": "low_springconstant_launcher",
+        "spread_kick_shot_hip": 0.5,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "RE-45",
+      "classname": "mp_weapon_autopistol",
+      "category": "Pistol",
+      "reference": {
+        "name": "RE-45",
+        "category": "Pistol",
+        "classname": "mp_weapon_autopistol",
+        "source_blob_sha": "d27aecd9d6b375721e5f646a9c60662388f264bb",
+        "fire_mode": "auto",
+        "damage_near": 20,
+        "damage_far": 13,
+        "damage_very_far": 9,
+        "range_near_units": 750,
+        "range_far_units": 1000,
+        "range_very_far_units": 2000,
+        "fire_rate_shots_s_nominal": 13,
+        "rpm_nominal": 780,
+        "magazine": 20,
+        "hip_spread_standing": 3,
+        "hip_spread_moving": 4,
+        "hip_spread_air": 7,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.4,
+        "holster_s": 0.3,
+        "viewkick_pitch_base": -0.34,
+        "viewkick_yaw_base": 0.15,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "autopistol",
+        "spread_kick_shot_hip": 0.4,
+        "spread_kick_shot_ads": 0.15,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 20,
+          "hits": 5,
+          "ideal_first_hit_to_lethal_s": 0.3076923076923077,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 13,
+          "hits": 8,
+          "ideal_first_hit_to_lethal_s": 0.5384615384615384,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 9,
+          "hits": 12,
+          "ideal_first_hit_to_lethal_s": 0.8461538461538461,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "P2016",
+      "classname": "mp_weapon_semipistol",
+      "category": "Pistol",
+      "reference": {
+        "name": "P2016",
+        "category": "Pistol",
+        "classname": "mp_weapon_semipistol",
+        "source_blob_sha": "f7913dc49bfd9ff1e71e83f806b745e96ac8b58b",
+        "fire_mode": "semi-auto",
+        "damage_near": 30,
+        "damage_far": 20,
+        "damage_very_far": 15,
+        "range_near_units": 750,
+        "range_far_units": 1000,
+        "range_very_far_units": 2000,
+        "fire_rate_shots_s_nominal": 8,
+        "rpm_nominal": 480,
+        "magazine": 12,
+        "hip_spread_standing": 2.5,
+        "hip_spread_moving": 3.5,
+        "hip_spread_air": 6.5,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.4,
+        "holster_s": 0.3,
+        "viewkick_pitch_base": -0.85,
+        "viewkick_yaw_base": 0.1,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "pistol",
+        "spread_kick_shot_hip": 0.4,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 30,
+          "hits": 4,
+          "ideal_first_hit_to_lethal_s": 0.375,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 20,
+          "hits": 5,
+          "ideal_first_hit_to_lethal_s": 0.5,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 15,
+          "hits": 7,
+          "ideal_first_hit_to_lethal_s": 0.75,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "B3 Wingman",
+      "classname": "mp_weapon_wingman",
+      "category": "Pistol",
+      "reference": {
+        "name": "B3 Wingman",
+        "category": "Pistol",
+        "classname": "mp_weapon_wingman",
+        "source_blob_sha": "4c8bc163f910946b67b45ce2f13ada40a361e484",
+        "fire_mode": "semi-auto",
+        "damage_near": 40,
+        "damage_far": 40,
+        "damage_very_far": 30,
+        "range_near_units": 1000,
+        "range_far_units": 1500,
+        "range_very_far_units": 2500,
+        "fire_rate_shots_s_nominal": 2.6,
+        "rpm_nominal": 156,
+        "magazine": 6,
+        "hip_spread_standing": 1,
+        "hip_spread_moving": 3,
+        "hip_spread_air": 6,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.4,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -2.5,
+        "viewkick_yaw_base": -0.5,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "magnum",
+        "spread_kick_shot_hip": 2.5,
+        "spread_kick_shot_ads": 0.025,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": true,
+          "health": 100,
+          "body_damage": 40,
+          "hits": 3,
+          "ideal_first_hit_to_lethal_s": 0.7692307692307692,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 40,
+          "hits": 3,
+          "ideal_first_hit_to_lethal_s": 0.7692307692307692,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        },
+        "very_far": {
+          "available": true,
+          "health": 100,
+          "body_damage": 30,
+          "hits": 4,
+          "ideal_first_hit_to_lethal_s": 1.1538461538461537,
+          "assumptions": "Reference-only fixed body damage; full health; all hits; steady maximum cadence; no ADS/trigger delay, travel, healing, shields, damage buffs, reload or server-tick quantization."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Wingman Elite",
+      "classname": "mp_weapon_wingman_n",
+      "category": "Pistol",
+      "reference": {
+        "name": "Wingman Elite",
+        "category": "Pistol",
+        "classname": "mp_weapon_wingman_n",
+        "source_blob_sha": "6dccf98e1cabf00fd6000cf219b2e351c4846e58",
+        "fire_mode": "semi-auto",
+        "damage_near": 75,
+        "damage_far": 55,
+        "damage_very_far": 35,
+        "range_near_units": 1500,
+        "range_far_units": 2000,
+        "range_very_far_units": 3500,
+        "fire_rate_shots_s_nominal": 2.6,
+        "rpm_nominal": 156,
+        "magazine": 6,
+        "hip_spread_standing": 0,
+        "hip_spread_moving": 0,
+        "hip_spread_air": 0,
+        "ads_spread_standing": 0,
+        "ads_spread_air": 0,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.4,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.5,
+        "viewkick_yaw_base": 0.05,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "magnum",
+        "spread_kick_shot_hip": 0,
+        "spread_kick_shot_ads": 0,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Charge Rifle",
+      "classname": "mp_weapon_defender",
+      "category": "Anti-Titan",
+      "reference": {
+        "name": "Charge Rifle",
+        "category": "Anti-Titan",
+        "classname": "mp_weapon_defender",
+        "source_blob_sha": "a514408cc0d726c67c908f441326afea6f69cb0b",
+        "fire_mode": "semi-auto",
+        "damage_near": 300,
+        "damage_far": 300,
+        "damage_very_far": null,
+        "range_near_units": 4800,
+        "range_far_units": 5300,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 1,
+        "rpm_nominal": 60,
+        "magazine": 0,
+        "hip_spread_standing": 3,
+        "hip_spread_moving": 3,
+        "hip_spread_air": 3,
+        "ads_spread_standing": 0.35,
+        "ads_spread_air": 0.5,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.8,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -1,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": null,
+        "explosion_damage": null,
+        "viewkick_spring": "titan_arc",
+        "spread_kick_shot_hip": null,
+        "spread_kick_shot_ads": null,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": 1.3
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Archer",
+      "classname": "mp_weapon_rocket_launcher",
+      "category": "Anti-Titan",
+      "reference": {
+        "name": "Archer",
+        "category": "Anti-Titan",
+        "classname": "mp_weapon_rocket_launcher",
+        "source_blob_sha": "b25653bc6cd63cc02d6b0b57fe4129757c886dd7",
+        "fire_mode": null,
+        "damage_near": 100,
+        "damage_far": 100,
+        "damage_very_far": null,
+        "range_near_units": 1200,
+        "range_far_units": 15000,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 1,
+        "rpm_nominal": 60,
+        "magazine": 1,
+        "hip_spread_standing": 3,
+        "hip_spread_moving": null,
+        "hip_spread_air": null,
+        "ads_spread_standing": 0.2,
+        "ads_spread_air": null,
+        "ads_in_s": 0.35,
+        "ads_out_s": 0.35,
+        "deploy_s": 0.8,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -4,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": null,
+        "explosion_damage": 100,
+        "viewkick_spring": "launcher",
+        "spread_kick_shot_hip": null,
+        "spread_kick_shot_ads": null,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "Thunderbolt",
+      "classname": "mp_weapon_arc_launcher",
+      "category": "Anti-Titan",
+      "reference": {
+        "name": "Thunderbolt",
+        "category": "Anti-Titan",
+        "classname": "mp_weapon_arc_launcher",
+        "source_blob_sha": "982cddee124a5eb3a646cf1c1afcdd39a41df7d2",
+        "fire_mode": null,
+        "damage_near": 70,
+        "damage_far": 70,
+        "damage_very_far": null,
+        "range_near_units": 1200,
+        "range_far_units": 15000,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 2,
+        "rpm_nominal": 120,
+        "magazine": 1,
+        "hip_spread_standing": 3,
+        "hip_spread_moving": null,
+        "hip_spread_air": null,
+        "ads_spread_standing": 0.2,
+        "ads_spread_air": null,
+        "ads_in_s": 0.35,
+        "ads_out_s": 0.35,
+        "deploy_s": 0.8,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.2,
+        "viewkick_yaw_base": -1,
+        "projectile_speed_units_s": null,
+        "explosion_damage": 40,
+        "viewkick_spring": "launcher",
+        "spread_kick_shot_hip": null,
+        "spread_kick_shot_ads": null,
+        "burst_count": null,
+        "burst_delay_s": null,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    },
+    {
+      "name": "MGL",
+      "classname": "mp_weapon_mgl",
+      "category": "Anti-Titan",
+      "reference": {
+        "name": "MGL",
+        "category": "Anti-Titan",
+        "classname": "mp_weapon_mgl",
+        "source_blob_sha": "3e90e49dab6cb9d511e20b27b374ef14afd41e0c",
+        "fire_mode": "semi-auto",
+        "damage_near": 20,
+        "damage_far": 20,
+        "damage_very_far": null,
+        "range_near_units": 70,
+        "range_far_units": 1500,
+        "range_very_far_units": null,
+        "fire_rate_shots_s_nominal": 6,
+        "rpm_nominal": 360,
+        "magazine": 6,
+        "hip_spread_standing": 0.25,
+        "hip_spread_moving": 0.25,
+        "hip_spread_air": 0.25,
+        "ads_spread_standing": 0.35,
+        "ads_spread_air": 0.35,
+        "ads_in_s": 0.2,
+        "ads_out_s": 0.15,
+        "deploy_s": 0.8,
+        "holster_s": 0.5,
+        "viewkick_pitch_base": -0.3,
+        "viewkick_yaw_base": 0,
+        "projectile_speed_units_s": 1200,
+        "explosion_damage": 35,
+        "viewkick_spring": "launcher",
+        "spread_kick_shot_hip": 0.1,
+        "spread_kick_shot_ads": 0.075,
+        "burst_count": 2,
+        "burst_delay_s": 0.7,
+        "fire_rate_max_shots_s": null,
+        "fire_rate_ramp_time_s": null,
+        "rechamber_s": null,
+        "charge_s": null
+      },
+      "ideal_body_models": {
+        "near": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        },
+        "very_far": {
+          "available": false,
+          "reason": "Weapon needs a burst/pellet/ramp/charge/projectile/rechamber-specific model or has not been approved for the scalar model."
+        }
+      },
+      "runtime_checks": [],
+      "runtime_role_fields": [],
+      "observed_combat_metrics": null
+    }
+  ]
+}
