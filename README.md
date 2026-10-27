@@ -37,6 +37,9 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 [the map review](research/trends-20261025/FINDINGS.md) and
 [the deeper decision review](research/decision-context-20261025/FINDINGS.md) before changes.
 
+- **New source candidate, not installed:** bounded crouch navigation for possible
+  low passages, default OFF. [Evidence, tests and runtime gates](research/low-clearance-20261027/README.md).
+
 ## Contents
 
 | Location | Purpose |

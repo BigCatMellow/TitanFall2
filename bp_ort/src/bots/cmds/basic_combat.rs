@@ -612,9 +612,111 @@ pub(crate) fn basic_combat(
             local_data.metrics.spacing_commands = local_data.metrics.spacing_commands.saturating_add(1);
         }
     }
+    apply_low_clearance(cmds_low_clearance_context(is_titan, sim_type, local_data),
+        player, helper, local_data, &mut cmd);
     cmd.camera_angles = cmd.world_view_angles;
 
     cmd
+}
+
+// Only route-following pilot commands; never override combat, boarding or recovery.
+fn cmds_low_clearance_context(is_titan: bool, sim_type: i32, local: &BotData) -> bool {
+    !is_titan && sim_type == 6 && local.navigation_requested
+        && !local.metrics.visible && local.metrics.state != "embark"
+        && local.metrics.state != "recover"
+        && local.nav_query.as_ref().is_some_and(|q| q.hull == crate::navmesh::Hull::Human)
+        && crate::bots::LOW_CLEARANCE_CONVAR.get().is_some_and(|c| c.get_value_bool())
+}
+
+fn apply_low_clearance(eligible: bool, player: &mut CPlayer, helper: &CUserCmdHelper,
+    local: &mut BotData, cmd: &mut CUserCmd) {
+    use crate::bots::low_clearance::Intent;
+    if !eligible || cmd.move_.x <= 0. || player.m_lifeState != 0 || player.m_iHealth <= 0 {
+        local.low_clearance.cancel();
+        if local.clearance_duck_output
+            && crate::bots::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
+            log::info!("BOT_CLEARANCE epoch={} t={:.2} slot={} intent=Cancel duck=0 attempts={} failures={}",
+                crate::bots::telemetry::epoch(), time(helper), local.edict,
+                local.low_clearance.attempts, local.low_clearance.failures);
+        }
+        local.clearance_duck_output = false;
+        return;
+    }
+    let now = time(helper);
+    let feet = player.m_vecAbsOrigin;
+    let pos = [feet.x, feet.y];
+    let yaw = cmd.world_view_angles.y;
+    let grounded = unsafe { (helper.sv_funcs.is_on_ground)(nudge_type::<&CBaseEntity>(player)) } != 0;
+    let mut probed = false;
+    let mut probe_label = "cached";
+    if grounded && yaw.is_finite() && [feet.x, feet.y, feet.z].iter().all(|v| v.is_finite())
+        && local.low_clearance.probe_due(now) {
+        let clearance = probe_low_clearance(player, helper, yaw);
+        local.low_clearance.observe(now, pos, yaw, clearance);
+        probed = true;
+        probe_label = match clearance {
+            crate::bots::low_clearance::Clearance::Open => "open",
+            crate::bots::low_clearance::Clearance::CrouchCandidate => "candidate",
+            crate::bots::low_clearance::Clearance::Blocked => "blocked",
+        };
+    }
+    let intent = local.low_clearance.decide(now, pos, yaw, grounded);
+    match intent {
+        Intent::Normal => {},
+        Intent::Crouch => {
+            cmd.buttons &= !(Action::Jump as u32 | Action::Speed as u32 | Action::Back as u32
+                | Action::Moveleft as u32 | Action::Moveright as u32);
+            cmd.buttons |= Action::Duck as u32 | Action::Forward as u32;
+            cmd.move_ = Vector3::new(0.5, 0., 0.);
+        },
+        Intent::Recover => {
+            // Let the established recovery own the escape; invalidate the old route.
+            if let Some(nav) = local.nav_query.as_mut() { nav.path_points.clear(); nav.end_point = None; }
+            local.metrics.recoveries = local.metrics.recoveries.saturating_add(1);
+            local.recovery_until = now + 1.2;
+            local.should_recalculate_path = true;
+            cmd.buttons &= !(Action::Duck as u32 | Action::Jump as u32);
+            cmd.move_.z = 0.;
+            try_avoid_obstacle(cmd, local, helper);
+        },
+    }
+    let duck_output = cmd.buttons & Action::Duck as u32 != 0;
+    let changed = duck_output != local.clearance_duck_output;
+    local.clearance_duck_output = duck_output;
+    if (probed || changed || intent == Intent::Recover)
+        && crate::bots::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
+        log::info!("BOT_CLEARANCE epoch={} t={now:.2} slot={} probe={probe_label} intent={intent:?} duck={} attempts={} failures={} x={:.1} y={:.1} z={:.1}",
+            crate::bots::telemetry::epoch(), local.edict, duck_output as u8,
+            local.low_clearance.attempts, local.low_clearance.failures, feet.x, feet.y, feet.z);
+    }
+}
+
+// Uses the existing filtered ray ABI. Three lanes at two lower heights plus
+// ground support reduce false positives, but do NOT prove swept-hull clearance.
+fn probe_low_clearance(player: &mut CPlayer, helper: &CUserCmdHelper, yaw: f32)
+    -> crate::bots::low_clearance::Clearance {
+    let (sin, cos) = yaw.to_radians().sin_cos();
+    let feet = player.m_vecAbsOrigin;
+    let forward = Vector3::new(cos * 48., sin * 48., 0.);
+    let upper_start = feet + Vector3::new(0., 0., 64.);
+    let (upper, _) = view_rate(helper, upper_start, upper_start + forward - GROUND_OFFSET, player, true);
+    if upper.is_finite() && upper >= 0.98 && upper <= 1. {
+        return crate::bots::low_clearance::Clearance::Open;
+    }
+    let mut lower = [0.; 6];
+    let mut floor = [0.; 3];
+    for (lane, offset) in [-16., 0., 16.].into_iter().enumerate() {
+        let base = feet + Vector3::new(sin * offset, -cos * offset, 0.);
+        for (height_index, height) in [8., 36.].into_iter().enumerate() {
+            let start = base + Vector3::new(0., 0., height);
+            lower[lane * 2 + height_index] = view_rate(helper, start,
+                start + forward - GROUND_OFFSET, player, true).0;
+        }
+        let end = base + forward;
+        floor[lane] = view_rate(helper, end + Vector3::new(0., 0., 36.),
+            end - Vector3::new(0., 0., 48.) - GROUND_OFFSET, player, true).0;
+    }
+    crate::bots::low_clearance::classify(upper, &lower, &floor)
 }
 
 /// Small grounded steps only; tracing is cached at 5 Hz, outside navigation.

@@ -56,6 +56,7 @@ mod behavior_tuning;
 mod progress_watchdog;
 mod coordination;
 mod escape_recovery;
+mod low_clearance;
 mod combat_decisions;
 mod action_policy;
 mod action_bridge;
@@ -81,6 +82,7 @@ pub(super) static COMBAT_DECISIONS_CONVAR: OnceCell<ConVarStruct> = OnceCell::ne
 pub(super) static ACTION_POLICY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static TARGET_ELIGIBILITY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static NAVIGATION_CONTEXT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static LOW_CLEARANCE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static STEP_RETRY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 
 pub static AIM_PENALTY_VALUE: AtomicI32 = AtomicI32::new(100);
@@ -112,6 +114,8 @@ pub(super) struct BotData {
     tactical_pulse: action_policy::Pulse,
     ordnance_pulse: action_policy::Pulse,
     escape_recovery: escape_recovery::EscapeRecovery,
+    low_clearance: low_clearance::LowClearance,
+    clearance_duck_output: bool,
     combat: combat_decisions::CombatState,
     metrics: telemetry::Metrics,
     last_bad_path: f32,
@@ -399,6 +403,7 @@ impl Plugin for Bots {
             (&ACTION_POLICY_CONVAR, "bot_action_policy", "fresh script readiness and bounded pilot offhand input"),
             (&TARGET_ELIGIBILITY_CONVAR, "bot_target_eligibility", "exclude hotdropping pet Titans from coordinated selection and pursuit"),
             (&NAVIGATION_CONTEXT_CONVAR, "bot_navigation_context", "do not age navigation watchdog across non-navigation commands"),
+            (&LOW_CLEARANCE_CONVAR, "bot_low_clearance_trial", "bounded pilot crouch passage trial; ray hints require isolated validation"),
             (&STEP_RETRY_CONVAR, "bot_step_retry", "try opposite combat step with the same wall and ground checks"),
         ] {
             _ = cell.set(ConVarStruct::try_new(&ConVarRegister::new(name, "0", FCVAR_GAMEDLL as i32, help), token)

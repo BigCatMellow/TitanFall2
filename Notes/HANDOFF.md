@@ -661,3 +661,16 @@ collector exactly. Public research/played-weapons-20261026 contains onlyderived
 analysis/provenance hashes andfindings. Full18.8MB nslog/events/saves stayprivate.
 Approximate activity bounds: preceding native frame atPlaying tolastdamage/death;
 no exact winner/postmatch markers available. No visual watching occurred.
+
+2026-10-27 — LOW-CLEARANCE SOURCE CANDIDATE, NOT INSTALLED.
+User authorized investigating/improving bots, reporting trouble sliding/crouching
+under obstacles. Normal route follower does not request Duck. Added default-off
+bot_low_clearance_trial for bounded mode6pilot route crouch attempts based on
+existing filtered ray hints. No navmesh/ABI/aim/fire/damage/loadout changes.
+No map areas blacklisted: exported surfaces/stall cells do not establish a
+non-traversable link. See research/low-clearance-20261027/README.md and VALIDATION.md.
+54pure Rust checks, pinned Windows-target cargo check and distribution DLL
+cross-build pass (Linux/GCC MinGW; no runtime claim). Independent source
+re-review passes after timer/cooldown and telemetry fixes. Actual posture/hull
+fit/traversal/lifecycle/performance trials remain mandatory before deployment.
+No normal or isolated Windows profile, current saves or running game was touched.
