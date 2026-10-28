@@ -68,7 +68,13 @@ entries before changes.
 - User authorized integration/install of all four weapon-work branches.
   Notes/candidates/weapons-v19-20261026/README.md is the current rollout record.
   Keep effective-variable validation distinct from feel/hit-rate/balance proof.
-- Latest played review:research/played-weapons-20261026/FINDINGS.md. Four maps,
+- Latest Full review: research/played-full-v20-20261027/FINDINGS.md. Four rounds,
+  646 pilot deaths/96 qualifying episodes; much less stationary combat, but
+  103 frag self-kills versus 37 enemy kills. Prioritize isolated grenade
+  lifecycle/safety and Eden link recovery; Phase/A-Wall casts unconfirmed.
+  Review only, no installed settings changed. Keep aim/damage/warm-up unchanged.
+  Whole-log diagnostics and per-played-window diagnostics have different scopes.
+- Earlier played review:research/played-weapons-20261026/FINDINGS.md. Four maps,
   533pilot deaths,128qualifying episodes;33/6recorded human pilot K/D on WarGames.
   Counts exclude Titan victims and are not scoreboards. Grounded combat-step
   alternatives/blocked holds are installed as the Movement playtest; map-cell

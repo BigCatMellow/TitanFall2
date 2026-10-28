@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "paths": {
+    "requests": 11688,
+    "partial": 320,
+    "failures": 1093,
+    "suppressed": 168448,
+    "with_links": 5764
+  },
+  "corners": {
+    "total": 450506,
+    "links": 85842,
+    "by_jump": {
+      "1": 15470,
+      "2": 1962,
+      "8": 10565,
+      "16": 57845,
+      "255": 364517,
+      "-1": 147
+    },
+    "by_flags": {
+      "0": 254446,
+      "1": 175115,
+      "2": 20798,
+      "-1": 147
+    }
+  },
+  "stalls": {
+    "samples": 988,
+    "incidents": 432,
+    "link_or_partial": 241,
+    "duck_only": 2,
+    "blocked": 303,
+    "stand_clear": 127,
+    "unknown": 0,
+    "by_reason": {
+      "no_progress": 372,
+      "waypoint_timeout": 60
+    },
+    "by_state": {
+      "recover": 432
+    }
+  },
+  "stuck": {
+    "episodes": 609,
+    "by_state": {
+      "pursue": 374,
+      "recover": 21,
+      "engage": 159,
+      "embark": 55
+    },
+    "visible": 159,
+    "titan": 117
+  },
+  "crouch": {
+    "tests": 0,
+    "by_fit": {},
+    "attempts_max": 0,
+    "successes_max": 0,
+    "failures_max": 0
+  },
+  "viewcheck": {
+    "samples": 700,
+    "plausible": 700,
+    "examples": [
+      {
+        "eye_angles": "[0.0, 11.2074, 0.0]",
+        "view_angles_raw": "[0.98093003, 0.19436105, -0.0]",
+        "eye_height": "60.0",
+        "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+        "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+      },
+      {
+        "eye_angles": "[0.0, 89.901, 0.0]",
+        "view_angles_raw": "[0.0017278941, 0.9999985, -0.0]",
+        "eye_height": "60.0",
+        "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+        "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+      },
+      {
+        "eye_angles": "[0.0, 0.0, 0.0]",
+        "view_angles_raw": "[1.0, 0.0, -0.0]",
+        "eye_height": "60.0",
+        "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+        "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+      }
+    ]
+  },
+  "decision": {
+    "stall_incidents": 432,
+    "link_or_partial_share": 0.5578703703703703,
+    "duck_only_share": 0.004629629629629629,
+    "partial_route_share": 0.02737850787132101,
+    "engage_stuck_share": 0.26108374384236455,
+    "recommendation": "prioritise link/partial-route handling"
+  },
+  "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+}

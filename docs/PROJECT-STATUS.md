@@ -4,6 +4,12 @@ The reviewed v20 stack is built on Windows, tested and installed for playtesting
 Use the existing solo shortcut: default Movement enables combat movement and the
 proximity correction. [Presets, evidence and rollback](../Notes/candidates/bot-capability-v20-20261027/README.md).
 
+Latest played Full review: [four-round findings](../research/played-full-v20-20261027/FINDINGS.md).
+Combat movement is much more active; actual grenade damage is recorded, but
+frags caused 103 self-kills versus 37 enemy pilot kills. Eden still has recurring
+route stalls. Phase/A-Wall activation remains unconfirmed. Review only: no game
+settings or saves changed, and no aim/damage adjustment is justified here.
+
 | Item | Current state |
 |---|---|
 | Native |bot-capability-v20-candidate|

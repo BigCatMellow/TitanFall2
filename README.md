@@ -16,11 +16,12 @@ local work. [Original README](docs/UPSTREAM-README.md).
   damage/life/kill notes. Includes a 30-weapon reference catalog and conditional
   ideal TTK models; observed damage-to-death spans remain separate.
   [How to use it and measurement limits](Notes/weapon-notebook/README.md).
-- **First played-session review:** four maps,533pilot death records and128
-  qualifying health episodes. War Games recorded33human pilot kills/6deaths.
-  Passive/blocked combat movement and unused default tacticals are the strongest
-  follow-ups; aim and weapon damage remain unchanged.
-  [Findings](research/played-weapons-20261026/FINDINGS.md).
+- **Latest played Full review:** four rounds, 646 pilot death records and 96
+  qualifying health episodes. Combat holds are much less stationary. Grenades
+  affect fights, but frags recorded 103 self-kills against 37 enemy kills;
+  grenade safety and Eden routes are the next priorities. Aim/damage unchanged.
+  [Full findings](research/played-full-v20-20261027/FINDINGS.md),
+  [earlier v19 baseline](research/played-weapons-20261026/FINDINGS.md).
 - **Current source:** retains the v18 decision fixes and adds five missing
   standard weapon profiles.46 Rust checks,17 Node checks, the existing-controller
   comparison,11-gun runtime matrix and human stat/stacking/lifecycle checks pass.
@@ -37,14 +38,15 @@ local work. [Original README](docs/UPSTREAM-README.md).
   War Games/Eden are the strongest route follow-ups. Historical v16/played
   sessions, short/long goals and observer configurations remain separate.
 
-- **New source candidate, not installed:** bot capability v20 — seven default-off
+- **Installed v20 capability source:** seven default-off
   switches (navigation diagnostics, route guard, jump timing, proximity and
   perception fixes, combat movement, stall-triggered crouch with engine hulls).
   [Switches, evidence, runtime protocol and rollback](research/bot-capability-20261027/README.md).
 
-- **Balance candidate, not installed:** target ~3:1 K/D (baseline 9.7). Height
+- **Explicit Full playtest:** target ~3:1 K/D (baseline 9.7). Height
   response, defensive tactics and a symmetric bot roster, all default off.
   [Plan and levers](research/bot-balance-20261027/README.md).
+  The first mixed Full session is not proof the balance target is met.
 
 Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 [the map review](research/trends-20261025/FINDINGS.md) and

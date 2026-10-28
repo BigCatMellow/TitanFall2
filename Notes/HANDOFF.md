@@ -783,3 +783,46 @@ Rolloutaggregate/provenance:Notes/candidates/bot-capability-v20-20261027.
 Optional Desktop shortcut Northstar - Full Bot Trial (8v8).lnk was created and
 verified: same installedCMD/profile with argument full; usualshortcut stays
 Movement. Both use CURRENT normalprogress. Shortcut binary stays local.
+
+## 2026-10-27 — First human Full v20 review
+
+BT-7274 reported good tactical/grenade use and pilot movement. Reviewed completed
+normal-play session 20261027-190908-a8903c69, Full metadata/launch line, same v20
+DLL and 1.31.14 core. Eden/Complex/Meadow/Eden, 646 pilot deaths, 96 qualifying
+health episodes, zero damage/fire/script/native/roster error markers. No game
+process was active at review. No gameplay settings, plugin or saves changed.
+Derived reports: research/played-full-v20-20261027. Raw data stays private.
+
+Combat hold below-50-unit/s fractions 13.49/5.49/5.67/8.59%; earlier v19 Eden
+54.13%, Meadow45.61%. Strong descriptive movement signal, not controlled causal
+proof with different roster/play. Eight guns observed and damaging. Cover
+165/227 probes found a point; no arrival/survival guarantee. Human pilot-victim
+credit 0/2,13/1,26/4,8/6. Aggregate47/13 is not target proof or scoreboard K/D.
+
+Important defect: bot-pilot frag damage recorded 78 opposing callbacks/37 enemy
+pilot kills versus176 self callbacks/103 self-kills (19/14/46/24 per round).
+Other ordnance enemy kills: Arc2, Firestar1, Smoke1; Gravity did damage. No bot
+ordnance human kills in this session. Next isolated work: prepare/release/fuse
+and clearance/escape instrumentation; cannot infer held cook vs bounce vs return
+into blast from existing telemetry. Preserve successful behavior and aim0.78,
+0.8s source firing warm-up, damage/recharge/reload/ADS/role changes.
+
+4,023 allowed skill starts:1,727 tactical/2,296 ordnance, not casts. Cloak/Stim/
+Holo/Pulse show below-cost resource observations. Phase always clip200, A-Wall100;
+no depletion observed for those, so activation remains unconfirmed. All shot
+counters zero even for damaging grenades: do not use them as success counts.
+Need explicit outcome hooks for Phase/A-Wall, not more request-frequency buffs.
+
+Eden low progress296/3327 and264/3390 samples; old4096,-256,128 hotspot111 windows/
+8slots, new-1792,2816,320 cluster91/2 plus47 neighboring windows. Low-progress
+turning persists, no flagged window >20%jump-command fraction. Per-played-window
+429 grouped stalls,238 link/partial,2duck-only. Whole log432 includes later
+activity; do not mix scopes. Prioritize bounded Eden link/recovery trials, not
+global crouch/jump. Complex13/1589 low, Meadow0/1596 despite diagnostic incidents
+using a different state-agnostic stall definition.
+
+New tools/Analyze-PlayedCapabilities.mjs verifies the original played-analysis
+hashes, keeps context/event/life and self/friendly/forced/Titan separation and
+trims native diagnostics by epoch/window. Five new regression checks passed,
+plus four existing played-session and five navigation checks. Text telemetry
+only; BT-7274's visual feedback is attributed, not agent visual watching.

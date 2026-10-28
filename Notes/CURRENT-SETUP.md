@@ -9,6 +9,13 @@ explicit presets add height response, roster, skills and personalities. Gated
 crouch/route/jump/perception switches stay off. Both profiles use renamed BT7274
 add-ons and current migrated saves. See [current rollout](candidates/bot-capability-v20-20261027/README.md).
 
+The Desktop **Northstar - Full Bot Trial (8v8)** shortcut explicitly selects
+Full using the same current saves; the usual solo shortcut resets to Movement.
+The first Full session is reviewed in
+[played findings](../research/played-full-v20-20261027/FINDINGS.md). Preserve the
+improved combat movement; investigate frag self-kills and Eden route stalls.
+This review did not change the installed game.
+
 The existing solo shortcut now starts the automatic text weapon notebook.
 See [recording and reference stats](weapon-notebook/README.md). Current saves
 are retained; no injector is enabled in normal play. Source checkout is
