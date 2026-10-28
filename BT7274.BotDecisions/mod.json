@@ -1,7 +1,7 @@
 {
   "Name": "BT7274.BotDecisions",
-  "Description": "Readiness and hotdrop state bridge for the switchable v18 native bot decision candidate.",
-  "Version": "1.0.0",
+  "Description": "Readiness, offhand outcome and hotdrop state bridge for solo bot decisions.",
+  "Version": "1.1.0",
   "LoadPriority": 45,
   "Scripts": [{"Path": "bt7274_bot_decisions.nut", "RunOn": "SERVER && MP", "ServerCallback": {"After": "BT7274BotDecisions_Init"}}]
 }

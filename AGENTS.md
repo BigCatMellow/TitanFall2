@@ -4,6 +4,11 @@ Canonical development repo for BT-7274's solo Northstar project. Read README.md,
 docs/PROJECT-STATUS.md, Notes/CURRENT-SETUP.md and the latest Notes/HANDOFF.md
 entries before changes.
 
+- v21 safety work is SOURCE ONLY. Antivirus quarantined a Cargo build helper
+  as Gen:Variant.Lazy.746108; stop native rebuild/restore attempts pending
+  security resolution. Do not exclude or repackage the flagged file. Installed
+  profiles remain v20. Read Notes/candidates/bot-safety-v21-20261027/README.md.
+
 - Refer to the owner only as BT-7274 (prose) / BT7274 (identifiers) in every
   file, filename and commit message; never by a personal name. See
   docs/BT7274-RENAME.md before deploying renamed add-ons (profiles need

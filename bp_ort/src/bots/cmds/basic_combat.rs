@@ -613,6 +613,8 @@ pub(crate) fn basic_combat(
         }
     }
 
+    let offhand_safety = skills_on && action_policy && crate::bots::switch_on(&crate::bots::OFFHAND_SAFETY_CONVAR);
+    if !offhand_safety { local_data.throw_safety = Default::default(); }
     let pulses_before = (local_data.tactical_pulse.starts, local_data.ordnance_pulse.starts);
     if action_policy {
         let token = unsafe { EngineToken::new_unchecked() };
@@ -620,10 +622,36 @@ pub(crate) fn basic_combat(
         let tactical_id = lookup_ent(player.m_inventory.offhandWeapons[1], helper.sv_funcs).map_or(-1, |w| w.m_RefEHandle);
         let ordnance_id = lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs).map_or(-1, |w| w.m_RefEHandle);
         let tactical = local_data.tactical_pulse.press(time(helper), tactical_id,
-            cmd.buttons & Action::OffHand1 as u32 != 0, ready.map(|r| r.tactical));
+            cmd.buttons & Action::OffHand1 as u32 != 0
+                && (!offhand_safety || local_data.throw_safety.aim(time(helper)).is_none()), ready.map(|r| r.tactical));
+        let mut ordnance_wanted = !tactical && cmd.buttons & Action::OffHand0 as u32 != 0;
+        if offhand_safety && ordnance_wanted {
+            let name = lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs)
+                .and_then(|w| get_weaponx_name(w, helper.sv_funcs)).unwrap_or_default();
+            let p = local_data.metrics.target_pos;
+            let tpos = Vector3::new(p[0], p[1], p[2]);
+            let min = crate::bots::offhand_safety::minimum_range(name);
+            ordnance_wanted = local_data.throw_safety.allow_request(time(helper))
+                && local_data.metrics.state != "recover" && local_data.metrics.state != "embark"
+                && (name == "mp_weapon_grenade_electric_smoke" || distance(origin, tpos) >= min);
+            if ordnance_wanted && skill_plan.1.is_some_and(|(reason, _)| reason == "throw") {
+                let aim = look_at(origin, tpos);
+                let loft = skill_plan.1.map_or(0., |(_, loft)| loft);
+                let pitch = (aim.x - loft).clamp(-89., 89.);
+                let start = origin + Vector3::new(0., 0., 56.);
+                ordnance_wanted = local_data.throw_safety.clearance(time(helper), [origin.x,origin.y,origin.z], [pitch,aim.y], || {
+                    let (sp,cp) = pitch.to_radians().sin_cos(); let (sy,cy) = aim.y.to_radians().sin_cos();
+                    let direction = Vector3::new(cp*cy,cp*sy,-sp);
+                    [-8.,0.,8.].into_iter().all(|offset| {
+                        let from = start + Vector3::new(sy*offset,-cy*offset,0.);
+                        view_rate(helper, from, from + direction*224. - GROUND_OFFSET, player, true).0 >= 0.98
+                    })
+                });
+            }
+        }
         // At most one pilot offhand request at once, with defensive tactical priority.
         let ordnance = local_data.ordnance_pulse.press(time(helper), ordnance_id,
-            !tactical && cmd.buttons & Action::OffHand0 as u32 != 0, ready.map(|r| r.ordnance));
+            ordnance_wanted, ready.map(|r| r.ordnance));
         if !tactical { cmd.buttons &= !(Action::OffHand1 as u32); }
         if !ordnance { cmd.buttons &= !(Action::OffHand0 as u32); }
     }
@@ -640,6 +668,16 @@ pub(crate) fn basic_combat(
             cmd.world_view_angles = Vector3::new((aim.x - 15.).clamp(-89., 89.), aim.y, 0.);
         }
         let started = (local_data.tactical_pulse.starts > pulses_before.0, local_data.ordnance_pulse.starts > pulses_before.1);
+        if started.1 && offhand_safety {
+            let frag = lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs)
+                .and_then(|w| get_weaponx_name(w, helper.sv_funcs)) == Some("mp_weapon_frag_grenade");
+            local_data.throw_safety.start(time(helper), [cmd.world_view_angles.x,cmd.world_view_angles.y], frag);
+            if crate::bots::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
+                log::info!("BOT_THROW epoch={} t={:.2} slot={} stage=commit frag={} pitch={:.1} yaw={:.1}",
+                    crate::bots::telemetry::epoch(),time(helper),local_data.edict,frag as u8,
+                    cmd.world_view_angles.x,cmd.world_view_angles.y);
+            }
+        }
         if (started.0 || started.1) && crate::bots::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
             let weapon = lookup_ent(player.m_inventory.activeWeapon, helper.sv_funcs)
                 .and_then(|ent| get_weaponx_name(ent, helper.sv_funcs)).unwrap_or_default();
@@ -715,6 +753,20 @@ pub(crate) fn basic_combat(
     }
     height_followups(player, helper, local_data, &mut cmd, is_titan, sim_type);
     route_followups(player, helper, local_data, &mut cmd, is_titan, sim_type);
+    if offhand_safety {
+        if let Some(aim) = local_data.throw_safety.aim(time(helper)) {
+            cmd.world_view_angles = Vector3::new(aim[0],aim[1],0.);
+            cmd.buttons &= !(Action::Attack as u32 | Action::Zoom as u32 | Action::Melee as u32 | Action::Reload as u32);
+            cmd.weaponselect = 0;
+        }
+        if local_data.throw_safety.brake_forward(time(helper)) {
+            cmd.move_.x = cmd.move_.x.min(0.);
+            cmd.buttons &= !(Action::Forward as u32 | Action::Speed as u32);
+            // A deliberate short approach brake must not look like a routing stall.
+            local_data.navigation_requested = false;
+            local_data.movement_anchor = None;
+        }
+    }
     cmd.camera_angles = cmd.world_view_angles;
 
     cmd
@@ -1070,7 +1122,8 @@ unsafe fn find_team_target<'a>(
     });
     // Pursuit (not engagement) skips a target whose routes keep ending far
     // short of it, so bots stop circling under unreachable positions.
-    let pursue = if crate::bots::switch_on(&crate::bots::ROUTE_GUARD_CONVAR) {
+    let pursue = if crate::bots::switch_on(&crate::bots::ROUTE_GUARD_CONVAR)
+        || crate::bots::switch_on(&crate::bots::STALL_RETARGET_CONVAR) {
         ranked.iter().copied().find(|i| !local.unreachable.blocks(time(helper), targets[*i].candidate.id))
             .or_else(|| ranked.first().copied())
     } else { ranked.first().copied() };

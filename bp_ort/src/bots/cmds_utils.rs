@@ -463,6 +463,14 @@ pub fn try_avoid_obstacle(cmd: &mut CUserCmd, local_data: &mut BotData, helper: 
 fn note_recovery(local: &mut BotData, origin: Vector3, helper: &CUserCmdHelper, reason: &str) {
     if escape_recovery_enabled(local) {
         local.escape_recovery.stalled(time(helper), [origin.x, origin.y]);
+        if super::switch_on(&super::STALL_RETARGET_CONVAR) && local.escape_recovery.repeated(time(helper))
+            && let Some(target) = local.route_target {
+            local.unreachable.avoid(time(helper), target);
+            if super::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
+                log::info!("BOT_RETARGET epoch={} t={:.2} slot={} target={} reason=repeated_local_stall hold=6 x={:.1} y={:.1} z={:.1}",
+                    super::telemetry::epoch(), time(helper), local.edict, target, origin.x, origin.y, origin.z);
+            }
+        }
         if let Some(side) = local.escape_recovery.backstep_side(time(helper), local.edict)
             && super::TELEMETRY_CONVAR.get().is_some_and(|c| c.get_value_f32() > 0.) {
             log::info!("BOT_ESCAPE epoch={} t={:.2} slot={} side={side} x={:.1} y={:.1} z={:.1}",

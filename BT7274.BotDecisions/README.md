@@ -1,5 +1,12 @@
 # BT7274.BotDecisions
 
+Source 1.1.0 adds observed offhand-use timestamps, weapon attack callbacks and
+actual phase transitions with a separate bounded error budget. This draft is
+not installed or runtime-validated; native build is blocked by an antivirus
+quarantine. See [v21 draft status](../Notes/candidates/bot-safety-v21-20261027/README.md).
+The installed v20 profiles still use bridge 1.0.0. Readiness and requests alone
+remain insufficient evidence of successful ability use.
+
 Script/native bridge for the switchable decisions-v18 candidate. Requires the
 matching bp_ort DLL; install together, with the game closed. Do not install the
 `BT7274.DecisionTest` harness in the regular profile.

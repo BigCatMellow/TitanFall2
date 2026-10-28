@@ -4,6 +4,9 @@ pub(super) struct EscapeRecovery {
     episode: Option<(f32, [f32; 2], u8)>,
 }
 impl EscapeRecovery {
+    pub fn repeated(&self, now: f32) -> bool {
+        self.episode.is_some_and(|(at, _, count)| count >= 3 && now >= at && now - at < 1.2)
+    }
     pub fn stalled(&mut self, now: f32, pos: [f32; 2]) {
         let count = self.episode.filter(|(at, previous, _)| now >= *at && now - *at < 12.
             && (pos[0]-previous[0]).hypot(pos[1]-previous[1]) < 192.)
@@ -19,6 +22,14 @@ impl EscapeRecovery {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn retarget_needs_three_local_stalls_and_never_a_stale_episode() {
+        let mut r = EscapeRecovery::default();
+        for t in [1., 4.] { r.stalled(t, [0.;2]); assert!(!r.repeated(t)); }
+        r.stalled(7., [0.;2]); assert!(r.repeated(7.));
+        assert!(!r.repeated(8.3)); assert!(!r.repeated(0.));
+        r.stalled(9., [300.,0.]); assert!(!r.repeated(9.));
+    }
     #[test]
     fn first_stall_retains_original_avoidance_and_backstep_is_bounded() {
         let mut r = EscapeRecovery::default();

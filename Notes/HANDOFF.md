@@ -826,3 +826,26 @@ hashes, keeps context/event/life and self/friendly/forced/Titan separation and
 trims native diagnostics by epoch/window. Five new regression checks passed,
 plus four existing played-session and five navigation checks. Text telemetry
 only; BT-7274's visual feedback is attributed, not agent visual watching.
+
+## 2026-10-27 — v21 source draft; antivirus blocks native build
+
+BT-7274 authorized follow-up safety/recovery changes. Backed up CURRENT normal
+and isolated profile deployment/saves to private before-v21-20261027-203256.
+See Notes/candidates/bot-safety-v21-20261027/README.md for the draft and exact
+resume gates. Pure Rust suite91tests/18suites plus migration/preset fixtures
+passed. Native build blocked before integration compiled: antivirus quarantined
+Cargo windows_x86_64_gnu0.52.6 build-script-build.exe as Gen:Variant.Lazy.746108.
+Stopped all build attempts when BT-7274 reported the detection; no cargo/rustc/
+game remained. No security settings, exclusions or quarantine changes made.
+
+Cached crate SHA matches unchanged Cargo.lock, and all8regular registry source
+files match archive byte-for-byte. build.rs only prints a native library search
+path. This does not clear the compiled helper or system; no false-positive
+certainty. Keep quarantine, update AV/System Scan and use vendor review before
+restoring/retrying. No raw binaries/logs/security data were uploaded.
+
+Both installed DLLs still v20 SHA3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89.
+Bridge1.1, new default-off safety/retarget switches and disposable SafetyTest are
+SOURCE ONLY, unbuilt and untested in game. No preset, current save or normal
+profile changed. Do not launch the draft test until security resolution and a
+successful compile. Keep these draft results separate from completed v20 work.

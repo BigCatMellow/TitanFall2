@@ -39,6 +39,12 @@ impl Unreachable {
     pub const GAP: f32 = 250.;
     pub const CONFIRM: f32 = 3.;
     pub const HOLD: f32 = 6.;
+    pub fn avoid(&mut self, now: f32, target: i32) {
+        if now.is_finite() && target != -1 {
+            self.blocked = Some((target, now + Self::HOLD));
+            self.candidate = None;
+        }
+    }
     pub fn note(&mut self, now: f32, target: i32, partial: bool, end_gap: f32) {
         if !now.is_finite() { *self = Self::default(); return; }
         if !(partial && end_gap.is_finite() && end_gap > Self::GAP) {
@@ -99,6 +105,12 @@ impl JumpTiming {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test] fn repeated_stall_avoidance_is_target_specific_and_expires() {
+        let mut u = Unreachable::default(); u.avoid(10., 7);
+        assert!(u.blocks(11., 7)); assert!(!u.blocks(11., 8));
+        assert!(!u.blocks(9., 7)); assert!(!u.blocks(16., 7));
+        let mut u = Unreachable::default(); u.avoid(f32::NAN, 7); assert!(!u.blocks(1., 7));
+    }
     #[test] fn consumed_partial_route_is_not_replanned_every_frame() {
         let mut t = ReplanThrottle::default();
         assert!(t.allow_consumed_replan(1.));

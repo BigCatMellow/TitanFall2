@@ -67,6 +67,7 @@ mod personality;
 mod combat_decisions;
 mod action_policy;
 mod action_bridge;
+mod offhand_safety;
 mod telemetry;
 mod netvars;
 mod persistence;
@@ -103,6 +104,8 @@ pub(super) static DEFENSIVE_TACTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::n
 pub(super) static HEIGHT_RESPONSE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static SKILL_USE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PERSONALITY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static OFFHAND_SAFETY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static STALL_RETARGET_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 
 pub(super) fn switch_on(cell: &OnceCell<ConVarStruct>) -> bool {
     cell.get().is_some_and(|c| c.get_value_bool())
@@ -136,6 +139,7 @@ pub(super) struct BotData {
     navigation_requested: bool,
     tactical_pulse: action_policy::Pulse,
     ordnance_pulse: action_policy::Pulse,
+    throw_safety: offhand_safety::ThrowSafety,
     escape_recovery: escape_recovery::EscapeRecovery,
     path_log: nav_diagnostics::RateGate,
     stall_log: nav_diagnostics::RateGate,
@@ -184,6 +188,8 @@ impl BotData {
         self.height = Default::default();
         self.crouch_duck = false;
         self.stall_event = None;
+        self.throw_safety = Default::default();
+        self.escape_recovery = Default::default();
     }
 }
 
@@ -467,6 +473,8 @@ impl Plugin for Bots {
             (&COMBAT_MOVEMENT_CONVAR, "bot_combat_movement", "route while engaged, full randomized strafes and blocked-step alternatives; aim unchanged"),
             (&DEFENSIVE_TACTICS_CONVAR, "bot_defensive_tactics", "Stim/Phase when health is low instead of only in the shared request window; needs bot_action_policy 1"),
             (&SKILL_USE_CONVAR, "bot_skill_use", "situational pilot tactical/ordnance use (Stim, Phase, Cloak, Pulse Blade, Holo, A-Wall, grenades); needs bot_action_policy 1"),
+            (&OFFHAND_SAFETY_CONVAR, "bot_offhand_safety", "checked throw clearance, release aim ownership and frag approach brake; needs bot_skill_use 1"),
+            (&STALL_RETARGET_CONVAR, "bot_stall_retarget", "briefly skip an unseen pursuit target after three repeated local pilot stalls; visible threats remain eligible"),
             (&PERSONALITY_CONVAR, "bot_personality", "weapon-based behavior: SMG rushers push in, marksmen keep distance, LMG anchors hold; aim unchanged"),
             (&HEIGHT_RESPONSE_CONVAR, "bot_height_response", "break line of sight from a visible enemy that stays 180+ units above; needs bot_combat_decisions 1"),
             (&CROUCH_RECOVERY_CONVAR, "bot_crouch_recovery", "stall-triggered crouch when the real stand hull is blocked and duck hull fits"),
