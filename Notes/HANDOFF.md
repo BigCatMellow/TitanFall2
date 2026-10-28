@@ -1009,3 +1009,12 @@ is produced by the background queue; raw private paths/accounts stay local.
 Do not combine these50pointv22 A/B rounds with the completed22map75pointFullv20
 baseline or earlierplayed/v18cohorts. New observation/report files are text, not
 video or proof of human balance. Review future results before further behavior.
+
+October28 baseline analysis follow-up: v20 Full continuation completed13/13at08:39,
+so all22maps are now collected (0failed) with122.98active minutes/40859livepilot
+samples/0detectedruntimeerrors. Published review research/maps-full-v20-complete-20261028,
+without rawlogs. Complex8.12%lowprogress in bot-only cohort (2475samples) is a
+stressmap, despite earlier played-control results. WarGames5.91%,Eden3.76%,
+Canal1.19%,Homestead0.37%,Meadow0. Keep cohorts/definitions separate. Current
+v22matrix started13:16:44, runner684504, receipt target/v22-matrix-session.json;
+first WarGamesguard0 is running at50goal/16bots. No conclusion from live partials.
