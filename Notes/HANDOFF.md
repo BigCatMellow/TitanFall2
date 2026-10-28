@@ -826,3 +826,13 @@ hashes, keeps context/event/life and self/friendly/forced/Titan separation and
 trims native diagnostics by epoch/window. Five new regression checks passed,
 plus four existing played-session and five navigation checks. Text telemetry
 only; BT-7274's visual feedback is attributed, not agent visual watching.
+
+
+2026-10-28 — TACTICAL COOLDOWN REVIEW / PULSE TRIAL, SOURCE CANDIDATE ONLY.
+Main's BT7274.TacticalRecharge1.0.0 doubles refill rates and halves refill-start
+delay for all seven local-human tacticals; bots are excluded. The new v1.1.0
+branch restores Pulse Blade's native refill while preserving the other six
+bonuses and Power Cell. Candidate is not installed or runtime-tested; normal
+profile/saves remain unchanged. Read research/skill-cooldowns-20261028/FINDINGS.md.
+Bot skill reasons/readiness are not confirmed casts; preserve native bot
+readiness until actual-activation telemetry can measure per-skill outcomes.
