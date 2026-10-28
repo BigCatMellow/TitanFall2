@@ -7,7 +7,7 @@ start/end/traversal markers, downward corners and Titans. Use release-debug
 with the original lockfile and offline pinned dependencies; the original build
 commands and unbuilt status below describe this branch before integration.
 
-Date: 2026-10-28  
+Date: 2026-10-28
 Repository base reviewed: [1b223ee](https://github.com/BigCatMellow/TitanFall2/commit/1b223ee62e5ebad23f4c35954601313e579ef64d)
 
 This note turns proven ideas from related navigation systems into a small, reversible experiment for the Northstar bot follower. The code change is a candidate only: the new switch defaults to off and has not been built, installed, or tested in a game.
