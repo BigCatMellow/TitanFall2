@@ -4,8 +4,8 @@ WeaponData
     {
         bt7274_tactical_recharge
         {
-            regen_ammo_refill_rate "*2.0"
-            regen_ammo_refill_start_delay "*0.5"
+            regen_ammo_refill_rate "*1.0"
+            regen_ammo_refill_start_delay "*1.0"
         }
     }
 }
