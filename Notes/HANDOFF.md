@@ -849,3 +849,19 @@ Bridge1.1, new default-off safety/retarget switches and disposable SafetyTest ar
 SOURCE ONLY, unbuilt and untested in game. No preset, current save or normal
 profile changed. Do not launch the draft test until security resolution and a
 successful compile. Keep these draft results separate from completed v20 work.
+
+Follow-up: attempted a documented Cargo links override instead of restoring or
+executing the flagged helper. Verified local 0.52.6 source copy plus package.links
+metadata and target link-search configuration worked: Cargo skipped its helper.
+The 0.48.5 helper was then blocked too (same library-discovery role). Its cached
+archive SHA matches lockfile53d40abd2583d23e4718fddf1ebec84dbff8381c07cae67ff7768bbf19c6718e;
+build.rs SHA d1d816121af1bba70471e982bf98fa9cd2d8cf695d15d2837f592458410ff597.
+A generator for both overrides was written as tools/Build-VerifiedWindowsCandidate.ps1,
+but antivirus blocked reads/execution and removed it before it ran. BT-7274
+confirmed the PowerShell script was flagged too. Stopped this route; no script
+restoration/recreation/rename, AV change, v21 DLL, game test or deployment.
+Private preparation/config and alternate lockfile under target remain evidence;
+project Cargo.lock unchanged. Original generator is absent and not committed.
+Suggested exact-source-file allowance after user review instead of whole-PC
+AV disable, then recheck restored source before running. Do not assume approval
+or source restoration merely from elapsed time. Working game stays v20.

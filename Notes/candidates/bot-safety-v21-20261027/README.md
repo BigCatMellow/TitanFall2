@@ -1,5 +1,20 @@
 # v21 safety source draft — not built or installed
 
+Update: BT-7274 asked about proceeding despite likely false positives. A verified
+local Cargo `links` metadata override successfully skipped the 0.52.6 helper,
+but the older 0.48.5 helper was also blocked. A source generator,
+`tools/Build-VerifiedWindowsCandidate.ps1`, was then written to verify both
+archives and supply both library search paths directly. Antivirus quarantined
+that PowerShell script before it ran; BT-7274 confirmed the additional alert.
+Its file is absent, so it is not included in this branch. No new DLL or runtime
+result exists. No antivirus settings or quarantine contents were changed.
+Recommended smaller scope if BT-7274 elects to allow reviewed source: allow
+only that exact generator script, leave the discovery EXEs quarantined, and
+recheck the restored source before executing it. Do not recreate it under
+another name or repeatedly retry blocked files. Whole-PC protection need not
+be disabled. This is an authorization choice, not confirmation of a clean
+quarantined executable.
+
 BT-7274 authorized the follow-up changes after the first Full review. Work
 stopped when antivirus quarantined a Cargo build helper with detection
 `Gen:Variant.Lazy.746108`. **No v21 DLL exists, no runtime validation passed,
