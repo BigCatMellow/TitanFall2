@@ -1,6 +1,16 @@
-# Project status — 2026-10-27
+# Project status — 2026-10-28
 
-The reviewed v20 stack is built on Windows, tested and installed for playtesting.
+Normal now has the tested **v23 Eden-only pilot route repair**, native BC2C1019... .
+It preserves pending waypoints and temporarily routes around a failed type16
+jump near its failure location. The reproduced Eden hotspot cleared in both
+repair-on trials; off trials remained blocked. Respawn, disable, lobby and
+Complex map change passed, with repair inactive on Complex. Six current saves,
+enabledmods and existing gameplay settings were preserved. Same solo shortcut.
+See [findings and limits](../research/route-continuity-v23-20261028/FINDINGS.md).
+Isolated is restored to v20; no game/test queue remains. Later choke points and
+human combat validation remain open. Global experimental switches stay off.
+
+The reviewed v20 stack remains the gameplay/modifier foundation.
 Use the existing solo shortcut: default Movement enables combat movement and the
 proximity correction. [Presets, evidence and rollback](../Notes/candidates/bot-capability-v20-20261027/README.md).
 
@@ -12,7 +22,7 @@ settings or saves changed, and no aim/damage adjustment is justified here.
 
 | Item | Current state |
 |---|---|
-| Native |bot-capability-v20-candidate|
+| Native |v23 Eden-only route repair, BC2C1019...; v20 rollback3077878B...|
 | Native SHA256 |3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89|
 | Core |Northstar1.31.14.0|
 | Profiles |Normal Movement; working isolated candidate Baseline; test harnesses disabled|

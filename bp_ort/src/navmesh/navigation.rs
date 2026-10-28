@@ -43,6 +43,12 @@ pub struct Navigation {
     pub last_status: u32,
     /// Projected end point of the most recent route, if any.
     pub last_end: Option<Vector3>,
+    pub projected_goal: Option<Vector3>,
+    pub reached_goal_poly: bool,
+    pub corridor_poly_count: usize,
+    pub straight_status: u32,
+    pub segment_traversals: u32,
+    node_budget: i32,
     jump_types: Vec<u8>,
     straigth_path_points: Vec<Vector3>,
     straigth_path: Vec<dtPolyRef>,
@@ -52,8 +58,14 @@ pub struct Navigation {
 
 impl Navigation {
     pub fn new(hull: Hull) -> Option<Self> {
-        Some(Self {
-            query: generate_nav_query(hull, None)?,
+        Self::research_query(hull, 2048, false, 0)
+    }
+
+    /// Isolated query diagnostics only. Ordinary bots retain their original settings.
+    pub fn research_query(hull: Hull, node_budget: i32, uniform_cost: bool, excluded_traversals: i32) -> Option<Self> {
+        if !(2048..=8192).contains(&node_budget) || excluded_traversals < 0 { return None; }
+        let mut nav = Self {
+            query: generate_nav_query(hull, None, node_budget)?,
             extents: hull_to_extents(hull),
             hull,
             filter: dtQueryFilter {
@@ -81,19 +93,28 @@ impl Navigation {
             corner_meta: Vec::with_capacity(PATH_CAPACITY),
             last_status: 0,
             last_end: None,
+            projected_goal: None,
+            reached_goal_poly: false,
+            corridor_poly_count: 0,
+            straight_status: 0,
+            segment_traversals: 0,
+            node_budget,
             jump_types: vec![u8::MAX; PATH_CAPACITY],
             straigth_path: Vec::with_capacity(PATH_CAPACITY),
             straigth_path_points: Vec::with_capacity(PATH_CAPACITY),
             straigth_path_flags: Vec::with_capacity(PATH_CAPACITY),
             straigth_path_jumps: Vec::with_capacity(PATH_CAPACITY),
-        })
+        };
+        if uniform_cost { nav.filter.m_areaCost = [1.; 32]; }
+        nav.filter.m_traverseFlags &= !(excluded_traversals as u32);
+        Some(nav)
     }
 
     pub fn switch_query(&mut self, hull: Hull) -> Option<()> {
         self.path.clear();
         self.path_points.clear();
 
-        self.query = generate_nav_query(hull, Some(&self.query))?;
+        self.query = generate_nav_query(hull, Some(&self.query), self.node_budget)?;
         self.extents = hull_to_extents(hull);
         self.hull = hull;
 
@@ -116,6 +137,11 @@ impl Navigation {
         self.corner_meta.clear();
         self.last_status = 0;
         self.last_end = None;
+        self.projected_goal = None;
+        self.reached_goal_poly = false;
+        self.corridor_poly_count = 0;
+        self.straight_status = 0;
+        self.segment_traversals = 0;
 
         let status = unsafe {
             if (dt_funcs.dtNavMeshQuery__findNearestPoly)(
@@ -144,6 +170,7 @@ impl Navigation {
             log::warn!("failed to find nearest poly, with goal {ref_end} start {ref_start}");
             return Err(NavigationError::NoPoints(start_point, end_point, ref_start, ref_end));
         }
+        self.projected_goal = Some(end);
 
         // Titanfall's Detour ABI has TWO variable-sized outputs. The former
         // eight-byte `unk` stack slot was overwritten by routes > 8 polygons.
@@ -166,6 +193,8 @@ impl Navigation {
             },
         ).map_err(|_| NavigationError::InvalidOutputCount)?;
         let path_size = self.path.len();
+        self.corridor_poly_count = path_size;
+        self.reached_goal_poly = self.path.last().copied() == Some(ref_end);
         self.path_points.clear();
         self.last_status = status;
 
@@ -177,7 +206,7 @@ impl Navigation {
 
         let mut straight_size = 0;
         unsafe {
-            (dt_funcs.dtNavMeshQuery__findStraightPath)(
+            self.straight_status = (dt_funcs.dtNavMeshQuery__findStraightPath)(
                 &mut self.query,
                 &start,
                 &end,
@@ -213,6 +242,8 @@ impl Navigation {
                 self.corner_meta.extend(self.straigth_path_flags.iter().copied()
                     .zip(self.straigth_path_jumps.iter().copied()));
                 self.corner_meta.reverse();
+                self.segment_traversals = self.corner_meta.iter().fold(0, |mask,(_,jump)|
+                    if *jump>0 && *jump<32 {mask | (1u32<<*jump)} else {mask});
                 self.straigth_path.clone_into(&mut self.path);
             }
         } else if path_size == 1 {
@@ -310,7 +341,7 @@ impl Drop for Navigation {
     }
 }
 
-fn generate_nav_query(hull: Hull, prev_query: Option<&dtNavMeshQuery>) -> Option<dtNavMeshQuery> {
+fn generate_nav_query(hull: Hull, prev_query: Option<&dtNavMeshQuery>, node_budget: i32) -> Option<dtNavMeshQuery> {
     let mut query = prev_query
         .map(|query| MaybeUninit::new(query.clone()))
         .unwrap_or_else(MaybeUninit::zeroed);
@@ -324,7 +355,7 @@ fn generate_nav_query(hull: Hull, prev_query: Option<&dtNavMeshQuery>) -> Option
         if (dt_funcs.dtNavMeshQuery__init)(
             query.as_mut_ptr(),
             *dt_funcs.nav_mesh.add(hull_index as usize).as_ref()?,
-            2048,
+            node_budget,
         ) != 0x40000000
         {
             return None;

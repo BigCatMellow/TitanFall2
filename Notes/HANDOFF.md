@@ -1,5 +1,8 @@
 # Handoff for future work
 
+Latest deployment: v23 Eden-only pilot route repair, BC2C1019... . Read the final
+2026-10-28 entry below and research/route-continuity-v23-20261028/FINDINGS.md.
+
 Everyday launch: desktop Northstar - Solo Bots (8v8), targeting the canonical
 Play-Solo-Bots.cmd. Read LAUNCHING-SOLO.md for the separate profile, duplicate
 instance guard and Northstar-specific quoting. Direct regular Northstar
@@ -1109,3 +1112,58 @@ weapon-decision and controlled gun-measurement work with per-change gates.
 Current play provides fresh v20baseline; no manual timestamps required. Preserve
 8v8/aim/warm-up/currentweapon-humanmods/current saves. No gameplay installation
 or native change was performed by this planning turn. Prior queues are finished.
+
+## 2026-10-28 — Reproduced Eden hotspot; tested and installed scoped v23 repair
+
+BT-7274 reported substantially worse Eden stalls after another Full v20 session.
+The new played cohort is research/played-eden-v20-20261028-evening: Eden709/3910
+low-progress samples (18.13%), versus zero in two Meadow rounds. All15bot slots
+appeared in the main Eden cluster. Same v20 native as earlier play; do not call
+this proof of a newly installed regression or mix played/unattended cohorts.
+
+Research and explicit queries separate full polygon search from segmented
+straight-waypoint output. The follower was rebuilding while its popped final
+waypoint remained pending. Preserving that waypoint reduced churn but did not
+clear the exact physical crossing. Excluding known jump type16 yields a southern
+route around it. Implemented bounded local failure feedback plus an Eden-only,
+Human-hull gate. No unknown native ABI changes or modified game meshes.
+
+Final native BC2C1019D27F537F075611ED6B68A75591D1F2F9924BA8700D82A757BB1000F7,
+core1.31.14 unchanged, installed bridge1.0 unchanged. Repeated directed replay
+from(4120,-272,128), same target and actual simulation21: repair-off90s closest
+5522.07units; repair-on120s1466.85; repair-on after respawn30s3011.19; off10s5522.26.
+Actor sampled alive throughout. Other15bots held stationary, <0.23XY excursion
+once settled. No complete fixed-route arrival; later traversal issues remain.
+99Rust tests,6Node test files,4PowerShell fixture suites passed. Rollback verified
+on a synthetic profile preserving progress and newly changed gameplay settings.
+
+Final isolated run passed control/on/respawn/disable/lobby/new-map phases. Native
+scope readback0/1/1/0/0: raw switch remained on in Complex but effective repair
+was0. Zero detected runtime-error markers. Target receipts are historical:
+target/v23-eden-repair-session.json and its private runtime-review.json. Earlier
+failed harness attempts and the invalid mp_complex map attempt were retained;
+correct installed ID is mp_complex3, now preflight-checked before staging.
+Initial directed replay did not maintain all other simulation overrides after
+respawn; final helper maintains them and review verifies actual stationarity.
+
+Normal deployed at18:42 with bot_eden_route_repair1 only; global continuity,
+link-detour and height-guard flags0. Preserve the same solo shortcut,8v8,aim0.78,
+weapon/tactical/human buffs and current Full/Movement preset behavior. Six normal
+save files, enabledmods and existing gameplay-setting values hash-preserved.
+Receipt matches installed native; launcher --check passed. No human match has
+been played on the new deployment yet. Do not claim full combat/KD improvement.
+
+Fresh normal backup: private Notes/backups/before-eden-repair-v23-20261028-184241.
+Close game and run tools/Rollback-EdenRouteRepair.ps1 to restore v20 native and
+remove candidate flags while retaining CURRENT progress and gameplay settings.
+Never restore historical save_data. Isolated restored to v20 native3077878B...;
+all disposable harness versions explicitly disabled; no game/queue left running.
+No antivirus settings changed. Do not read/run/stage the old untracked
+Build-VerifiedWindowsCandidate.ps1. Source/build/probe evidence is on branch
+candidate/route-continuity-v23-20261028; raw logs, SDK references, binaries,
+disassembly, account data and personal saves remain private.
+
+Next: human Eden play and diagnose remaining choke points, then repeated matched
+combat trials before extending maps/types. Native temporary exclusion is one
+jump TYPE near a failed segment for <=8s/600units, not a per-link mesh blacklist.
+Do not strengthen aim or change weapon power based on this directed test.

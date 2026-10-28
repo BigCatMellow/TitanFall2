@@ -39,6 +39,8 @@ pub fn path_to_target(
     helper: &CUserCmdHelper,
 ) -> bool {
     local_data.navigation_requested = true;
+    let eden_repair=eden_repair_active(helper)
+        && local_data.nav_query.as_ref().is_some_and(|n|n.hull==crate::navmesh::Hull::Human);
     if distance3(target_pos, origin)
         <= BOT_PATH_NODE_RANGE + local_data.approach_range.unwrap_or(20.) {
         local_data.movement_anchor = None;
@@ -51,6 +53,7 @@ pub fn path_to_target(
     }
     if super::progress_watchdog::has_stalled(time(helper), &mut local_data.movement_anchor,
         [origin.x, origin.y]) {
+        note_failed_link(local_data, origin, helper, "no_progress");
         if let Some(nav) = local_data.nav_query.as_mut() {
             nav.path_points.clear();
             nav.end_point = None;
@@ -88,7 +91,20 @@ pub fn path_to_target(
         .map(|point| distance(point, target_pos) > BOT_PATH_RECAL_RANGE)
         .map(|should_recalculate| should_recalculate || should_recalcute_path)
         .unwrap_or(true);
-    if !must_replan && nav.path_points.is_empty()
+    let pending_waypoint = super::route_guard::active_waypoint_pending(
+        super::switch_on(&super::ROUTE_CONTINUITY_CONVAR) || eden_repair, !must_replan,
+        local_data.current_corner.is_some(), distance(local_data.next_target_pos, origin),
+        BOT_PATH_NODE_RANGE);
+    let segment_consumed = nav.path_points.is_empty() && !pending_waypoint;
+    if pending_waypoint && nav.path_points.is_empty()
+        && super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR)
+        && local_data.segment_log.allow(time(helper), 1.) {
+        log::info!("BOT_SEGMENT epoch={} t={:.2} slot={} event=finish_pending dist={:.1} dz={:.1} x={:.1} y={:.1} z={:.1}",
+            super::telemetry::epoch(),time(helper),local_data.edict,
+            distance(local_data.next_target_pos,origin),local_data.next_target_pos.z-origin.z,
+            origin.x,origin.y,origin.z);
+    }
+    if !must_replan && segment_consumed
         && super::switch_on(&super::ROUTE_GUARD_CONVAR)
         && !local_data.replan.allow_consumed_replan(time(helper))
     {
@@ -97,7 +113,7 @@ pub fn path_to_target(
         face_toward(cmd, origin, target_pos, helper);
         return true;
     }
-    if must_replan || nav.path_points.is_empty()
+    if must_replan || segment_consumed
     {
         if let Some(since) = local_data.corner_guard_since.take() {
             log::info!("BOT_CORNER_GUARD epoch={} t={:.2} slot={} event=end reason=replan held_s={:.2}",
@@ -105,6 +121,7 @@ pub fn path_to_target(
         }
         local_data.last_time_node_reached = helper.globals.curTime;
         local_data.next_target_pos = origin;
+        local_data.current_corner = None;
 
         // this might be the reason of the sudden aim shift or not really idk
         if local_data.last_bad_path + 1. >= helper.globals.curTime {
@@ -115,7 +132,13 @@ pub fn path_to_target(
         }
 
         local_data.metrics.path_requests = local_data.metrics.path_requests.saturating_add(1);
+        let original_traversals = nav.filter.m_traverseFlags;
+        let excluded = if (super::switch_on(&super::LINK_DETOUR_CONVAR) || eden_repair) && nav.hull==crate::navmesh::Hull::Human {
+            local_data.link_detour.excluded(time(helper),[origin.x,origin.y])
+        } else {0};
+        nav.filter.m_traverseFlags &= !excluded;
         let result = nav.new_path(origin, target_pos, dt_funcs);
+        nav.filter.m_traverseFlags = original_traversals;
         let status = nav.last_status;
         let partial = super::nav_diagnostics::is_partial(status);
         let end_gap = nav.last_end.map_or(f32::INFINITY, |end| distance3(end, target_pos));
@@ -149,7 +172,7 @@ pub fn path_to_target(
         .end_point
         .map(|point| distance(point, target_pos) > BOT_PATH_RECAL_RANGE)
         .unwrap_or(true)
-        || nav.path_points.is_empty()
+        || (nav.path_points.is_empty() && !pending_waypoint)
     {
         try_avoid_obstacle(cmd, local_data, helper);
         face_toward(cmd, origin, target_pos, helper);
@@ -218,6 +241,7 @@ pub fn path_to_target(
     cmd.buttons |= Action::Forward as u32 | Action::Speed as u32;
 
     if is_timedout(local_data.last_time_node_reached, helper, 5.) {
+        note_failed_link(local_data, origin, helper, "waypoint_timeout");
         // Repeating avoidance against the same stale route never escapes it.
         if let Some(nav) = local_data.nav_query.as_mut() {
             nav.path_points.clear();
@@ -230,6 +254,24 @@ pub fn path_to_target(
     }
 
     true
+}
+
+fn note_failed_link(local: &mut BotData, origin: Vector3, helper: &CUserCmdHelper, reason: &str) {
+    if !super::switch_on(&super::LINK_DETOUR_CONVAR) && !eden_repair_active(helper) {return;}
+    let mask=local.nav_query.as_ref().filter(|n|n.hull==crate::navmesh::Hull::Human)
+        .map_or(0,|n|n.segment_traversals);
+    if local.link_detour.fail(time(helper),[origin.x,origin.y],mask)
+        && super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
+        log::info!("BOT_LINK_DETOUR epoch={} t={:.2} slot={} reason={} mask={} duration_s=8 x={:.1} y={:.1} z={:.1}",
+            super::telemetry::epoch(),time(helper),local.edict,reason,super::route_guard::LinkDetour::MASK,origin.x,origin.y,origin.z);
+    }
+}
+
+fn eden_repair_active(helper: &CUserCmdHelper) -> bool {
+    if !super::switch_on(&super::EDEN_REPAIR_CONVAR) {return false;}
+    let map=unsafe {helper.engine_funcs.server.as_ref()}
+        .and_then(|server|crate::utils::get_c_char_array(&server.m_szMapName)).unwrap_or("unknown");
+    super::route_guard::eden_repair_enabled(true,map)
 }
 
 fn within_route_corner_range(target: Vector3, origin: Vector3, height_guard: bool, human_hull: bool, metadata: Option<(u8,u8)>) -> bool {

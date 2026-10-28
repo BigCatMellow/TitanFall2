@@ -1,0 +1,5 @@
+{
+  "Name":"BT7274.RouteProbe","Version":"1.0.0","LoadPriority":65,
+  "Description":"Disposable isolated Eden corridor probes; no bot input or save changes.",
+  "Scripts":[{"Path":"bt7274_route_probe.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"BT7274RouteProbe_Init"}}]
+}

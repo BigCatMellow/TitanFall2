@@ -1,0 +1,1169 @@
+{
+  "schema_version": 1,
+  "death_records": 474,
+  "qualifying_health_episodes": 87,
+  "logger_errors": 0,
+  "runtime_error_markers": 0,
+  "exclusion_counts": {
+    "multiple_weapons": 256,
+    "changed_configuration": 149,
+    "unknown_mod_stack": 240,
+    "multiple_attackers": 255,
+    "force_self_or_friendly_damage": 101,
+    "not_full_100hp_start": 10,
+    "non_weapon_or_unknown_source": 49,
+    "unaccounted_health_loss": 44,
+    "not_pilot_vs_pilot": 90,
+    "healing_observed": 19,
+    "clock_regression": 1
+  },
+  "rounds": [
+    {
+      "context": 1,
+      "map": "mp_eden",
+      "mode": "normal_play",
+      "first_damage_t": 32.5458,
+      "last_damage_t": 657.583,
+      "human_pilot_kills_credited": 30,
+      "human_pilot_deaths_recorded": 6,
+      "unattributed_deaths": 0,
+      "human_guns": {
+        "mp_weapon_hemlok": 11,
+        "mp_weapon_grenade_electric_smoke": 13,
+        "mp_weapon_g2": 1,
+        "mp_weapon_smr": 1,
+        "bubble_shield": 1,
+        "mp_weapon_lmg": 3
+      },
+      "human_incoming_fatal_guns": {
+        "mp_weapon_hemlok": 1,
+        "mp_titanability_laser_trip": 1,
+        "melee_pilot_emptyhanded": 1,
+        "mp_weapon_car": 1,
+        "mp_weapon_lmg": 1,
+        "mp_titanweapon_particle_accelerator": 1
+      },
+      "epoch": 1,
+      "telemetry_window_start": 17.02,
+      "telemetry_window_end": 657.583,
+      "movement": {
+        "live_pilot_samples": 3910,
+        "navigation_low_samples": 709,
+        "navigation_low_percent": 18.13,
+        "low_with_over_720deg_yaw": 374,
+        "low_with_jump_command_fraction_over_20pct": 0,
+        "hotspots": [
+          {
+            "cell": "4096,-256,128",
+            "samples": 383,
+            "slots": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15"
+            ]
+          },
+          {
+            "cell": "4096,-384,128",
+            "samples": 130,
+            "slots": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15"
+            ]
+          },
+          {
+            "cell": "4096,-384,64",
+            "samples": 24,
+            "slots": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "15"
+            ]
+          },
+          {
+            "cell": "4096,-512,128",
+            "samples": 21,
+            "slots": [
+              "1",
+              "3",
+              "4",
+              "5",
+              "7",
+              "8",
+              "9",
+              "10",
+              "12",
+              "13",
+              "15"
+            ]
+          },
+          {
+            "cell": "4224,-256,128",
+            "samples": 18,
+            "slots": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "6",
+              "8",
+              "10",
+              "13",
+              "15"
+            ]
+          },
+          {
+            "cell": "-640,1024,64",
+            "samples": 17,
+            "slots": [
+              "3",
+              "11",
+              "13"
+            ]
+          }
+        ],
+        "visible_engage_samples": 464,
+        "range_hold_samples": 64,
+        "range_hold_speed_median": 173.5,
+        "range_hold_under50_percent": 6.25,
+        "hold_samples_with_contiguous_previous": 64,
+        "hold_samples_with_recent_blocked_step": 4,
+        "hold_recent_blocked_percent": 6.25,
+        "blocked_step_counter_increments": 30,
+        "jump_commands_observed": 24983,
+        "commands_observed": 455640,
+        "jump_command_percent": 5.48
+      },
+      "pressure": {
+        "visible_human_engage_samples": 106,
+        "human_hold_samples": 16,
+        "human_hold_speed_median": 164.4,
+        "human_hold_under50_percent": 6.25,
+        "human_vertical_gap_over180_percent": 59.43,
+        "simultaneous_visible_human_max": 6,
+        "human_visible_frames": 70,
+        "frames_with_2plus_visible_engagers": 21
+      },
+      "abilities": {
+        "ready_observations": 3911,
+        "tactical_classes": [
+          "mp_weapon_grenade_sonar",
+          "mp_ability_cloak",
+          "mp_ability_heal",
+          "mp_ability_holopilot",
+          "mp_weapon_deployable_cover",
+          "mp_ability_shifter"
+        ],
+        "tactical_nonzero_shot_counter_observations": 0,
+        "ordnance_classes": [
+          "mp_weapon_frag_grenade",
+          "mp_weapon_grenade_electric_smoke",
+          "mp_weapon_grenade_emp",
+          "mp_weapon_grenade_gravity",
+          "mp_weapon_thermite_grenade"
+        ],
+        "ordnance_nonzero_shot_counter_observations": 0,
+        "skill_starts": 738,
+        "skill_reasons": {
+          "cloak_approach": 55,
+          "pulse_reveal": 297,
+          "stim_close_in": 20,
+          "holo_decoy": 13,
+          "throw": 313,
+          "stim_hurt": 5,
+          "awall_hold": 13,
+          "other": 2,
+          "phase_escape": 12,
+          "cloak_disengage": 3,
+          "smoke_cover": 5
+        },
+        "skill_by_archetype": {
+          "marksman": 65,
+          "rifleman": 597,
+          "rusher": 52,
+          "anchor": 24
+        }
+      },
+      "bot_active_weapon_samples": {
+        "mp_weapon_rspn101": 391,
+        "mp_weapon_g2": 392,
+        "mp_weapon_car": 351,
+        "mp_weapon_vinson": 366,
+        "mp_weapon_dmr": 321,
+        "mp_weapon_lmg": 371,
+        "mp_weapon_hemlok": 374,
+        "mp_weapon_r97": 157,
+        "mp_weapon_frag_grenade": 5,
+        "mp_weapon_grenade_emp": 11,
+        "mp_weapon_thermite_grenade": 4,
+        "mp_weapon_grenade_sonar": 11,
+        "mp_weapon_grenade_gravity": 1,
+        "mp_weapon_defender": 36
+      },
+      "fatal_bot_speed_median": 171.6928244336278,
+      "fatal_bot_speed_under50_percent": 23.33,
+      "qualifying_human_damage_groups": [
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "redline_sight,pro_screen,pas_run_and_gun,extended_ammo",
+          "config": "true:true:false:true:true",
+          "range_bucket": "500-999u",
+          "hitgroups": [
+            "1",
+            "2"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.5558999999999941,
+          "min_s": 0.5558999999999941,
+          "max_s": 0.5558999999999941
+        },
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "redline_sight,pro_screen,pas_run_and_gun,extended_ammo",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "1",
+            "3",
+            "4"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.9188999999999936,
+          "min_s": 0.9188999999999936,
+          "max_s": 0.9188999999999936
+        },
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "redline_sight,pro_screen,pas_run_and_gun,extended_ammo",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "4",
+            "7"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.8170000000000073,
+          "min_s": 0.8170000000000073,
+          "max_s": 0.8170000000000073
+        },
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "redline_sight,pro_screen,pas_run_and_gun,extended_ammo",
+          "config": "true:true:false:true:true",
+          "range_bucket": "500-999u",
+          "hitgroups": [
+            "1",
+            "2",
+            "4"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.8489999999999895,
+          "min_s": 0.8489999999999895,
+          "max_s": 0.8489999999999895
+        },
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "redline_sight,pro_screen,pas_run_and_gun,extended_ammo",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "1",
+            "2",
+            "6"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 4.4459999999999695,
+          "min_s": 4.4459999999999695,
+          "max_s": 4.4459999999999695
+        },
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "redline_sight,pro_screen,pas_run_and_gun,extended_ammo",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "3",
+            "6"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 1.0409999999999968,
+          "min_s": 1.0409999999999968,
+          "max_s": 1.0409999999999968
+        },
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_g2",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "bt7274_solo_ads_trial,bt7274_solo_reload,pro_screen,pas_fast_reload,extended_ammo",
+          "config": "true:true:false:true:true",
+          "range_bucket": "2000u+",
+          "hitgroups": [
+            "1",
+            "3",
+            "4"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 5.295000000000016,
+          "min_s": 5.295000000000016,
+          "max_s": 5.295000000000016
+        },
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_lmg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,aog,pro_screen,extended_ammo,pas_run_and_gun",
+          "config": "true:true:false:true:true",
+          "range_bucket": "0-499u",
+          "hitgroups": [
+            "1",
+            "6",
+            "7"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.9070000000000391,
+          "min_s": 0.9070000000000391,
+          "max_s": 0.9070000000000391
+        },
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_lmg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,aog,pro_screen,extended_ammo,pas_run_and_gun",
+          "config": "true:true:false:true:true",
+          "range_bucket": "500-999u",
+          "hitgroups": [
+            "2",
+            "3",
+            "6"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.5670000000000073,
+          "min_s": 0.5670000000000073,
+          "max_s": 0.5670000000000073
+        },
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_lmg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,aog,pro_screen,extended_ammo,pas_run_and_gun",
+          "config": "true:true:false:true:true",
+          "range_bucket": "0-499u",
+          "hitgroups": [
+            "3",
+            "4",
+            "7"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 1.1589999999999918,
+          "min_s": 1.1589999999999918,
+          "max_s": 1.1589999999999918
+        }
+      ],
+      "qualifying_human_episodes": 10,
+      "qualifying_bot_to_human_groups": [
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_car",
+          "attacker_kind": "bot",
+          "victim_kind": "human",
+          "mods": "none",
+          "config": "true:true:false:true:true",
+          "range_bucket": "500-999u",
+          "hitgroups": [
+            "1",
+            "2",
+            "4"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.5170000000000528,
+          "min_s": 0.5170000000000528,
+          "max_s": 0.5170000000000528
+        },
+        {
+          "map": "mp_eden",
+          "mode": "normal_play",
+          "gun": "mp_weapon_lmg",
+          "attacker_kind": "bot",
+          "victim_kind": "human",
+          "mods": "none",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "3",
+            "6"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 1.2170000000000982,
+          "min_s": 1.2170000000000982,
+          "max_s": 1.2170000000000982
+        }
+      ],
+      "human_damage_sources": [
+        {
+          "gun": "mp_weapon_hemlok",
+          "damage_events": 46,
+          "paired_positive_events": 43,
+          "paired_health_loss": 1285,
+          "damage_event_range_median": 1295.565,
+          "actual_mod_stacks": [
+            "redline_sight,pro_screen,pas_run_and_gun,extended_ammo"
+          ]
+        },
+        {
+          "gun": "mp_weapon_grenade_electric_smoke",
+          "damage_events": 141,
+          "paired_positive_events": 141,
+          "paired_health_loss": 1326,
+          "damage_event_range_median": 0,
+          "actual_mod_stacks": [
+            "unknown"
+          ]
+        },
+        {
+          "gun": "mp_weapon_g2",
+          "damage_events": 4,
+          "paired_positive_events": 4,
+          "paired_health_loss": 135,
+          "damage_event_range_median": 1947.71,
+          "actual_mod_stacks": [
+            "bt7274_solo_ads_trial,bt7274_solo_reload,pro_screen,pas_fast_reload,extended_ammo"
+          ]
+        },
+        {
+          "gun": "mp_weapon_smr",
+          "damage_events": 5,
+          "paired_positive_events": 5,
+          "paired_health_loss": 158,
+          "damage_event_range_median": 1450.41,
+          "actual_mod_stacks": [
+            "unknown"
+          ]
+        },
+        {
+          "gun": "bubble_shield",
+          "damage_events": 3,
+          "paired_positive_events": 3,
+          "paired_health_loss": 100,
+          "damage_event_range_median": 0,
+          "actual_mod_stacks": [
+            "unknown"
+          ]
+        },
+        {
+          "gun": "mp_weapon_thermite_grenade",
+          "damage_events": 5,
+          "paired_positive_events": 5,
+          "paired_health_loss": 45,
+          "damage_event_range_median": 0,
+          "actual_mod_stacks": [
+            "unknown"
+          ]
+        },
+        {
+          "gun": "mp_weapon_lmg",
+          "damage_events": 9,
+          "paired_positive_events": 9,
+          "paired_health_loss": 300,
+          "damage_event_range_median": 461.607,
+          "actual_mod_stacks": [
+            "solo_role_balance_v1,aog,pro_screen,extended_ammo,pas_run_and_gun"
+          ]
+        }
+      ]
+    },
+    {
+      "context": 2,
+      "map": "mp_lf_meadow",
+      "mode": "normal_play",
+      "first_damage_t": 18.3458,
+      "last_damage_t": 319.346,
+      "human_pilot_kills_credited": 20,
+      "human_pilot_deaths_recorded": 3,
+      "unattributed_deaths": 0,
+      "human_guns": {
+        "mp_weapon_grenade_electric_smoke": 2,
+        "mp_weapon_hemlok_smg": 18
+      },
+      "human_incoming_fatal_guns": {
+        "mp_weapon_dmr": 1,
+        "mp_weapon_lmg": 1,
+        "mp_weapon_hemlok": 1
+      },
+      "epoch": 3,
+      "telemetry_window_start": 13.02,
+      "telemetry_window_end": 319.346,
+      "movement": {
+        "live_pilot_samples": 1441,
+        "navigation_low_samples": 0,
+        "navigation_low_percent": 0,
+        "low_with_over_720deg_yaw": 0,
+        "low_with_jump_command_fraction_over_20pct": 0,
+        "hotspots": [],
+        "visible_engage_samples": 884,
+        "range_hold_samples": 386,
+        "range_hold_speed_median": 173.5,
+        "range_hold_under50_percent": 7.25,
+        "hold_samples_with_contiguous_previous": 381,
+        "hold_samples_with_recent_blocked_step": 8,
+        "hold_recent_blocked_percent": 2.1,
+        "blocked_step_counter_increments": 45,
+        "jump_commands_observed": 2156,
+        "commands_observed": 147960,
+        "jump_command_percent": 1.46
+      },
+      "pressure": {
+        "visible_human_engage_samples": 61,
+        "human_hold_samples": 10,
+        "human_hold_speed_median": 173.5,
+        "human_hold_under50_percent": 0,
+        "human_vertical_gap_over180_percent": 36.07,
+        "simultaneous_visible_human_max": 3,
+        "human_visible_frames": 45,
+        "frames_with_2plus_visible_engagers": 14
+      },
+      "abilities": {
+        "ready_observations": 1433,
+        "tactical_classes": [
+          "mp_weapon_grenade_sonar",
+          "mp_ability_cloak",
+          "mp_ability_heal",
+          "mp_ability_holopilot",
+          "mp_weapon_deployable_cover",
+          "mp_ability_shifter"
+        ],
+        "tactical_nonzero_shot_counter_observations": 0,
+        "ordnance_classes": [
+          "mp_weapon_frag_grenade",
+          "mp_weapon_grenade_electric_smoke",
+          "mp_weapon_grenade_emp",
+          "mp_weapon_grenade_gravity",
+          "mp_weapon_thermite_grenade"
+        ],
+        "ordnance_nonzero_shot_counter_observations": 0,
+        "skill_starts": 1066,
+        "skill_reasons": {
+          "stim_close_in": 37,
+          "throw": 666,
+          "cloak_disengage": 19,
+          "pulse_reveal": 114,
+          "smoke_cover": 15,
+          "awall_hold": 65,
+          "holo_decoy": 47,
+          "other": 28,
+          "cloak_approach": 29,
+          "phase_escape": 43,
+          "stim_hurt": 3
+        },
+        "skill_by_archetype": {
+          "rusher": 141,
+          "marksman": 223,
+          "rifleman": 586,
+          "anchor": 116
+        }
+      },
+      "bot_active_weapon_samples": {
+        "mp_weapon_rspn101": 163,
+        "mp_weapon_g2": 219,
+        "mp_weapon_car": 164,
+        "mp_weapon_vinson": 162,
+        "mp_weapon_dmr": 194,
+        "mp_weapon_lmg": 166,
+        "mp_weapon_hemlok": 188,
+        "mp_weapon_r97": 79,
+        "mp_weapon_frag_grenade": 27,
+        "mp_weapon_grenade_emp": 35,
+        "mp_weapon_thermite_grenade": 5,
+        "mp_weapon_grenade_sonar": 9,
+        "mp_weapon_deployable_cover": 4,
+        "mp_weapon_grenade_gravity": 20,
+        "mp_ability_shifter": 5,
+        "melee_pilot_emptyhanded": 1
+      },
+      "fatal_bot_speed_median": 150.66291448217993,
+      "fatal_bot_speed_under50_percent": 5,
+      "qualifying_human_damage_groups": [
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "500-999u",
+          "hitgroups": [
+            "1",
+            "5"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.4848999999999961,
+          "min_s": 0.4848999999999961,
+          "max_s": 0.4848999999999961
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "1",
+            "3"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.4848999999999961,
+          "min_s": 0.4848999999999961,
+          "max_s": 0.4848999999999961
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "500-999u",
+          "hitgroups": [
+            "1",
+            "4",
+            "6"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 5.320999999999998,
+          "min_s": 5.320999999999998,
+          "max_s": 5.320999999999998
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "1",
+            "2"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.6640000000000157,
+          "min_s": 0.6640000000000157,
+          "max_s": 0.6640000000000157
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "0-499u",
+          "hitgroups": [
+            "1",
+            "4",
+            "6",
+            "7"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 1.329999999999984,
+          "min_s": 1.329999999999984,
+          "max_s": 1.329999999999984
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 1.1380000000000052,
+          "min_s": 1.1380000000000052,
+          "max_s": 1.1380000000000052
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "500-999u",
+          "hitgroups": [
+            "1",
+            "2"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 1.2019999999999982,
+          "min_s": 1.2019999999999982,
+          "max_s": 1.2019999999999982
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "0-499u",
+          "hitgroups": [
+            "4",
+            "5"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.28299999999998704,
+          "min_s": 0.28299999999998704,
+          "max_s": 0.28299999999998704
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "500-999u",
+          "hitgroups": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.5670000000000073,
+          "min_s": 0.5670000000000073,
+          "max_s": 0.5670000000000073
+        }
+      ],
+      "qualifying_human_episodes": 9,
+      "qualifying_bot_to_human_groups": [],
+      "human_damage_sources": [
+        {
+          "gun": "mp_weapon_grenade_electric_smoke",
+          "damage_events": 69,
+          "paired_positive_events": 69,
+          "paired_health_loss": 306,
+          "damage_event_range_median": 0,
+          "actual_mod_stacks": [
+            "unknown"
+          ]
+        },
+        {
+          "gun": "mp_weapon_hemlok_smg",
+          "damage_events": 100,
+          "paired_positive_events": 95,
+          "paired_health_loss": 1991,
+          "damage_event_range_median": 1038.9450000000002,
+          "actual_mod_stacks": [
+            "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload"
+          ]
+        }
+      ]
+    },
+    {
+      "context": 3,
+      "map": "mp_lf_meadow",
+      "mode": "normal_play",
+      "first_damage_t": 20.1958,
+      "last_damage_t": 300.296,
+      "human_pilot_kills_credited": 23,
+      "human_pilot_deaths_recorded": 5,
+      "unattributed_deaths": 0,
+      "human_guns": {
+        "mp_weapon_hemlok_smg": 18,
+        "mp_weapon_grenade_electric_smoke": 5
+      },
+      "human_incoming_fatal_guns": {
+        "mp_weapon_g2": 1,
+        "mp_weapon_vinson": 1,
+        "mp_weapon_r97": 1,
+        "mp_weapon_car": 1,
+        "mp_weapon_lmg": 1
+      },
+      "epoch": 5,
+      "telemetry_window_start": 13.02,
+      "telemetry_window_end": 300.296,
+      "movement": {
+        "live_pilot_samples": 1407,
+        "navigation_low_samples": 0,
+        "navigation_low_percent": 0,
+        "low_with_over_720deg_yaw": 0,
+        "low_with_jump_command_fraction_over_20pct": 0,
+        "hotspots": [],
+        "visible_engage_samples": 868,
+        "range_hold_samples": 371,
+        "range_hold_speed_median": 173.5,
+        "range_hold_under50_percent": 4.85,
+        "hold_samples_with_contiguous_previous": 369,
+        "hold_samples_with_recent_blocked_step": 4,
+        "hold_recent_blocked_percent": 1.08,
+        "blocked_step_counter_increments": 14,
+        "jump_commands_observed": 2248,
+        "commands_observed": 147600,
+        "jump_command_percent": 1.52
+      },
+      "pressure": {
+        "visible_human_engage_samples": 52,
+        "human_hold_samples": 14,
+        "human_hold_speed_median": 158.25,
+        "human_hold_under50_percent": 0,
+        "human_vertical_gap_over180_percent": 7.69,
+        "simultaneous_visible_human_max": 3,
+        "human_visible_frames": 37,
+        "frames_with_2plus_visible_engagers": 11
+      },
+      "abilities": {
+        "ready_observations": 1406,
+        "tactical_classes": [
+          "mp_weapon_grenade_sonar",
+          "mp_ability_cloak",
+          "mp_ability_heal",
+          "mp_ability_holopilot",
+          "mp_weapon_deployable_cover",
+          "mp_ability_shifter"
+        ],
+        "tactical_nonzero_shot_counter_observations": 0,
+        "ordnance_classes": [
+          "mp_weapon_frag_grenade",
+          "mp_weapon_grenade_electric_smoke",
+          "mp_weapon_grenade_emp",
+          "mp_weapon_grenade_gravity",
+          "mp_weapon_thermite_grenade"
+        ],
+        "ordnance_nonzero_shot_counter_observations": 0,
+        "skill_starts": 1003,
+        "skill_reasons": {
+          "cloak_approach": 30,
+          "stim_close_in": 31,
+          "throw": 626,
+          "pulse_reveal": 97,
+          "holo_decoy": 46,
+          "cloak_disengage": 14,
+          "smoke_cover": 22,
+          "awall_hold": 98,
+          "phase_escape": 25,
+          "stim_hurt": 4,
+          "other": 10
+        },
+        "skill_by_archetype": {
+          "marksman": 206,
+          "rusher": 133,
+          "rifleman": 522,
+          "anchor": 142
+        }
+      },
+      "bot_active_weapon_samples": {
+        "mp_weapon_rspn101": 157,
+        "mp_weapon_g2": 213,
+        "mp_weapon_car": 163,
+        "mp_weapon_vinson": 161,
+        "mp_weapon_dmr": 197,
+        "mp_weapon_lmg": 174,
+        "mp_weapon_hemlok": 177,
+        "mp_weapon_r97": 63,
+        "mp_weapon_grenade_emp": 36,
+        "mp_weapon_grenade_electric_smoke": 5,
+        "mp_weapon_thermite_grenade": 12,
+        "mp_weapon_frag_grenade": 24,
+        "mp_weapon_grenade_gravity": 12,
+        "mp_weapon_grenade_sonar": 10,
+        "melee_pilot_emptyhanded": 1,
+        "mp_weapon_deployable_cover": 2
+      },
+      "fatal_bot_speed_median": 128.41666987443645,
+      "fatal_bot_speed_under50_percent": 13.04,
+      "qualifying_human_damage_groups": [
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "500-999u",
+          "hitgroups": [
+            "2",
+            "4",
+            "5"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.5705999999999989,
+          "min_s": 0.5705999999999989,
+          "max_s": 0.5705999999999989
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "1",
+            "2",
+            "4",
+            "7"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.46930000000000405,
+          "min_s": 0.46930000000000405,
+          "max_s": 0.46930000000000405
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "2",
+            "3",
+            "6"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.6597000000000008,
+          "min_s": 0.6597000000000008,
+          "max_s": 0.6597000000000008
+        },
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_hemlok_smg",
+          "attacker_kind": "human",
+          "victim_kind": "bot",
+          "mods": "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload",
+          "config": "true:true:false:true:true",
+          "range_bucket": "500-999u",
+          "hitgroups": [
+            "1",
+            "2",
+            "5",
+            "7"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 1.0289999999999964,
+          "min_s": 1.0289999999999964,
+          "max_s": 1.0289999999999964
+        }
+      ],
+      "qualifying_human_episodes": 4,
+      "qualifying_bot_to_human_groups": [
+        {
+          "map": "mp_lf_meadow",
+          "mode": "normal_play",
+          "gun": "mp_weapon_g2",
+          "attacker_kind": "bot",
+          "victim_kind": "human",
+          "mods": "none",
+          "config": "true:true:false:true:true",
+          "range_bucket": "1000-1999u",
+          "hitgroups": [
+            "1"
+          ],
+          "critical_scales": [
+            "1"
+          ],
+          "n": 1,
+          "median_s": 0.4333999999999989,
+          "min_s": 0.4333999999999989,
+          "max_s": 0.4333999999999989
+        }
+      ],
+      "human_damage_sources": [
+        {
+          "gun": "mp_weapon_hemlok_smg",
+          "damage_events": 72,
+          "paired_positive_events": 71,
+          "paired_health_loss": 1477,
+          "damage_event_range_median": 1060.0149999999999,
+          "actual_mod_stacks": [
+            "solo_role_balance_v1,bt7274_solo_reload,redline_sight,pro_screen,tactical_cdr_on_kill,pas_fast_reload"
+          ]
+        },
+        {
+          "gun": "mp_weapon_grenade_electric_smoke",
+          "damage_events": 65,
+          "paired_positive_events": 65,
+          "paired_health_loss": 513,
+          "damage_event_range_median": 0,
+          "actual_mod_stacks": [
+            "unknown"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "Pilot-victim damage/death only: not scoreboard totals, Titan deaths, shots, accuracy or trigger/first-shot TTK. Kill credit is the matching lethal event, not a new scoreboard hook. Native analysis window starts at the telemetry frame preceding Playing and ends at the last recorded damage/death; not exact winner/end-state markers. Two-second overlapping samples and contiguous counter deltas are not independent incidents or action-success counts; short deaths may be unsampled. Hold/step-block associations do not prove why an individual bot died. Different maps, guns, ranges, hitgroups, modifiers and play styles are not controlled comparisons. No visual watching or causal balance conclusion. Only derived aggregate output is published.",
+  "provenance": {
+    "session": "20261028-165845-d7218d71",
+    "native_sha256": "3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89",
+    "event_sha256": "1a67703d789f5e8823902fed63db83d06c11e54df66b0ac3eb4ec0c4737ea479",
+    "private_log_sha256": "3ae10d7ba2040f437c90b633b93bb529f917d8a3c6f4b4ebe2070e2108751387",
+    "core": "1.31.14"
+  }
+}

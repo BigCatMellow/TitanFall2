@@ -43,8 +43,9 @@ pub fn run_bots_cmds(paused: bool) {
     if emit_trace {
         bot_shared_data.telemetry_next_at = globals.curTime + interval.clamp(0.5, 10.);
         let coordinated = super::COORDINATION_CONVAR.get().is_some_and(|c| c.get_value_bool());
-        log::info!("BOT_FRAME epoch={epoch} map={map} t={:.2} tick={} coordination={}",
-            globals.curTime, globals.tickCount, coordinated as u8);
+        let eden_repair=super::route_guard::eden_repair_enabled(super::switch_on(&super::EDEN_REPAIR_CONVAR),map);
+        log::info!("BOT_FRAME epoch={epoch} map={map} t={:.2} tick={} coordination={} eden_repair={}",
+            globals.curTime, globals.tickCount, coordinated as u8,eden_repair as u8);
         for (slot, client) in unsafe { iterate_c_array_sized::<_, 32>(engine_functions.client_array.into()) }
             .enumerate().filter(|(_, c)| c.m_nSignonState == SignonState::FULL) {
             if let Some(player) = unsafe { player_by_index(slot as i32 + 1).as_ref() } {

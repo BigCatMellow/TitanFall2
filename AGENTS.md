@@ -4,18 +4,22 @@ Canonical development repo for BT-7274's solo Northstar project. Read README.md,
 docs/PROJECT-STATUS.md, Notes/CURRENT-SETUP.md and the latest Notes/HANDOFF.md
 entries before changes.
 
-- October28 user authorized four hours of isolated testing with shorter rounds.
-  That window is now FINISHED:29/32rounds,14matchedpairs, mixed findings. Both
-  profiles verified restored to v20, normal files/saves unchanged, no test game
-  remains. Read research/corner-height-v22-20261028/FINDINGS.md. Keep guardOFF;
-  old matrix receipts/PIDs are historical, not an instruction to resume testing.
-  Current source is v22 upward intermediate pilot corner guard, default off;
-  v21 offhand/retarget trials remain OFF. Normal stays v20 native3077878B... .
-  Isolated candidate2B08DE76AB7A85C560F9DC9076F50233346EF1038A2C96B0F5BACD55AAB0A439
-  uses unchanged bridge1.0/native core1.31.14 and pinned release-debug build,
-  antivirus enabled. See research/corner-height-v22-20261028/README.md and live
-  target/v22-smoke-session.json / target/v22-matrix-session.json before changes.
-  Do not alter antivirus/quarantine settings or run old blocked helpers.
+- Current normal deployment is the tested v23 Eden pilot route repair:
+  BC2C1019D27F537F075611ED6B68A75591D1F2F9924BA8700D82A757BB1000F7.
+  bot_eden_route_repair=1; global route_continuity/link_detour and corner-height
+  switches stay0. Other maps and Titan navigation retain baseline behavior.
+  Read research/route-continuity-v23-20261028/FINDINGS.md and validation.json.
+  The repeated directed hotspot test, off/on/respawn/off/lobby/Complex transition
+  and effective map-scope checks passed. Six normal saves and enabledmods were
+  hash-preserved; existing gameplay settings unchanged. Same solo shortcut.
+  Isolated profile restored to v20 native3077878B...; all harnesses disabled.
+  No game remains. target/v23-eden-repair-session.json is historical evidence,
+  not an instruction to resume it. New combat/human validation is still needed
+  before extending the repair to other maps or link types.
+- The earlier four-hour v22 matrix FINISHED29/32rounds,14pairs with mixed results.
+  Keep its height guardOFF; do not resume old queues/PIDs. v21 safety/retarget
+  trials stayOFF. Use pinned release-debug/offline builds with antivirus enabled.
+  Do not alter antivirus/quarantine or run/stage Build-VerifiedWindowsCandidate.ps1.
 
 - Refer to the owner only as BT-7274 (prose) / BT7274 (identifiers) in every
   file, filename and commit message; never by a personal name. See
@@ -26,17 +30,16 @@ entries before changes.
   Use backed-up candidates and isolated runtime/transition tests before normal
   deployment. User also authorized resuming map-by-map testing AFTER those
   checks; start a fresh frozen-build survey rather than changing old cohorts.
-- Normal and isolated are back on the Windows-tested v20 candidate. The v22
-  source remains experimental/default-off after the mixed map comparisons.
-  The validated v20 DLL is
+- The v20 foundation and isolated rollback DLL is
   DLL3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89.
   Normal launcher defaults to Movement (movement+proximity, diagnostics/sampler).
   Height/Roster/Skills/Full are explicit cumulative playtest presets. Crouch,
-  route/jump and perception remain OFF. Read Notes/candidates/bot-capability-v20-20261027.
+  global route/jump and perception remain OFF; the Eden-only repair is separate.
+  Read Notes/candidates/bot-capability-v20-20261027 for the foundation checks.
   Eight-gun/six-tactical readback,32human modifier checks, cancellation restore,
   lobby/map changes, live v19 rollback and normal startup passed. The fresh candidate clone
   remains startup-broken and is abandoned; use map-cycle-test-profile for tests.
-  Verify actual hashes/logs before further claims. All four new switches are on.
+  Verify actual hashes/logs before further claims; preserve current preset selection.
 - Preserve8v8, aim0.78, current saves,50% human tactical recharge and the
   five-gun human reload change (G2/Volt/Alternator/R201/CAR). Human ADS and
   role trials are enabled; solo_weapon_balance_bots stays0. See latest rollout.

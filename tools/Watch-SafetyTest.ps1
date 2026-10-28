@@ -1,5 +1,5 @@
 param([Parameter(Mandatory)][int]$GameProcessId,[Parameter(Mandatory)][string]$Profile,
-    [Parameter(Mandatory)][string]$RunDirectory,[Parameter(Mandatory)][string]$Started,[switch]$NavigationTrial)
+    [Parameter(Mandatory)][string]$RunDirectory,[Parameter(Mandatory)][string]$Started,[switch]$NavigationTrial,[switch]$RouteProbe,[switch]$QueryOnly)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/Stop-OwnedSurveyGame.ps1"
 . "$PSScriptRoot/Northstar-ModState.ps1"
@@ -18,6 +18,7 @@ try{
             if($line-match'SAFETY_TEST_PHASE_PASS name=(\S+)'){$state.completed+=($Matches[1]);$state.state='running'}
             if($line-match'SAFETY_TEST_PHASE .*name=(\S+)'){$state.phase=$Matches[1];$state.state='running'}
             if($line.Contains('SAFETY_TEST_LOBBY')){$state.lobby=$true}
+            if($line.Contains('ROUTE_PROBE_DONE')){$state.route_probe_done=$true;if($QueryOnly){$state.state='passed';break}}
             if($line-match'NorthstarLauncher version:\s+(\S+)'){$state.core=$Matches[1]}
             if($line.Contains('SAFETY_TEST_DONE')){$state.state='passed';break}
         }}
@@ -26,7 +27,10 @@ try{
         Save-State;Start-Sleep -Seconds 1
     }
     $expected=if($NavigationTrial){'nav_control,nav_guard,nav_respawn,nav_disabled,nav_new_map'}else{'v20_control,v21_safety,hurt_ability_probe,switch_off,new_map_safety'}
-    if($state.state-ne'passed'-or-not$state.lobby-or$state.core-ne'1.31.14.0'-or($state.completed-join',')-ne$expected){throw 'Incomplete safety/map/lobby checks'}
+    if($QueryOnly){
+        if($state.state-ne'passed'-or$state.core-ne'1.31.14.0'-or-not$state.route_probe_done){throw 'Incomplete query-only probe'}
+    }elseif($state.state-ne'passed'-or-not$state.lobby-or$state.core-ne'1.31.14.0'-or($state.completed-join',')-ne$expected){throw 'Incomplete safety/map/lobby checks'}
+    if($RouteProbe-and-not$state.route_probe_done){throw 'Route probes did not finish'}
 }catch{$state.state='failed';$state.failure=[string]$_}
 finally{
     if($reader){$reader.Dispose()}
@@ -34,7 +38,7 @@ finally{
     if($log){Copy-Item -LiteralPath $log.FullName -Destination "$RunDirectory/raw-session.log"}
     if(Test-Path "$RunDirectory/idle.cfg"){Copy-Item "$RunDirectory/idle.cfg" "$Profile/mods/Northstar.CustomServers/mod/cfg/autoexec_ns_server.cfg" -Force}
     $enabled=Get-Content "$RunDirectory/enabledmods-before.json" -Raw|ConvertFrom-Json
-    foreach($name in @('BT7274.DecisionTest','BT7274.WeaponIntegrationTest','BT7274.CapabilityTest','BT7274.SafetyTest')){Disable-NorthstarMod $enabled $name $Profile}
+    foreach($name in @('BT7274.DecisionTest','BT7274.WeaponIntegrationTest','BT7274.CapabilityTest','BT7274.SafetyTest','BT7274.RouteProbe')){Disable-NorthstarMod $enabled $name $Profile}
     $bridgeVersion=(Get-Content "$Profile/mods/BT7274.BotDecisions/mod.json" -Raw|ConvertFrom-Json).Version
     Disable-NorthstarMod $enabled 'BT7274.BotDecisions' $Profile
     $enabled.'BT7274.BotDecisions'|Add-Member -NotePropertyName $bridgeVersion -NotePropertyValue $true -Force

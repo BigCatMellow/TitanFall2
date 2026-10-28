@@ -95,6 +95,9 @@ pub(super) static STEP_RETRY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static NAV_DIAGNOSTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static ROUTE_GUARD_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static CORNER_HEIGHT_GUARD_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static ROUTE_CONTINUITY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static LINK_DETOUR_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static EDEN_REPAIR_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static JUMP_TIMING_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PROXIMITY_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PERCEPTION_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
@@ -143,6 +146,7 @@ pub(super) struct BotData {
     throw_safety: offhand_safety::ThrowSafety,
     escape_recovery: escape_recovery::EscapeRecovery,
     path_log: nav_diagnostics::RateGate,
+    segment_log: nav_diagnostics::RateGate,
     corner_guard_log: nav_diagnostics::RateGate,
     corner_guard_since: Option<f32>,
     stall_log: nav_diagnostics::RateGate,
@@ -151,6 +155,7 @@ pub(super) struct BotData {
     current_corner: Option<(u8, u8)>,
     route_target: Option<i32>,
     replan: route_guard::ReplanThrottle,
+    link_detour: route_guard::LinkDetour,
     unreachable: route_guard::Unreachable,
     jump_timing: route_guard::JumpTiming,
     strafe: combat_movement::Strafe,
@@ -178,6 +183,7 @@ impl BotData {
     // Per-life candidate state must not survive respawn or pilot/Titan transitions.
     fn reset_candidate_state(&mut self) {
         self.path_log = Default::default();
+        self.segment_log = Default::default();
         self.corner_guard_log = Default::default();
         self.corner_guard_since = None;
         self.stall_log = Default::default();
@@ -186,6 +192,7 @@ impl BotData {
         self.current_corner = None;
         self.route_target = None;
         self.replan = Default::default();
+        self.link_detour = Default::default();
         self.unreachable = Default::default();
         self.jump_timing = Default::default();
         self.strafe = Default::default();
@@ -239,6 +246,7 @@ impl Plugin for Bots {
         register_sq_functions(bot_set_titan);
         register_sq_functions(bot_set_target_pos);
         register_sq_functions(bot_set_sim_type);
+        register_sq_functions(bot_research_report);
         register_sq_functions(bot_spawn);
         register_sq_functions(remember_name_override);
         register_sq_functions(remember_name_override_uid);
@@ -473,6 +481,9 @@ impl Plugin for Bots {
             (&NAV_DIAGNOSTICS_CONVAR, "bot_nav_diagnostics", "log route status, traversal corners, stuck episodes and stall hull fits; no input changes"),
             (&ROUTE_GUARD_CONVAR, "bot_route_guard", "throttle replans of consumed partial routes and skip unreachable pursuit targets briefly"),
             (&CORNER_HEIGHT_GUARD_CONVAR, "bot_corner_height_guard", "trial: retain ordinary upward pilot corners above 36 units; drops/links/Titans unchanged, default off"),
+            (&ROUTE_CONTINUITY_CONVAR, "bot_route_continuity", "trial: finish the active final waypoint before replanning an empty segment, default off"),
+            (&LINK_DETOUR_CONVAR, "bot_link_detour", "trial: locally avoid a failed same-level jump type for eight seconds, default off"),
+            (&EDEN_REPAIR_CONVAR, "bot_eden_route_repair", "enable pending-waypoint and failed-link repair on Eden only, default off"),
             (&JUMP_TIMING_CONVAR, "bot_jump_timing", "step jumps only near the higher waypoint, plus one bounded double jump"),
             (&PROXIMITY_FIX_CONVAR, "bot_proximity_fix", "circular distance for titan boarding Use and titan melee (fixes axis-aligned aim snaps)"),
             (&PERCEPTION_FIX_CONVAR, "bot_perception_fix", "eye-angle facing and eye-level sight lines; same 180-degree hemisphere"),
@@ -867,6 +878,16 @@ fn bot_set_sim_type(bot: Option<&mut CPlayer>, sim_type: i32) -> Option<()> {
     }
 
     None
+}
+
+/// Read-only test-harness snapshot; no names or account identifiers.
+#[rrplug::sqfunction(VM = "Server", ExportName = "BotResearchReport")]
+fn bot_research_report(bot: Option<&mut CPlayer>) -> Option<String> {
+    let maps=BOT_DATA_MAP.get(engine_token).try_borrow().ok()?;
+    let local=maps.as_ref().get(get_player_index(bot?))?;
+    Some(format!("slot={} simulation={} nodes={} segment_mask={}",local.edict,
+        local.sim_type.unwrap_or(-1),local.nav_query.as_ref().map_or(0,|n|n.path_points.len()),
+        local.nav_query.as_ref().map_or(0,|n|n.segment_traversals)))
 }
 
 #[rrplug::sqfunction(VM = "Server", ExportName = "BotSpawn")]

@@ -78,6 +78,38 @@ pub(super) fn step_jump_wanted(dz: f32, horizontal: f32) -> bool {
 /// validate it against live routes before making this behavior a default.
 pub(super) const CORNER_HEIGHT_TOLERANCE: f32 = 36.0;
 
+pub(super) fn eden_repair_enabled(enabled: bool, map: &str) -> bool {
+    enabled && map=="mp_eden"
+}
+
+/// Local, short-lived feedback for a failed same-level jump segment. It does
+/// not edit the mesh or permanently remove that capability from the actor.
+#[derive(Debug, Default)]
+pub(super) struct LinkDetour { failed_at: Option<(f32,[f32;2])> }
+impl LinkDetour {
+    pub const MASK: u32 = 1 << 16;
+    pub fn fail(&mut self, now: f32, position: [f32;2], segment_mask: u32) -> bool {
+        if segment_mask & Self::MASK == 0 || !now.is_finite() || !position.iter().all(|v|v.is_finite()) { return false; }
+        self.failed_at=Some((now,position)); true
+    }
+    pub fn excluded(&self, now: f32, position: [f32;2]) -> u32 {
+        match self.failed_at {
+            Some((at,p)) if now.is_finite() && now>=at && now-at<8.
+                && position.iter().all(|v|v.is_finite())
+                && (position[0]-p[0]).hypot(position[1]-p[1])<=600. => Self::MASK,
+            _ => 0,
+        }
+    }
+}
+
+/// A waypoint removed from the queue remains owned by the follower until reached.
+/// Empty output from Detour can mean the end of a traversal segment, not arrival.
+pub(super) fn active_waypoint_pending(enabled: bool, route_valid: bool,
+    has_corner: bool, horizontal: f32, range: f32) -> bool {
+    enabled && route_valid && has_corner && horizontal.is_finite()
+        && range.is_finite() && horizontal > range && range >= 0.
+}
+
 pub(super) fn hold_upward_corner(horizontal_distance: f32, vertical_delta: f32, horizontal_limit: f32,
     human_hull: bool, metadata: Option<(u8,u8)>) -> bool {
     horizontal_distance.is_finite()
@@ -123,6 +155,36 @@ impl JumpTiming {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test] fn eden_rollout_cannot_enable_other_maps() {
+        assert!(eden_repair_enabled(true,"mp_eden"));
+        assert!(!eden_repair_enabled(false,"mp_eden"));
+        for map in ["mp_complex","mp_wargames","mp_lf_meadow","unknown",""] {
+            assert!(!eden_repair_enabled(true,map));
+        }
+    }
+    #[test] fn failed_jump_detour_is_local_bounded_and_type_specific() {
+        let mut d=LinkDetour::default();
+        assert_eq!(d.excluded(10.,[0.,0.]),0);
+        assert!(!d.fail(10.,[0.,0.],1<<8));
+        assert!(d.fail(10.,[4120.,-272.],1<<16));
+        assert_eq!(d.excluded(10.,[4120.,-272.]),1<<16);
+        assert_eq!(d.excluded(17.99,[4120.,-872.]),1<<16);
+        assert_eq!(d.excluded(18.,[4120.,-272.]),0);
+        assert_eq!(d.excluded(9.,[4120.,-272.]),0);
+        assert_eq!(d.excluded(11.,[4120.,-872.1]),0);
+        assert_eq!(d.excluded(f32::NAN,[4120.,-272.]),0);
+        assert_eq!(d.excluded(11.,[f32::NAN,-272.]),0);
+        assert!(!d.fail(11.,[f32::NAN,0.],1<<16));
+    }
+    #[test] fn final_waypoint_remains_pending_until_arrival_or_route_invalidation() {
+        // Eden's observed segment: an empty remaining queue, exit still 356 units away.
+        assert!(active_waypoint_pending(true,true,true,356.,45.));
+        for (enabled,valid,corner,distance) in [(false,true,true,356.),
+            (true,false,true,356.),(true,true,false,356.),(true,true,true,45.),
+            (true,true,true,f32::NAN)] {
+            assert!(!active_waypoint_pending(enabled,valid,corner,distance,45.));
+        }
+    }
     #[test] fn corner_guard_only_holds_close_upward_ordinary_pilot_corners() {
         assert!(hold_upward_corner(45.,36.1,45.,true,Some((0,255))));
         assert!(hold_upward_corner(0.,100.,45.,true,Some((0,0))));

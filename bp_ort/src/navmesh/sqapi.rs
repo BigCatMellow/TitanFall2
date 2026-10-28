@@ -14,6 +14,26 @@ pub fn navigation_register_sq_functions() {
     register_sq_functions(navigation_get_all_points);
     register_sq_functions(navigation_next_point);
     register_sq_functions(navigation_random_point);
+    register_sq_functions(navigation_research_query);
+    register_sq_functions(navigation_research_report);
+}
+
+#[rrplug::sqfunction(VM = "SERVER", ExportName = "NavigationResearchQuery")]
+fn navigation_research_query(hull: Hull, node_budget: i32, uniform_cost: bool, excluded_traversals: i32) -> Option<UserData<Navigation>> {
+    Some(UserData::new(Navigation::research_query(hull, node_budget, uniform_cost, excluded_traversals)?))
+}
+
+#[rrplug::sqfunction(VM = "SERVER", ExportName = "NavigationResearchReport")]
+fn navigation_research_report(nav: UserDataRef<Navigation>) -> String {
+    let gap = nav.last_end.zip(nav.projected_goal).map_or(-1., |(a,b)| {
+        ((a.x-b.x).powi(2)+(a.y-b.y).powi(2)+(a.z-b.z).powi(2)).sqrt()
+    });
+    let corners = nav.path_points.iter().rev().take(8).enumerate().map(|(i,p)| {
+        let meta = nav.corner_meta.iter().rev().nth(i).copied();
+        format!("{:.1},{:.1},{:.1},{},{}",p.x,p.y,p.z,meta.map_or(-1,|m|m.0 as i32),meta.map_or(-1,|m|m.1 as i32))
+    }).collect::<Vec<_>>().join(";");
+    format!("status={:#x} straight_status={:#x} reached_poly={} polys={} points={} projected_gap={:.1} corners={}",
+        nav.last_status,nav.straight_status,nav.reached_goal_poly as u8,nav.corridor_poly_count,nav.path_points.len(),gap,corners)
 }
 
 #[rrplug::sqfunction(VM = "SERVER", ExportName = "NavigationCreate")]

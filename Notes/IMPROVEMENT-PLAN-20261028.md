@@ -1,8 +1,14 @@
 # Improvement plan — October28
 
-## Current play session
+Evening update: the new Eden report took priority. A bounded Eden-only route
+repair is now tested and installed, preserving the other gameplay settings.
+See [results and remaining limits](../research/route-continuity-v23-20261028/FINDINGS.md).
+Human Eden feedback and remaining choke points come next; broader map/type
+rollout, grenade changes and weapon power changes are not implied by this fix.
 
-BT-7274 is playing the latest validated **Full v20** setup. Startup/readback
+## Earlier baseline play session
+
+BT-7274 played the validated **Full v20** setup. Startup/readback
 confirmed native3077878B..., Northstar1.31.14, Full preset and automatic normal-
 play recording. The v22 corner guard is not installed: it regressed Complex.
 Keep the user's active profile/DLL/config/saves untouched while playing. All

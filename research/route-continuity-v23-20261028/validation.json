@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "state": "validated_for_playtest_and_installed",
+  "native_sha256": "BC2C1019D27F537F075611ED6B68A75591D1F2F9924BA8700D82A757BB1000F7",
+  "baseline_native_sha256": "3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89",
+  "core_sha256": "86007DD1DDAC9103508EECA520E2AB89B16DF92780A5F8A67497CCF29567EDB9",
+  "bridge_sha256": "9C43719868D28121E6D59A07C3317882E135A50FF3C91AA1340A12C1219C4598",
+  "build_profile": "release-debug",
+  "toolchain": "nightly-2025-09-11-x86_64-pc-windows-gnu",
+  "cargo_lock_sha256": "E4F8434813F688AF4FB5184EAEF4876A7F72F79C1D6B2A4DAB69C7BF2B89AE41",
+  "offline_rust_tests_passed": 99,
+  "node_test_files_passed": 6,
+  "powershell_fixture_suites_passed": 4,
+  "rollback_fixture_passed": true,
+  "invalid_map_preflight_passed": true,
+  "runtime_error_markers": 0,
+  "phases": [
+    {
+      "passed": true,
+      "name": "nav_control",
+      "map": "mp_eden",
+      "eden_scope_values": [
+        0
+      ]
+    },
+    {
+      "passed": true,
+      "name": "nav_guard",
+      "map": "mp_eden",
+      "eden_scope_values": [
+        1
+      ]
+    },
+    {
+      "passed": true,
+      "name": "nav_respawn",
+      "map": "mp_eden",
+      "eden_scope_values": [
+        1
+      ]
+    },
+    {
+      "passed": true,
+      "name": "nav_disabled",
+      "map": "mp_eden",
+      "eden_scope_values": [
+        0
+      ]
+    },
+    {
+      "passed": true,
+      "name": "nav_new_map",
+      "map": "mp_complex3",
+      "eden_scope_values": [
+        0
+      ]
+    }
+  ],
+  "private_log_sha256": "3150e371ac2b01d7cad2b2112eeaea74809a03ada1ea5cc1efcf639e6cd1a2c0",
+  "normal_saves_unchanged": 6,
+  "enabledmods_unchanged": true,
+  "existing_gameplay_setting_changes": 0,
+  "normal_launcher_paths_and_receipt_verified": true,
+  "normal_human_match_after_deploy": false,
+  "normal_scope": "Eden pilot navigation only",
+  "normal_flags": {
+    "bot_eden_route_repair": 1,
+    "bot_link_detour": 0,
+    "bot_route_continuity": 0,
+    "bot_corner_height_guard": 0
+  },
+  "isolated_restored_native_sha256": "3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89",
+  "harnesses_disabled": true,
+  "game_remaining_at_cleanup": false,
+  "antivirus_settings_changed": false,
+  "limits": "Directed escape and lifecycle/scope validation, not whole-map traversal completion, human difficulty balance or a randomized full-combat improvement estimate. Earlier incomplete harness/map attempts retained separately."
+}

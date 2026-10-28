@@ -1,13 +1,28 @@
 # Current setup
 
-Updated 2026-10-27. Current deployment is the Windows-tested v20 playtest, native SHA256
-3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89,
+Updated 2026-10-28. Current normal deployment is the tested v23 Eden route repair, native SHA256
+BC2C1019D27F537F075611ED6B68A75591D1F2F9924BA8700D82A757BB1000F7,
 Northstar1.31.14. Human+15 bots,8v8,aim0.78, human tactical recharge0.5,
 five-gun reload0.9 and human ADS/role trials enabled; bot balance opt-in stays0.
 The normal shortcut defaults to Movement (movement/proximity fixes). Other
 explicit presets add height response, roster, skills and personalities. Gated
-crouch/route/jump/perception switches stay off. Both profiles use renamed BT7274
+crouch/global-route/jump/perception switches stay off. bot_eden_route_repair=1
+enables the bounded repair only for Eden pilot navigation. Other maps and Titan
+navigation keep baseline behavior. Both profiles use renamed BT7274
 add-ons and current migrated saves. See [current rollout](candidates/bot-capability-v20-20261027/README.md).
+
+Latest [Eden findings and runtime evidence](../research/route-continuity-v23-20261028/FINDINGS.md).
+Repeated fixed-start off/on/respawn/off and lobby/Complex checks passed; effective
+repair scope was0/1/1/0/0. Six normal save files and enabledmods were unchanged;
+no existing gameplay-setting value changed. Isolated was restored to v20 native
+3077878B...; test harnesses disabled and no game remains. Normal startup was
+checked through launcher paths and matching validation receipt; no human match
+has been played on the new deployment yet. Use the same solo shortcut.
+
+Fresh private backup: before-eden-repair-v23-20261028-184241. To revert the native
+and candidate flags while retaining current progress/settings, close the game
+and run tools/Rollback-EdenRouteRepair.ps1 from the repository. Never restore
+historical save_data over newer play. No antivirus settings were changed.
 
 The Desktop **Northstar - Full Bot Trial (8v8)** shortcut explicitly selects
 Full using the same current saves; the usual solo shortcut resets to Movement.

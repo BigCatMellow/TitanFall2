@@ -1,0 +1,857 @@
+{
+  "schema_version": 1,
+  "error_markers_whole_log": {},
+  "rounds": [
+    {
+      "context": 1,
+      "map": "mp_eden",
+      "epoch": 1,
+      "human_presence": {
+        "alive_pilot_samples": 304,
+        "alive_titan_samples": 0,
+        "dead_samples": 17
+      },
+      "skill_requests": {
+        "lines": 738,
+        "tactical_pulses": 420,
+        "ordnance_pulses": 318,
+        "tactical_reasons": {
+          "cloak_approach": 55,
+          "pulse_reveal": 297,
+          "stim_close_in": 20,
+          "holo_decoy": 13,
+          "stim_hurt": 5,
+          "awall_hold": 13,
+          "other": 2,
+          "phase_escape": 12,
+          "cloak_disengage": 3
+        },
+        "ordnance_reasons": {
+          "throw": 313,
+          "smoke_cover": 5
+        }
+      },
+      "readiness": [
+        {
+          "channel": "tactical",
+          "weapon": "mp_weapon_grenade_sonar",
+          "samples": 553,
+          "not_ready_samples": 31,
+          "below_cost_samples": 5,
+          "min_clip": 97,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_frag_grenade",
+          "samples": 1589,
+          "not_ready_samples": 58,
+          "below_cost_samples": 48,
+          "min_clip": 8,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_cloak",
+          "samples": 1021,
+          "not_ready_samples": 712,
+          "below_cost_samples": 711,
+          "min_clip": 1,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "samples": 555,
+          "not_ready_samples": 0,
+          "below_cost_samples": 0,
+          "min_clip": 100,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_heal",
+          "samples": 717,
+          "not_ready_samples": 146,
+          "below_cost_samples": 146,
+          "min_clip": 2,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_holopilot",
+          "samples": 543,
+          "not_ready_samples": 13,
+          "below_cost_samples": 12,
+          "min_clip": 12,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_grenade_emp",
+          "samples": 770,
+          "not_ready_samples": 19,
+          "below_cost_samples": 4,
+          "min_clip": 146,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_grenade_gravity",
+          "samples": 466,
+          "not_ready_samples": 5,
+          "below_cost_samples": 0,
+          "min_clip": 100,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_weapon_deployable_cover",
+          "samples": 546,
+          "not_ready_samples": 0,
+          "below_cost_samples": 0,
+          "min_clip": 100,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_shifter",
+          "samples": 531,
+          "not_ready_samples": 0,
+          "below_cost_samples": 0,
+          "min_clip": 200,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_thermite_grenade",
+          "samples": 531,
+          "not_ready_samples": 15,
+          "below_cost_samples": 10,
+          "min_clip": 45,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        }
+      ],
+      "cover": {
+        "probes": 69,
+        "selected_destinations": 58,
+        "no_destination": 11
+      },
+      "bot_pilot_ordnance": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 18,
+          "opposing_damage_callbacks": 6,
+          "opposing_callbacks_with_observed_health_loss": 6,
+          "enemy_pilot_deaths_credited": 2,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 12,
+          "self_pilot_deaths_credited": 7,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 5113,
+          "partial": 385,
+          "failures": 186,
+          "suppressed": 146254,
+          "with_links": 3365
+        },
+        "corners": {
+          "total": 371011,
+          "links": 90848,
+          "by_jump": {
+            "1": 8717,
+            "2": 2618,
+            "8": 2797,
+            "16": 76716,
+            "255": 280163
+          },
+          "by_flags": {
+            "0": 241170,
+            "1": 125883,
+            "2": 3958
+          }
+        },
+        "corner_guard": {
+          "begins": 0,
+          "hold_samples": 0,
+          "ends": {},
+          "completed_duration_s": 0,
+          "duration_samples": 0
+        },
+        "stalls": {
+          "samples": 628,
+          "incidents": 216,
+          "link_or_partial": 121,
+          "duck_only": 6,
+          "blocked": 123,
+          "stand_clear": 87,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 198,
+            "waypoint_timeout": 18
+          },
+          "by_state": {
+            "recover": 216
+          }
+        },
+        "stuck": {
+          "episodes": 216,
+          "by_state": {
+            "pursue": 157,
+            "engage": 32,
+            "recover": 10,
+            "embark": 17
+          },
+          "visible": 32,
+          "titan": 30
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 0,
+          "plausible": 0,
+          "examples": []
+        },
+        "decision": {
+          "stall_incidents": 216,
+          "link_or_partial_share": 0.5601851851851852,
+          "duck_only_share": 0.027777777777777776,
+          "partial_route_share": 0.07529825933893995,
+          "engage_stuck_share": 0.14814814814814814,
+          "recommendation": "prioritise link/partial-route handling"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      }
+    },
+    {
+      "context": 2,
+      "map": "mp_lf_meadow",
+      "epoch": 3,
+      "human_presence": {
+        "alive_pilot_samples": 148,
+        "alive_titan_samples": 0,
+        "dead_samples": 6
+      },
+      "skill_requests": {
+        "lines": 1066,
+        "tactical_pulses": 385,
+        "ordnance_pulses": 681,
+        "tactical_reasons": {
+          "stim_close_in": 37,
+          "cloak_disengage": 19,
+          "pulse_reveal": 114,
+          "awall_hold": 65,
+          "holo_decoy": 47,
+          "other": 28,
+          "cloak_approach": 29,
+          "phase_escape": 43,
+          "stim_hurt": 3
+        },
+        "ordnance_reasons": {
+          "throw": 666,
+          "smoke_cover": 15
+        }
+      },
+      "readiness": [
+        {
+          "channel": "tactical",
+          "weapon": "mp_weapon_grenade_sonar",
+          "samples": 176,
+          "not_ready_samples": 17,
+          "below_cost_samples": 9,
+          "min_clip": 96,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_frag_grenade",
+          "samples": 525,
+          "not_ready_samples": 193,
+          "below_cost_samples": 169,
+          "min_clip": 6,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_cloak",
+          "samples": 435,
+          "not_ready_samples": 331,
+          "below_cost_samples": 326,
+          "min_clip": 1,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "samples": 219,
+          "not_ready_samples": 16,
+          "below_cost_samples": 15,
+          "min_clip": 49,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_heal",
+          "samples": 261,
+          "not_ready_samples": 186,
+          "below_cost_samples": 186,
+          "min_clip": 2,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_holopilot",
+          "samples": 185,
+          "not_ready_samples": 39,
+          "below_cost_samples": 35,
+          "min_clip": 3,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_grenade_emp",
+          "samples": 274,
+          "not_ready_samples": 58,
+          "below_cost_samples": 28,
+          "min_clip": 137,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_grenade_gravity",
+          "samples": 216,
+          "not_ready_samples": 32,
+          "below_cost_samples": 10,
+          "min_clip": 49,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_weapon_deployable_cover",
+          "samples": 177,
+          "not_ready_samples": 4,
+          "below_cost_samples": 0,
+          "min_clip": 100,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_shifter",
+          "samples": 199,
+          "not_ready_samples": 3,
+          "below_cost_samples": 0,
+          "min_clip": 200,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_thermite_grenade",
+          "samples": 199,
+          "not_ready_samples": 37,
+          "below_cost_samples": 27,
+          "min_clip": 38,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        }
+      ],
+      "cover": {
+        "probes": 28,
+        "selected_destinations": 23,
+        "no_destination": 5
+      },
+      "bot_pilot_ordnance": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 123,
+          "opposing_damage_callbacks": 58,
+          "opposing_callbacks_with_observed_health_loss": 56,
+          "enemy_pilot_deaths_credited": 24,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 65,
+          "self_pilot_deaths_credited": 43,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "damage_callbacks": 20,
+          "opposing_damage_callbacks": 20,
+          "opposing_callbacks_with_observed_health_loss": 20,
+          "enemy_pilot_deaths_credited": 2,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 14,
+          "opposing_damage_callbacks": 14,
+          "opposing_callbacks_with_observed_health_loss": 14,
+          "enemy_pilot_deaths_credited": 3,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_thermite_grenade",
+          "damage_callbacks": 15,
+          "opposing_damage_callbacks": 15,
+          "opposing_callbacks_with_observed_health_loss": 15,
+          "enemy_pilot_deaths_credited": 2,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_gravity",
+          "damage_callbacks": 1,
+          "opposing_damage_callbacks": 1,
+          "opposing_callbacks_with_observed_health_loss": 1,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 1243,
+          "partial": 62,
+          "failures": 3,
+          "suppressed": 3621,
+          "with_links": 0
+        },
+        "corners": {
+          "total": 12736,
+          "links": 0,
+          "by_jump": {
+            "255": 12453,
+            "-1": 283
+          },
+          "by_flags": {
+            "0": 3197,
+            "1": 5418,
+            "2": 3838,
+            "-1": 283
+          }
+        },
+        "corner_guard": {
+          "begins": 0,
+          "hold_samples": 0,
+          "ends": {},
+          "completed_duration_s": 0,
+          "duration_samples": 0
+        },
+        "stalls": {
+          "samples": 25,
+          "incidents": 21,
+          "link_or_partial": 2,
+          "duck_only": 0,
+          "blocked": 3,
+          "stand_clear": 18,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 6,
+            "waypoint_timeout": 15
+          },
+          "by_state": {
+            "recover": 21
+          }
+        },
+        "stuck": {
+          "episodes": 7,
+          "by_state": {
+            "pursue": 5,
+            "engage": 2
+          },
+          "visible": 2,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 0,
+          "plausible": 0,
+          "examples": []
+        },
+        "decision": {
+          "stall_incidents": 21,
+          "link_or_partial_share": 0.09523809523809523,
+          "duck_only_share": 0,
+          "partial_route_share": 0.0498793242156074,
+          "engage_stuck_share": 0.2857142857142857,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      }
+    },
+    {
+      "context": 3,
+      "map": "mp_lf_meadow",
+      "epoch": 5,
+      "human_presence": {
+        "alive_pilot_samples": 135,
+        "alive_titan_samples": 0,
+        "dead_samples": 9
+      },
+      "skill_requests": {
+        "lines": 1003,
+        "tactical_pulses": 355,
+        "ordnance_pulses": 648,
+        "tactical_reasons": {
+          "cloak_approach": 30,
+          "stim_close_in": 31,
+          "pulse_reveal": 97,
+          "holo_decoy": 46,
+          "cloak_disengage": 14,
+          "awall_hold": 98,
+          "phase_escape": 25,
+          "stim_hurt": 4,
+          "other": 10
+        },
+        "ordnance_reasons": {
+          "throw": 626,
+          "smoke_cover": 22
+        }
+      },
+      "readiness": [
+        {
+          "channel": "tactical",
+          "weapon": "mp_weapon_grenade_sonar",
+          "samples": 170,
+          "not_ready_samples": 10,
+          "below_cost_samples": 0,
+          "min_clip": 200,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_frag_grenade",
+          "samples": 528,
+          "not_ready_samples": 218,
+          "below_cost_samples": 194,
+          "min_clip": 6,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_cloak",
+          "samples": 427,
+          "not_ready_samples": 340,
+          "below_cost_samples": 338,
+          "min_clip": 0,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "samples": 217,
+          "not_ready_samples": 29,
+          "below_cost_samples": 24,
+          "min_clip": 46,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_heal",
+          "samples": 248,
+          "not_ready_samples": 185,
+          "below_cost_samples": 185,
+          "min_clip": 2,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_holopilot",
+          "samples": 184,
+          "not_ready_samples": 47,
+          "below_cost_samples": 44,
+          "min_clip": 11,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_grenade_emp",
+          "samples": 261,
+          "not_ready_samples": 44,
+          "below_cost_samples": 14,
+          "min_clip": 143,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_grenade_gravity",
+          "samples": 210,
+          "not_ready_samples": 23,
+          "below_cost_samples": 10,
+          "min_clip": 46,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_weapon_deployable_cover",
+          "samples": 187,
+          "not_ready_samples": 12,
+          "below_cost_samples": 0,
+          "min_clip": 100,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "tactical",
+          "weapon": "mp_ability_shifter",
+          "samples": 190,
+          "not_ready_samples": 0,
+          "below_cost_samples": 0,
+          "min_clip": 200,
+          "max_clip": 200,
+          "nonzero_shot_counter_samples": 0
+        },
+        {
+          "channel": "ordnance",
+          "weapon": "mp_weapon_thermite_grenade",
+          "samples": 190,
+          "not_ready_samples": 36,
+          "below_cost_samples": 19,
+          "min_clip": 39,
+          "max_clip": 100,
+          "nonzero_shot_counter_samples": 0
+        }
+      ],
+      "cover": {
+        "probes": 18,
+        "selected_destinations": 9,
+        "no_destination": 9
+      },
+      "bot_pilot_ordnance": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 86,
+          "opposing_damage_callbacks": 38,
+          "opposing_callbacks_with_observed_health_loss": 38,
+          "enemy_pilot_deaths_credited": 19,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 48,
+          "self_pilot_deaths_credited": 27,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 7,
+          "opposing_damage_callbacks": 7,
+          "opposing_callbacks_with_observed_health_loss": 7,
+          "enemy_pilot_deaths_credited": 3,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_thermite_grenade",
+          "damage_callbacks": 12,
+          "opposing_damage_callbacks": 12,
+          "opposing_callbacks_with_observed_health_loss": 12,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_gravity",
+          "damage_callbacks": 4,
+          "opposing_damage_callbacks": 4,
+          "opposing_callbacks_with_observed_health_loss": 2,
+          "enemy_pilot_deaths_credited": 2,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "damage_callbacks": 4,
+          "opposing_damage_callbacks": 4,
+          "opposing_callbacks_with_observed_health_loss": 4,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 1156,
+          "partial": 48,
+          "failures": 2,
+          "suppressed": 2908,
+          "with_links": 0
+        },
+        "corners": {
+          "total": 10677,
+          "links": 0,
+          "by_jump": {
+            "255": 10283,
+            "-1": 394
+          },
+          "by_flags": {
+            "0": 2899,
+            "1": 4424,
+            "2": 2960,
+            "-1": 394
+          }
+        },
+        "corner_guard": {
+          "begins": 0,
+          "hold_samples": 0,
+          "ends": {},
+          "completed_duration_s": 0,
+          "duration_samples": 0
+        },
+        "stalls": {
+          "samples": 20,
+          "incidents": 20,
+          "link_or_partial": 5,
+          "duck_only": 0,
+          "blocked": 3,
+          "stand_clear": 17,
+          "unknown": 0,
+          "by_reason": {
+            "waypoint_timeout": 16,
+            "no_progress": 4
+          },
+          "by_state": {
+            "recover": 20
+          }
+        },
+        "stuck": {
+          "episodes": 3,
+          "by_state": {
+            "pursue": 2,
+            "engage": 1
+          },
+          "visible": 1,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 0,
+          "plausible": 0,
+          "examples": []
+        },
+        "decision": {
+          "stall_incidents": 20,
+          "link_or_partial_share": 0.25,
+          "duck_only_share": 0,
+          "partial_route_share": 0.04152249134948097,
+          "engage_stuck_share": 0.3333333333333333,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      }
+    }
+  ],
+  "limits": "Native observations trimmed to each played context epoch/window. Readiness/resource samples and allowed input pulses are not counts of successful casts or unique uses. Ordnance counts are pilot-attacker/pilot-victim callbacks; Titan attackers excluded. Matching end-of-frame health loss can include concurrent damage: no attributed damage sum or throw accuracy is computed. Lethal credit requires matching context/event/victim/life and zero-health post. Self/friendly/forced cases remain separate. Diagnostic incidents and overlapping movement samples are proxies, not visual observation or a causal before/after trial.",
+  "provenance": {
+    "session": "20261028-165845-d7218d71",
+    "native_sha256": "3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89",
+    "event_sha256": "1a67703d789f5e8823902fed63db83d06c11e54df66b0ac3eb4ec0c4737ea479",
+    "private_log_sha256": "3ae10d7ba2040f437c90b633b93bb529f917d8a3c6f4b4ebe2070e2108751387",
+    "core": "1.31.14",
+    "trial": "Full",
+    "trial_overrides": {
+      "bot_nav_diagnostics": 1,
+      "bot_route_guard": 0,
+      "bot_jump_timing": 0,
+      "bot_proximity_fix": 1,
+      "bot_perception_fix": 0,
+      "bot_combat_movement": 1,
+      "bot_crouch_recovery": 0,
+      "bot_height_response": 1,
+      "bot_defensive_tactics": 1,
+      "bot_skill_use": 1,
+      "bot_personality": 1,
+      "bt7274_bot_roster": 1,
+      "bt7274_bot_tacticals": 1,
+      "solo_weapon_notes_fire": 1,
+      "solo_weapon_notes_viewkick": 0
+    }
+  }
+}
