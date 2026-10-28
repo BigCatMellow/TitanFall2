@@ -1018,3 +1018,12 @@ stressmap, despite earlier played-control results. WarGames5.91%,Eden3.76%,
 Canal1.19%,Homestead0.37%,Meadow0. Keep cohorts/definitions separate. Current
 v22matrix started13:16:44, runner684504, receipt target/v22-matrix-session.json;
 first WarGamesguard0 is running at50goal/16bots. No conclusion from live partials.
+
+13:25 first matrix guard0 round on WarGames completed/closed/restored its idle
+config, and guard1 began automatically. Completed-round parser/population/goal/
+actual switch evidence all passed. Control2592livepilot samples,3.858%low progress;
+this single off round is NOT an improvement comparison. Initial sanitized snapshot
+in initial-results.json; live matrix-results.json continues updating locally and
+must not be mistaken for the frozen initial snapshot. Normal save/config/native
+guards intact so far. Queue continues through its finite plan/deadline without
+requiring BT-7274 to start each round. Consult current status before any edits.

@@ -1,0 +1,144 @@
+{
+  "state": "running",
+  "updated": "2026-10-28T13:26:45.9163236-04:00",
+  "source_commit": "80162b83a8c6702d779748e7b9117110210d18ba",
+  "profile_restored": false,
+  "native_sha256": "2B08DE76AB7A85C560F9DC9076F50233346EF1038A2C96B0F5BACD55AAB0A439",
+  "bridge_sha256": "9C43719868D28121E6D59A07C3317882E135A50FF3C91AA1340A12C1219C4598",
+  "core_sha256": "86007DD1DDAC9103508EECA520E2AB89B16DF92780A5F8A67497CCF29567EDB9",
+  "goal": 50,
+  "planned": 32,
+  "completed": 1,
+  "guard_stopped": false,
+  "skipped": [],
+  "rounds": [
+    {
+      "metrics": {
+        "schema_version": 1,
+        "map": "mp_wargames",
+        "goal": 50,
+        "corner_guard": 0,
+        "duration_s": 420.2,
+        "error_markers": 0,
+        "score": {
+          "imc": 46,
+          "militia": 50
+        },
+        "live_pilot_samples": 2592,
+        "low_progress_samples": 100,
+        "low_progress_percent": 3.8580246913580245,
+        "navigation": {
+          "schema_version": 1,
+          "paths": {
+            "requests": 2757,
+            "partial": 95,
+            "failures": 523,
+            "suppressed": 32854,
+            "with_links": 1317
+          },
+          "corners": {
+            "total": 85286,
+            "links": 13113,
+            "by_jump": {
+              "1": 2449,
+              "2": 60,
+              "8": 3178,
+              "16": 7426,
+              "255": 72128,
+              "-1": 45
+            },
+            "by_flags": {
+              "0": 41488,
+              "1": 35774,
+              "2": 7979,
+              "-1": 45
+            }
+          },
+          "corner_guard": {
+            "begins": 0,
+            "hold_samples": 0,
+            "ends": {},
+            "completed_duration_s": 0,
+            "duration_samples": 0
+          },
+          "stalls": {
+            "samples": 245,
+            "incidents": 154,
+            "link_or_partial": 116,
+            "duck_only": 0,
+            "blocked": 128,
+            "stand_clear": 26,
+            "unknown": 0,
+            "by_reason": {
+              "no_progress": 111,
+              "waypoint_timeout": 43
+            },
+            "by_state": {
+              "recover": 154
+            }
+          },
+          "stuck": {
+            "episodes": 195,
+            "by_state": {
+              "pursue": 120,
+              "engage": 25,
+              "recover": 33,
+              "embark": 17
+            },
+            "visible": 25,
+            "titan": 19
+          },
+          "crouch": {
+            "tests": 0,
+            "by_fit": {},
+            "attempts_max": 0,
+            "successes_max": 0,
+            "failures_max": 0
+          },
+          "viewcheck": {
+            "samples": 112,
+            "plausible": 112,
+            "examples": [
+              {
+                "eye_angles": "[0.0, -179.459, 0.0]",
+                "view_angles_raw": "[-0.9999554, -0.009442101, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              },
+              {
+                "eye_angles": "[0.0, 163.752, 0.0]",
+                "view_angles_raw": "[-0.9600596, 0.27979556, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              },
+              {
+                "eye_angles": "[0.0, -178.753, 0.0]",
+                "view_angles_raw": "[-0.9997632, -0.021762474, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              }
+            ]
+          },
+          "decision": {
+            "stall_incidents": 154,
+            "link_or_partial_share": 0.7532467532467533,
+            "duck_only_share": 0,
+            "partial_route_share": 0.034457743924555674,
+            "engage_stuck_share": 0.1282051282051282,
+            "recommendation": "prioritise link/partial-route handling"
+          },
+          "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+        },
+        "limits": "One bot-only survey window; requested goal is recorded separately. Low progress uses overlapping live-pilot navigation/recovery/boarding samples over10–13s with <50XY displacement; short unsampled deaths can be missed. Counts are not independent incidents, visual observation or causal improvement. Guard advances/replans are native recorded outcomes; missing ends on life/early returns remain censored. Different maps, scores and durations stay separate; no aim/damage/balance conclusion.",
+        "log_sha256": "8be50e4d0b97941ac732ec2a0931a783e49970c80bd2b4149d6e4a6712d6399d"
+      },
+      "map": "mp_wargames",
+      "repeat": 1,
+      "guard": 0
+    }
+  ],
+  "limits": "Matched 50-point bot-only rounds, same native build, one corner switch. Reversed order/repeats limit order effects but do not establish causal improvement. Native safety switches stay off. Operational regression cutoff skips subsequent guard-on rounds while baseline variety continues; it is not a statistical significance test."
+}
