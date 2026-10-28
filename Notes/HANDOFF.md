@@ -1071,3 +1071,29 @@ Nexttrace WHY replan and preserve a genuinely pending currentwaypoint before
 rebuilding solely due to empty remaininglist; boundedprogress/watchdog still
 required. Do not infer allreplans harmful or revive rejectedroutecache changes.
 No newgame launched during this review. Weapons/aim/humanbuffs unchanged.
+
+## 2026-10-28 — Weapon review of29matrix rounds
+
+Read-only weapon review, no game or install changes. research/weapons-matrix-v22-20261028
+retains29verifiedsource-window projections,2710pilot deaths/298clean100HP
+health episodes,0recorder errors. G2has191creditedenemypilotkills/78clean,
+CAR136/48,Hemlok121/30,R97109/24,R201103/28,Longbow96/53,Flatline80/19,
+Spitfire55/18. These are coverage counts, not a balance leaderboard: G2has
+4943equipped/2090visible-pilotcombat samples versusCAR3536/949. Actualrange,
+roles/opponents/time differ. Per-map/guard/repeat/config groups stay separate.
+
+Frags259enemy/513self pilotkills; otherordnance muchlessused. Botthrowdecision/
+trajectory/escape remains priority; priorv21 timingcandidatesfailed. No human
+grenade/gun damage nerf or accuracy/reaction buff justified by these counts.
+
+CAR628/949andR97698/1081visiblepilot-targetcombat samples beyond current650XY
+controller farband. These are target-intent samples, not shots/damagefalloff.
+Rusheralreadyrequestsclose, so auditbandappropriateness+path/covercompletion,
+not merely moreforwardinput. ChargeRiflehasnoordinaryband and excludedfromthis
+comparison. All joins are exactepoch/time/slot/livepilot, actualequippedweapon,
+updatedcombat andmatchinglivepilottarget. No rawactorIDs exported.
+
+0botmagazinesampling rows: currentfire sampler explicitlyhuman-only. Damage
+spansfirst-positivehealthdamage->death, NOT trigger/firstshotTTK. Strictperround
+range/config/hitgroup groups alln<5. Nextcontrolledrange/mod/hitgroup100HPgun
+trials, keepdamage/RPM/reload/aimunchanged. Humanplayedv20tworoundsseparate.
