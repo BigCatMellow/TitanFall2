@@ -1,0 +1,1123 @@
+{
+  "schema_version": 1,
+  "errors": 0,
+  "phases": [
+    {
+      "name": "v20_control",
+      "map": "mp_eden",
+      "start_t": 25.5167,
+      "end_t": 115.517,
+      "completed": true,
+      "safety": "false",
+      "retarget": "false",
+      "commits": 0,
+      "retarget_requests": 0,
+      "frag_prepares": 28,
+      "release_signals": 28,
+      "legacy_release_signals_without_weapon": 0,
+      "releases_by_weapon": {
+        "mp_weapon_frag_grenade": 28
+      },
+      "uses_by_weapon": {
+        "mp_ability_cloak": 13,
+        "mp_ability_heal": 12,
+        "mp_weapon_frag_grenade": 27,
+        "mp_ability_holopilot": 8
+      },
+      "attack_callbacks_by_weapon": {
+        "mp_ability_cloak": 13,
+        "mp_weapon_grenade_sonar": 21,
+        "mp_ability_heal": 12,
+        "mp_weapon_grenade_emp": 59,
+        "mp_weapon_frag_grenade": 28,
+        "mp_weapon_deployable_cover": 6,
+        "mp_weapon_grenade_gravity": 42,
+        "mp_ability_holopilot": 8,
+        "mp_weapon_thermite_grenade": 36,
+        "mp_ability_shifter": 3,
+        "mp_weapon_grenade_electric_smoke": 3
+      },
+      "phase_entries": 0,
+      "duration_s": 90.0003,
+      "ordnance": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 16,
+          "opposing_damage_callbacks": 4,
+          "opposing_callbacks_with_observed_health_loss": 4,
+          "enemy_pilot_deaths_credited": 4,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 12,
+          "self_pilot_deaths_credited": 7,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 545,
+          "partial": 0,
+          "failures": 6,
+          "suppressed": 8812,
+          "with_links": 310
+        },
+        "corners": {
+          "total": 21817,
+          "links": 2695,
+          "by_jump": {
+            "1": 1239,
+            "2": 61,
+            "8": 521,
+            "16": 874,
+            "255": 19122
+          },
+          "by_flags": {
+            "0": 12150,
+            "1": 9439,
+            "2": 228
+          }
+        },
+        "stalls": {
+          "samples": 34,
+          "incidents": 30,
+          "link_or_partial": 21,
+          "duck_only": 0,
+          "blocked": 13,
+          "stand_clear": 17,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 20,
+            "waypoint_timeout": 10
+          },
+          "by_state": {
+            "recover": 30
+          }
+        },
+        "stuck": {
+          "episodes": 15,
+          "by_state": {
+            "engage": 5,
+            "pursue": 9,
+            "embark": 1
+          },
+          "visible": 5,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 42,
+          "plausible": 42,
+          "examples": [
+            {
+              "eye_angles": "[0.0, 180.0, 0.0]",
+              "view_angles_raw": "[-1.0, -8.742278e-8, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, -90.0, 0.0]",
+              "view_angles_raw": "[-4.371139e-8, -1.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 180.0, 0.0]",
+              "view_angles_raw": "[-1.0, -8.742278e-8, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 30,
+          "link_or_partial_share": 0.7,
+          "duck_only_share": 0,
+          "partial_route_share": 0,
+          "engage_stuck_share": 0.3333333333333333,
+          "recommendation": "prioritise link/partial-route handling"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      },
+      "owned_frag_trajectory_count": 27,
+      "owned_frag_trajectories": [
+        {
+          "samples": 10,
+          "initial_speed": 381.6859824269814,
+          "min_owner_dist": 65.7115,
+          "max_owner_dist": 267.893
+        },
+        {
+          "samples": 10,
+          "initial_speed": 611.5998186142635,
+          "min_owner_dist": 51.9896,
+          "max_owner_dist": 333.585
+        },
+        {
+          "samples": 9,
+          "initial_speed": 219.88776174180887,
+          "min_owner_dist": 61.1196,
+          "max_owner_dist": 318.658
+        },
+        {
+          "samples": 10,
+          "initial_speed": 374.3852715330025,
+          "min_owner_dist": 62.1739,
+          "max_owner_dist": 215.873
+        },
+        {
+          "samples": 7,
+          "initial_speed": 305.93547510218553,
+          "min_owner_dist": 58.6388,
+          "max_owner_dist": 220.654
+        },
+        {
+          "samples": 10,
+          "initial_speed": 389.1501188140639,
+          "min_owner_dist": 61.8109,
+          "max_owner_dist": 182.695
+        },
+        {
+          "samples": 10,
+          "initial_speed": 222.14621622393213,
+          "min_owner_dist": 53.1022,
+          "max_owner_dist": 267.704
+        },
+        {
+          "samples": 10,
+          "initial_speed": 57.9812869930463,
+          "min_owner_dist": 27.3806,
+          "max_owner_dist": 212.868
+        },
+        {
+          "samples": 3,
+          "initial_speed": 317.9952407159579,
+          "min_owner_dist": 61.5561,
+          "max_owner_dist": 217.142
+        },
+        {
+          "samples": 10,
+          "initial_speed": 322.0940785085159,
+          "min_owner_dist": 54.4727,
+          "max_owner_dist": 221.675
+        },
+        {
+          "samples": 10,
+          "initial_speed": 222.18180289215857,
+          "min_owner_dist": 48.8771,
+          "max_owner_dist": 417.054
+        },
+        {
+          "samples": 9,
+          "initial_speed": 392.6624513736703,
+          "min_owner_dist": 13.1256,
+          "max_owner_dist": 79.0363
+        },
+        {
+          "samples": 5,
+          "initial_speed": 474.23227264870957,
+          "min_owner_dist": 54.8937,
+          "max_owner_dist": 273.271
+        },
+        {
+          "samples": 9,
+          "initial_speed": 329.9796032407155,
+          "min_owner_dist": 49.8841,
+          "max_owner_dist": 200.127
+        },
+        {
+          "samples": 5,
+          "initial_speed": 387.97097622637955,
+          "min_owner_dist": 51.9944,
+          "max_owner_dist": 158.917
+        },
+        {
+          "samples": 10,
+          "initial_speed": 415.5868398845781,
+          "min_owner_dist": 83.2424,
+          "max_owner_dist": 541.934
+        },
+        {
+          "samples": 10,
+          "initial_speed": 300.5787061821579,
+          "min_owner_dist": 68.2215,
+          "max_owner_dist": 154.898
+        },
+        {
+          "samples": 10,
+          "initial_speed": 520.3633466744656,
+          "min_owner_dist": 79.5654,
+          "max_owner_dist": 192.287
+        },
+        {
+          "samples": 10,
+          "initial_speed": 473.6529985764051,
+          "min_owner_dist": 56.9273,
+          "max_owner_dist": 245.167
+        },
+        {
+          "samples": 5,
+          "initial_speed": 296.06930725134276,
+          "min_owner_dist": 56.9556,
+          "max_owner_dist": 151.982
+        },
+        {
+          "samples": 10,
+          "initial_speed": 390.90189951839574,
+          "min_owner_dist": 60.6296,
+          "max_owner_dist": 203.85
+        },
+        {
+          "samples": 9,
+          "initial_speed": 374.5889024778497,
+          "min_owner_dist": 63.2578,
+          "max_owner_dist": 254.267
+        },
+        {
+          "samples": 9,
+          "initial_speed": 631.0300242646224,
+          "min_owner_dist": 39.0272,
+          "max_owner_dist": 173.682
+        },
+        {
+          "samples": 10,
+          "initial_speed": 427.4140102058659,
+          "min_owner_dist": 67.0123,
+          "max_owner_dist": 342.888
+        },
+        {
+          "samples": 6,
+          "initial_speed": 323.4132540608842,
+          "min_owner_dist": 63.2221,
+          "max_owner_dist": 274.355
+        },
+        {
+          "samples": 10,
+          "initial_speed": 341.0331971544594,
+          "min_owner_dist": 65.0884,
+          "max_owner_dist": 261.036
+        },
+        {
+          "samples": 5,
+          "initial_speed": 440.73385285781035,
+          "min_owner_dist": 59.1291,
+          "max_owner_dist": 97.6783
+        }
+      ]
+    },
+    {
+      "name": "v21_safety",
+      "map": "mp_eden",
+      "start_t": 115.517,
+      "end_t": 295.517,
+      "completed": true,
+      "safety": "true",
+      "retarget": "true",
+      "commits": 52,
+      "retarget_requests": 37,
+      "frag_prepares": 6,
+      "release_signals": 6,
+      "legacy_release_signals_without_weapon": 0,
+      "releases_by_weapon": {
+        "mp_weapon_frag_grenade": 6
+      },
+      "uses_by_weapon": {
+        "mp_ability_cloak": 13,
+        "mp_ability_holopilot": 9,
+        "mp_weapon_frag_grenade": 6,
+        "mp_ability_heal": 9
+      },
+      "attack_callbacks_by_weapon": {
+        "mp_ability_cloak": 15,
+        "mp_ability_holopilot": 9,
+        "mp_weapon_frag_grenade": 6,
+        "mp_weapon_deployable_cover": 3,
+        "mp_weapon_grenade_emp": 8,
+        "mp_weapon_grenade_gravity": 6,
+        "mp_weapon_thermite_grenade": 2,
+        "mp_weapon_grenade_sonar": 42,
+        "mp_ability_heal": 9,
+        "mp_ability_shifter": 1
+      },
+      "phase_entries": 0,
+      "duration_s": 180,
+      "ordnance": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 4,
+          "opposing_damage_callbacks": 1,
+          "opposing_callbacks_with_observed_health_loss": 1,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 3,
+          "self_pilot_deaths_credited": 3,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 1,
+          "opposing_damage_callbacks": 1,
+          "opposing_callbacks_with_observed_health_loss": 1,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 1487,
+          "partial": 68,
+          "failures": 249,
+          "suppressed": 33641,
+          "with_links": 766
+        },
+        "corners": {
+          "total": 84592,
+          "links": 17719,
+          "by_jump": {
+            "1": 1691,
+            "2": 153,
+            "8": 305,
+            "16": 15570,
+            "255": 66873
+          },
+          "by_flags": {
+            "0": 52458,
+            "1": 30560,
+            "2": 1574
+          }
+        },
+        "stalls": {
+          "samples": 119,
+          "incidents": 52,
+          "link_or_partial": 14,
+          "duck_only": 0,
+          "blocked": 30,
+          "stand_clear": 22,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 49,
+            "waypoint_timeout": 3
+          },
+          "by_state": {
+            "recover": 52
+          }
+        },
+        "stuck": {
+          "episodes": 68,
+          "by_state": {
+            "embark": 9,
+            "pursue": 29,
+            "recover": 26,
+            "engage": 4
+          },
+          "visible": 4,
+          "titan": 23
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 60,
+          "plausible": 60,
+          "examples": [
+            {
+              "eye_angles": "[0.0, 0.0, 0.0]",
+              "view_angles_raw": "[1.0, 0.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 180.0, 0.0]",
+              "view_angles_raw": "[-1.0, -8.742278e-8, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 0.0, 0.0]",
+              "view_angles_raw": "[1.0, 0.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 52,
+          "link_or_partial_share": 0.2692307692307692,
+          "duck_only_share": 0,
+          "partial_route_share": 0.04572965702757229,
+          "engage_stuck_share": 0.058823529411764705,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      },
+      "owned_frag_trajectory_count": 6,
+      "owned_frag_trajectories": [
+        {
+          "samples": 9,
+          "initial_speed": 378.30675290352673,
+          "min_owner_dist": 94.874,
+          "max_owner_dist": 296.454
+        },
+        {
+          "samples": 10,
+          "initial_speed": 216.04236561149298,
+          "min_owner_dist": 56.3508,
+          "max_owner_dist": 152.476
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.86420307908438,
+          "min_owner_dist": 14.1913,
+          "max_owner_dist": 124.728
+        },
+        {
+          "samples": 10,
+          "initial_speed": 206.1409014396949,
+          "min_owner_dist": 68.4666,
+          "max_owner_dist": 183.856
+        },
+        {
+          "samples": 9,
+          "initial_speed": 216.6872966682865,
+          "min_owner_dist": 60.9967,
+          "max_owner_dist": 174.386
+        },
+        {
+          "samples": 7,
+          "initial_speed": 213.71105510768507,
+          "min_owner_dist": 61.8283,
+          "max_owner_dist": 162.373
+        }
+      ]
+    },
+    {
+      "name": "hurt_ability_probe",
+      "map": "mp_eden",
+      "start_t": 295.517,
+      "end_t": 335.517,
+      "completed": true,
+      "safety": "true",
+      "retarget": "true",
+      "commits": 3,
+      "retarget_requests": 18,
+      "frag_prepares": 0,
+      "release_signals": 0,
+      "legacy_release_signals_without_weapon": 0,
+      "releases_by_weapon": {},
+      "uses_by_weapon": {
+        "mp_ability_holopilot": 1,
+        "mp_ability_heal": 3,
+        "mp_ability_cloak": 1
+      },
+      "attack_callbacks_by_weapon": {
+        "mp_ability_holopilot": 1,
+        "mp_weapon_grenade_sonar": 15,
+        "mp_ability_heal": 3,
+        "mp_ability_cloak": 1
+      },
+      "phase_entries": 0,
+      "duration_s": 40,
+      "ordnance": [],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 446,
+          "partial": 59,
+          "failures": 116,
+          "suppressed": 11904,
+          "with_links": 185
+        },
+        "corners": {
+          "total": 28534,
+          "links": 6034,
+          "by_jump": {
+            "1": 114,
+            "8": 44,
+            "16": 5876,
+            "255": 22499,
+            "-1": 1
+          },
+          "by_flags": {
+            "0": 17799,
+            "1": 10223,
+            "2": 511,
+            "-1": 1
+          }
+        },
+        "stalls": {
+          "samples": 38,
+          "incidents": 16,
+          "link_or_partial": 6,
+          "duck_only": 0,
+          "blocked": 12,
+          "stand_clear": 4,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 16
+          },
+          "by_state": {
+            "recover": 16
+          }
+        },
+        "stuck": {
+          "episodes": 33,
+          "by_state": {
+            "recover": 17,
+            "engage": 7,
+            "pursue": 7,
+            "embark": 2
+          },
+          "visible": 7,
+          "titan": 20
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 1,
+          "plausible": 1,
+          "examples": [
+            {
+              "eye_angles": "[0.0, 180.0, 0.0]",
+              "view_angles_raw": "[-1.0, -8.742278e-8, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 16,
+          "link_or_partial_share": 0.375,
+          "duck_only_share": 0,
+          "partial_route_share": 0.13228699551569506,
+          "engage_stuck_share": 0.21212121212121213,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      },
+      "owned_frag_trajectory_count": 0,
+      "owned_frag_trajectories": []
+    },
+    {
+      "name": "switch_off",
+      "map": "mp_eden",
+      "start_t": 335.517,
+      "end_t": 345.517,
+      "completed": true,
+      "safety": "false",
+      "retarget": "false",
+      "commits": 0,
+      "retarget_requests": 0,
+      "frag_prepares": 0,
+      "release_signals": 0,
+      "legacy_release_signals_without_weapon": 0,
+      "releases_by_weapon": {},
+      "uses_by_weapon": {},
+      "attack_callbacks_by_weapon": {},
+      "phase_entries": 0,
+      "duration_s": 10,
+      "ordnance": [],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 28,
+          "partial": 1,
+          "failures": 1,
+          "suppressed": 187,
+          "with_links": 15
+        },
+        "corners": {
+          "total": 829,
+          "links": 103,
+          "by_jump": {
+            "1": 2,
+            "8": 44,
+            "16": 57,
+            "255": 726
+          },
+          "by_flags": {
+            "0": 463,
+            "1": 366
+          }
+        },
+        "stalls": {
+          "samples": 0,
+          "incidents": 0,
+          "link_or_partial": 0,
+          "duck_only": 0,
+          "blocked": 0,
+          "stand_clear": 0,
+          "unknown": 0,
+          "by_reason": {},
+          "by_state": {}
+        },
+        "stuck": {
+          "episodes": 0,
+          "by_state": {},
+          "visible": 0,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 16,
+          "plausible": 16,
+          "examples": [
+            {
+              "eye_angles": "[0.0, 180.0, 0.0]",
+              "view_angles_raw": "[-1.0, -8.742278e-8, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 179.983, 0.0]",
+              "view_angles_raw": "[-0.99999994, 0.0002967437, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 179.983, 0.0]",
+              "view_angles_raw": "[-0.99999994, 0.0002967437, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 0,
+          "link_or_partial_share": null,
+          "duck_only_share": null,
+          "partial_route_share": 0.03571428571428571,
+          "engage_stuck_share": null,
+          "recommendation": "insufficient stall incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      },
+      "owned_frag_trajectory_count": 0,
+      "owned_frag_trajectories": []
+    },
+    {
+      "name": "new_map_safety",
+      "map": "mp_lf_meadow",
+      "start_t": 20.3167,
+      "end_t": 120.317,
+      "completed": true,
+      "safety": "true",
+      "retarget": "true",
+      "commits": 134,
+      "retarget_requests": 0,
+      "frag_prepares": 43,
+      "release_signals": 35,
+      "legacy_release_signals_without_weapon": 0,
+      "releases_by_weapon": {
+        "mp_weapon_frag_grenade": 35
+      },
+      "uses_by_weapon": {
+        "mp_ability_cloak": 14,
+        "mp_ability_heal": 15,
+        "mp_weapon_frag_grenade": 35,
+        "mp_ability_holopilot": 12
+      },
+      "attack_callbacks_by_weapon": {
+        "mp_ability_cloak": 14,
+        "mp_weapon_grenade_sonar": 16,
+        "mp_ability_heal": 15,
+        "mp_weapon_frag_grenade": 35,
+        "mp_weapon_grenade_gravity": 23,
+        "mp_weapon_thermite_grenade": 17,
+        "mp_ability_holopilot": 12,
+        "mp_weapon_grenade_emp": 41,
+        "mp_weapon_grenade_electric_smoke": 2,
+        "mp_weapon_deployable_cover": 9,
+        "mp_ability_shifter": 25
+      },
+      "phase_entries": 0,
+      "duration_s": 100.0003,
+      "ordnance": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 31,
+          "opposing_damage_callbacks": 4,
+          "opposing_callbacks_with_observed_health_loss": 4,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 27,
+          "self_pilot_deaths_credited": 20,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_thermite_grenade",
+          "damage_callbacks": 4,
+          "opposing_damage_callbacks": 4,
+          "opposing_callbacks_with_observed_health_loss": 4,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 413,
+          "partial": 11,
+          "failures": 0,
+          "suppressed": 1537,
+          "with_links": 0
+        },
+        "corners": {
+          "total": 4655,
+          "links": 0,
+          "by_jump": {
+            "255": 4655
+          },
+          "by_flags": {
+            "0": 977,
+            "1": 2119,
+            "2": 1559
+          }
+        },
+        "stalls": {
+          "samples": 8,
+          "incidents": 7,
+          "link_or_partial": 1,
+          "duck_only": 0,
+          "blocked": 2,
+          "stand_clear": 5,
+          "unknown": 0,
+          "by_reason": {
+            "waypoint_timeout": 6,
+            "no_progress": 1
+          },
+          "by_state": {
+            "recover": 7
+          }
+        },
+        "stuck": {
+          "episodes": 4,
+          "by_state": {
+            "pursue": 3,
+            "engage": 1
+          },
+          "visible": 1,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 65,
+          "plausible": 65,
+          "examples": [
+            {
+              "eye_angles": "[0.0, -90.0, 0.0]",
+              "view_angles_raw": "[-4.371139e-8, -1.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 0.0, 0.0]",
+              "view_angles_raw": "[1.0, 0.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, -90.0, 0.0]",
+              "view_angles_raw": "[-4.371139e-8, -1.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 7,
+          "link_or_partial_share": 0.14285714285714285,
+          "duck_only_share": 0,
+          "partial_route_share": 0.026634382566585957,
+          "engage_stuck_share": 0.25,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      },
+      "owned_frag_trajectory_count": 35,
+      "owned_frag_trajectories": [
+        {
+          "samples": 10,
+          "initial_speed": 383.8864840809064,
+          "min_owner_dist": 65.9906,
+          "max_owner_dist": 209.724
+        },
+        {
+          "samples": 10,
+          "initial_speed": 201.18168444317914,
+          "min_owner_dist": 67.3878,
+          "max_owner_dist": 206.766
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.1982168095944,
+          "min_owner_dist": 61.6598,
+          "max_owner_dist": 193.2
+        },
+        {
+          "samples": 10,
+          "initial_speed": 242.7818004113982,
+          "min_owner_dist": 62.7333,
+          "max_owner_dist": 187.194
+        },
+        {
+          "samples": 10,
+          "initial_speed": 201.2698941641546,
+          "min_owner_dist": 66.5353,
+          "max_owner_dist": 124.95
+        },
+        {
+          "samples": 10,
+          "initial_speed": 216.80408752606579,
+          "min_owner_dist": 67.6611,
+          "max_owner_dist": 357.44
+        },
+        {
+          "samples": 3,
+          "initial_speed": 199.49052234682728,
+          "min_owner_dist": 70.3316,
+          "max_owner_dist": 152.722
+        },
+        {
+          "samples": 10,
+          "initial_speed": 201.58261348343015,
+          "min_owner_dist": 65.9159,
+          "max_owner_dist": 308.05
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.34488095368644,
+          "min_owner_dist": 61.4549,
+          "max_owner_dist": 195.403
+        },
+        {
+          "samples": 10,
+          "initial_speed": 213.59406263929716,
+          "min_owner_dist": 62.28,
+          "max_owner_dist": 265.747
+        },
+        {
+          "samples": 10,
+          "initial_speed": 436.7429016023042,
+          "min_owner_dist": 56.9269,
+          "max_owner_dist": 108.88
+        },
+        {
+          "samples": 10,
+          "initial_speed": 210.3330232272146,
+          "min_owner_dist": 64.143,
+          "max_owner_dist": 177.787
+        },
+        {
+          "samples": 10,
+          "initial_speed": 198.59649586057657,
+          "min_owner_dist": 60.403,
+          "max_owner_dist": 116.753
+        },
+        {
+          "samples": 10,
+          "initial_speed": 213.58597256608405,
+          "min_owner_dist": 61.507,
+          "max_owner_dist": 515.115
+        },
+        {
+          "samples": 10,
+          "initial_speed": 202.68391290287445,
+          "min_owner_dist": 66.7759,
+          "max_owner_dist": 176.709
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.17421553261264,
+          "min_owner_dist": 61.6743,
+          "max_owner_dist": 153.757
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.03637439475096,
+          "min_owner_dist": 61.8242,
+          "max_owner_dist": 226.271
+        },
+        {
+          "samples": 10,
+          "initial_speed": 215.42462459405613,
+          "min_owner_dist": 61.3601,
+          "max_owner_dist": 210.971
+        },
+        {
+          "samples": 6,
+          "initial_speed": 215.4183700847493,
+          "min_owner_dist": 61.3973,
+          "max_owner_dist": 214.458
+        },
+        {
+          "samples": 3,
+          "initial_speed": 222.9589495110927,
+          "min_owner_dist": 65.5177,
+          "max_owner_dist": 122.829
+        },
+        {
+          "samples": 10,
+          "initial_speed": 215.17315678590455,
+          "min_owner_dist": 61.4854,
+          "max_owner_dist": 184.979
+        },
+        {
+          "samples": 10,
+          "initial_speed": 203.5577803844648,
+          "min_owner_dist": 66.4271,
+          "max_owner_dist": 216.673
+        },
+        {
+          "samples": 10,
+          "initial_speed": 202.88889609352702,
+          "min_owner_dist": 66.1551,
+          "max_owner_dist": 316.791
+        },
+        {
+          "samples": 10,
+          "initial_speed": 210.9620658092113,
+          "min_owner_dist": 63.9501,
+          "max_owner_dist": 162.07
+        },
+        {
+          "samples": 10,
+          "initial_speed": 204.61942306860803,
+          "min_owner_dist": 56.2746,
+          "max_owner_dist": 183.737
+        },
+        {
+          "samples": 10,
+          "initial_speed": 203.85239780245413,
+          "min_owner_dist": 59.8593,
+          "max_owner_dist": 206.858
+        },
+        {
+          "samples": 10,
+          "initial_speed": 213.6938874627208,
+          "min_owner_dist": 51.1955,
+          "max_owner_dist": 190.659
+        },
+        {
+          "samples": 5,
+          "initial_speed": 200.88766535857795,
+          "min_owner_dist": 80.1867,
+          "max_owner_dist": 148.561
+        },
+        {
+          "samples": 10,
+          "initial_speed": 278.7747407746979,
+          "min_owner_dist": 72.7011,
+          "max_owner_dist": 195.774
+        },
+        {
+          "samples": 10,
+          "initial_speed": 202.2237936148217,
+          "min_owner_dist": 55.0164,
+          "max_owner_dist": 388.22
+        },
+        {
+          "samples": 10,
+          "initial_speed": 472.9079997346207,
+          "min_owner_dist": 75.6649,
+          "max_owner_dist": 486.387
+        },
+        {
+          "samples": 10,
+          "initial_speed": 202.85257637545547,
+          "min_owner_dist": 59.3633,
+          "max_owner_dist": 187.325
+        },
+        {
+          "samples": 10,
+          "initial_speed": 200.2953084213657,
+          "min_owner_dist": 66.4308,
+          "max_owner_dist": 125.995
+        },
+        {
+          "samples": 10,
+          "initial_speed": 208.10289157505716,
+          "min_owner_dist": 64.6506,
+          "max_owner_dist": 143.879
+        },
+        {
+          "samples": 3,
+          "initial_speed": 367.1416186718689,
+          "min_owner_dist": 58.1955,
+          "max_owner_dist": 180.087
+        }
+      ]
+    }
+  ],
+  "limits": "Controlled smoke, not human balance. Natural control/candidate and manipulated-health probe are separate phases. Release signal also includes cancel/drop; offhand-use bookkeeping includes drops on death. Legacy release logs used active primary instead of the throwing offhand: weapon/age attribution from those logs is invalid. Projectile samples confirm observed owned frags but do not count all launches or show their final collision. Phase boundaries can exclude cross-boundary damage. Different durations/weapon/life mixes are not matched fight samples. Counts are not throw accuracy or first-shot TTK.",
+  "runtime_state": "passed",
+  "provenance": {
+    "private_run": "safety-20261028-064903",
+    "log_sha256": "580d432ba8d766f4cd2b78092a55204830cf3c02b1faf5a9aaf34147d16c4b93",
+    "native_sha256": "BE33537CCF312D9249D60249716F7FD9E7502296FBD9B7B9D4D1D5AB90008204",
+    "bridge_sha256": "04B7FE7B1BB242A91F3F191AE16A66E49FDFF6F4FA2443DD550A9E11E80BDBAE",
+    "started": "2026-10-28T06:49:03.4439004-04:00"
+  },
+  "context": {
+    "map": "mp_eden",
+    "next_map": "mp_lf_meadow",
+    "population": "16bots_inactive_human",
+    "harness_sha256": "BB55863F29E91AAD5CAAAEB5356867F1B9E40059BCE35F0F0071963E61B5FA1E",
+    "ui_sha256": "F73AC74EA11CBF16BFD8C3E9D0CFF9B37495E05BEC9BE55916B216EAC70C4232"
+  }
+}

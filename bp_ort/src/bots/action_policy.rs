@@ -3,8 +3,11 @@
 pub(super) struct Ready { pub at: f32, pub weapon: i32, pub ready: bool }
 impl Ready {
     pub fn permits(self, now: f32, weapon: i32) -> bool {
+        self.matches(now, weapon) && self.ready
+    }
+    fn matches(self, now: f32, weapon: i32) -> bool {
         now.is_finite() && self.at.is_finite() && weapon != -1 && self.weapon == weapon
-            && now >= self.at && now - self.at <= 0.35 && self.ready
+            && now >= self.at && now - self.at <= 0.35
     }
 }
 #[derive(Debug, Default)]
@@ -14,19 +17,27 @@ pub(super) struct Pulse {
 }
 impl Pulse {
     pub fn press(&mut self, now: f32, weapon: i32, wanted: bool, ready: Option<Ready>) -> bool {
+        self.press_for(now, weapon, wanted, ready, 0.12, false)
+    }
+    pub fn press_for(&mut self, now: f32, weapon: i32, wanted: bool, ready: Option<Ready>, hold: f32, committed: bool) -> bool {
+        if !hold.is_finite() { return false; }
         if !now.is_finite() { return false; }
         if self.last.is_some_and(|last| now < last) || self.weapon != Some(weapon) {
             *self = Self { weapon: Some(weapon), ..Default::default() };
         }
         self.last = Some(now);
-        if !wanted || !ready.is_some_and(|r| r.permits(now, weapon)) {
+        // A started toss may become busy during pullout. Finish only its bounded
+        // input pulse; starting still requires explicit readiness every time.
+        let permitted = ready.is_some_and(|r| r.permits(now, weapon)
+            || (committed && now < self.until && r.matches(now, weapon)));
+        if !wanted || !permitted {
             self.until = now;
             if wanted { self.blocked = self.blocked.saturating_add(1); }
             return false;
         }
         if now < self.until { return true; }
         if now < self.next { return false; }
-        self.until = now + 0.12;
+        self.until = now + hold.clamp(0.05, 0.6);
         self.next = now + 1.;
         self.starts = self.starts.saturating_add(1);
         true
@@ -50,6 +61,29 @@ pub(super) fn defensive_now(tactical: &str, health: i32) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test] fn toss_press_can_finish_pullout_but_still_releases_and_obeys_readiness() {
+        let mut p = Pulse::default();
+        assert!(p.press_for(1.,7,true,ready(1.),0.45,true));
+        assert!(p.press_for(1.3,7,true,ready(1.3),0.45,true));
+        assert!(!p.press_for(1.5,7,true,ready(1.5),0.45,true));
+        assert!(!p.press_for(1.6,7,true,ready(1.6),0.45,true));
+        assert_eq!(p.starts,1);
+        assert!(p.press_for(2.1,7,true,ready(2.1),0.45,true));
+        assert!(!p.press_for(2.2,7,true,None,0.45,true));
+    }
+    #[test] fn committed_busy_continuation_requires_fresh_matching_sample_and_expires() {
+        let busy = |at, weapon| Some(Ready {at,weapon,ready:false});
+        let mut p = Pulse::default();
+        assert!(!p.press_for(0.9,7,true,busy(0.9,7),0.45,true));
+        assert!(p.press_for(1.,7,true,ready(1.),0.45,true));
+        assert!(p.press_for(1.2,7,true,busy(1.2,7),0.45,true));
+        assert!(!p.press_for(1.5,7,true,busy(1.5,7),0.45,true));
+        for sample in [None, busy(1.,7), busy(1.3,8)] {
+            let mut q = Pulse::default();
+            assert!(q.press_for(1.,7,true,ready(1.),0.45,true));
+            assert!(!q.press_for(1.4,7,true,sample,0.45,true));
+        }
+    }
     #[test] fn defensive_tactics_only_for_stim_phase_when_hurt() {
         assert!(defensive_now("mp_ability_heal", 40)); assert!(defensive_now("mp_ability_shifter", 59));
         assert!(!defensive_now("mp_ability_heal", 60)); assert!(!defensive_now("mp_ability_heal", 0));

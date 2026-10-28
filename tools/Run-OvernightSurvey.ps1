@@ -3,6 +3,7 @@ $ErrorActionPreference='Stop'
 $request=Get-Content -Raw -LiteralPath $RequestPath|ConvertFrom-Json
 $repo=Split-Path $PSScriptRoot
 . "$PSScriptRoot/Read-SurveyQueueJson.ps1"
+. "$PSScriptRoot/Read-SurveyRuntimeHash.ps1"
 $batch=[string]$request.batch
 $profile=[string]$request.profile
 $goal=[int]$request.goal
@@ -23,7 +24,7 @@ function Read-Prior {
     foreach($priorBatch in $request.completed_batches){
         $p=Get-Content -Raw "$priorBatch/plan.json"|ConvertFrom-Json
         $s=Get-Content -Raw "$priorBatch/status.json"|ConvertFrom-Json
-        if($p.dll_sha256-ne$nativeHash-or$p.core_sha256-ne$coreHash-or$p.bridge_sha256-ne$bridgeHash){throw 'Prior cohort runtime differs'}
+        if((Read-SurveyRuntimeHash $p)-ne$nativeHash-or$p.core_sha256-ne$coreHash-or$p.bridge_sha256-ne$bridgeHash){throw 'Prior cohort runtime differs'}
         foreach($entry in $s.results){if($entry.result.valid-eq'true'){
             $rows+=@{map=$entry.map;goal=$p.goal;observer_loadout_restore=$p.observer_loadout_restore;result=$entry.result;directory=$entry.directory;batch=$priorBatch}
         }}

@@ -4,8 +4,13 @@ struct { bool started=false } file
 void function BT7274SafetyTest_Init()
 {
     if(!GetConVarBool("bt7274_safety_test"))return
+    AddCallback_OnClientConnected(BT7274SafetyTest_Connect)
     AddCallback_GameStateEnter(eGameState.Playing,BT7274SafetyTest_Start)
     if(IsLobby())thread BT7274SafetyTest_Lobby()
+}
+void function BT7274SafetyTest_Connect(entity player)
+{
+    if(player.GetUID()!="0")player.SetPersistentVar("privateMatchState",0)
 }
 void function BT7274SafetyTest_Lobby()
 {
@@ -33,9 +38,29 @@ void function BT7274SafetyTest_Phase(string name,float duration)
     print("SAFETY_TEST_PHASE map="+GetMapName()+" name="+name+" t="+Time()+" safety="+GetConVarBool("bot_offhand_safety")+" retarget="+GetConVarBool("bot_stall_retarget"))
     float until=Time()+duration
     while(Time()<until){wait 5.0;print("SAFETY_TEST_HEARTBEAT phase="+name+" t="+Time()+" population="+GetPlayerArray().len())}
-    BT7274SafetyTest_Require(GetPlayerArray().len()==16,"Population changed")
+    BT7274SafetyTest_Require(BT7274SafetyTest_Bots().len()==16,"Bot population changed")
     BT7274SafetyTest_Require(fabs(GetConVarFloat("bot_aim_error_scale")-0.78)<0.001,"Aim changed")
     print("SAFETY_TEST_PHASE_PASS name="+name+" t="+Time())
+}
+array<entity> function BT7274SafetyTest_Bots()
+{
+    array<entity> bots
+    foreach(entity p in GetPlayerArray())if(p.GetUID()=="0")bots.append(p)
+    return bots
+}
+void function BT7274SafetyTest_Spectate(entity p)
+{
+    WaitEndFrame()
+    if(!IsValid(p))return
+    p.SetPersistentVar("privateMatchState",1)
+    if(IsAlive(p))p.Die()
+    wait 0.1
+    if(!IsValid(p))return
+    p.Signal("OnRespawned")
+    ClearRespawnAvailable(p)
+    p.SetPlayerSettings("spectator")
+    p.StopPhysics()
+    InitialisePrivateMatchSpectatorPlayer(p)
 }
 void function BT7274SafetyTest_Respawn()
 {
@@ -44,15 +69,27 @@ void function BT7274SafetyTest_Respawn()
 void function BT7274SafetyTest_Run()
 {
     wait 1.0
+    SetConVarInt("bot_manager_target",17)
+    SetConVarInt("bot_manager_max",17)
     entity human=null
     float deadline=Time()+40.0
     while(Time()<deadline){
-        foreach(entity p in GetPlayerArray())if(p.GetUID()!="0"&&IsAlive(p))human=p
-        if(IsValid(human)&&GetPlayerArray().len()==16)break
+        foreach(entity p in GetPlayerArray())if(p.GetUID()!="0")human=p
+        if(BT7274SafetyTest_Bots().len()==16)break
         wait 0.25
     }
-    BT7274SafetyTest_Require(IsValid(human)&&GetPlayerArray().len()==16,"Need human observer plus15bots")
-    human.SetInvulnerable()
+    BT7274SafetyTest_Require(BT7274SafetyTest_Bots().len()==16,"Need16fighting bots")
+    if(IsValid(human)){
+        BT7274SafetyTest_Spectate(human)
+        BT7274SafetyTest_Require(!IsAlive(human),"Human observer must be inactive")
+    }
+    int imc=0
+    foreach(entity p in BT7274SafetyTest_Bots())if(p.GetTeam()==TEAM_IMC)imc++
+    foreach(entity p in BT7274SafetyTest_Bots()){
+        if(imc>8&&p.GetTeam()==TEAM_IMC){SetTeam(p,TEAM_MILITIA);imc--}
+        else if(imc<8&&p.GetTeam()==TEAM_MILITIA){SetTeam(p,TEAM_IMC);imc++}
+    }
+    print("SAFETY_TEST_POPULATION bots=16 imc=8 militia=8 observer_alive=0")
     foreach(string name in ["bot_nav_diagnostics","bot_proximity_fix","bot_combat_movement","bot_height_response","bot_defensive_tactics","bot_skill_use","bot_personality","bt7274_bot_roster","bt7274_bot_tacticals"])SetConVarBool(name,true)
     foreach(string name in ["bot_route_guard","bot_jump_timing","bot_perception_fix","bot_crouch_recovery"])SetConVarBool(name,false)
     BT7274SafetyTest_Flags(false)

@@ -621,17 +621,24 @@ pub(crate) fn basic_combat(
         let ready = crate::bots::action_bridge::readiness(player.m_RefEHandle, token);
         let tactical_id = lookup_ent(player.m_inventory.offhandWeapons[1], helper.sv_funcs).map_or(-1, |w| w.m_RefEHandle);
         let ordnance_id = lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs).map_or(-1, |w| w.m_RefEHandle);
-        let tactical = local_data.tactical_pulse.press(time(helper), tactical_id,
-            cmd.buttons & Action::OffHand1 as u32 != 0
-                && (!offhand_safety || local_data.throw_safety.aim(time(helper)).is_none()), ready.map(|r| r.tactical));
-        let mut ordnance_wanted = !tactical && cmd.buttons & Action::OffHand0 as u32 != 0;
-        if offhand_safety && ordnance_wanted {
+        let tactical_name = lookup_ent(player.m_inventory.offhandWeapons[1], helper.sv_funcs)
+            .and_then(|w| get_weaponx_name(w, helper.sv_funcs)).unwrap_or_default();
+        let tactical_toss = matches!(tactical_name, "mp_ability_shifter" | "mp_weapon_deployable_cover" | "mp_weapon_grenade_sonar");
+        let keep_tactical = offhand_safety && local_data.throw_safety.keep_request(time(helper), true);
+        let tactical_wanted = keep_tactical || (cmd.buttons & Action::OffHand1 as u32 != 0
+            && (!offhand_safety || local_data.throw_safety.aim(time(helper)).is_none()));
+        let tactical = local_data.tactical_pulse.press_for(time(helper), tactical_id,
+            tactical_wanted, ready.map(|r| r.tactical), if offhand_safety && tactical_toss { 0.45 } else { 0.12 }, offhand_safety && tactical_toss);
+        let keep_ordnance = offhand_safety && local_data.throw_safety.keep_request(time(helper), false);
+        let mut ordnance_wanted = !tactical && (cmd.buttons & Action::OffHand0 as u32 != 0 || keep_ordnance);
+        if offhand_safety && ordnance_wanted && !keep_ordnance {
             let name = lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs)
                 .and_then(|w| get_weaponx_name(w, helper.sv_funcs)).unwrap_or_default();
             let p = local_data.metrics.target_pos;
             let tpos = Vector3::new(p[0], p[1], p[2]);
             let min = crate::bots::offhand_safety::minimum_range(name);
             ordnance_wanted = local_data.throw_safety.allow_request(time(helper))
+                && !local_data.throw_safety.tactical_active(time(helper))
                 && local_data.metrics.state != "recover" && local_data.metrics.state != "embark"
                 && (name == "mp_weapon_grenade_electric_smoke" || distance(origin, tpos) >= min);
             if ordnance_wanted && skill_plan.1.is_some_and(|(reason, _)| reason == "throw") {
@@ -644,14 +651,15 @@ pub(crate) fn basic_combat(
                     let direction = Vector3::new(cp*cy,cp*sy,-sp);
                     [-8.,0.,8.].into_iter().all(|offset| {
                         let from = start + Vector3::new(sy*offset,-cy*offset,0.);
-                        view_rate(helper, from, from + direction*224. - GROUND_OFFSET, player, true).0 >= 0.98
+                        let end = from + Vector3::new(direction.x*224.,direction.y*224.,direction.z*224.);
+                        view_rate(helper, from, end - GROUND_OFFSET, player, true).0 >= 0.98
                     })
                 });
             }
         }
         // At most one pilot offhand request at once, with defensive tactical priority.
-        let ordnance = local_data.ordnance_pulse.press(time(helper), ordnance_id,
-            ordnance_wanted, ready.map(|r| r.ordnance));
+        let ordnance = local_data.ordnance_pulse.press_for(time(helper), ordnance_id,
+            ordnance_wanted, ready.map(|r| r.ordnance), if offhand_safety { 0.45 } else { 0.12 }, offhand_safety);
         if !tactical { cmd.buttons &= !(Action::OffHand1 as u32); }
         if !ordnance { cmd.buttons &= !(Action::OffHand0 as u32); }
     }
@@ -668,6 +676,13 @@ pub(crate) fn basic_combat(
             cmd.world_view_angles = Vector3::new((aim.x - 15.).clamp(-89., 89.), aim.y, 0.);
         }
         let started = (local_data.tactical_pulse.starts > pulses_before.0, local_data.ordnance_pulse.starts > pulses_before.1);
+        if started.0 && offhand_safety {
+            let name = lookup_ent(player.m_inventory.offhandWeapons[1], helper.sv_funcs)
+                .and_then(|w| get_weaponx_name(w, helper.sv_funcs)).unwrap_or_default();
+            if matches!(name, "mp_ability_shifter" | "mp_weapon_deployable_cover" | "mp_weapon_grenade_sonar") {
+                local_data.throw_safety.start_tactical(time(helper), [cmd.world_view_angles.x,cmd.world_view_angles.y]);
+            }
+        }
         if started.1 && offhand_safety {
             let frag = lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs)
                 .and_then(|w| get_weaponx_name(w, helper.sv_funcs)) == Some("mp_weapon_frag_grenade");

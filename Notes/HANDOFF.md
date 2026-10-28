@@ -905,3 +905,62 @@ Original batch v20-full-overnight-20261027-212916 and target receipt now histori
 stopped state. Use recovered-coverage as completed_batches in NEW request if
 continuing remaining13, after checking current user/game activity. Normal saves
 guarded6files during8controller-completed rounds; never restore old progress.
+
+## 2026-10-28 — Public research, native build and isolated safety trials
+
+BT-7274 renewed changes/testing authorization while away and requested public
+bot-system research. See research/public-bot-systems-20261028/FINDINGS.md:
+YaPB action ownership/throw feasibility; Valve NextBot explicit traversal and
+failure; Detour corridor maintenance. Concepts only, no third-party source
+copied. No aim, damage, warm-up or human buff changes.
+
+Native build works using the existing release-debug profile, unchanged original
+Cargo.lock and normal pinned registry dependencies, --locked --offline, antivirus
+enabled. The old distribution helper/metadata override experiments are obsolete.
+Restored Build-VerifiedWindowsCandidate.ps1 is untracked and not used by this
+successful build; leave it alone. No security setting or quarantine changes.
+Backup before-v21-testing-20261028-061528 protects current normal/isolated files.
+Normal remains v20 native3077878B... and bridge1.0 SHA9C437198... .
+
+Three completed isolated first-revision smokes, nativeBE33537C...:
+062743 and063843 used15bots plus active invulnerable human (separate cohort).
+First passed lifecycle but no gameplay improvement. Initial release attribution
+used active primary: inferred weapon/age invalid. Second corrected that, but
+initial owned projectile query returned no samples (not proof of no projectiles).
+Third064903 used16bots plus inactive observer, next-frame any-projectile query
+and originalOwner fallback. Actual trajectories now recorded. It passed phases,
+switch-off, respawn, lobby and Eden->Meadow with zero detected runtime errors.
+Eden90scontrol frag4enemy/7self kills;180ssafety0enemy/3self; Meadow100ssafety
+1enemy/20self. Unequal durations/weapon/life mixes are not causal rate evidence.
+No validated safety improvement and no normal deployment.
+
+Refinement native55E02604C81FFE48A768A38BC7299304B26EC66C08A8E0B9F848F80E0A785CCA
+allows a started toss to finish a0.45s bounded input despite fresh same-weapon
+busy state. Starting still requires readiness, stale/wrong-weapon data cancels,
+legacy default-off immediate-cooldown release retained.0.85s aim/action ownership
+covers toss tacticals too. Existing3s frag brake survives tactical ownership.
+94Rust checks passed;2analysis fixtures passed. Full project script then stopped
+at migration fixture's expected close-game guard (test running), so migration/
+preset fixtures still need rerun after shutdown. Current refined runtime:
+private Notes/candidates/v21-tests/safety-20261028-070247; inspect progress.json.
+Bridge1.2 SHA04B7FE7B... is isolated only; normal bridge stays1.0.
+Start-SafetyTest now saves per-run session provenance; report publishes hashes,
+phase aggregates and trajectory speed/distance samples without actor IDs/raw logs.
+Report outcome, not merely functional pass, before any deployment.
+
+Follow-up07:14: refined070247 lifecycle passed, zero detected runtime errors,
+but safety failed: Eden90scontrol1enemy/6self frag kills;180ssafety0enemy/13self;
+Meadow100ssafety2enemy/18self. No observed Phase entries even in hurt probe.
+All four migration/preset fixtures passed after shutdown. Both profiles now
+verified restored v20 native3077878B... /bridge1.0 hash9C437198... . All six
+normal save files matched the fresh backup; no old saves restored. Candidate
+source retained default-off, no gameplay rollout. Read bot-only-r2 derivedreport.
+
+Resumed remaining13baseline maps using recovered9-map coverage,75point goals,
+identical native/core/bridge hashes. Live target/v20-continuation-session.json;
+private batch v20-full-continuation-20261028-071017, runner648228, first AngelCity
+child655544. Exact cohort check initially correctly blocked because recovered
+queue plan uses native_sha256 whereas child plans use dll_sha256. Added explicit
+schema normalization, rejects absent/malformed/conflicting hashes;6cases pass.
+No hash bypass. Queue retains normal-save guard, per-map watch/cleanup and stop
+file. This is further v20 baseline collection, not candidate safety validation.

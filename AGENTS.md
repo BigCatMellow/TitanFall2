@@ -4,10 +4,12 @@ Canonical development repo for BT-7274's solo Northstar project. Read README.md,
 docs/PROJECT-STATUS.md, Notes/CURRENT-SETUP.md and the latest Notes/HANDOFF.md
 entries before changes.
 
-- v21 safety work is SOURCE ONLY. Antivirus quarantined a Cargo build helper
-  as Gen:Variant.Lazy.746108; stop native rebuild/restore attempts pending
-  security resolution. Do not exclude or repackage the flagged file. Installed
-  profiles remain v20. Read Notes/candidates/bot-safety-v21-20261027/README.md.
+- User renewed implementation/testing authorization October28 while away.
+  v21 now builds with the existing release-debug profile and unchanged lockfile,
+  antivirus enabled. Refined native55E02604C81FFE48A768A38BC7299304B26EC66C08A8E0B9F848F80E0A785CCA
+  is in isolated tests, NOT validated or installed for normal play. Normal stays
+  v20. Do not alter antivirus/quarantine settings or run old blocked helpers.
+  Read Notes/candidates/bot-safety-v21-20261027/README.md and latest handoff.
 
 - Refer to the owner only as BT-7274 (prose) / BT7274 (identifiers) in every
   file, filename and commit message; never by a personal name. See
@@ -18,7 +20,9 @@ entries before changes.
   Use backed-up candidates and isolated runtime/transition tests before normal
   deployment. User also authorized resuming map-by-map testing AFTER those
   checks; start a fresh frozen-build survey rather than changing old cohorts.
-- Normal and working isolated profiles now use the Windows-tested v20 candidate,
+- Normal uses the Windows-tested v20 candidate; isolated now has the unvalidated
+  v21 candidate described above (do not assume the old v20 receipt matches it).
+  The validated v20 DLL is
   DLL3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89.
   Normal launcher defaults to Movement (movement+proximity, diagnostics/sampler).
   Height/Roster/Skills/Full are explicit cumulative playtest presets. Crouch,

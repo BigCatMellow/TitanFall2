@@ -34,7 +34,9 @@ finally{
     if(Test-Path "$RunDirectory/idle.cfg"){Copy-Item "$RunDirectory/idle.cfg" "$Profile/mods/Northstar.CustomServers/mod/cfg/autoexec_ns_server.cfg" -Force}
     $enabled=Get-Content "$RunDirectory/enabledmods-before.json" -Raw|ConvertFrom-Json
     foreach($name in @('BT7274.DecisionTest','BT7274.WeaponIntegrationTest','BT7274.CapabilityTest','BT7274.SafetyTest')){Disable-NorthstarMod $enabled $name $Profile}
-    $enabled|Add-Member -NotePropertyName 'BT7274.BotDecisions' -NotePropertyValue @{'1.0.0'=$false;'1.1.0'=$true} -Force
+    $bridgeVersion=(Get-Content "$Profile/mods/BT7274.BotDecisions/mod.json" -Raw|ConvertFrom-Json).Version
+    Disable-NorthstarMod $enabled 'BT7274.BotDecisions' $Profile
+    $enabled.'BT7274.BotDecisions'|Add-Member -NotePropertyName $bridgeVersion -NotePropertyValue $true -Force
     $enabled|ConvertTo-Json -Depth 10|Set-Content "$Profile/enabledmods.json"
     Save-State
 }

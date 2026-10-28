@@ -1,0 +1,1378 @@
+{
+  "schema_version": 1,
+  "errors": 0,
+  "phases": [
+    {
+      "name": "v20_control",
+      "map": "mp_eden",
+      "start_t": 25.5167,
+      "end_t": 115.517,
+      "completed": true,
+      "safety": "false",
+      "retarget": "false",
+      "commits": 0,
+      "retarget_requests": 0,
+      "frag_prepares": 29,
+      "release_signals": 29,
+      "legacy_release_signals_without_weapon": 0,
+      "releases_by_weapon": {
+        "mp_weapon_frag_grenade": 29
+      },
+      "uses_by_weapon": {
+        "mp_ability_cloak": 13,
+        "mp_ability_heal": 10,
+        "mp_weapon_frag_grenade": 29,
+        "mp_ability_holopilot": 5
+      },
+      "attack_callbacks_by_weapon": {
+        "mp_ability_cloak": 13,
+        "mp_weapon_grenade_sonar": 22,
+        "mp_ability_heal": 10,
+        "mp_weapon_grenade_emp": 63,
+        "mp_weapon_thermite_grenade": 50,
+        "mp_weapon_frag_grenade": 29,
+        "mp_weapon_grenade_gravity": 42,
+        "mp_ability_shifter": 9,
+        "mp_weapon_deployable_cover": 27,
+        "mp_ability_holopilot": 5,
+        "mp_weapon_grenade_electric_smoke": 4
+      },
+      "phase_entries": 0,
+      "duration_s": 90.0003,
+      "ordnance": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 18,
+          "opposing_damage_callbacks": 6,
+          "opposing_callbacks_with_observed_health_loss": 6,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 12,
+          "self_pilot_deaths_credited": 6,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_gravity",
+          "damage_callbacks": 3,
+          "opposing_damage_callbacks": 3,
+          "opposing_callbacks_with_observed_health_loss": 3,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "damage_callbacks": 23,
+          "opposing_damage_callbacks": 23,
+          "opposing_callbacks_with_observed_health_loss": 23,
+          "enemy_pilot_deaths_credited": 2,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 2,
+          "opposing_damage_callbacks": 2,
+          "opposing_callbacks_with_observed_health_loss": 2,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 604,
+          "partial": 0,
+          "failures": 6,
+          "suppressed": 10169,
+          "with_links": 340
+        },
+        "corners": {
+          "total": 25768,
+          "links": 3686,
+          "by_jump": {
+            "1": 1519,
+            "2": 173,
+            "8": 497,
+            "16": 1497,
+            "255": 22082
+          },
+          "by_flags": {
+            "0": 13924,
+            "1": 11007,
+            "2": 837
+          }
+        },
+        "stalls": {
+          "samples": 25,
+          "incidents": 20,
+          "link_or_partial": 13,
+          "duck_only": 0,
+          "blocked": 9,
+          "stand_clear": 11,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 16,
+            "waypoint_timeout": 4
+          },
+          "by_state": {
+            "recover": 20
+          }
+        },
+        "stuck": {
+          "episodes": 12,
+          "by_state": {
+            "pursue": 11,
+            "engage": 1
+          },
+          "visible": 1,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 42,
+          "plausible": 42,
+          "examples": [
+            {
+              "eye_angles": "[0.0, -90.0, 0.0]",
+              "view_angles_raw": "[-4.371139e-8, -1.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 179.983, 0.0]",
+              "view_angles_raw": "[-0.99999994, 0.0002967437, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, -90.0, 0.0]",
+              "view_angles_raw": "[-4.371139e-8, -1.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 20,
+          "link_or_partial_share": 0.65,
+          "duck_only_share": 0,
+          "partial_route_share": 0,
+          "engage_stuck_share": 0.08333333333333333,
+          "recommendation": "prioritise link/partial-route handling"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      },
+      "owned_frag_trajectory_count": 29,
+      "owned_frag_trajectories": [
+        {
+          "samples": 10,
+          "initial_speed": 209.4029078676082,
+          "min_owner_dist": 49.0671,
+          "max_owner_dist": 229.463
+        },
+        {
+          "samples": 6,
+          "initial_speed": 215.81949452134765,
+          "min_owner_dist": 58.7776,
+          "max_owner_dist": 182.359
+        },
+        {
+          "samples": 10,
+          "initial_speed": 479.622945654855,
+          "min_owner_dist": 62.4956,
+          "max_owner_dist": 356.639
+        },
+        {
+          "samples": 6,
+          "initial_speed": 211.40846209922628,
+          "min_owner_dist": 45.8196,
+          "max_owner_dist": 241.402
+        },
+        {
+          "samples": 10,
+          "initial_speed": 355.9964270151598,
+          "min_owner_dist": 63.8708,
+          "max_owner_dist": 187.478
+        },
+        {
+          "samples": 10,
+          "initial_speed": 322.09125170437335,
+          "min_owner_dist": 63.6819,
+          "max_owner_dist": 377.89
+        },
+        {
+          "samples": 10,
+          "initial_speed": 685.0268515432734,
+          "min_owner_dist": 52.4774,
+          "max_owner_dist": 633.299
+        },
+        {
+          "samples": 10,
+          "initial_speed": 476.8112604930907,
+          "min_owner_dist": 50.9894,
+          "max_owner_dist": 155.411
+        },
+        {
+          "samples": 10,
+          "initial_speed": 540.1163356897197,
+          "min_owner_dist": 62.2198,
+          "max_owner_dist": 420.092
+        },
+        {
+          "samples": 10,
+          "initial_speed": 359.26367892945717,
+          "min_owner_dist": 71.2649,
+          "max_owner_dist": 258.586
+        },
+        {
+          "samples": 6,
+          "initial_speed": 279.53725650521073,
+          "min_owner_dist": 44.7202,
+          "max_owner_dist": 140.197
+        },
+        {
+          "samples": 10,
+          "initial_speed": 284.6096219596414,
+          "min_owner_dist": 66.3601,
+          "max_owner_dist": 180.075
+        },
+        {
+          "samples": 9,
+          "initial_speed": 218.92733569620762,
+          "min_owner_dist": 61.1193,
+          "max_owner_dist": 396.045
+        },
+        {
+          "samples": 10,
+          "initial_speed": 477.47747592112654,
+          "min_owner_dist": 30.0465,
+          "max_owner_dist": 517.556
+        },
+        {
+          "samples": 10,
+          "initial_speed": 431.43917732357124,
+          "min_owner_dist": 62.2743,
+          "max_owner_dist": 457.489
+        },
+        {
+          "samples": 10,
+          "initial_speed": 216.9627410188441,
+          "min_owner_dist": 62.1747,
+          "max_owner_dist": 234.261
+        },
+        {
+          "samples": 10,
+          "initial_speed": 531.3944611382772,
+          "min_owner_dist": 66.2161,
+          "max_owner_dist": 364.037
+        },
+        {
+          "samples": 10,
+          "initial_speed": 395.8759043422067,
+          "min_owner_dist": 47.6826,
+          "max_owner_dist": 205.872
+        },
+        {
+          "samples": 7,
+          "initial_speed": 334.0494601650554,
+          "min_owner_dist": 61.3263,
+          "max_owner_dist": 188.963
+        },
+        {
+          "samples": 10,
+          "initial_speed": 265.51192205716495,
+          "min_owner_dist": 49.589,
+          "max_owner_dist": 334.333
+        },
+        {
+          "samples": 9,
+          "initial_speed": 340.0358723885026,
+          "min_owner_dist": 60.9886,
+          "max_owner_dist": 282.918
+        },
+        {
+          "samples": 5,
+          "initial_speed": 280.687491043135,
+          "min_owner_dist": 61.0666,
+          "max_owner_dist": 189.404
+        },
+        {
+          "samples": 10,
+          "initial_speed": 255.30977613395459,
+          "min_owner_dist": 53.4255,
+          "max_owner_dist": 270.061
+        },
+        {
+          "samples": 10,
+          "initial_speed": 330.33836190463865,
+          "min_owner_dist": 57.2989,
+          "max_owner_dist": 288.97
+        },
+        {
+          "samples": 10,
+          "initial_speed": 352.30698058949116,
+          "min_owner_dist": 63.3657,
+          "max_owner_dist": 485.128
+        },
+        {
+          "samples": 3,
+          "initial_speed": 238.59093217249475,
+          "min_owner_dist": 58.9185,
+          "max_owner_dist": 149.512
+        },
+        {
+          "samples": 10,
+          "initial_speed": 292.78126165429364,
+          "min_owner_dist": 71.8154,
+          "max_owner_dist": 315.673
+        },
+        {
+          "samples": 10,
+          "initial_speed": 413.5618673221215,
+          "min_owner_dist": 66.8988,
+          "max_owner_dist": 376.795
+        },
+        {
+          "samples": 10,
+          "initial_speed": 476.1399433160381,
+          "min_owner_dist": 60.1993,
+          "max_owner_dist": 457.924
+        }
+      ]
+    },
+    {
+      "name": "v21_safety",
+      "map": "mp_eden",
+      "start_t": 115.517,
+      "end_t": 295.517,
+      "completed": true,
+      "safety": "true",
+      "retarget": "true",
+      "commits": 152,
+      "retarget_requests": 15,
+      "frag_prepares": 36,
+      "release_signals": 35,
+      "legacy_release_signals_without_weapon": 0,
+      "releases_by_weapon": {
+        "mp_weapon_frag_grenade": 35
+      },
+      "uses_by_weapon": {
+        "mp_ability_heal": 17,
+        "mp_weapon_frag_grenade": 35,
+        "mp_ability_cloak": 21,
+        "mp_ability_holopilot": 12
+      },
+      "attack_callbacks_by_weapon": {
+        "mp_ability_heal": 17,
+        "mp_weapon_grenade_sonar": 55,
+        "mp_weapon_grenade_gravity": 18,
+        "mp_weapon_grenade_emp": 38,
+        "mp_weapon_frag_grenade": 35,
+        "mp_ability_cloak": 21,
+        "mp_weapon_thermite_grenade": 20,
+        "mp_weapon_deployable_cover": 17,
+        "mp_ability_holopilot": 13,
+        "mp_ability_shifter": 15,
+        "mp_weapon_grenade_electric_smoke": 1
+      },
+      "phase_entries": 0,
+      "duration_s": 180,
+      "ordnance": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 22,
+          "opposing_damage_callbacks": 3,
+          "opposing_callbacks_with_observed_health_loss": 3,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 19,
+          "self_pilot_deaths_credited": 13,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 1060,
+          "partial": 2,
+          "failures": 62,
+          "suppressed": 14435,
+          "with_links": 611
+        },
+        "corners": {
+          "total": 37384,
+          "links": 5068,
+          "by_jump": {
+            "1": 1721,
+            "2": 113,
+            "8": 1798,
+            "16": 1436,
+            "255": 32316
+          },
+          "by_flags": {
+            "0": 18832,
+            "1": 16008,
+            "2": 2544
+          }
+        },
+        "stalls": {
+          "samples": 74,
+          "incidents": 48,
+          "link_or_partial": 33,
+          "duck_only": 0,
+          "blocked": 34,
+          "stand_clear": 14,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 40,
+            "waypoint_timeout": 8
+          },
+          "by_state": {
+            "recover": 48
+          }
+        },
+        "stuck": {
+          "episodes": 55,
+          "by_state": {
+            "pursue": 37,
+            "engage": 16,
+            "embark": 1,
+            "recover": 1
+          },
+          "visible": 16,
+          "titan": 9
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 80,
+          "plausible": 80,
+          "examples": [
+            {
+              "eye_angles": "[0.0, 4.0642, 0.0]",
+              "view_angles_raw": "[0.9974853, 0.0708742, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[6.11385e-17, -0.0648, 0.998518]",
+              "view_angles_raw": "[0.99999934, -0.0011309731, -1.0670682e-18]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[6.11385e-17, -0.0648, 0.998518]",
+              "view_angles_raw": "[0.99999934, -0.0011309731, -1.0670682e-18]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 48,
+          "link_or_partial_share": 0.6875,
+          "duck_only_share": 0,
+          "partial_route_share": 0.0018867924528301887,
+          "engage_stuck_share": 0.2909090909090909,
+          "recommendation": "prioritise link/partial-route handling"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      },
+      "owned_frag_trajectory_count": 35,
+      "owned_frag_trajectories": [
+        {
+          "samples": 10,
+          "initial_speed": 398.3934426004525,
+          "min_owner_dist": 58.9943,
+          "max_owner_dist": 502.942
+        },
+        {
+          "samples": 10,
+          "initial_speed": 373.22006181072317,
+          "min_owner_dist": 89.0883,
+          "max_owner_dist": 269.05
+        },
+        {
+          "samples": 10,
+          "initial_speed": 207.3021711705162,
+          "min_owner_dist": 67.7476,
+          "max_owner_dist": 254.344
+        },
+        {
+          "samples": 10,
+          "initial_speed": 232.22705994961055,
+          "min_owner_dist": 61.9725,
+          "max_owner_dist": 182.898
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.2332229618083,
+          "min_owner_dist": 55.0071,
+          "max_owner_dist": 606.905
+        },
+        {
+          "samples": 9,
+          "initial_speed": 198.93075233817518,
+          "min_owner_dist": 75.2684,
+          "max_owner_dist": 193.696
+        },
+        {
+          "samples": 10,
+          "initial_speed": 210.5405727125297,
+          "min_owner_dist": 64.0852,
+          "max_owner_dist": 279.804
+        },
+        {
+          "samples": 10,
+          "initial_speed": 201.46071651219313,
+          "min_owner_dist": 58.9149,
+          "max_owner_dist": 230.507
+        },
+        {
+          "samples": 10,
+          "initial_speed": 201.47820967994258,
+          "min_owner_dist": 68.1174,
+          "max_owner_dist": 214.722
+        },
+        {
+          "samples": 10,
+          "initial_speed": 220.26242899380273,
+          "min_owner_dist": 62.0123,
+          "max_owner_dist": 136.1
+        },
+        {
+          "samples": 10,
+          "initial_speed": 225.45513729576,
+          "min_owner_dist": 61.5163,
+          "max_owner_dist": 381.933
+        },
+        {
+          "samples": 10,
+          "initial_speed": 195.99517170963676,
+          "min_owner_dist": 68.0865,
+          "max_owner_dist": 158.472
+        },
+        {
+          "samples": 10,
+          "initial_speed": 373.95799148599565,
+          "min_owner_dist": 74.6472,
+          "max_owner_dist": 386.456
+        },
+        {
+          "samples": 10,
+          "initial_speed": 299.2904511590706,
+          "min_owner_dist": 69.7309,
+          "max_owner_dist": 286.643
+        },
+        {
+          "samples": 10,
+          "initial_speed": 207.25846479818384,
+          "min_owner_dist": 67.0925,
+          "max_owner_dist": 183.606
+        },
+        {
+          "samples": 10,
+          "initial_speed": 207.58073044731296,
+          "min_owner_dist": 79.7767,
+          "max_owner_dist": 209.102
+        },
+        {
+          "samples": 10,
+          "initial_speed": 253.43417029858068,
+          "min_owner_dist": 67.4764,
+          "max_owner_dist": 259.221
+        },
+        {
+          "samples": 10,
+          "initial_speed": 202.04134586816633,
+          "min_owner_dist": 66.5958,
+          "max_owner_dist": 266.859
+        },
+        {
+          "samples": 10,
+          "initial_speed": 199.87542281393675,
+          "min_owner_dist": 69.6672,
+          "max_owner_dist": 167.342
+        },
+        {
+          "samples": 9,
+          "initial_speed": 253.26453075332122,
+          "min_owner_dist": 64.5013,
+          "max_owner_dist": 234.841
+        },
+        {
+          "samples": 9,
+          "initial_speed": 350.18502354212694,
+          "min_owner_dist": 57.4888,
+          "max_owner_dist": 614.366
+        },
+        {
+          "samples": 10,
+          "initial_speed": 199.52839861348062,
+          "min_owner_dist": 66.6192,
+          "max_owner_dist": 314.203
+        },
+        {
+          "samples": 10,
+          "initial_speed": 206.95548154180406,
+          "min_owner_dist": 64.9237,
+          "max_owner_dist": 191.83
+        },
+        {
+          "samples": 10,
+          "initial_speed": 205.10692953015993,
+          "min_owner_dist": 65.3457,
+          "max_owner_dist": 329.117
+        },
+        {
+          "samples": 10,
+          "initial_speed": 213.8501629273207,
+          "min_owner_dist": 61.7953,
+          "max_owner_dist": 182.871
+        },
+        {
+          "samples": 9,
+          "initial_speed": 204.3986770755623,
+          "min_owner_dist": 65.5074,
+          "max_owner_dist": 346.663
+        },
+        {
+          "samples": 10,
+          "initial_speed": 213.7093457537234,
+          "min_owner_dist": 64.3398,
+          "max_owner_dist": 217.335
+        },
+        {
+          "samples": 10,
+          "initial_speed": 211.35400247664677,
+          "min_owner_dist": 63.8914,
+          "max_owner_dist": 375.12
+        },
+        {
+          "samples": 10,
+          "initial_speed": 215.09048860042603,
+          "min_owner_dist": 56.1502,
+          "max_owner_dist": 222.102
+        },
+        {
+          "samples": 10,
+          "initial_speed": 199.48314173840882,
+          "min_owner_dist": 52.8448,
+          "max_owner_dist": 173.736
+        },
+        {
+          "samples": 10,
+          "initial_speed": 228.3502501952866,
+          "min_owner_dist": 61.5664,
+          "max_owner_dist": 229.908
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.68365393743883,
+          "min_owner_dist": 61.5632,
+          "max_owner_dist": 194.959
+        },
+        {
+          "samples": 7,
+          "initial_speed": 196.75833707200314,
+          "min_owner_dist": 68.4137,
+          "max_owner_dist": 197.167
+        },
+        {
+          "samples": 10,
+          "initial_speed": 218.2847833855122,
+          "min_owner_dist": 52.1351,
+          "max_owner_dist": 495.195
+        },
+        {
+          "samples": 10,
+          "initial_speed": 215.6761044738151,
+          "min_owner_dist": 61.2956,
+          "max_owner_dist": 170.5
+        }
+      ]
+    },
+    {
+      "name": "hurt_ability_probe",
+      "map": "mp_eden",
+      "start_t": 295.517,
+      "end_t": 335.517,
+      "completed": true,
+      "safety": "true",
+      "retarget": "true",
+      "commits": 26,
+      "retarget_requests": 5,
+      "frag_prepares": 4,
+      "release_signals": 4,
+      "legacy_release_signals_without_weapon": 0,
+      "releases_by_weapon": {
+        "mp_weapon_frag_grenade": 4
+      },
+      "uses_by_weapon": {
+        "mp_ability_heal": 4,
+        "mp_ability_cloak": 4,
+        "mp_weapon_frag_grenade": 4
+      },
+      "attack_callbacks_by_weapon": {
+        "mp_ability_heal": 4,
+        "mp_ability_shifter": 2,
+        "mp_weapon_grenade_sonar": 15,
+        "mp_weapon_thermite_grenade": 3,
+        "mp_ability_cloak": 4,
+        "mp_weapon_grenade_gravity": 7,
+        "mp_weapon_grenade_emp": 6,
+        "mp_weapon_frag_grenade": 4,
+        "mp_weapon_deployable_cover": 2
+      },
+      "phase_entries": 0,
+      "duration_s": 40,
+      "ordnance": [],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 197,
+          "partial": 0,
+          "failures": 20,
+          "suppressed": 2260,
+          "with_links": 101
+        },
+        "corners": {
+          "total": 5804,
+          "links": 988,
+          "by_jump": {
+            "1": 163,
+            "2": 25,
+            "8": 245,
+            "16": 555,
+            "255": 4816
+          },
+          "by_flags": {
+            "0": 2840,
+            "1": 2307,
+            "2": 657
+          }
+        },
+        "stalls": {
+          "samples": 33,
+          "incidents": 18,
+          "link_or_partial": 8,
+          "duck_only": 0,
+          "blocked": 13,
+          "stand_clear": 5,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 10,
+            "waypoint_timeout": 8
+          },
+          "by_state": {
+            "recover": 18
+          }
+        },
+        "stuck": {
+          "episodes": 18,
+          "by_state": {
+            "engage": 6,
+            "pursue": 6,
+            "embark": 5,
+            "recover": 1
+          },
+          "visible": 6,
+          "titan": 6
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 3,
+          "plausible": 3,
+          "examples": [
+            {
+              "eye_angles": "[0.0, 125.009, 0.0]",
+              "view_angles_raw": "[-0.57370514, 0.8190619, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 4.0642, 0.0]",
+              "view_angles_raw": "[0.9974853, 0.0708742, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 54.5206, 0.0]",
+              "view_angles_raw": "[0.58041024, 0.81432426, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 18,
+          "link_or_partial_share": 0.4444444444444444,
+          "duck_only_share": 0,
+          "partial_route_share": 0,
+          "engage_stuck_share": 0.3333333333333333,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      },
+      "owned_frag_trajectory_count": 4,
+      "owned_frag_trajectories": [
+        {
+          "samples": 10,
+          "initial_speed": 223.54720443203934,
+          "min_owner_dist": 9.70279,
+          "max_owner_dist": 79.6665
+        },
+        {
+          "samples": 10,
+          "initial_speed": 198.62014985865585,
+          "min_owner_dist": 53.7583,
+          "max_owner_dist": 301.044
+        },
+        {
+          "samples": 10,
+          "initial_speed": 231.96002842347644,
+          "min_owner_dist": 65.3061,
+          "max_owner_dist": 123.73
+        },
+        {
+          "samples": 9,
+          "initial_speed": 211.98742474087092,
+          "min_owner_dist": 57.5253,
+          "max_owner_dist": 108.718
+        }
+      ]
+    },
+    {
+      "name": "switch_off",
+      "map": "mp_eden",
+      "start_t": 335.517,
+      "end_t": 345.517,
+      "completed": true,
+      "safety": "false",
+      "retarget": "false",
+      "commits": 0,
+      "retarget_requests": 0,
+      "frag_prepares": 0,
+      "release_signals": 0,
+      "legacy_release_signals_without_weapon": 0,
+      "releases_by_weapon": {},
+      "uses_by_weapon": {},
+      "attack_callbacks_by_weapon": {},
+      "phase_entries": 0,
+      "duration_s": 10,
+      "ordnance": [],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 22,
+          "partial": 1,
+          "failures": 0,
+          "suppressed": 26,
+          "with_links": 15
+        },
+        "corners": {
+          "total": 244,
+          "links": 39,
+          "by_jump": {
+            "1": 11,
+            "8": 22,
+            "16": 6,
+            "255": 205
+          },
+          "by_flags": {
+            "0": 145,
+            "1": 99
+          }
+        },
+        "stalls": {
+          "samples": 0,
+          "incidents": 0,
+          "link_or_partial": 0,
+          "duck_only": 0,
+          "blocked": 0,
+          "stand_clear": 0,
+          "unknown": 0,
+          "by_reason": {},
+          "by_state": {}
+        },
+        "stuck": {
+          "episodes": 1,
+          "by_state": {
+            "pursue": 1
+          },
+          "visible": 0,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 16,
+          "plausible": 16,
+          "examples": [
+            {
+              "eye_angles": "[0.0, 54.5206, 0.0]",
+              "view_angles_raw": "[0.58041024, 0.81432426, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 89.901, 0.0]",
+              "view_angles_raw": "[0.0017278941, 0.9999985, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 89.901, 0.0]",
+              "view_angles_raw": "[0.0017278941, 0.9999985, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 0,
+          "link_or_partial_share": null,
+          "duck_only_share": null,
+          "partial_route_share": 0.045454545454545456,
+          "engage_stuck_share": 0,
+          "recommendation": "insufficient stall incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      },
+      "owned_frag_trajectory_count": 0,
+      "owned_frag_trajectories": []
+    },
+    {
+      "name": "new_map_safety",
+      "map": "mp_lf_meadow",
+      "start_t": 20.3167,
+      "end_t": 120.317,
+      "completed": true,
+      "safety": "true",
+      "retarget": "true",
+      "commits": 148,
+      "retarget_requests": 0,
+      "frag_prepares": 44,
+      "release_signals": 34,
+      "legacy_release_signals_without_weapon": 0,
+      "releases_by_weapon": {
+        "mp_weapon_frag_grenade": 34
+      },
+      "uses_by_weapon": {
+        "mp_ability_cloak": 15,
+        "mp_ability_heal": 18,
+        "mp_weapon_frag_grenade": 34,
+        "mp_ability_holopilot": 14
+      },
+      "attack_callbacks_by_weapon": {
+        "mp_ability_cloak": 15,
+        "mp_weapon_grenade_sonar": 29,
+        "mp_ability_heal": 18,
+        "mp_weapon_frag_grenade": 34,
+        "mp_weapon_grenade_gravity": 23,
+        "mp_weapon_thermite_grenade": 24,
+        "mp_weapon_grenade_emp": 48,
+        "mp_weapon_deployable_cover": 45,
+        "mp_ability_holopilot": 14,
+        "mp_ability_shifter": 23,
+        "mp_weapon_grenade_electric_smoke": 2
+      },
+      "phase_entries": 0,
+      "duration_s": 100.0003,
+      "ordnance": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 24,
+          "opposing_damage_callbacks": 5,
+          "opposing_callbacks_with_observed_health_loss": 5,
+          "enemy_pilot_deaths_credited": 2,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 19,
+          "self_pilot_deaths_credited": 18,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 4,
+          "opposing_damage_callbacks": 4,
+          "opposing_callbacks_with_observed_health_loss": 4,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 388,
+          "partial": 28,
+          "failures": 2,
+          "suppressed": 1704,
+          "with_links": 0
+        },
+        "corners": {
+          "total": 5263,
+          "links": 0,
+          "by_jump": {
+            "255": 4984,
+            "-1": 279
+          },
+          "by_flags": {
+            "0": 893,
+            "1": 2274,
+            "2": 1817,
+            "-1": 279
+          }
+        },
+        "stalls": {
+          "samples": 9,
+          "incidents": 9,
+          "link_or_partial": 2,
+          "duck_only": 0,
+          "blocked": 2,
+          "stand_clear": 7,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 4,
+            "waypoint_timeout": 5
+          },
+          "by_state": {
+            "recover": 9
+          }
+        },
+        "stuck": {
+          "episodes": 3,
+          "by_state": {
+            "pursue": 3
+          },
+          "visible": 0,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 62,
+          "plausible": 62,
+          "examples": [
+            {
+              "eye_angles": "[0.0, -90.0, 0.0]",
+              "view_angles_raw": "[-4.371139e-8, -1.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 0.0, 0.0]",
+              "view_angles_raw": "[1.0, 0.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, -90.0, 0.0]",
+              "view_angles_raw": "[-4.371139e-8, -1.0, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 9,
+          "link_or_partial_share": 0.2222222222222222,
+          "duck_only_share": 0,
+          "partial_route_share": 0.07216494845360824,
+          "engage_stuck_share": 0,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      },
+      "owned_frag_trajectory_count": 34,
+      "owned_frag_trajectories": [
+        {
+          "samples": 10,
+          "initial_speed": 383.8720181180181,
+          "min_owner_dist": 65.9916,
+          "max_owner_dist": 194.547
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.22361208533948,
+          "min_owner_dist": 57.5233,
+          "max_owner_dist": 198.505
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.12488662516554,
+          "min_owner_dist": 61.9627,
+          "max_owner_dist": 376.275
+        },
+        {
+          "samples": 10,
+          "initial_speed": 215.74669048229777,
+          "min_owner_dist": 59.7777,
+          "max_owner_dist": 249.531
+        },
+        {
+          "samples": 10,
+          "initial_speed": 200.80799303426645,
+          "min_owner_dist": 67.9166,
+          "max_owner_dist": 171.554
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.61079988118024,
+          "min_owner_dist": 61.5964,
+          "max_owner_dist": 196.244
+        },
+        {
+          "samples": 10,
+          "initial_speed": 200.73609606637766,
+          "min_owner_dist": 66.4312,
+          "max_owner_dist": 143.078
+        },
+        {
+          "samples": 10,
+          "initial_speed": 203.55241297572476,
+          "min_owner_dist": 65.9414,
+          "max_owner_dist": 178.311
+        },
+        {
+          "samples": 10,
+          "initial_speed": 264.64142547594474,
+          "min_owner_dist": 68.7434,
+          "max_owner_dist": 195.031
+        },
+        {
+          "samples": 10,
+          "initial_speed": 213.75517552737034,
+          "min_owner_dist": 66.5885,
+          "max_owner_dist": 309.203
+        },
+        {
+          "samples": 10,
+          "initial_speed": 216.26666807480993,
+          "min_owner_dist": 61.1687,
+          "max_owner_dist": 216.435
+        },
+        {
+          "samples": 10,
+          "initial_speed": 200.7079142629159,
+          "min_owner_dist": 67.2212,
+          "max_owner_dist": 162.246
+        },
+        {
+          "samples": 10,
+          "initial_speed": 310.16055959383357,
+          "min_owner_dist": 52.9116,
+          "max_owner_dist": 363.461
+        },
+        {
+          "samples": 1,
+          "initial_speed": 217.0159983024754,
+          "min_owner_dist": 59.4516,
+          "max_owner_dist": 59.4516
+        },
+        {
+          "samples": 10,
+          "initial_speed": 485.02250704374535,
+          "min_owner_dist": 85.7468,
+          "max_owner_dist": 601.837
+        },
+        {
+          "samples": 10,
+          "initial_speed": 215.72006142742035,
+          "min_owner_dist": 61.4125,
+          "max_owner_dist": 152.405
+        },
+        {
+          "samples": 10,
+          "initial_speed": 202.56703220302163,
+          "min_owner_dist": 65.8971,
+          "max_owner_dist": 164.673
+        },
+        {
+          "samples": 9,
+          "initial_speed": 209.0116673815364,
+          "min_owner_dist": 54.0688,
+          "max_owner_dist": 278.759
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.08150553272662,
+          "min_owner_dist": 63.8186,
+          "max_owner_dist": 338.581
+        },
+        {
+          "samples": 10,
+          "initial_speed": 205.083026181008,
+          "min_owner_dist": 65.3956,
+          "max_owner_dist": 140.792
+        },
+        {
+          "samples": 10,
+          "initial_speed": 216.3092334094724,
+          "min_owner_dist": 62.6918,
+          "max_owner_dist": 348.177
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.04643266798445,
+          "min_owner_dist": 57.1172,
+          "max_owner_dist": 126.265
+        },
+        {
+          "samples": 10,
+          "initial_speed": 212.96234100963133,
+          "min_owner_dist": 63.5076,
+          "max_owner_dist": 222.537
+        },
+        {
+          "samples": 9,
+          "initial_speed": 199.06797328575007,
+          "min_owner_dist": 66.7659,
+          "max_owner_dist": 195.07
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.31692060870978,
+          "min_owner_dist": 61.7022,
+          "max_owner_dist": 105.472
+        },
+        {
+          "samples": 7,
+          "initial_speed": 219.00003722830735,
+          "min_owner_dist": 68.5722,
+          "max_owner_dist": 266.925
+        },
+        {
+          "samples": 10,
+          "initial_speed": 199.2858954744036,
+          "min_owner_dist": 67.0803,
+          "max_owner_dist": 137.451
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.68136233313317,
+          "min_owner_dist": 33.9207,
+          "max_owner_dist": 111.399
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.25019083650872,
+          "min_owner_dist": 57.535,
+          "max_owner_dist": 320.315
+        },
+        {
+          "samples": 10,
+          "initial_speed": 217.0546756938675,
+          "min_owner_dist": 56.0823,
+          "max_owner_dist": 139.741
+        },
+        {
+          "samples": 10,
+          "initial_speed": 215.98467869145833,
+          "min_owner_dist": 60.8899,
+          "max_owner_dist": 275.214
+        },
+        {
+          "samples": 10,
+          "initial_speed": 214.4789878161961,
+          "min_owner_dist": 29.4125,
+          "max_owner_dist": 82.3343
+        },
+        {
+          "samples": 10,
+          "initial_speed": 206.99653837757768,
+          "min_owner_dist": 65.7623,
+          "max_owner_dist": 158.506
+        },
+        {
+          "samples": 4,
+          "initial_speed": 214.4031696506607,
+          "min_owner_dist": 60.2229,
+          "max_owner_dist": 124.831
+        }
+      ]
+    }
+  ],
+  "limits": "Controlled smoke, not human balance. Natural control/candidate and manipulated-health probe are separate phases. Release signal also includes cancel/drop; offhand-use bookkeeping includes drops on death. Legacy release logs used active primary instead of the throwing offhand: weapon/age attribution from those logs is invalid. Projectile samples confirm observed owned frags but do not count all launches or show their final collision. Phase boundaries can exclude cross-boundary damage. Different durations/weapon/life mixes are not matched fight samples. Counts are not throw accuracy or first-shot TTK.",
+  "runtime_state": "passed",
+  "provenance": {
+    "private_run": "safety-20261028-070247",
+    "log_sha256": "8f476249b0b1bf7ad8d3fb9ec83c5ff73a2e44bd60593434e12518f152ff1f29",
+    "native_sha256": "55E02604C81FFE48A768A38BC7299304B26EC66C08A8E0B9F848F80E0A785CCA",
+    "bridge_sha256": "04B7FE7B1BB242A91F3F191AE16A66E49FDFF6F4FA2443DD550A9E11E80BDBAE",
+    "started": "2026-10-28T07:02:48.1498512-04:00"
+  },
+  "context": {
+    "map": "mp_eden",
+    "next_map": "mp_lf_meadow",
+    "population": "16bots_inactive_human",
+    "harness_sha256": "BB55863F29E91AAD5CAAAEB5356867F1B9E40059BCE35F0F0071963E61B5FA1E",
+    "ui_sha256": "F73AC74EA11CBF16BFD8C3E9D0CFF9B37495E05BEC9BE55916B216EAC70C4232"
+  }
+}

@@ -1,4 +1,62 @@
-# v21 safety source draft — not built or installed
+# v21 safety candidate — isolated tests only
+
+## Current October28 state
+
+User renewed implementation/testing authorization while away. The restored
+build-source script matched its reviewed hash, but optimized/stripped helper
+builds continued to fail. The repository's existing **release-debug** profile
+successfully built the unmodified pinned dependency graph with the original
+Cargo.lock (`--locked --offline`), antivirus enabled and no security setting
+changes. This is a debuggable candidate, not clearance of old quarantined files.
+Reproduce from the root using nightly2025-09-11 GNU/LLVM-MinGW:
+`cargo build -p bp_ort --profile release-debug --target x86_64-pc-windows-gnu --target-dir target/v21-debug-validation --locked --offline`.
+
+First candidate DLL SHA256:
+`BE33537CCF312D9249D60249716F7FD9E7502296FBD9B7B9D4D1D5AB90008204`.
+Only the working isolated profile was changed; it is now restored to v20.
+Normal play remained v20 throughout.
+Fresh backup: private `before-v21-testing-20261028-061528`.
+
+First smoke `safety-20261028-062743` passed functional switch-off/respawn/lobby/
+new-map checks with no detected errors, but **failed the gameplay improvement
+criterion**. Eden90scontrol:2enemyfrag kills/4self;180ssafety:0enemy/12self.
+Meadow100ssafety:1enemy/18self. Different durations/lives are not a causal rate
+comparison, but they provide no justification for deployment. See first-smoke
+derived review. Human was an invulnerable active pilot with15bots in those
+initial smokes; later bot-only tests are explicitly separate.
+
+The first release logger read the current active weapon after the signal, which
+was often already the primary. Its inferred release weapon/age are invalid.
+Source1.2 corrects attribution using the offhands' preparation state and adds
+owned-projectile observations. The next-frame any-projectile scan with
+originalOwner fallback is now returning owned frag trajectories. Empty queries
+in the earlier second smoke remain invalid trajectory evidence. The later
+bot-only-r1 report has16bots/inactiveobserver, maps, harness hashes and native/
+bridge provenance. Its functional lifecycle checks passed, but Meadow still
+recorded20frag self-kills/1enemy kill in100s; it is not suitable for deployment.
+
+Refined candidate SHA256:
+`55E02604C81FFE48A768A38BC7299304B26EC66C08A8E0B9F848F80E0A785CCA`.
+It tests0.45s bounded toss input,0.85s action ownership, and finishing a started
+input pulse when the same freshly reported offhand becomes busy. Starting still
+requires explicit readiness. Legacy default-off readiness behavior is retained.
+Phase/A-Wall/Pulse tosses gain bounded ownership; a tactical cannot erase the
+frag movement brake.94Rust unit checks across18suites passed; all four migration/
+preset fixtures passed after game shutdown. Private run safety-20261028-070247
+passed all five functional phases and lobby/map transition, with zero detected
+runtime errors. It FAILED safety improvement: Eden90scontrol1enemy/6self frag
+kills versus180ssafety0enemy/13self; Meadow100ssafety2enemy/18self. No Phase
+entries were observed, including the separately marked hurt probe. Counts are
+not matched throw trials; retained useful throws and a safety improvement were
+not shown. See bot-only-r2/safety-review.json. Both profiles are back on validated
+v20 native/bridge1.0, and remaining13baseline maps resumed in a separate queue.
+Keep this experimental source behind default-off switches. Different native
+hashes must not be pooled despite their shared candidate build label.
+
+Public-source research: research/public-bot-systems-20261028/FINDINGS.md.
+No normal deployment until safety outcomes, preserved useful throws, life/map
+transitions and current saves pass. Historical notes below describe the earlier
+blocked draft and are superseded by this current status.
 
 Update: BT-7274 asked about proceeding despite likely false positives. A verified
 local Cargo `links` metadata override successfully skipped the 0.52.6 helper,
@@ -101,3 +159,11 @@ file or personal security logs were submitted to any external analysis service.
    and deliberate preset updates to normal play after a fresh current backup.
 6. Save derived aggregates separately from the played v20 cohort. Update status
    only when the candidate is actually built, tested and installed.
+
+Static follow-up: basic_combat currently clears a rejected offhand bit but does
+not explicitly set a bit for a successful keep_request when the original skill
+policy omitted it that frame. Thus pure Pulse continuation is not proof of a
+continuous engine input. Before another timing trial, fix/test command-bit
+application and record actual held/released inputs. The failed r2 result does
+not rule out action interruption as a cause. Do not deploy this experimental
+path or generalize its negative outcome to the complete task-ownership concept.
