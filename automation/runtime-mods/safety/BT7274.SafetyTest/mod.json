@@ -1,7 +1,7 @@
 {
   "Name":"BT7274.SafetyTest","Version":"1.0.0","LoadPriority":60,
   "Description":"Disposable v21 safety A/B and transition checks; isolated profile only.",
-  "ConVars":[{"Name":"bt7274_safety_test","DefaultValue":"0"},{"Name":"bt7274_safety_stage","DefaultValue":"1"}],
+  "ConVars":[{"Name":"bt7274_safety_test","DefaultValue":"0"},{"Name":"bt7274_safety_stage","DefaultValue":"1"},{"Name":"bt7274_safety_navigation","DefaultValue":"0"}],
   "Scripts":[{"Path":"bt7274_safety_test.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"BT7274SafetyTest_Init"}},
     {"Path":"bt7274_safety_test_ui.nut","RunOn":"UI","UICallback":{"After":"BT7274SafetyTest_UIInit"}}]
 }

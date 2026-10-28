@@ -1,5 +1,5 @@
 param([Parameter(Mandatory)][int]$GameProcessId,[Parameter(Mandatory)][string]$Profile,
-    [Parameter(Mandatory)][string]$RunDirectory,[Parameter(Mandatory)][string]$Started)
+    [Parameter(Mandatory)][string]$RunDirectory,[Parameter(Mandatory)][string]$Started,[switch]$NavigationTrial)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/Stop-OwnedSurveyGame.ps1"
 . "$PSScriptRoot/Northstar-ModState.ps1"
@@ -25,7 +25,8 @@ try{
         $game.Refresh();if($game.HasExited){throw 'Owned game exited before checks completed'}
         Save-State;Start-Sleep -Seconds 1
     }
-    if($state.state-ne'passed'-or-not$state.lobby-or$state.core-ne'1.31.14.0'-or($state.completed-join',')-ne'v20_control,v21_safety,hurt_ability_probe,switch_off,new_map_safety'){throw 'Incomplete safety/map/lobby checks'}
+    $expected=if($NavigationTrial){'nav_control,nav_guard,nav_respawn,nav_disabled,nav_new_map'}else{'v20_control,v21_safety,hurt_ability_probe,switch_off,new_map_safety'}
+    if($state.state-ne'passed'-or-not$state.lobby-or$state.core-ne'1.31.14.0'-or($state.completed-join',')-ne$expected){throw 'Incomplete safety/map/lobby checks'}
 }catch{$state.state='failed';$state.failure=[string]$_}
 finally{
     if($reader){$reader.Dispose()}

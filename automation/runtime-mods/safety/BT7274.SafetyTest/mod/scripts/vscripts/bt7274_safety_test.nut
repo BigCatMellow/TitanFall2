@@ -30,8 +30,10 @@ void function BT7274SafetyTest_Require(bool ok,string message)
 }
 void function BT7274SafetyTest_Flags(bool enabled)
 {
-    SetConVarBool("bot_offhand_safety",enabled)
-    SetConVarBool("bot_stall_retarget",enabled)
+    bool nav=GetConVarBool("bt7274_safety_navigation")
+    SetConVarBool("bot_offhand_safety",enabled&&!nav)
+    SetConVarBool("bot_stall_retarget",enabled&&!nav)
+    if(nav)SetConVarBool("bot_corner_height_guard",enabled)
 }
 void function BT7274SafetyTest_Phase(string name,float duration)
 {
@@ -40,6 +42,10 @@ void function BT7274SafetyTest_Phase(string name,float duration)
     while(Time()<until){wait 5.0;print("SAFETY_TEST_HEARTBEAT phase="+name+" t="+Time()+" population="+GetPlayerArray().len())}
     BT7274SafetyTest_Require(BT7274SafetyTest_Bots().len()==16,"Bot population changed")
     BT7274SafetyTest_Require(fabs(GetConVarFloat("bot_aim_error_scale")-0.78)<0.001,"Aim changed")
+    if(GetConVarBool("bt7274_safety_navigation")){
+        BT7274SafetyTest_Require(!GetConVarBool("bot_offhand_safety")&&!GetConVarBool("bot_stall_retarget"),"Unrelated safety flags changed")
+        print("SAFETY_TEST_NAV_STATE phase="+name+" corner="+GetConVarBool("bot_corner_height_guard"))
+    }
     print("SAFETY_TEST_PHASE_PASS name="+name+" t="+Time())
 }
 array<entity> function BT7274SafetyTest_Bots()
@@ -94,6 +100,29 @@ void function BT7274SafetyTest_Run()
     foreach(string name in ["bot_route_guard","bot_jump_timing","bot_perception_fix","bot_crouch_recovery"])SetConVarBool(name,false)
     BT7274SafetyTest_Flags(false)
     BT7274SafetyTest_Respawn()
+    if(GetConVarBool("bt7274_safety_navigation")){
+        if(GetConVarInt("bt7274_safety_stage")==1){
+            BT7274SafetyTest_Phase("nav_control",90.0)
+            BT7274SafetyTest_Flags(true)
+            BT7274SafetyTest_Respawn()
+            BT7274SafetyTest_Phase("nav_guard",120.0)
+            BT7274SafetyTest_Respawn()
+            BT7274SafetyTest_Phase("nav_respawn",30.0)
+            BT7274SafetyTest_Flags(false)
+            BT7274SafetyTest_Respawn()
+            BT7274SafetyTest_Phase("nav_disabled",10.0)
+            SetConVarInt("bt7274_safety_stage",2)
+            print("SAFETY_TEST_TRANSITION to=mp_lobby")
+            GameRules_ChangeMap("mp_lobby","tdm")
+        }else{
+            BT7274SafetyTest_Flags(true)
+            BT7274SafetyTest_Respawn()
+            BT7274SafetyTest_Phase("nav_new_map",90.0)
+            BT7274SafetyTest_Flags(false)
+            print("SAFETY_TEST_DONE map="+GetMapName()+" t="+Time())
+        }
+        return
+    }
     if(GetConVarInt("bt7274_safety_stage")==1){
         BT7274SafetyTest_Phase("v20_control",90.0)
         BT7274SafetyTest_Flags(true)

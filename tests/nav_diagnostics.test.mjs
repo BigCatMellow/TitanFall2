@@ -1,6 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {parseDiag, analyzeDiag} from '../tools/Analyze-NavDiagnostics.mjs';
+// Guard ends are explicit outcomes; disappearance/death is not inferred success.
+test('corner guard records remain distinct from route corners and exclude invalid durations',()=>{
+  const lines=['BOT_CORNER_GUARD epoch=1 t=1 slot=2 event=begin',
+    'BOT_CORNER_HOLD epoch=1 t=2 slot=2 dz=90',
+    'BOT_CORNER_GUARD epoch=1 t=3 slot=2 event=end reason=advance held_s=2',
+    'BOT_CORNER_GUARD epoch=1 t=4 slot=2 event=end reason=replan held_s=NaN'];
+  const out=analyzeDiag(lines.map(parseDiag));
+  assert.equal(out.corners.total,0);assert.equal(out.corner_guard.begins,1);
+  assert.equal(out.corner_guard.hold_samples,1);assert.equal(out.corner_guard.ends.advance,1);
+  assert.equal(out.corner_guard.ends.replan,1);assert.equal(out.corner_guard.duration_samples,1);
+  assert.equal(out.corner_guard.completed_duration_s,2);
+});
 
 const stall = (slot, t, x, extra = {}) => `[info] BOT_STALL epoch=1 t=${t} slot=${slot} reason=no_progress state=pursue visible=0 grounded=1 speed=3 corner_flags=0 corner_jump=0 next_dist=380 next_dz=22.0 partial=0 fit=Blocked duck_state=0 x=${x} y=-300.0 z=74.0`
   .replace(/(\w+)=([^\s]+)/g, (m, k, v) => k in extra ? `${k}=${extra[k]}` : m);

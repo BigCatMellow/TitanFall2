@@ -99,6 +99,10 @@ pub fn path_to_target(
     }
     if must_replan || nav.path_points.is_empty()
     {
+        if let Some(since) = local_data.corner_guard_since.take() {
+            log::info!("BOT_CORNER_GUARD epoch={} t={:.2} slot={} event=end reason=replan held_s={:.2}",
+                super::telemetry::epoch(),time(helper),local_data.edict,(time(helper)-since).max(0.));
+        }
         local_data.last_time_node_reached = helper.globals.curTime;
         local_data.next_target_pos = origin;
 
@@ -153,8 +157,18 @@ pub fn path_to_target(
         return true;
     }
 
-    while distance(local_data.next_target_pos, origin) <= BOT_PATH_NODE_RANGE {
+    let corner_height_guard = super::switch_on(&super::CORNER_HEIGHT_GUARD_CONVAR);
+    if !corner_height_guard && let Some(since) = local_data.corner_guard_since.take() {
+        log::info!("BOT_CORNER_GUARD epoch={} t={:.2} slot={} event=end reason=disabled held_s={:.2}",
+            super::telemetry::epoch(),time(helper),local_data.edict,(time(helper)-since).max(0.));
+    }
+    let human_hull = nav.hull == crate::navmesh::Hull::Human;
+    while within_route_corner_range(local_data.next_target_pos, origin, corner_height_guard, human_hull, local_data.current_corner) {
         let Some((next, meta)) = nav.next_corner() else { break; };
+        if let Some(since) = local_data.corner_guard_since.take() {
+            log::info!("BOT_CORNER_GUARD epoch={} t={:.2} slot={} event=end reason=advance held_s={:.2}",
+                super::telemetry::epoch(),time(helper),local_data.edict,(time(helper)-since).max(0.));
+        }
         local_data.last_time_node_reached = helper.globals.curTime;
         local_data.next_target_pos = next;
         local_data.current_corner = meta;
@@ -163,6 +177,27 @@ pub fn path_to_target(
                 super::telemetry::epoch(), time(helper), local_data.edict,
                 meta.map_or(-1, |m| m.0 as i32), meta.map_or(-1, |m| m.1 as i32), nav.path_points.len(),
                 next.x, next.y, next.z, next.z - origin.z, distance(next, origin));
+        }
+    }
+
+    if corner_height_guard && super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
+        let horizontal = distance(local_data.next_target_pos, origin);
+        let dz = local_data.next_target_pos.z - origin.z;
+        if super::route_guard::hold_upward_corner(horizontal,dz,BOT_PATH_NODE_RANGE,human_hull,local_data.current_corner) {
+            if local_data.corner_guard_since.is_none() {
+                local_data.corner_guard_since = Some(time(helper));
+                log::info!("BOT_CORNER_GUARD epoch={} t={:.2} slot={} event=begin dz={:.1}",
+                    super::telemetry::epoch(),time(helper),local_data.edict,dz);
+            }
+            if local_data.corner_guard_log.allow(time(helper), 1.0) {
+            log::info!("BOT_CORNER_HOLD epoch={} t={:.2} slot={} flags={} jump={} horizontal={:.0} dz={:.1} waypoint=({:.1},{:.1},{:.1}) origin=({:.1},{:.1},{:.1})",
+                super::telemetry::epoch(), time(helper), local_data.edict,
+                local_data.current_corner.map_or(-1, |m| m.0 as i32),
+                local_data.current_corner.map_or(-1, |m| m.1 as i32),
+                horizontal, dz,
+                local_data.next_target_pos.x, local_data.next_target_pos.y, local_data.next_target_pos.z,
+                origin.x, origin.y, origin.z);
+            }
         }
     }
 
@@ -195,6 +230,12 @@ pub fn path_to_target(
     }
 
     true
+}
+
+fn within_route_corner_range(target: Vector3, origin: Vector3, height_guard: bool, human_hull: bool, metadata: Option<(u8,u8)>) -> bool {
+    let horizontal = distance(target, origin);
+    horizontal <= BOT_PATH_NODE_RANGE && (!height_guard || !super::route_guard::hold_upward_corner(
+        horizontal,target.z-origin.z,BOT_PATH_NODE_RANGE,human_hull,metadata))
 }
 
 pub fn is_timedout(last_time: f32, helper: &CUserCmdHelper<'_>, time_elasped: f32) -> bool {

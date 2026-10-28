@@ -964,3 +964,48 @@ queue plan uses native_sha256 whereas child plans use dll_sha256. Added explicit
 schema normalization, rejects absent/malformed/conflicting hashes;6cases pass.
 No hash bypass. Queue retains normal-save guard, per-map watch/cleanup and stop
 file. This is further v20 baseline collection, not candidate safety validation.
+
+## 2026-10-28 — Two played rounds and four-hour navigation trial
+
+BT-7274 completed two more rounds and authorized new-source trials across varied
+maps for four hours, with a lower score goal. New completed Full v20 session
+122804 has302pilot deaths/59qualifying health episodes,0detected recorder/game
+errors. Eden18/6human pilot credit,5.37%low progress (2682livepilot samples);
+Canal15/2,2.53%(2170). Bot frags6enemy/24self and10enemy/19self. See sanitized
+research/played-full-v20-20261028. No aim/damage/weapon/cooldown change justified.
+
+Fresh current deployment/save backup is in target/v22-backup.txt. Never copy
+those old saves over new play. Normal remains native3077878B.../bridge9C437... .
+Integrated navmesh-corner-height-guard research history on candidate/nav-corner-v22-20261028.
+Adapted candidate to pilot/upward/ordinary corners only, XY<=45,dz>36; downward,
+Titan, raw traversal/start/end/unknown markers unchanged. Default-off convar.
+FirstBA66CF92... smoke passed lifecycle but99/136sampledholds were startpoints.
+Refined flags==0 policy rebuilt as2B08DE76AB7A85C560F9DC9076F50233346EF1038A2C96B0F5BACD55AAB0A439.
+Bridge1.0/core1.31.14 unchanged; both failed v21 flags explicitlyOFF. Original
+lockfile/pinned release-debug/offline build, antivirus enabled, old blocked
+Build-VerifiedWindowsCandidate.ps1 untracked and unused.
+
+Refined smoke private safety-20261028-130651 passed control90s/guard120s/respawn30s/
+disabled10s/lobby/Complex90s,16bots,actualswitch0/1/1/0/1,0detected errors. Most
+held corners ended in replan, not advance; no efficacy claim or normal rollout.
+96Rust checks/18suites plus fixtures passed beforefirstsmoke; refined7route tests
+passedagain;6navdiagnostic/3round/2smokereviewNode tests,8evidencevalidation,
+6planning/8cleanup andread/hashchecks passed. New explicit NavigationV22 gate
+requires this same-runtime smoke plus actual switchreadback; oldv18/v20 gates
+remain in force for their cohorts. No Game Assert reliance.
+
+Matrix request target/v22-matrix-request.json plans32fresh-process50point rounds,
+8maps(WarGames,Complex,Canal,Meadow,AngelCity,Relic,Homestead,Eden),guard0/1,
+2repeats with reversed order. Read target/v22-matrix-session.json for livebatch,
+not this historical text. Deadline16:35EDT; no new child in final20min. Root
+normal files/current saves guarded, owned-process watchdogs, stop-after-current,
+explicit marker/population/hash checks. Significant operational low-progress
+regression skips remaining guard-on rounds while baseline variety continues;
+this is a safety cutoff, not statistical proof. Runtime/integrity failures stop.
+Cleanup restores isolatedv20 deployment/config/enablement only, NEVER old saves,
+and refuses to overwrite a loaded profile/unexpected native. No normal deploy.
+Live sanitized aggregate file research/corner-height-v22-20261028/matrix-results.json
+is produced by the background queue; raw private paths/accounts stay local.
+Do not combine these50pointv22 A/B rounds with the completed22map75pointFullv20
+baseline or earlierplayed/v18cohorts. New observation/report files are text, not
+video or proof of human balance. Review future results before further behavior.

@@ -4,12 +4,14 @@ Canonical development repo for BT-7274's solo Northstar project. Read README.md,
 docs/PROJECT-STATUS.md, Notes/CURRENT-SETUP.md and the latest Notes/HANDOFF.md
 entries before changes.
 
-- User renewed implementation/testing authorization October28 while away.
-  v21 now builds with the existing release-debug profile and unchanged lockfile,
-  antivirus enabled. Refined native55E02604C81FFE48A768A38BC7299304B26EC66C08A8E0B9F848F80E0A785CCA
-  is in isolated tests, NOT validated or installed for normal play. Normal stays
-  v20. Do not alter antivirus/quarantine settings or run old blocked helpers.
-  Read Notes/candidates/bot-safety-v21-20261027/README.md and latest handoff.
+- October28 user authorized four hours of isolated testing with shorter rounds.
+  Current source is v22 upward intermediate pilot corner guard, default off;
+  v21 offhand/retarget trials remain OFF. Normal stays v20 native3077878B... .
+  Isolated candidate2B08DE76AB7A85C560F9DC9076F50233346EF1038A2C96B0F5BACD55AAB0A439
+  uses unchanged bridge1.0/native core1.31.14 and pinned release-debug build,
+  antivirus enabled. See research/corner-height-v22-20261028/README.md and live
+  target/v22-smoke-session.json / target/v22-matrix-session.json before changes.
+  Do not alter antivirus/quarantine settings or run old blocked helpers.
 
 - Refer to the owner only as BT-7274 (prose) / BT7274 (identifiers) in every
   file, filename and commit message; never by a personal name. See
@@ -20,8 +22,8 @@ entries before changes.
   Use backed-up candidates and isolated runtime/transition tests before normal
   deployment. User also authorized resuming map-by-map testing AFTER those
   checks; start a fresh frozen-build survey rather than changing old cohorts.
-- Normal uses the Windows-tested v20 candidate; isolated now has the unvalidated
-  v21 candidate described above (do not assume the old v20 receipt matches it).
+- Normal uses the Windows-tested v20 candidate; isolated has the v22 experiment
+  described above while tests own it (old v20 receipt is not its validation).
   The validated v20 DLL is
   DLL3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89.
   Normal launcher defaults to Movement (movement+proximity, diagnostics/sampler).

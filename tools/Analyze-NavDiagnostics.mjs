@@ -13,10 +13,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
-const TYPES = ['BOT_PATH', 'BOT_CORNER', 'BOT_STALL', 'BOT_STUCK', 'BOT_CROUCH', 'BOT_VIEWCHECK'];
+const TYPES = ['BOT_PATH', 'BOT_CORNER', 'BOT_STALL', 'BOT_STUCK', 'BOT_CROUCH', 'BOT_VIEWCHECK', 'BOT_CORNER_HOLD', 'BOT_CORNER_GUARD'];
 
 export function parseDiag(line) {
-  const m = line.match(/(?:^|\s|\])(BOT_(?:PATH|CORNER|STALL|STUCK|CROUCH|VIEWCHECK))\s/);
+  const m = line.match(/(?:^|\s|\])(BOT_(?:PATH|CORNER_HOLD|CORNER_GUARD|CORNER|STALL|STUCK|CROUCH|VIEWCHECK))\s/);
   if (!m) return null;
   const rest = line.slice(m.index + m[0].length - 1);
   const fields = {};
@@ -33,6 +33,7 @@ const isLink = (flags, jump) => {
 export function analyzeDiag(events) {
   const out = {schema_version: 1, paths: {requests: 0, partial: 0, failures: 0, suppressed: 0, with_links: 0},
     corners: {total: 0, links: 0, by_jump: {}, by_flags: {}},
+    corner_guard: {begins: 0, hold_samples: 0, ends: {}, completed_duration_s: 0, duration_samples: 0},
     stalls: {samples: 0, incidents: 0, link_or_partial: 0, duck_only: 0, blocked: 0, stand_clear: 0, unknown: 0, by_reason: {}, by_state: {}},
     stuck: {episodes: 0, by_state: {}, visible: 0, titan: 0},
     crouch: {tests: 0, by_fit: {}, attempts_max: 0, successes_max: 0, failures_max: 0},
@@ -52,6 +53,14 @@ export function analyzeDiag(events) {
       out.corners.by_jump[e.jump] = (out.corners.by_jump[e.jump] || 0) + 1;
       out.corners.by_flags[e.flags] = (out.corners.by_flags[e.flags] || 0) + 1;
       if (isLink(e.flags, e.jump)) out.corners.links++;
+    } else if (e.type === 'BOT_CORNER_HOLD') {
+      out.corner_guard.hold_samples++;
+    } else if (e.type === 'BOT_CORNER_GUARD') {
+      if(e.event==='begin')out.corner_guard.begins++;
+      if(e.event==='end'){
+        out.corner_guard.ends[e.reason]=(out.corner_guard.ends[e.reason]||0)+1;
+        if(Number.isFinite(+e.held_s)&&+e.held_s>=0){out.corner_guard.completed_duration_s+=+e.held_s;out.corner_guard.duration_samples++;}
+      }
     } else if (e.type === 'BOT_STALL') {
       out.stalls.samples++;
       const t = Number(e.t), x = Number(e.x), y = Number(e.y), prev = lastStall.get(e.slot);

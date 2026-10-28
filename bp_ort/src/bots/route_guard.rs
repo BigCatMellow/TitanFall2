@@ -73,6 +73,24 @@ pub(super) fn step_jump_wanted(dz: f32, horizontal: f32) -> bool {
     dz.is_finite() && horizontal.is_finite() && dz > 18. && horizontal < 140.
 }
 
+/// Provisional floor-separation check for route-corner consumption.
+/// The 36-unit tolerance is half the 72-unit standing hull observed in v20 diagnostics;
+/// validate it against live routes before making this behavior a default.
+pub(super) const CORNER_HEIGHT_TOLERANCE: f32 = 36.0;
+
+pub(super) fn hold_upward_corner(horizontal_distance: f32, vertical_delta: f32, horizontal_limit: f32,
+    human_hull: bool, metadata: Option<(u8,u8)>) -> bool {
+    horizontal_distance.is_finite()
+        && vertical_delta.is_finite()
+        && horizontal_limit.is_finite()
+        && horizontal_distance >= 0. && horizontal_limit >= 0.
+        && horizontal_distance <= horizontal_limit
+        && vertical_delta > CORNER_HEIGHT_TOLERANCE
+        && human_hull
+        // Start/end markers and raw traversal flags keep the original behavior.
+        && metadata.is_some_and(|(flags,jump)| flags == 0 && (jump == 0 || jump == u8::MAX))
+}
+
 #[derive(Debug, Default)]
 pub(super) struct JumpTiming {
     airborne_since: Option<f32>,
@@ -105,6 +123,22 @@ impl JumpTiming {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test] fn corner_guard_only_holds_close_upward_ordinary_pilot_corners() {
+        assert!(hold_upward_corner(45.,36.1,45.,true,Some((0,255))));
+        assert!(hold_upward_corner(0.,100.,45.,true,Some((0,0))));
+        assert!(!hold_upward_corner(45.1,100.,45.,true,Some((0,255))));
+        assert!(!hold_upward_corner(20.,36.,45.,true,Some((0,255))));
+        assert!(!hold_upward_corner(20.,-100.,45.,true,Some((0,255))));
+        assert!(!hold_upward_corner(20.,100.,45.,false,Some((0,255))));
+        for meta in [None,Some((1,255)),Some((2,255)),Some((4,255)),Some((0,1)),Some((0,8))] {
+            assert!(!hold_upward_corner(20.,100.,45.,true,meta));
+        }
+    }
+    #[test] fn corner_guard_invalid_values_cannot_create_a_hold() {
+        for (xy,dz,limit) in [(f32::NAN,80.,45.),(1.,f32::NAN,45.),(1.,80.,f32::INFINITY),(-1.,80.,45.)] {
+            assert!(!hold_upward_corner(xy,dz,limit,true,Some((0,255))));
+        }
+    }
     #[test] fn repeated_stall_avoidance_is_target_specific_and_expires() {
         let mut u = Unreachable::default(); u.avoid(10., 7);
         assert!(u.blocks(11., 7)); assert!(!u.blocks(11., 8));

@@ -2,11 +2,17 @@ param([Parameter(Mandatory)][string]$BatchDirectory,[Parameter(Mandatory)][strin
     [string]$TestProfile="$env:USERPROFILE\northstar-crash-audit\map-cycle-test-profile",
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
     [string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$ResumeBatch,[switch]$ObserverDefaults,
-    [ValidateRange(1,9999)][int]$Goal=200,[string[]]$MapNames,[switch]$ValidatedV20)
+    [ValidateRange(1,9999)][int]$Goal=200,[string[]]$MapNames,[switch]$ValidatedV20,
+    [switch]$NavigationV22,[ValidateRange(0,1)][int]$CornerGuard=0)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/Stop-OwnedSurveyGame.ps1"
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
-if($ValidatedV20){
+if($NavigationV22){
+    if($ValidatedV20){throw 'Choose one validation cohort'}
+    . "$PSScriptRoot/Read-CornerValidation.ps1"
+    $validated=Read-CornerValidation $ValidationDirectory $TestProfile
+    $retestBuild=[pscustomobject]@{bridge_sha256=$validated.bridge_sha256}
+}elseif($ValidatedV20){
     $receipt=Get-Content "$TestProfile/bt7274-candidate.json" -Raw|ConvertFrom-Json
     $expected='3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89'
     $expectedBridge='9C43719868D28121E6D59A07C3317882E135A50FF3C91AA1340A12C1219C4598'
@@ -65,6 +71,7 @@ $bridgeHash=(Get-FileHash -LiteralPath $bridge).Hash
 $plan=[ordered]@{created=(Get-Date).ToString('o');build='decisions-v18';dll_sha256=$dllHash;core_sha256=$coreHash;bridge_sha256=$bridgeHash;maps=$maps;excluded_maps=$oldPlan.excluded_maps;bots=16;observer=1;goal=$Goal;minutes=15;aim=0.78;kind='Fresh-process listen-server candidate cohort; not mixed with v16';validation=$ValidationDirectory;readiness_retest=$ReadinessRetestDirectory}
 $plan.resumed_from=$ResumeBatch;$plan.completed_previously=$completedPreviously
 if($ValidatedV20){$plan.build='bot-capability-v20-Full';$plan.kind='Unattended v20 Full; separate from played sessions and historical v18';$plan.validation='Installed v20 receipt plus exact frozen DLL/core/bridge checks'}
+if($NavigationV22){$plan.build='nav-corner-v22';$plan.kind='Navigation A/B, same native build; no v21 safety/retarget';$plan.corner_guard=$CornerGuard;$plan.validation=$ValidationDirectory}
 $plan.observer_loadout_restore=-not[bool]$ObserverDefaults
 $plan|ConvertTo-Json -Depth 5|Set-Content -LiteralPath "$BatchDirectory/plan.json"
 $state=[ordered]@{state='preparing';started=(Get-Date).ToString('o');current=$null;planned=$maps.Count;results=@();failure=$null}
@@ -92,6 +99,7 @@ try{
     $text=[regex]::Replace($text,'(?m)^setplaylistvaroverrides .*$', ('setplaylistvaroverrides "max_players 17 timelimit 15 scorelimit '+$Goal+'"'))
     $text+="`r`nns_allow_spectators 1`r`nns_should_return_to_lobby 0`r`nbot_navigation_context 1`r`nbot_target_eligibility 1`r`nbot_action_policy 1`r`nbot_step_retry 1`r`n"
     if($ObserverDefaults){$text+="bt7274_local_loadouts 0 // survey observer only; preserve saved files without restoring them`r`n"}
+    if($NavigationV22){$text+="bot_offhand_safety 0`r`nbot_stall_retarget 0`r`nbot_corner_height_guard $CornerGuard`r`n"}
     Set-Content -LiteralPath $cfg -Value $text
     $index=0
     foreach($map in $maps){
@@ -102,12 +110,18 @@ try{
         $index++;$dir=Join-Path $BatchDirectory ('{0:D2}-{1}'-f$index,$map)
         New-Item -ItemType Directory -Path $dir|Out-Null
         $one=[regex]::Replace($template,'array<string> maps = \[[^\r\n]+\]',('array<string> maps = ["'+$map+'"]'))
+        if($NavigationV22){
+            $marker='(?m)^(\s*print\( "MAP_SURVEY_BEGIN[^\r\n]+)$'
+            if([regex]::Matches($one,$marker).Count-ne1){throw 'Unexpected survey begin marker'}
+            $one=[regex]::Replace($one,$marker,('$1'+"`n"+'    print("MAP_SURVEY_CORNER_GUARD value="+GetConVarInt("bot_corner_height_guard")+" safety="+GetConVarBool("bot_offhand_safety")+" retarget="+GetConVarBool("bot_stall_retarget"))'))
+        }
         [IO.File]::WriteAllText($surveyScript,$one,[Text.UTF8Encoding]::new($false))
         $state.state='starting';$state.current=@{map=$map;index=$index;directory=$dir};Save-State
         $began=Get-Date;$seen=@(Get-ChildItem "$TestProfile/logs" -Filter 'nslog*.txt'|Select-Object -ExpandProperty Name)
-        $process=Start-Process -FilePath "$GameDirectory/NorthstarLauncher.exe" -WorkingDirectory $GameDirectory -WindowStyle Normal -PassThru -ArgumentList "-profile=$TestProfile",'-novid','-fullscreen','-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+setplaylist','tdm','+setplaylistvaroverrides',('"max_players 17 scorelimit '+$Goal+' timelimit 15"'),'+bt7274_survey_goal',"$Goal",'+bt7274_survey_count','1','+bt7274_survey_index','0','+bt7274_survey_minutes','15','+bt7274_survey_smoke','0','+mp_gamemode','tdm','+map',$map
+        $windowMode=if($NavigationV22){'-windowed'}else{'-fullscreen'}
+        $process=Start-Process -FilePath "$GameDirectory/NorthstarLauncher.exe" -WorkingDirectory $GameDirectory -WindowStyle Hidden -PassThru -ArgumentList "-profile=$TestProfile",'-novid',$windowMode,'-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+setplaylist','tdm','+setplaylistvaroverrides',('"max_players 17 scorelimit '+$Goal+' timelimit 15"'),'+bt7274_survey_goal',"$Goal",'+bt7274_survey_count','1','+bt7274_survey_index','0','+bt7274_survey_minutes','15','+bt7274_survey_smoke','0','+mp_gamemode','tdm','+map',$map
         $state.current.pid=$process.Id;Save-State
-        $log=$null;$lastHeartbeat=Get-Date;$result=$null;$done=$false
+        $log=$null;$lastHeartbeat=Get-Date;$result=$null;$done=$false;$cornerStateSeen=$false
         while(-not$done){
             if(-not$log){
                 $log=Get-ChildItem "$TestProfile/logs" -Filter 'nslog*.txt'|Where-Object Name -notin $seen|Sort-Object CreationTime -Descending|Select-Object -First 1
@@ -122,7 +136,12 @@ try{
                     $state.state='running';$lastHeartbeat=Get-Date
                 }
                 if($line.Contains('MAP_SURVEY_SCORE ')){$state.current.score=Fields $line;$lastHeartbeat=Get-Date;Save-State}
-                if($line.Contains('MAP_SURVEY_RESULT ')){$result=Fields $line;if($result.valid-ne'true'){throw 'Invalid match result'}}
+                if($NavigationV22-and$line.Contains('MAP_SURVEY_CORNER_GUARD ')){
+                    $f=Fields $line
+                    if([int]$f.value-ne$CornerGuard-or$f.safety-ne'false'-or$f.retarget-ne'false'){throw 'Unexpected corner/safety switches'}
+                    $cornerStateSeen=$true
+                }
+                if($line.Contains('MAP_SURVEY_RESULT ')){$result=Fields $line;if($result.valid-ne'true'){throw 'Invalid match result'};if($NavigationV22-and-not$cornerStateSeen){throw 'Missing corner variant confirmation'}}
                 if($line.Contains('MAP_SURVEY_DONE ')){$done=$true}
             }}
             $process.Refresh();if($process.HasExited-and-not$done){throw 'Survey game exited early'}

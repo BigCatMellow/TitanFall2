@@ -65,7 +65,7 @@ impl Plugin for HooksPlugin {
             panic!("bad things will happen if this is reloaded")
         }
         unsafe { std::env::set_var("RUST_BACKTRACE", "1") };
-        log::info!("local build: bot-safety-v21-candidate (v20 plus gated throw ownership/clearance and bounded stalled-pursuit retargeting)");
+        log::info!("local build: nav-corner-v22-candidate (gated upward ordinary pilot corner trial; v21 safety/retarget remain off)");
 
         Self {
             bots: Bots::new(reloaded),
