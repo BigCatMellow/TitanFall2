@@ -865,3 +865,20 @@ project Cargo.lock unchanged. Original generator is absent and not committed.
 Suggested exact-source-file allowance after user review instead of whole-PC
 AV disable, then recheck restored source before running. Do not assume approval
 or source restoration merely from elapsed time. Working game stays v20.
+
+## 2026-10-27 — Overnight Full v20 map survey authorized
+
+BT-7274 restored flagged files and submitted them to Bitdefender, then requested
+more unattended map collection while asleep. No draft/helper execution. Installed
+v20 native3077878B... and bridge9C437198... verified, normal saves guarded. See
+Notes/map-surveys/v20-full-20261027/README.md and private target/v20-overnight-session.json.
+22 maps,75points,16bots+inactiveobserver,Full flags, aim0.78, default stock bot
+weapon balance. Isolated roster0.1.1/WeaponNotes1.1.1 enabled, old/other harnesses
+disabled. Backup before-v20-full-survey-20261027-212652. Normal profile untouched.
+New exact v20 receipt/hash gate added to existing survey runner; historical v18
+gates preserved. Queue uses this switch only when request.use_validated_v20=true.
+8cleanup/6planning checks pass. First non-desktop attempt retained as failed
+startup, owned process closed and child confirmed profile_restored before retry.
+Desktop-context batch v20-full-overnight-20261027-212916 is the active candidate;
+verify actual current status before making claims. Logs and personal state private.
+Stop via current batch stop-after-current.txt; no old survey save restoration.

@@ -2,10 +2,19 @@ param([Parameter(Mandatory)][string]$BatchDirectory,[Parameter(Mandatory)][strin
     [string]$TestProfile="$env:USERPROFILE\northstar-crash-audit\map-cycle-test-profile",
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
     [string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$ResumeBatch,[switch]$ObserverDefaults,
-    [ValidateRange(1,9999)][int]$Goal=200,[string[]]$MapNames)
+    [ValidateRange(1,9999)][int]$Goal=200,[string[]]$MapNames,[switch]$ValidatedV20)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/Stop-OwnedSurveyGame.ps1"
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
+if($ValidatedV20){
+    $receipt=Get-Content "$TestProfile/bt7274-candidate.json" -Raw|ConvertFrom-Json
+    $expected='3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89'
+    $expectedBridge='9C43719868D28121E6D59A07C3317882E135A50FF3C91AA1340A12C1219C4598'
+    if($receipt.state-ne'validated_for_playtest'-or$receipt.native_sha256-ne$expected-or$receipt.compatibility-ne'passed'-or$receipt.staged_smoke-ne'passed'){throw 'Require the installed Windows-tested v20 receipt'}
+    if((Get-FileHash "$TestProfile/plugins/bp_ort.dll").Hash-ne$expected-or(Get-FileHash "$TestProfile/mods/BT7274.BotDecisions/mod/scripts/vscripts/bt7274_bot_decisions.nut").Hash-ne$expectedBridge){throw 'Validated v20 DLL/bridge mismatch'}
+    if((Get-Item "$TestProfile/Northstar.dll").VersionInfo.FileVersion-ne'1.31.14'){throw 'Wrong v20 core'}
+    $validated=[pscustomobject]@{dll_sha256=$expected};$retestBuild=[pscustomobject]@{bridge_sha256=$expectedBridge}
+}else{
 $validation=Get-Content -Raw -LiteralPath "$ValidationDirectory/progress.json"|ConvertFrom-Json
 if($validation.state-ne'passed'-or$validation.dedicated){throw 'Require completed client/transition/lobby integration checks before this listen-server survey'}
 $validated=Get-Content -Raw -LiteralPath "$ValidationDirectory/processes.json"|ConvertFrom-Json
@@ -15,6 +24,7 @@ $retestBuild=Get-Content -Raw -LiteralPath "$ReadinessRetestDirectory/processes.
 if($retest.state-ne'passed'-or-not$retest.quick-or$retestBuild.dll_sha256-ne$validated.dll_sha256){throw 'Final readiness retest did not pass with the same native build'}
 if((Get-FileHash -LiteralPath "$TestProfile/mods/BT7274.BotDecisions/mod/scripts/vscripts/bt7274_bot_decisions.nut").Hash-ne$retestBuild.bridge_sha256){throw 'Bridge differs from the tested final readiness script'}
 if((Get-FileHash -LiteralPath "$TestProfile/plugins/bp_ort.dll").Hash-ne$validated.dll_sha256){throw 'Profile DLL differs from the validated candidate'}
+}
 if(Test-Path -LiteralPath $BatchDirectory){throw 'Preserve the previous batch; create a fresh directory'}
 if(Get-Process NorthstarLauncher,Titanfall2 -ErrorAction SilentlyContinue){throw 'Another game is already running'}
 New-Item -ItemType Directory -Path "$BatchDirectory/backup" -Force|Out-Null
@@ -54,6 +64,7 @@ $bridge="$TestProfile/mods/BT7274.BotDecisions/mod/scripts/vscripts/bt7274_bot_d
 $bridgeHash=(Get-FileHash -LiteralPath $bridge).Hash
 $plan=[ordered]@{created=(Get-Date).ToString('o');build='decisions-v18';dll_sha256=$dllHash;core_sha256=$coreHash;bridge_sha256=$bridgeHash;maps=$maps;excluded_maps=$oldPlan.excluded_maps;bots=16;observer=1;goal=$Goal;minutes=15;aim=0.78;kind='Fresh-process listen-server candidate cohort; not mixed with v16';validation=$ValidationDirectory;readiness_retest=$ReadinessRetestDirectory}
 $plan.resumed_from=$ResumeBatch;$plan.completed_previously=$completedPreviously
+if($ValidatedV20){$plan.build='bot-capability-v20-Full';$plan.kind='Unattended v20 Full; separate from played sessions and historical v18';$plan.validation='Installed v20 receipt plus exact frozen DLL/core/bridge checks'}
 $plan.observer_loadout_restore=-not[bool]$ObserverDefaults
 $plan|ConvertTo-Json -Depth 5|Set-Content -LiteralPath "$BatchDirectory/plan.json"
 $state=[ordered]@{state='preparing';started=(Get-Date).ToString('o');current=$null;planned=$maps.Count;results=@();failure=$null}
@@ -71,7 +82,7 @@ try{
     New-Item -ItemType Directory -Path (Split-Path $surveyScript) -Force|Out-Null
     Copy-Item -LiteralPath "$repo/automation/runtime-mods/survey/BT7274.MapSurvey/mod.json" -Destination "$surveyDir/mod.json" -Force
     $mods=Get-Content -Raw -LiteralPath $enabled|ConvertFrom-Json -AsHashtable
-    foreach($name in @('BT7274.DecisionTest','BT7274.BotCycleTest','BT7274.MenuPreviewTest')){
+    foreach($name in @('BT7274.DecisionTest','BT7274.BotCycleTest','BT7274.MenuPreviewTest','BT7274.CapabilityTest','BT7274.WeaponIntegrationTest','BT7274.SafetyTest')){
         if($mods.ContainsKey($name)){foreach($version in @($mods[$name].Keys)){$mods[$name][$version]=$false}}
     }
     $mods['BT7274.MapSurvey']=@{'1.0.0'=$true};$mods['BT7274.BotDecisions']=@{'1.0.0'=$true}

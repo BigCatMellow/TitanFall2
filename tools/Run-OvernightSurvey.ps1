@@ -96,6 +96,7 @@ public static class NorthstarSurveyPower {
             $childBatch=Join-Path $batch ('{0:D2}-{1}-attempt{2}'-f$index,$map,$attempt)
             $state.state='running_map';$state.current=@{map=$map;index=$index;attempt=$attempt;batch=$childBatch;score=$null};Save-OvernightState
             $childArgs=@('-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',"$repo/tools/Run-CandidateSurvey.ps1",'-BatchDirectory',$childBatch,'-ValidationDirectory',[string]$request.validation,'-ReadinessRetestDirectory',[string]$request.readiness_retest,'-TestProfile',$profile,'-Goal',"$goal",'-MapNames',$map,'-ObserverDefaults')
+            if($request.use_validated_v20){$childArgs+='-ValidatedV20'}
             $activeChild=Start-Process -FilePath $hostExe -WindowStyle Hidden -WorkingDirectory $repo -ArgumentList $childArgs -RedirectStandardOutput "$childBatch.stdout.log" -RedirectStandardError "$childBatch.stderr.log" -PassThru
             $state.current.runner_pid=$activeChild.Id;Save-OvernightState
             $deadline=(Get-Date).AddMinutes(25)
