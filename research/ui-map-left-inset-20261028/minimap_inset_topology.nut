@@ -11,7 +11,7 @@ var function BT7274_CreateMinimapInsetRui( asset ruiAsset, int sortKey )
 	if ( file.bt7274MinimapInsetTopology == null )
 	{
 		float[2] screenSize = GetScreenSize()
-		float insetSide = min( screenSize[0] * 0.32, screenSize[1] * 0.42 )
+		float insetSide = min( screenSize[0] * 0.18, screenSize[1] * 0.25 )
 
 		// HUD topology coordinates are pixels; origin is the top-left corner.
 		// Equal side lengths make the viewport square.
