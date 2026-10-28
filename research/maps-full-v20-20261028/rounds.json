@@ -1,0 +1,413 @@
+{
+  "snapshot": "2026-10-28T10:07:38.448Z",
+  "source_batch": "recovered-coverage",
+  "state": "partial_recovered",
+  "completed": 9,
+  "limits": "One bot-only round per map, with 200/75 goals and observer-restore configurations kept separate. Playing window uses preceding two-second telemetry frames at harness begin/result markers (approximate edges). Low progress is <50 XY units net displacement over10–13s, with the same sampled live pilot and continuous navigation/recovery/boarding states; gaps>2.1s break continuity. Samples overlap and are not independent incidents. Short unsampled deaths can be missed. High target selection is not firing/cast proof. No causal AI/balance or before/after improvement conclusion. No visual watching. Public output contains derived metrics and hashes only.",
+  "rounds": [
+    {
+      "map": "mp_forwardbase_kodai",
+      "goal": 75,
+      "observer_loadout_restore": false,
+      "imc": 75,
+      "militia": 69,
+      "elapsed": 511.2,
+      "finish": "score_limit",
+      "window_start": 25.02,
+      "window_end": 537.02,
+      "pilot_samples": 2899,
+      "continuous_navigation_low_samples": 29,
+      "continuous_navigation_percent": 1,
+      "visible_engage_samples": 767,
+      "overhead_engage_samples": 0,
+      "errors_in_saved_log": 0,
+      "source_sha256": "029e24e05c9624ff834d1ebc7ceefae1a4a31227515d3e8b2c0cf8a6f85a1be6",
+      "hotspots": [
+        {
+          "cell": "1792,-2048,768",
+          "samples": 3,
+          "slots": [
+            "2",
+            "4"
+          ]
+        },
+        {
+          "cell": "-1280,1536,960",
+          "samples": 2,
+          "slots": [
+            "7",
+            "13"
+          ]
+        },
+        {
+          "cell": "-512,2432,1088",
+          "samples": 1,
+          "slots": [
+            "8"
+          ]
+        }
+      ]
+    },
+    {
+      "map": "mp_grave",
+      "goal": 75,
+      "observer_loadout_restore": false,
+      "imc": 75,
+      "militia": 33,
+      "elapsed": 301,
+      "finish": "score_limit",
+      "window_start": 27.02,
+      "window_end": 327.02,
+      "pilot_samples": 1718,
+      "continuous_navigation_low_samples": 6,
+      "continuous_navigation_percent": 0.35,
+      "visible_engage_samples": 709,
+      "overhead_engage_samples": 0,
+      "errors_in_saved_log": 0,
+      "source_sha256": "582da6ff84c16bef3573da1d089f6c827bf8b483bd558a7bfec181001ff2aa60",
+      "hotspots": [
+        {
+          "cell": "4096,-1792,2304",
+          "samples": 3,
+          "slots": [
+            "7",
+            "9",
+            "13"
+          ]
+        },
+        {
+          "cell": "3968,-4480,2304",
+          "samples": 2,
+          "slots": [
+            "16"
+          ]
+        },
+        {
+          "cell": "2688,-3840,2368",
+          "samples": 1,
+          "slots": [
+            "3"
+          ]
+        }
+      ]
+    },
+    {
+      "map": "mp_homestead",
+      "goal": 75,
+      "observer_loadout_restore": false,
+      "imc": 75,
+      "militia": 27,
+      "elapsed": 253.5,
+      "finish": "score_limit",
+      "window_start": 27.02,
+      "window_end": 279.02,
+      "pilot_samples": 1336,
+      "continuous_navigation_low_samples": 5,
+      "continuous_navigation_percent": 0.37,
+      "visible_engage_samples": 502,
+      "overhead_engage_samples": 0,
+      "errors_in_saved_log": 0,
+      "source_sha256": "5b853cef639a0eb21252f7d6a802c17a2bf33de978ef76b1de7237f25dd2f8e1",
+      "hotspots": [
+        {
+          "cell": "-768,256,0",
+          "samples": 2,
+          "slots": [
+            "14"
+          ]
+        },
+        {
+          "cell": "1920,768,256",
+          "samples": 1,
+          "slots": [
+            "2"
+          ]
+        },
+        {
+          "cell": "-1024,512,64",
+          "samples": 1,
+          "slots": [
+            "11"
+          ]
+        }
+      ]
+    },
+    {
+      "map": "mp_relic02",
+      "goal": 75,
+      "observer_loadout_restore": false,
+      "imc": 75,
+      "militia": 25,
+      "elapsed": 345,
+      "finish": "score_limit",
+      "window_start": 27.02,
+      "window_end": 371.02,
+      "pilot_samples": 2080,
+      "continuous_navigation_low_samples": 57,
+      "continuous_navigation_percent": 2.74,
+      "visible_engage_samples": 402,
+      "overhead_engage_samples": 0,
+      "errors_in_saved_log": 0,
+      "source_sha256": "9477137b01e6542e6ecc6622f857563d50f384e1eb58b3f8ff1c892d31278392",
+      "hotspots": [
+        {
+          "cell": "128,-4736,320",
+          "samples": 8,
+          "slots": [
+            "2",
+            "10",
+            "12"
+          ]
+        },
+        {
+          "cell": "2176,-4864,512",
+          "samples": 3,
+          "slots": [
+            "5"
+          ]
+        },
+        {
+          "cell": "2176,-4864,448",
+          "samples": 3,
+          "slots": [
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "map": "mp_rise",
+      "goal": 75,
+      "observer_loadout_restore": false,
+      "imc": 75,
+      "militia": 69,
+      "elapsed": 370.1,
+      "finish": "score_limit",
+      "window_start": 27.02,
+      "window_end": 397.02,
+      "pilot_samples": 2058,
+      "continuous_navigation_low_samples": 30,
+      "continuous_navigation_percent": 1.46,
+      "visible_engage_samples": 632,
+      "overhead_engage_samples": 0,
+      "errors_in_saved_log": 0,
+      "source_sha256": "5b6b2c620b7d0363eba5829aece067d06531d1b5b36c9d7d4bfb529e266a22cc",
+      "hotspots": [
+        {
+          "cell": "256,-128,576",
+          "samples": 7,
+          "slots": [
+            "7",
+            "11",
+            "13"
+          ]
+        },
+        {
+          "cell": "-6144,-768,768",
+          "samples": 4,
+          "slots": [
+            "9"
+          ]
+        },
+        {
+          "cell": "512,896,576",
+          "samples": 2,
+          "slots": [
+            "11",
+            "16"
+          ]
+        }
+      ]
+    },
+    {
+      "map": "mp_thaw",
+      "goal": 75,
+      "observer_loadout_restore": false,
+      "imc": 75,
+      "militia": 69,
+      "elapsed": 368.2,
+      "finish": "score_limit",
+      "window_start": 27.02,
+      "window_end": 395.02,
+      "pilot_samples": 2035,
+      "continuous_navigation_low_samples": 21,
+      "continuous_navigation_percent": 1.03,
+      "visible_engage_samples": 592,
+      "overhead_engage_samples": 0,
+      "errors_in_saved_log": 0,
+      "source_sha256": "e026cb0b90a33d1abdf786afcca173819c53b77343e5949c070cca5245a95d39",
+      "hotspots": [
+        {
+          "cell": "1280,-3328,-192",
+          "samples": 4,
+          "slots": [
+            "7",
+            "9",
+            "11",
+            "13"
+          ]
+        },
+        {
+          "cell": "1280,-3456,-192",
+          "samples": 4,
+          "slots": [
+            "7",
+            "13"
+          ]
+        },
+        {
+          "cell": "2816,-3712,-256",
+          "samples": 2,
+          "slots": [
+            "16"
+          ]
+        }
+      ]
+    },
+    {
+      "map": "mp_wargames",
+      "goal": 75,
+      "observer_loadout_restore": false,
+      "imc": 75,
+      "militia": 51,
+      "elapsed": 575.4,
+      "finish": "score_limit",
+      "window_start": 31.02,
+      "window_end": 607.02,
+      "pilot_samples": 3637,
+      "continuous_navigation_low_samples": 215,
+      "continuous_navigation_percent": 5.91,
+      "visible_engage_samples": 391,
+      "overhead_engage_samples": 0,
+      "errors_in_saved_log": 0,
+      "source_sha256": "3ff9d45c31f01f477ff52d037f08788739cdde3549fc695d5bb458f8419c0fe6",
+      "hotspots": [
+        {
+          "cell": "1664,-256,128",
+          "samples": 24,
+          "slots": [
+            "4",
+            "6",
+            "10",
+            "12",
+            "16"
+          ]
+        },
+        {
+          "cell": "-2688,1152,-128",
+          "samples": 20,
+          "slots": [
+            "1",
+            "3",
+            "7",
+            "9",
+            "11",
+            "15"
+          ]
+        },
+        {
+          "cell": "-2816,1024,-128",
+          "samples": 17,
+          "slots": [
+            "1",
+            "3",
+            "7",
+            "9",
+            "11",
+            "15"
+          ]
+        }
+      ]
+    },
+    {
+      "map": "mp_eden",
+      "goal": 75,
+      "observer_loadout_restore": false,
+      "imc": 40,
+      "militia": 75,
+      "elapsed": 395.1,
+      "finish": "score_limit",
+      "window_start": 27.02,
+      "window_end": 421.02,
+      "pilot_samples": 2180,
+      "continuous_navigation_low_samples": 82,
+      "continuous_navigation_percent": 3.76,
+      "visible_engage_samples": 577,
+      "overhead_engage_samples": 0,
+      "errors_in_saved_log": 0,
+      "source_sha256": "de8f787972f8edab4c30b9c516090f56cde7f9d8a2d1b167a1fb92123f799667",
+      "hotspots": [
+        {
+          "cell": "-512,384,64",
+          "samples": 20,
+          "slots": [
+            "1",
+            "3",
+            "5"
+          ]
+        },
+        {
+          "cell": "1280,-2176,128",
+          "samples": 13,
+          "slots": [
+            "2",
+            "6",
+            "8",
+            "10",
+            "16"
+          ]
+        },
+        {
+          "cell": "-384,384,64",
+          "samples": 10,
+          "slots": [
+            "3",
+            "5",
+            "15"
+          ]
+        }
+      ]
+    },
+    {
+      "map": "mp_glitch",
+      "goal": 75,
+      "observer_loadout_restore": false,
+      "imc": 75,
+      "militia": 46,
+      "elapsed": 335.2,
+      "finish": "score_limit",
+      "window_start": 27.02,
+      "window_end": 361.02,
+      "pilot_samples": 1714,
+      "continuous_navigation_low_samples": 7,
+      "continuous_navigation_percent": 0.41,
+      "visible_engage_samples": 533,
+      "overhead_engage_samples": 0,
+      "errors_in_saved_log": 0,
+      "source_sha256": "9c57bb4eccf6bdf80b407ab311f3ddd782fd02f1458968e8f6f13067c9b88bec",
+      "hotspots": [
+        {
+          "cell": "-3072,-1280,320",
+          "samples": 1,
+          "slots": [
+            "6"
+          ]
+        },
+        {
+          "cell": "-1792,-1152,256",
+          "samples": 1,
+          "slots": [
+            "4"
+          ]
+        },
+        {
+          "cell": "-1920,-1024,320",
+          "samples": 1,
+          "slots": [
+            "4"
+          ]
+        }
+      ]
+    }
+  ]
+}

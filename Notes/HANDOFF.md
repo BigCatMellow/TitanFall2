@@ -882,3 +882,26 @@ startup, owned process closed and child confirmed profile_restored before retry.
 Desktop-context batch v20-full-overnight-20261027-212916 is the active candidate;
 verify actual current status before making claims. Logs and personal state private.
 Stop via current batch stop-after-current.txt; no old survey save restoration.
+
+## 2026-10-28 — Overnight queue partial; nine rounds recovered
+
+Controller stopped22:38 after8completed maps: File.Open hit a temporary missing
+child status.json during replacement. Child Glitch continued to clean completion
+22:42,75–46,profile_restored=true. No game currently running. Preserved original
+failure summary; private original-batch/recovered-coverage contains9completed
+restored children and matching plan for continuation.13maps remain unrun. Do not
+claim all22finished. No game launched during morning status review.
+
+Derived results research/maps-full-v20-20261028:57.58active minutes,19657livepilot
+samples,0detectedscript/native error markers. Pilot bot frags71enemykills/153self;
+other ordnance Smoke10,Firestar2,Arc1,Gravity2 enemykills. Same self-safety defect,
+not cause proof. Navigationlow WarGames5.91%,Eden3.76%,Relic2.74%; preserved old
+WarGames1664,-256,128hotspot. Separate bot-only cohort, no human difficulty claim.
+
+Fixed queue Read-QueueJson via Read-SurveyQueueJson helper: bounded missing/
+sharing/partialJSON retries; persistent failures stop, permission denial immediate.
+Four regression cases passed. Source fix only; stable installed v20 unchanged.
+Original batch v20-full-overnight-20261027-212916 and target receipt now historical
+stopped state. Use recovered-coverage as completed_batches in NEW request if
+continuing remaining13, after checking current user/game activity. Normal saves
+guarded6files during8controller-completed rounds; never restore old progress.

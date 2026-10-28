@@ -2,6 +2,7 @@ param([Parameter(Mandatory)][string]$RequestPath,[switch]$PlanOnly)
 $ErrorActionPreference='Stop'
 $request=Get-Content -Raw -LiteralPath $RequestPath|ConvertFrom-Json
 $repo=Split-Path $PSScriptRoot
+. "$PSScriptRoot/Read-SurveyQueueJson.ps1"
 $batch=[string]$request.batch
 $profile=[string]$request.profile
 $goal=[int]$request.goal
@@ -15,9 +16,7 @@ $coreHash=(Get-FileHash "$profile/Northstar.dll").Hash
 $bridge="$profile/mods/BT7274.BotDecisions/mod/scripts/vscripts/bt7274_bot_decisions.nut"
 $bridgeHash=(Get-FileHash $bridge).Hash
 function Read-QueueJson([string]$path){
-    $stream=[IO.File]::Open($path,[IO.FileMode]::Open,[IO.FileAccess]::Read,([IO.FileShare]::ReadWrite-bor[IO.FileShare]::Delete))
-    $reader=[IO.StreamReader]::new($stream)
-    try{$reader.ReadToEnd()|ConvertFrom-Json}finally{$reader.Dispose()}
+    Read-SurveyQueueJson $path
 }
 function Read-Prior {
     $rows=@()

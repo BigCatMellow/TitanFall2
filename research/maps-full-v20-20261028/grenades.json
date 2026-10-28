@@ -1,0 +1,467 @@
+{
+  "scope": "Nine completed v20 bot-only survey windows; pilot attackers/victims only; matched death credit, not throws or accuracy",
+  "totals": {
+    "mp_weapon_frag_grenade": {
+      "enemy": 71,
+      "self": 153,
+      "opposing_damage_callbacks": 140
+    },
+    "mp_weapon_thermite_grenade": {
+      "enemy": 2,
+      "self": 0,
+      "opposing_damage_callbacks": 31
+    },
+    "mp_weapon_grenade_emp": {
+      "enemy": 1,
+      "self": 0,
+      "opposing_damage_callbacks": 13
+    },
+    "mp_weapon_grenade_electric_smoke": {
+      "enemy": 10,
+      "self": 0,
+      "opposing_damage_callbacks": 167
+    },
+    "mp_weapon_grenade_gravity": {
+      "enemy": 2,
+      "self": 0,
+      "opposing_damage_callbacks": 13
+    }
+  },
+  "rounds": [
+    {
+      "map": "mp_forwardbase_kodai",
+      "sources": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 59,
+          "opposing_damage_callbacks": 24,
+          "opposing_callbacks_with_observed_health_loss": 24,
+          "enemy_pilot_deaths_credited": 14,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 35,
+          "self_pilot_deaths_credited": 23,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_thermite_grenade",
+          "damage_callbacks": 8,
+          "opposing_damage_callbacks": 8,
+          "opposing_callbacks_with_observed_health_loss": 8,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 3,
+          "opposing_damage_callbacks": 3,
+          "opposing_callbacks_with_observed_health_loss": 3,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "damage_callbacks": 23,
+          "opposing_damage_callbacks": 23,
+          "opposing_callbacks_with_observed_health_loss": 23,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_gravity",
+          "damage_callbacks": 1,
+          "opposing_damage_callbacks": 1,
+          "opposing_callbacks_with_observed_health_loss": 1,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ]
+    },
+    {
+      "map": "mp_grave",
+      "sources": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 41,
+          "opposing_damage_callbacks": 15,
+          "opposing_callbacks_with_observed_health_loss": 15,
+          "enemy_pilot_deaths_credited": 7,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 26,
+          "self_pilot_deaths_credited": 17,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "damage_callbacks": 19,
+          "opposing_damage_callbacks": 19,
+          "opposing_callbacks_with_observed_health_loss": 19,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_gravity",
+          "damage_callbacks": 3,
+          "opposing_damage_callbacks": 3,
+          "opposing_callbacks_with_observed_health_loss": 3,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ]
+    },
+    {
+      "map": "mp_homestead",
+      "sources": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 31,
+          "opposing_damage_callbacks": 15,
+          "opposing_callbacks_with_observed_health_loss": 15,
+          "enemy_pilot_deaths_credited": 7,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 16,
+          "self_pilot_deaths_credited": 9,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 3,
+          "opposing_damage_callbacks": 3,
+          "opposing_callbacks_with_observed_health_loss": 3,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_gravity",
+          "damage_callbacks": 4,
+          "opposing_damage_callbacks": 4,
+          "opposing_callbacks_with_observed_health_loss": 4,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "damage_callbacks": 30,
+          "opposing_damage_callbacks": 30,
+          "opposing_callbacks_with_observed_health_loss": 30,
+          "enemy_pilot_deaths_credited": 2,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ]
+    },
+    {
+      "map": "mp_relic02",
+      "sources": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 24,
+          "opposing_damage_callbacks": 8,
+          "opposing_callbacks_with_observed_health_loss": 8,
+          "enemy_pilot_deaths_credited": 4,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 16,
+          "self_pilot_deaths_credited": 8,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 1,
+          "opposing_damage_callbacks": 1,
+          "opposing_callbacks_with_observed_health_loss": 1,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_thermite_grenade",
+          "damage_callbacks": 4,
+          "opposing_damage_callbacks": 4,
+          "opposing_callbacks_with_observed_health_loss": 4,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ]
+    },
+    {
+      "map": "mp_rise",
+      "sources": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 47,
+          "opposing_damage_callbacks": 23,
+          "opposing_callbacks_with_observed_health_loss": 23,
+          "enemy_pilot_deaths_credited": 13,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 24,
+          "self_pilot_deaths_credited": 15,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "damage_callbacks": 22,
+          "opposing_damage_callbacks": 22,
+          "opposing_callbacks_with_observed_health_loss": 22,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ]
+    },
+    {
+      "map": "mp_thaw",
+      "sources": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 52,
+          "opposing_damage_callbacks": 18,
+          "opposing_callbacks_with_observed_health_loss": 18,
+          "enemy_pilot_deaths_credited": 7,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 34,
+          "self_pilot_deaths_credited": 20,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 4,
+          "opposing_damage_callbacks": 4,
+          "opposing_callbacks_with_observed_health_loss": 4,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "damage_callbacks": 10,
+          "opposing_damage_callbacks": 10,
+          "opposing_callbacks_with_observed_health_loss": 9,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_thermite_grenade",
+          "damage_callbacks": 3,
+          "opposing_damage_callbacks": 3,
+          "opposing_callbacks_with_observed_health_loss": 3,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ]
+    },
+    {
+      "map": "mp_wargames",
+      "sources": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 42,
+          "opposing_damage_callbacks": 15,
+          "opposing_callbacks_with_observed_health_loss": 15,
+          "enemy_pilot_deaths_credited": 9,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 27,
+          "self_pilot_deaths_credited": 17,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 1,
+          "opposing_damage_callbacks": 1,
+          "opposing_callbacks_with_observed_health_loss": 1,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_electric_smoke",
+          "damage_callbacks": 63,
+          "opposing_damage_callbacks": 63,
+          "opposing_callbacks_with_observed_health_loss": 63,
+          "enemy_pilot_deaths_credited": 6,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ]
+    },
+    {
+      "map": "mp_eden",
+      "sources": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 53,
+          "opposing_damage_callbacks": 12,
+          "opposing_callbacks_with_observed_health_loss": 12,
+          "enemy_pilot_deaths_credited": 7,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 41,
+          "self_pilot_deaths_credited": 25,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_gravity",
+          "damage_callbacks": 1,
+          "opposing_damage_callbacks": 1,
+          "opposing_callbacks_with_observed_health_loss": 1,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ]
+    },
+    {
+      "map": "mp_glitch",
+      "sources": [
+        {
+          "weapon": "mp_weapon_frag_grenade",
+          "damage_callbacks": 41,
+          "opposing_damage_callbacks": 10,
+          "opposing_callbacks_with_observed_health_loss": 10,
+          "enemy_pilot_deaths_credited": 3,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 31,
+          "self_pilot_deaths_credited": 19,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_gravity",
+          "damage_callbacks": 4,
+          "opposing_damage_callbacks": 4,
+          "opposing_callbacks_with_observed_health_loss": 4,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_thermite_grenade",
+          "damage_callbacks": 16,
+          "opposing_damage_callbacks": 16,
+          "opposing_callbacks_with_observed_health_loss": 16,
+          "enemy_pilot_deaths_credited": 1,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        },
+        {
+          "weapon": "mp_weapon_grenade_emp",
+          "damage_callbacks": 1,
+          "opposing_damage_callbacks": 1,
+          "opposing_callbacks_with_observed_health_loss": 1,
+          "enemy_pilot_deaths_credited": 0,
+          "human_pilot_deaths_credited": 0,
+          "self_damage_callbacks": 0,
+          "self_pilot_deaths_credited": 0,
+          "friendly_damage_callbacks": 0,
+          "friendly_pilot_deaths_credited": 0,
+          "forced_callbacks": 0
+        }
+      ]
+    }
+  ]
+}
