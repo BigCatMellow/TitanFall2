@@ -1,5 +1,11 @@
 # Isolated v22 corner trial — October28
 
+**Final outcome:**29of32rounds/14matchedpairs completed; time-budget stop,
+0detected game errors, both profiles restored to v20. WarGames improved on the
+measured proxy in both repeats, Complex worsened in both. Guard staysOFF.
+[Findings, caveats and next experiment](FINDINGS.md). Earlier progress notes
+below are historical; current receipts must not be read as active processes.
+
 BT-7274 authorized four hours of testing and shorter rounds after two more
 played matches. Normal remains validated v20; current saves are protected.
 The candidate adapts remote research/navmesh-corner-height-guard-20261028,

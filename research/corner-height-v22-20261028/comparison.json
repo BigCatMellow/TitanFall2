@@ -1,0 +1,276 @@
+{
+  "source_sha256": "66d5e76af9f3626c44e9cb0bdc9ccded76140842e10d6b05d2de563feacaa1ba",
+  "native_sha256": "2B08DE76AB7A85C560F9DC9076F50233346EF1038A2C96B0F5BACD55AAB0A439",
+  "state": "stopped_time_budget",
+  "completed": 29,
+  "matched_pairs": 14,
+  "unpaired": [
+    {
+      "map": "mp_homestead",
+      "repeat": 2,
+      "available_guard": 1
+    }
+  ],
+  "lower_pairs": 7,
+  "higher_pairs": 5,
+  "equal_pairs": 2,
+  "guard": {
+    "begins": 7533,
+    "replans": 7466,
+    "advances": 56,
+    "ends": 7522
+  },
+  "maps": [
+    {
+      "map": "mp_wargames",
+      "pairs": 2,
+      "off_percent": 3.7442396313364057,
+      "on_percent": 2.2140221402214024,
+      "pair_deltas": [
+        -1.8283603666117325,
+        -1.1865106958868874
+      ],
+      "off_samples": 5208,
+      "on_samples": 4607
+    },
+    {
+      "map": "mp_complex3",
+      "pairs": 2,
+      "off_percent": 0.23856858846918488,
+      "on_percent": 0.8957897879964168,
+      "pair_deltas": [
+        0.4607574894793127,
+        0.83253585078313
+      ],
+      "off_samples": 2515,
+      "on_samples": 3349
+    },
+    {
+      "map": "mp_black_water_canal",
+      "pairs": 2,
+      "off_percent": 0.6970665117629974,
+      "on_percent": 0.5119453924914675,
+      "pair_deltas": [
+        0.15623430079856782,
+        -0.5494409146437694
+      ],
+      "off_samples": 3443,
+      "on_samples": 2930
+    },
+    {
+      "map": "mp_lf_meadow",
+      "pairs": 2,
+      "off_percent": 0,
+      "on_percent": 0,
+      "pair_deltas": [
+        0,
+        0
+      ],
+      "off_samples": 2063,
+      "on_samples": 2171
+    },
+    {
+      "map": "mp_angel_city",
+      "pairs": 2,
+      "off_percent": 0.5108556832694764,
+      "on_percent": 0.5136986301369864,
+      "pair_deltas": [
+        -0.4950196923892228,
+        0.5445359445546007
+      ],
+      "off_samples": 2349,
+      "on_samples": 2336
+    },
+    {
+      "map": "mp_relic02",
+      "pairs": 2,
+      "off_percent": 1.278705636743215,
+      "on_percent": 1.0884733463578007,
+      "pair_deltas": [
+        -0.09601497417647797,
+        -0.2522765396597172
+      ],
+      "off_samples": 3832,
+      "on_samples": 3583
+    },
+    {
+      "map": "mp_homestead",
+      "pairs": 1,
+      "off_percent": 0.22779043280182232,
+      "on_percent": 0.7692307692307693,
+      "pair_deltas": [
+        0.541440336428947
+      ],
+      "off_samples": 1317,
+      "on_samples": 1690
+    },
+    {
+      "map": "mp_eden",
+      "pairs": 1,
+      "off_percent": 5.941088367448827,
+      "on_percent": 3.8350515463917527,
+      "pair_deltas": [
+        -2.106036821057074
+      ],
+      "off_samples": 2003,
+      "on_samples": 2425
+    }
+  ],
+  "pairs": [
+    {
+      "map": "mp_wargames",
+      "repeat": 1,
+      "off_percent": 3.8580246913580245,
+      "on_percent": 2.029664324746292,
+      "delta_percentage_points": -1.8283603666117325,
+      "off_samples": 2592,
+      "on_samples": 2562,
+      "off_low": 100,
+      "on_low": 52
+    },
+    {
+      "map": "mp_complex3",
+      "repeat": 1,
+      "off_percent": 0.2808988764044944,
+      "on_percent": 0.7416563658838071,
+      "delta_percentage_points": 0.4607574894793127,
+      "off_samples": 1068,
+      "on_samples": 1618,
+      "off_low": 3,
+      "on_low": 12
+    },
+    {
+      "map": "mp_black_water_canal",
+      "repeat": 1,
+      "off_percent": 0.47418335089567965,
+      "on_percent": 0.6304176516942475,
+      "delta_percentage_points": 0.15623430079856782,
+      "off_samples": 1898,
+      "on_samples": 1269,
+      "off_low": 9,
+      "on_low": 8
+    },
+    {
+      "map": "mp_lf_meadow",
+      "repeat": 1,
+      "off_percent": 0,
+      "on_percent": 0,
+      "delta_percentage_points": 0,
+      "off_samples": 1096,
+      "on_samples": 1096,
+      "off_low": 0,
+      "on_low": 0
+    },
+    {
+      "map": "mp_angel_city",
+      "repeat": 1,
+      "off_percent": 0.8210180623973727,
+      "on_percent": 0.32599837000814996,
+      "delta_percentage_points": -0.4950196923892228,
+      "off_samples": 1218,
+      "on_samples": 1227,
+      "off_low": 10,
+      "on_low": 4
+    },
+    {
+      "map": "mp_relic02",
+      "repeat": 1,
+      "off_percent": 1.320754716981132,
+      "on_percent": 1.224739742804654,
+      "delta_percentage_points": -0.09601497417647797,
+      "off_samples": 2120,
+      "on_samples": 1633,
+      "off_low": 28,
+      "on_low": 20
+    },
+    {
+      "map": "mp_homestead",
+      "repeat": 1,
+      "off_percent": 0.22779043280182232,
+      "on_percent": 0.7692307692307693,
+      "delta_percentage_points": 0.541440336428947,
+      "off_samples": 1317,
+      "on_samples": 1690,
+      "off_low": 3,
+      "on_low": 13
+    },
+    {
+      "map": "mp_eden",
+      "repeat": 1,
+      "off_percent": 5.941088367448827,
+      "on_percent": 3.8350515463917527,
+      "delta_percentage_points": -2.106036821057074,
+      "off_samples": 2003,
+      "on_samples": 2425,
+      "off_low": 119,
+      "on_low": 93
+    },
+    {
+      "map": "mp_wargames",
+      "repeat": 2,
+      "off_percent": 3.6314984709480123,
+      "on_percent": 2.444987775061125,
+      "delta_percentage_points": -1.1865106958868874,
+      "off_samples": 2616,
+      "on_samples": 2045,
+      "off_low": 95,
+      "on_low": 50
+    },
+    {
+      "map": "mp_complex3",
+      "repeat": 2,
+      "off_percent": 0.2073255010366275,
+      "on_percent": 1.0398613518197575,
+      "delta_percentage_points": 0.83253585078313,
+      "off_samples": 1447,
+      "on_samples": 1731,
+      "off_low": 3,
+      "on_low": 18
+    },
+    {
+      "map": "mp_black_water_canal",
+      "repeat": 2,
+      "off_percent": 0.970873786407767,
+      "on_percent": 0.4214328717639976,
+      "delta_percentage_points": -0.5494409146437694,
+      "off_samples": 1545,
+      "on_samples": 1661,
+      "off_low": 15,
+      "on_low": 7
+    },
+    {
+      "map": "mp_lf_meadow",
+      "repeat": 2,
+      "off_percent": 0,
+      "on_percent": 0,
+      "delta_percentage_points": 0,
+      "off_samples": 967,
+      "on_samples": 1075,
+      "off_low": 0,
+      "on_low": 0
+    },
+    {
+      "map": "mp_angel_city",
+      "repeat": 2,
+      "off_percent": 0.1768346595932803,
+      "on_percent": 0.721370604147881,
+      "delta_percentage_points": 0.5445359445546007,
+      "off_samples": 1131,
+      "on_samples": 1109,
+      "off_low": 2,
+      "on_low": 8
+    },
+    {
+      "map": "mp_relic02",
+      "repeat": 2,
+      "off_percent": 1.2266355140186915,
+      "on_percent": 0.9743589743589743,
+      "delta_percentage_points": -0.2522765396597172,
+      "off_samples": 1712,
+      "on_samples": 1950,
+      "off_low": 21,
+      "on_low": 19
+    }
+  ],
+  "limits": "Per-map same-native paired 50-point bot-only comparisons. Unmatched Homestead repeat2 is excluded. Repeats are few and samples overlap; not a statistical causal effect or human difficulty test. Replan endpoints do not prove useless replans or failure. Do not pool maps into a deployment decision."
+}

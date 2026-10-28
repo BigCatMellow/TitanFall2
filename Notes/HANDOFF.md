@@ -1050,3 +1050,24 @@ deadline16:35 and normal/save guards unchanged. Live optional public mirror now
 uses atomic writer/retries; its failure cannot terminate primary collection.
 Source/native remain frozen2B08DE76... with failedv21flagsOFF. At final handoff,
 check LIVE private batch state/current game/normal hashes before any edits.
+
+## 2026-10-28 16:43 — v22 matrix stopped at budget; mixed findings
+
+29/32rounds completed,14matchedpairs plusunmatchedHomestead repeat2on. Missing
+Homestead repeat2off andbothEden repeat2. Time-budgetstop16:16:54, nofailure,
+nooperationalcutoff. All29rawloghashes checked,complete/restored childstates,
+0detectedgameerrors. Bothprofiles verified restoredv20 native3077878B...;
+9normalfiles/saves unchanged; no game from the test remains. Current receipt
+and oldactivePIDs are now historical; NEVER infer a live test from them.
+
+See research/corner-height-v22-20261028/FINDINGS.md/comparison.json/final matrix.
+WarGames2pairs lower both,3.74%off/2.21%on; Eden1pair5.94/3.84. Complex2pairs
+higherboth0.24/0.90; Homesteadfirstpair0.23/0.77. Relic tiny decrease;Canal/
+AngelCitymixed;Meadownoeligibleholds. KeepdefaultguardOFF, normalv20, no global
+rollout. No causality or human-difficulty claim from overlapping samples.
+
+7466of7522explicitguard ends were replan,56advance;11of7533starts censored.
+Nexttrace WHY replan and preserve a genuinely pending currentwaypoint before
+rebuilding solely due to empty remaininglist; boundedprogress/watchdog still
+required. Do not infer allreplans harmful or revive rejectedroutecache changes.
+No newgame launched during this review. Weapons/aim/humanbuffs unchanged.
