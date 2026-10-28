@@ -1,7 +1,7 @@
 {
   "Name":"BT7274.TacticalRecharge",
-  "Description":"Half normal pilot tactical recharge for the local solo human, preserving ability effects and bot settings.",
-  "Version":"1.0.0",
+  "Description":"Local solo tactical recharge trial: stock Pulse Blade refill; half recharge time for six other tacticals.",
+  "Version":"1.1.0",
   "LoadPriority":40,
   "ConVars":[{"Name":"bt7274_tactical_recharge","DefaultValue":"1"}],
   "Scripts":[{"Path":"bt7274_tactical_recharge.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"BT7274TacticalRecharge_Init"}}]
