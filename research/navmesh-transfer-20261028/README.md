@@ -60,7 +60,15 @@ The candidate intentionally does **not**:
 
 Use a separate candidate build and the existing isolated `map-cycle-test-profile`. Do not replace the normal installed DLL for this trial.
 
-1. Build from this branch with the repository's pinned Windows toolchain and retain the usual debug symbols.
+1. From the repository root in PowerShell, run the project checks and build with the pinned toolchain, retaining debug symbols:
+
+       $env:RUSTUP_TOOLCHAIN='nightly-2025-09-11-x86_64-pc-windows-gnu'
+       $env:CARGO_PROFILE_DISTRIBUTION_STRIP='none'
+       $env:CARGO_PROFILE_DISTRIBUTION_DEBUG='2'
+       ./tools/Test-Project.ps1
+       cargo +nightly-2025-09-11-x86_64-pc-windows-gnu build -p bp_ort --profile distribution --locked -j 1
+
+   The DLL output is `target/x86_64-pc-windows-gnu/distribution/bp_ort.dll`. Stage that build only in the isolated profile, keeping its matching Northstar 1.31.14 runtime; preserve the current isolated DLL and configuration for rollback.
 2. Start the isolated profile on the existing Movement preset, confirm the matching Northstar 1.31.14 core and candidate DLL hash, and leave the current 8v8 population/aim settings unchanged.
 3. Keep `bot_route_guard 0`, `bot_jump_timing 0`, and `bot_crouch_recovery 0`. Enable `bot_nav_diagnostics 1`.
 4. Run a baseline with `bot_corner_height_guard 0`, then a matched run with `bot_corner_height_guard 1`. Use the same map, goal/time cap, roster, and other settings for each pair. A 75-point team goal with the existing 15-minute cap keeps sessions bounded.
