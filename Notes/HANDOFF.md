@@ -1038,3 +1038,15 @@ Optional mirror failure no longer stops primary collection. Private status is
 authoritative. Added same-runtime/goal/observer resumed-child import and explicit
 matrix cutoff policy tests (6pass). Do not edit loaded profile; allow child to
 finish and confirm complete/profile_restored before resuming in NEW batch.
+
+13:35 repaired controller resumed in NEW batch nav-corner-v22-resume-20261028-133523,
+runner691604 (live receipt target/v22-matrix-session.json). Imported both completed,
+restored WarGames50point rounds after full same-native/core/bridge/goal/observer
+validation and reanalysis. Matched control100/2592low samples=3.858%;guard52/2562=
+2.030%. This is one pair, not causal improvement or normal rollout. Original
+failed controller status remains unchanged; initial/first-pair snapshots remain
+historical. Current mapComplexguard1, thenmatchedguard0, restof8mapplan/repeats;
+deadline16:35 and normal/save guards unchanged. Live optional public mirror now
+uses atomic writer/retries; its failure cannot terminate primary collection.
+Source/native remain frozen2B08DE76... with failedv21flagsOFF. At final handoff,
+check LIVE private batch state/current game/normal hashes before any edits.
