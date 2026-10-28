@@ -93,6 +93,7 @@ pub(super) static STEP_RETRY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 // v20 candidate switches; every one defaults to 0 (installed v19 behavior).
 pub(super) static NAV_DIAGNOSTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static ROUTE_GUARD_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static CORNER_HEIGHT_GUARD_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static JUMP_TIMING_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PROXIMITY_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PERCEPTION_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
@@ -138,6 +139,7 @@ pub(super) struct BotData {
     ordnance_pulse: action_policy::Pulse,
     escape_recovery: escape_recovery::EscapeRecovery,
     path_log: nav_diagnostics::RateGate,
+    corner_guard_log: nav_diagnostics::RateGate,
     stall_log: nav_diagnostics::RateGate,
     stuck: nav_diagnostics::StuckMonitor,
     view_checked: bool,
@@ -171,6 +173,7 @@ impl BotData {
     // Per-life candidate state must not survive respawn or pilot/Titan transitions.
     fn reset_candidate_state(&mut self) {
         self.path_log = Default::default();
+        self.corner_guard_log = Default::default();
         self.stall_log = Default::default();
         self.stuck = Default::default();
         self.view_checked = false;
@@ -461,6 +464,7 @@ impl Plugin for Bots {
             (&STEP_RETRY_CONVAR, "bot_step_retry", "try opposite combat step with the same wall and ground checks"),
             (&NAV_DIAGNOSTICS_CONVAR, "bot_nav_diagnostics", "log route status, traversal corners, stuck episodes and stall hull fits; no input changes"),
             (&ROUTE_GUARD_CONVAR, "bot_route_guard", "throttle replans of consumed partial routes and skip unreachable pursuit targets briefly"),
+            (&CORNER_HEIGHT_GUARD_CONVAR, "bot_corner_height_guard", "keep a close route corner while its vertical gap exceeds 36 units; default off"),
             (&JUMP_TIMING_CONVAR, "bot_jump_timing", "step jumps only near the higher waypoint, plus one bounded double jump"),
             (&PROXIMITY_FIX_CONVAR, "bot_proximity_fix", "circular distance for titan boarding Use and titan melee (fixes axis-aligned aim snaps)"),
             (&PERCEPTION_FIX_CONVAR, "bot_perception_fix", "eye-angle facing and eye-level sight lines; same 180-degree hemisphere"),

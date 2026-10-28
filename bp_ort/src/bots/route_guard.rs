@@ -67,6 +67,19 @@ pub(super) fn step_jump_wanted(dz: f32, horizontal: f32) -> bool {
     dz.is_finite() && horizontal.is_finite() && dz > 18. && horizontal < 140.
 }
 
+/// Provisional floor-separation check for route-corner consumption.
+/// The 36-unit tolerance is half the 72-unit standing hull observed in v20 diagnostics;
+/// validate it against live routes before making this behavior a default.
+pub(super) const CORNER_HEIGHT_TOLERANCE: f32 = 36.0;
+
+pub(super) fn corner_reached(horizontal_distance: f32, vertical_delta: f32, horizontal_limit: f32) -> bool {
+    horizontal_distance.is_finite()
+        && vertical_delta.is_finite()
+        && horizontal_limit.is_finite()
+        && horizontal_distance <= horizontal_limit
+        && vertical_delta.abs() <= CORNER_HEIGHT_TOLERANCE
+}
+
 #[derive(Debug, Default)]
 pub(super) struct JumpTiming {
     airborne_since: Option<f32>,
