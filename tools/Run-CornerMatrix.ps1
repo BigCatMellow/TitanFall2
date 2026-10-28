@@ -3,6 +3,8 @@ $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot
 . "$PSScriptRoot/Read-CornerValidation.ps1"
 . "$PSScriptRoot/Read-SurveyQueueJson.ps1"
+. "$PSScriptRoot/Write-SurveyQueueJson.ps1"
+. "$PSScriptRoot/Corner-MatrixPolicy.ps1"
 $request=Get-Content $RequestPath -Raw|ConvertFrom-Json
 $profile=(Resolve-Path $request.profile).Path
 $batch=[string]$request.batch
@@ -24,10 +26,12 @@ $public="$repo/research/corner-height-v22-20261028"
 New-Item -ItemType Directory -Path $public -Force|Out-Null
 function Save-Matrix {
     $state.updated=(Get-Date).ToString('o')
-    $state|ConvertTo-Json -Depth 14|Set-Content "$batch/status.tmp"
-    Move-Item -LiteralPath "$batch/status.tmp" -Destination "$batch/status.json" -Force
+    Write-SurveyQueueJson "$batch/status.json" $state
     $rows=@($state.results|ForEach-Object {@{map=$_.map;repeat=$_.repeat;guard=$_.guard;metrics=$_.metrics}})
-    [ordered]@{state=$state.state;updated=$state.updated;source_commit=$request.source_commit;profile_restored=$state.profile_restored;native_sha256=$frozen.dll_sha256;bridge_sha256=$frozen.bridge_sha256;core_sha256=$frozen.core_sha256;goal=$request.goal;planned=$state.planned;completed=$rows.Count;guard_stopped=$state.guard_stopped;skipped=$state.skipped;rounds=$rows;limits='Matched 50-point bot-only rounds, same native build, one corner switch. Reversed order/repeats limit order effects but do not establish causal improvement. Native safety switches stay off. Operational regression cutoff skips subsequent guard-on rounds while baseline variety continues; it is not a statistical significance test.'}|ConvertTo-Json -Depth 14|Set-Content "$public/matrix-results.json"
+    $payload=[ordered]@{state=$state.state;updated=$state.updated;source_commit=$request.source_commit;profile_restored=$state.profile_restored;native_sha256=$frozen.dll_sha256;bridge_sha256=$frozen.bridge_sha256;core_sha256=$frozen.core_sha256;goal=$request.goal;planned=$state.planned;completed=$rows.Count;guard_stopped=$state.guard_stopped;skipped=$state.skipped;rounds=$rows;limits='Matched 50-point bot-only rounds, same native build, one corner switch. Reversed order/repeats limit order effects but do not establish causal improvement. Native safety switches stay off. Operational regression cutoff skips subsequent guard-on rounds while baseline variety continues; it is not a statistical significance test.'}
+    # A derived mirror is optional. Publishing must not stop the game/data owner.
+    try{Write-SurveyQueueJson "$public/matrix-results.json" $payload;$state.public_report_error=$null}
+    catch{$state.public_report_error=[string]$_}
 }
 function Check-Normal {
     foreach($saved in $normal){if((Get-FileHash $saved.path).Hash-ne$saved.hash){throw 'Normal files/saves changed; stop for current player activity'}}
@@ -42,8 +46,27 @@ public static class CornerMatrixPower {
 '@
     if([CornerMatrixPower]::SetThreadExecutionState([uint32]2147483649)-eq0){throw 'Could not establish process-scoped sleep guard'};$awake=$true
     $hostExe=(Get-Process -Id $PID).Path
+    foreach($priorBatch in $request.resume_batches){
+        foreach($dir in Get-ChildItem -LiteralPath $priorBatch -Directory){
+            $match=[regex]::Match($dir.Name,'^\d+-(mp_[a-z0-9_]+)-r(\d+)-guard([01])$')
+            if(-not$match.Success){continue}
+            $c=Read-SurveyQueueJson "$($dir.FullName)/status.json"
+            if($c.state-ne'complete'-or-not$c.profile_restored-or$c.results.Count-ne1-or$c.results[0].result.valid-ne'true'){throw 'Prior child is not safely complete'}
+            $p=Get-Content "$($dir.FullName)/plan.json" -Raw|ConvertFrom-Json
+            if($p.build-ne'nav-corner-v22'-or$p.dll_sha256-ne$frozen.dll_sha256-or$p.core_sha256-ne$frozen.core_sha256-or$p.bridge_sha256-ne$frozen.bridge_sha256-or$p.goal-ne$request.goal-or$p.observer_loadout_restore-ne$false){throw 'Cannot resume across different runtime/goal/observer evidence'}
+            $raw=Join-Path $c.results[0].directory 'raw-session.log'
+            $out=Join-Path $dir.FullName 'recovered-metrics.json'
+            & node --preserve-symlinks --preserve-symlinks-main "$repo/tools/Review-CornerRound.mjs" --log $raw --out $out > "$($dir.FullName)/recovered-analysis.stdout.log"
+            if($LASTEXITCODE-ne0){throw 'Prior round analysis failed'}
+            $m=Get-Content $out -Raw|ConvertFrom-Json
+            if($m.error_markers-ne0-or$m.map-ne$match.Groups[1].Value-or$m.corner_guard-ne[int]$match.Groups[3].Value-or$m.goal-ne$request.goal-or$p.corner_guard-ne$m.corner_guard){throw 'Prior round variant/goal/errors mismatch'}
+            $state.results+=@{map=$m.map;repeat=[int]$match.Groups[2].Value;guard=$m.corner_guard;directory=$dir.FullName;metrics=$m}
+        }
+    }
+    if(Find-CornerRegression $state.results){$state.guard_stopped=$true;$state.guard_stop_reason='Operational regression cutoff in recovered matching pair'}
     $index=0
     foreach($round in $request.rounds){
+        if(@($state.results|Where-Object {$_.map-eq$round.map-and$_.repeat-eq$round.repeat-and$_.guard-eq$round.guard}).Count){continue}
         if((Get-Date).AddMinutes(20)-gt$deadline){$state.state='stopped_time_budget';break}
         if(Test-Path "$batch/stop-after-current.txt"){$state.state='stopped_by_request';break}
         if($state.guard_stopped-and[int]$round.guard-eq1){
@@ -77,14 +100,10 @@ public static class CornerMatrixPower {
         if($metrics.error_markers-ne0-or$metrics.corner_guard-ne[int]$round.guard-or$metrics.map-ne$round.map-or$metrics.goal-ne[int]$request.goal){throw 'Round error/variant/goal mismatch'}
         $state.results+=@{map=$round.map;repeat=$round.repeat;guard=[int]$round.guard;directory=$dir;metrics=$metrics};$state.state='between_rounds';Save-Matrix
         Check-Normal
-        $pair=@($state.results|Where-Object {$_.map-eq$round.map-and$_.repeat-eq$round.repeat})
-        if($pair.Count-eq2){
-            $off=($pair|Where-Object guard -eq 0).metrics;$on=($pair|Where-Object guard -eq 1).metrics
-            if($off.live_pilot_samples-ge500-and$on.live_pilot_samples-ge500-and$on.low_progress_percent-gt($off.low_progress_percent+5)-and$on.low_progress_percent-gt(1.5*$off.low_progress_percent)){
-                $state.guard_stopped=$true
-                $state.guard_stop_reason='Operational cutoff: matched guard round exceeded baseline by >5 percentage points and >50%; not a causal significance claim. Continue baseline variety only.'
-                Save-Matrix
-            }
+        if(Find-CornerRegression $state.results){
+            $state.guard_stopped=$true
+            $state.guard_stop_reason='Operational cutoff: matched guard round exceeded baseline by >5 percentage points and >50%; not a causal significance claim. Continue baseline variety only.'
+            Save-Matrix
         }
     }
     if($state.state-in@('preparing','between_rounds')){$state.state=if($state.guard_stopped){'complete_baseline_only_after_guard_stop'}else{'complete'}}

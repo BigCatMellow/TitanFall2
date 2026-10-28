@@ -1027,3 +1027,14 @@ in initial-results.json; live matrix-results.json continues updating locally and
 must not be mistaken for the frozen initial snapshot. Normal save/config/native
 guards intact so far. Queue continues through its finite plan/deadline without
 requiring BT-7274 to start each round. Consult current status before any edits.
+
+13:27 controller publication failure: optional public matrix-results.json write
+hit sharing violation. Parent stopped; second WarGamesguard1 child kept running
+under its own bounded watcher. Original stopped_error is retained in firstbatch;
+normal guard intact. First control/nextchild game data are not invalidated by
+this report-write failure. New Write-SurveyQueueJson publishes via same-directory
+rename and bounded IO retries; five cases including a REAL reader lock passed.
+Optional mirror failure no longer stops primary collection. Private status is
+authoritative. Added same-runtime/goal/observer resumed-child import and explicit
+matrix cutoff policy tests (6pass). Do not edit loaded profile; allow child to
+finish and confirm complete/profile_restored before resuming in NEW batch.

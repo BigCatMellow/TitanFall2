@@ -83,3 +83,20 @@ WarGames guard120s had78observed starts,77replan ends/1advance; the respawn
 phase26replans. Complex90s had380starts/380replan ends. Replanning commonly
 interrupts a guard, so matched movement outcomes must decide its value. Do not
 reinterpret fewer start-marker holds as improved route completion.
+
+## Publication failure and recovery
+
+The first controller stopped during its second child because Set-Content hit a
+sharing violation on the optional public matrix-results.json. The owned child
+continued under its independent watchdog. This was a reporting-controller failure,
+not a detected game crash; original failure records are preserved. No normal
+file/save change was found. Initial-results.json remains a historical snapshot.
+
+The controller now uses same-directory atomic JSON publication with bounded
+sharing-error retries. Tests exercise real reader locks, replacement recovery,
+persistent IO failure preserving old valid JSON, and immediate permission denial.
+An unavailable optional public mirror is recorded privately but cannot stop
+collection. Private status remains authoritative. Resume imports only complete,
+restored, same-native/core/bridge/50goal/inactiveobserver child evidence and
+recomputes reviewed metrics; completed map/repeat/variant keys are not rerun.
+The regression stop rule is unchanged and also checks recovered matching pairs.
