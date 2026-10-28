@@ -4,7 +4,7 @@
 
 ## Target
 
-Keep a larger, square map visible during a match in a left-side inset. The current corner minimap is too small and poorly placed for useful route awareness. The candidate geometry uses one shared side length for width and height: up to 32% of screen width or 42% of screen height, whichever is smaller, with 2% left and 12% top offsets. This makes the viewport square; the asset's visible map bounds still need in-game confirmation.
+Keep a larger, square map visible during a match in a left-side inset. The current corner minimap is too small and poorly placed for useful route awareness. The candidate geometry uses one shared side length for width and height: up to 18% of screen width or 25% of screen height, whichever is smaller, with 2% left and 12% top offsets. That is about 270 x 270 pixels at 1920 x 1080. This makes the viewport square; the asset's visible map bounds still need in-game confirmation.
 
 ## What the APIs support
 
@@ -24,7 +24,7 @@ The integration needs to:
 2. Route every minimap `CreateCockpitRui` call through the helper: map base, wedges, local-player marker, indicator, entity markers, pings, and layers. Keeping all of these on one topology is necessary for marker alignment.
 3. Use the HUD draw group for those RUIs.
 4. Destroy the custom topology at map teardown and recreate it after a map or resolution change. Northstar warns that topology slots are limited.
-5. Start with the square viewport geometry and native minimap size scale, then tune after seeing it in-game. RUI asset layout, clipping, and the apparent map scale on the installed 1.31.14 build still need visual validation.
+5. Start with the smaller square viewport geometry and native minimap size scale, then tune after seeing it in-game. RUI asset layout, clipping, and the apparent map scale on the installed 1.31.14 build still need visual validation.
 
 The stock script and RUI assets are not copied into this repository. Use the installed build's local source when preparing an isolated override, and retain a local backup for rollback.
 
