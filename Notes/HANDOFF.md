@@ -1097,3 +1097,15 @@ updatedcombat andmatchinglivepilottarget. No rawactorIDs exported.
 spansfirst-positivehealthdamage->death, NOT trigger/firstshotTTK. Strictperround
 range/config/hitgroup groups alln<5. Nextcontrolledrange/mod/hitgroup100HPgun
 trials, keepdamage/RPM/reload/aimunchanged. Humanplayedv20tworoundsseparate.
+
+## 2026-10-28 — Improvement plan; user playing Full v20
+
+BT-7274 asked for a plan and is now playing. Verified actual16:58startup uses
+local-test-profile/native3077878B.../core1.31.14/Full, automatic normal_play
+recorder active. Latest source analyses have NOT deployed v22; it remains off.
+Do not edit the loaded profile or start automated games alongside the user.
+Notes/IMPROVEMENT-PLAN-20261028.md records staged grenade-safety, route-continuity,
+weapon-decision and controlled gun-measurement work with per-change gates.
+Current play provides fresh v20baseline; no manual timestamps required. Preserve
+8v8/aim/warm-up/currentweapon-humanmods/current saves. No gameplay installation
+or native change was performed by this planning turn. Prior queues are finished.
