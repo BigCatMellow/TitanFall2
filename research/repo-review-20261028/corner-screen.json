@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "scope": "Four completed Full v20 bot-only 75-point rounds, between MAP_SURVEY_BEGIN/RESULT",
+  "method": "Nearby corners use logged rounded XY<=44 and abs(dz)>36.2, remaining>0. Advancement signals require consecutive corner records per epoch/slot with identical rounded time, remaining decremented by one, and inferred origin z agreeing within0.21units. Known path log resets continuity.",
+  "limits": "Retrospective same-stamp signals, not exact command replay. Rounded time/coordinates, unlogged path replans and per-slot identity can limit attribution. These are not independent stuck incidents, proof of harmful skipping or pilot-only counts. Legitimate drops/traversal may account for many signals. No before/after or causal navigation improvement claim.",
+  "maps": [
+    {
+      "map": "mp_wargames",
+      "corner_records": 140811,
+      "near_xy_large_height_with_remaining": 32408,
+      "same_stamp_advancement_signals": 32408,
+      "up": 1624,
+      "down": 30784,
+      "provisional_link_signals": 10427,
+      "log_sha256": "3ff9d45c31f01f477ff52d037f08788739cdde3549fc695d5bb458f8419c0fe6"
+    },
+    {
+      "map": "mp_eden",
+      "corner_records": 73668,
+      "near_xy_large_height_with_remaining": 11111,
+      "same_stamp_advancement_signals": 11111,
+      "up": 1434,
+      "down": 9677,
+      "provisional_link_signals": 2823,
+      "log_sha256": "de8f787972f8edab4c30b9c516090f56cde7f9d8a2d1b167a1fb92123f799667"
+    },
+    {
+      "map": "mp_complex3",
+      "corner_records": 106095,
+      "near_xy_large_height_with_remaining": 12477,
+      "same_stamp_advancement_signals": 12477,
+      "up": 636,
+      "down": 11841,
+      "provisional_link_signals": 2573,
+      "log_sha256": "b7a474945eb1ac81cadd57a787dcb6b99d8012b5cef2e492aeecb90b8a749fff"
+    },
+    {
+      "map": "mp_lf_meadow",
+      "corner_records": 10685,
+      "near_xy_large_height_with_remaining": 836,
+      "same_stamp_advancement_signals": 836,
+      "up": 1,
+      "down": 835,
+      "provisional_link_signals": 7,
+      "log_sha256": "0a1ed3ab5e411928290ba6de40e990439899b1381099bf187e2ef9f38f0066c1"
+    }
+  ]
+}

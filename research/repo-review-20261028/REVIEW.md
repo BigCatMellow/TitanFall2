@@ -82,3 +82,42 @@ The validated v20 continuation finished13/13remaining rounds at08:39 onOctober28
 Coverage now reports22completed,0failed,0remaining in this Full v20 cohort.
 This is collection completion, not a fresh analysis or evidence that any of
 these three branches improved play. All remain uninstalled by this review.
+
+## Follow-up: what to reuse, and a retrospective route screen
+
+Remote tips were fetched again and remain unchanged. The usable pieces are:
+
+1. Reuse the navigation branch's separate default-off switch, bounded log gate,
+   per-life reset and finite height predicate. First add a measurement-only
+   would-hold signal/parser and tests. Trial a hull/traversal-aware policy;
+   do not assume absolute36units is appropriate for all directions and hulls.
+2. Reuse the tactical audit's per-ability profile logging and matched timing/
+   uptime protocol. Keep the actual native-Pulse modifier as a separate optional
+   human balance trial; it is not a bot cooldown fix.
+3. Reuse the minimap's single shared topology and square sizing helper as a
+   starting point for a finished isolated client mod, including all draw-group
+   resets, marker alignment, teardown and resolution handling.
+
+A read-only retrospective screen of four Full v20 survey logs is saved in
+corner-screen.json. It considers only MAP_SURVEY_BEGIN..RESULT. Conservative
+nearby candidates have rounded XY<=44, abs(dz)>36.2 and a remaining corner.
+Same-stamp advancement signals also require the next corner to decrement the
+remaining count by one and agree on inferred origin height. This is a screen of
+recorded route behavior, not exact input replay or unique stuck incidents.
+
+| Map | Same-stamp signals | Upward | Downward |
+|---|---:|---:|---:|
+| War Games |32408|1624|30784|
+| Eden |11111|1434|9677|
+| Complex |12477|636|11841|
+| Meadow |836|1|835|
+
+Most signals are downward, including on the lower-stall controls. The absolute
+height guard could therefore affect many drops or floor-projection transitions,
+not just premature consumption of higher-floor corners. This strengthens the
+case for direction/hull/traversal separation and observation before changing
+movement. It does not establish that downward advancement is correct, that
+upward advancement is harmful, or that the candidate improves either one.
+Rounded timestamps/coordinates, slot reuse and unlogged replans limit this
+inference. Signals can repeat frequently during route churn. No script/native
+candidate was built or installed for this follow-up; normal v20 is unchanged.
