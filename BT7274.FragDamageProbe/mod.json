@@ -1,0 +1,11 @@
+{
+  "Name": "BT7274.FragDamageProbe",
+  "Description": "Default-off local solo frag damage callbacks for diagnosis; never changes damage or grenade behavior.",
+  "Version": "0.1.0",
+  "LoadPriority": 46,
+  "ConVars": [{"Name":"bt7274_frag_damage_probe","DefaultValue":"0"}],
+  "Scripts": [
+    {"Path":"bt7274_frag_damage_probe.nut","RunOn":"SERVER && MP",
+      "ServerCallback":{"After":"BT7274FragDamageProbe_Init"}}
+  ]
+}
