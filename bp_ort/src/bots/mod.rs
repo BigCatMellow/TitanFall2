@@ -98,6 +98,7 @@ pub(super) static STEP_RETRY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static NAV_DIAGNOSTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static ROUTE_GUARD_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static CORNER_HEIGHT_GUARD_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static CORNER_HEIGHT_TRIAL_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static ROUTE_CONTINUITY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static LINK_DETOUR_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static EDEN_REPAIR_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
@@ -498,6 +499,7 @@ impl Plugin for Bots {
             (&NAV_DIAGNOSTICS_CONVAR, "bot_nav_diagnostics", "log route status, traversal corners, stuck episodes and stall hull fits; no input changes"),
             (&ROUTE_GUARD_CONVAR, "bot_route_guard", "throttle replans of consumed partial routes and skip unreachable pursuit targets briefly"),
             (&CORNER_HEIGHT_GUARD_CONVAR, "bot_corner_height_guard", "trial: retain ordinary upward pilot corners above 36 units; drops/links/Titans unchanged, default off"),
+            (&CORNER_HEIGHT_TRIAL_CONVAR, "bot_corner_height_trial", "isolated main-source trial: require both vertical directions within 36 units for all corners; default off"),
             (&ROUTE_CONTINUITY_CONVAR, "bot_route_continuity", "trial: finish the active final waypoint before replanning an empty segment, default off"),
             (&LINK_DETOUR_CONVAR, "bot_link_detour", "trial: locally avoid a failed same-level jump type for eight seconds, default off"),
             (&EDEN_REPAIR_CONVAR, "bot_eden_route_repair", "enable pending-waypoint and failed-link repair on Eden only, default off"),

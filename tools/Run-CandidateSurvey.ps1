@@ -4,11 +4,20 @@ param([Parameter(Mandatory)][string]$BatchDirectory,[Parameter(Mandatory)][strin
     [string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$ResumeBatch,[switch]$ObserverDefaults,
     [ValidateRange(1,9999)][int]$Goal=200,[string[]]$MapNames,[switch]$ValidatedV20,
     [switch]$NavigationV22,[ValidateRange(0,1)][int]$CornerGuard=0,
-    [switch]$RouteStudy,[ValidateRange(0,1)][int]$RouteVariant=0)
+    [switch]$RouteStudy,[ValidateRange(0,1)][int]$RouteVariant=0,[switch]$IntegrationV28,
+    [ValidateSet('baseline','nearest_baseline','nearest','stall','frag','clearance','height','combined')][string]$IntegrationCell='baseline')
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/Stop-OwnedSurveyGame.ps1"
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
-if($RouteStudy){
+if($IntegrationV28){
+    if($RouteStudy-or$NavigationV22-or$ValidatedV20){throw 'Separate integration cohort required'}
+    . "$PSScriptRoot/Read-IntegrationValidation.ps1"
+    . "$PSScriptRoot/Integration-Cells.ps1"
+    $validated=Read-IntegrationValidation $ValidationDirectory $TestProfile
+    $retestBuild=[pscustomobject]@{bridge_sha256=$validated.bridge_sha256}
+    $integrationExpected=Get-IntegrationCell $IntegrationCell
+    $integrationVars=Get-IntegrationConVars
+}elseif($RouteStudy){
     if($NavigationV22-or$ValidatedV20){throw 'Choose one study cohort'}
     . "$PSScriptRoot/Read-RouteStudyValidation.ps1"
     $validated=Read-RouteStudyValidation $ValidationDirectory $TestProfile
@@ -80,6 +89,7 @@ if($ValidatedV20){$plan.build='bot-capability-v20-Full';$plan.kind='Unattended v
 if($NavigationV22){$plan.build='nav-corner-v22';$plan.kind='Navigation A/B, same native build; no v21 safety/retarget';$plan.corner_guard=$CornerGuard;$plan.validation=$ValidationDirectory}
 if($RouteStudy){$plan.build='routing-v24-study-v23-native';$plan.kind='Paired global routing trial against installed Eden-only behavior; read-only weapon/frag measurement';$plan.route_variant=$RouteVariant;$plan.measurement_sha256=$validated.measurement_sha256}
 $plan.observer_loadout_restore=-not[bool]$ObserverDefaults
+if($IntegrationV28){$plan.build='integration-v28';$plan.kind='Frozen integrated native, independently switched cell';$plan.integration_cell=$IntegrationCell;$plan.integration_settings=$integrationExpected;$plan.measurement_sha256=$validated.measurement_sha256;$plan.damage_probe_sha256=$validated.damage_probe_sha256}
 $plan|ConvertTo-Json -Depth 5|Set-Content -LiteralPath "$BatchDirectory/plan.json"
 $state=[ordered]@{state='preparing';started=(Get-Date).ToString('o');current=$null;planned=$maps.Count;results=@();failure=$null}
 function Save-State {
@@ -100,7 +110,8 @@ try{
         if($mods.ContainsKey($name)){foreach($version in @($mods[$name].Keys)){$mods[$name][$version]=$false}}
     }
     $mods['BT7274.MapSurvey']=@{'1.0.0'=$true};$mods['BT7274.BotDecisions']=@{'1.0.0'=$true}
-    if($RouteStudy){$mods['BT7274.BotMeasurements']=@{'1.0.0'=$true}}
+    if($RouteStudy-or$IntegrationV28){$mods['BT7274.BotMeasurements']=@{'1.0.0'=$true}}
+    if($IntegrationV28){$mods['BT7274.FragDamageProbe']=@{'0.1.0'=$true}}
     $mods|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $enabled
     $text=Get-Content -Raw -LiteralPath "$BatchDirectory/backup/server.cfg"
     $text=$text.Replace('bot_manager_max 16','bot_manager_max 17').Replace('bot_manager_target 16','bot_manager_target 17')
@@ -109,6 +120,10 @@ try{
     if($ObserverDefaults){$text+="bt7274_local_loadouts 0 // survey observer only; preserve saved files without restoring them`r`n"}
     if($NavigationV22){$text+="bot_offhand_safety 0`r`nbot_stall_retarget 0`r`nbot_corner_height_guard $CornerGuard`r`n"}
     if($RouteStudy){$text+="bot_eden_route_repair 1`r`nbot_route_continuity $RouteVariant`r`nbot_link_detour $RouteVariant`r`nbot_corner_height_guard 0`r`nbot_offhand_safety 0`r`nbot_stall_retarget 0`r`nbot_telemetry_interval 1`r`nsolo_notes_mode controlled_validation`r`nbt7274_bot_measurements 1`r`n"}
+    if($IntegrationV28){
+        $text+="`nns_auth_allow_insecure 1`nbot_telemetry_interval 1`nsolo_notes_mode controlled_validation`n"
+        foreach($key in $integrationExpected.Keys){$text+=$integrationVars[$key]+' '+$integrationExpected[$key]+"`n"}
+    }
     Set-Content -LiteralPath $cfg -Value $text
     $index=0
     foreach($map in $maps){
@@ -130,10 +145,18 @@ try{
             if([regex]::Matches($one,$marker).Count-ne1){throw 'Unexpected survey begin marker'}
             $one=[regex]::Replace($one,$marker,('$1'+"`n"+'    print("MAP_SURVEY_ROUTE t="+Time()+" variant='+$RouteVariant+' continuity="+GetConVarInt("bot_route_continuity")+" detour="+GetConVarInt("bot_link_detour")+" eden="+GetConVarInt("bot_eden_route_repair")+" measurements="+GetConVarInt("bt7274_bot_measurements")+" safety="+GetConVarBool("bot_offhand_safety")+" retarget="+GetConVarBool("bot_stall_retarget"))'))
         }
+        if($IntegrationV28){
+            $marker='(?m)^(\s*print\( "MAP_SURVEY_BEGIN[^\r\n]+)$'
+            if([regex]::Matches($one,$marker).Count-ne1){throw 'Unexpected integration survey marker'}
+            $readback='    print("MAP_SURVEY_INTEGRATION t="+Time()+" cell='+$IntegrationCell+'"'
+            foreach($key in $integrationExpected.Keys){$readback+='+" '+$key+'="+GetConVarInt("'+$integrationVars[$key]+'")'}
+            $readback+=')'
+            $one=[regex]::Replace($one,$marker,('$1'+"`n"+$readback))
+        }
         [IO.File]::WriteAllText($surveyScript,$one,[Text.UTF8Encoding]::new($false))
         $state.state='starting';$state.current=@{map=$map;index=$index;directory=$dir};Save-State
         $began=Get-Date;$seen=@(Get-ChildItem "$TestProfile/logs" -Filter 'nslog*.txt'|Select-Object -ExpandProperty Name)
-        $windowMode=if($NavigationV22-or$RouteStudy){'-windowed'}else{'-fullscreen'}
+        $windowMode=if($NavigationV22-or$RouteStudy-or$IntegrationV28){'-windowed'}else{'-fullscreen'}
         $process=Start-Process -FilePath "$GameDirectory/NorthstarLauncher.exe" -WorkingDirectory $GameDirectory -WindowStyle Hidden -PassThru -ArgumentList "-profile=$TestProfile",'-novid',$windowMode,'-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+setplaylist','tdm','+setplaylistvaroverrides',('"max_players 17 scorelimit '+$Goal+' timelimit 15"'),'+bt7274_survey_goal',"$Goal",'+bt7274_survey_count','1','+bt7274_survey_index','0','+bt7274_survey_minutes','15','+bt7274_survey_smoke','0','+mp_gamemode','tdm','+map',$map
         $state.current.pid=$process.Id;Save-State
         $log=$null;$lastHeartbeat=Get-Date;$result=$null;$done=$false;$cornerStateSeen=$false;$routeStateSeen=$false
@@ -144,7 +167,7 @@ try{
             }
             if($reader){while($null-ne($line=$reader.ReadLine())){
                 if($line-match'NorthstarLauncher version:\s+(\S+)' -and $Matches[1]-ne'1.31.14.0'){throw 'Wrong actual core version'}
-                if($line-match'SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|BOT_MEASURE_ERROR|\[error\]'){throw "Game error: $line"}
+                if($line-match'SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|BOT_MEASURE_ERROR|BT_FRAG_DAMAGE_ERROR|BT_FRAG_PROBE_ERROR|\[error\]'){throw "Game error: $line"}
                 if($line.Contains('MAP_SURVEY_BEGIN ')){
                     $f=Fields $line;if($f.bots-ne'16'-or$f.imc-ne'8'-or$f.militia-ne'8'-or$f.observer_alive-ne'0'){throw 'Uncontrolled survey population'}
                     if([int]$f.goal-ne$Goal-or[int]$f.engine_goal-ne$Goal){throw 'Engine and harness score goals do not match the requested trial'}
@@ -161,6 +184,11 @@ try{
                     if([int]$f.variant-ne$RouteVariant-or[int]$f.continuity-ne$RouteVariant-or[int]$f.detour-ne$RouteVariant-or$f.eden-ne'1'-or$f.measurements-ne'1'-or$f.safety-ne'false'-or$f.retarget-ne'false'){throw 'Unexpected routing study switches'}
                     $routeStateSeen=$true
                 }
+                if($IntegrationV28-and$line.Contains('MAP_SURVEY_INTEGRATION ')){
+                    $f=Fields $line;if($f.cell-ne$IntegrationCell){throw 'Wrong integration cell'}
+                    foreach($key in $integrationExpected.Keys){if($f[$key]-ne[string]$integrationExpected[$key]){throw "Wrong integration switches $key"}}
+                    $routeStateSeen=$true
+                }
                 if($line.Contains('MAP_SURVEY_RESULT ')){$result=Fields $line;if($result.valid-ne'true'){throw 'Invalid match result'};if($NavigationV22-and-not$cornerStateSeen){throw 'Missing corner variant confirmation'}}
                 if($line.Contains('MAP_SURVEY_DONE ')){$done=$true}
             }}
@@ -170,7 +198,7 @@ try{
             if(-not$done){Start-Sleep -Seconds 1}
         }
         if(-not$result){throw 'Missing completed match result'}
-        if($RouteStudy-and-not$routeStateSeen){throw 'Missing routing variant readback'}
+        if(($RouteStudy-or$IntegrationV28)-and-not$routeStateSeen){throw 'Missing routing variant readback'}
         # Persist the completed match before shutdown, so cleanup cannot erase it.
         Copy-Item -LiteralPath $log.FullName -Destination "$dir/raw-session.log"
         $result|ConvertTo-Json|Set-Content -LiteralPath "$dir/result.json"

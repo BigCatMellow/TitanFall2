@@ -66,6 +66,15 @@ pub(super) fn defensive_now(tactical: &str, health: i32) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test] fn extended_interval_preserves_bounded_busy_continuation() {
+        let mut p=Pulse::default();
+        assert!(p.press_for_interval(1.,7,true,ready(1.),0.45,true,6.));
+        assert!(p.press_for_interval(1.2,7,true,Some(Ready{at:1.2,weapon:7,ready:false}),0.45,true,6.));
+        assert!(!p.press_for_interval(1.5,7,true,ready(1.5),0.45,true,6.));
+        assert!(!p.press_for_interval(6.99,7,true,ready(6.99),0.45,true,6.));
+        assert!(p.press_for_interval(7.01,7,true,ready(7.01),0.45,true,6.));
+        assert_eq!(p.starts,2);
+    }
     #[test] fn toss_press_can_finish_pullout_but_still_releases_and_obeys_readiness() {
         let mut p = Pulse::default();
         assert!(p.press_for(1.,7,true,ready(1.),0.45,true));

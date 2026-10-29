@@ -14,7 +14,7 @@ try{
             if($log){$reader=[IO.StreamReader]::new([IO.File]::Open($log.FullName,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::ReadWrite))}}
         if($reader){while($null-ne($line=$reader.ReadLine())){
             if($line.Contains('Failed performing northstar origin auth: error Couldn''t connect to server')){continue}
-            if($line-match'SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|BOT_ROSTER_ERROR|BOT_OBSERVE_ERROR|BOT_MEASURE_ERROR|WNOTE_ERROR|WNOTE_FIRE_ERROR|SAFETY_TEST_FAILED'){throw "Runtime check failed: $line"}
+            if($line-match'SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|BOT_ROSTER_ERROR|BOT_OBSERVE_ERROR|BOT_MEASURE_ERROR|BT_FRAG_DAMAGE_ERROR|BT_FRAG_PROBE_ERROR|WNOTE_ERROR|WNOTE_FIRE_ERROR|SAFETY_TEST_FAILED'){throw "Runtime check failed: $line"}
             if($line-match'SAFETY_TEST_PHASE_PASS name=(\S+)'){$state.completed+=($Matches[1]);$state.state='running'}
             if($line-match'SAFETY_TEST_PHASE .*name=(\S+)'){$state.phase=$Matches[1];$state.state='running'}
             if($line.Contains('SAFETY_TEST_LOBBY')){$state.lobby=$true}
@@ -38,7 +38,7 @@ finally{
     if($log){Copy-Item -LiteralPath $log.FullName -Destination "$RunDirectory/raw-session.log"}
     if(Test-Path "$RunDirectory/idle.cfg"){Copy-Item "$RunDirectory/idle.cfg" "$Profile/mods/Northstar.CustomServers/mod/cfg/autoexec_ns_server.cfg" -Force}
     $enabled=Get-Content "$RunDirectory/enabledmods-before.json" -Raw|ConvertFrom-Json
-    foreach($name in @('BT7274.DecisionTest','BT7274.WeaponIntegrationTest','BT7274.CapabilityTest','BT7274.SafetyTest','BT7274.RouteProbe','BT7274.BotMeasurements')){Disable-NorthstarMod $enabled $name $Profile}
+    foreach($name in @('BT7274.DecisionTest','BT7274.WeaponIntegrationTest','BT7274.CapabilityTest','BT7274.SafetyTest','BT7274.RouteProbe','BT7274.BotMeasurements','BT7274.FragDamageProbe')){Disable-NorthstarMod $enabled $name $Profile}
     $bridgeVersion=(Get-Content "$Profile/mods/BT7274.BotDecisions/mod.json" -Raw|ConvertFrom-Json).Version
     Disable-NorthstarMod $enabled 'BT7274.BotDecisions' $Profile
     $enabled.'BT7274.BotDecisions'|Add-Member -NotePropertyName $bridgeVersion -NotePropertyValue $true -Force

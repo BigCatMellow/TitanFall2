@@ -184,7 +184,8 @@ pub fn path_to_target(
     }
 
     let corner_height_guard = super::switch_on(&super::CORNER_HEIGHT_GUARD_CONVAR);
-    if !corner_height_guard && let Some(since) = local_data.corner_guard_since.take() {
+    let corner_height_trial = super::switch_on(&super::CORNER_HEIGHT_TRIAL_CONVAR);
+    if !corner_height_guard && !corner_height_trial && let Some(since) = local_data.corner_guard_since.take() {
         log::info!("BOT_CORNER_GUARD epoch={} t={:.2} slot={} event=end reason=disabled held_s={:.2}",
             super::telemetry::epoch(),time(helper),local_data.edict,(time(helper)-since).max(0.));
     }
@@ -207,10 +208,11 @@ pub fn path_to_target(
         }
     }
 
-    if corner_height_guard && super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
+    if (corner_height_guard || corner_height_trial) && super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
         let horizontal = distance(local_data.next_target_pos, origin);
         let dz = local_data.next_target_pos.z - origin.z;
-        if super::route_guard::hold_upward_corner(horizontal,dz,BOT_PATH_NODE_RANGE,human_hull,local_data.current_corner) {
+        if (corner_height_guard && super::route_guard::hold_upward_corner(horizontal,dz,BOT_PATH_NODE_RANGE,human_hull,local_data.current_corner))
+            || (corner_height_trial && !super::route_guard::corner_reached(horizontal,dz,BOT_PATH_NODE_RANGE) && horizontal<=BOT_PATH_NODE_RANGE) {
             if local_data.corner_guard_since.is_none() {
                 local_data.corner_guard_since = Some(time(helper));
                 log::info!("BOT_CORNER_GUARD epoch={} t={:.2} slot={} event=begin dz={:.1}",
@@ -292,7 +294,9 @@ fn eden_repair_active(helper: &CUserCmdHelper) -> bool {
 
 fn within_route_corner_range(target: Vector3, origin: Vector3, height_guard: bool, human_hull: bool, metadata: Option<(u8,u8)>) -> bool {
     let horizontal = distance(target, origin);
-    horizontal <= BOT_PATH_NODE_RANGE && (!height_guard || !super::route_guard::hold_upward_corner(
+    horizontal <= BOT_PATH_NODE_RANGE
+        && (!super::switch_on(&super::CORNER_HEIGHT_TRIAL_CONVAR) || super::route_guard::corner_reached(horizontal,target.z-origin.z,BOT_PATH_NODE_RANGE))
+        && (!height_guard || !super::route_guard::hold_upward_corner(
         horizontal,target.z-origin.z,BOT_PATH_NODE_RANGE,human_hull,metadata))
 }
 

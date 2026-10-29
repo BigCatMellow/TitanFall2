@@ -7,7 +7,8 @@ import {parseDiag,analyzeDiag} from './Analyze-NavDiagnostics.mjs';
 import {markLowProgress} from './Analyze-PlayedWeaponSession.mjs';
 import {parseNote,analyzeNotes} from './weapon-notes.mjs';
 const fields=s=>Object.fromEntries([...s.matchAll(/(?:^|\s)([a-z_]+)=([^\s]+)/g)].map(m=>[m[1],m[2]]));
-export function reviewRouteStudy(lines){
+const integrationDefinition=JSON.parse(fs.readFileSync(new URL('../automation/integration-v28-cells.json',import.meta.url),'utf8'));
+export function reviewRouteStudy(lines,{integration=false}={}){
   let active=false,begins=0,header,variant,result,context,errors=0;
   const players=new Map(),traces=new Map(),diag=[],notes=[],windows=[],spawns=[],kills=[],samples=[];
   const key=e=>`${e.epoch}|${e.t}|${e.slot}`;
@@ -16,6 +17,7 @@ export function reviewRouteStudy(lines){
     const note=parseNote(line);if(note?.type==='WNOTE_CONTEXT')context=note;
     if(line.includes('MAP_SURVEY_BEGIN ')){active=true;begins++;header=fields(line);continue;}
     if(line.includes('MAP_SURVEY_ROUTE '))variant=fields(line);
+    if(integration&&line.includes('MAP_SURVEY_INTEGRATION '))variant=fields(line);
     if(line.includes('MAP_SURVEY_RESULT ')){result=fields(line);active=false;}
     if(note&&note.type!=='WNOTE_CONTEXT')notes.push(note);
     if(line.includes('BWEAPON_WINDOW '))windows.push(fields(line));
@@ -27,8 +29,14 @@ export function reviewRouteStudy(lines){
     const m=line.match(/(?:^|\s|\])(BOT_PLAYER|BOT_TRACE)\s/);
     if(m){const e=fields(line);(m[1]==='BOT_PLAYER'?players:traces).set(key(e),e);}
   }
-  if(begins!==1||result?.valid!=='true'||!variant||!['0','1'].includes(variant.variant))throw Error('Require one completed routing study round');
-  if(variant.continuity!==variant.variant||variant.detour!==variant.variant||variant.eden!=='1'||variant.measurements!=='1'||variant.safety!=='false'||variant.retarget!=='false')throw Error('Unexpected experimental settings');
+  if(begins!==1||result?.valid!=='true'||!variant)throw Error('Require one completed study round');
+  if(integration){
+    if(!Object.hasOwn(integrationDefinition.cells,variant.cell))throw Error('Unknown integration cell');
+    const expected={...integrationDefinition.base,...integrationDefinition.cells[variant.cell]};
+    for(const [key,value] of Object.entries(expected))if(variant[key]!==String(value))throw Error('Unexpected integration settings: '+key);
+  }else{
+    if(!['0','1'].includes(variant.variant)||variant.continuity!==variant.variant||variant.detour!==variant.variant||variant.eden!=='1'||variant.measurements!=='1'||variant.safety!=='false'||variant.retarget!=='false')throw Error('Unexpected experimental settings');
+  }
   const start=+variant.t,end=start+(+result.elapsed),inside=e=>+e.t>=start&&+e.t<=end+0.1;
   if(!Number.isFinite(start)||!Number.isFinite(end)||!context)throw Error('Missing time/context boundary');
   if(header.map!==result.map||context.map!==result.map)throw Error('Map context mismatch');
@@ -46,7 +54,7 @@ export function reviewRouteStudy(lines){
   const self=joined.filter(k=>k.self==='true'),enemy=joined.filter(k=>k.self!=='true'&&k.friendly!=='true');
   const selfIds=new Set(self.map(k=>k.projectile)),enemyIds=new Set(enemy.map(k=>k.projectile));
   const measured=analyzeNotes([context,...notes.filter(inside)]);
-  return {schema_version:1,map:result.map,variant:+variant.variant,goal:+header.goal,duration_s:+result.elapsed,
+  return {schema_version:1,map:result.map,...(integration?{cohort:'integration_v28',cell:variant.cell,settings:Object.fromEntries(Object.keys(integrationDefinition.base).map(k=>[k,+variant[k]]))}:{variant:+variant.variant}),goal:+header.goal,duration_s:+result.elapsed,
     error_markers:errors,score:{imc:+result.imc,militia:+result.militia},live_pilot_samples:pilots.length,
     low_progress_samples:low.length,low_progress_percent:pilots.length?100*low.length/pilots.length:null,
     navigation:analyzeDiag(diag),weapons:[...guns.values()],weapon_windows_excluded_at_boundaries:windows.length-gunWindows.length,

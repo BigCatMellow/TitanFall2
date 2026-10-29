@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "state": "lifecycle_passed_not_promoted",
+  "native_sha256": "D85B69B149E1681B29AB6B933FED75EB125F9D92FFD24435F31EE3998A4E9AE6",
+  "core_sha256": "86007DD1DDAC9103508EECA520E2AB89B16DF92780A5F8A67497CCF29567EDB9",
+  "bridge_sha256": "9C43719868D28121E6D59A07C3317882E135A50FF3C91AA1340A12C1219C4598",
+  "measurement_sha256": "A6D101A0506654755265945AB193EB0F0EF8E9AC93569A8BA8D443B9CE9CECEC",
+  "damage_probe_sha256": "F4215610A16796583983B252E646A6381D3AAB8762D9F4CFE373200D99EFF5FE",
+  "map": "mp_eden",
+  "next_map": "mp_wargames",
+  "phases": [
+    "off",
+    "on",
+    "respawn",
+    "off",
+    "lobby_and_new_map"
+  ],
+  "rust_tests": 118,
+  "rust_suites": 21,
+  "new_behavior_default": 0,
+  "normal_deployed": false,
+  "limits": "Combined lifecycle smoke and diagnostic execution only, not isolated effectiveness, human difficulty, ability effect or performance proof."
+}
