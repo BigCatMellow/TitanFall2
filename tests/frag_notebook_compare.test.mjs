@@ -93,3 +93,14 @@ test('missing notebook force/Titan flags or invalid teams are never treated as m
     assert.equal(r.unmatched,1);
   }
 });
+
+test('notebook errors and overwritten hits invalidate completeness conclusions', () => {
+  const valid=[ctx('mp_eden'),probe(12),hit(7,12.01),post(7),death(7)];
+  const err=compareFragNotebook([...valid,'WNOTE_ERROR stage=post count=1'].join('\n'));
+  assert.equal(err.uniquely_matched,1);
+  assert.equal(err.notebook_errors_logged,1);
+  assert.equal(err.status,'notebook_error_incomplete');
+  const gap=compareFragNotebook([...valid,'WNOTE_GAP event=9 victim=42 life=0'].join('\n'));
+  assert.equal(gap.notebook_gap_markers_logged,1);
+  assert.equal(gap.status,'notebook_gap_review_required');
+});
