@@ -45,7 +45,7 @@ node tools/Analyze-FragLifecycle.mjs --log "<PRIVATE-NSLOG.log>" --out "<PRIVATE
 
 The read-only `tools/Analyze-FragLifecycle.mjs` reports per-map event totals and **distinct logged spawn handles** (with a 2,048-entry per-map cap), duplicate handles, `spawn_null`, death-drop callbacks, and two **hypothesis inspection bins**: residual fuse below 0.25 seconds and owner-to-projectile gap below 120 units at spawn. Those bins are **not validated danger thresholds**. Almost every grenade spawns relatively near its owner; no outcome is implied.
 
-The report excludes owner/weapon/projectile identifiers, coordinates, raw lines and any attempted owner/kill joins. Recycled handles, truncated logs, multiple rounds on the same map and script/runtime errors can distort counts; retain the original private logs for local debugging. Neither a disappearance nor a missing projectile callback is proof of a successful detonation.
+The report excludes owner/weapon/projectile identifiers, coordinates, raw lines and any attempted owner/kill joins. It now separates observed map/time segments on map changes and engine-clock rollback greater than 0.5 seconds, so common projectile handles reused in later rounds are not automatically mistaken for duplicate spawns. Truncated logs, smaller out-of-order clock changes, map resets without a detectable boundary and script/runtime errors can still distort counts; retain the original private logs for local debugging. Neither a disappearance nor a missing projectile callback is proof of a successful detonation. A caught diagnostic exception emits a single `BT_FRAG_PROBE_ERROR` marker and the analyzer sets `probe_status=probe_error_review_required`. If there are no valid `BT_FRAG_STAGE` events, it instead sets `probe_status=no_valid_stage_events_cannot_infer_no_grenades`, because the probe might be disabled, missing, or simply unexercised. Any probe fault is a **stop-and-review** signal; an empty report is not a negative gameplay observation.
 
 ## Required local testing sequence
 
@@ -59,8 +59,8 @@ The report excludes owner/weapon/projectile identifiers, coordinates, raw lines 
 
 ## Verification performed remotely
 
-- Seven exact source anchors are present **once each** in public NorthstarMods `_grenade.nut` on 2026-10-29.
-- Node generator, parser and six regression cases were authored for this branch, but **no Windows 1.31.14 Squirrel compilation, DLL build, isolated launch or gameplay observation** has been performed as part of this PR.
+- Seven exact source anchors are present **once each** in public NorthstarMods `_grenade.nut` on 2026-10-29; the actual generator was also applied in memory to that public source and produced one helper plus six additive call sites, without deleting original lines.
+- The generator and analyzer's nine pure-JavaScript regression cases passed in the repository's remote JavaScript evaluation harness. **The standalone Node CLI test command and Windows 1.31.14 Squirrel compilation, DLL build, isolated launch or gameplay observation have not been executed here.** The injected helper uses an exception guard and emits a one-time sanitized error marker if a diagnostic call fails.
 - The base Git rollback `backup/pre-bot-ai-20261029` and merged v20/v21 source remain untouched. This is an independent **draft** experiment.
 
 **Important deployment warning:** An entire third-party `_grenade.nut` source override is significantly riskier than a standalone observer. If Northstar 1.31.14 cannot safely load an isolated override of this script with the correct include semantics and update compatibility, **do not deploy the patched copy**. Report that blocker and pursue a validated event callback or plugin hook instead.
