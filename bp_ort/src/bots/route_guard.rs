@@ -131,6 +131,16 @@ pub(super) fn step_jump_wanted(dz: f32, horizontal: f32) -> bool {
     dz.is_finite() && horizontal.is_finite() && dz > 18. && horizontal < 140.
 }
 
+/// Experimental floor-separation check for route corner consumption.
+/// Remains default-off; 36 units is provisional until validated in-game.
+pub(super) const CORNER_HEIGHT_TOLERANCE: f32 = 36.;
+
+pub(super) fn corner_reached(horizontal_distance: f32, vertical_delta: f32, horizontal_limit: f32) -> bool {
+    horizontal_distance.is_finite() && vertical_delta.is_finite()
+        && horizontal_limit.is_finite() && horizontal_distance <= horizontal_limit
+        && vertical_delta.abs() <= CORNER_HEIGHT_TOLERANCE
+}
+
 #[derive(Debug, Default)]
 pub(super) struct JumpTiming {
     airborne_since: Option<f32>,
@@ -243,6 +253,17 @@ mod tests {
         assert!(!state.blocks(f32::NAN, 2));
         assert!(!state.record(f32::NAN, 2));
         assert!(!state.record(3., -1));
+    }
+    #[test] fn corner_height_guard_requires_nearby_horizontal_and_vertical_position() {
+        assert!(corner_reached(0., 0., 45.));
+        assert!(corner_reached(45., 36., 45.));
+        assert!(corner_reached(30., -36., 45.));
+        assert!(!corner_reached(45.1, 0., 45.));
+        assert!(!corner_reached(30., 36.1, 45.));
+        assert!(!corner_reached(30., -36.1, 45.));
+        assert!(!corner_reached(f32::NAN, 0., 45.));
+        assert!(!corner_reached(10., f32::INFINITY, 45.));
+        assert!(!corner_reached(10., 0., f32::NAN));
     }
     #[test] fn step_jump_waits_until_near_the_higher_point() {
         assert!(!step_jump_wanted(22., 400.)); assert!(step_jump_wanted(22., 100.));
