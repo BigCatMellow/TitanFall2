@@ -142,6 +142,7 @@ test('corner and stall histograms only expose raw code pairs, no positions', () 
   assert.ok(data.limits.some(x => x.includes('not a per-link failure rate')));
 });
 
+
 test('BOT_FRAME window is descriptive, with map conflicts and invalid times visible', () => {
   const r = parseBotTrialLog(log(
     'BOT_FRAME epoch=1 map=mp_eden t=1',
