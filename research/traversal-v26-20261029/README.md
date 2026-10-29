@@ -26,7 +26,7 @@ airborne movement ownership is a separate follow-up, not implemented here.
 heading, invalid velocity, grounded launch, two released presses and expiry.
 Pinned locked offline Windows release-debug build passes. Dependency lock bytes
 remain E4F8434813F688AF4FB5184EAEF4876A7F72F79C1D6B2A4DAB69C7BF2B89AE41.
-Full PowerShell migration fixtures are not run while game processes are active.
+The full project checks, including four migration/preset fixtures, also passed between games.
 Runtime checks and native hash will be recorded separately; source tests do not
 establish traversal success or a difficulty improvement.
 
@@ -49,3 +49,30 @@ establish traversal success or a difficulty improvement.
 This separates candidate logic, frozen study cohorts and stable play. A new
 feature must improve the corresponding measured failure and survive lifecycle
 checks before promotion. Weapon power is not a substitute for better movement.
+
+## Runtime result: not promoted
+
+Native EBB6D53136C54BCA83075B760CB6FA9C87650C1445CF2273DC91B17A86DCD1FA
+completed all five smoke phases, respawn, switch-off, lobby and Eden-to-War-Games
+transition with zero detected runtime-error markers. Normal remains BC2C1019...;
+all ten normal save/deployment/settings guards were unchanged after the test.
+
+Eden:8actions,0completed,7failed,1cancelled. Failures were4ApproachTimeout,
+2EarlyLanding,1NoLift. All three launched failures ended from flight before a
+logged second press. War Games:50actions,2completed,28failed,20cancelled;
+22EarlyLanding,5ApproachTimeout,1LostEntry. Fifteen cancellations were combat or
+disable, four replan and one no-navigation. Different links/actions/phase timing
+make the two War Games completions versus v25's one unsuitable as a gain claim.
+The lifecycle smoke passed; traversal effectiveness did not earn promotion.
+
+A straight entry allowed a measured260units/s launch, but landed on an intermediate
+surface about47units above entry before the second press. Another approach came
+from the exit-facing side of the entry, requiring reversal; it timed out with
+little forward velocity. These are individual diagnostic examples, not visual
+confirmation. Simply preserving momentum or extending a timer is insufficient.
+
+Next candidate needs collision-checked approach staging and explicit intermediate
+surface handling, then airborne locomotion ownership across combat/target changes.
+Do not blindly add more jumps or assume all type16 links have the same usable arc.
+The original frozen BC2 routing study resumed after this test; normal play was
+never switched to the prototype. Raw logs and DLLs remain private.

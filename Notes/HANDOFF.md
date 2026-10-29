@@ -1208,3 +1208,28 @@ and target/v24-study-session.json for actual live state; never infer success
 or a live PID from this note. Do not change frozen study scripts/measurement
 source/native while active. Deeper native prototypes use a separate canonical
 repository worktree/build and remain default-off until runtime validation.
+
+## 2026-10-29 — v25/v26 traversal prototypes, no normal rollout
+
+Separate worktree/branch candidate/traversal-v26-20261029 contains the default-off
+native traversal action, approach-momentum revision, reporting tests and owned
+frag exposure analysis. v25 native0BB7182... and v26EBB6D531... both completed the
+isolated lifecycle smoke; neither earns normal deployment. v26 produced Eden
+0/8completed actions, War Games2/50, with many early landings/cancellations.
+Read research/traversal-v26-20261029/README.md and runtime.json.105Rust checks,
+full migration/preset fixtures and four reporting Node tests pass. Pinned offline
+build; dependency lock E4F843... retained. Current saves never restored backward.
+
+Seven frozen BC2 v24 rounds across five maps are archived on the canonical
+candidate/overnight-v24-20261028 branch. New frag exposure review here covers542
+observed projectiles and88matched self-kills;86first observed above200units/s.
+Sampled owner proximity supports testing actual projectile-relative escape, not
+claiming toss/drop causes. Read research/frag-exposure-20261029. No grenade,
+weapon power, aim, warm-up, human modifiers or normal settings changed.
+
+Canonical target/v24-study-after-v26-session.json identifies the resumed frozen
+study, bounded by08:03EDT October29. Read its actual status; never infer that a
+historical PID remains active. Start order Drydock/Kodai/Glitch/Grave/Homestead
+and further remaining maps as time permits. Supervisor restores isolated v20
+native307... and disables harnesses at exit without copying historical saves.
+Normal stays v23BC2..., its ten-file guard passed. No automatic rollout.

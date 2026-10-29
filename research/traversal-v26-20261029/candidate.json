@@ -8,8 +8,8 @@
   "normal_deployed": false,
   "rust_suites": 19,
   "rust_tests": 105.0,
-  "reporting_node_tests": 2,
-  "runtime_state": "pending",
+  "reporting_node_tests": 4,
+  "runtime_state": "lifecycle_passed_behavior_not_promoted",
   "preserves": [
     "aim_0.78",
     "warmup_0.8s",
@@ -17,5 +17,6 @@
     "normal_saves",
     "two_buffer_navigation",
     "map_teardown"
-  ]
+  ],
+  "full_project_checks": "passed_between_games_including_migration_and_presets"
 }

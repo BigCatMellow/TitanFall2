@@ -9,13 +9,15 @@ test('traversal outcomes separate completion, failure, cancellation and censorin
     'BOT_TRAVERSAL_STATE epoch=private_epoch t=1 slot=private_actor phase=approach',
     'BOT_TRAVERSAL epoch=private_epoch t=2 slot=private_actor event=complete',
     'BOT_TRAVERSAL epoch=private_epoch t=3 slot=private_actor event=begin',
+    'BOT_TRAVERSAL_STATE epoch=private_epoch t=3 slot=private_actor phase=flight',
+    'BOT_TRAVERSAL_STATE epoch=private_epoch t=4 slot=private_actor phase=idle',
     'BOT_TRAVERSAL epoch=private_epoch t=4 slot=private_actor event=failed reason=EarlyLanding',
     'BOT_TRAVERSAL epoch=private_epoch t=5 slot=private_actor event=begin',
     'BOT_TRAVERSAL epoch=private_epoch t=6 slot=private_actor event=cancel reason=replan',
     'BOT_TRAVERSAL epoch=private_epoch t=7 slot=private_actor event=begin',
   ]);
   assert.deepEqual(r.maps[0],{map:'mp_eden',begins:4,completed:1,failed:1,cancelled:1,unmatched_ends:0,censored:1,
-    failure_reasons:{EarlyLanding:1},cancel_reasons:{replan:1},state_samples:{approach:1},completed_duration_s:[1]});
+    failure_reasons:{EarlyLanding:1},failure_from_last_active_phase:{flight:1},cancel_reasons:{replan:1},state_samples:{approach:1,flight:1,idle:1},completed_duration_s:[1]});
   assert(!JSON.stringify(r).includes('private_'));
 });
 test('epochs prevent joining a previous map action to a new map completion',()=>{

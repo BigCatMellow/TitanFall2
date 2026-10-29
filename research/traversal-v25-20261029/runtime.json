@@ -578,6 +578,10 @@
       "failure_reasons": {
         "EarlyLanding": 5
       },
+      "failure_from_last_active_phase": {
+        "flight": 4,
+        "landing": 1
+      },
       "cancel_reasons": {},
       "state_samples": {
         "align": 3,
@@ -602,6 +606,11 @@
         "ApproachTimeout": 3,
         "NoLift": 2,
         "LostEntry": 1
+      },
+      "failure_from_last_active_phase": {
+        "flight": 4,
+        "landing": 21,
+        "align": 4
       },
       "cancel_reasons": {
         "replan": 7,
