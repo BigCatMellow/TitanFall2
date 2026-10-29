@@ -30,6 +30,25 @@ evidence, **do not replace the Northstar grenade source**. The prepared
 second stage for cook/launch observations and remains blocked on Squirrel
 compatibility/runtime checks.
 
+## Added cross-channel concordance (read-only)
+
+The new [frag/WeaponNotes comparison](FRAG-EVIDENCE-CONCORDANCE-2026-10-29.md)
+adds `tools/Compare-FragNotebook.mjs` and ten regression cases. It can
+compare `BT_FRAG_DAMAGE` with `WNOTE_HIT` only within an actual
+`WNOTE_CONTEXT` map segment using exact Squirrel encoded attacker/victim
+handles, a matching self/friendly/enemy relationship and a provisional
+0.05-second time limit. Ambiguous pairs are excluded; independent
+`WNOTE_POST` and `WNOTE_DEATH` records are counted as **concordant**
+only with matched event/victim/life and without a conflicting `WNOTE_GAP`.
+Neither callback concordance nor a notebook fatal record establishes
+which projectile, explosion, or simultaneous damage caused a death.
+
+Run `node --test tests/frag_notebook_compare.test.mjs` alongside the
+other PR checks; analyze a **single private log** using
+`node tools/Compare-FragNotebook.mjs --log <PRIVATE_NSLOG> --out <PRIVATE_CONCORDANCE.json>`.
+All output is aggregate, without raw handles or timestamps. This remains
+separate from native `BOT_FRAG_INPUT` slot telemetry.
+
 ## Source of truth and hooks
 
 The public Northstar server source [`_grenade.nut`](https://github.com/R2Northstar/NorthstarMods/blob/main/Northstar.CustomServers/mod/scripts/vscripts/weapons/_grenade.nut) implements:
@@ -84,7 +103,7 @@ The report excludes owner/weapon/projectile identifiers, coordinates, raw lines 
 ## Verification performed remotely
 
 - Seven exact source anchors are present **once each** in public NorthstarMods `_grenade.nut` on 2026-10-29; the actual generator was also applied in memory to that public source and produced one helper plus six additive call sites, without deleting original lines.
-- The generator and analyzer's fourteen pure-JavaScript regression cases passed (eleven generator/analyzer tests and three standalone damage-probe source tests) in the repository's remote JavaScript evaluation harness. **The standalone Node CLI test command and Windows 1.31.14 Squirrel compilation, DLL build, isolated launch or gameplay observation have not been executed here.** The injected helper uses an exception guard and emits a one-time sanitized error marker if a diagnostic call fails.
+- The generator and analyzer's twenty-four pure-JavaScript regression cases passed (eleven generator/analyzer tests, three standalone damage-probe source tests and ten callback concordance tests) in the repository's remote JavaScript evaluation harness. **The standalone Node CLI test command and Windows 1.31.14 Squirrel compilation, DLL build, isolated launch or gameplay observation have not been executed here.** The injected helper uses an exception guard and emits a one-time sanitized error marker if a diagnostic call fails.
 - The base Git rollback `backup/pre-bot-ai-20261029` and merged v20/v21 source remain untouched. This is an independent **draft** experiment.
 
 **Important deployment warning:** An entire third-party `_grenade.nut` source override is significantly riskier than a standalone observer. If Northstar 1.31.14 cannot safely load an isolated override of this script with the correct include semantics and update compatibility, **do not deploy the patched copy**. Report that blocker and pursue a validated event callback or plugin hook instead.
