@@ -54,7 +54,7 @@ Public Northstar [entity documentation](https://docs.northstar.tf/Modding/refere
 The local Windows agent must first locate the **exact file used by installed Northstar 1.31.14** and preserve a verified backup. The `tools/Prepare-FragLifecycleProbe.mjs` command takes the local source file, checks seven known signatures **exactly once**, refuses already-instrumented/unknown source, and writes **a new candidate only** with exclusive creation (`wx`). It refuses to overwrite its input and never modifies game installation files directly.
 
 ```powershell
-node --test tests/frag_lifecycle_probe.test.mjs
+node --test tests/frag_lifecycle_probe.test.mjs tests/frag_damage_probe_source.test.mjs
 
 node tools/Prepare-FragLifecycleProbe.mjs `
   --source "<PRIVATE-LOCAL-NORTHSTAR-SOURCE>\_grenade.nut" `
@@ -84,7 +84,7 @@ The report excludes owner/weapon/projectile identifiers, coordinates, raw lines 
 ## Verification performed remotely
 
 - Seven exact source anchors are present **once each** in public NorthstarMods `_grenade.nut` on 2026-10-29; the actual generator was also applied in memory to that public source and produced one helper plus six additive call sites, without deleting original lines.
-- The generator and analyzer's eleven pure-JavaScript regression cases passed in the repository's remote JavaScript evaluation harness. **The standalone Node CLI test command and Windows 1.31.14 Squirrel compilation, DLL build, isolated launch or gameplay observation have not been executed here.** The injected helper uses an exception guard and emits a one-time sanitized error marker if a diagnostic call fails.
+- The generator and analyzer's fourteen pure-JavaScript regression cases passed (eleven generator/analyzer tests and three standalone damage-probe source tests) in the repository's remote JavaScript evaluation harness. **The standalone Node CLI test command and Windows 1.31.14 Squirrel compilation, DLL build, isolated launch or gameplay observation have not been executed here.** The injected helper uses an exception guard and emits a one-time sanitized error marker if a diagnostic call fails.
 - The base Git rollback `backup/pre-bot-ai-20261029` and merged v20/v21 source remain untouched. This is an independent **draft** experiment.
 
 **Important deployment warning:** An entire third-party `_grenade.nut` source override is significantly riskier than a standalone observer. If Northstar 1.31.14 cannot safely load an isolated override of this script with the correct include semantics and update compatibility, **do not deploy the patched copy**. Report that blocker and pursue a validated event callback or plugin hook instead.
