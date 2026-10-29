@@ -131,3 +131,16 @@ test('recycled projectile handles after map or clock restart are independent eve
   assert.equal(meadow[0].duplicate_projectile_spawn_events, 1);
   assert.ok(data.limits.some(s => s.includes('clock rollback')));
 });
+
+test('probe error marker prevents false conclusion of no grenade activity', () => {
+  const failed = analyzeFragLog('[warn] BT_FRAG_PROBE_ERROR schema=1 stage=prep\n');
+  assert.equal(failed.probe_errors_logged, 1);
+  assert.equal(failed.probe_status, 'probe_error_review_required');
+  assert.deepEqual(failed.maps, []);
+  assert.ok(failed.limits.some(s => s.includes('invalidates absence-of-events')));
+  const quiet = analyzeFragLog('unrelated server log\n');
+  assert.equal(quiet.probe_errors_logged, 0);
+  assert.equal(quiet.probe_status, 'no_valid_stage_events_cannot_infer_no_grenades');
+  const valid = analyzeFragLog(line('spawn'));
+  assert.equal(valid.probe_status, 'stage_events_present_runtime_validation_required');
+});
