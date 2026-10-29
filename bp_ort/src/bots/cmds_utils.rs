@@ -200,7 +200,16 @@ pub fn path_to_target(
             super::telemetry::epoch(),time(helper),local_data.edict,(time(helper)-since).max(0.));
     }
     let human_hull = nav.hull == crate::navmesh::Hull::Human;
-    while !local_data.traversal.active() && within_route_corner_range(local_data.next_target_pos, origin, corner_height_guard, human_hull, local_data.current_corner) {
+    // Arm a verified entry/exit pair before the usual 45-unit corner pop, so
+    // the action can retain its run-up instead of stopping at the launch lip.
+    while !local_data.traversal.active() && (within_route_corner_range(local_data.next_target_pos, origin, corner_height_guard, human_hull, local_data.current_corner)
+        || (traversal_trial&&local_data.current_corner.is_some_and(|(_,k)|k==16)
+            &&distance(local_data.next_target_pos,origin)<=160.
+            &&nav.corner_meta.len()==nav.path_points.len()
+            &&nav.corner_meta.last().is_some_and(|(_,k)|*k==255)
+            &&nav.path_points.last().is_some_and(|next|local_data.traversal.can_begin(time(helper),16,
+                [local_data.next_target_pos.x,local_data.next_target_pos.y,local_data.next_target_pos.z],
+                [next.x,next.y,next.z],[origin.x,origin.y,origin.z])))) {
         let Some((next, meta)) = nav.next_corner() else { break; };
         let entry=local_data.next_target_pos;
         let kind=local_data.current_corner.map(|(_,kind)|kind);
@@ -248,14 +257,17 @@ pub fn path_to_target(
     }
 
     let mut action_input=None;
+    let mut action_goal=None;
     if local_data.traversal.active() {
-        let facing=(look_at(origin,local_data.next_target_pos).y-helper.angles.y+180.).rem_euclid(360.)-180.;
+        let exit=local_data.traversal.exit().unwrap();
+        let facing=(look_at(origin,Vector3::new(exit[0],exit[1],exit[2])).y-helper.angles.y+180.).rem_euclid(360.)-180.;
         let step=local_data.traversal.step(super::traversal_action::Input {
-            now:time(helper),origin:[origin.x,origin.y,origin.z],grounded:local_data.route_grounded,facing_error:facing,
+            now:time(helper),origin:[origin.x,origin.y,origin.z],velocity:local_data.route_velocity,grounded:local_data.route_grounded,facing_error:facing,
         });
+        action_goal=local_data.traversal.movement_goal([origin.x,origin.y,origin.z]);
         let phase=local_data.traversal.phase_label();
         if local_data.traversal_phase!=Some(phase) {
-            log::info!("BOT_TRAVERSAL_STATE epoch={} t={:.2} slot={} phase={} grounded={} x={:.1} y={:.1} z={:.1} facing_error={:.1}",super::telemetry::epoch(),time(helper),local_data.edict,phase,local_data.route_grounded as u8,origin.x,origin.y,origin.z,facing);
+            log::info!("BOT_TRAVERSAL_STATE epoch={} t={:.2} slot={} phase={} grounded={} x={:.1} y={:.1} z={:.1} facing_error={:.1} vx={:.1} vy={:.1}",super::telemetry::epoch(),time(helper),local_data.edict,phase,local_data.route_grounded as u8,origin.x,origin.y,origin.z,facing,local_data.route_velocity[0],local_data.route_velocity[1]);
             local_data.traversal_phase=Some(phase);
         }
         match step {
@@ -295,6 +307,13 @@ pub fn path_to_target(
         cmd.move_.x = 1.0;
         cmd.buttons |= Action::Forward as u32 | Action::Speed as u32;
     }else{cmd.move_.x=0.;cmd.buttons &= !(Action::Forward as u32);}
+    if let Some(goal)=action_goal {
+        let bearing=look_at(origin,Vector3::new(goal[0],goal[1],goal[2])).y;
+        let (forward,side)=super::combat_movement::reframe(1.,0.,bearing,cmd.world_view_angles.y);
+        cmd.move_.x=forward;cmd.move_.y=side;
+        cmd.buttons &= !(Action::Forward as u32 | Action::Speed as u32);
+        if forward>0.85 {cmd.buttons |= Action::Forward as u32 | Action::Speed as u32;}
+    }
 
     if is_timedout(local_data.last_time_node_reached, helper, 5.) {
         note_failed_link(local_data, origin, helper, "waypoint_timeout");

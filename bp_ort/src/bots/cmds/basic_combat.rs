@@ -911,7 +911,7 @@ fn route_move_toward(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut 
         return routed;
     }
 
-    let (f, s) = if local.metrics.state == "recover" {
+    let (f, s) = if local.metrics.state == "recover" || local.traversal.active() {
         crate::bots::combat_movement::reframe(route.move_.x, route.move_.y, route.world_view_angles.y, aim_yaw)
     } else {
         let o = player.m_vecAbsOrigin;

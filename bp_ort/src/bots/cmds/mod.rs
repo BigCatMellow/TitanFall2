@@ -59,6 +59,7 @@ pub(super) fn get_cmd(
 
     local_data.route_grounded = super::switch_on(&super::TRAVERSAL_ACTION_CONVAR)
         && unsafe { (helper.sv_funcs.is_on_ground)(nudge_type::<&CBaseEntity>(player)) } != 0;
+    local_data.route_velocity = [player.m_vecAbsVelocity.x,player.m_vecAbsVelocity.y];
     let command_number = {
         player.m_rank += 1; // using this for command number
         player.m_rank as u32

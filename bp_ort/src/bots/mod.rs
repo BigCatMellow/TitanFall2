@@ -160,6 +160,7 @@ pub(super) struct BotData {
     link_detour: route_guard::LinkDetour,
     traversal: traversal_action::TraversalAction,
     route_grounded: bool,
+    route_velocity: [f32;2],
     traversal_phase: Option<&'static str>,
     unreachable: route_guard::Unreachable,
     jump_timing: route_guard::JumpTiming,
