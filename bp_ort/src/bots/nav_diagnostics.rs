@@ -15,6 +15,21 @@ pub(super) fn is_partial(status: u32) -> bool {
     status & DT_SUCCESS != 0 && status & DT_PARTIAL_RESULT != 0
 }
 
+/// Classify raw Detour-style corner metadata for diagnostics only.
+/// The upstream START/END/OFFMESH bits are known, but Titanfall's additional
+/// single-byte jump codes are NOT proven to match JumpTypes enum values.
+/// Never use this classification to authorize a pilot movement action.
+pub(super) fn corner_class(meta: Option<(u8, u8)>) -> &'static str {
+    match meta {
+        None => "missing",
+        Some((flags, _)) if flags & !0x07 != 0 => "unknown_flags",
+        Some((flags, _)) if flags & 0x04 != 0 => "offmesh_flag",
+        Some((_, u8::MAX)) => "unknown_jump",
+        Some((_, jump)) if jump != 0 => "coded_jump",
+        Some(_) => "ordinary_candidate",
+    }
+}
+
 /// Suppresses repeated identical log lines (e.g. per-frame replanning) while
 /// counting what was suppressed so the volume itself remains visible.
 #[derive(Debug, Default)]
@@ -73,6 +88,18 @@ impl StuckMonitor {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test] fn corner_class_does_not_guess_titanfall_jump_semantics() {
+        assert_eq!(corner_class(None), "missing");
+        assert_eq!(corner_class(Some((0, 0))), "ordinary_candidate");
+        assert_eq!(corner_class(Some((1, 0))), "ordinary_candidate");
+        assert_eq!(corner_class(Some((2, 0))), "ordinary_candidate");
+        assert_eq!(corner_class(Some((4, 0))), "offmesh_flag");
+        assert_eq!(corner_class(Some((5, 7))), "offmesh_flag");
+        assert_eq!(corner_class(Some((0, 7))), "coded_jump");
+        assert_eq!(corner_class(Some((2, u8::MAX))), "unknown_jump");
+        assert_eq!(corner_class(Some((16, 0))), "unknown_flags");
+        assert_eq!(corner_class(Some((255, 255))), "unknown_flags");
+    }
     #[test] fn partial_requires_success_and_partial_bits() {
         assert!(is_partial(DT_SUCCESS | DT_PARTIAL_RESULT));
         assert!(!is_partial(DT_SUCCESS));

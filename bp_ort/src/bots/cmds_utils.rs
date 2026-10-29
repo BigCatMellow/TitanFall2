@@ -57,6 +57,7 @@ pub fn path_to_target(
         }
         local_data.recovery_until = time(helper) + 1.2;
         local_data.stall_event = Some("no_progress");
+        note_stalled_pursuit(local_data, helper, "no_progress");
         note_recovery(local_data, origin, helper, "no_progress");
         face_toward(cmd, origin, target_pos, helper);
         try_avoid_obstacle(cmd, local_data, helper);
@@ -101,6 +102,9 @@ pub fn path_to_target(
     {
         local_data.last_time_node_reached = helper.globals.curTime;
         local_data.next_target_pos = origin;
+        // A replanned corridor has not yet produced a matching next-corner.
+        // Do not let diagnostics or low-clearance actions reuse stale metadata.
+        local_data.current_corner = None;
 
         // this might be the reason of the sudden aim shift or not really idk
         if local_data.last_bad_path + 1. >= helper.globals.curTime {
@@ -160,9 +164,10 @@ pub fn path_to_target(
         local_data.next_target_pos = next;
         local_data.current_corner = meta;
         if super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
-            log::info!("BOT_CORNER epoch={} t={:.2} slot={} flags={} jump={} remaining={} x={:.1} y={:.1} z={:.1} dz={:.1} dist={:.0}",
+            log::info!("BOT_CORNER epoch={} t={:.2} slot={} flags={} jump={} class={} remaining={} x={:.1} y={:.1} z={:.1} dz={:.1} dist={:.0}",
                 super::telemetry::epoch(), time(helper), local_data.edict,
-                meta.map_or(-1, |m| m.0 as i32), meta.map_or(-1, |m| m.1 as i32), nav.path_points.len(),
+                meta.map_or(-1, |m| m.0 as i32), meta.map_or(-1, |m| m.1 as i32),
+                super::nav_diagnostics::corner_class(meta), nav.path_points.len(),
                 next.x, next.y, next.z, next.z - origin.z, distance(next, origin));
         }
     }
@@ -170,11 +175,9 @@ pub fn path_to_target(
     if corner_height_guard && super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
         let horizontal = distance(local_data.next_target_pos, origin);
         let dz = local_data.next_target_pos.z - origin.z;
-        if horizontal <= BOT_PATH_NODE_RANGE
-            && dz.is_finite()
+        if horizontal <= BOT_PATH_NODE_RANGE && dz.is_finite()
             && dz.abs() > super::route_guard::CORNER_HEIGHT_TOLERANCE
-            && local_data.corner_guard_log.allow(time(helper), 1.0)
-        {
+            && local_data.corner_guard_log.allow(time(helper), 1.0) {
             log::info!("BOT_CORNER_HOLD epoch={} t={:.2} slot={} flags={} jump={} horizontal={:.0} dz={:.1} waypoint=({:.1},{:.1},{:.1}) origin=({:.1},{:.1},{:.1})",
                 super::telemetry::epoch(), time(helper), local_data.edict,
                 local_data.current_corner.map_or(-1, |m| m.0 as i32),
@@ -209,6 +212,7 @@ pub fn path_to_target(
         }
         local_data.recovery_until = time(helper) + 1.2;
         local_data.stall_event = Some("waypoint_timeout");
+        note_stalled_pursuit(local_data, helper, "waypoint_timeout");
         note_recovery(local_data, origin, helper, "waypoint_timeout");
         try_avoid_obstacle(cmd, local_data, helper);
     }
@@ -216,17 +220,23 @@ pub fn path_to_target(
     true
 }
 
+/// Suppress only *unseen pursuit* after repeated actual watchdog recoveries.
+/// No global route blacklist or navmesh mutation; other bots are unaffected.
+fn note_stalled_pursuit(local_data: &mut BotData, helper: &CUserCmdHelper, reason: &str) {
+    if !super::switch_on(&super::STALL_TARGET_RECOVERY_CONVAR) { return; }
+    let Some(id) = local_data.route_target else { return; };
+    if local_data.stall_targets.record(time(helper), id) {
+        log::info!("BOT_ROUTE_COOLDOWN epoch={} t={:.2} slot={} target={} reason={} hold=8",
+            super::telemetry::epoch(), time(helper), local_data.edict, id, reason);
+    }
+}
+
 fn within_route_corner_range(target: Vector3, origin: Vector3, height_guard: bool) -> bool {
     let horizontal = distance(target, origin);
     if height_guard {
-        super::route_guard::corner_reached(
-            horizontal,
-            target.z - origin.z,
-            BOT_PATH_NODE_RANGE,
-        )
-    } else {
-        horizontal <= BOT_PATH_NODE_RANGE
-    }
+        super::route_guard::corner_reached(horizontal,
+            target.z - origin.z, BOT_PATH_NODE_RANGE)
+    } else { horizontal <= BOT_PATH_NODE_RANGE }
 }
 
 pub fn is_timedout(last_time: f32, helper: &CUserCmdHelper<'_>, time_elasped: f32) -> bool {

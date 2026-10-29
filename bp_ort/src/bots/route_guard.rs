@@ -61,22 +61,83 @@ impl Unreachable {
     }
 }
 
+/// Per-bot pursuit escape when Detour returned a route but the bot repeatedly
+/// could not advance along it. This tracks *distinct watchdog events*, not
+/// per-frame movement samples. A visible target is never blocked by this state.
+#[derive(Debug, Default)]
+pub(super) struct StallTargetCooldown {
+    // Fixed-size independent histories: switching enemies must not erase strikes.
+    recent: [Option<(i32, f32, u8)>; 4],
+    blocked: [Option<(i32, f32)>; 4],
+    last_time: Option<f32>,
+}
+impl StallTargetCooldown {
+    pub const WINDOW: f32 = 12.;
+    pub const HOLD: f32 = 8.;
+    pub const STRIKES: u8 = 2;
+
+    /// A watchdog event, not a per-frame sample.
+    /// Returns true only when a *new* cooldown starts.
+    pub fn record(&mut self, now: f32, target: i32) -> bool {
+        if !now.is_finite() || target == -1 { return false; }
+        if self.last_time.is_some_and(|last| now < last) { *self = Self::default(); }
+        self.last_time = Some(now);
+        if self.blocks(now, target) { return false; }
+
+        let slot = self.recent.iter().position(|entry|
+            entry.is_some_and(|(id, _, _)| id == target))
+            .or_else(|| self.recent.iter().position(|entry|
+                entry.is_none_or(|(_, at, _)| now - at > Self::WINDOW)))
+            .unwrap_or_else(|| self.recent.iter().enumerate()
+                .min_by(|(_, a), (_, b)| {
+                    let ta = a.map_or(f32::NEG_INFINITY, |(_, at, _)| at);
+                    let tb = b.map_or(f32::NEG_INFINITY, |(_, at, _)| at);
+                    ta.total_cmp(&tb)
+                }).map_or(0, |(i, _)| i));
+
+        let strikes = match self.recent[slot] {
+            Some((id, at, count)) if id == target && now >= at && now - at <= Self::WINDOW =>
+                count.saturating_add(1),
+            _ => 1,
+        };
+        if strikes < Self::STRIKES {
+            self.recent[slot] = Some((target, now, strikes));
+            return false;
+        }
+        self.recent[slot] = None;
+        let slot = self.blocked.iter().position(|entry|
+            entry.is_none_or(|(_, until)| now >= until))
+            .unwrap_or_else(|| self.blocked.iter().enumerate()
+                .min_by(|(_, a), (_, b)| {
+                    let ta = a.map_or(f32::NEG_INFINITY, |(_, until)| until);
+                    let tb = b.map_or(f32::NEG_INFINITY, |(_, until)| until);
+                    ta.total_cmp(&tb)
+                }).map_or(0, |(i, _)| i));
+        self.blocked[slot] = Some((target, now + Self::HOLD));
+        true
+    }
+
+    /// Only pursuit selection consults this; visible combat always wins.
+    pub fn blocks(&self, now: f32, target: i32) -> bool {
+        self.blocked.iter().any(|entry| entry.is_some_and(|(id, until)|
+            now.is_finite() && id == target &&
+                now >= until - Self::HOLD && now < until))
+    }
+}
+
 /// Step jumps used to fire whenever the next point was 18+ units higher, even
 /// 400 units away, so the bot hopped early and arrived at the ledge grounded.
 pub(super) fn step_jump_wanted(dz: f32, horizontal: f32) -> bool {
     dz.is_finite() && horizontal.is_finite() && dz > 18. && horizontal < 140.
 }
 
-/// Provisional floor-separation check for route-corner consumption.
-/// The 36-unit tolerance is half the 72-unit standing hull observed in v20 diagnostics;
-/// validate it against live routes before making this behavior a default.
-pub(super) const CORNER_HEIGHT_TOLERANCE: f32 = 36.0;
+/// Experimental floor-separation check for route corner consumption.
+/// Remains default-off; 36 units is provisional until validated in-game.
+pub(super) const CORNER_HEIGHT_TOLERANCE: f32 = 36.;
 
 pub(super) fn corner_reached(horizontal_distance: f32, vertical_delta: f32, horizontal_limit: f32) -> bool {
-    horizontal_distance.is_finite()
-        && vertical_delta.is_finite()
-        && horizontal_limit.is_finite()
-        && horizontal_distance <= horizontal_limit
+    horizontal_distance.is_finite() && vertical_delta.is_finite()
+        && horizontal_limit.is_finite() && horizontal_distance <= horizontal_limit
         && vertical_delta.abs() <= CORNER_HEIGHT_TOLERANCE
 }
 
@@ -132,6 +193,66 @@ mod tests {
         let mut u = Unreachable::default();
         u.note(0., 7, true, 100.); u.note(5., 7, true, 100.); assert!(!u.blocks(5., 7));
         u.note(0., 7, true, 400.); u.note(4., 7, true, 400.); assert!(!u.blocks(-1., 7));
+    }
+    #[test] fn repeated_watchdog_events_cool_down_only_that_pursuit_target() {
+        let mut state = StallTargetCooldown::default();
+        assert!(!state.record(1., 7));
+        assert!(!state.blocks(3., 7));
+        assert!(state.record(5., 7));
+        assert!(state.blocks(5., 7));
+        assert!(state.blocks(12.9, 7));
+        assert!(!state.blocks(13., 7));
+        assert!(!state.blocks(6., 8));
+        assert!(!state.record(20., 7));
+        assert!(!state.record(21., 8)); // independent target history
+        assert!(state.record(22., 7));
+        assert!(state.record(23., 8));
+    }
+    #[test] fn alternating_unreachable_enemies_get_separate_cooldowns() {
+        let mut state = StallTargetCooldown::default();
+        assert!(!state.record(1., 7));
+        assert!(!state.record(1.5, 8));
+        assert!(state.record(2., 7));
+        assert!(state.record(3., 8));
+        assert!(state.blocks(9.9, 7));
+        assert!(!state.blocks(10., 7)); // expires eight seconds after second hit
+        assert!(state.blocks(10., 8));
+        assert!(!state.blocks(11., 8));
+        assert!(!state.blocks(8., 9));
+        assert!(!state.record(3.5, 8)); // no retrigger while still blocked
+    }
+
+    #[test] fn cache_is_bounded_and_evicts_oldest_evidence() {
+        let mut state = StallTargetCooldown::default();
+        for id in 1..=4 { assert!(!state.record(id as f32, id)); }
+        assert!(!state.record(5., 5)); // replaces oldest evidence (target 1)
+        assert!(state.record(6., 2)); // target 2 history survives
+        assert!(!state.record(7., 1)); // target 1 starts fresh
+        assert!(!state.blocks(7., 1));
+        assert!(state.blocks(7., 2));
+    }
+
+    #[test] fn clock_reset_discards_every_cached_target() {
+        let mut state = StallTargetCooldown::default();
+        assert!(!state.record(40., 7));
+        assert!(state.record(41., 7));
+        assert!(!state.record(42., 8));
+        assert!(!state.record(1., 7));
+        assert!(!state.blocks(1., 7));
+        assert!(!state.record(2., 8));
+        assert!(state.record(3., 7));
+        assert!(!state.blocks(3., 8));
+    }
+    #[test] fn old_hits_and_clock_rollback_do_not_create_false_cooldowns() {
+        let mut state = StallTargetCooldown::default();
+        assert!(!state.record(10., 2));
+        assert!(!state.record(22.1, 2)); // outside the 12s strike window
+        assert!(!state.record(1., 2)); // new map/clock reset
+        assert!(!state.blocks(1., 2));
+        assert!(state.record(2., 2));
+        assert!(!state.blocks(f32::NAN, 2));
+        assert!(!state.record(f32::NAN, 2));
+        assert!(!state.record(3., -1));
     }
     #[test] fn corner_height_guard_requires_nearby_horizontal_and_vertical_position() {
         assert!(corner_reached(0., 0., 45.));
