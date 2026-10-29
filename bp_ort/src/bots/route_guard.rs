@@ -66,8 +66,9 @@ impl Unreachable {
 /// per-frame movement samples. A visible target is never blocked by this state.
 #[derive(Debug, Default)]
 pub(super) struct StallTargetCooldown {
-    recent: Option<(i32, f32, u8)>,
-    blocked: Option<(i32, f32)>,
+    // Fixed-size independent histories: switching enemies must not erase strikes.
+    recent: [Option<(i32, f32, u8)>; 4],
+    blocked: [Option<(i32, f32)>; 4],
     last_time: Option<f32>,
 }
 impl StallTargetCooldown {
@@ -75,28 +76,52 @@ impl StallTargetCooldown {
     pub const HOLD: f32 = 8.;
     pub const STRIKES: u8 = 2;
 
-    /// Returns true only when this event starts a target cooldown.
+    /// A watchdog event, not a per-frame sample.
+    /// Returns true only when a *new* cooldown starts.
     pub fn record(&mut self, now: f32, target: i32) -> bool {
         if !now.is_finite() || target == -1 { return false; }
         if self.last_time.is_some_and(|last| now < last) { *self = Self::default(); }
         self.last_time = Some(now);
-        let count = match self.recent {
+        if self.blocks(now, target) { return false; }
+
+        let slot = self.recent.iter().position(|entry|
+            entry.is_some_and(|(id, _, _)| id == target))
+            .or_else(|| self.recent.iter().position(|entry|
+                entry.is_none_or(|(_, at, _)| now - at > Self::WINDOW)))
+            .unwrap_or_else(|| self.recent.iter().enumerate()
+                .min_by(|(_, a), (_, b)| {
+                    let ta = a.map_or(f32::NEG_INFINITY, |(_, at, _)| at);
+                    let tb = b.map_or(f32::NEG_INFINITY, |(_, at, _)| at);
+                    ta.total_cmp(&tb)
+                }).map_or(0, |(i, _)| i));
+
+        let strikes = match self.recent[slot] {
             Some((id, at, count)) if id == target && now >= at && now - at <= Self::WINDOW =>
                 count.saturating_add(1),
             _ => 1,
         };
-        if count >= Self::STRIKES {
-            self.recent = None;
-            self.blocked = Some((target, now + Self::HOLD));
-            return true;
+        if strikes < Self::STRIKES {
+            self.recent[slot] = Some((target, now, strikes));
+            return false;
         }
-        self.recent = Some((target, now, count));
-        false
+        self.recent[slot] = None;
+        let slot = self.blocked.iter().position(|entry|
+            entry.is_none_or(|(_, until)| now >= until))
+            .unwrap_or_else(|| self.blocked.iter().enumerate()
+                .min_by(|(_, a), (_, b)| {
+                    let ta = a.map_or(f32::NEG_INFINITY, |(_, until)| until);
+                    let tb = b.map_or(f32::NEG_INFINITY, |(_, until)| until);
+                    ta.total_cmp(&tb)
+                }).map_or(0, |(i, _)| i));
+        self.blocked[slot] = Some((target, now + Self::HOLD));
+        true
     }
 
+    /// Only pursuit selection consults this; visible combat always wins.
     pub fn blocks(&self, now: f32, target: i32) -> bool {
-        self.blocked.is_some_and(|(id, until)| now.is_finite()
-            && id == target && now >= until - Self::HOLD && now < until)
+        self.blocked.iter().any(|entry| entry.is_some_and(|(id, until)|
+            now.is_finite() && id == target &&
+                now >= until - Self::HOLD && now < until))
     }
 }
 
