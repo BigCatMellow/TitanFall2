@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-const MARK=/^(?:\[[^\]\r\n]*\]\s*)*(WNOTE_CONTEXT|WNOTE_HIT|WNOTE_POST|WNOTE_GAP|WNOTE_DEATH|BT_FRAG_DAMAGE|BT_FRAG_DAMAGE_ERROR)(?:\s|$)/;
+const MARK=/^(?:\[[^\]\r\n]*\]\s*)*(WNOTE_CONTEXT|WNOTE_HIT|WNOTE_POST|WNOTE_GAP|WNOTE_DEATH|WNOTE_ERROR|BT_FRAG_DAMAGE|BT_FRAG_DAMAGE_ERROR)(?:\s|$)/;
 const num=x=>typeof x==='string'&&x!==''&&Number.isFinite(Number(x))?Number(x):null;
 const id=x=>typeof x==='string'&&/^-?\d+$/.test(x)&&Number.isSafeInteger(Number(x))&&Number(x)!==-1?Number(x):null;
 const event=x=>{const n=id(x);return n!==null&&n>=0?n:null};
@@ -20,10 +20,11 @@ const newCounts=()=>({damage_callbacks:0,eligible_notebook_hits:0,
   uniquely_matched:0,ambiguous:0,unmatched:0,
   post_health_decrease_consistent:0,fatal_notebook_record_consistent:0,missing_clean_post:0});
 export function compareFragNotebook(text) {
-  const segments=[];let current=null,rawProbe=0,unscoped=0,probeErrors=0;
+  const segments=[];let current=null,rawProbe=0,unscoped=0,probeErrors=0,notebookErrors=0,gapsSeen=0;
   for(const line of text.split(/\r?\n/)){
     const e=parse(line);if(!e)continue;
     if(e.type==='BT_FRAG_DAMAGE_ERROR'){probeErrors++;continue;}
+    if(e.type==='WNOTE_ERROR'){notebookErrors++;continue;}
     if(e.type==='WNOTE_CONTEXT'){
       current={map:validMap(e.map)?e.map:null,damage:[],hits:[],posts:new Map(),deaths:new Map(),gaps:new Set()};
       segments.push(current);continue;
@@ -50,6 +51,7 @@ export function compareFragNotebook(text) {
       (e.type==='WNOTE_POST'?current.posts:current.deaths).set(k,{victim:v,life,t,
         hp:e.type==='WNOTE_POST'?num(e.hp_after):null});
     } else if(e.type==='WNOTE_GAP'){
+      gapsSeen++;
       const k=eventId(e.event);if(k!==null)current.gaps.add(k);
     }
   }
@@ -83,9 +85,11 @@ export function compareFragNotebook(text) {
     }
   }
   return {schema_version:1,probe_callbacks_total:rawProbe,unscoped_or_invalid_probe_callbacks:unscoped,
-    probe_errors_logged:probeErrors,...counts,
+    probe_errors_logged:probeErrors,notebook_errors_logged:notebookErrors,
+    notebook_gap_markers_logged:gapsSeen,...counts,
     maps:[...groups].sort(([a],[b])=>a.localeCompare(b)).map(([map,c])=>({map,...c})),
-    status:probeErrors?'probe_error_incomplete':unscoped?'context_or_invalid_callbacks_review_required'
+    status:probeErrors?'probe_error_incomplete':notebookErrors?'notebook_error_incomplete'
+      :gapsSeen?'notebook_gap_review_required':unscoped?'context_or_invalid_callbacks_review_required'
       :counts.uniquely_matched?'concordant_callbacks_not_causation':'no_unique_matches_cannot_infer_no_damage',
     limits:[
       'Requires a WNOTE_CONTEXT segment and map, exact Squirrel encoded attacker/victim handles, same self/friendly/enemy relation, and within 0.05 seconds.',
@@ -93,6 +97,7 @@ export function compareFragNotebook(text) {
       'WNOTE_POST health decrease and WNOTE_DEATH with matching victim/life/event are concordant observations, not proof a grenade caused damage or death. Overlapping hits remain possible.',
       'WNOTE_GAP or missing/invalid post disqualifies post concordance. Never equate projectile, inflictor and native BOT_FRAG_INPUT identifiers.',
       'No raw IDs, timestamps, positions, lines or event IDs are written. No matched active-pilot exposure, verified throws, trajectories, explosions, or frag kill credit.',
+      'WNOTE_ERROR markers indicate incomplete notebook evidence and WNOTE_GAP indicates overwritten pending events; do not treat missing health-post records as negative damage results.',
       'No matches may indicate missing WNOTE_CONTEXT, disabled logs/probe, ambiguous rapid hits, sparse timing, or genuinely absent qualifying callbacks.',
     ]};
 }
