@@ -1,0 +1,1250 @@
+{
+  "schema_version": 1,
+  "state": "stopped_by_request",
+  "started": "2026-10-29T07:06:07.1584046-04:00",
+  "updated": "2026-10-29T07:25:10.0018433-04:00",
+  "deadline": "2026-10-29T08:03:00.0000000-04:00",
+  "planned": 22,
+  "completed": 3,
+  "failed_attempts": 0,
+  "candidate_stopped": false,
+  "normal_unchanged": true,
+  "profile_restored": true,
+  "native_sha256": "BC2C1019D27F537F075611ED6B68A75591D1F2F9924BA8700D82A757BB1000F7",
+  "measurement_sha256": "A6D101A0506654755265945AB193EB0F0EF8E9AC93569A8BA8D443B9CE9CECEC",
+  "goal": 50,
+  "source_commit": "4319dcc0e5708d1ba22a11d5a49c275ffe4b33d4",
+  "rounds": [
+    {
+      "variant": 0,
+      "metrics": {
+        "schema_version": 1,
+        "map": "mp_angel_city",
+        "variant": 0,
+        "goal": 50,
+        "duration_s": 241.8,
+        "error_markers": 0,
+        "score": {
+          "imc": 50,
+          "militia": 34
+        },
+        "live_pilot_samples": 2789,
+        "low_progress_samples": 18,
+        "low_progress_percent": 0.6453926138400861,
+        "navigation": {
+          "schema_version": 1,
+          "paths": {
+            "requests": 1421,
+            "partial": 12,
+            "failures": 57,
+            "suppressed": 12649,
+            "with_links": 805
+          },
+          "corners": {
+            "total": 34997,
+            "links": 5018,
+            "by_jump": {
+              "1": 1043,
+              "2": 215,
+              "8": 941,
+              "16": 2819,
+              "255": 29960,
+              "-1": 19
+            },
+            "by_flags": {
+              "0": 16807,
+              "1": 14500,
+              "2": 3671,
+              "-1": 19
+            }
+          },
+          "corner_guard": {
+            "begins": 0,
+            "hold_samples": 0,
+            "ends": {},
+            "completed_duration_s": 0,
+            "duration_samples": 0
+          },
+          "stalls": {
+            "samples": 61,
+            "incidents": 46,
+            "link_or_partial": 17,
+            "duck_only": 0,
+            "blocked": 31,
+            "stand_clear": 15,
+            "unknown": 0,
+            "by_reason": {
+              "no_progress": 34,
+              "waypoint_timeout": 12
+            },
+            "by_state": {
+              "recover": 46
+            }
+          },
+          "stuck": {
+            "episodes": 55,
+            "by_state": {
+              "pursue": 29,
+              "engage": 22,
+              "embark": 4
+            },
+            "visible": 22,
+            "titan": 17
+          },
+          "crouch": {
+            "tests": 0,
+            "by_fit": {},
+            "attempts_max": 0,
+            "successes_max": 0,
+            "failures_max": 0
+          },
+          "viewcheck": {
+            "samples": 101,
+            "plausible": 101,
+            "examples": [
+              {
+                "eye_angles": "[0.0, -149.722, 0.0]",
+                "view_angles_raw": "[-0.86358917, -0.50419617, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              },
+              {
+                "eye_angles": "[0.0, 37.265, 0.0]",
+                "view_angles_raw": "[0.7958435, 0.60550237, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              },
+              {
+                "eye_angles": "[0.0, 180.0, 0.0]",
+                "view_angles_raw": "[-1.0, -8.742278e-8, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              }
+            ]
+          },
+          "decision": {
+            "stall_incidents": 46,
+            "link_or_partial_share": 0.3695652173913043,
+            "duck_only_share": 0,
+            "partial_route_share": 0.00844475721323012,
+            "engage_stuck_share": 0.4,
+            "recommendation": "neither threshold met; inspect individual incidents"
+          },
+          "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+        },
+        "weapons": [
+          {
+            "gun": "mp_weapon_g2",
+            "windows": 161,
+            "samples": 2502,
+            "attack_callbacks": 184,
+            "shots_parameter_sum": 184,
+            "ammo_decrease_proxy": 183,
+            "clip_increases": 9
+          },
+          {
+            "gun": "mp_weapon_vinson",
+            "windows": 211,
+            "samples": 2214,
+            "attack_callbacks": 89,
+            "shots_parameter_sum": 89,
+            "ammo_decrease_proxy": 88,
+            "clip_increases": 1
+          },
+          {
+            "gun": "mp_weapon_r97",
+            "windows": 171,
+            "samples": 2031,
+            "attack_callbacks": 196,
+            "shots_parameter_sum": 196,
+            "ammo_decrease_proxy": 191,
+            "clip_increases": 2
+          },
+          {
+            "gun": "mp_weapon_lmg",
+            "windows": 148,
+            "samples": 1898,
+            "attack_callbacks": 96,
+            "shots_parameter_sum": 96,
+            "ammo_decrease_proxy": 94,
+            "clip_increases": 0
+          },
+          {
+            "gun": "mp_weapon_car",
+            "windows": 143,
+            "samples": 2049,
+            "attack_callbacks": 182,
+            "shots_parameter_sum": 182,
+            "ammo_decrease_proxy": 179,
+            "clip_increases": 1
+          },
+          {
+            "gun": "mp_weapon_dmr",
+            "windows": 204,
+            "samples": 2306,
+            "attack_callbacks": 72,
+            "shots_parameter_sum": 72,
+            "ammo_decrease_proxy": 71,
+            "clip_increases": 8
+          },
+          {
+            "gun": "mp_weapon_hemlok",
+            "windows": 229,
+            "samples": 2247,
+            "attack_callbacks": 170,
+            "shots_parameter_sum": 170,
+            "ammo_decrease_proxy": 169,
+            "clip_increases": 4
+          },
+          {
+            "gun": "mp_weapon_rspn101",
+            "windows": 165,
+            "samples": 1789,
+            "attack_callbacks": 141,
+            "shots_parameter_sum": 141,
+            "ammo_decrease_proxy": 137,
+            "clip_increases": 1
+          }
+        ],
+        "weapon_windows_excluded_at_boundaries": 53,
+        "frag": {
+          "observed_projectiles": 80,
+          "pilot_kill_callbacks": 36,
+          "matched_self_deaths": 16,
+          "matched_enemy_deaths": 20,
+          "projectiles_with_self_kill": 16,
+          "projectiles_with_enemy_kill": 17,
+          "unmatched_kill_callbacks": 0,
+          "self_kill_projectile_fraction": 0.2,
+          "enemy_kill_projectile_fraction": 0.2125,
+          "observed_near_end": 0
+        },
+        "damage_notes": {
+          "death_records": 94,
+          "qualifying_episodes": 9,
+          "groups": [
+            {
+              "map": "mp_angel_city",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_dmr",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "1000-1999u",
+              "hitgroups": [
+                "1"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 0,
+              "min_s": 0,
+              "max_s": 0
+            },
+            {
+              "map": "mp_angel_city",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_rspn101",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "4",
+                "5"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 1.2834000000000003,
+              "min_s": 1.2834000000000003,
+              "max_s": 1.2834000000000003
+            },
+            {
+              "map": "mp_angel_city",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_g2",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "500-999u",
+              "hitgroups": [
+                "1",
+                "4"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 1.716699999999996,
+              "min_s": 1.716699999999996,
+              "max_s": 1.716699999999996
+            },
+            {
+              "map": "mp_angel_city",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_vinson",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "4",
+                "5"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 4.783199999999994,
+              "min_s": 4.783199999999994,
+              "max_s": 4.783199999999994
+            },
+            {
+              "map": "mp_angel_city",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_rspn101",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "3"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 2.1829999999999927,
+              "min_s": 2.1829999999999927,
+              "max_s": 2.1829999999999927
+            },
+            {
+              "map": "mp_angel_city",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_car",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "2"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 2,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 0.47449999999999193,
+              "min_s": 0.4329999999999927,
+              "max_s": 0.5159999999999911
+            },
+            {
+              "map": "mp_angel_city",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_car",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "500-999u",
+              "hitgroups": [
+                "2",
+                "3",
+                "7"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 2.9329999999999927,
+              "min_s": 2.9329999999999927,
+              "max_s": 2.9329999999999927
+            },
+            {
+              "map": "mp_angel_city",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_g2",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "2"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 1.299999999999983,
+              "min_s": 1.299999999999983,
+              "max_s": 1.299999999999983
+            }
+          ]
+        },
+        "limits": "Fresh-process bot-only Full cohort. Navigation windows overlap and are not independent failures. The global continuity trial can affect pilot/Titan routing, while the low-progress metric here covers pilots only. Weapon callbacks/shot parameters and sampled magazine decreases remain separate proxies, not validated discharges or accuracy. Refills and boundary windows can hide expenditure. Frags are observed valid-owner pilot projectiles; very short-lived/missed/pre-window entities and invalid inflictors remain unmatched. Outcome fractions can overlap and near-end projectiles are censored. No human difficulty or randomized causal balance claim.",
+        "log_sha256": "fcd79c35961bf69906e8f5a9c4799815d509c629274b8b54541e8d5accb9ba4b"
+      },
+      "repeat": 1,
+      "map": "mp_angel_city"
+    },
+    {
+      "variant": 0,
+      "metrics": {
+        "schema_version": 1,
+        "map": "mp_colony02",
+        "variant": 0,
+        "goal": 50,
+        "duration_s": 251.3,
+        "error_markers": 0,
+        "score": {
+          "imc": 50,
+          "militia": 26
+        },
+        "live_pilot_samples": 2949,
+        "low_progress_samples": 39,
+        "low_progress_percent": 1.3224821973550356,
+        "navigation": {
+          "schema_version": 1,
+          "paths": {
+            "requests": 1538,
+            "partial": 27,
+            "failures": 82,
+            "suppressed": 20389,
+            "with_links": 868
+          },
+          "corners": {
+            "total": 54854,
+            "links": 9307,
+            "by_jump": {
+              "1": 5424,
+              "2": 152,
+              "8": 925,
+              "16": 2806,
+              "255": 45528,
+              "-1": 19
+            },
+            "by_flags": {
+              "0": 28712,
+              "1": 22187,
+              "2": 3936,
+              "-1": 19
+            }
+          },
+          "corner_guard": {
+            "begins": 0,
+            "hold_samples": 0,
+            "ends": {},
+            "completed_duration_s": 0,
+            "duration_samples": 0
+          },
+          "stalls": {
+            "samples": 70,
+            "incidents": 57,
+            "link_or_partial": 28,
+            "duck_only": 1,
+            "blocked": 38,
+            "stand_clear": 18,
+            "unknown": 0,
+            "by_reason": {
+              "no_progress": 37,
+              "waypoint_timeout": 20
+            },
+            "by_state": {
+              "recover": 57
+            }
+          },
+          "stuck": {
+            "episodes": 76,
+            "by_state": {
+              "pursue": 41,
+              "engage": 27,
+              "recover": 3,
+              "embark": 5
+            },
+            "visible": 27,
+            "titan": 19
+          },
+          "crouch": {
+            "tests": 0,
+            "by_fit": {},
+            "attempts_max": 0,
+            "successes_max": 0,
+            "failures_max": 0
+          },
+          "viewcheck": {
+            "samples": 87,
+            "plausible": 87,
+            "examples": [
+              {
+                "eye_angles": "[0.0, -65.874, 0.0]",
+                "view_angles_raw": "[0.40874466, -0.9126488, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              },
+              {
+                "eye_angles": "[0.0, 0.0, 0.0]",
+                "view_angles_raw": "[1.0, 0.0, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              },
+              {
+                "eye_angles": "[0.0, 64.9663, 0.0]",
+                "view_angles_raw": "[0.42315125, 0.9060591, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              }
+            ]
+          },
+          "decision": {
+            "stall_incidents": 57,
+            "link_or_partial_share": 0.49122807017543857,
+            "duck_only_share": 0.017543859649122806,
+            "partial_route_share": 0.017555266579973992,
+            "engage_stuck_share": 0.35526315789473684,
+            "recommendation": "neither threshold met; inspect individual incidents"
+          },
+          "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+        },
+        "weapons": [
+          {
+            "gun": "mp_weapon_rspn101",
+            "windows": 265,
+            "samples": 2543,
+            "attack_callbacks": 80,
+            "shots_parameter_sum": 80,
+            "ammo_decrease_proxy": 78,
+            "clip_increases": 1
+          },
+          {
+            "gun": "mp_weapon_car",
+            "windows": 85,
+            "samples": 1121,
+            "attack_callbacks": 60,
+            "shots_parameter_sum": 60,
+            "ammo_decrease_proxy": 59,
+            "clip_increases": 0
+          },
+          {
+            "gun": "mp_weapon_vinson",
+            "windows": 193,
+            "samples": 2340,
+            "attack_callbacks": 85,
+            "shots_parameter_sum": 85,
+            "ammo_decrease_proxy": 85,
+            "clip_increases": 1
+          },
+          {
+            "gun": "mp_weapon_dmr",
+            "windows": 230,
+            "samples": 2623,
+            "attack_callbacks": 53,
+            "shots_parameter_sum": 53,
+            "ammo_decrease_proxy": 51,
+            "clip_increases": 6
+          },
+          {
+            "gun": "mp_weapon_hemlok",
+            "windows": 172,
+            "samples": 1923,
+            "attack_callbacks": 69,
+            "shots_parameter_sum": 69,
+            "ammo_decrease_proxy": 67,
+            "clip_increases": 0
+          },
+          {
+            "gun": "mp_weapon_g2",
+            "windows": 217,
+            "samples": 3472,
+            "attack_callbacks": 230,
+            "shots_parameter_sum": 230,
+            "ammo_decrease_proxy": 230,
+            "clip_increases": 12
+          },
+          {
+            "gun": "mp_weapon_lmg",
+            "windows": 139,
+            "samples": 1800,
+            "attack_callbacks": 37,
+            "shots_parameter_sum": 37,
+            "ammo_decrease_proxy": 35,
+            "clip_increases": 0
+          },
+          {
+            "gun": "mp_weapon_r97",
+            "windows": 182,
+            "samples": 2411,
+            "attack_callbacks": 68,
+            "shots_parameter_sum": 68,
+            "ammo_decrease_proxy": 66,
+            "clip_increases": 0
+          }
+        ],
+        "weapon_windows_excluded_at_boundaries": 73,
+        "frag": {
+          "observed_projectiles": 70,
+          "pilot_kill_callbacks": 19,
+          "matched_self_deaths": 11,
+          "matched_enemy_deaths": 8,
+          "projectiles_with_self_kill": 11,
+          "projectiles_with_enemy_kill": 8,
+          "unmatched_kill_callbacks": 0,
+          "self_kill_projectile_fraction": 0.15714285714285714,
+          "enemy_kill_projectile_fraction": 0.11428571428571428,
+          "observed_near_end": 2
+        },
+        "damage_notes": {
+          "death_records": 81,
+          "qualifying_episodes": 14,
+          "groups": [
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_g2",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "1000-1999u",
+              "hitgroups": [
+                "1",
+                "4"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 1.3167000000000009,
+              "min_s": 1.3167000000000009,
+              "max_s": 1.3167000000000009
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_g2",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 2.216700000000003,
+              "min_s": 2.216700000000003,
+              "max_s": 2.216700000000003
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_rspn101",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "2",
+                "3",
+                "4"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 2.3166999999999973,
+              "min_s": 2.3166999999999973,
+              "max_s": 2.3166999999999973
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_dmr",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "500-999u",
+              "hitgroups": [
+                "1"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 0,
+              "min_s": 0,
+              "max_s": 0
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_hemlok",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 2,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 0.4498999999999924,
+              "min_s": 0.4497999999999962,
+              "max_s": 0.44999999999998863
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_hemlok",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "4"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 2,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 2.6244999999999976,
+              "min_s": 1.4159999999999968,
+              "max_s": 3.8329999999999984
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_g2",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "500-999u",
+              "hitgroups": [
+                "2",
+                "3",
+                "7"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 4.867000000000004,
+              "min_s": 4.867000000000004,
+              "max_s": 4.867000000000004
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_hemlok",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "2"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 0.13299999999999557,
+              "min_s": 0.13299999999999557,
+              "max_s": 0.13299999999999557
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_car",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "2"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 0.8990000000000009,
+              "min_s": 0.8990000000000009,
+              "max_s": 0.8990000000000009
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_car",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "4"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 0.8009999999999877,
+              "min_s": 0.8009999999999877,
+              "max_s": 0.8009999999999877
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_vinson",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "2"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 2.25,
+              "min_s": 2.25,
+              "max_s": 2.25
+            },
+            {
+              "map": "mp_colony02",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_car",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "500-999u",
+              "hitgroups": [
+                "1"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 1.3339999999999748,
+              "min_s": 1.3339999999999748,
+              "max_s": 1.3339999999999748
+            }
+          ]
+        },
+        "limits": "Fresh-process bot-only Full cohort. Navigation windows overlap and are not independent failures. The global continuity trial can affect pilot/Titan routing, while the low-progress metric here covers pilots only. Weapon callbacks/shot parameters and sampled magazine decreases remain separate proxies, not validated discharges or accuracy. Refills and boundary windows can hide expenditure. Frags are observed valid-owner pilot projectiles; very short-lived/missed/pre-window entities and invalid inflictors remain unmatched. Outcome fractions can overlap and near-end projectiles are censored. No human difficulty or randomized causal balance claim.",
+        "log_sha256": "37f9ad1d26535cc6500a0a8194d10d7e20d2fede0a3af3f8fef71ab1132f470f"
+      },
+      "repeat": 1,
+      "map": "mp_colony02"
+    },
+    {
+      "variant": 0,
+      "metrics": {
+        "schema_version": 1,
+        "map": "mp_crashsite3",
+        "variant": 0,
+        "goal": 50,
+        "duration_s": 287.6,
+        "error_markers": 0,
+        "score": {
+          "imc": 50,
+          "militia": 48
+        },
+        "live_pilot_samples": 3167,
+        "low_progress_samples": 5,
+        "low_progress_percent": 0.15787811809283234,
+        "navigation": {
+          "schema_version": 1,
+          "paths": {
+            "requests": 1718,
+            "partial": 29,
+            "failures": 170,
+            "suppressed": 18340,
+            "with_links": 994
+          },
+          "corners": {
+            "total": 49713,
+            "links": 8284,
+            "by_jump": {
+              "1": 1942,
+              "2": 486,
+              "8": 2976,
+              "16": 2880,
+              "255": 41092,
+              "-1": 337
+            },
+            "by_flags": {
+              "0": 25154,
+              "1": 20100,
+              "2": 4122,
+              "-1": 337
+            }
+          },
+          "corner_guard": {
+            "begins": 0,
+            "hold_samples": 0,
+            "ends": {},
+            "completed_duration_s": 0,
+            "duration_samples": 0
+          },
+          "stalls": {
+            "samples": 44,
+            "incidents": 41,
+            "link_or_partial": 21,
+            "duck_only": 0,
+            "blocked": 18,
+            "stand_clear": 23,
+            "unknown": 0,
+            "by_reason": {
+              "waypoint_timeout": 16,
+              "no_progress": 25
+            },
+            "by_state": {
+              "recover": 41
+            }
+          },
+          "stuck": {
+            "episodes": 60,
+            "by_state": {
+              "pursue": 23,
+              "engage": 23,
+              "embark": 2,
+              "recover": 12
+            },
+            "visible": 23,
+            "titan": 37
+          },
+          "crouch": {
+            "tests": 0,
+            "by_fit": {},
+            "attempts_max": 0,
+            "successes_max": 0,
+            "failures_max": 0
+          },
+          "viewcheck": {
+            "samples": 103,
+            "plausible": 103,
+            "examples": [
+              {
+                "eye_angles": "[0.0, -175.016, 0.0]",
+                "view_angles_raw": "[-0.996219, -0.08687751, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              },
+              {
+                "eye_angles": "[0.0, -169.768, 0.0]",
+                "view_angles_raw": "[-0.9840965, -0.1776344, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              },
+              {
+                "eye_angles": "[0.0, -61.076, 0.0]",
+                "view_angles_raw": "[0.48364902, -0.875262, -0.0]",
+                "eye_height": "60.0",
+                "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+                "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+              }
+            ]
+          },
+          "decision": {
+            "stall_incidents": 41,
+            "link_or_partial_share": 0.5121951219512195,
+            "duck_only_share": 0,
+            "partial_route_share": 0.016880093131548313,
+            "engage_stuck_share": 0.38333333333333336,
+            "recommendation": "prioritise link/partial-route handling"
+          },
+          "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+        },
+        "weapons": [
+          {
+            "gun": "mp_weapon_rspn101",
+            "windows": 242,
+            "samples": 3279,
+            "attack_callbacks": 288,
+            "shots_parameter_sum": 288,
+            "ammo_decrease_proxy": 287,
+            "clip_increases": 8
+          },
+          {
+            "gun": "mp_weapon_g2",
+            "windows": 119,
+            "samples": 1815,
+            "attack_callbacks": 139,
+            "shots_parameter_sum": 139,
+            "ammo_decrease_proxy": 139,
+            "clip_increases": 6
+          },
+          {
+            "gun": "mp_weapon_vinson",
+            "windows": 215,
+            "samples": 2679,
+            "attack_callbacks": 195,
+            "shots_parameter_sum": 195,
+            "ammo_decrease_proxy": 194,
+            "clip_increases": 2
+          },
+          {
+            "gun": "mp_weapon_lmg",
+            "windows": 160,
+            "samples": 2357,
+            "attack_callbacks": 146,
+            "shots_parameter_sum": 146,
+            "ammo_decrease_proxy": 145,
+            "clip_increases": 0
+          },
+          {
+            "gun": "mp_weapon_car",
+            "windows": 110,
+            "samples": 1585,
+            "attack_callbacks": 93,
+            "shots_parameter_sum": 93,
+            "ammo_decrease_proxy": 92,
+            "clip_increases": 1
+          },
+          {
+            "gun": "mp_weapon_dmr",
+            "windows": 184,
+            "samples": 2636,
+            "attack_callbacks": 81,
+            "shots_parameter_sum": 81,
+            "ammo_decrease_proxy": 81,
+            "clip_increases": 11
+          },
+          {
+            "gun": "mp_weapon_hemlok",
+            "windows": 159,
+            "samples": 2035,
+            "attack_callbacks": 210,
+            "shots_parameter_sum": 210,
+            "ammo_decrease_proxy": 210,
+            "clip_increases": 7
+          },
+          {
+            "gun": "mp_weapon_r97",
+            "windows": 148,
+            "samples": 1982,
+            "attack_callbacks": 183,
+            "shots_parameter_sum": 183,
+            "ammo_decrease_proxy": 182,
+            "clip_increases": 2
+          }
+        ],
+        "weapon_windows_excluded_at_boundaries": 51,
+        "frag": {
+          "observed_projectiles": 67,
+          "pilot_kill_callbacks": 22,
+          "matched_self_deaths": 6,
+          "matched_enemy_deaths": 16,
+          "projectiles_with_self_kill": 6,
+          "projectiles_with_enemy_kill": 13,
+          "unmatched_kill_callbacks": 0,
+          "self_kill_projectile_fraction": 0.08955223880597014,
+          "enemy_kill_projectile_fraction": 0.19402985074626866,
+          "observed_near_end": 0
+        },
+        "damage_notes": {
+          "death_records": 98,
+          "qualifying_episodes": 6,
+          "groups": [
+            {
+              "map": "mp_crashsite3",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_dmr",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "2000u+",
+              "hitgroups": [
+                "1",
+                "3"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 2.1833000000000027,
+              "min_s": 2.1833000000000027,
+              "max_s": 2.1833000000000027
+            },
+            {
+              "map": "mp_crashsite3",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_dmr",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "1000-1999u",
+              "hitgroups": [
+                "1"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 0,
+              "min_s": 0,
+              "max_s": 0
+            },
+            {
+              "map": "mp_crashsite3",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_g2",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1",
+                "2"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 1.3170000000000073,
+              "min_s": 1.3170000000000073,
+              "max_s": 1.3170000000000073
+            },
+            {
+              "map": "mp_crashsite3",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_hemlok",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "2",
+                "4"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 0.5,
+              "min_s": 0.5,
+              "max_s": 0.5
+            },
+            {
+              "map": "mp_crashsite3",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_lmg",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "500-999u",
+              "hitgroups": [
+                "1",
+                "4"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 4.015999999999991,
+              "min_s": 4.015999999999991,
+              "max_s": 4.015999999999991
+            },
+            {
+              "map": "mp_crashsite3",
+              "mode": "controlled_validation",
+              "gun": "mp_weapon_dmr",
+              "attacker_kind": "bot",
+              "victim_kind": "bot",
+              "mods": "none",
+              "config": "true:true:false:true:true",
+              "range_bucket": "0-499u",
+              "hitgroups": [
+                "1"
+              ],
+              "critical_scales": [
+                "1"
+              ],
+              "n": 1,
+              "metric": "first_positive_health_damage_to_death_s",
+              "median_s": 0,
+              "min_s": 0,
+              "max_s": 0
+            }
+          ]
+        },
+        "limits": "Fresh-process bot-only Full cohort. Navigation windows overlap and are not independent failures. The global continuity trial can affect pilot/Titan routing, while the low-progress metric here covers pilots only. Weapon callbacks/shot parameters and sampled magazine decreases remain separate proxies, not validated discharges or accuracy. Refills and boundary windows can hide expenditure. Frags are observed valid-owner pilot projectiles; very short-lived/missed/pre-window entities and invalid inflictors remain unmatched. Outcome fractions can overlap and near-end projectiles are censored. No human difficulty or randomized causal balance claim.",
+        "log_sha256": "32dd273e8019fad42606929178aa308ee86e2050ee882322a5e3bd79b2d4e7ff"
+      },
+      "repeat": 1,
+      "map": "mp_crashsite3"
+    }
+  ],
+  "pairs": [],
+  "limits": "Sequential reversed-order bot-only pairs; not randomized human difficulty evidence. Native and measurement build frozen. Pilot low-progress metric overlaps; global trial may also affect Titan routing. Candidate operational stop is not statistical significance or a deployment gate. Raw logs/saves/identifiers remain private. No automatic normal deployment."
+}
