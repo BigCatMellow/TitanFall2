@@ -984,11 +984,13 @@ fn height_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut B
 /// Crouch recovery, stall diagnostics and double jumps for route following.
 fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut BotData,
     cmd: &mut CUserCmd, is_titan: bool, sim_type: i32) {
-    use crate::bots::{switch_on, CROUCH_RECOVERY_CONVAR, NAV_DIAGNOSTICS_CONVAR, JUMP_TIMING_CONVAR};
-    if !switch_on(&NAV_DIAGNOSTICS_CONVAR) && !switch_on(&CROUCH_RECOVERY_CONVAR) && !switch_on(&JUMP_TIMING_CONVAR) {
-        // All three off: no native calls, no input changes (installed v19 path).
+    use crate::bots::{switch_on, CROUCH_RECOVERY_CONVAR, NAV_DIAGNOSTICS_CONVAR, JUMP_TIMING_CONVAR, LOW_CLEARANCE_APPROACH_CONVAR};
+    if !switch_on(&NAV_DIAGNOSTICS_CONVAR) && !switch_on(&CROUCH_RECOVERY_CONVAR)
+        && !switch_on(&JUMP_TIMING_CONVAR) && !switch_on(&LOW_CLEARANCE_APPROACH_CONVAR) {
+        // All off: no native calls and no command changes.
         local.stall_event = None;
         if local.crouch.is_active() || local.crouch_duck { local.crouch.cancel(); local.crouch_duck = false; }
+        if local.clearance.is_active() || local.clearance_duck { local.clearance.cancel(); local.clearance_duck = false; }
         return;
     }
     let now = time(helper);
@@ -1014,7 +1016,49 @@ fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut Bo
             player.m_duckState, o.x, o.y, o.z);
     }
 
-    if switch_on(&CROUCH_RECOVERY_CONVAR) && pilot_route && local.metrics.state != "recover" {
+    // Proactive low-clearance policy: never guess a traversal link's type.
+    // The same real stand/duck hull traces used by stall-triggered recovery
+    // confirm a narrow ordinary path twice before commanding a crouch.
+    if switch_on(&LOW_CLEARANCE_APPROACH_CONVAR) {
+        use crate::bots::clearance_approach::{Clearance, Intent};
+        use crate::bots::crouch_recovery::Fit;
+        let commanded = cmd.move_.x.hypot(cmd.move_.y) > 0.3;
+        let ordinary = crate::bots::clearance_approach::ClearanceApproach::ordinary_corner(local.current_corner);
+        let dir = route_dir(player, local, yaw);
+        let mut tested = None;
+        let outcome = local.clearance.update(now, [o.x, o.y], on_ground,
+            pilot_route && local.metrics.state != "recover" && commanded
+                && !local.crouch.is_active(),
+            speed, distance(local.next_target_pos, o), ordinary, || {
+                let fit = hull_fit(player, helper, dir, 40.);
+                tested = Some(fit);
+                match fit {
+                    Fit::StandClear => Clearance::StandClear,
+                    Fit::DuckOnly => Clearance::DuckOnly,
+                    _ => Clearance::Unsafe,
+                }
+            });
+        let duck = outcome == Intent::Duck;
+        if duck {
+            cmd.buttons &= !(Action::Speed as u32 | Action::Jump as u32);
+            cmd.buttons |= Action::Duck as u32;
+            cmd.move_.z = 0.;
+        }
+        if switch_on(&NAV_DIAGNOSTICS_CONVAR)
+            && (duck != local.clearance_duck || outcome == Intent::Failed) {
+            log::info!("BOT_CLEARANCE epoch={} t={now:.2} slot={} intent={outcome:?} fit={tested:?} ordinary={} dist={:.0} speed={speed:.0} probes={} starts={} successes={} failures={} x={:.1} y={:.1} z={:.1}",
+                crate::bots::telemetry::epoch(), local.edict, ordinary as u8,
+                distance(local.next_target_pos, o), local.clearance.probes,
+                local.clearance.starts, local.clearance.successes,
+                local.clearance.failures, o.x, o.y, o.z);
+        }
+        local.clearance_duck = duck;
+    } else if local.clearance.is_active() || local.clearance_duck {
+        local.clearance.cancel();
+        local.clearance_duck = false;
+    }
+
+    if !local.clearance_duck && switch_on(&CROUCH_RECOVERY_CONVAR) && pilot_route && local.metrics.state != "recover" {
         use crate::bots::crouch_recovery::Intent;
         let commanding = cmd.move_.x.hypot(cmd.move_.y) > 0.3;
         let dir = route_dir(player, local, yaw);
@@ -1044,7 +1088,7 @@ fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut Bo
     if switch_on(&JUMP_TIMING_CONVAR) && !is_titan && sim_type == 6 {
         let wanted = local.jump_timing.double_jump(now, on_ground,
             local.next_target_pos.z - o.z, distance(local.next_target_pos, o));
-        if wanted && pilot_route && local.metrics.state != "recover" && !local.crouch_duck {
+        if wanted && pilot_route && local.metrics.state != "recover" && !local.crouch_duck && !local.clearance_duck {
             cmd.buttons |= Action::Jump as u32;
         }
     }
