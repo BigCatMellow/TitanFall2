@@ -54,6 +54,8 @@ export function summarizeBotTrial(events) {
       held: [], invalid_time_events: 0,
       corner_codes: new Map(), stall_codes: new Map(),
       corner_code_overflow: 0, stall_code_overflow: 0,
+      frame_samples: 0, invalid_frame_samples: 0,
+      first_frame_at: null, last_frame_at: null, frame_maps: new Set(),
     });
     return groups.get(epoch);
   };
@@ -61,7 +63,16 @@ export function summarizeBotTrial(events) {
     if (!e) continue;
     const g = get(e), c = g.counts;
     if (e.type === 'BOT_FRAME') {
-      if (typeof e.map === 'string' && /^mp_[a-z0-9_]+$/.test(e.map)) g.map = e.map;
+      if (typeof e.map === 'string' && /^mp_[a-z0-9_]+$/.test(e.map)) {
+        g.map = e.map;
+        g.frame_maps.add(e.map);
+      }
+      if (finite(e.t) && Number(e.t) >= 0) {
+        const t = Number(e.t);
+        g.frame_samples++;
+        g.first_frame_at = Math.min(g.first_frame_at ?? t, t);
+        g.last_frame_at = Math.max(g.last_frame_at ?? t, t);
+      } else g.invalid_frame_samples++;
       continue;
     }
     if (e.type === 'BOT_PATH') { c.path_requests_logged++; if (e.partial === '1') c.partial_paths_logged++; }
@@ -142,6 +153,12 @@ export function summarizeBotTrial(events) {
       raw_stalled_corner_codes: sortedCodes(g.stall_codes),
       corner_code_overflow: g.corner_code_overflow,
       stall_code_overflow: g.stall_code_overflow,
+      telemetry_window: {
+        frame_samples: g.frame_samples,
+        observed_span_s: g.frame_samples >= 2 ? g.last_frame_at - g.first_frame_at : null,
+        map_conflict: g.frame_maps.size > 1,
+        invalid_frame_samples: g.invalid_frame_samples,
+      },
       ignored_events_without_valid_slot_time: g.invalid_time_events,
     };
   });
@@ -156,12 +173,56 @@ export function summarizeBotTrial(events) {
       'BOT_DECISION logs target changes only when telemetry is enabled. A switch after a cooldown is temporal proximity, not a causal proof of recovery.',
       'Unfinished input pulses include log truncation, inventory changes, respawns and missing events; no such case alone establishes a stuck button.',
       'Counts are whole-epoch diagnostic events, not played-only windows or rates. Compare matched map/cohort exposure and independently validated damage/death results.',
+      'BOT_FRAME span is the difference between earliest and latest *sampled* engine times, not active bot-seconds, matched playtime, or validated exposure; sparse/truncated logs can mislead.',
     ],
   };
 }
 
 export function parseBotTrialLog(text) {
   return summarizeBotTrial(text.split(/\r?\n/).map(parseBotTrialLine).filter(Boolean));
+}
+
+
+ // Conservative comparison gate. It never labels a behavioral improvement or
+ // converts whole-epoch event counts to rates without validated bot exposure.
+export function assessTrialCoverage(baseline, trial) {
+  const warnings = [];
+  const maps = result => new Map(result.cohorts.filter(c => c.map && !c.telemetry_window?.map_conflict)
+    .map(c => [c.map, result.cohorts.filter(other => other.map === c.map)]));
+  const bMaps = maps(baseline), tMaps = maps(trial);
+  const unknown = result => result.cohorts.filter(c => !c.map || c.telemetry_window?.map_conflict).length;
+  if (unknown(baseline) || unknown(trial))
+    warnings.push('One or more epochs lack a trustworthy BOT_FRAME map label; enable native telemetry for both runs.');
+  const baselineOnly = [...bMaps.keys()].filter(map => !tMaps.has(map)).sort();
+  const trialOnly = [...tMaps.keys()].filter(map => !bMaps.has(map)).sort();
+  if (baselineOnly.length || trialOnly.length)
+    warnings.push('Baseline and trial include different maps; do not compare their pooled event totals.');
+  const shared = [...bMaps.keys()].filter(map => tMaps.has(map)).sort();
+  if (!shared.length) warnings.push('No common map has identifiable epochs in both logs.');
+  const byMap = shared.map(map => {
+    const bs = bMaps.get(map), ts = tMaps.get(map);
+    const bSpans = bs.map(c => c.telemetry_window?.observed_span_s);
+    const tSpans = ts.map(c => c.telemetry_window?.observed_span_s);
+    const valid = spans => spans.every(v => Number.isFinite(v) && v > 0);
+    if (bs.length !== ts.length)
+      warnings.push(`Map ${map} has unequal baseline/trial epoch counts; manually match rounds.`);
+    if (!valid(bSpans) || !valid(tSpans))
+      warnings.push(`Map ${map} lacks at least two valid BOT_FRAME samples in an epoch.`);
+    // Only compare the sampled spans automatically when one epoch per map.
+    if (bs.length === 1 && ts.length === 1 && valid(bSpans) && valid(tSpans)
+      && Math.abs(bSpans[0] - tSpans[0]) / Math.max(bSpans[0], tSpans[0]) > 0.10)
+      warnings.push(`Map ${map} has more than 10% difference in observed telemetry span; verify equivalent exposure.`);
+    return {map, baseline_epochs: bs.length, trial_epochs: ts.length,
+      baseline_observed_spans_s: bSpans, trial_observed_spans_s: tSpans};
+  });
+  return {
+    status: warnings.length ? 'coverage_warnings' : 'metadata_present_manual_review_required',
+    shared_maps: shared, baseline_only_maps: baselineOnly, trial_only_maps: trialOnly,
+    unknown_or_conflicted_baseline_epochs: unknown(baseline),
+    unknown_or_conflicted_trial_epochs: unknown(trial),
+    by_map: byMap, warnings,
+    interpretation: 'Matching map names and sampled frame spans do NOT establish matching active pilot exposure, configuration, causality, frag deaths, or navigation success. Verify trials with the independent played-window and weapon-notebook evidence.',
+  };
 }
 
 function main() {
@@ -174,8 +235,12 @@ function main() {
   if (!(log && !baseline && !trial) && !(!log && baseline && trial))
     throw new Error('Supply --log PATH or both --baseline PATH and --trial PATH');
   const read = file => parseBotTrialLog(fs.readFileSync(file, 'utf8'));
-  const report = log ? read(log) : {schema_version: 1, baseline: read(baseline), trial: read(trial),
-    comparison_note: 'Side-by-side event counts only: rates and improvement require matched exposure and validated gameplay outcomes.'};
+  const report = log ? read(log) : (() => {
+    const b = read(baseline), t = read(trial);
+    return {schema_version: 1, baseline: b, trial: t,
+      coverage_review: assessTrialCoverage(b, t),
+      comparison_note: 'Side-by-side raw diagnostic counts only; coverage checks are not a claim of matched active exposure or gameplay improvement.'};
+  })();
   const out = option('--out');
   if (out) {
     fs.mkdirSync(path.dirname(out), {recursive: true});
