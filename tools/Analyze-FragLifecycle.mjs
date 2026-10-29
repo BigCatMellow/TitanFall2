@@ -36,11 +36,21 @@ const fresh = () => ({
   tracked_projectiles_overflow: 0,
 });
 export function summarizeFragStages(events) {
-  const maps = new Map();
+  // Entity handles may be recycled when a map restarts. Never deduplicate
+  // projectiles across separate observed map/time segments. All records are
+  // diagnostic log slices, NOT proven full match sessions.
+  const segments = [], nextOrdinal = new Map();
+  let active = null;
   for (const e of events) {
     if (!e) continue;
-    if (!maps.has(e.map)) maps.set(e.map, {counts: fresh(), projectiles: new Set()});
-    const g = maps.get(e.map), c = g.counts;
+    if (!active || active.map !== e.map || e.t + 0.5 < active.lastTime) {
+      const ordinal = (nextOrdinal.get(e.map) || 0) + 1;
+      nextOrdinal.set(e.map, ordinal);
+      active = {map: e.map, segment: ordinal, firstTime: e.t, lastTime: e.t,
+        counts: fresh(), projectiles: new Set()};
+      segments.push(active);
+    } else active.lastTime = Math.max(active.lastTime, e.t);
+    const g = active, c = g.counts;
     c.events_logged++;
     if (e.stage === 'prep') c.prep_events++;
     if (e.stage === 'release_callback') c.release_callbacks++;
@@ -67,15 +77,16 @@ export function summarizeFragStages(events) {
   }
   return {
     schema_version: 1,
-    maps: [...maps].sort(([a], [b]) => a.localeCompare(b)).map(([map, g]) =>
-      ({map, ...g.counts})),
+    maps: segments.sort((a, b) => a.map.localeCompare(b.map) || a.segment - b.segment)
+      .map(g => ({map: g.map, segment: g.segment, ...g.counts})),
     limits: [
       'spawned_entities counts observed server FireWeaponGrenade return values, not verified detonation, collision, release animation completion, or damage.',
       'prep/release_callback/cancel_drop_callback/forced_release_request are script invocation observations; they may not pair one-to-one with spawned entities.',
       'death_drop_callbacks are a script branch, not proof of explosion or causal self-damage. Short fuse and nearby owner at spawn are inspection candidates, NOT danger thresholds.',
       'Only exact projectile handle equality is used for within-log spawn-to-death-drop association; handles are not emitted. Reused handles and partial logs remain confounders.',
       'No BOT_FRAG_INPUT per-bot slot or WNOTE_HIT attacker is joined to these lifecycle events; the identifier domains and causality have not been validated.',
-      'Counts are per-map log totals, not normalized throws, game time, player life, matched A/B, or self-kills. Keep native session logs private.',
+      'Maps are divided into observed log segments on map change or >0.5s clock rollback. This reduces cross-round handle reuse but does not prove a complete match or globally unique entity identity.',
+      'Counts are per-map-segment log totals, not normalized throws, game time, player life, matched A/B, or self-kills. Keep native session logs private.',
     ],
   };
 }
