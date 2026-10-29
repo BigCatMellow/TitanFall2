@@ -55,7 +55,9 @@ impl ClearanceApproach {
         if !pos.iter().all(|v| v.is_finite()) || !speed.is_finite() {
             self.cancel(); return Intent::Normal;
         }
-        if !route || !grounded { self.cancel(); return Intent::Normal; }
+        // An active crouch must yield too: a newly advanced corner may be a
+        // native traversal link (or have unknown metadata) before takeoff.
+        if !route || !grounded || !ordinary { self.cancel(); return Intent::Normal; }
         if let Some(mut active) = self.active {
             if separation(pos, active.anchor) >= 8. {
                 active.anchor = pos; active.progress_at = now;
@@ -162,5 +164,22 @@ mod tests {
         assert_eq!(a.update(1., [0., 0.], true, false, 0., 100., true,
             || panic!("invalid trace")), Intent::Normal);
         assert!(!a.is_active());
+    }
+    #[test] fn active_crouch_yields_immediately_to_special_or_unknown_corners() {
+        for meta in [None, Some((4, 16)), Some((0, u8::MAX))] {
+            let mut a = ClearanceApproach::default();
+            a.update(0., [0., 0.], true, true, 80., 100., true,
+                || Clearance::DuckOnly);
+            assert_eq!(a.update(0.21, [5., 0.], true, true, 80., 90., true,
+                || Clearance::DuckOnly), Intent::Duck);
+            assert!(a.is_active());
+            // No trace is due yet. Link eligibility must still be checked
+            // every command, rather than only at the next 5Hz probe.
+            assert_eq!(a.update(0.3, [8., 0.], true, true, 80., 85.,
+                ClearanceApproach::ordinary_corner(meta),
+                || panic!("must yield without another hull probe")), Intent::Normal);
+            assert!(!a.is_active());
+            assert_eq!(a.probes, 2);
+        }
     }
 }
