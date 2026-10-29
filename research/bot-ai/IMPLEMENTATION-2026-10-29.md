@@ -31,6 +31,12 @@ All three behavior switches and the diagnostic probe default to **0**, preservin
 
 Before game deployment, run `tools/Test-Project.ps1` and `cargo +nightly-2025-09-11-x86_64-pc-windows-gnu test -p bp_ort --locked` with the pinned Windows toolchain and compile a distribution DLL as in the root README. Test all four switches off for exact current behavior, then one switch at a time, then their combinations. The code was edited remotely; no local Rust toolchain or installed game was available in the editing environment. **No native compile, Rust test, DLL install or Titanfall runtime test is claimed by this pass.**
 
+## Read-only trial analyzer (Node 22)
+
+The new \`tools/Analyze-BotAITrial.mjs\` produces a sanitized report per native epoch without actor handles, slot IDs, target IDs, positions, or raw log content. It counts frag command press/release pairs, unpaired and long (>0.2 s) pulses, recorded readiness at press, cooldown decisions, target switches within eight seconds, path/stall samples, and ordnance input requests. No counter is a cast, projectile release, kill, or navigation success.
+
+Run \`node --test tests/bot_ai_trial.test.mjs\` to verify its standalone fixtures. To analyze one private Northstar log, run \`node tools/Analyze-BotAITrial.mjs --log <private-nslog.txt> --out <private-report.json>\`. For paired sessions, use \`--baseline <old.log> --trial <new.log> --out <report.json>\`. Keep the raw log and output private until reviewed. The report intentionally gives whole-epoch counts, not success rates or a played-only analysis. Pair with the weapon-notebook death attribution and matched exposure before claiming improvement.
+
 ## Isolated A/B gate
 
 The stall-recovery switch is tested as a **separate navigation A/B** before any combined test: with `bot_nearest_pursuit 0`, compare `bot_stall_target_recovery 0/1` across matched Eden, War Games and Meadow rounds with the same loadouts and goals. Record `BOT_ROUTE_COOLDOWN` events, target reacquisition, median time to first engagement, partial/full routes, route failures, low-progress windows and target churn. Negative controls: near-visible enemy attacks must never be blocked, no stale blacklist across respawn/map/lobby, and the sole available target remains eligible. The diagnostic logs identify decisions, **not** that a route became traversable. Reject for more idle time, new no-target loops, or regression in played-fight fairness.
