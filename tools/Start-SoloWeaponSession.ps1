@@ -2,9 +2,14 @@ param([string]$Profile="$env:USERPROFILE\northstar-crash-audit\local-test-profil
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
     [string]$NotesRoot="$env:USERPROFILE\northstar-crash-audit\Notes\weapon-notebook\sessions",
     [ValidateSet('normal_play','controlled_validation')][string]$Mode='normal_play',
-    [ValidatePattern('^mp_[a-z0-9_]+$')][string]$Map='mp_eden',
-    [ValidateSet('Current','Baseline','Movement','Height','Roster','Skills','Full')][string]$Trial='Current')
+    [ValidatePattern('^(random|mp_[a-z0-9_]+)$')][string]$Map='random',
+    [ValidateSet('Current','Baseline','Movement','Height','Roster','Skills','Full')][string]$Trial='Current',[switch]$Preview)
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/Solo-MapSelection.ps1"
+$selection=Resolve-SoloStartMap -RequestedMap $Map -GameDirectory $GameDirectory -Profile $Profile
+$requestedMap=$Map
+$Map=$selection.map
+if($Preview){$selection;return}
 if(Get-Process NorthstarLauncher,Titanfall2 -ErrorAction SilentlyContinue){throw 'A game is already running'}
 $node=(Get-Command node.exe -ErrorAction Stop).Source
 if(-not(Test-Path "$Profile/mods/Solo.WeaponNotes/mod.json")){throw 'Solo.WeaponNotes is missing from this profile'}
@@ -43,5 +48,9 @@ foreach($item in $overrides.GetEnumerator()){$arguments+=@('+'+$item.Key,[string
 $arguments+=@('+mp_gamemode','tdm','+map',$Map)
 $game=Start-Process -FilePath "$GameDirectory/NorthstarLauncher.exe" -WorkingDirectory $GameDirectory -WindowStyle Normal -PassThru -ArgumentList $arguments
 $recorder=Start-Process -FilePath $node -WindowStyle Hidden -ArgumentList '--preserve-symlinks','--preserve-symlinks-main',"`"$PSScriptRoot/Record-WeaponNotes.mjs`"",'--profile',"`"$Profile`"",'--pid',"$($game.Id)",'--since',"$since",'--out',"`"$session`"" -RedirectStandardOutput "$session/recorder.stdout.log" -RedirectStandardError "$session/recorder.stderr.log" -PassThru
-[ordered]@{session=(Split-Path $session -Leaf);started=(Get-Date).ToString('o');mode=$Mode;map=$Map;trial=$Trial;trial_overrides=$overrides;game_pid=$game.Id;recorder_pid=$recorder.Id;native_sha256=$nativeHash;core=$core;installed_addons=$mods;enabled_versions=$enabled;startup_settings=$settings;notes=$session;privacy='Anonymous entity/life identifiers only; no account IDs, preset names, screen/audio capture or upload'}|ConvertTo-Json -Depth 8|Set-Content "$session/session.json"
+[ordered]@{session=(Split-Path $session -Leaf);started=(Get-Date).ToString('o');mode=$Mode;map=$Map;requested_map=$requestedMap;trial=$Trial;trial_overrides=$overrides;game_pid=$game.Id;recorder_pid=$recorder.Id;native_sha256=$nativeHash;core=$core;installed_addons=$mods;enabled_versions=$enabled;startup_settings=$settings;notes=$session;privacy='Anonymous entity/life identifiers only; no account IDs, preset names, screen/audio capture or upload'}|ConvertTo-Json -Depth 8|Set-Content "$session/session.json"
+if($requestedMap-eq'random'){
+    try{[IO.File]::WriteAllText((Join-Path $Profile 'bt7274-last-random-map.txt'),$Map+[Environment]::NewLine)}
+    catch{Write-Warning 'Could not remember the random map; this session and recording are already started.'}
+}
 Get-Content "$session/session.json"

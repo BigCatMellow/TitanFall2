@@ -1,5 +1,11 @@
 # Current setup
 
+Launcher update 2026-10-28: the same solo/Full shortcuts now choose a random
+installed full-size starting map from 14 maps, skipping Eden and the previous
+random selection. Live Fire/Coliseum are excluded from the 8v8 pool. No automatic
+between-round rotation was added. Explicit map selection remains available;
+recording metadata stores the actual chosen map. Native/settings/saves unchanged.
+
 Updated 2026-10-28. Current normal deployment is the tested v23 Eden route repair, native SHA256
 BC2C1019D27F537F075611ED6B68A75591D1F2F9924BA8700D82A757BB1000F7,
 Northstar1.31.14. Human+15 bots,8v8,aim0.78, human tactical recharge0.5,

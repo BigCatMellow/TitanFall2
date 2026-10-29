@@ -23,7 +23,7 @@ if not errorlevel 1 goto already_running
 tasklist /FI "IMAGENAME eq Titanfall2.exe" /NH 2>nul | find /I "Titanfall2.exe" >nul
 if not errorlevel 1 goto already_running
 
-echo Launching your Northstar solo profile: 8v8 bots on Eden.
+echo Launching your Northstar solo profile: 8v8 bots on a random full-size map.
 echo Bots join after the match intro finishes.
 echo Automatic weapon notes are saved locally for this session.
 cd /d "%NS_GAME_DIR%"
@@ -35,7 +35,8 @@ exit /b 0
 echo Solo launcher verified.
 echo Game: "%NS_GAME_DIR%"
 echo Profile: "%NS_SOLO_PROFILE%"
-echo Starts Eden, team deathmatch, 8v8: you and 15 bots.
+echo Starts a random full-size map, team deathmatch, 8v8: you and 15 bots.
+echo Skips Eden and avoids repeating the previous random map.
 echo Fullscreen at the saved video resolution.
 echo Mods, aim settings, tracking and saves load from this profile.
 echo Automatic weapon notebook enabled.

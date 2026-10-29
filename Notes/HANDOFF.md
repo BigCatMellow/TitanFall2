@@ -1167,3 +1167,24 @@ Next: human Eden play and diagnose remaining choke points, then repeated matched
 combat trials before extending maps/types. Native temporary exclusion is one
 jump TYPE near a failed segment for <=8s/600units, not a per-link mesh blacklist.
 Do not strengthen aim or change weapon power based on this directed test.
+
+## 2026-10-28 — Random starting map for normal solo/Full shortcuts
+
+BT-7274 requested variety instead of another Eden round. Start-SoloWeaponSession
+now defaults to -Map random; Solo-MapSelection.ps1 chooses from14installed full-size
+maps excluding Eden, Live Fire/Coliseum/common packages. It avoids the previous
+random selection when alternatives exist, remembering it only after game/recorder
+startup. Explicit installed -Map mp_* overrides still work. Actual selected map
+and requested_map are stored in session metadata. This is per-launch selection,
+not between-round automatic rotation. No game was launched by this change.
+
+Canonical Play-Solo-Bots.cmd deployed with updated messages. Both desktop
+shortcuts use that launcher; Full was repaired to use cmd.exe with a literal
+canonical script argument, replacing an invalid alternate-profile target.
+Preset choice,8v8,fullscreen,recording,nativeBC2C1019...,mods and current saves
+are preserved. Six save hashes unchanged. Backups before-random-launch-* under
+private Notes/backups include the old scripts, Full shortcut and current saves.
+Preview verified in both current PowerShell and the Windows PowerShell5.1 used
+by the shortcut;50selection checks excluded Eden/previous/small arenas. Explicit
+Eden override works. Launcher --check passes. Do not revert saves for a launcher
+rollback. Native Eden-only repair remains inactive on the random non-Eden maps.

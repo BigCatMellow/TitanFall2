@@ -7,8 +7,13 @@ user-known-folder shortcut resolution changing the target in a sandbox.
 The assistant is not needed to launch or keep the game running.
 
 The script explicitly selects the existing local-test-profile, loads its
-current mods/config/saves, binds localhost, and starts team deathmatch on
-Eden with a 16-player cap: one human plus 15 bots. Bots are added after the
+current mods/config/saves, binds localhost, and starts team deathmatch on a
+random installed full-size map with a 16-player cap: one human plus 15 bots.
+The 14-map pool excludes Eden, Live Fire and Coliseum; successive launches avoid
+repeating the previous random selection. This chooses the starting map on each
+launch, not an automatic between-round rotation. Explicit `-Map mp_eden` (or
+another installed internal map ID) still works in Start-SoloWeaponSession.ps1.
+Both solo and Full desktop shortcuts use the same launcher. Bots are added after the
 match intro reaches Playing. The profile contains the v15 recovery trial,
 coordination/observer, loadout saving 1.2.0, and the current 0.78 aim setting.
 Future changes to this profile are picked up by the same shortcut.
