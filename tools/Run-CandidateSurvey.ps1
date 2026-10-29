@@ -3,11 +3,17 @@ param([Parameter(Mandatory)][string]$BatchDirectory,[Parameter(Mandatory)][strin
     [string]$GameDirectory='C:\Program Files (x86)\Steam\steamapps\common\Titanfall2',
     [string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$ResumeBatch,[switch]$ObserverDefaults,
     [ValidateRange(1,9999)][int]$Goal=200,[string[]]$MapNames,[switch]$ValidatedV20,
-    [switch]$NavigationV22,[ValidateRange(0,1)][int]$CornerGuard=0)
+    [switch]$NavigationV22,[ValidateRange(0,1)][int]$CornerGuard=0,
+    [switch]$RouteStudy,[ValidateRange(0,1)][int]$RouteVariant=0)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/Stop-OwnedSurveyGame.ps1"
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
-if($NavigationV22){
+if($RouteStudy){
+    if($NavigationV22-or$ValidatedV20){throw 'Choose one study cohort'}
+    . "$PSScriptRoot/Read-RouteStudyValidation.ps1"
+    $validated=Read-RouteStudyValidation $ValidationDirectory $TestProfile
+    $retestBuild=[pscustomobject]@{bridge_sha256=$validated.bridge_sha256}
+}elseif($NavigationV22){
     if($ValidatedV20){throw 'Choose one validation cohort'}
     . "$PSScriptRoot/Read-CornerValidation.ps1"
     $validated=Read-CornerValidation $ValidationDirectory $TestProfile
@@ -72,6 +78,7 @@ $plan=[ordered]@{created=(Get-Date).ToString('o');build='decisions-v18';dll_sha2
 $plan.resumed_from=$ResumeBatch;$plan.completed_previously=$completedPreviously
 if($ValidatedV20){$plan.build='bot-capability-v20-Full';$plan.kind='Unattended v20 Full; separate from played sessions and historical v18';$plan.validation='Installed v20 receipt plus exact frozen DLL/core/bridge checks'}
 if($NavigationV22){$plan.build='nav-corner-v22';$plan.kind='Navigation A/B, same native build; no v21 safety/retarget';$plan.corner_guard=$CornerGuard;$plan.validation=$ValidationDirectory}
+if($RouteStudy){$plan.build='routing-v24-study-v23-native';$plan.kind='Paired global routing trial against installed Eden-only behavior; read-only weapon/frag measurement';$plan.route_variant=$RouteVariant;$plan.measurement_sha256=$validated.measurement_sha256}
 $plan.observer_loadout_restore=-not[bool]$ObserverDefaults
 $plan|ConvertTo-Json -Depth 5|Set-Content -LiteralPath "$BatchDirectory/plan.json"
 $state=[ordered]@{state='preparing';started=(Get-Date).ToString('o');current=$null;planned=$maps.Count;results=@();failure=$null}
@@ -89,10 +96,11 @@ try{
     New-Item -ItemType Directory -Path (Split-Path $surveyScript) -Force|Out-Null
     Copy-Item -LiteralPath "$repo/automation/runtime-mods/survey/BT7274.MapSurvey/mod.json" -Destination "$surveyDir/mod.json" -Force
     $mods=Get-Content -Raw -LiteralPath $enabled|ConvertFrom-Json -AsHashtable
-    foreach($name in @('BT7274.DecisionTest','BT7274.BotCycleTest','BT7274.MenuPreviewTest','BT7274.CapabilityTest','BT7274.WeaponIntegrationTest','BT7274.SafetyTest')){
+    foreach($name in @('BT7274.DecisionTest','BT7274.BotCycleTest','BT7274.MenuPreviewTest','BT7274.CapabilityTest','BT7274.WeaponIntegrationTest','BT7274.SafetyTest','BT7274.RouteProbe')){
         if($mods.ContainsKey($name)){foreach($version in @($mods[$name].Keys)){$mods[$name][$version]=$false}}
     }
     $mods['BT7274.MapSurvey']=@{'1.0.0'=$true};$mods['BT7274.BotDecisions']=@{'1.0.0'=$true}
+    if($RouteStudy){$mods['BT7274.BotMeasurements']=@{'1.0.0'=$true}}
     $mods|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $enabled
     $text=Get-Content -Raw -LiteralPath "$BatchDirectory/backup/server.cfg"
     $text=$text.Replace('bot_manager_max 16','bot_manager_max 17').Replace('bot_manager_target 16','bot_manager_target 17')
@@ -100,11 +108,13 @@ try{
     $text+="`r`nns_allow_spectators 1`r`nns_should_return_to_lobby 0`r`nbot_navigation_context 1`r`nbot_target_eligibility 1`r`nbot_action_policy 1`r`nbot_step_retry 1`r`n"
     if($ObserverDefaults){$text+="bt7274_local_loadouts 0 // survey observer only; preserve saved files without restoring them`r`n"}
     if($NavigationV22){$text+="bot_offhand_safety 0`r`nbot_stall_retarget 0`r`nbot_corner_height_guard $CornerGuard`r`n"}
+    if($RouteStudy){$text+="bot_eden_route_repair 1`r`nbot_route_continuity $RouteVariant`r`nbot_link_detour $RouteVariant`r`nbot_corner_height_guard 0`r`nbot_offhand_safety 0`r`nbot_stall_retarget 0`r`nbot_telemetry_interval 1`r`nsolo_notes_mode controlled_validation`r`nbt7274_bot_measurements 1`r`n"}
     Set-Content -LiteralPath $cfg -Value $text
     $index=0
     foreach($map in $maps){
         if(Test-Path -LiteralPath "$BatchDirectory/stop-after-current.txt"){$state.state='stopped_by_request';break}
         if($map-notmatch'^mp_[a-z0-9_]+$'){throw 'Invalid planned map identifier'}
+        if($RouteStudy-and!(Get-ChildItem "$GameDirectory/vpk" -Filter "*_$map.bsp.pak000_dir.vpk" -File)){throw 'Missing installed map assets'}
         if(Get-Process NorthstarLauncher,Titanfall2 -ErrorAction SilentlyContinue){throw 'Another game appeared; queue will not replace it'}
         if((Get-FileHash "$TestProfile/plugins/bp_ort.dll").Hash-ne$dllHash-or(Get-FileHash "$TestProfile/Northstar.dll").Hash-ne$coreHash-or(Get-FileHash $bridge).Hash-ne$bridgeHash){throw 'Frozen runtime changed; stop instead of mixing builds'}
         $index++;$dir=Join-Path $BatchDirectory ('{0:D2}-{1}'-f$index,$map)
@@ -115,13 +125,18 @@ try{
             if([regex]::Matches($one,$marker).Count-ne1){throw 'Unexpected survey begin marker'}
             $one=[regex]::Replace($one,$marker,('$1'+"`n"+'    print("MAP_SURVEY_CORNER_GUARD value="+GetConVarInt("bot_corner_height_guard")+" safety="+GetConVarBool("bot_offhand_safety")+" retarget="+GetConVarBool("bot_stall_retarget"))'))
         }
+        if($RouteStudy){
+            $marker='(?m)^(\s*print\( "MAP_SURVEY_BEGIN[^\r\n]+)$'
+            if([regex]::Matches($one,$marker).Count-ne1){throw 'Unexpected survey begin marker'}
+            $one=[regex]::Replace($one,$marker,('$1'+"`n"+'    print("MAP_SURVEY_ROUTE t="+Time()+" variant='+$RouteVariant+' continuity="+GetConVarInt("bot_route_continuity")+" detour="+GetConVarInt("bot_link_detour")+" eden="+GetConVarInt("bot_eden_route_repair")+" measurements="+GetConVarInt("bt7274_bot_measurements")+" safety="+GetConVarBool("bot_offhand_safety")+" retarget="+GetConVarBool("bot_stall_retarget"))'))
+        }
         [IO.File]::WriteAllText($surveyScript,$one,[Text.UTF8Encoding]::new($false))
         $state.state='starting';$state.current=@{map=$map;index=$index;directory=$dir};Save-State
         $began=Get-Date;$seen=@(Get-ChildItem "$TestProfile/logs" -Filter 'nslog*.txt'|Select-Object -ExpandProperty Name)
-        $windowMode=if($NavigationV22){'-windowed'}else{'-fullscreen'}
+        $windowMode=if($NavigationV22-or$RouteStudy){'-windowed'}else{'-fullscreen'}
         $process=Start-Process -FilePath "$GameDirectory/NorthstarLauncher.exe" -WorkingDirectory $GameDirectory -WindowStyle Hidden -PassThru -ArgumentList "-profile=$TestProfile",'-novid',$windowMode,'-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+setplaylist','tdm','+setplaylistvaroverrides',('"max_players 17 scorelimit '+$Goal+' timelimit 15"'),'+bt7274_survey_goal',"$Goal",'+bt7274_survey_count','1','+bt7274_survey_index','0','+bt7274_survey_minutes','15','+bt7274_survey_smoke','0','+mp_gamemode','tdm','+map',$map
         $state.current.pid=$process.Id;Save-State
-        $log=$null;$lastHeartbeat=Get-Date;$result=$null;$done=$false;$cornerStateSeen=$false
+        $log=$null;$lastHeartbeat=Get-Date;$result=$null;$done=$false;$cornerStateSeen=$false;$routeStateSeen=$false
         while(-not$done){
             if(-not$log){
                 $log=Get-ChildItem "$TestProfile/logs" -Filter 'nslog*.txt'|Where-Object Name -notin $seen|Sort-Object CreationTime -Descending|Select-Object -First 1
@@ -129,7 +144,7 @@ try{
             }
             if($reader){while($null-ne($line=$reader.ReadLine())){
                 if($line-match'NorthstarLauncher version:\s+(\S+)' -and $Matches[1]-ne'1.31.14.0'){throw 'Wrong actual core version'}
-                if($line-match'SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|\[error\]'){throw "Game error: $line"}
+                if($line-match'SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|BOT_MEASURE_ERROR|\[error\]'){throw "Game error: $line"}
                 if($line.Contains('MAP_SURVEY_BEGIN ')){
                     $f=Fields $line;if($f.bots-ne'16'-or$f.imc-ne'8'-or$f.militia-ne'8'-or$f.observer_alive-ne'0'){throw 'Uncontrolled survey population'}
                     if([int]$f.goal-ne$Goal-or[int]$f.engine_goal-ne$Goal){throw 'Engine and harness score goals do not match the requested trial'}
@@ -141,6 +156,11 @@ try{
                     if([int]$f.value-ne$CornerGuard-or$f.safety-ne'false'-or$f.retarget-ne'false'){throw 'Unexpected corner/safety switches'}
                     $cornerStateSeen=$true
                 }
+                if($RouteStudy-and$line.Contains('MAP_SURVEY_ROUTE ')){
+                    $f=Fields $line
+                    if([int]$f.variant-ne$RouteVariant-or[int]$f.continuity-ne$RouteVariant-or[int]$f.detour-ne$RouteVariant-or$f.eden-ne'1'-or$f.measurements-ne'1'-or$f.safety-ne'false'-or$f.retarget-ne'false'){throw 'Unexpected routing study switches'}
+                    $routeStateSeen=$true
+                }
                 if($line.Contains('MAP_SURVEY_RESULT ')){$result=Fields $line;if($result.valid-ne'true'){throw 'Invalid match result'};if($NavigationV22-and-not$cornerStateSeen){throw 'Missing corner variant confirmation'}}
                 if($line.Contains('MAP_SURVEY_DONE ')){$done=$true}
             }}
@@ -150,6 +170,7 @@ try{
             if(-not$done){Start-Sleep -Seconds 1}
         }
         if(-not$result){throw 'Missing completed match result'}
+        if($RouteStudy-and-not$routeStateSeen){throw 'Missing routing variant readback'}
         # Persist the completed match before shutdown, so cleanup cannot erase it.
         Copy-Item -LiteralPath $log.FullName -Destination "$dir/raw-session.log"
         $result|ConvertTo-Json|Set-Content -LiteralPath "$dir/result.json"

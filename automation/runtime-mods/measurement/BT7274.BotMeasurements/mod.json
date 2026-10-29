@@ -1,0 +1,6 @@
+{
+  "Name":"BT7274.BotMeasurements","Version":"1.0.0","LoadPriority":46,
+  "Description":"Opt-in read-only bot weapon windows and owned frag outcomes for isolated studies.",
+  "ConVars":[{"Name":"bt7274_bot_measurements","DefaultValue":"0"}],
+  "Scripts":[{"Path":"bt7274_bot_measurements.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"BT7274BotMeasurements_Init"}}]
+}

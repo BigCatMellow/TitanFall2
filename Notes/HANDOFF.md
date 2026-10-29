@@ -1188,3 +1188,23 @@ Preview verified in both current PowerShell and the Windows PowerShell5.1 used
 by the shortcut;50selection checks excluded Eden/previous/small arenas. Explicit
 Eden override works. Launcher --check passes. Do not revert saves for a launcher
 rollback. Native Eden-only repair remains inactive on the random non-Eden maps.
+
+## 2026-10-29 — Renewed two-hour study and experimental controller lane
+
+Original absence window expired; no overnight matrix had been launched. The
+initial Relic/War Games smoke passed at20:50Oct28. Latest played v23 session
+reviewed: Relic16/6, Meadow23/2 and22/3; frag self-deaths91/enemy53. Normal setup
+remains unchanged. A read-only measurement module now records primary weapon
+attack/ammo proxies and owned frag outcomes. Two compile-time type assertions
+were corrected; final measurement/lifecycle smoke passed on Relic/War Games.
+
+BT-7274 selected a renewed two-hour window ending08:03EDT October29 and then
+explicitly encouraged deeper experimental code work. Frozen v24 study uses
+nativeBC2C1019..., unchanged core/bridge, global route trial0/1,50-point rounds
+and read-only measurements. Paired priority maps plus full-size variety are
+bounded by time, normal-profile guards and operational regression stopping.
+Normal deployment is not automatically changed. See research/routing-v24-20261029
+and target/v24-study-session.json for actual live state; never infer success
+or a live PID from this note. Do not change frozen study scripts/measurement
+source/native while active. Deeper native prototypes use a separate canonical
+repository worktree/build and remain default-off until runtime validation.

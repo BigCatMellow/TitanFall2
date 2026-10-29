@@ -1,7 +1,7 @@
 param([string]$Profile="$env:USERPROFILE/northstar-crash-audit/map-cycle-test-profile",
     [Parameter(Mandatory)][string]$DllPath,
     [ValidatePattern('^mp_[a-z0-9_]+$')][string]$Map='mp_eden',
-    [ValidatePattern('^mp_[a-z0-9_]+$')][string]$NextMap='mp_lf_meadow',[switch]$NavigationTrial,[switch]$RouteProbe,[switch]$RouteContinuityTrial,[switch]$RouteWalkTrial,[switch]$QueryOnly,[switch]$RouteDetourTrial,[switch]$EdenRepairTrial)
+    [ValidatePattern('^mp_[a-z0-9_]+$')][string]$NextMap='mp_lf_meadow',[switch]$NavigationTrial,[switch]$RouteProbe,[switch]$RouteContinuityTrial,[switch]$RouteWalkTrial,[switch]$QueryOnly,[switch]$RouteDetourTrial,[switch]$EdenRepairTrial,[switch]$Measurements)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/Northstar-ModState.ps1"
 $repo=Split-Path $PSScriptRoot
@@ -29,6 +29,7 @@ $bridgeSource=if($NavigationTrial){"$repo/../local-test-profile/mods/BT7274.BotD
 Copy-Item "$bridgeSource/*" "$Profile/mods/BT7274.BotDecisions" -Recurse -Force
 Copy-Item "$repo/automation/runtime-mods/safety/BT7274.SafetyTest" "$Profile/mods" -Recurse -Force
 if($RouteProbe){Copy-Item "$repo/automation/runtime-mods/route-probe/BT7274.RouteProbe" "$Profile/mods" -Recurse -Force}
+if($Measurements){Copy-Item "$repo/automation/runtime-mods/measurement/BT7274.BotMeasurements" "$Profile/mods" -Recurse -Force}
 $serverScript="$Profile/mods/BT7274.SafetyTest/mod/scripts/vscripts/bt7274_safety_test.nut"
 $uiScript="$Profile/mods/BT7274.SafetyTest/mod/scripts/vscripts/bt7274_safety_test_ui.nut"
 [IO.File]::WriteAllText($serverScript,[IO.File]::ReadAllText($serverScript).Replace('"mp_lf_meadow"','"'+$NextMap+'"'))
@@ -49,6 +50,7 @@ $enabled=Get-Content "$Profile/enabledmods.json" -Raw|ConvertFrom-Json
 foreach($name in @('BT7274.DecisionTest','BT7274.WeaponIntegrationTest','BT7274.CapabilityTest','BT7274.MapSurvey')){Disable-NorthstarMod $enabled $name $Profile}
 $enabled|Add-Member -NotePropertyName 'BT7274.SafetyTest' -NotePropertyValue @{'1.0.0'=$true} -Force
 if($RouteProbe){$enabled|Add-Member -NotePropertyName 'BT7274.RouteProbe' -NotePropertyValue @{'1.0.0'=$true} -Force}
+if($Measurements){$enabled|Add-Member -NotePropertyName 'BT7274.BotMeasurements' -NotePropertyValue @{'1.0.0'=$true} -Force}
 $bridgeVersion=(Get-Content "$Profile/mods/BT7274.BotDecisions/mod.json" -Raw|ConvertFrom-Json).Version
 Disable-NorthstarMod $enabled 'BT7274.BotDecisions' $Profile
 $enabled.'BT7274.BotDecisions'|Add-Member -NotePropertyName $bridgeVersion -NotePropertyValue $true -Force
@@ -58,6 +60,7 @@ Add-Content $cfg 'setplaylistvaroverrides "max_players 17 scorelimit 9999 timeli
 Add-Content $cfg ('bt7274_safety_navigation '+[int][bool]$NavigationTrial)
 if($RouteDetourTrial){Add-Content $cfg 'bot_route_continuity 1'}
 if($EdenRepairTrial){Add-Content $cfg "bot_route_continuity 0`nbot_link_detour 0"}
+if($Measurements){Add-Content $cfg 'bt7274_bot_measurements 1'}
 $started=Get-Date
 $game=Start-Process "$gameDir/NorthstarLauncher.exe" -WorkingDirectory $gameDir -WindowStyle Hidden -PassThru -ArgumentList "-profile=$Profile",'-bt7274_safety_test','-novid','-windowed','-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+setplaylist','tdm','+setplaylistvaroverrides','"max_players 17 scorelimit 9999 timelimit 30"','+bt7274_safety_test','1','+bt7274_safety_stage','1','+solo_notes_mode','controlled_validation','+mp_gamemode','tdm','+map',$Map
 [ordered]@{experiment=$(if($EdenRepairTrial){'eden_repair_v23'}elseif($RouteDetourTrial){'route_detour_v23'}elseif($QueryOnly){'route_queries_v23'}elseif($RouteWalkTrial){'route_walk_v23'}elseif($RouteContinuityTrial){'route_continuity_v23'}elseif($RouteProbe){'route_research_v23'}elseif($NavigationTrial){'navigation_v22'}else{'safety_v21'});directed_walk=[bool]$RouteWalkTrial;map=$Map;next_map=$NextMap;population=$(if($QueryOnly){'query_only_no_movement_assertions'}elseif($RouteWalkTrial){'one_directed_bot_other_bots_stationary_on_eden'}else{'16bots_inactive_human'});core_sha256=(Get-FileHash "$Profile/Northstar.dll").Hash;harness_sha256=(Get-FileHash $serverScript).Hash;ui_sha256=(Get-FileHash $uiScript).Hash}|ConvertTo-Json|Set-Content "$run/context.json"

@@ -1,0 +1,693 @@
+{
+  "schema_version": 1,
+  "error_markers": 0,
+  "directed_walks": [],
+  "phases": [
+    {
+      "name": "nav_control",
+      "map": "mp_relic02",
+      "enabled": false,
+      "passed": true,
+      "duration_s": 90.0003,
+      "eden_scope_values": [
+        0
+      ],
+      "movement_comparison_valid": true,
+      "other_bot_groups_observed": 0,
+      "other_bot_slots_observed": 0,
+      "other_bots_max_xy_excursion": null,
+      "live_pilot_samples": 2208,
+      "low_progress_samples": 10,
+      "low_progress_percent": 0.4528985507246377,
+      "pending_segment_samples": 493,
+      "pending_segment_bot_slots": 16,
+      "path_bot_slots": 16,
+      "hotspots": [
+        {
+          "cell": "0,-4736,256",
+          "samples": 8
+        },
+        {
+          "cell": "-3456,-3328,512",
+          "samples": 1
+        },
+        {
+          "cell": "0,-4864,256",
+          "samples": 1
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 465,
+          "partial": 21,
+          "failures": 8,
+          "suppressed": 887,
+          "with_links": 288
+        },
+        "corners": {
+          "total": 3388,
+          "links": 764,
+          "by_jump": {
+            "1": 282,
+            "2": 64,
+            "8": 276,
+            "16": 142,
+            "255": 2624
+          },
+          "by_flags": {
+            "0": 1980,
+            "1": 1338,
+            "2": 70
+          }
+        },
+        "corner_guard": {
+          "begins": 0,
+          "hold_samples": 0,
+          "ends": {},
+          "completed_duration_s": 0,
+          "duration_samples": 0
+        },
+        "stalls": {
+          "samples": 44,
+          "incidents": 34,
+          "link_or_partial": 8,
+          "duck_only": 1,
+          "blocked": 18,
+          "stand_clear": 15,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 24,
+            "waypoint_timeout": 10
+          },
+          "by_state": {
+            "recover": 34
+          }
+        },
+        "stuck": {
+          "episodes": 26,
+          "by_state": {
+            "pursue": 19,
+            "engage": 7
+          },
+          "visible": 7,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 37,
+          "plausible": 37,
+          "examples": [
+            {
+              "eye_angles": "[0.0, 37.7617, 0.0]",
+              "view_angles_raw": "[0.79056454, 0.6123787, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, -23.152, 0.0]",
+              "view_angles_raw": "[0.91946507, -0.39317176, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 52.2414, 0.0]",
+              "view_angles_raw": "[0.6123359, 0.7905977, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 34,
+          "link_or_partial_share": 0.23529411764705882,
+          "duck_only_share": 0.029411764705882353,
+          "partial_route_share": 0.04516129032258064,
+          "engage_stuck_share": 0.2692307692307692,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      }
+    },
+    {
+      "name": "nav_guard",
+      "map": "mp_relic02",
+      "enabled": true,
+      "passed": true,
+      "duration_s": 120,
+      "eden_scope_values": [
+        0
+      ],
+      "movement_comparison_valid": true,
+      "other_bot_groups_observed": 0,
+      "other_bot_slots_observed": 0,
+      "other_bots_max_xy_excursion": null,
+      "live_pilot_samples": 2857,
+      "low_progress_samples": 20,
+      "low_progress_percent": 0.7000350017500875,
+      "pending_segment_samples": 638,
+      "pending_segment_bot_slots": 16,
+      "path_bot_slots": 16,
+      "hotspots": [
+        {
+          "cell": "-896,-5760,128",
+          "samples": 3
+        },
+        {
+          "cell": "640,-4864,256",
+          "samples": 3
+        },
+        {
+          "cell": "-896,-5632,128",
+          "samples": 2
+        },
+        {
+          "cell": "-1024,-5632,128",
+          "samples": 2
+        },
+        {
+          "cell": "2176,-3968,128",
+          "samples": 1
+        },
+        {
+          "cell": "-1536,-5120,256",
+          "samples": 1
+        },
+        {
+          "cell": "-1408,-5120,128",
+          "samples": 1
+        },
+        {
+          "cell": "-1536,-5120,128",
+          "samples": 1
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 620,
+          "partial": 9,
+          "failures": 63,
+          "suppressed": 1829,
+          "with_links": 343
+        },
+        "corners": {
+          "total": 6338,
+          "links": 1312,
+          "by_jump": {
+            "1": 583,
+            "2": 15,
+            "8": 598,
+            "16": 116,
+            "255": 5026
+          },
+          "by_flags": {
+            "0": 3725,
+            "1": 2481,
+            "2": 132
+          }
+        },
+        "corner_guard": {
+          "begins": 0,
+          "hold_samples": 0,
+          "ends": {},
+          "completed_duration_s": 0,
+          "duration_samples": 0
+        },
+        "stalls": {
+          "samples": 64,
+          "incidents": 47,
+          "link_or_partial": 9,
+          "duck_only": 0,
+          "blocked": 36,
+          "stand_clear": 11,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 39,
+            "waypoint_timeout": 8
+          },
+          "by_state": {
+            "recover": 47
+          }
+        },
+        "stuck": {
+          "episodes": 48,
+          "by_state": {
+            "pursue": 39,
+            "engage": 4,
+            "embark": 3,
+            "recover": 2
+          },
+          "visible": 4,
+          "titan": 3
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 49,
+          "plausible": 49,
+          "examples": [
+            {
+              "eye_angles": "[0.0, 108.331, 0.0]",
+              "view_angles_raw": "[-0.3145061, 0.94925547, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, -178.922, 0.0]",
+              "view_angles_raw": "[-0.99982303, -0.018813604, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, -168.872, 0.0]",
+              "view_angles_raw": "[-0.98119843, -0.1930017, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 47,
+          "link_or_partial_share": 0.19148936170212766,
+          "duck_only_share": 0,
+          "partial_route_share": 0.014516129032258065,
+          "engage_stuck_share": 0.08333333333333333,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      }
+    },
+    {
+      "name": "nav_respawn",
+      "map": "mp_relic02",
+      "enabled": true,
+      "passed": true,
+      "duration_s": 30,
+      "eden_scope_values": [
+        0
+      ],
+      "movement_comparison_valid": true,
+      "other_bot_groups_observed": 0,
+      "other_bot_slots_observed": 0,
+      "other_bots_max_xy_excursion": null,
+      "live_pilot_samples": 690,
+      "low_progress_samples": 2,
+      "low_progress_percent": 0.2898550724637681,
+      "pending_segment_samples": 160,
+      "pending_segment_bot_slots": 16,
+      "path_bot_slots": 16,
+      "hotspots": [
+        {
+          "cell": "1792,-3200,256",
+          "samples": 1
+        },
+        {
+          "cell": "1536,-1920,0",
+          "samples": 1
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 133,
+          "partial": 1,
+          "failures": 9,
+          "suppressed": 126,
+          "with_links": 80
+        },
+        "corners": {
+          "total": 769,
+          "links": 141,
+          "by_jump": {
+            "1": 63,
+            "2": 2,
+            "8": 44,
+            "16": 32,
+            "255": 628
+          },
+          "by_flags": {
+            "0": 398,
+            "1": 310,
+            "2": 61
+          }
+        },
+        "corner_guard": {
+          "begins": 0,
+          "hold_samples": 0,
+          "ends": {},
+          "completed_duration_s": 0,
+          "duration_samples": 0
+        },
+        "stalls": {
+          "samples": 11,
+          "incidents": 9,
+          "link_or_partial": 2,
+          "duck_only": 1,
+          "blocked": 8,
+          "stand_clear": 0,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 8,
+            "waypoint_timeout": 1
+          },
+          "by_state": {
+            "recover": 9
+          }
+        },
+        "stuck": {
+          "episodes": 8,
+          "by_state": {
+            "embark": 2,
+            "pursue": 5,
+            "engage": 1
+          },
+          "visible": 1,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 19,
+          "plausible": 19,
+          "examples": [
+            {
+              "eye_angles": "[0.0, 171.437, 0.0]",
+              "view_angles_raw": "[-0.98885274, 0.14889686, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 156.969, 0.0]",
+              "view_angles_raw": "[-0.9202933, 0.39122927, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, -96.666, 0.0]",
+              "view_angles_raw": "[-0.11608137, -0.9932397, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 9,
+          "link_or_partial_share": 0.2222222222222222,
+          "duck_only_share": 0.1111111111111111,
+          "partial_route_share": 0.007518796992481203,
+          "engage_stuck_share": 0.125,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      }
+    },
+    {
+      "name": "nav_disabled",
+      "map": "mp_relic02",
+      "enabled": false,
+      "passed": true,
+      "duration_s": 10,
+      "eden_scope_values": [
+        0
+      ],
+      "movement_comparison_valid": true,
+      "other_bot_groups_observed": 0,
+      "other_bot_slots_observed": 0,
+      "other_bots_max_xy_excursion": null,
+      "live_pilot_samples": 69,
+      "low_progress_samples": 0,
+      "low_progress_percent": 0,
+      "pending_segment_samples": 8,
+      "pending_segment_bot_slots": 6,
+      "path_bot_slots": 16,
+      "hotspots": [],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 21,
+          "partial": 1,
+          "failures": 0,
+          "suppressed": 0,
+          "with_links": 15
+        },
+        "corners": {
+          "total": 108,
+          "links": 25,
+          "by_jump": {
+            "1": 10,
+            "2": 1,
+            "8": 12,
+            "16": 2,
+            "255": 83
+          },
+          "by_flags": {
+            "0": 68,
+            "1": 40
+          }
+        },
+        "corner_guard": {
+          "begins": 0,
+          "hold_samples": 0,
+          "ends": {},
+          "completed_duration_s": 0,
+          "duration_samples": 0
+        },
+        "stalls": {
+          "samples": 0,
+          "incidents": 0,
+          "link_or_partial": 0,
+          "duck_only": 0,
+          "blocked": 0,
+          "stand_clear": 0,
+          "unknown": 0,
+          "by_reason": {},
+          "by_state": {}
+        },
+        "stuck": {
+          "episodes": 0,
+          "by_state": {},
+          "visible": 0,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 16,
+          "plausible": 16,
+          "examples": [
+            {
+              "eye_angles": "[0.0, -166.61, 0.0]",
+              "view_angles_raw": "[-0.9728163, -0.23157825, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 46.268, 0.0]",
+              "view_angles_raw": "[0.6912861, 0.7225812, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, -145.243, 0.0]",
+              "view_angles_raw": "[-0.8215772, -0.57009727, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 0,
+          "link_or_partial_share": null,
+          "duck_only_share": null,
+          "partial_route_share": 0.047619047619047616,
+          "engage_stuck_share": null,
+          "recommendation": "insufficient stall incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      }
+    },
+    {
+      "name": "nav_new_map",
+      "map": "mp_wargames",
+      "enabled": true,
+      "passed": true,
+      "duration_s": 90.00030000000001,
+      "eden_scope_values": [
+        0
+      ],
+      "movement_comparison_valid": true,
+      "other_bot_groups_observed": 0,
+      "other_bot_slots_observed": 0,
+      "other_bots_max_xy_excursion": null,
+      "live_pilot_samples": 2088,
+      "low_progress_samples": 8,
+      "low_progress_percent": 0.3831417624521073,
+      "pending_segment_samples": 476,
+      "pending_segment_bot_slots": 16,
+      "path_bot_slots": 16,
+      "hotspots": [
+        {
+          "cell": "1792,-896,128",
+          "samples": 3
+        },
+        {
+          "cell": "-896,-1792,0",
+          "samples": 1
+        },
+        {
+          "cell": "-896,-1920,0",
+          "samples": 1
+        },
+        {
+          "cell": "-896,-1408,0",
+          "samples": 1
+        },
+        {
+          "cell": "1536,-768,0",
+          "samples": 1
+        },
+        {
+          "cell": "1792,-512,0",
+          "samples": 1
+        }
+      ],
+      "navigation": {
+        "schema_version": 1,
+        "paths": {
+          "requests": 411,
+          "partial": 16,
+          "failures": 5,
+          "suppressed": 562,
+          "with_links": 276
+        },
+        "corners": {
+          "total": 2577,
+          "links": 559,
+          "by_jump": {
+            "1": 193,
+            "2": 19,
+            "8": 210,
+            "16": 137,
+            "255": 2018
+          },
+          "by_flags": {
+            "0": 1579,
+            "1": 982,
+            "2": 16
+          }
+        },
+        "corner_guard": {
+          "begins": 0,
+          "hold_samples": 0,
+          "ends": {},
+          "completed_duration_s": 0,
+          "duration_samples": 0
+        },
+        "stalls": {
+          "samples": 35,
+          "incidents": 32,
+          "link_or_partial": 14,
+          "duck_only": 1,
+          "blocked": 25,
+          "stand_clear": 6,
+          "unknown": 0,
+          "by_reason": {
+            "no_progress": 24,
+            "waypoint_timeout": 8
+          },
+          "by_state": {
+            "recover": 32
+          }
+        },
+        "stuck": {
+          "episodes": 25,
+          "by_state": {
+            "pursue": 24,
+            "recover": 1
+          },
+          "visible": 0,
+          "titan": 0
+        },
+        "crouch": {
+          "tests": 0,
+          "by_fit": {},
+          "attempts_max": 0,
+          "successes_max": 0,
+          "failures_max": 0
+        },
+        "viewcheck": {
+          "samples": 44,
+          "plausible": 44,
+          "examples": [
+            {
+              "eye_angles": "[0.0, -48.598, 0.0]",
+              "view_angles_raw": "[0.6613381, -0.750088, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, 163.752, 0.0]",
+              "view_angles_raw": "[-0.9600596, 0.27979556, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            },
+            {
+              "eye_angles": "[0.0, -150.276, 0.0]",
+              "view_angles_raw": "[-0.86842394, -0.4958224, -0.0]",
+              "eye_height": "60.0",
+              "stand": "([-16.0, -16.0, 0.0], [16.0, 16.0, 72.0])",
+              "duck": "([-16.0, -16.0, 0.0], [16.0, 16.0, 47.0])"
+            }
+          ]
+        },
+        "decision": {
+          "stall_incidents": 32,
+          "link_or_partial_share": 0.4375,
+          "duck_only_share": 0.03125,
+          "partial_route_share": 0.038929440389294405,
+          "engage_stuck_share": 0,
+          "recommendation": "neither threshold met; inspect individual incidents"
+        },
+        "limits": "Derived from sampled diagnostic lines. Link classification assumes the off-mesh flag (0x04) or a nonzero jump type other than 255; confirm the encoding from BOT_CORNER distributions first. Hull fits use engine traces, not visual confirmation. Incidents are grouped per slot (12 s, 192 units); they are not proof of a single physical cause."
+      }
+    }
+  ],
+  "limits": "Sequential unequal-duration smoke phases, not randomized matched rounds. Pending-segment samples prove branch execution, not traversal success. Overlapping low-progress samples are not independent incidents. Respawn/map transitions and short windows limit comparison; no human difficulty, aim or weapon conclusion.",
+  "log_sha256": "5d4cad1d3eb00d51bf6e49950109d46c7d3dc4d3be08c70c1875cb57224461f5"
+}
