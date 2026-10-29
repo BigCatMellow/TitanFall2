@@ -157,7 +157,8 @@ pub fn path_to_target(
         return true;
     }
 
-    while distance(local_data.next_target_pos, origin) <= BOT_PATH_NODE_RANGE {
+    let corner_height_guard = super::switch_on(&super::CORNER_HEIGHT_GUARD_CONVAR);
+    while within_route_corner_range(local_data.next_target_pos, origin, corner_height_guard) {
         let Some((next, meta)) = nav.next_corner() else { break; };
         local_data.last_time_node_reached = helper.globals.curTime;
         local_data.next_target_pos = next;
@@ -168,6 +169,22 @@ pub fn path_to_target(
                 meta.map_or(-1, |m| m.0 as i32), meta.map_or(-1, |m| m.1 as i32),
                 super::nav_diagnostics::corner_class(meta), nav.path_points.len(),
                 next.x, next.y, next.z, next.z - origin.z, distance(next, origin));
+        }
+    }
+
+    if corner_height_guard && super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
+        let horizontal = distance(local_data.next_target_pos, origin);
+        let dz = local_data.next_target_pos.z - origin.z;
+        if horizontal <= BOT_PATH_NODE_RANGE && dz.is_finite()
+            && dz.abs() > super::route_guard::CORNER_HEIGHT_TOLERANCE
+            && local_data.corner_guard_log.allow(time(helper), 1.0) {
+            log::info!("BOT_CORNER_HOLD epoch={} t={:.2} slot={} flags={} jump={} horizontal={:.0} dz={:.1} waypoint=({:.1},{:.1},{:.1}) origin=({:.1},{:.1},{:.1})",
+                super::telemetry::epoch(), time(helper), local_data.edict,
+                local_data.current_corner.map_or(-1, |m| m.0 as i32),
+                local_data.current_corner.map_or(-1, |m| m.1 as i32),
+                horizontal, dz,
+                local_data.next_target_pos.x, local_data.next_target_pos.y, local_data.next_target_pos.z,
+                origin.x, origin.y, origin.z);
         }
     }
 
@@ -212,6 +229,14 @@ fn note_stalled_pursuit(local_data: &mut BotData, helper: &CUserCmdHelper, reaso
         log::info!("BOT_ROUTE_COOLDOWN epoch={} t={:.2} slot={} target={} reason={} hold=8",
             super::telemetry::epoch(), time(helper), local_data.edict, id, reason);
     }
+}
+
+fn within_route_corner_range(target: Vector3, origin: Vector3, height_guard: bool) -> bool {
+    let horizontal = distance(target, origin);
+    if height_guard {
+        super::route_guard::corner_reached(horizontal,
+            target.z - origin.z, BOT_PATH_NODE_RANGE)
+    } else { horizontal <= BOT_PATH_NODE_RANGE }
 }
 
 pub fn is_timedout(last_time: f32, helper: &CUserCmdHelper<'_>, time_elasped: f32) -> bool {
