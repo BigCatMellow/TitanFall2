@@ -65,7 +65,7 @@ impl Plugin for HooksPlugin {
             panic!("bad things will happen if this is reloaded")
         }
         unsafe { std::env::set_var("RUST_BACKTRACE", "1") };
-        log::info!("local build: route-continuity-v23-candidate (pending waypoint and local failed-link detour; both default off)");
+        log::info!("local build: traversal-actions-v25-prototype (explicit pursuit jump actions, default off; not the frozen study build)");
 
         Self {
             bots: Bots::new(reloaded),

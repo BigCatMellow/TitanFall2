@@ -119,6 +119,10 @@ pub fn run_bots_cmds(paused: bool) {
         if super::NAVIGATION_CONTEXT_CONVAR.get().is_some_and(|c| c.get_value_bool()) {
             super::progress_watchdog::finish_command(&mut local_data.movement_anchor, local_data.navigation_requested);
         }
+        if !local_data.navigation_requested && local_data.traversal.active() {
+            log::info!("BOT_TRAVERSAL epoch={} t={:.2} slot={} event=cancel reason=no_navigation",super::telemetry::epoch(),globals.curTime,local_data.edict);
+            local_data.traversal.cancel();
+        }
         cmd.frame_time = globals.frameTime;
         if super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
             // State-agnostic: also catches bots pressing into geometry while engaged.

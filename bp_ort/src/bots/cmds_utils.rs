@@ -41,12 +41,21 @@ pub fn path_to_target(
     local_data.navigation_requested = true;
     let eden_repair=eden_repair_active(helper)
         && local_data.nav_query.as_ref().is_some_and(|n|n.hull==crate::navmesh::Hull::Human);
+    let traversal_trial=super::switch_on(&super::TRAVERSAL_ACTION_CONVAR)
+        && local_data.nav_query.as_ref().is_some_and(|n|n.hull==crate::navmesh::Hull::Human)
+        && !local_data.metrics.visible;
+    if !traversal_trial && local_data.traversal.active() {
+        log::info!("BOT_TRAVERSAL epoch={} t={:.2} slot={} event=cancel reason=combat_or_disabled",super::telemetry::epoch(),time(helper),local_data.edict);
+        local_data.traversal.cancel();
+    }
     if distance3(target_pos, origin)
         <= BOT_PATH_NODE_RANGE + local_data.approach_range.unwrap_or(20.) {
         local_data.movement_anchor = None;
+        local_data.traversal.cancel();
         return false;
     }
     if time(helper) < local_data.recovery_until {
+        local_data.traversal.cancel();
         face_toward(cmd, origin, target_pos, helper);
         try_avoid_obstacle(cmd, local_data, helper);
         return true;
@@ -54,6 +63,7 @@ pub fn path_to_target(
     if super::progress_watchdog::has_stalled(time(helper), &mut local_data.movement_anchor,
         [origin.x, origin.y]) {
         note_failed_link(local_data, origin, helper, "no_progress");
+        local_data.traversal.cancel();
         if let Some(nav) = local_data.nav_query.as_mut() {
             nav.path_points.clear();
             nav.end_point = None;
@@ -92,9 +102,9 @@ pub fn path_to_target(
         .map(|should_recalculate| should_recalculate || should_recalcute_path)
         .unwrap_or(true);
     let pending_waypoint = super::route_guard::active_waypoint_pending(
-        super::switch_on(&super::ROUTE_CONTINUITY_CONVAR) || eden_repair, !must_replan,
+        super::switch_on(&super::ROUTE_CONTINUITY_CONVAR) || eden_repair || traversal_trial, !must_replan,
         local_data.current_corner.is_some(), distance(local_data.next_target_pos, origin),
-        BOT_PATH_NODE_RANGE);
+        BOT_PATH_NODE_RANGE) || (!must_replan && local_data.traversal.active());
     let segment_consumed = nav.path_points.is_empty() && !pending_waypoint;
     if pending_waypoint && nav.path_points.is_empty()
         && super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR)
@@ -115,6 +125,10 @@ pub fn path_to_target(
     }
     if must_replan || segment_consumed
     {
+        if local_data.traversal.active() {
+            log::info!("BOT_TRAVERSAL epoch={} t={:.2} slot={} event=cancel reason=replan",super::telemetry::epoch(),time(helper),local_data.edict);
+            local_data.traversal.cancel();
+        }
         if let Some(since) = local_data.corner_guard_since.take() {
             log::info!("BOT_CORNER_GUARD epoch={} t={:.2} slot={} event=end reason=replan held_s={:.2}",
                 super::telemetry::epoch(),time(helper),local_data.edict,(time(helper)-since).max(0.));
@@ -133,7 +147,7 @@ pub fn path_to_target(
 
         local_data.metrics.path_requests = local_data.metrics.path_requests.saturating_add(1);
         let original_traversals = nav.filter.m_traverseFlags;
-        let excluded = if (super::switch_on(&super::LINK_DETOUR_CONVAR) || eden_repair) && nav.hull==crate::navmesh::Hull::Human {
+        let excluded = if (super::switch_on(&super::LINK_DETOUR_CONVAR) || eden_repair || traversal_trial) && nav.hull==crate::navmesh::Hull::Human {
             local_data.link_detour.excluded(time(helper),[origin.x,origin.y])
         } else {0};
         nav.filter.m_traverseFlags &= !excluded;
@@ -186,8 +200,10 @@ pub fn path_to_target(
             super::telemetry::epoch(),time(helper),local_data.edict,(time(helper)-since).max(0.));
     }
     let human_hull = nav.hull == crate::navmesh::Hull::Human;
-    while within_route_corner_range(local_data.next_target_pos, origin, corner_height_guard, human_hull, local_data.current_corner) {
+    while !local_data.traversal.active() && within_route_corner_range(local_data.next_target_pos, origin, corner_height_guard, human_hull, local_data.current_corner) {
         let Some((next, meta)) = nav.next_corner() else { break; };
+        let entry=local_data.next_target_pos;
+        let kind=local_data.current_corner.map(|(_,kind)|kind);
         if let Some(since) = local_data.corner_guard_since.take() {
             log::info!("BOT_CORNER_GUARD epoch={} t={:.2} slot={} event=end reason=advance held_s={:.2}",
                 super::telemetry::epoch(),time(helper),local_data.edict,(time(helper)-since).max(0.));
@@ -195,6 +211,13 @@ pub fn path_to_target(
         local_data.last_time_node_reached = helper.globals.curTime;
         local_data.next_target_pos = next;
         local_data.current_corner = meta;
+        if traversal_trial && kind==Some(16) && meta.is_some_and(|(_,jump)|jump==255)
+            && local_data.traversal.begin(time(helper),16,[entry.x,entry.y,entry.z],
+                [next.x,next.y,next.z],[origin.x,origin.y,origin.z]) {
+            local_data.jump_hold=0;local_data.jump_delay=time(helper);
+            local_data.traversal_phase=None;
+            log::info!("BOT_TRAVERSAL epoch={} t={:.2} slot={} event=begin kind=16 entry=({:.1},{:.1},{:.1}) exit=({:.1},{:.1},{:.1})",super::telemetry::epoch(),time(helper),local_data.edict,entry.x,entry.y,entry.z,next.x,next.y,next.z);
+        }
         if super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
             log::info!("BOT_CORNER epoch={} t={:.2} slot={} flags={} jump={} remaining={} x={:.1} y={:.1} z={:.1} dz={:.1} dist={:.0}",
                 super::telemetry::epoch(), time(helper), local_data.edict,
@@ -224,21 +247,54 @@ pub fn path_to_target(
         }
     }
 
+    let mut action_input=None;
+    if local_data.traversal.active() {
+        let facing=(look_at(origin,local_data.next_target_pos).y-helper.angles.y+180.).rem_euclid(360.)-180.;
+        let step=local_data.traversal.step(super::traversal_action::Input {
+            now:time(helper),origin:[origin.x,origin.y,origin.z],grounded:local_data.route_grounded,facing_error:facing,
+        });
+        let phase=local_data.traversal.phase_label();
+        if local_data.traversal_phase!=Some(phase) {
+            log::info!("BOT_TRAVERSAL_STATE epoch={} t={:.2} slot={} phase={} grounded={} x={:.1} y={:.1} z={:.1} facing_error={:.1}",super::telemetry::epoch(),time(helper),local_data.edict,phase,local_data.route_grounded as u8,origin.x,origin.y,origin.z,facing);
+            local_data.traversal_phase=Some(phase);
+        }
+        match step {
+            super::traversal_action::Step::Active {jump,forward}=>action_input=Some((jump,forward)),
+            super::traversal_action::Step::Completed=>{
+                log::info!("BOT_TRAVERSAL epoch={} t={:.2} slot={} event=complete",super::telemetry::epoch(),time(helper),local_data.edict);
+                action_input=Some((false,false));
+            }
+            super::traversal_action::Step::Failed(reason)=>{
+                log::info!("BOT_TRAVERSAL epoch={} t={:.2} slot={} event=failed reason={reason:?}",super::telemetry::epoch(),time(helper),local_data.edict);
+                local_data.link_detour.fail(time(helper),[origin.x,origin.y],1<<16);
+                if let Some(nav)=local_data.nav_query.as_mut(){nav.path_points.clear();nav.end_point=None;}
+                local_data.recovery_until=time(helper)+0.3;local_data.movement_anchor=None;
+                local_data.jump_hold=0;local_data.jump_delay=time(helper);
+                cmd.buttons &= !(Action::Jump as u32 | Action::Forward as u32);
+                cmd.move_.x=0.;cmd.move_.z=0.;return true;
+            }
+            super::traversal_action::Step::Idle=>{}
+        }
+    }
     // Flat routes do not need a constant jump attempt. Finish a short press,
     // then release it before trying again at a step or during recovery.
     let dz = local_data.next_target_pos.z - origin.z;
     let step = if super::switch_on(&super::JUMP_TIMING_CONVAR) {
         super::route_guard::step_jump_wanted(dz, distance(local_data.next_target_pos, origin))
     } else { dz > 18. };
-    if super::jump_pulse::jump_pulse(time(helper), &mut local_data.jump_delay,
-        &mut local_data.jump_hold, step) {
+    let jump=action_input.map_or_else(||super::jump_pulse::jump_pulse(time(helper), &mut local_data.jump_delay,
+        &mut local_data.jump_hold, step),|(jump,_)|jump);
+    if action_input.is_some(){cmd.buttons &= !(Action::Jump as u32);cmd.move_.z=0.;}
+    if jump {
         cmd.buttons |= Action::Jump as u32;
         cmd.move_.z = 1.0; // hmmm
     }
 
     face_toward(cmd, origin, local_data.next_target_pos, helper);
-    cmd.move_.x = 1.0;
-    cmd.buttons |= Action::Forward as u32 | Action::Speed as u32;
+    if action_input.is_none_or(|(_,forward)|forward) {
+        cmd.move_.x = 1.0;
+        cmd.buttons |= Action::Forward as u32 | Action::Speed as u32;
+    }else{cmd.move_.x=0.;cmd.buttons &= !(Action::Forward as u32);}
 
     if is_timedout(local_data.last_time_node_reached, helper, 5.) {
         note_failed_link(local_data, origin, helper, "waypoint_timeout");
@@ -257,7 +313,8 @@ pub fn path_to_target(
 }
 
 fn note_failed_link(local: &mut BotData, origin: Vector3, helper: &CUserCmdHelper, reason: &str) {
-    if !super::switch_on(&super::LINK_DETOUR_CONVAR) && !eden_repair_active(helper) {return;}
+    if !super::switch_on(&super::LINK_DETOUR_CONVAR) && !eden_repair_active(helper)
+        && !super::switch_on(&super::TRAVERSAL_ACTION_CONVAR) {return;}
     let mask=local.nav_query.as_ref().filter(|n|n.hull==crate::navmesh::Hull::Human)
         .map_or(0,|n|n.segment_traversals);
     if local.link_detour.fail(time(helper),[origin.x,origin.y],mask)

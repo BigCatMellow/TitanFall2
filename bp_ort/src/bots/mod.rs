@@ -58,6 +58,7 @@ mod coordination;
 mod escape_recovery;
 mod nav_diagnostics;
 mod route_guard;
+mod traversal_action;
 mod perception;
 mod combat_movement;
 mod crouch_recovery;
@@ -98,6 +99,7 @@ pub(super) static CORNER_HEIGHT_GUARD_CONVAR: OnceCell<ConVarStruct> = OnceCell:
 pub(super) static ROUTE_CONTINUITY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static LINK_DETOUR_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static EDEN_REPAIR_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static TRAVERSAL_ACTION_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static JUMP_TIMING_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PROXIMITY_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PERCEPTION_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
@@ -156,6 +158,9 @@ pub(super) struct BotData {
     route_target: Option<i32>,
     replan: route_guard::ReplanThrottle,
     link_detour: route_guard::LinkDetour,
+    traversal: traversal_action::TraversalAction,
+    route_grounded: bool,
+    traversal_phase: Option<&'static str>,
     unreachable: route_guard::Unreachable,
     jump_timing: route_guard::JumpTiming,
     strafe: combat_movement::Strafe,
@@ -193,6 +198,8 @@ impl BotData {
         self.route_target = None;
         self.replan = Default::default();
         self.link_detour = Default::default();
+        self.traversal = Default::default();
+        self.traversal_phase = None;
         self.unreachable = Default::default();
         self.jump_timing = Default::default();
         self.strafe = Default::default();
@@ -484,6 +491,7 @@ impl Plugin for Bots {
             (&ROUTE_CONTINUITY_CONVAR, "bot_route_continuity", "trial: finish the active final waypoint before replanning an empty segment, default off"),
             (&LINK_DETOUR_CONVAR, "bot_link_detour", "trial: locally avoid a failed same-level jump type for eight seconds, default off"),
             (&EDEN_REPAIR_CONVAR, "bot_eden_route_repair", "enable pending-waypoint and failed-link repair on Eden only, default off"),
+            (&TRAVERSAL_ACTION_CONVAR, "bot_traversal_actions", "prototype: bounded type16 pilot pursuit jump actions with failure handoff, default off"),
             (&JUMP_TIMING_CONVAR, "bot_jump_timing", "step jumps only near the higher waypoint, plus one bounded double jump"),
             (&PROXIMITY_FIX_CONVAR, "bot_proximity_fix", "circular distance for titan boarding Use and titan melee (fixes axis-aligned aim snaps)"),
             (&PERCEPTION_FIX_CONVAR, "bot_perception_fix", "eye-angle facing and eye-level sight lines; same 180-degree hemisphere"),
@@ -885,9 +893,9 @@ fn bot_set_sim_type(bot: Option<&mut CPlayer>, sim_type: i32) -> Option<()> {
 fn bot_research_report(bot: Option<&mut CPlayer>) -> Option<String> {
     let maps=BOT_DATA_MAP.get(engine_token).try_borrow().ok()?;
     let local=maps.as_ref().get(get_player_index(bot?))?;
-    Some(format!("slot={} simulation={} nodes={} segment_mask={}",local.edict,
+    Some(format!("slot={} simulation={} nodes={} segment_mask={} action={} grounded={}",local.edict,
         local.sim_type.unwrap_or(-1),local.nav_query.as_ref().map_or(0,|n|n.path_points.len()),
-        local.nav_query.as_ref().map_or(0,|n|n.segment_traversals)))
+        local.nav_query.as_ref().map_or(0,|n|n.segment_traversals),local.traversal.phase_label(),local.route_grounded as u8))
 }
 
 #[rrplug::sqfunction(VM = "Server", ExportName = "BotSpawn")]

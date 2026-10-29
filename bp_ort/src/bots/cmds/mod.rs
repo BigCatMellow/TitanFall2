@@ -57,6 +57,8 @@ pub(super) fn get_cmd(
         }
     }
 
+    local_data.route_grounded = super::switch_on(&super::TRAVERSAL_ACTION_CONVAR)
+        && unsafe { (helper.sv_funcs.is_on_ground)(nudge_type::<&CBaseEntity>(player)) } != 0;
     let command_number = {
         player.m_rank += 1; // using this for command number
         player.m_rank as u32
@@ -81,6 +83,9 @@ pub(super) fn get_cmd(
         }
 
         _ if unsafe { (helper.sv_funcs.is_alive)(nudge_type::<&CBaseEntity>(player)) == 0 } => {
+            if local_data.traversal.active() {
+                log::info!("BOT_TRAVERSAL epoch={} t={:.2} slot={} event=cancel reason=death",super::telemetry::epoch(),helper.globals.curTime,local_data.edict);
+            }
             local_data.reset_candidate_state();
             local_data.escape_recovery = Default::default();
             local_data.combat = Default::default();
