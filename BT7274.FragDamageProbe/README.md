@@ -43,8 +43,14 @@ the identifier semantics. This module does **not** track throws or explosions.
    and confirm normal behavior, map transitions, round restart and removal.
 6. Keep private logs and saves local. Run
    `node tools/Analyze-FragLifecycle.mjs --log <PRIVATE_NSLOG> --out <PRIVATE_REPORT.json>`
-   for aggregate-only diagnostic counts and error flags. Do not join different
-   identity namespaces without explicit validation.
+   for aggregate-only diagnostic counts and error flags. With `solo_weapon_notes=1`
+   recording into the **same** local NS log, additionally run
+   `node tools/Compare-FragNotebook.mjs --log <PRIVATE_NSLOG> --out <PRIVATE_CONCORDANCE.json>`.
+   Read [exact concordance rules](../research/bot-ai/FRAG-EVIDENCE-CONCORDANCE-2026-10-29.md)
+   before interpreting the comparison. Two callback streams agreeing within a
+   provisional 0.05-second window does not prove a particular projectile caused
+   health loss or a death. Do not join native bot slots or projectile inflictor
+   identifiers without separately validating those identity namespaces.
 
 The *more invasive* generated `_grenade.nut` override in this PR is
 **optional and a second-stage experiment only**. If this standalone callback
