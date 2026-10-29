@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "map": "mp_wargames",
+  "variant": 1,
+  "observed_projectiles": 81,
+  "unmatched_kill_callbacks": 1,
+  "groups": [
+    {
+      "first_observed_speed": "(200,800]u_s",
+      "observed_projectiles": 79,
+      "projectiles_with_self_kill": 13,
+      "projectiles_with_enemy_kill": 12,
+      "projectiles_with_friendly_kill": 0,
+      "self_kill_callbacks": 13,
+      "enemy_kill_callbacks": 13,
+      "median_first_owner_distance": 61.1067,
+      "median_first_seen_to_self_kill_s": 2.766599999999997,
+      "self_kills_with_recent_sample": 13,
+      "median_last_owner_distance_before_self_kill": 104.937,
+      "median_sample_lag_s": 0.26659999999999684
+    },
+    {
+      "first_observed_speed": "0-200u_s",
+      "observed_projectiles": 2,
+      "projectiles_with_self_kill": 1,
+      "projectiles_with_enemy_kill": 1,
+      "projectiles_with_friendly_kill": 0,
+      "self_kill_callbacks": 1,
+      "enemy_kill_callbacks": 1,
+      "median_first_owner_distance": 58.42955,
+      "median_first_seen_to_self_kill_s": 2.766600000000011,
+      "self_kills_with_recent_sample": 1,
+      "median_last_owner_distance_before_self_kill": 148.959,
+      "median_sample_lag_s": 0.26660000000001105
+    }
+  ],
+  "limits": "Observed valid-owner projectiles in one completed frozen bot-only round. Speed is first observed, up to sampler delay; it does not identify thrown, dropped, bounced or stuck grenades. Owner distance is sampled and may cross owner death/respawn. Latest samples are <=0.6s before self-kill, not positions at explosion. Outcome groups overlap and near-end/missed projectiles are censored. Association is not a causal safety diagnosis; no handles exported.",
+  "log_sha256": "25f83e3fb81c175ed085f0655b15f192985921c03257c0b5b0414f9b062a1831"
+}
