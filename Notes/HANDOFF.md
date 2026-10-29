@@ -1284,3 +1284,52 @@ bonuses and Power Cell. Candidate is not installed or runtime-tested; normal
 profile/saves remain unchanged. Read research/skill-cooldowns-20261028/FINDINGS.md. Draft PR #10: https://github.com/BigCatMellow/TitanFall2/pull/10.
 Bot skill reasons/readiness are not confirmed casts; preserve native bot
 readiness until actual-activation telemetry can measure per-skill outcomes.
+
+## 2026-10-29 — Integrated repository validation and active four-hour screening
+
+BT-7274 authorized testing for four hours starting12:27:48EDT; hard deadline
+16:27:48EDT. Integrated worktree TitanFall2-integration-v28, branch
+candidate/integration-v28-20261029, merges main/fixed clearancec35e6a5, frag
+instrumentation8962b2f and coverage0e146d4 onto local v23. Preserve the Eden
+pending-waypoint/detour repair. v25/v26 failed traversal prototype is excluded.
+NativeD85B69B149E1681B29AB6B933FED75EB125F9D92FFD24435F31EE3998A4E9AE6;
+locked offline release-debug; lock E4F843... unchanged.118Rust/21suites and
+migration/preset fixtures passed;106Node/20suites passed. Never run the flagged
+old build script or alter antivirus.
+
+Combined Eden/WarGames lifecycle smoke passed five actual new-flag readbacks,
+respawn, off, lobby and map change, with zero detected runtime errors. New
+additive frag observer/input edges/weapon+projectile notes all executed.26frag
+callbacks uniquely matched notebook hit/post-health evidence;29global notebook
+gap markers mean the smoke's notebook evidence remains gap-review-required.
+No whole grenade script override was deployed. See integration research records.
+
+Separate Pulse1.1.0 probes passed all seven tacticals with and without PowerCell,
+including actual Grapple full-refill timing, repeat apply, disable/remove,
+duration/ammo/ordnance preservation and15bot exclusions each. Current1.0.0
+package was restored and hash-checked; normal human50%preference remains. These
+are controlled modifier checks, not human balance or ability effect/range proof.
+The minimap fragment remains source research without actual HUD integration.
+
+An initial50-point Relic preflight completed cleanly:318.5s,3,813pilot samples,
+2.203%overlapping low-progress,71observed frags. Paused cleanly for ability tests.
+It is archived separately and not reused as a30-point baseline. The main screen
+restarted13:05EDT with fresh matched30-point controls,55planned jobs/15full-size
+installed maps as budget permits. Exact receipt target/v28-study-resumed-session.json
+in the INTEGRATION worktree; private batch screening30-20261029-130412. Read actual
+status/clock, not historical PIDs. Original16:27:48deadline is not extended.
+
+Cells: baseline, stall-target recovery, conservative frag safety, fixed early
+clearance, and remote all-corner height predicate under separate
+bot_corner_height_trial (legacy bot_corner_height_guard stays0). Nearest pursuit
+has its own coordination-off baseline; normal/coordinated cells retain1. Later
+combined trials skip a component that hits the coarse navigation regression
+cutoff. Sources/runtime/probes/settings readbacks and all11normal files guarded.
+Starts no new round with<8minleft, stops owned game at deadline, restores isolated
+v20native/config/enablement and disables harnesses without restoring old saves.
+Any runtime/integrity failure stops and retains evidence. No normal promotion.
+
+Normal independently remains v23BC2C1019..., current saves/modifiers/presets,
+aim0.78/firingwarmup0.8s.11normal hashes still unchanged after ability probes and
+fresh screen start. Do not edit frozen tools/analysis/cell config during the run.
+Use stop-after-current.txt for a pause; never infer completion from this note.
