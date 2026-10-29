@@ -738,6 +738,28 @@ pub(crate) fn basic_combat(
     }
     height_followups(player, helper, local_data, &mut cmd, is_titan, sim_type);
     route_followups(player, helper, local_data, &mut cmd, is_titan, sim_type);
+    // Capture final native *command* edges, not weapon/projectile events.
+    // Separate short input pulses from actual throws before changing frag logic.
+    if crate::bots::switch_on(&crate::bots::FRAG_INPUT_PROBE_CONVAR) && !is_titan && sim_type == 6 {
+        let is_frag = lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs)
+            .and_then(|w| get_weaponx_name(w, helper.sv_funcs))
+            .is_some_and(|name| name == "mp_weapon_frag_grenade");
+        let pressed = cmd.buttons & Action::OffHand0 as u32 != 0;
+        if let Some((edge, age)) = local_data.frag_probe.observe(time(helper), is_frag, pressed) {
+            let token = unsafe { EngineToken::new_unchecked() };
+            let ready = crate::bots::action_bridge::readiness(player.m_RefEHandle, token)
+                .map(|state| (state.ordnance.ready as u8, (time(helper) - state.ordnance.at).max(0.)));
+            let o = player.m_vecAbsOrigin;
+            let vel = player.m_vecAbsVelocity;
+            log::info!("BOT_FRAG_INPUT epoch={} t={:.2} slot={} edge={} held_s={age:.3} target={} visible={} state={} ready={} ready_age={:.2} speed_xy={:.1} x={:.1} y={:.1} z={:.1}",
+                crate::bots::telemetry::epoch(), time(helper), local_data.edict,
+                edge.as_str(), local_data.metrics.target.unwrap_or(-1),
+                local_data.metrics.visible as u8, local_data.metrics.state,
+                ready.map_or(-1, |(flag, _)| flag as i32),
+                ready.map_or(-1., |(_, age)| age),
+                vel.x.hypot(vel.y), o.x, o.y, o.z);
+        }
+    } else { local_data.frag_probe = Default::default(); }
     cmd.camera_angles = cmd.world_view_angles;
 
     cmd

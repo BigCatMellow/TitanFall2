@@ -24,7 +24,8 @@ All switches default to **0**, preserving existing normal/Full commands until an
 - `bp_ort/src/bots/action_policy.rs`: configurable inter-start interval while retaining readiness, release and weapon/reset semantics.
 - `bp_ort/src/bots/cmds/basic_combat.rs`: opt-in wiring.
 - `bp_ort/src/bots/mod.rs`: default-off convars and per-life reset of the new stall state.
-- `bp_ort/src/bots/route_guard.rs` and `cmds_utils.rs`: repeated-stall memory and watchdog integration. Five test cases in the two pure-policy modules cover targeting and route recovery.
+- `bp_ort/src/bots/route_guard.rs` and `cmds_utils.rs`: repeated-stall memory and watchdog integration.
+- `bp_ort/src/bots/frag_input_probe.rs`: default-off command edge diagnostic, isolated tests, and reset on lifecycle/switch-off. The log deliberately says **input** rather than throw/cast. Five test cases in the two pure-policy modules cover targeting and route recovery.
 
 Before game deployment, run `tools/Test-Project.ps1` and `cargo +nightly-2025-09-11-x86_64-pc-windows-gnu test -p bp_ort --locked` with the pinned Windows toolchain and compile a distribution DLL as in the root README. Test both convars off for exact current behavior, then one switch at a time, then their combinations. The code was edited remotely; no local Rust toolchain or installed game was available in the editing environment. **No native compile, Rust test, DLL install or Titanfall runtime test is claimed by this pass.**
 
@@ -41,6 +42,8 @@ Use the existing **map-cycle-test-profile**, never overwrite the normal profile 
 | B — targeting | 1 | 0 | target switches, chosen distance, partial paths, stall episodes, engagement time |
 | C — frag | 0 | 1 | allowed ordnance starts, frag self-deaths, opposing frag deaths and health losses |
 | D — combined | 1 | 1 | interaction and regression checks |
+
+Enable `bot_frag_input_probe 1` during the **isolated frag A/B** only. It emits `BOT_FRAG_INPUT` with `edge=press/release`, input hold time, bot location, movement speed, target/visible state and last script readiness value/age. Pair those with private `BOT_READY`, damage and death logs to locate suspicious timing. **Command release is not projectile release**, readiness is not a cast, and the log has no verified grenade path, collision, fuse, or owner-distance outcome. Never claim causality from matching timestamps alone.
 
 The baseline Full played cohort is context, not an A cell from this new test. Collect new matched baselines with the same player, maps, loadouts and round goals; keep played and unattended sessions separate. For frag, report **both** self-kills per qualifying bot-life/round and enemy frag kills, as well as total requests: a reduction in total throws alone is not proof of better skill. Inspect owner, projectile release, close-wall collisions, and post-throw bot paths before accepting a guard. For targeting, compare route completion and stuck incidents without assuming nearest is reachable. Reject if map-cycle, respawn, inventory change, Titan transitions or lobby return retains stuck input.
 
