@@ -77,6 +77,15 @@ Read [project status](docs/PROJECT-STATUS.md), [handoff](Notes/HANDOFF.md), and
 | `history/source-snapshots/` | Expanded historical source, including rejected experiments |
 | `tools/` | Import, artifact extraction and offline checks |
 
+## Source review merged for local testing (2026-10-29)
+
+The bot AI, route-corner guard, Pulse Blade cooldown and minimap research
+candidates are **source-only** pending the isolated Windows/game validation
+specified in [LOCAL-TEST-HANDOFF-2026-10-29](docs/LOCAL-TEST-HANDOFF-2026-10-29.md).
+Merging these sources is not an installed DLL update or evidence of successful
+gameplay. All new bot behavior switches default off. Keep the known-good v20
+installation/CURRENT saves intact; do not install any trial into the normal profile.
+
 ## Build and check
 
 Validated toolchain: `nightly-2025-09-11-x86_64-pc-windows-gnu` and LLVM-MinGW.
