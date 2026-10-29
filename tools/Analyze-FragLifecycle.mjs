@@ -91,7 +91,22 @@ export function summarizeFragStages(events) {
   };
 }
 export function analyzeFragLog(content) {
-  return summarizeFragStages(content.split(/\r?\n/).map(parseFragStage));
+  const lines = content.split(/\r?\n/);
+  const stages = lines.map(parseFragStage).filter(Boolean);
+  const summary = summarizeFragStages(stages);
+  // Faults are not gameplay events. Even one exception makes the absence of
+  // grenade stages unreliable. Never return an apparently clean zero.
+  const faults = lines.filter(line =>
+    /(?:^|[\s\]])BT_FRAG_PROBE_ERROR schema=1(?:\s|$)/.test(line)).length;
+  const empty = stages.length === 0;
+  return {...summary,
+    probe_errors_logged: faults,
+    probe_status: faults > 0 ? 'probe_error_review_required'
+      : empty ? 'no_valid_stage_events_cannot_infer_no_grenades'
+        : 'stage_events_present_runtime_validation_required',
+    limits: [...summary.limits,
+      'A BT_FRAG_PROBE_ERROR invalidates absence-of-events conclusions. No valid stage events may mean the probe was disabled, not installed, lacked hooks, or did not observe a throw.'],
+  };
 }
 function main(args) {
   const option = k => { const i = args.indexOf(k); return i < 0 ? undefined : args[i + 1]; };
