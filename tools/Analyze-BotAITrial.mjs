@@ -183,8 +183,8 @@ export function parseBotTrialLog(text) {
 }
 
 
- // Conservative comparison gate. It never labels a behavioral improvement or
- // converts whole-epoch event counts to rates without validated bot exposure.
+// Conservative comparison gate. It never labels a behavioral improvement or
+// converts whole-epoch event counts to rates without validated bot exposure.
 export function assessTrialCoverage(baseline, trial) {
   const warnings = [];
   const maps = result => new Map(result.cohorts.filter(c => c.map && !c.telemetry_window?.map_conflict)
