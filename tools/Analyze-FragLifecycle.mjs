@@ -89,8 +89,10 @@ function main(args) {
     'Usage: node tools/Analyze-FragLifecycle.mjs --log PRIVATE.log [--out PRIVATE.json]');
   const report = analyzeFragLog(fs.readFileSync(log, 'utf8'));
   if (out) {
+    if (path.resolve(out) === path.resolve(log))
+      throw new Error('Refusing to overwrite the private source log');
     fs.mkdirSync(path.dirname(out), {recursive: true});
-    fs.writeFileSync(out, JSON.stringify(report, null, 2) + '\n');
+    fs.writeFileSync(out, JSON.stringify(report, null, 2) + '\n', {flag: 'wx'});
   }
   console.log(JSON.stringify(report, null, 2));
 }
