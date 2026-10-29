@@ -1008,10 +1008,12 @@ fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut Bo
         let dir = route_dir(player, local, yaw);
         let fit = hull_fit(player, helper, dir, 40.);
         let status = local.nav_query.as_ref().map_or(0, |n| n.last_status);
-        log::info!("BOT_STALL epoch={} t={now:.2} slot={} reason={reason} state={} visible={} grounded={} speed={speed:.0} corner_flags={} corner_jump={} next_dist={:.0} next_dz={:.1} partial={} fit={fit:?} duck_state={} x={:.1} y={:.1} z={:.1}",
+        log::info!("BOT_STALL epoch={} t={now:.2} slot={} reason={reason} state={} visible={} grounded={} speed={speed:.0} corner_flags={} corner_jump={} corner_class={} next_dist={:.0} next_dz={:.1} partial={} fit={fit:?} duck_state={} x={:.1} y={:.1} z={:.1}",
             crate::bots::telemetry::epoch(), local.edict, local.metrics.state, local.metrics.visible as u8,
             on_ground as u8, local.current_corner.map_or(-1, |m| m.0 as i32),
-            local.current_corner.map_or(-1, |m| m.1 as i32), distance(local.next_target_pos, o),
+            local.current_corner.map_or(-1, |m| m.1 as i32),
+            crate::bots::nav_diagnostics::corner_class(local.current_corner),
+            distance(local.next_target_pos, o),
             local.next_target_pos.z - o.z, crate::bots::nav_diagnostics::is_partial(status) as u8,
             player.m_duckState, o.x, o.y, o.z);
     }

@@ -102,6 +102,9 @@ pub fn path_to_target(
     {
         local_data.last_time_node_reached = helper.globals.curTime;
         local_data.next_target_pos = origin;
+        // A replanned corridor has not yet produced a matching next-corner.
+        // Do not let diagnostics or low-clearance actions reuse stale metadata.
+        local_data.current_corner = None;
 
         // this might be the reason of the sudden aim shift or not really idk
         if local_data.last_bad_path + 1. >= helper.globals.curTime {
@@ -160,9 +163,10 @@ pub fn path_to_target(
         local_data.next_target_pos = next;
         local_data.current_corner = meta;
         if super::switch_on(&super::NAV_DIAGNOSTICS_CONVAR) {
-            log::info!("BOT_CORNER epoch={} t={:.2} slot={} flags={} jump={} remaining={} x={:.1} y={:.1} z={:.1} dz={:.1} dist={:.0}",
+            log::info!("BOT_CORNER epoch={} t={:.2} slot={} flags={} jump={} class={} remaining={} x={:.1} y={:.1} z={:.1} dz={:.1} dist={:.0}",
                 super::telemetry::epoch(), time(helper), local_data.edict,
-                meta.map_or(-1, |m| m.0 as i32), meta.map_or(-1, |m| m.1 as i32), nav.path_points.len(),
+                meta.map_or(-1, |m| m.0 as i32), meta.map_or(-1, |m| m.1 as i32),
+                super::nav_diagnostics::corner_class(meta), nav.path_points.len(),
                 next.x, next.y, next.z, next.z - origin.z, distance(next, origin));
         }
     }
