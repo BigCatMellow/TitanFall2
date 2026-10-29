@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {parseBotTrialLine, parseBotTrialLog} from '../tools/Analyze-BotAITrial.mjs';
+import {parseBotTrialLine, parseBotTrialLog, cornerClass} from '../tools/Analyze-BotAITrial.mjs';
 
 const log = (...lines) => lines.join('\n');
 
@@ -104,4 +104,40 @@ test('clearance diagnostics count command transitions, not successful passages',
   assert.ok(data.limits.some(line => line.includes('not player animation')));
   assert.ok(!JSON.stringify(data).includes('x=120'));
   assert.ok(!Object.keys(c).some(key => key.includes('successful_passages')));
+});
+
+test('native corner classes retain unknown jump codes without assigning movement', () => {
+  assert.equal(cornerClass(0, 0), 'ordinary_candidate');
+  assert.equal(cornerClass(1, 0), 'ordinary_candidate');
+  assert.equal(cornerClass(4, 0), 'offmesh_flag');
+  assert.equal(cornerClass(5, 7), 'offmesh_flag');
+  assert.equal(cornerClass(0, 7), 'coded_jump');
+  assert.equal(cornerClass(2, 255), 'unknown_jump');
+  assert.equal(cornerClass(16, 0), 'unknown_flags');
+  assert.equal(cornerClass(-1, -1), 'missing');
+  assert.equal(cornerClass(0, NaN), 'missing');
+});
+
+test('corner and stall histograms only expose raw code pairs, no positions', () => {
+  const data = parseBotTrialLog(log(
+    'BOT_FRAME epoch=11 map=mp_eden t=1',
+    'BOT_CORNER epoch=11 t=1 slot=3 flags=4 jump=7 x=123 y=200',
+    'BOT_CORNER epoch=11 t=2 slot=3 flags=4 jump=7 x=456 y=200',
+    'BOT_CORNER epoch=11 t=3 slot=3 flags=0 jump=0 x=450',
+    'BOT_CORNER epoch=11 t=4 slot=3 flags=-1 jump=-1',
+    'BOT_CORNER epoch=11 t=5 slot=3 flags=0 jump=255',
+    'BOT_STALL epoch=11 t=5 slot=3 reason=no_progress corner_flags=4 corner_jump=7 x=456',
+    'BOT_STALL epoch=11 t=6 slot=3 reason=waypoint_timeout corner_flags=-1 corner_jump=-1',
+  ));
+  const c = data.cohorts[0];
+  assert.equal(c.corners_by_class.offmesh_flag, 2);
+  assert.equal(c.corners_by_class.ordinary_candidate, 1);
+  assert.equal(c.corners_by_class.unknown_jump, 1);
+  assert.equal(c.corners_by_class.missing, 1);
+  assert.equal(c.stall_samples_by_corner_class.offmesh_flag, 1);
+  assert.equal(c.stall_samples_by_corner_class.missing, 1);
+  assert.deepEqual(c.raw_corner_codes.find(x => x.flags === 4 && x.jump === 7), {flags: 4, jump: 7, count: 2});
+  assert.deepEqual(c.raw_stalled_corner_codes, [{flags: 4, jump: 7, count: 1}]);
+  assert.ok(!JSON.stringify(data).includes('x=456'));
+  assert.ok(data.limits.some(x => x.includes('not a per-link failure rate')));
 });

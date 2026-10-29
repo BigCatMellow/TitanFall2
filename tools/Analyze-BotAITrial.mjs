@@ -6,11 +6,24 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
-const EVENT = /(?:^|[\s\]])(BOT_(?:FRAME|FRAG_INPUT|CLEARANCE|ROUTE_COOLDOWN|DECISION|SKILL|PATH|STALL|STUCK))\s/;
+const EVENT = /(?:^|[\s\]])(BOT_(?:FRAME|FRAG_INPUT|CLEARANCE|ROUTE_COOLDOWN|DECISION|SKILL|PATH|CORNER|STALL|STUCK))\s/;
 const finite = value => Number.isFinite(Number(value)) && value !== undefined && value !== '';
+// Raw Titanfall corner jump codes are not automatically JumpTypes enum values.
+// Standard Detour 0x04 is an off-mesh flag; all other inferences are provisional.
+export function cornerClass(flags, jump) {
+  if (!Number.isInteger(flags) || !Number.isInteger(jump) || flags < 0 || flags > 255 || jump < 0 || jump > 255) return 'missing';
+  if ((flags & ~7) !== 0) return 'unknown_flags';
+  if ((flags & 4) !== 0) return 'offmesh_flag';
+  if (jump === 255) return 'unknown_jump';
+  if (jump !== 0) return 'coded_jump';
+  return 'ordinary_candidate';
+}
+const classCounter = () => ({ordinary_candidate: 0, offmesh_flag: 0,
+  coded_jump: 0, unknown_jump: 0, unknown_flags: 0, missing: 0});
 const counter = () => ({
   path_requests_logged: 0, partial_paths_logged: 0, stall_samples_logged: 0,
   stuck_episodes_logged: 0, route_cooldown_events: 0,
+  corners_by_class: classCounter(), stall_samples_by_corner_class: classCounter(),
   clearance_duck_starts_logged: 0, clearance_releases_logged: 0,
   clearance_failed_attempts_logged: 0,
   cooldowns_followed_by_switch_within_8s: 0, decision_switches_logged: 0,
@@ -39,6 +52,8 @@ export function summarizeBotTrial(events) {
     if (!groups.has(epoch)) groups.set(epoch, {
       map: null, counts: counter(), presses: new Map(), pending: new Map(),
       held: [], invalid_time_events: 0,
+      corner_codes: new Map(), stall_codes: new Map(),
+      corner_code_overflow: 0, stall_code_overflow: 0,
     });
     return groups.get(epoch);
   };
@@ -51,6 +66,23 @@ export function summarizeBotTrial(events) {
     }
     if (e.type === 'BOT_PATH') { c.path_requests_logged++; if (e.partial === '1') c.partial_paths_logged++; }
     else if (e.type === 'BOT_STALL') c.stall_samples_logged++;
+    // Count raw code pairs, never actors, positions, target handles or log lines.
+    if (e.type === 'BOT_CORNER' || e.type === 'BOT_STALL') {
+      const f = Number(e.type === 'BOT_CORNER' ? e.flags : e.corner_flags);
+      const j = Number(e.type === 'BOT_CORNER' ? e.jump : e.corner_jump);
+      const flags = Number.isInteger(f) && e[e.type === 'BOT_CORNER' ? 'flags' : 'corner_flags'] !== undefined ? f : NaN;
+      const jump = Number.isInteger(j) && e[e.type === 'BOT_CORNER' ? 'jump' : 'corner_jump'] !== undefined ? j : NaN;
+      const kind = cornerClass(flags, jump);
+      (e.type === 'BOT_CORNER' ? c.corners_by_class : c.stall_samples_by_corner_class)[kind]++;
+      const map = e.type === 'BOT_CORNER' ? g.corner_codes : g.stall_codes;
+      if (kind !== 'missing') {
+        const key = `${flags}:${jump}`;
+        if (map.has(key)) map.set(key, map.get(key) + 1);
+        else if (map.size < 64) map.set(key, 1);
+        else if (e.type === 'BOT_CORNER') g.corner_code_overflow++;
+        else g.stall_code_overflow++;
+      }
+    }
     else if (e.type === 'BOT_STUCK') c.stuck_episodes_logged++;
     else if (e.type === 'BOT_SKILL' && e.ordnance && e.ordnance !== '-') c.skill_ordnance_requests_logged++;
 
@@ -97,11 +129,19 @@ export function summarizeBotTrial(events) {
     c.frag_unfinished_presses += g.presses.size;
     const n = g.held.length;
     const sorted = [...g.held].sort((a, b) => a - b);
+    const sortedCodes = map => [...map].map(([key, count]) => {
+      const [flags, jump] = key.split(':').map(Number);
+      return {flags, jump, count};
+    }).sort((a, b) => b.count - a.count || a.flags - b.flags || a.jump - b.jump);
     return {
       cohort: i + 1, map: g.map, ...c,
       input_hold_seconds: {matched_edges: n,
         median: n ? sorted[Math.floor((n - 1) / 2)] : null,
         maximum: n ? sorted[n - 1] : null},
+      raw_corner_codes: sortedCodes(g.corner_codes),
+      raw_stalled_corner_codes: sortedCodes(g.stall_codes),
+      corner_code_overflow: g.corner_code_overflow,
+      stall_code_overflow: g.stall_code_overflow,
       ignored_events_without_valid_slot_time: g.invalid_time_events,
     };
   });
@@ -111,6 +151,8 @@ export function summarizeBotTrial(events) {
       'BOT_FRAG_INPUT measures final native offhand command edges, not a confirmed engine throw, projectile, fuse, collision, self-damage or enemy hit.',
       'BOT_SKILL counts successful input starts as reported by the bot policy, not casts. BOT_ROUTE_COOLDOWN counts per-bot decisions, not successful navigation.',
       'BOT_CLEARANCE counts observed native crouch-intent transitions, not player animation, successful passage, slide or wall-run. Counter snapshots in logs are not summed.',
+      'BOT_CORNER classes are raw candidate labels, not validated Titanfall traversal actions. A 0x04 off-mesh flag follows standard Detour; the 8-bit jump code is not assumed to equal the JumpTypes bitmask enum.',
+      'BOT_STALL records the current last-known corner metadata, which may be stale or absent. Its class distribution is descriptive, not a per-link failure rate; logged corner visits do not prove completed traversal.',
       'BOT_DECISION logs target changes only when telemetry is enabled. A switch after a cooldown is temporal proximity, not a causal proof of recovery.',
       'Unfinished input pulses include log truncation, inventory changes, respawns and missing events; no such case alone establishes a stuck button.',
       'Counts are whole-epoch diagnostic events, not played-only windows or rates. Compare matched map/cohort exposure and independently validated damage/death results.',
