@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {instrumentFragSource} from '../tools/Prepare-FragLifecycleProbe.mjs';
-import {parseFragStage, analyzeFragLog} from '../tools/Analyze-FragLifecycle.mjs';
+import {parseFragStage, parseFragDamage, analyzeFragLog} from '../tools/Analyze-FragLifecycle.mjs';
 
 // Minimal signatures from public Northstar grenade code; no third-party game assets.
 const fixture = [
@@ -143,4 +143,39 @@ test('probe error marker prevents false conclusion of no grenade activity', () =
   assert.equal(quiet.probe_status, 'no_valid_stage_events_cannot_infer_no_grenades');
   const valid = analyzeFragLog(line('spawn'));
   assert.equal(valid.probe_status, 'stage_events_present_runtime_validation_required');
+});
+
+test('standalone frag damage callbacks are counted without claiming health loss', () => {
+  const lineDamage = (rel, victim, extra = '') => '[info] BT_FRAG_DAMAGE schema=1 map=mp_eden t=12'
+    + ' attacker=41 victim=' + victim + ' inflictor=800 relation=' + rel
+    + ' damage=45 ' + extra;
+  const data = analyzeFragLog([
+    lineDamage('self', '41', 'raw_private_id=41'),
+    lineDamage('enemy', '42'),
+    lineDamage('friendly', '43').replace('inflictor=800', 'inflictor=-1'),
+    lineDamage('self', '42'), // malformed self/attacker relation, ignored
+    lineDamage('enemy', '44').replace('damage=45', 'damage=0'), // ignored
+  ].join('\n'));
+  assert.equal(data.damage_maps.length, 1);
+  const counts = data.damage_maps[0];
+  assert.equal(counts.callback_events, 3);
+  assert.equal(counts.self, 1);
+  assert.equal(counts.enemy, 1);
+  assert.equal(counts.friendly, 1);
+  assert.equal(counts.missing_inflictor_handle, 1);
+  assert.equal(counts.valid_inflictor_handle_at_callback, 2);
+  assert.equal(data.damage_probe_status, 'damage_callbacks_present_not_confirmed_health_loss_or_deaths');
+  assert.ok(!JSON.stringify(data).includes('attacker=41'));
+  assert.ok(!JSON.stringify(data).includes('victim=42'));
+  assert.ok(!JSON.stringify(data).includes('raw_private_id'));
+  assert.ok(data.limits.some(s => s.includes('NOT proven to identify')));
+});
+test('damage probe faults and no-callback cases never imply absence of damage', () => {
+  assert.equal(parseFragDamage('unrelated log'), null);
+  const error = analyzeFragLog('[warn] BT_FRAG_DAMAGE_ERROR schema=1\n');
+  assert.equal(error.damage_probe_errors_logged, 1);
+  assert.equal(error.damage_probe_status, 'damage_probe_error_review_required');
+  const quiet = analyzeFragLog('WNOTE_HIT source=frag');
+  assert.equal(quiet.damage_probe_status, 'no_valid_damage_events_cannot_infer_no_frag_damage');
+  assert.equal(quiet.damage_maps.length, 0);
 });
