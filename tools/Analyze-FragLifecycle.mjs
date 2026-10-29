@@ -8,6 +8,10 @@ const KNOWN = new Set(['prep', 'spawn', 'spawn_null', 'release_callback',
   'cancel_drop_callback', 'forced_release_request', 'death_drop']);
 const num = value => typeof value === 'string' && value.length > 0 && Number.isFinite(Number(value))
   ? Number(value) : null;
+// Engine encoded entity handles may be signed 32-bit values. Keep negative
+// high-bit handles; -1 is the missing-entity sentinel. Never parse fractions.
+const handle = value => typeof value === 'string' && /^-?\d+$/.test(value)
+  && Number.isSafeInteger(Number(value)) ? Number(value) : null;
 export function parseFragStage(line) {
   const index = line.indexOf('BT_FRAG_STAGE ');
   if (index < 0) return null;
@@ -16,12 +20,10 @@ export function parseFragStage(line) {
     .matchAll(/(?:^|\s)([a-z_0-9]+)=([^\s]+)/g))
     fields[match[1]] = match[2];
   if (fields.schema !== '1' || !KNOWN.has(fields.stage)) return null;
-  const time = num(fields.t), owner = num(fields.owner),
-    weapon = num(fields.weapon), projectile = num(fields.projectile);
-  if (time === null || time < 0 || owner === null || owner < 0
-    || weapon === null || weapon < 0 || projectile === null
-    || !Number.isInteger(owner) || !Number.isInteger(weapon)
-    || !Number.isInteger(projectile)) return null;
+  const time = num(fields.t), owner = handle(fields.owner),
+    weapon = handle(fields.weapon), projectile = handle(fields.projectile);
+  if (time === null || time < 0 || owner === null || owner === -1
+    || weapon === null || weapon === -1 || projectile === null) return null;
   const map = /^mp_[a-z0-9_]+$/.test(fields.map || '') ? fields.map : 'unknown';
   return {map, t: time, stage: fields.stage, owner, weapon, projectile,
     fuse: num(fields.fuse_s), gap: num(fields.owner_gap),
@@ -37,17 +39,17 @@ export function parseFragDamage(line) {
   for (const match of line.slice(index + 'BT_FRAG_DAMAGE '.length)
     .matchAll(/(?:^|\s)([a-z_0-9]+)=([^\s]+)/g))
     fields[match[1]] = match[2];
-  const t = num(fields.t), attacker = num(fields.attacker),
-    victim = num(fields.victim), inflictor = num(fields.inflictor),
+  const t = num(fields.t), attacker = handle(fields.attacker),
+    victim = handle(fields.victim), inflictor = handle(fields.inflictor),
     damage = num(fields.damage);
   if (fields.schema !== '1' || t === null || t < 0
-    || ![attacker, victim, inflictor].every(Number.isInteger)
-    || attacker < 0 || victim < 0 || inflictor < -1
+    || attacker === null || victim === null || inflictor === null
+    || attacker === -1 || victim === -1
     || damage === null || damage <= 0
     || !['self', 'friendly', 'enemy'].includes(fields.relation)
     || (fields.relation === 'self') !== (attacker === victim)) return null;
   return {map: /^mp_[a-z0-9_]+$/.test(fields.map || '') ? fields.map : 'unknown',
-    t, relation: fields.relation, inflictorKnown: inflictor >= 0};
+    t, relation: fields.relation, inflictorKnown: inflictor !== -1};
 }
 
 export function summarizeFragDamage(events) {
@@ -99,7 +101,7 @@ export function summarizeFragStages(events) {
     if (e.stage === 'forced_release_request') c.forced_release_requests++;
     if (e.stage === 'spawn_null') c.spawn_null_events++;
     if (e.stage === 'spawn') {
-      if (e.projectile < 0) { c.invalid_spawn_handles++; continue; }
+      if (e.projectile === -1) { c.invalid_spawn_handles++; continue; }
       const key = e.projectile;
       if (g.projectiles.has(key)) { c.duplicate_projectile_spawn_events++; continue; }
       if (g.projectiles.size >= 2048) { c.tracked_projectiles_overflow++; continue; }
@@ -112,7 +114,7 @@ export function summarizeFragStages(events) {
     }
     if (e.stage === 'death_drop') {
       c.death_drop_callbacks++;
-      if (e.projectile >= 0 && g.projectiles.has(e.projectile))
+      if (e.projectile !== -1 && g.projectiles.has(e.projectile))
         c.death_drops_with_logged_spawn++;
     }
   }
