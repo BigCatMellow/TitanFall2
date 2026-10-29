@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {parseBotTrialLine, parseBotTrialLog, cornerClass} from '../tools/Analyze-BotAITrial.mjs';
+import {parseBotTrialLine, parseBotTrialLog, cornerClass, assessTrialCoverage} from '../tools/Analyze-BotAITrial.mjs';
 
 const log = (...lines) => lines.join('\n');
 
@@ -140,4 +140,73 @@ test('corner and stall histograms only expose raw code pairs, no positions', () 
   assert.deepEqual(c.raw_stalled_corner_codes, [{flags: 4, jump: 7, count: 1}]);
   assert.ok(!JSON.stringify(data).includes('x=456'));
   assert.ok(data.limits.some(x => x.includes('not a per-link failure rate')));
+});
+
+test('BOT_FRAME window is descriptive, with map conflicts and invalid times visible', () => {
+  const r = parseBotTrialLog(log(
+    'BOT_FRAME epoch=1 map=mp_eden t=1',
+    'BOT_FRAME epoch=1 map=mp_eden t=6',
+    'BOT_FRAME epoch=1 map=mp_meadow t=8',
+    'BOT_FRAME epoch=1 map=mp_meadow t=nope',
+  ));
+  assert.equal(r.cohorts[0].telemetry_window.frame_samples, 3);
+  assert.equal(r.cohorts[0].telemetry_window.observed_span_s, 7);
+  assert.equal(r.cohorts[0].telemetry_window.map_conflict, true);
+  assert.equal(r.cohorts[0].telemetry_window.invalid_frame_samples, 1);
+  assert.ok(r.limits.some(x => x.includes('not active bot-seconds')));
+});
+
+test('compare refuses to assume maps match or that no frames imply matched playtime', () => {
+  const baseline = parseBotTrialLog(log(
+    'BOT_FRAME epoch=1 map=mp_eden t=0',
+    'BOT_FRAME epoch=1 map=mp_eden t=100',
+    'BOT_FRAG_INPUT epoch=1 t=2 slot=2 edge=press',
+  ));
+  const mismatched = parseBotTrialLog(log(
+    'BOT_FRAME epoch=2 map=mp_meadow t=0',
+    'BOT_FRAME epoch=2 map=mp_meadow t=100',
+  ));
+  const c = assessTrialCoverage(baseline, mismatched);
+  assert.equal(c.status, 'coverage_warnings');
+  assert.deepEqual(c.shared_maps, []);
+  assert.deepEqual(c.baseline_only_maps, ['mp_eden']);
+  assert.deepEqual(c.trial_only_maps, ['mp_meadow']);
+  assert.ok(c.warnings.some(x => x.includes('different maps')));
+  const noFrame = parseBotTrialLog('BOT_STALL epoch=1 t=2 slot=2 reason=no_progress');
+  assert.equal(assessTrialCoverage(baseline, noFrame).status, 'coverage_warnings');
+  assert.ok(assessTrialCoverage(baseline, noFrame).warnings.some(x => x.includes('BOT_FRAME map label')));
+});
+
+test('large telemetry span mismatch is flagged but similar spans still require manual review', () => {
+  const mk = span => parseBotTrialLog(log(
+    'BOT_FRAME epoch=1 map=mp_eden t=0',
+    `BOT_FRAME epoch=1 map=mp_eden t=${span}`,
+  ));
+  const bad = assessTrialCoverage(mk(120), mk(60));
+  assert.equal(bad.status, 'coverage_warnings');
+  assert.ok(bad.warnings.some(x => x.includes('10% difference')));
+  const same = assessTrialCoverage(mk(120), mk(118));
+  assert.equal(same.status, 'metadata_present_manual_review_required');
+  assert.deepEqual(same.warnings, []);
+  assert.match(same.interpretation, /do NOT establish matching active pilot exposure/);
+});
+
+test('conflicted map labels and multiple epochs require manual matching', () => {
+  const b = parseBotTrialLog(log(
+    'BOT_FRAME epoch=1 map=mp_eden t=0',
+    'BOT_FRAME epoch=1 map=mp_meadow t=30',
+  ));
+  const t = parseBotTrialLog(log(
+    'BOT_FRAME epoch=2 map=mp_eden t=0',
+    'BOT_FRAME epoch=2 map=mp_eden t=40',
+  ));
+  assert.equal(assessTrialCoverage(b, t).unknown_or_conflicted_baseline_epochs, 1);
+  const multi = parseBotTrialLog(log(
+    'BOT_FRAME epoch=1 map=mp_eden t=0',
+    'BOT_FRAME epoch=1 map=mp_eden t=40',
+    'BOT_FRAME epoch=2 map=mp_eden t=0',
+    'BOT_FRAME epoch=2 map=mp_eden t=40',
+  ));
+  const c = assessTrialCoverage(multi, t);
+  assert.ok(c.warnings.some(x => x.includes('unequal baseline/trial epoch counts')));
 });
