@@ -1242,3 +1242,35 @@ left, stops owned game at deadline, guards normal files and restores isolated
 v20native307.../idle config/enablement at exit. It never copies old save_data.
 Respect stop-after-current.txt. Read actual status before launching anything.
 No antivirus changes; flagged old build script remains untouched/untracked.
+
+## 2026-10-29 — Remote work review and final frozen study receipt
+
+Fetched latest main d2dde49, frag lifecycle8962b2f and coverage-preflight0e146d4.
+Independent review worktree TitanFall2-review-20261029; final fix branch
+fix/clearance-link-handoff-20261029 atc35e6a5. It fixes a reproduced active-crouch
+handoff bug: an already-running Duck action now yields immediately when metadata
+becomes a special/unknown corner. New regression fails against the old predicate
+and all5clearance tests pass with the fix. See that branch's
+research/repo-review-20261029/REVIEW.md for full findings and exact validation.
+No installed game/native/profile/settings/save change or launch in this review.
+
+37Node checks on main+frag sources and separately12coverage fixtures passed on
+Node22.14.0 (overlapping cases,49executions).32focused Rust checks passed before
+fix; changed clearance suite is5instead of4, so33focused checks in the fixed
+source. No new DLL build or Squirrel/runtime/p95 certification. Main is still
+based on the older v20 source: it lacks our v23 Eden repair and local optional
+v21/v25/v26 lanes. Preserve/reconcile them before any isolated integration build.
+Nearest-pursuit affects only uncoordinated fallback; actual normal coordination
+is1. Stall-target recovery also supports coordinated pursuit. The additive frag
+damage observer/concordance and telemetry coverage checks are strongest next
+instrumentation candidates. Pulse Blade native recharge is a separate trial;
+current human50%preference remains. No wholesale deployment from main.
+
+The renewed frozen BC2study ended normally at its time budget. Final chunk
+completed Drydock,Kodai,Glitch,Grave, all zero detected runtime-error markers;
+profile_restored=true,normal_unchanged=true,failure=null. With the two earlier
+chunks,11completed rounds across9maps. This was not all maps. No queue from
+these receipts should be resumed; historical PIDs are not live-state evidence.
+Immutable snapshot:research/routing-v24-20261029/screening-final-variety.json.
+Normal native was independently rechecked BC2C1019...; isolated harnesses and
+measurement mod are disabled. Current saves were never restored from history.
