@@ -1,0 +1,32 @@
+name: Frag diagnostics source tests
+
+on:
+  pull_request:
+    paths:
+      - 'tools/Prepare-FragLifecycleProbe.mjs'
+      - 'tools/Analyze-FragLifecycle.mjs'
+      - 'tools/Compare-FragNotebook.mjs'
+      - 'tests/frag_lifecycle_probe.test.mjs'
+      - 'tests/frag_damage_probe_source.test.mjs'
+      - 'tests/frag_notebook_compare.test.mjs'
+      - 'BT7274.FragDamageProbe/**'
+      - '.github/workflows/frag-diagnostics-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-tests:
+    name: Node 22 frag diagnostics tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check diagnostic regressions
+        run: node --test tests/frag_lifecycle_probe.test.mjs tests/frag_damage_probe_source.test.mjs tests/frag_notebook_compare.test.mjs
