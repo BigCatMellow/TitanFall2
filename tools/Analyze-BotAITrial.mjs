@@ -6,11 +6,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
-const EVENT = /(?:^|[\s\]])(BOT_(?:FRAME|FRAG_INPUT|ROUTE_COOLDOWN|DECISION|SKILL|PATH|STALL|STUCK))\s/;
+const EVENT = /(?:^|[\s\]])(BOT_(?:FRAME|FRAG_INPUT|CLEARANCE|ROUTE_COOLDOWN|DECISION|SKILL|PATH|STALL|STUCK))\s/;
 const finite = value => Number.isFinite(Number(value)) && value !== undefined && value !== '';
 const counter = () => ({
   path_requests_logged: 0, partial_paths_logged: 0, stall_samples_logged: 0,
   stuck_episodes_logged: 0, route_cooldown_events: 0,
+  clearance_duck_starts_logged: 0, clearance_releases_logged: 0,
+  clearance_failed_attempts_logged: 0,
   cooldowns_followed_by_switch_within_8s: 0, decision_switches_logged: 0,
   skill_ordnance_requests_logged: 0,
   frag_input_presses: 0, frag_input_releases: 0, frag_orphan_releases: 0,
@@ -52,11 +54,16 @@ export function summarizeBotTrial(events) {
     else if (e.type === 'BOT_STUCK') c.stuck_episodes_logged++;
     else if (e.type === 'BOT_SKILL' && e.ordnance && e.ordnance !== '-') c.skill_ordnance_requests_logged++;
 
-    const needsTime = ['BOT_ROUTE_COOLDOWN', 'BOT_DECISION', 'BOT_FRAG_INPUT'].includes(e.type);
+    const needsTime = ['BOT_ROUTE_COOLDOWN', 'BOT_DECISION', 'BOT_FRAG_INPUT', 'BOT_CLEARANCE'].includes(e.type);
     if (!needsTime) continue;
     if (!finite(e.t) || !e.slot || !/^\d+$/.test(e.slot)) { g.invalid_time_events++; continue; }
     const at = Number(e.t), slot = e.slot;
-    if (e.type === 'BOT_ROUTE_COOLDOWN') {
+    if (e.type === 'BOT_CLEARANCE') {
+      // Transition logs, never proof that an obstacle was traversed.
+      if (e.intent === 'Duck') c.clearance_duck_starts_logged++;
+      else if (e.intent === 'Normal') c.clearance_releases_logged++;
+      else if (e.intent === 'Failed') c.clearance_failed_attempts_logged++;
+    } else if (e.type === 'BOT_ROUTE_COOLDOWN') {
       c.route_cooldown_events++;
       g.pending.set(slot, {at, matched: false});
     } else if (e.type === 'BOT_DECISION') {
@@ -103,6 +110,7 @@ export function summarizeBotTrial(events) {
     limits: [
       'BOT_FRAG_INPUT measures final native offhand command edges, not a confirmed engine throw, projectile, fuse, collision, self-damage or enemy hit.',
       'BOT_SKILL counts successful input starts as reported by the bot policy, not casts. BOT_ROUTE_COOLDOWN counts per-bot decisions, not successful navigation.',
+      'BOT_CLEARANCE counts observed native crouch-intent transitions, not player animation, successful passage, slide or wall-run. Counter snapshots in logs are not summed.',
       'BOT_DECISION logs target changes only when telemetry is enabled. A switch after a cooldown is temporal proximity, not a causal proof of recovery.',
       'Unfinished input pulses include log truncation, inventory changes, respawns and missing events; no such case alone establishes a stuck button.',
       'Counts are whole-epoch diagnostic events, not played-only windows or rates. Compare matched map/cohort exposure and independently validated damage/death results.',
