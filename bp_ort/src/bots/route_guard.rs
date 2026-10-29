@@ -133,6 +133,17 @@ mod tests {
         u.note(0., 7, true, 100.); u.note(5., 7, true, 100.); assert!(!u.blocks(5., 7));
         u.note(0., 7, true, 400.); u.note(4., 7, true, 400.); assert!(!u.blocks(-1., 7));
     }
+    #[test] fn corner_height_guard_requires_nearby_horizontal_and_vertical_position() {
+        assert!(corner_reached(0., 0., 45.));
+        assert!(corner_reached(45., 36., 45.));
+        assert!(corner_reached(30., -36., 45.));
+        assert!(!corner_reached(45.1, 0., 45.));
+        assert!(!corner_reached(30., 36.1, 45.));
+        assert!(!corner_reached(30., -36.1, 45.));
+        assert!(!corner_reached(f32::NAN, 0., 45.));
+        assert!(!corner_reached(10., f32::INFINITY, 45.));
+        assert!(!corner_reached(10., 0., f32::NAN));
+    }
     #[test] fn step_jump_waits_until_near_the_higher_point() {
         assert!(!step_jump_wanted(22., 400.)); assert!(step_jump_wanted(22., 100.));
         assert!(!step_jump_wanted(10., 50.)); assert!(!step_jump_wanted(f32::NAN, 50.));
