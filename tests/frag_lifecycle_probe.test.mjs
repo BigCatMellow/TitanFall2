@@ -179,3 +179,34 @@ test('damage probe faults and no-callback cases never imply absence of damage', 
   assert.equal(quiet.damage_probe_status, 'no_valid_damage_events_cannot_infer_no_frag_damage');
   assert.equal(quiet.damage_maps.length, 0);
 });
+
+test('signed encoded entity handles survive lifecycle and damage parsing', () => {
+  const stage = line('spawn').replace('owner=41', 'owner=-2147483000')
+    .replace('weapon=409', 'weapon=-2147482999')
+    .replace('projectile=800', 'projectile=-2147482998');
+  const damage = '[info] BT_FRAG_DAMAGE schema=1 map=mp_eden t=12'
+    + ' attacker=-2147483000 victim=-2147482000 inflictor=-2147482998'
+    + ' relation=enemy damage=45';
+  const parsedStage = parseFragStage(stage);
+  const parsedDamage = parseFragDamage(damage);
+  assert.equal(parsedStage.owner, -2147483000);
+  assert.equal(parsedStage.projectile, -2147482998);
+  assert.equal(parsedDamage.inflictorKnown, true);
+  const report = analyzeFragLog([stage,damage].join('\n'));
+  assert.equal(report.maps[0].spawned_entities, 1);
+  assert.equal(report.maps[0].invalid_spawn_handles, 0);
+  assert.equal(report.damage_maps[0].valid_inflictor_handle_at_callback, 1);
+  assert.ok(!JSON.stringify(report).includes('-2147483000'));
+  assert.ok(!JSON.stringify(report).includes('-2147482998'));
+});
+
+test('missing sentinel, fractions and unsafe numeric handles never become valid entities', () => {
+  assert.equal(parseFragStage(line('spawn').replace('owner=41','owner=-1')), null);
+  assert.equal(parseFragStage(line('spawn').replace('weapon=409','weapon=41.5')), null);
+  assert.equal(parseFragStage(line('spawn').replace('projectile=800','projectile=9007199254740993')), null);
+  assert.equal(parseFragDamage('[info] BT_FRAG_DAMAGE schema=1 map=mp_eden t=12'
+    + ' attacker=41 victim=42 inflictor=1.25 relation=enemy damage=10'), null);
+  const missing = analyzeFragLog(line('spawn').replace('projectile=800','projectile=-1'));
+  assert.equal(missing.maps[0].invalid_spawn_handles, 1);
+  assert.equal(missing.maps[0].spawned_entities, 0);
+});
