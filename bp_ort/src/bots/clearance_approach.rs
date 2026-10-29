@@ -40,7 +40,7 @@ impl ClearanceApproach {
     /// Absence of metadata is unknown, not permission to take over a link.
     pub fn ordinary_corner(meta: Option<(u8, u8)>) -> bool {
         meta.is_some_and(|(flags, jump)| flags & 0x04 == 0
-            && (jump == 0 || jump == u8::MAX))
+            && jump == 0)
     }
     /// Checks are at most 5Hz, require a grounded pilot actively travelling
     /// along an ordinary route, and never override a running escape recovery.
@@ -130,6 +130,7 @@ mod tests {
         assert!(!ClearanceApproach::ordinary_corner(None));
         assert!(!ClearanceApproach::ordinary_corner(Some((4, 0))));
         assert!(!ClearanceApproach::ordinary_corner(Some((0, 7))));
+        assert!(!ClearanceApproach::ordinary_corner(Some((0, u8::MAX))));
         let mut a = ClearanceApproach::default();
         for n in 0..20 {
             assert_eq!(a.update(n as f32 * 0.25, [0., 0.], true,
