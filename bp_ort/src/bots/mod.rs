@@ -102,6 +102,7 @@ pub(super) static CROUCH_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new
 // Independent opt-in v21 experiments; both default to 0.
 pub(super) static NEAREST_PURSUIT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static FRAG_SAFETY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static STALL_TARGET_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 // Balance candidate switches (default 0).
 pub(super) static DEFENSIVE_TACTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static HEIGHT_RESPONSE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
@@ -149,6 +150,7 @@ pub(super) struct BotData {
     route_target: Option<i32>,
     replan: route_guard::ReplanThrottle,
     unreachable: route_guard::Unreachable,
+    stall_targets: route_guard::StallTargetCooldown,
     jump_timing: route_guard::JumpTiming,
     strafe: combat_movement::Strafe,
     crouch: crouch_recovery::CrouchRecovery,
@@ -182,6 +184,7 @@ impl BotData {
         self.route_target = None;
         self.replan = Default::default();
         self.unreachable = Default::default();
+        self.stall_targets = Default::default();
         self.jump_timing = Default::default();
         self.strafe = Default::default();
         self.crouch = Default::default();
@@ -467,6 +470,7 @@ impl Plugin for Bots {
             (&ROUTE_GUARD_CONVAR, "bot_route_guard", "throttle replans of consumed partial routes and skip unreachable pursuit targets briefly"),
             (&NEAREST_PURSUIT_CONVAR, "bot_nearest_pursuit", "prefer nearest foe when uncoordinated bots have no visible enemy; 0 preserves old farthest fallback"),
             (&FRAG_SAFETY_CONVAR, "bot_frag_safety", "conservative frag-only throw conditions and 6-second request spacing; requires bot_skill_use 1"),
+            (&STALL_TARGET_RECOVERY_CONVAR, "bot_stall_target_recovery", "skip recently stalled pursuit target after two watchdog incidents; never hide visible combat target"),
             (&JUMP_TIMING_CONVAR, "bot_jump_timing", "step jumps only near the higher waypoint, plus one bounded double jump"),
             (&PROXIMITY_FIX_CONVAR, "bot_proximity_fix", "circular distance for titan boarding Use and titan melee (fixes axis-aligned aim snaps)"),
             (&PERCEPTION_FIX_CONVAR, "bot_perception_fix", "eye-angle facing and eye-level sight lines; same 180-degree hemisphere"),

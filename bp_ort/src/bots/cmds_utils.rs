@@ -57,6 +57,7 @@ pub fn path_to_target(
         }
         local_data.recovery_until = time(helper) + 1.2;
         local_data.stall_event = Some("no_progress");
+        note_stalled_pursuit(local_data, helper, "no_progress");
         note_recovery(local_data, origin, helper, "no_progress");
         face_toward(cmd, origin, target_pos, helper);
         try_avoid_obstacle(cmd, local_data, helper);
@@ -190,11 +191,23 @@ pub fn path_to_target(
         }
         local_data.recovery_until = time(helper) + 1.2;
         local_data.stall_event = Some("waypoint_timeout");
+        note_stalled_pursuit(local_data, helper, "waypoint_timeout");
         note_recovery(local_data, origin, helper, "waypoint_timeout");
         try_avoid_obstacle(cmd, local_data, helper);
     }
 
     true
+}
+
+/// Suppress only *unseen pursuit* after repeated actual watchdog recoveries.
+/// No global route blacklist or navmesh mutation; other bots are unaffected.
+fn note_stalled_pursuit(local_data: &mut BotData, helper: &CUserCmdHelper, reason: &str) {
+    if !super::switch_on(&super::STALL_TARGET_RECOVERY_CONVAR) { return; }
+    let Some(id) = local_data.route_target else { return; };
+    if local_data.stall_targets.record(time(helper), id) {
+        log::info!("BOT_ROUTE_COOLDOWN epoch={} t={:.2} slot={} target={} reason={} hold=8",
+            super::telemetry::epoch(), time(helper), local_data.edict, id, reason);
+    }
 }
 
 pub fn is_timedout(last_time: f32, helper: &CUserCmdHelper<'_>, time_elasped: f32) -> bool {

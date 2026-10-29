@@ -83,13 +83,25 @@ pub(crate) fn basic_combat(
         )
         .map(|(player, should_shoot)| ((*player.get_origin(v), player), should_shoot))
         .or_else(|| {
+            // Avoid a recently stalled *pursuit* target if another foe exists.
+            // When every candidate is blocked, fail open to existing selection;
+            // this must not disable combat in sparse/one-opponent matches.
+            let nearest = crate::bots::switch_on(&crate::bots::NEAREST_PURSUIT_CONVAR);
+            let avoid = crate::bots::switch_on(&crate::bots::STALL_TARGET_RECOVERY_CONVAR);
             crate::bots::target_policy::select_distance(
-                distance_iterator(
-                    &origin,
-                    enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team)),
-                ),
-                crate::bots::switch_on(&crate::bots::NEAREST_PURSUIT_CONVAR),
-            )
+                distance_iterator(&origin,
+                    enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team)))
+                    .filter(|(_, enemy)| !avoid || !local_data.stall_targets.blocks(
+                        time(helper), enemy.m_RefEHandle)),
+                nearest,
+            ).or_else(|| {
+                if !avoid { return None; }
+                crate::bots::target_policy::select_distance(
+                    distance_iterator(&origin,
+                        enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team))),
+                    nearest,
+                )
+            })
             .map(|(_, player)| player)
             .map(|player| ((*player.get_origin(v), player), false))
         })
@@ -1081,9 +1093,14 @@ unsafe fn find_team_target<'a>(
     });
     // Pursuit (not engagement) skips a target whose routes keep ending far
     // short of it, so bots stop circling under unreachable positions.
-    let pursue = if crate::bots::switch_on(&crate::bots::ROUTE_GUARD_CONVAR) {
-        ranked.iter().copied().find(|i| !local.unreachable.blocks(time(helper), targets[*i].candidate.id))
-            .or_else(|| ranked.first().copied())
+    let skip_partial = crate::bots::switch_on(&crate::bots::ROUTE_GUARD_CONVAR);
+    let skip_stalled = crate::bots::switch_on(&crate::bots::STALL_TARGET_RECOVERY_CONVAR);
+    let pursue = if skip_partial || skip_stalled {
+        ranked.iter().copied().find(|i| {
+            let id = targets[*i].candidate.id;
+            (!skip_partial || !local.unreachable.blocks(time(helper), id))
+                && (!skip_stalled || !local.stall_targets.blocks(time(helper), id))
+        }).or_else(|| ranked.first().copied())
     } else { ranked.first().copied() };
     let selected = visible.or(pursue)?;
     let selected = &targets[selected];

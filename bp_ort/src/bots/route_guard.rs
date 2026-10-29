@@ -61,6 +61,45 @@ impl Unreachable {
     }
 }
 
+/// Per-bot pursuit escape when Detour returned a route but the bot repeatedly
+/// could not advance along it. This tracks *distinct watchdog events*, not
+/// per-frame movement samples. A visible target is never blocked by this state.
+#[derive(Debug, Default)]
+pub(super) struct StallTargetCooldown {
+    recent: Option<(i32, f32, u8)>,
+    blocked: Option<(i32, f32)>,
+    last_time: Option<f32>,
+}
+impl StallTargetCooldown {
+    pub const WINDOW: f32 = 12.;
+    pub const HOLD: f32 = 8.;
+    pub const STRIKES: u8 = 2;
+
+    /// Returns true only when this event starts a target cooldown.
+    pub fn record(&mut self, now: f32, target: i32) -> bool {
+        if !now.is_finite() || target == -1 { return false; }
+        if self.last_time.is_some_and(|last| now < last) { *self = Self::default(); }
+        self.last_time = Some(now);
+        let count = match self.recent {
+            Some((id, at, count)) if id == target && now >= at && now - at <= Self::WINDOW =>
+                count.saturating_add(1),
+            _ => 1,
+        };
+        if count >= Self::STRIKES {
+            self.recent = None;
+            self.blocked = Some((target, now + Self::HOLD));
+            return true;
+        }
+        self.recent = Some((target, now, count));
+        false
+    }
+
+    pub fn blocks(&self, now: f32, target: i32) -> bool {
+        self.blocked.is_some_and(|(id, until)| now.is_finite()
+            && id == target && now >= until - Self::HOLD && now < until)
+    }
+}
+
 /// Step jumps used to fire whenever the next point was 18+ units higher, even
 /// 400 units away, so the bot hopped early and arrived at the ledge grounded.
 pub(super) fn step_jump_wanted(dz: f32, horizontal: f32) -> bool {
@@ -119,6 +158,31 @@ mod tests {
         let mut u = Unreachable::default();
         u.note(0., 7, true, 100.); u.note(5., 7, true, 100.); assert!(!u.blocks(5., 7));
         u.note(0., 7, true, 400.); u.note(4., 7, true, 400.); assert!(!u.blocks(-1., 7));
+    }
+    #[test] fn repeated_watchdog_events_cool_down_only_that_pursuit_target() {
+        let mut state = StallTargetCooldown::default();
+        assert!(!state.record(1., 7));
+        assert!(!state.blocks(3., 7));
+        assert!(state.record(5., 7));
+        assert!(state.blocks(5., 7));
+        assert!(state.blocks(12.9, 7));
+        assert!(!state.blocks(13., 7));
+        assert!(!state.blocks(6., 8));
+        assert!(!state.record(20., 7));
+        assert!(!state.record(21., 8)); // different target breaks strike sequence
+        assert!(!state.record(22., 7));
+        assert!(state.record(23., 7));
+    }
+    #[test] fn old_hits_and_clock_rollback_do_not_create_false_cooldowns() {
+        let mut state = StallTargetCooldown::default();
+        assert!(!state.record(10., 2));
+        assert!(!state.record(22.1, 2)); // outside the 12s strike window
+        assert!(!state.record(1., 2)); // new map/clock reset
+        assert!(!state.blocks(1., 2));
+        assert!(state.record(2., 2));
+        assert!(!state.blocks(f32::NAN, 2));
+        assert!(!state.record(f32::NAN, 2));
+        assert!(!state.record(3., -1));
     }
     #[test] fn step_jump_waits_until_near_the_higher_point() {
         assert!(!step_jump_wanted(22., 400.)); assert!(step_jump_wanted(22., 100.));

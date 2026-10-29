@@ -11,9 +11,11 @@ The [Full v20 review](../played-full-v20-20261027/FINDINGS.md) recorded 103 bot-
 1. **`bot_nearest_pursuit 1`** switches only the *uncoordinated*, *no-visible-target* fallback from choosing the **farthest** candidate (the existing `reduce` condition) to the **nearest** candidate. It does not change visible-enemy selection, the team coordination ranking, aiming or attack rules. The existing farthest-first behavior remains when off. The similarly named `closest_player` helper is a separate cleanup candidate and is not altered here.
 2. **`bot_frag_safety 1`** applies only when `bot_skill_use 1` is already enabled: bot frag requests require a visible target, `range_hold`-style intent, no pursuit/advance, at least 70 health, 700–1100 units horizontal range, and height difference at most 120 units. Frag request starts are spaced **6 seconds** apart rather than 1 second, while each valid press keeps the previous 0.12-second maximum pulse and readiness gating. All other ordnance and all tactical abilities keep their existing logic.
 
-Both switches default to **0**, preserving existing normal/Full commands until an explicit isolated trial. Existing aim error `0.78`, firing warm-up `0.8s`, damage, RPM, human reload/recharge, bot count, two-buffer navigation, map teardown, and lifecycle safeguards remain unchanged.
+All switches default to **0**, preserving existing normal/Full commands until an explicit isolated trial. Existing aim error `0.78`, firing warm-up `0.8s`, damage, RPM, human reload/recharge, bot count, two-buffer navigation, map teardown, and lifecycle safeguards remain unchanged.
 
 **Limitations:** The frag guard is intentionally conservative but cannot prove a safe throw. It has no projectile trajectory, wall clearance, owner-to-grenade distance, fuse or post-release escape signal. It might reduce both self-kills **and** useful enemy kills by throwing less. Do not enable it as a default until measured. The nearest fallback may choose an unreachable nearby player and is not intended to replace route-guard recovery or typed traversal links.
+
+3. **`bot_stall_target_recovery 1`** is an independent, default-off response to the Eden full-route stalls not covered by the existing partial-route guard. After two actual watchdog recoveries for the same pursuing bot and target within 12 seconds, that bot avoids selecting the target for the next 8 seconds *if another candidate exists*. Visible enemy engagement is never suppressed. Both coordinated and uncoordinated pursuit selection honor the cooldown; one-opponent cases fail open. No navmesh or movement physics are modified.
 
 ## Source and verification
 
@@ -21,11 +23,15 @@ Both switches default to **0**, preserving existing normal/Full commands until a
 - `bp_ort/src/bots/skill_policy.rs`: frag eligibility with negative controls.
 - `bp_ort/src/bots/action_policy.rs`: configurable inter-start interval while retaining readiness, release and weapon/reset semantics.
 - `bp_ort/src/bots/cmds/basic_combat.rs`: opt-in wiring.
-- `bp_ort/src/bots/mod.rs`: default-off convars.
+- `bp_ort/src/bots/mod.rs`: default-off convars and per-life reset of the new stall state.
+- `bp_ort/src/bots/route_guard.rs` and `cmds_utils.rs`: repeated-stall memory and watchdog integration. Five test cases in the two pure-policy modules cover targeting and route recovery.
 
-Before game deployment, run `tools/Test-Project.ps1` and `cargo +nightly-2025-09-11-x86_64-pc-windows-gnu test -p bp_ort --locked` with the pinned Windows toolchain and compile a distribution DLL as in the root README. Test both convars off for exact current behavior, then one switch at a time, then both. The code was edited remotely; no local Rust toolchain or installed game was available in the editing environment. **No native compile, Rust test, DLL install or Titanfall runtime test is claimed by this pass.**
+Before game deployment, run `tools/Test-Project.ps1` and `cargo +nightly-2025-09-11-x86_64-pc-windows-gnu test -p bp_ort --locked` with the pinned Windows toolchain and compile a distribution DLL as in the root README. Test both convars off for exact current behavior, then one switch at a time, then their combinations. The code was edited remotely; no local Rust toolchain or installed game was available in the editing environment. **No native compile, Rust test, DLL install or Titanfall runtime test is claimed by this pass.**
 
 ## Isolated A/B gate
+
+The third switch is tested as a **separate navigation A/B** before any combined test: with `bot_nearest_pursuit 0`, compare `bot_stall_target_recovery 0/1` across matched Eden, War Games and Meadow rounds with the same loadouts and goals. Record `BOT_ROUTE_COOLDOWN` events, target reacquisition, median time to first engagement, partial/full routes, route failures, low-progress windows and target churn. Negative controls: near-visible enemy attacks must never be blocked, no stale blacklist across respawn/map/lobby, and the sole available target remains eligible. The diagnostic logs identify decisions, **not** that a route became traversable. Reject for more idle time, new no-target loops, or regression in played-fight fairness.
+
 
 Use the existing **map-cycle-test-profile**, never overwrite the normal profile or CURRENT saves. Verify core `1.31.14.0`, native hash, 8v8, aim `0.78`, unchanged warm-up and known baseline. Run matched Eden, War Games, Complex and Meadow rounds using independent switches:
 
