@@ -23,6 +23,17 @@ pub(super) struct Situation {
 
 fn finite(s: &Situation) -> bool { s.distance.is_finite() && s.height.is_finite() }
 
+/// Optional frag-only risk reduction. This is a conservative experiment, not
+/// proof of blast clearance: without live projectile/throw-state feedback it
+/// cannot predict a collision, fuse time, or a bot running into its grenade.
+/// Other ordnance keeps its original eligibility.
+pub(super) fn frag_eligible(name: &str, s: &Situation) -> bool {
+    if name != "mp_weapon_frag_grenade" { return true; }
+    s.has_target && s.visible && finite(s) && s.health >= 70
+        && s.holding && !s.approaching
+        && (700. ..=1100.).contains(&s.distance) && s.height.abs() <= 120.
+}
+
 /// Reason to press the tactical now, if any.
 pub(super) fn tactical(name: &str, s: &Situation) -> Option<&'static str> {
     if !s.has_target || !finite(s) { return None; }
@@ -96,6 +107,25 @@ mod tests {
         assert_eq!(ordnance("mp_weapon_satchel", &s()), None);
         assert_eq!(ordnance("mp_weapon_grenade_electric_smoke", &Situation { health: 30, distance: 400., ..s() }), Some(("smoke_cover", 2.)));
         assert_eq!(ordnance("mp_weapon_frag_grenade", &Situation { distance: f32::NAN, ..s() }), None);
+    }
+    #[test] fn frag_guard_rejects_low_health_pursuit_close_throws_and_height() {
+        let safe = Situation { holding: true, distance: 800., ..s() };
+        assert!(frag_eligible("mp_weapon_frag_grenade", &safe));
+        for situation in [
+            Situation { holding: false, ..safe },
+            Situation { approaching: true, ..safe },
+            Situation { health: 69, ..safe },
+            Situation { distance: 699., ..safe },
+            Situation { distance: 1101., ..safe },
+            Situation { height: 121., ..safe },
+            Situation { visible: false, ..safe },
+            Situation { has_target: false, ..safe },
+            Situation { distance: f32::NAN, ..safe },
+        ] {
+            assert!(!frag_eligible("mp_weapon_frag_grenade", &situation));
+        }
+        assert!(frag_eligible("mp_weapon_grenade_emp", &Situation { health: 1, ..s() }));
+        assert!(frag_eligible("mp_weapon_thermite_grenade", &Situation { distance: 50., ..s() }));
     }
     #[test] fn loft_grows_with_range_and_is_bounded() {
         assert_eq!(loft(100.), 4.); assert!(loft(675.) > 12. && loft(675.) < 14.);

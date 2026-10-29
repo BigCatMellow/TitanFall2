@@ -55,12 +55,15 @@ mod jump_pulse;
 mod behavior_tuning;
 mod progress_watchdog;
 mod coordination;
+mod target_policy;
+mod frag_input_probe;
 mod escape_recovery;
 mod nav_diagnostics;
 mod route_guard;
 mod perception;
 mod combat_movement;
 mod crouch_recovery;
+mod clearance_approach;
 mod height_response;
 mod skill_policy;
 mod personality;
@@ -103,6 +106,12 @@ pub(super) static PROXIMITY_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new()
 pub(super) static PERCEPTION_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static COMBAT_MOVEMENT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static CROUCH_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static LOW_CLEARANCE_APPROACH_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+// Independent opt-in v21 experiments; both default to 0.
+pub(super) static NEAREST_PURSUIT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static FRAG_SAFETY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static STALL_TARGET_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static FRAG_INPUT_PROBE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 // Balance candidate switches (default 0).
 pub(super) static DEFENSIVE_TACTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static HEIGHT_RESPONSE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
@@ -157,10 +166,14 @@ pub(super) struct BotData {
     replan: route_guard::ReplanThrottle,
     link_detour: route_guard::LinkDetour,
     unreachable: route_guard::Unreachable,
+    stall_targets: route_guard::StallTargetCooldown,
+    frag_probe: frag_input_probe::FragInputProbe,
     jump_timing: route_guard::JumpTiming,
     strafe: combat_movement::Strafe,
     crouch: crouch_recovery::CrouchRecovery,
     crouch_duck: bool,
+    clearance: clearance_approach::ClearanceApproach,
+    clearance_duck: bool,
     height: height_response::HeightResponse,
     stall_event: Option<&'static str>,
     combat: combat_decisions::CombatState,
@@ -194,11 +207,15 @@ impl BotData {
         self.replan = Default::default();
         self.link_detour = Default::default();
         self.unreachable = Default::default();
+        self.stall_targets = Default::default();
+        self.frag_probe = Default::default();
         self.jump_timing = Default::default();
         self.strafe = Default::default();
         self.crouch = Default::default();
         self.height = Default::default();
         self.crouch_duck = false;
+        self.clearance = Default::default();
+        self.clearance_duck = false;
         self.stall_event = None;
         self.throw_safety = Default::default();
         self.escape_recovery = Default::default();
@@ -484,6 +501,10 @@ impl Plugin for Bots {
             (&ROUTE_CONTINUITY_CONVAR, "bot_route_continuity", "trial: finish the active final waypoint before replanning an empty segment, default off"),
             (&LINK_DETOUR_CONVAR, "bot_link_detour", "trial: locally avoid a failed same-level jump type for eight seconds, default off"),
             (&EDEN_REPAIR_CONVAR, "bot_eden_route_repair", "enable pending-waypoint and failed-link repair on Eden only, default off"),
+            (&NEAREST_PURSUIT_CONVAR, "bot_nearest_pursuit", "prefer nearest foe when uncoordinated bots have no visible enemy; 0 preserves old farthest fallback"),
+            (&FRAG_SAFETY_CONVAR, "bot_frag_safety", "conservative frag-only throw conditions and 6-second request spacing; requires bot_skill_use 1"),
+            (&STALL_TARGET_RECOVERY_CONVAR, "bot_stall_target_recovery", "skip recently stalled pursuit target after two watchdog incidents; never hide visible combat target"),
+            (&FRAG_INPUT_PROBE_CONVAR, "bot_frag_input_probe", "diagnostic-only per-bot frag command press/release edges; not proof of projectile release"),
             (&JUMP_TIMING_CONVAR, "bot_jump_timing", "step jumps only near the higher waypoint, plus one bounded double jump"),
             (&PROXIMITY_FIX_CONVAR, "bot_proximity_fix", "circular distance for titan boarding Use and titan melee (fixes axis-aligned aim snaps)"),
             (&PERCEPTION_FIX_CONVAR, "bot_perception_fix", "eye-angle facing and eye-level sight lines; same 180-degree hemisphere"),
@@ -495,6 +516,7 @@ impl Plugin for Bots {
             (&PERSONALITY_CONVAR, "bot_personality", "weapon-based behavior: SMG rushers push in, marksmen keep distance, LMG anchors hold; aim unchanged"),
             (&HEIGHT_RESPONSE_CONVAR, "bot_height_response", "break line of sight from a visible enemy that stays 180+ units above; needs bot_combat_decisions 1"),
             (&CROUCH_RECOVERY_CONVAR, "bot_crouch_recovery", "stall-triggered crouch when the real stand hull is blocked and duck hull fits"),
+            (&LOW_CLEARANCE_APPROACH_CONVAR, "bot_low_clearance_approach", "opt-in double-confirmed duck-only route clearance, bounded and never overrides known nav links"),
         ] {
             _ = cell.set(ConVarStruct::try_new(&ConVarRegister::new(name, "0", FCVAR_GAMEDLL as i32, help), token)
                 .expect("failed to register candidate feature switch"));

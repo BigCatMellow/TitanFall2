@@ -83,11 +83,25 @@ pub(crate) fn basic_combat(
         )
         .map(|(player, should_shoot)| ((*player.get_origin(v), player), should_shoot))
         .or_else(|| {
-            distance_iterator(
-                &origin,
-                enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team)),
-            )
-            .reduce(|closer, other| if closer.0 < other.0 { other } else { closer })
+            // Avoid a recently stalled *pursuit* target if another foe exists.
+            // When every candidate is blocked, fail open to existing selection;
+            // this must not disable combat in sparse/one-opponent matches.
+            let nearest = crate::bots::switch_on(&crate::bots::NEAREST_PURSUIT_CONVAR);
+            let avoid = crate::bots::switch_on(&crate::bots::STALL_TARGET_RECOVERY_CONVAR);
+            crate::bots::target_policy::select_distance(
+                distance_iterator(&origin,
+                    enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team)))
+                    .filter(|(_, enemy)| !avoid || !local_data.stall_targets.blocks(
+                        time(helper), enemy.m_RefEHandle)),
+                nearest,
+            ).or_else(|| {
+                if !avoid { return None; }
+                crate::bots::target_policy::select_distance(
+                    distance_iterator(&origin,
+                        enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team))),
+                    nearest,
+                )
+            })
             .map(|(_, player)| player)
             .map(|player| ((*player.get_origin(v), player), false))
         })
@@ -313,7 +327,11 @@ pub(crate) fn basic_combat(
         };
         let name = |slot: usize| lookup_ent(player.m_inventory.offhandWeapons[slot], helper.sv_funcs)
             .and_then(|ent| get_weaponx_name(ent, helper.sv_funcs)).unwrap_or_default();
-        skill_plan = (tactical_reason(name(1), &situation), ordnance_reason(name(0), &situation));
+        let ordnance_name = name(0);
+        let frag_allowed = !crate::bots::switch_on(&crate::bots::FRAG_SAFETY_CONVAR)
+            || crate::bots::skill_policy::frag_eligible(ordnance_name, &situation);
+        skill_plan = (tactical_reason(name(1), &situation),
+            if frag_allowed { ordnance_reason(ordnance_name, &situation) } else { None });
         if skill_plan.0.is_some() { cmd.buttons |= Action::OffHand1 as u32; }
         if skill_plan.1.is_some() { cmd.buttons |= Action::OffHand0 as u32; }
     }
@@ -658,8 +676,13 @@ pub(crate) fn basic_combat(
             }
         }
         // At most one pilot offhand request at once, with defensive tactical priority.
-        let ordnance = local_data.ordnance_pulse.press_for(time(helper), ordnance_id,
-            ordnance_wanted, ready.map(|r| r.ordnance), if offhand_safety { 0.45 } else { 0.12 }, offhand_safety);
+        let frag_guard_on = crate::bots::switch_on(&crate::bots::FRAG_SAFETY_CONVAR)
+            && lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs)
+                .and_then(|ent| get_weaponx_name(ent, helper.sv_funcs))
+                .is_some_and(|name| name == "mp_weapon_frag_grenade");
+        let ordnance = local_data.ordnance_pulse.press_for_interval(time(helper), ordnance_id,
+            ordnance_wanted, ready.map(|r| r.ordnance), if offhand_safety {0.45}else{0.12}, offhand_safety,
+            if frag_guard_on {6.}else{1.});
         if !tactical { cmd.buttons &= !(Action::OffHand1 as u32); }
         if !ordnance { cmd.buttons &= !(Action::OffHand0 as u32); }
     }
@@ -782,6 +805,28 @@ pub(crate) fn basic_combat(
             local_data.movement_anchor = None;
         }
     }
+    // Capture final native *command* edges, not weapon/projectile events.
+    // Separate short input pulses from actual throws before changing frag logic.
+    if crate::bots::switch_on(&crate::bots::FRAG_INPUT_PROBE_CONVAR) && !is_titan && sim_type == 6 {
+        let is_frag = lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs)
+            .and_then(|w| get_weaponx_name(w, helper.sv_funcs))
+            .is_some_and(|name| name == "mp_weapon_frag_grenade");
+        let pressed = cmd.buttons & Action::OffHand0 as u32 != 0;
+        if let Some((edge, age)) = local_data.frag_probe.observe(time(helper), is_frag, pressed) {
+            let token = unsafe { EngineToken::new_unchecked() };
+            let ready = crate::bots::action_bridge::readiness(player.m_RefEHandle, token)
+                .map(|state| (state.ordnance.ready as u8, (time(helper) - state.ordnance.at).max(0.)));
+            let o = player.m_vecAbsOrigin;
+            let vel = player.m_vecAbsVelocity;
+            log::info!("BOT_FRAG_INPUT epoch={} t={:.2} slot={} edge={} held_s={age:.3} target={} visible={} state={} ready={} ready_age={:.2} speed_xy={:.1} x={:.1} y={:.1} z={:.1}",
+                crate::bots::telemetry::epoch(), time(helper), local_data.edict,
+                edge.as_str(), local_data.metrics.target.unwrap_or(-1),
+                local_data.metrics.visible as u8, local_data.metrics.state,
+                ready.map_or(-1, |(flag, _)| flag as i32),
+                ready.map_or(-1., |(_, age)| age),
+                vel.x.hypot(vel.y), o.x, o.y, o.z);
+        }
+    } else { local_data.frag_probe = Default::default(); }
     cmd.camera_angles = cmd.world_view_angles;
 
     cmd
@@ -1006,11 +1051,13 @@ fn height_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut B
 /// Crouch recovery, stall diagnostics and double jumps for route following.
 fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut BotData,
     cmd: &mut CUserCmd, is_titan: bool, sim_type: i32) {
-    use crate::bots::{switch_on, CROUCH_RECOVERY_CONVAR, NAV_DIAGNOSTICS_CONVAR, JUMP_TIMING_CONVAR};
-    if !switch_on(&NAV_DIAGNOSTICS_CONVAR) && !switch_on(&CROUCH_RECOVERY_CONVAR) && !switch_on(&JUMP_TIMING_CONVAR) {
-        // All three off: no native calls, no input changes (installed v19 path).
+    use crate::bots::{switch_on, CROUCH_RECOVERY_CONVAR, NAV_DIAGNOSTICS_CONVAR, JUMP_TIMING_CONVAR, LOW_CLEARANCE_APPROACH_CONVAR};
+    if !switch_on(&NAV_DIAGNOSTICS_CONVAR) && !switch_on(&CROUCH_RECOVERY_CONVAR)
+        && !switch_on(&JUMP_TIMING_CONVAR) && !switch_on(&LOW_CLEARANCE_APPROACH_CONVAR) {
+        // All off: no native calls and no command changes.
         local.stall_event = None;
         if local.crouch.is_active() || local.crouch_duck { local.crouch.cancel(); local.crouch_duck = false; }
+        if local.clearance.is_active() || local.clearance_duck { local.clearance.cancel(); local.clearance_duck = false; }
         return;
     }
     let now = time(helper);
@@ -1028,15 +1075,59 @@ fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut Bo
         let dir = route_dir(player, local, yaw);
         let fit = hull_fit(player, helper, dir, 40.);
         let status = local.nav_query.as_ref().map_or(0, |n| n.last_status);
-        log::info!("BOT_STALL epoch={} t={now:.2} slot={} reason={reason} state={} visible={} grounded={} speed={speed:.0} corner_flags={} corner_jump={} next_dist={:.0} next_dz={:.1} partial={} fit={fit:?} duck_state={} x={:.1} y={:.1} z={:.1}",
+        log::info!("BOT_STALL epoch={} t={now:.2} slot={} reason={reason} state={} visible={} grounded={} speed={speed:.0} corner_flags={} corner_jump={} corner_class={} next_dist={:.0} next_dz={:.1} partial={} fit={fit:?} duck_state={} x={:.1} y={:.1} z={:.1}",
             crate::bots::telemetry::epoch(), local.edict, local.metrics.state, local.metrics.visible as u8,
             on_ground as u8, local.current_corner.map_or(-1, |m| m.0 as i32),
-            local.current_corner.map_or(-1, |m| m.1 as i32), distance(local.next_target_pos, o),
+            local.current_corner.map_or(-1, |m| m.1 as i32),
+            crate::bots::nav_diagnostics::corner_class(local.current_corner),
+            distance(local.next_target_pos, o),
             local.next_target_pos.z - o.z, crate::bots::nav_diagnostics::is_partial(status) as u8,
             player.m_duckState, o.x, o.y, o.z);
     }
 
-    if switch_on(&CROUCH_RECOVERY_CONVAR) && pilot_route && local.metrics.state != "recover" {
+    // Proactive low-clearance policy: never guess a traversal link's type.
+    // The same real stand/duck hull traces used by stall-triggered recovery
+    // confirm a narrow ordinary path twice before commanding a crouch.
+    if switch_on(&LOW_CLEARANCE_APPROACH_CONVAR) {
+        use crate::bots::clearance_approach::{Clearance, Intent};
+        use crate::bots::crouch_recovery::Fit;
+        let commanded = cmd.move_.x.hypot(cmd.move_.y) > 0.3;
+        let ordinary = crate::bots::clearance_approach::ClearanceApproach::ordinary_corner(local.current_corner);
+        let dir = route_dir(player, local, yaw);
+        let mut tested = None;
+        let outcome = local.clearance.update(now, [o.x, o.y], on_ground,
+            pilot_route && local.metrics.state != "recover" && commanded
+                && !local.crouch.is_active(),
+            speed, distance(local.next_target_pos, o), ordinary, || {
+                let fit = hull_fit(player, helper, dir, 40.);
+                tested = Some(fit);
+                match fit {
+                    Fit::StandClear => Clearance::StandClear,
+                    Fit::DuckOnly => Clearance::DuckOnly,
+                    _ => Clearance::Unsafe,
+                }
+            });
+        let duck = outcome == Intent::Duck;
+        if duck {
+            cmd.buttons &= !(Action::Speed as u32 | Action::Jump as u32);
+            cmd.buttons |= Action::Duck as u32;
+            cmd.move_.z = 0.;
+        }
+        if switch_on(&NAV_DIAGNOSTICS_CONVAR)
+            && (duck != local.clearance_duck || outcome == Intent::Failed) {
+            log::info!("BOT_CLEARANCE epoch={} t={now:.2} slot={} intent={outcome:?} fit={tested:?} ordinary={} dist={:.0} speed={speed:.0} probes={} starts={} successes={} failures={} x={:.1} y={:.1} z={:.1}",
+                crate::bots::telemetry::epoch(), local.edict, ordinary as u8,
+                distance(local.next_target_pos, o), local.clearance.probes,
+                local.clearance.starts, local.clearance.successes,
+                local.clearance.failures, o.x, o.y, o.z);
+        }
+        local.clearance_duck = duck;
+    } else if local.clearance.is_active() || local.clearance_duck {
+        local.clearance.cancel();
+        local.clearance_duck = false;
+    }
+
+    if !local.clearance_duck && switch_on(&CROUCH_RECOVERY_CONVAR) && pilot_route && local.metrics.state != "recover" {
         use crate::bots::crouch_recovery::Intent;
         let commanding = cmd.move_.x.hypot(cmd.move_.y) > 0.3;
         let dir = route_dir(player, local, yaw);
@@ -1066,7 +1157,7 @@ fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut Bo
     if switch_on(&JUMP_TIMING_CONVAR) && !is_titan && sim_type == 6 {
         let wanted = local.jump_timing.double_jump(now, on_ground,
             local.next_target_pos.z - o.z, distance(local.next_target_pos, o));
-        if wanted && pilot_route && local.metrics.state != "recover" && !local.crouch_duck {
+        if wanted && pilot_route && local.metrics.state != "recover" && !local.crouch_duck && !local.clearance_duck {
             cmd.buttons |= Action::Jump as u32;
         }
     }
@@ -1137,10 +1228,15 @@ unsafe fn find_team_target<'a>(
     });
     // Pursuit (not engagement) skips a target whose routes keep ending far
     // short of it, so bots stop circling under unreachable positions.
-    let pursue = if crate::bots::switch_on(&crate::bots::ROUTE_GUARD_CONVAR)
-        || crate::bots::switch_on(&crate::bots::STALL_RETARGET_CONVAR) {
-        ranked.iter().copied().find(|i| !local.unreachable.blocks(time(helper), targets[*i].candidate.id))
-            .or_else(|| ranked.first().copied())
+    let skip_partial = crate::bots::switch_on(&crate::bots::ROUTE_GUARD_CONVAR)
+        || crate::bots::switch_on(&crate::bots::STALL_RETARGET_CONVAR);
+    let skip_stalled = crate::bots::switch_on(&crate::bots::STALL_TARGET_RECOVERY_CONVAR);
+    let pursue = if skip_partial || skip_stalled {
+        ranked.iter().copied().find(|i| {
+            let id = targets[*i].candidate.id;
+            (!skip_partial || !local.unreachable.blocks(time(helper), id))
+                && (!skip_stalled || !local.stall_targets.blocks(time(helper), id))
+        }).or_else(|| ranked.first().copied())
     } else { ranked.first().copied() };
     let selected = visible.or(pursue)?;
     let selected = &targets[selected];
