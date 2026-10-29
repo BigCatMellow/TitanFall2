@@ -102,3 +102,24 @@ test('map groups are sanitized and never join BOT inputs to script entities', ()
   assert.equal(data.maps.reduce((s,x) => s + x.events_logged, 0), 3);
   assert.ok(data.limits.some(x => x.includes('identifier domains')));
 });
+
+test('recycled projectile handles after map or clock restart are independent events', () => {
+  const data = analyzeFragLog([
+    line('spawn').replace('t=10', 't=10'),
+    line('spawn').replace('t=10', 't=10.1'), // duplicate in same segment
+    line('spawn').replace('map=mp_eden', 'map=mp_meadow').replace('t=10', 't=1'),
+    line('spawn').replace('map=mp_eden', 'map=mp_meadow').replace('t=10', 't=2'),
+    line('spawn').replace('t=10', 't=0.1'), // return to same map is a new segment
+    line('spawn').replace('t=10', 't=10'),
+    line('spawn').replace('t=10', 't=0.2'), // clock rollback starts another segment
+  ].join('\n'));
+  const eden = data.maps.filter(m => m.map === 'mp_eden');
+  assert.equal(eden.length, 3);
+  assert.deepEqual(eden.map(m => m.spawned_entities), [1, 1, 1]);
+  assert.deepEqual(eden.map(m => m.duplicate_projectile_spawn_events), [1, 1, 0]);
+  const meadow = data.maps.filter(m => m.map === 'mp_meadow');
+  assert.equal(meadow.length, 1);
+  assert.equal(meadow[0].spawned_entities, 1);
+  assert.equal(meadow[0].duplicate_projectile_spawn_events, 1);
+  assert.ok(data.limits.some(s => s.includes('clock rollback')));
+});
