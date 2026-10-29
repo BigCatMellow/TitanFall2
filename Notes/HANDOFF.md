@@ -1208,3 +1208,37 @@ and target/v24-study-session.json for actual live state; never infer success
 or a live PID from this note. Do not change frozen study scripts/measurement
 source/native while active. Deeper native prototypes use a separate canonical
 repository worktree/build and remain default-off until runtime validation.
+
+## 2026-10-29 — Experimental traversal lane and resumed varied-map screen
+
+Normal play remains v23BC2C1019... with Eden repair only, unchanged modifiers,
+presets/current saves, aim0.78 and firing warm-up. All ten normal save/deployment/
+settings hashes were unchanged after isolated prototype testing. No prototype
+was installed into normal. Do not infer a live process from historical receipts.
+
+Separate canonical-repository worktree TitanFall2-lab-v25, branch
+candidate/traversal-v26-20261029, carries v25/v26 default-off traversal source,
+105Rust checks, full migration/preset fixture pass and four reporting Node tests.
+v26EBB6D531... passed all five runtime/lifecycle phases on Eden/WarGames with
+zero detected error markers, but effectiveness was inadequate: Eden0/8actions
+completed, WarGames2/50. Approach reversal, intermediate landings and combat/
+replan cancellations need an architectural follow-up. No rollout. See that
+branch's research/traversal-v26-20261029 and research/frag-exposure-20261029.
+Seven frozen v24 rounds,542observed frags,88matched self-kills:86came from first
+observed speed>200units/s. Scalar sampled distances suggest investigating actual
+projectile-relative escape; they do not establish why a throw was unsafe.
+
+This branch archives first Relic/WarGames pairs and AngelCity/Colony/CrashSite
+baseline rounds. Read research/routing-v24-20261029/INITIAL-FINDINGS.md and the
+two immutable screening JSON snapshots. Seven completed rounds across five maps,
+not an all-map or eight-hour completion. Pair results mixed; no global promotion.
+
+Frozen BC2study resumed at07:35EDT, deadline08:03EDTOct29. Actual receipt:
+target/v24-study-after-v26-session.json; private batch variety-after-v26-*;
+public research/routing-v24-20261029/status.json reflects ONLY the latest chunk.
+Priority is remaining full-size variety: Drydock,Kodai,Glitch,Grave,Homestead,
+then remaining queue within budget. Supervisor starts no new round with<8min
+left, stops owned game at deadline, guards normal files and restores isolated
+v20native307.../idle config/enablement at exit. It never copies old save_data.
+Respect stop-after-current.txt. Read actual status before launching anything.
+No antivirus changes; flagged old build script remains untouched/untracked.

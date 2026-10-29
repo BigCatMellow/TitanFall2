@@ -1,4 +1,4 @@
-# Project status — 2026-10-28
+# Project status — 2026-10-29
 
 Normal now has the tested **v23 Eden-only pilot route repair**, native BC2C1019... .
 It preserves pending waypoints and temporarily routes around a failed type16
@@ -7,7 +7,9 @@ repair-on trials; off trials remained blocked. Respawn, disable, lobby and
 Complex map change passed, with repair inactive on Complex. Six current saves,
 enabledmods and existing gameplay settings were preserved. Same solo shortcut.
 See [findings and limits](../research/route-continuity-v23-20261028/FINDINGS.md).
-Isolated is restored to v20; no game/test queue remains. Later choke points and
+The October28 isolated restore is historical. A fresh bounded October29 study is
+tracked in the latest handoff and target/v24-study-after-v26-session.json.
+Later choke points and
 human combat validation remain open. Global experimental switches stay off.
 
 The reviewed v20 stack remains the gameplay/modifier foundation.
@@ -23,7 +25,7 @@ settings or saves changed, and no aim/damage adjustment is justified here.
 | Item | Current state |
 |---|---|
 | Native |v23 Eden-only route repair, BC2C1019...; v20 rollback3077878B...|
-| Native SHA256 |3077878B8FDA814F8F50488BE4C073E040AC60A7E8BB45F053AF95D488DF1D89|
+| Native SHA256 |BC2C1019D27F537F075611ED6B68A75591D1F2F9924BA8700D82A757BB1000F7|
 | Core |Northstar1.31.14.0|
 | Profiles |Normal Movement; working isolated candidate Baseline; test harnesses disabled|
 | Preserved |8v8,human+15bots,aim0.78,existing0.8sfiring warm-up,damage/RPM|

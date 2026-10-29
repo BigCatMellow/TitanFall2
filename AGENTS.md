@@ -4,6 +4,11 @@ Canonical development repo for BT-7274's solo Northstar project. Read README.md,
 docs/PROJECT-STATUS.md, Notes/CURRENT-SETUP.md and the latest Notes/HANDOFF.md
 entries before changes.
 
+- October29 current research: normal remains v23BC2... unchanged. Separate
+  candidate/traversal-v26-20261029 prototype passed lifecycle but NOT effectiveness;
+  no rollout. Latest frozen map study receipt is target/v24-study-after-v26-session.json,
+  deadline08:03EDTOct29. Read actual status/clock before acting; never resume old
+  PIDs automatically. See latest handoff and research/routing-v24-20261029.
 - Current normal deployment is the tested v23 Eden pilot route repair:
   BC2C1019D27F537F075611ED6B68A75591D1F2F9924BA8700D82A757BB1000F7.
   bot_eden_route_repair=1; global route_continuity/link_detour and corner-height
