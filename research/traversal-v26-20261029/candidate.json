@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "candidate": "momentum_aware_traversal_v26",
+  "source_commit": "44b8dcec37e6e261e83d324db0cf1727123a84c8",
+  "native_sha256": "EBB6D53136C54BCA83075B760CB6FA9C87650C1445CF2273DC91B17A86DCD1FA",
+  "lock_sha256": "E4F8434813F688AF4FB5184EAEF4876A7F72F79C1D6B2A4DAB69C7BF2B89AE41",
+  "default_enabled": false,
+  "normal_deployed": false,
+  "rust_suites": 19,
+  "rust_tests": 105.0,
+  "reporting_node_tests": 2,
+  "runtime_state": "pending",
+  "preserves": [
+    "aim_0.78",
+    "warmup_0.8s",
+    "damage_and_physics",
+    "normal_saves",
+    "two_buffer_navigation",
+    "map_teardown"
+  ]
+}
