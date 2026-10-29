@@ -31,6 +31,14 @@ test('insertion is selective and leaves original input unchanged', () => {
   assert.ok(result.includes('#if SERVER'));
   assert.ok(!fixture.includes('BT7274_FragLifecycleProbe'));
 });
+test('diagnostic exceptions do not propagate through grenade callbacks', () => {
+  const output = instrumentFragSource(fixture);
+  assert.ok(output.includes('try\n    {'));
+  assert.ok(output.includes('catch ( probeError )'));
+  assert.ok(output.includes('BT_FRAG_PROBE_ERROR schema=1 stage='));
+  assert.ok(output.includes('bt7274FragProbeState.errorLogged = true'));
+  assert.ok(output.includes('#if SERVER'));
+});
 test('unknown upstream signatures and previously instrumented source fail closed', () => {
   assert.throws(() => instrumentFragSource('void foo() {}'), /Expected an unmodified/);
   assert.throws(() => instrumentFragSource(fixture.replace('FireWeaponGrenade', 'OtherFunction')),
