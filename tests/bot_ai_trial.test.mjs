@@ -86,3 +86,22 @@ test('bad timestamps, missing slot and duplicate presses are treated conservativ
   assert.equal(c.frag_unfinished_presses, 1);
   assert.equal(c.frag_orphan_releases, 1);
 });
+
+test('clearance diagnostics count command transitions, not successful passages', () => {
+  const data = parseBotTrialLog(log(
+    'BOT_FRAME epoch=8 map=mp_eden t=0',
+    'BOT_CLEARANCE epoch=8 t=1 slot=3 intent=Duck probes=2 starts=1 x=100',
+    'BOT_CLEARANCE epoch=8 t=1.5 slot=3 intent=Normal successes=1 x=120',
+    'BOT_CLEARANCE epoch=8 t=2 slot=4 intent=Duck starts=1',
+    'BOT_CLEARANCE epoch=8 t=2.6 slot=4 intent=Failed failures=1',
+    'BOT_CLEARANCE epoch=8 t=nope slot=7 intent=Duck',
+  ));
+  const c = data.cohorts[0];
+  assert.equal(c.clearance_duck_starts_logged, 2);
+  assert.equal(c.clearance_releases_logged, 1);
+  assert.equal(c.clearance_failed_attempts_logged, 1);
+  assert.equal(c.ignored_events_without_valid_slot_time, 1);
+  assert.ok(data.limits.some(line => line.includes('not player animation')));
+  assert.ok(!JSON.stringify(data).includes('x=120'));
+  assert.ok(!Object.keys(c).some(key => key.includes('successful_passages')));
+});
