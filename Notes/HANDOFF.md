@@ -1274,3 +1274,31 @@ these receipts should be resumed; historical PIDs are not live-state evidence.
 Immutable snapshot:research/routing-v24-20261029/screening-final-variety.json.
 Normal native was independently rechecked BC2C1019...; isolated harnesses and
 measurement mod are disabled. Current saves were never restored from history.
+
+## 2026-10-29 — Four-hour integrated testing authorized and started
+
+Active source/runtime work moved to the canonical-repository worktree
+TitanFall2-integration-v28, branch candidate/integration-v28-20261029. Read its
+latest AGENTS/HANDOFF and research/integration-v28-20261029. It merges main and
+the reviewed fix/frag/coverage branches while preserving the tested Eden repair.
+Normal remains v23BC2..., current progress and all11normal guard files unchanged.
+Native candidateD85B69B149E1681B29AB6B933FED75EB125F9D92FFD24435F31EE3998A4E9AE6.
+118Rust checks/21suites, full migration/preset fixtures and106Node/20suites pass.
+Combined Eden/WarGames lifecycle and both seven-tactical PowerCell/no-PowerCell
+probes passed in isolated profile; old tactical package restored. No normal
+promotion or minimap/HUD installation. No grenade-script implementation override.
+
+A50-point preflight Relic match completed and is archived separately. Fresh
+30-point independent cell/map screening began13:05EDT; deadline16:27:48EDT from
+original four-hour authorization12:27:48.55jobs/15full-size maps planned as time
+permits. Actual receipt ../TitanFall2-integration-v28/target/v28-study-resumed-session.json;
+private status in that receipt's batch; generated sanitized status under that
+worktree's research/integration-v28-20261029/status.json. No automatic upload of
+raw logs or live status. Read actual state; historical PIDs are not proof of life.
+
+Do not start another game or edit frozen integration tools/source while active.
+Use the batch stop-after-current.txt to pause cleanly. Supervisor enforces time,
+normal/source/runtime guards, per-cell coarse navigation cutoff and restores
+isolated native/config/enablement without copying historical saves. Source and
+sanitized validation notes are committed on the integration branch; further
+rounds remain pending and no all-map completion or human balance gain is claimed.
