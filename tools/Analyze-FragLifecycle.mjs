@@ -27,6 +27,47 @@ export function parseFragStage(line) {
     fuse: num(fields.fuse_s), gap: num(fields.owner_gap),
     cook: num(fields.cook_s)};
 }
+
+// Parses bot frag pilot *damage callbacks*, not health-loss confirmations
+// or kills. Encoded handles stay private and are never emitted in summaries.
+export function parseFragDamage(line) {
+  const index = line.indexOf('BT_FRAG_DAMAGE ');
+  if (index < 0) return null;
+  const fields = {};
+  for (const match of line.slice(index + 'BT_FRAG_DAMAGE '.length)
+    .matchAll(/(?:^|\s)([a-z_0-9]+)=([^\s]+)/g))
+    fields[match[1]] = match[2];
+  const t = num(fields.t), attacker = num(fields.attacker),
+    victim = num(fields.victim), inflictor = num(fields.inflictor),
+    damage = num(fields.damage);
+  if (fields.schema !== '1' || t === null || t < 0
+    || ![attacker, victim, inflictor].every(Number.isInteger)
+    || attacker < 0 || victim < 0 || inflictor < -1
+    || damage === null || damage <= 0
+    || !['self', 'friendly', 'enemy'].includes(fields.relation)
+    || (fields.relation === 'self') !== (attacker === victim)) return null;
+  return {map: /^mp_[a-z0-9_]+$/.test(fields.map || '') ? fields.map : 'unknown',
+    t, relation: fields.relation, inflictorKnown: inflictor >= 0};
+}
+
+export function summarizeFragDamage(events) {
+  const groups = new Map();
+  for (const e of events) {
+    if (!e) continue;
+    if (!groups.has(e.map)) groups.set(e.map, {
+      callback_events: 0, self: 0, friendly: 0, enemy: 0,
+      valid_inflictor_handle_at_callback: 0, missing_inflictor_handle: 0,
+    });
+    const c = groups.get(e.map);
+    c.callback_events++;
+    c[e.relation]++;
+    if (e.inflictorKnown) c.valid_inflictor_handle_at_callback++;
+    else c.missing_inflictor_handle++;
+  }
+  return [...groups].sort(([a], [b]) => a.localeCompare(b))
+    .map(([map, c]) => ({map, ...c}));
+}
+
 const fresh = () => ({
   events_logged: 0, prep_events: 0, spawned_entities: 0, spawn_null_events: 0,
   release_callbacks: 0, cancel_drop_callbacks: 0, forced_release_requests: 0,
@@ -93,19 +134,29 @@ export function summarizeFragStages(events) {
 export function analyzeFragLog(content) {
   const lines = content.split(/\r?\n/);
   const stages = lines.map(parseFragStage).filter(Boolean);
+  const damages = lines.map(parseFragDamage).filter(Boolean);
   const summary = summarizeFragStages(stages);
   // Faults are not gameplay events. Even one exception makes the absence of
   // grenade stages unreliable. Never return an apparently clean zero.
   const faults = lines.filter(line =>
     /(?:^|[\s\]])BT_FRAG_PROBE_ERROR schema=1(?:\s|$)/.test(line)).length;
+  const damageFaults = lines.filter(line =>
+    /(?:^|[\s\]])BT_FRAG_DAMAGE_ERROR schema=1(?:\s|$)/.test(line)).length;
   const empty = stages.length === 0;
   return {...summary,
+    damage_maps: summarizeFragDamage(damages),
+    damage_probe_errors_logged: damageFaults,
+    damage_probe_status: damageFaults > 0 ? 'damage_probe_error_review_required'
+      : damages.length === 0 ? 'no_valid_damage_events_cannot_infer_no_frag_damage'
+        : 'damage_callbacks_present_not_confirmed_health_loss_or_deaths',
     probe_errors_logged: faults,
     probe_status: faults > 0 ? 'probe_error_review_required'
       : empty ? 'no_valid_stage_events_cannot_infer_no_grenades'
         : 'stage_events_present_runtime_validation_required',
     limits: [...summary.limits,
-      'A BT_FRAG_PROBE_ERROR invalidates absence-of-events conclusions. No valid stage events may mean the probe was disabled, not installed, lacked hooks, or did not observe a throw.'],
+      'A BT_FRAG_PROBE_ERROR invalidates absence-of-events conclusions. No valid stage events may mean the probe was disabled, not installed, lacked hooks, or did not observe a throw.',
+      'BT_FRAG_DAMAGE counts positive reported bot-frag *damage callbacks* on pilots, not confirmed after-frame health loss or death. Its inflictor handle is NOT proven to identify the spawned projectile; no automatic joins across evidence channels.',
+      'A BT_FRAG_DAMAGE_ERROR invalidates the absence of damage callbacks. Missing events can also mean the standalone callback was not installed, disabled, or a round produced no qualifying damage.'],
   };
 }
 function main(args) {
