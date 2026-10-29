@@ -8,7 +8,7 @@ const probe = (t, attacker='41', victim='42', relation='enemy', map='mp_eden') =
     + ' victim=' + victim + ' inflictor=801 relation=' + relation + ' damage=55 secret=abc';
 const hit = (event, t, attacker='41', victim='42', life='0', extra='') =>
   'WNOTE_HIT event=' + event + ' t=' + t + ' attacker=' + attacker + ' victim=' + victim
-    + ' life=' + life + ' akind=bot vkind=human atitan=false'
+    + ' life=' + life + ' akind=bot vkind=human atitan=false force=false'
     + ' ateam=2 vteam=3 gun=mp_weapon_frag_grenade hp=100 ' + extra;
 const post = (event, life='0', hp='0', victim='42') =>
   'WNOTE_POST event=' + event + ' t=12.03 victim=' + victim + ' life=' + life + ' hp_after=' + hp;
@@ -77,4 +77,19 @@ test('probe errors and empty input never imply that zero frags occurred', () => 
   const empty=compareFragNotebook('no events');
   assert.equal(empty.status,'no_unique_matches_cannot_infer_no_damage');
   assert.equal(empty.maps.length,0);
+});
+
+test('missing notebook force/Titan flags or invalid teams are never treated as matches', () => {
+  const base=[ctx('mp_eden'),probe(12)];
+  const variants=[
+    hit(7,12.01).replace('force=false',''),
+    hit(7,12.01).replace('atitan=false','atitan=true'),
+    hit(7,12.01).replace('ateam=2','ateam=0'),
+    hit(7,12.01).replace('force=false','force=true'),
+  ];
+  for(const row of variants){
+    const r=compareFragNotebook([...base,row].join('\n'));
+    assert.equal(r.uniquely_matched,0);
+    assert.equal(r.unmatched,1);
+  }
 });
