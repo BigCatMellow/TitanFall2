@@ -31,7 +31,7 @@ the identifier semantics. This module does **not** track throws or explosions.
 
 1. Read `AGENTS.md`, `docs/LOCAL-TEST-HANDOFF-2026-10-29.md`, and
    `research/bot-ai/FRAG-LIFECYCLE-INSTRUMENTATION-2026-10-29.md`.
-2. Run `node --test tests/frag_lifecycle_probe.test.mjs` and review
+2. Run `node --test tests/frag_lifecycle_probe.test.mjs tests/frag_damage_probe_source.test.mjs` and review
    `mod.json` against the installed Northstar 1.31.14 format.
 3. Back up the isolated `map-cycle-test-profile` and its mod enabled state.
    Install this **new** add-on only there. Verify default-off yields zero
