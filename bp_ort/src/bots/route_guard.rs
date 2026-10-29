@@ -194,9 +194,44 @@ mod tests {
         assert!(!state.blocks(13., 7));
         assert!(!state.blocks(6., 8));
         assert!(!state.record(20., 7));
-        assert!(!state.record(21., 8)); // different target breaks strike sequence
-        assert!(!state.record(22., 7));
-        assert!(state.record(23., 7));
+        assert!(!state.record(21., 8)); // independent target history
+        assert!(state.record(22., 7));
+        assert!(state.record(23., 8));
+    }
+    #[test] fn alternating_unreachable_enemies_get_separate_cooldowns() {
+        let mut state = StallTargetCooldown::default();
+        assert!(!state.record(1., 7));
+        assert!(!state.record(1.5, 8));
+        assert!(state.record(2., 7));
+        assert!(state.record(3., 8));
+        assert!(state.blocks(9.9, 7));
+        assert!(!state.blocks(10., 7)); // expires eight seconds after second hit
+        assert!(state.blocks(10., 8));
+        assert!(!state.blocks(11., 8));
+        assert!(!state.blocks(8., 9));
+        assert!(!state.record(3.5, 8)); // no retrigger while still blocked
+    }
+
+    #[test] fn cache_is_bounded_and_evicts_oldest_evidence() {
+        let mut state = StallTargetCooldown::default();
+        for id in 1..=4 { assert!(!state.record(id as f32, id)); }
+        assert!(!state.record(5., 5)); // replaces oldest evidence (target 1)
+        assert!(state.record(6., 2)); // target 2 history survives
+        assert!(!state.record(7., 1)); // target 1 starts fresh
+        assert!(!state.blocks(7., 1));
+        assert!(state.blocks(7., 2));
+    }
+
+    #[test] fn clock_reset_discards_every_cached_target() {
+        let mut state = StallTargetCooldown::default();
+        assert!(!state.record(40., 7));
+        assert!(state.record(41., 7));
+        assert!(!state.record(42., 8));
+        assert!(!state.record(1., 7));
+        assert!(!state.blocks(1., 7));
+        assert!(!state.record(2., 8));
+        assert!(state.record(3., 7));
+        assert!(!state.blocks(3., 8));
     }
     #[test] fn old_hits_and_clock_rollback_do_not_create_false_cooldowns() {
         let mut state = StallTargetCooldown::default();
