@@ -13,7 +13,7 @@ export function reviewRouteStudy(lines,{integration=false}={}){
   const players=new Map(),traces=new Map(),diag=[],notes=[],windows=[],spawns=[],kills=[],samples=[];
   const key=e=>`${e.epoch}|${e.t}|${e.slot}`;
   for(const line of lines){
-    if(/SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|BOT_MEASURE_ERROR|WNOTE_ERROR|WNOTE_FIRE_ERROR/.test(line))errors++;
+    if(/SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|BOT_MEASURE_ERROR|BT_FRAG_DAMAGE_ERROR|BT_FRAG_PROBE_ERROR|WNOTE_ERROR|WNOTE_FIRE_ERROR/.test(line))errors++;
     const note=parseNote(line);if(note?.type==='WNOTE_CONTEXT')context=note;
     if(line.includes('MAP_SURVEY_BEGIN ')){active=true;begins++;header=fields(line);continue;}
     if(line.includes('MAP_SURVEY_ROUTE '))variant=fields(line);

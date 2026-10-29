@@ -17,6 +17,8 @@ New-Item -ItemType Directory $batch,$public -Force|Out-Null
 Copy-Item $RequestPath "$batch/request.json"
 $normalGuard=Get-Content "$($request.backup)/normal-guard.json" -Raw|ConvertFrom-Json
 $sourceFiles=@('tools/Run-CandidateSurvey.ps1','tools/Review-IntegrationRound.mjs','tools/Review-RouteStudy.mjs','tools/Analyze-BotAITrial.mjs','tools/Analyze-FragLifecycle.mjs','tools/Compare-FragNotebook.mjs','tools/Integration-Cells.ps1','tools/Read-IntegrationValidation.ps1','automation/integration-v28-cells.json','automation/runtime-mods/map-cycle-test-profile/BT7274.MapSurvey/mod/scripts/vscripts/bt7274_map_survey.nut')
+$sourceFiles+=@(Get-ChildItem "$repo/tools" -Filter '*.mjs' -File|ForEach-Object {'tools/'+$_.Name})
+$sourceFiles=@($sourceFiles|Select-Object -Unique)
 $sourceGuard=@($sourceFiles|ForEach-Object{@{path=(Join-Path $repo $_);hash=(Get-FileHash (Join-Path $repo $_)).Hash}})
 $sourceGuard|ConvertTo-Json|Set-Content "$batch/private-source-guard.json"
 $state=[ordered]@{state='preparing';started=(Get-Date).ToString('o');deadline=$deadline.ToString('o');results=@();failures=@();skipped=@();disabled_cells=@();current=$null;normal_unchanged=$true;profile_restored=$false;failure=$null}
@@ -100,7 +102,7 @@ finally{
    foreach($rel in @('plugins/bp_ort.dll','enabledmods.json','bt7274-candidate.json','mods/Northstar.CustomServers/mod/cfg/autoexec_ns_server.cfg')){if(Test-Path "$rollback/$rel"){Copy-Item "$rollback/$rel" "$profile/$rel" -Force}}
    if(Test-Path "$rollback/mods/BT7274.TacticalRecharge"){Copy-Item "$rollback/mods/BT7274.TacticalRecharge/*" "$profile/mods/BT7274.TacticalRecharge" -Recurse -Force}
    $mods=Get-Content "$profile/enabledmods.json" -Raw|ConvertFrom-Json
-   foreach($name in @('BT7274.SafetyTest','BT7274.MapSurvey','BT7274.RouteProbe','BT7274.BotMeasurements','BT7274.FragDamageProbe')){Disable-NorthstarMod $mods $name $profile}
+   foreach($name in @('BT7274.SafetyTest','BT7274.MapSurvey','BT7274.RouteProbe','BT7274.BotMeasurements','BT7274.FragDamageProbe','BT7274.PulseTrial')){Disable-NorthstarMod $mods $name $profile}
    $mods|ConvertTo-Json -Depth 10|Set-Content "$profile/enabledmods.json";$state.profile_restored=$true
   }catch{$state.state='stopped_error';$state.failure+='; restore: '+[string]$_}
  }else{$state.cleanup_pending=$true}

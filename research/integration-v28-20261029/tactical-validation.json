@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "cohort": "controlled_human_tactical_modifier_probe",
+  "cases": [
+    {
+      "state": "passed",
+      "power_cell": true,
+      "checks": 7,
+      "probe_sha256": "F5332AF080BEE6D285EAB58D0960778C10A6EA32AF1A1F6E40D7C438CC65D029",
+      "log_sha256": "2336474CE32D22A01E2F6BDF45D3B6B1FBDDFFA711605236A3F721261CF2EFB5",
+      "bots_unchanged": 15,
+      "measured": [
+        {
+          "weapon": "mp_ability_shifter",
+          "base_rate": "17.9995",
+          "half_rate": "35.9991",
+          "duration": "2",
+          "ammo": "200"
+        },
+        {
+          "weapon": "mp_ability_holopilot",
+          "base_rate": "10.8",
+          "half_rate": "21.6",
+          "duration": "0",
+          "ammo": "200"
+        },
+        {
+          "weapon": "mp_ability_heal",
+          "base_rate": "10.8",
+          "half_rate": "21.6",
+          "duration": "3",
+          "ammo": "200"
+        },
+        {
+          "weapon": "mp_ability_cloak",
+          "base_rate": "13.5",
+          "half_rate": "27",
+          "duration": "15",
+          "ammo": "200"
+        },
+        {
+          "weapon": "mp_weapon_grenade_sonar",
+          "base_rate": "10.8",
+          "half_rate": "10.8",
+          "duration": "0",
+          "ammo": "200"
+        },
+        {
+          "weapon": "mp_weapon_deployable_cover",
+          "base_rate": "6.75",
+          "half_rate": "13.5",
+          "duration": "15",
+          "ammo": "100"
+        },
+        {
+          "weapon": "grapple",
+          "base": "24.7",
+          "half": "12.4",
+          "power_cell": "true"
+        }
+      ]
+    },
+    {
+      "state": "passed",
+      "power_cell": false,
+      "checks": 7,
+      "probe_sha256": "DC3BB377826BDD3BF61611B465F3DDD2C0EA24B3342C98989EF33DED99155DDC",
+      "log_sha256": "66B782BBD1269C10B4A394C7C0D53804AA107EAFB66DBE6A7174859C49C23B75",
+      "bots_unchanged": 15,
+      "measured": [
+        {
+          "weapon": "mp_ability_shifter",
+          "base_rate": "13.333",
+          "half_rate": "26.666",
+          "duration": "2",
+          "ammo": "200"
+        },
+        {
+          "weapon": "mp_ability_holopilot",
+          "base_rate": "8",
+          "half_rate": "16",
+          "duration": "0",
+          "ammo": "200"
+        },
+        {
+          "weapon": "mp_ability_heal",
+          "base_rate": "8",
+          "half_rate": "16",
+          "duration": "3",
+          "ammo": "200"
+        },
+        {
+          "weapon": "mp_ability_cloak",
+          "base_rate": "10",
+          "half_rate": "20",
+          "duration": "15",
+          "ammo": "200"
+        },
+        {
+          "weapon": "mp_weapon_grenade_sonar",
+          "base_rate": "8",
+          "half_rate": "8",
+          "duration": "0",
+          "ammo": "200"
+        },
+        {
+          "weapon": "mp_weapon_deployable_cover",
+          "base_rate": "5",
+          "half_rate": "10",
+          "duration": "15",
+          "ammo": "100"
+        },
+        {
+          "weapon": "grapple",
+          "base": "33.4",
+          "half": "16.7",
+          "power_cell": "false"
+        }
+      ]
+    }
+  ],
+  "installed_tactical_restored": "1.0.0",
+  "normal_changed": false,
+  "limits": "Two independent isolated controlled-loadout probes. Effective refill/delay, duration/ammo/ordnance preservation, duplicate apply, disable/remove and bot exclusion checked; Grapple full refill timed. This is not actual effect/range confirmation, human gameplay balance, map performance or a reason to overwrite the current 50% human preference."
+}

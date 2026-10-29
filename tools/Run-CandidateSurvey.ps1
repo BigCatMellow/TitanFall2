@@ -106,7 +106,7 @@ try{
     New-Item -ItemType Directory -Path (Split-Path $surveyScript) -Force|Out-Null
     Copy-Item -LiteralPath "$repo/automation/runtime-mods/survey/BT7274.MapSurvey/mod.json" -Destination "$surveyDir/mod.json" -Force
     $mods=Get-Content -Raw -LiteralPath $enabled|ConvertFrom-Json -AsHashtable
-    foreach($name in @('BT7274.DecisionTest','BT7274.BotCycleTest','BT7274.MenuPreviewTest','BT7274.CapabilityTest','BT7274.WeaponIntegrationTest','BT7274.SafetyTest','BT7274.RouteProbe')){
+    foreach($name in @('BT7274.DecisionTest','BT7274.BotCycleTest','BT7274.MenuPreviewTest','BT7274.CapabilityTest','BT7274.WeaponIntegrationTest','BT7274.SafetyTest','BT7274.RouteProbe','BT7274.PulseTrial')){
         if($mods.ContainsKey($name)){foreach($version in @($mods[$name].Keys)){$mods[$name][$version]=$false}}
     }
     $mods['BT7274.MapSurvey']=@{'1.0.0'=$true};$mods['BT7274.BotDecisions']=@{'1.0.0'=$true}

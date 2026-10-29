@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "probe_callbacks_total": 26,
+  "unscoped_or_invalid_probe_callbacks": 0,
+  "probe_errors_logged": 0,
+  "notebook_errors_logged": 0,
+  "notebook_gap_markers_logged": 29,
+  "damage_callbacks": 26,
+  "eligible_notebook_hits": 26,
+  "uniquely_matched": 26,
+  "ambiguous": 0,
+  "unmatched": 0,
+  "post_health_decrease_consistent": 26,
+  "fatal_notebook_record_consistent": 11,
+  "missing_clean_post": 0,
+  "maps": [
+    {
+      "map": "mp_eden",
+      "damage_callbacks": 20,
+      "eligible_notebook_hits": 20,
+      "uniquely_matched": 20,
+      "ambiguous": 0,
+      "unmatched": 0,
+      "post_health_decrease_consistent": 20,
+      "fatal_notebook_record_consistent": 8,
+      "missing_clean_post": 0
+    },
+    {
+      "map": "mp_wargames",
+      "damage_callbacks": 6,
+      "eligible_notebook_hits": 6,
+      "uniquely_matched": 6,
+      "ambiguous": 0,
+      "unmatched": 0,
+      "post_health_decrease_consistent": 6,
+      "fatal_notebook_record_consistent": 3,
+      "missing_clean_post": 0
+    }
+  ],
+  "status": "notebook_gap_review_required",
+  "limits": [
+    "Requires a WNOTE_CONTEXT segment and map, exact Squirrel encoded attacker/victim handles, same self/friendly/enemy relation, and within 0.05 seconds.",
+    "More than one candidate either way is ambiguous and excluded; signed encoded handles are accepted but never exported.",
+    "WNOTE_POST health decrease and WNOTE_DEATH with matching victim/life/event are concordant observations, not proof a grenade caused damage or death. Overlapping hits remain possible.",
+    "WNOTE_GAP or missing/invalid post disqualifies post concordance. Never equate projectile, inflictor and native BOT_FRAG_INPUT identifiers.",
+    "No raw IDs, timestamps, positions, lines or event IDs are written. No matched active-pilot exposure, verified throws, trajectories, explosions, or frag kill credit.",
+    "WNOTE_ERROR markers indicate incomplete notebook evidence and WNOTE_GAP indicates overwritten pending events; do not treat missing health-post records as negative damage results.",
+    "No matches may indicate missing WNOTE_CONTEXT, disabled logs/probe, ambiguous rapid hits, sparse timing, or genuinely absent qualifying callbacks."
+  ]
+}

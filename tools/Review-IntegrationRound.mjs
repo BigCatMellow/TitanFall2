@@ -20,7 +20,7 @@ export function reviewIntegrationRound(lines){
   return {...r,diagnostics:parseBotTrialLog(window),
     additive_frag_damage:{probe_kind:'additive_damage_only_no_lifecycle_override',maps:frag.damage_maps,errors:frag.damage_probe_errors_logged,status:frag.damage_probe_status},
     notebook_concordance:compareFragNotebook(window),
-    limits:r.limits+' Cell comparisons share a frozen integrated native. Diagnostics measure logged inputs and decisions, not confirmed traversal or human difficulty. Additive damage callbacks are separate from health loss/deaths and lifecycle stage instrumentation is not installed. Low-clearance/nearest switches can remain unexercised; inspect channels before interpreting zero counts.'};
+    limits:'Frozen integrated native, bot-only Full observer rounds. Low-progress windows overlap and are not independent failures. Weapon callback/shot parameters and sampled magazine decreases are proxies, not validated accuracy or first-shot TTK. Frag entity sampling can miss very short-lived/invalid-owner projectiles; outcomes overlap and near-end cases are censored. Cell comparisons share a frozen integrated native. Diagnostics measure logged inputs and decisions, not confirmed traversal or human difficulty. Additive damage callbacks are separate from health loss/deaths and lifecycle stage instrumentation is not installed. Low-clearance/nearest switches can remain unexercised; inspect channels before interpreting zero counts.'};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const args=process.argv.slice(2),get=k=>args[args.indexOf(k)+1];for(const k of ['--log','--out'])if(!args.includes(k))throw Error('Missing '+k);

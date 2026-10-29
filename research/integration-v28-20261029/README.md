@@ -29,7 +29,7 @@ and additive frag damage callbacks all executed without detected runtime errors.
 All11normal save/deployment/core/settings guard files remained unchanged.
 See validation.json. This establishes compatibility in that smoke, not efficacy.
 
-The new frozen study uses fresh-process16-bot8v8Full observer rounds,50-point goals
+The new frozen study uses fresh-process16-bot8v8Full observer rounds,30-point screening goals (the initial50-point preflight is archived separately)
 and explicit independent cells: baseline, stall, frag, clearance, height; nearest
 has its own coordination-off baseline. Cells and actual cvars are machine-defined
 in automation/integration-v28-cells.json and validated from raw match readbacks.
@@ -47,7 +47,7 @@ actual toss/cancel/death-drop hook execution remains a distinct unvalidated prob
 
 Pulse Blade1.1.0 source is integrated as an optional isolated ability trial. The
 map study retains the installed1.0.0/50%human preference and inactive observer;
-PowerCell/effect/readiness certification is not established by these bot rounds.
+Separate seven-tactical probes passed with and without PowerCell, including timed Grapple refill, duplicate apply, disable/remove and15bot exclusions per probe; see tactical-validation.json. Actual ability effect/range and human balance remain outside those checks.
 Likewise the minimap file is an integration fragment, not a standalone installed
 HUD mod. Those boundaries must remain explicit in any report of all-repo testing.
 
@@ -55,3 +55,16 @@ Raw logs, IDs, saves, binaries, exact profile paths and backup directories stay
 private. Only sanitized metrics and authored sources belong in the repository.
 Read actual target/v28-study-session.json/private status before assuming any
 historical PID is live. stop-after-current.txt pauses after a completed round.
+
+The live smoke's additive frag observer recorded26callbacks; all26uniquely
+matched eligible notebook hits with consistent post-health decreases. Eleven
+also had a consistent fatal notebook record. There were29global WNOTE_GAP
+markers, so the concordance status remains notebook_gap_review_required rather
+than certifying complete damage evidence. No whole grenade-script lifecycle
+hooks were installed or inferred from those callback matches.
+
+The first Relic50-point preflight completed in318.5s with3,813pilot samples,
+2.203%overlapping low-progress samples,71observed frags and zero detected errors.
+It is archived in baseline-pre-pulse.json, not reused as a30-point control.
+The remaining screening queue restarts with matched30-point controls to improve
+coverage inside the original four-hour deadline.106Node tests/20suites passed.

@@ -1,0 +1,25 @@
+{
+  "Name": "BT7274.PulseTrial",
+  "Version": "0.1.0",
+  "Description": "Default-off isolated Power Cell tactical modifier validation.",
+  "LoadPriority": 50,
+  "ConVars": [
+    {
+      "Name": "bt7274_pulse_trial",
+      "DefaultValue": "0"
+    },
+    {
+      "DefaultValue": "1",
+      "Name": "bt7274_pulse_power_cell"
+    }
+  ],
+  "Scripts": [
+    {
+      "Path": "bt7274_pulse_trial.nut",
+      "RunOn": "SERVER && MP",
+      "ServerCallback": {
+        "After": "BT7274PulseTrial_Init"
+      }
+    }
+  ]
+}
