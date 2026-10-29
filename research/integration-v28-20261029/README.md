@@ -68,3 +68,9 @@ The first Relic50-point preflight completed in318.5s with3,813pilot samples,
 It is archived in baseline-pre-pulse.json, not reused as a30-point control.
 The remaining screening queue restarts with matched30-point controls to improve
 coverage inside the original four-hour deadline.106Node tests/20suites passed.
+
+First30-point control completed: Relic209.5s,2,665live pilot samples,
+1.726%overlapping low-progress,zero detected runtime-error markers. Its analysis
+and automatic transition to the independent stall-recovery cell were verified.
+This is pipeline validation and one baseline observation, not a benefit claim.
+Remaining matrix is still active under the original16:27:48EDT deadline.
