@@ -188,7 +188,7 @@ export function parseBotTrialLog(text) {
 export function assessTrialCoverage(baseline, trial) {
   const warnings = [];
   const maps = result => new Map(result.cohorts.filter(c => c.map && !c.telemetry_window?.map_conflict)
-    .map(c => [c.map, result.cohorts.filter(other => other.map === c.map)]));
+    .map(c => [c.map, result.cohorts.filter(other => other.map === c.map && !other.telemetry_window?.map_conflict)]));
   const bMaps = maps(baseline), tMaps = maps(trial);
   const unknown = result => result.cohorts.filter(c => !c.map || c.telemetry_window?.map_conflict).length;
   if (unknown(baseline) || unknown(trial))
