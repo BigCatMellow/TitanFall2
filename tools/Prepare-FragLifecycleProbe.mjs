@@ -13,9 +13,13 @@ const hook = String.raw`
 // BT-7274 isolated frag lifecycle probe. NOT a standalone mod.
 // This helper is inert unless the native bot_frag_input_probe convar is on.
 // Server only: no gameplay input, damage, fuse or projectile physics changes.
+// A diagnostic failure must never abort the underlying toss callback.
+struct { bool errorLogged = false } bt7274FragProbeState
 void function BT7274_FragLifecycleProbe( string stage, entity weapon, entity projectile, float fuse )
 {
 #if SERVER
+    try
+    {
     if ( !GetConVarBool( "bot_frag_input_probe" ) || !IsValid( weapon ) ) return
     if ( weapon.GetWeaponClassName() != "mp_weapon_frag_grenade" ) return
     entity owner = weapon.GetWeaponOwner()
@@ -27,6 +31,15 @@ void function BT7274_FragLifecycleProbe( string stage, entity weapon, entity pro
         + " stage=" + stage + " owner=" + owner.GetEncodedEHandle()
         + " weapon=" + weapon.GetEncodedEHandle() + " projectile=" + projectileId
         + " cook_s=" + cook + " fuse_s=" + fuse + " owner_gap=" + originGap )
+    }
+    catch ( probeError )
+    {
+        if ( !bt7274FragProbeState.errorLogged )
+        {
+            bt7274FragProbeState.errorLogged = true
+            print( "BT_FRAG_PROBE_ERROR schema=1 stage=" + stage )
+        }
+    }
 #endif
 }
 `;
