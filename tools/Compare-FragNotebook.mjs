@@ -42,7 +42,7 @@ export function compareFragNotebook(text) {
       const life=eventId(e.life),hp=num(e.hp),ta=num(e.ateam),tv=num(e.vteam);
       if([a,v,t,event,life,hp,ta,tv].some(x=>x===null)||t<0||hp<0
         ||e.gun!=='mp_weapon_frag_grenade'||e.akind!=='bot'||!['bot','human'].includes(e.vkind)
-        ||e.atitan==='true'||e.force==='true')continue;
+        ||e.atitan!=='false'||e.force!=='false'||ta<=0||tv<=0)continue;
       current.hits.push({attacker:a,victim:v,t,event,life,hp,relation:relation(a,v,ta,tv)});
     } else if(e.type==='WNOTE_POST'||e.type==='WNOTE_DEATH'){
       const k=eventId(e.event),v=id(e.victim),life=eventId(e.life),t=num(e.t);
