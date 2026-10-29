@@ -63,6 +63,9 @@ void function BT7274TacticalRecharge_Apply( entity player )
             tactical.SetMods( weaponMods )
         }
     }
+    array<string> accelerated = ["mp_ability_grapple","mp_ability_cloak","mp_ability_heal",
+        "mp_ability_holopilot","mp_ability_shifter","mp_weapon_deployable_cover"]
+    string profile = enabled && accelerated.contains( weaponClass ) ? "half" : "native"
     print( "TACTICAL_RECHARGE: local weapon=" + weaponClass + " enabled=" + enabled
-        + " scale=0.50 settings=" + settings )
+        + " profile=" + profile + " settings=" + settings )
 }
