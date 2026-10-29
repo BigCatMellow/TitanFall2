@@ -83,11 +83,13 @@ pub(crate) fn basic_combat(
         )
         .map(|(player, should_shoot)| ((*player.get_origin(v), player), should_shoot))
         .or_else(|| {
-            distance_iterator(
-                &origin,
-                enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team)),
+            crate::bots::target_policy::select_distance(
+                distance_iterator(
+                    &origin,
+                    enemy_player_iterator(team, helper).chain(enemy_titan_iterator(helper, team)),
+                ),
+                crate::bots::switch_on(&crate::bots::NEAREST_PURSUIT_CONVAR),
             )
-            .reduce(|closer, other| if closer.0 < other.0 { other } else { closer })
             .map(|(_, player)| player)
             .map(|player| ((*player.get_origin(v), player), false))
         })
@@ -313,7 +315,11 @@ pub(crate) fn basic_combat(
         };
         let name = |slot: usize| lookup_ent(player.m_inventory.offhandWeapons[slot], helper.sv_funcs)
             .and_then(|ent| get_weaponx_name(ent, helper.sv_funcs)).unwrap_or_default();
-        skill_plan = (tactical_reason(name(1), &situation), ordnance_reason(name(0), &situation));
+        let ordnance_name = name(0);
+        let frag_allowed = !crate::bots::switch_on(&crate::bots::FRAG_SAFETY_CONVAR)
+            || crate::bots::skill_policy::frag_eligible(ordnance_name, &situation);
+        skill_plan = (tactical_reason(name(1), &situation),
+            if frag_allowed { ordnance_reason(ordnance_name, &situation) } else { None });
         if skill_plan.0.is_some() { cmd.buttons |= Action::OffHand1 as u32; }
         if skill_plan.1.is_some() { cmd.buttons |= Action::OffHand0 as u32; }
     }
@@ -622,8 +628,13 @@ pub(crate) fn basic_combat(
         let tactical = local_data.tactical_pulse.press(time(helper), tactical_id,
             cmd.buttons & Action::OffHand1 as u32 != 0, ready.map(|r| r.tactical));
         // At most one pilot offhand request at once, with defensive tactical priority.
-        let ordnance = local_data.ordnance_pulse.press(time(helper), ordnance_id,
-            !tactical && cmd.buttons & Action::OffHand0 as u32 != 0, ready.map(|r| r.ordnance));
+        let frag_guard_on = crate::bots::switch_on(&crate::bots::FRAG_SAFETY_CONVAR)
+            && lookup_ent(player.m_inventory.offhandWeapons[0], helper.sv_funcs)
+                .and_then(|ent| get_weaponx_name(ent, helper.sv_funcs))
+                .is_some_and(|name| name == "mp_weapon_frag_grenade");
+        let ordnance = local_data.ordnance_pulse.press_with_interval(time(helper), ordnance_id,
+            !tactical && cmd.buttons & Action::OffHand0 as u32 != 0,
+            ready.map(|r| r.ordnance), if frag_guard_on { 6. } else { 1. });
         if !tactical { cmd.buttons &= !(Action::OffHand1 as u32); }
         if !ordnance { cmd.buttons &= !(Action::OffHand0 as u32); }
     }

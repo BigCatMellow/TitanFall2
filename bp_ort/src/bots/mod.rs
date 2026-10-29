@@ -55,6 +55,7 @@ mod jump_pulse;
 mod behavior_tuning;
 mod progress_watchdog;
 mod coordination;
+mod target_policy;
 mod escape_recovery;
 mod nav_diagnostics;
 mod route_guard;
@@ -98,6 +99,9 @@ pub(super) static PROXIMITY_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new()
 pub(super) static PERCEPTION_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static COMBAT_MOVEMENT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static CROUCH_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+// Independent opt-in v21 experiments; both default to 0.
+pub(super) static NEAREST_PURSUIT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static FRAG_SAFETY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 // Balance candidate switches (default 0).
 pub(super) static DEFENSIVE_TACTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static HEIGHT_RESPONSE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
@@ -461,6 +465,8 @@ impl Plugin for Bots {
             (&STEP_RETRY_CONVAR, "bot_step_retry", "try opposite combat step with the same wall and ground checks"),
             (&NAV_DIAGNOSTICS_CONVAR, "bot_nav_diagnostics", "log route status, traversal corners, stuck episodes and stall hull fits; no input changes"),
             (&ROUTE_GUARD_CONVAR, "bot_route_guard", "throttle replans of consumed partial routes and skip unreachable pursuit targets briefly"),
+            (&NEAREST_PURSUIT_CONVAR, "bot_nearest_pursuit", "prefer nearest foe when uncoordinated bots have no visible enemy; 0 preserves old farthest fallback"),
+            (&FRAG_SAFETY_CONVAR, "bot_frag_safety", "conservative frag-only throw conditions and 6-second request spacing; requires bot_skill_use 1"),
             (&JUMP_TIMING_CONVAR, "bot_jump_timing", "step jumps only near the higher waypoint, plus one bounded double jump"),
             (&PROXIMITY_FIX_CONVAR, "bot_proximity_fix", "circular distance for titan boarding Use and titan melee (fixes axis-aligned aim snaps)"),
             (&PERCEPTION_FIX_CONVAR, "bot_perception_fix", "eye-angle facing and eye-level sight lines; same 180-degree hemisphere"),

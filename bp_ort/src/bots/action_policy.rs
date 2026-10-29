@@ -14,7 +14,13 @@ pub(super) struct Pulse {
 }
 impl Pulse {
     pub fn press(&mut self, now: f32, weapon: i32, wanted: bool, ready: Option<Ready>) -> bool {
-        if !now.is_finite() { return false; }
+        self.press_with_interval(now, weapon, wanted, ready, 1.)
+    }
+    /// Keeps the 0.12-second release pulse, but permits a longer interval
+    /// between distinct starts for opt-in risky ordnance experiments.
+    pub fn press_with_interval(&mut self, now: f32, weapon: i32, wanted: bool,
+        ready: Option<Ready>, interval: f32) -> bool {
+        if !now.is_finite() || !interval.is_finite() || interval < 1. { return false; }
         if self.last.is_some_and(|last| now < last) || self.weapon != Some(weapon) {
             *self = Self { weapon: Some(weapon), ..Default::default() };
         }
@@ -27,7 +33,7 @@ impl Pulse {
         if now < self.until { return true; }
         if now < self.next { return false; }
         self.until = now + 0.12;
-        self.next = now + 1.;
+        self.next = now + interval;
         self.starts = self.starts.saturating_add(1);
         true
     }
@@ -69,6 +75,17 @@ mod tests {
         assert!(!p.press(1.9, 7, true, ready(1.9)));
         assert!(p.press(2.01, 7, true, ready(2.01)));
         assert_eq!(p.starts, 2);
+    }
+    #[test] fn extended_interval_retains_short_press_and_readiness_safety() {
+        let mut p = Pulse::default();
+        assert!(p.press_with_interval(1., 7, true, ready(1.), 6.));
+        assert!(p.press_with_interval(1.08, 7, true, ready(1.08), 6.));
+        assert!(!p.press_with_interval(1.2, 7, true, ready(1.2), 6.));
+        assert!(!p.press_with_interval(6.9, 7, true, ready(6.9), 6.));
+        assert!(p.press_with_interval(7.01, 7, true, ready(7.01), 6.));
+        assert_eq!(p.starts, 2);
+        assert!(!p.press_with_interval(f32::NAN, 7, true, ready(1.), 6.));
+        assert!(!p.press_with_interval(8., 7, true, ready(8.), 0.));
     }
     #[test] fn cooldown_consumption_releases_immediately() {
         let mut p = Pulse::default(); assert!(p.press(1., 7, true, ready(1.)));
