@@ -96,6 +96,7 @@ pub(super) static STEP_RETRY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 // v20 candidate switches; every one defaults to 0 (installed v19 behavior).
 pub(super) static NAV_DIAGNOSTICS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static ROUTE_GUARD_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static CORNER_HEIGHT_GUARD_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static JUMP_TIMING_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PROXIMITY_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PERCEPTION_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
@@ -147,6 +148,7 @@ pub(super) struct BotData {
     ordnance_pulse: action_policy::Pulse,
     escape_recovery: escape_recovery::EscapeRecovery,
     path_log: nav_diagnostics::RateGate,
+    corner_guard_log: nav_diagnostics::RateGate,
     stall_log: nav_diagnostics::RateGate,
     stuck: nav_diagnostics::StuckMonitor,
     view_checked: bool,
@@ -184,6 +186,7 @@ impl BotData {
     // Per-life candidate state must not survive respawn or pilot/Titan transitions.
     fn reset_candidate_state(&mut self) {
         self.path_log = Default::default();
+        self.corner_guard_log = Default::default();
         self.stall_log = Default::default();
         self.stuck = Default::default();
         self.view_checked = false;
@@ -478,6 +481,7 @@ impl Plugin for Bots {
             (&STEP_RETRY_CONVAR, "bot_step_retry", "try opposite combat step with the same wall and ground checks"),
             (&NAV_DIAGNOSTICS_CONVAR, "bot_nav_diagnostics", "log route status, traversal corners, stuck episodes and stall hull fits; no input changes"),
             (&ROUTE_GUARD_CONVAR, "bot_route_guard", "throttle replans of consumed partial routes and skip unreachable pursuit targets briefly"),
+            (&CORNER_HEIGHT_GUARD_CONVAR, "bot_corner_height_guard", "keep a close route corner while its vertical gap exceeds 36 units; default off"),
             (&NEAREST_PURSUIT_CONVAR, "bot_nearest_pursuit", "prefer nearest foe when uncoordinated bots have no visible enemy; 0 preserves old farthest fallback"),
             (&FRAG_SAFETY_CONVAR, "bot_frag_safety", "conservative frag-only throw conditions and 6-second request spacing; requires bot_skill_use 1"),
             (&STALL_TARGET_RECOVERY_CONVAR, "bot_stall_target_recovery", "skip recently stalled pursuit target after two watchdog incidents; never hide visible combat target"),
