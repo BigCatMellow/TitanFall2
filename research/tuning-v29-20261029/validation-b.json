@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "state": "lifecycle_passed_not_promoted",
+  "native_sha256": "82D039385FC8040ED103F64F3A013CF7401303714B3402ED36B77A327DF791BB",
+  "core_sha256": "86007DD1DDAC9103508EECA520E2AB89B16DF92780A5F8A67497CCF29567EDB9",
+  "bridge_sha256": "9C43719868D28121E6D59A07C3317882E135A50FF3C91AA1340A12C1219C4598",
+  "measurement_sha256": "A6D101A0506654755265945AB193EB0F0EF8E9AC93569A8BA8D443B9CE9CECEC",
+  "damage_probe_sha256": "F4215610A16796583983B252E646A6381D3AAB8762D9F4CFE373200D99EFF5FE",
+  "awareness_sha256": "88A8A2554C0CD4836D90F814D1208B86C0C1E01D6AF78EC9EADB11B410731E44",
+  "map": "mp_relic02",
+  "next_map": "mp_wargames",
+  "phases": [
+    "off",
+    "on",
+    "respawn",
+    "off",
+    "lobby_and_new_map"
+  ],
+  "rust_tests": 126,
+  "rust_suites": 22,
+  "node_tests": 112,
+  "node_files": 22,
+  "normal_deployed": false,
+  "escape_move_commands": 256,
+  "clearance_probe_fits": {
+    "StandClear": 828,
+    "Blocked": 252,
+    "DuckOnly": 6
+  },
+  "clearance_action_events": 2,
+  "limits": "Lifecycle safety and channel execution only, separate revised native. Move commands and sampled displacement are not confirmed safe grenade escapes. Local probe timings are not overall frame performance. No human difficulty claim.",
+  "clearance_recoveries_completed": 1
+}

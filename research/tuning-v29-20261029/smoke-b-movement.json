@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "move_commands": 256,
+  "spaced_command_windows": 76,
+  "usable_windows": 71,
+  "censored_windows": 5,
+  "windows_with_24_units_displacement": 63,
+  "displacement": {
+    "median_units": 68.28294076854044,
+    "p95_units": 163.07991905811096
+  },
+  "limits": "Same native epoch/slot/entity and live pilot snapshots only. Commands are spaced at least1s per actor. Previous snapshot within0.55s; next snapshot0.35–1s after command. No observed intervening death/entity change. Unobserved transitions remain possible. Displacement may include ordinary movement and is not causal proof, grenade separation, safe escape, independent incidents or video. No Squirrel/native handle join or actor identifiers published."
+}

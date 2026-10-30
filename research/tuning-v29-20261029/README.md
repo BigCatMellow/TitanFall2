@@ -71,3 +71,18 @@ cancellation and exit/entry boundaries. New native82D039385FC8040ED103F64F3A013C
 The126Rust/22suite preflight and migration/preset fixtures passed; the added Node
 churn fixture passes, bringing the Node total to110. The new build must complete
 its own lifecycle and fresh controls; never pool it with6AB62D... matches.
+
+The revised lifecycle passed all five phases, lobby and map change; see
+validation-b.json. It logged256escape move samples and1,086clearance probes,
+including6DuckOnly. One actual clearance attempt entered Duck at99units and
+returned to StandClear0.4s later after about25.7units displacement; controller
+starts1/successes1/failures0. This is a completed native recovery observation,
+not proof that every low-clearance stall is solved. The older smoke had no
+crouch starts; the two records remain distinct.
+
+Independent position review of the revised smoke found71usable, at-least1s-spaced
+command windows;63showed at least24units displacement. Five lacked usable
+same-life live-pilot snapshots. Median displacement68.3units. This establishes
+sampled movement after commands, not causal grenade avoidance or independent
+successful escapes. See smoke-b-movement.json and the explicit analyzer limits.
+The two new position-analysis regression fixtures pass (Node total112/22files).
