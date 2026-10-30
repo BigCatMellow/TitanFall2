@@ -1383,3 +1383,14 @@ Private request target/v29-study-request.json; source/tools/cells frozen during
 run. Normal v23BC2.../11files guarded. Isolated candidate will restore307... and
 harnesses off on exit; never restore old saves. No normal rollout yet. Publish
 only sanitized aggregate results after review. No antivirus changes.
+
+### v29 follow-up during this session
+
+Initial6AB62D... comparison paused cleanly after2rounds, isolated307restored,
+normalguard unchanged. Found30nearby rapid escape restarts; source ec45fa0 fixes
+self-cancellation during successful departure with320entry/352exit hysteresis.
+Updated reporting d3b57d3 counts churn and command spans. New native82D039...,
+126Rust/22suites plus PS fixtures; Node total110. NEW lifecycle receipt is
+INTEGRATION target/v29b-smoke-session.json. Never confuse the two builds or
+resume the stopped target/v29a-study-session.json request. See tuning README
+and screening-a-reviewed.json. Current lifecycle is running, no normal rollout.

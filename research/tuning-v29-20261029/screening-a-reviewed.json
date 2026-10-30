@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "cohort": "tuning_v29_a_posthoc",
+  "native_sha256": "6AB62D1B7F7E432947D3E2A4CFE69C0ACACA5D598FF333F8DA2061897FE7B545",
+  "analysis_commit": "d3b57d3",
+  "rounds": [
+    {
+      "map": "mp_relic02",
+      "cell": "baseline",
+      "log_sha256": "97c876f00c6809b8fca2171de16f425626bbbc8084ee99d2e93d9ab476d81a86",
+      "duration_s": 121.9,
+      "low_progress_percent": 3.3846153846153846,
+      "frag": {
+        "observed_projectiles": 36,
+        "pilot_kill_callbacks": 15,
+        "matched_self_deaths": 3,
+        "matched_enemy_deaths": 12,
+        "projectiles_with_self_kill": 3,
+        "projectiles_with_enemy_kill": 10,
+        "unmatched_kill_callbacks": 0,
+        "self_kill_projectile_fraction": 0.08333333333333333,
+        "enemy_kill_projectile_fraction": 0.2777777777777778,
+        "observed_near_end": 4
+      },
+      "tuning": {
+        "awareness_samples": 190,
+        "escape": {
+          "move_samples": 0,
+          "blocked_samples": 0,
+          "release_samples": 0,
+          "nearby_restarts_within_300ms": 0,
+          "probe_us": {
+            "n": 0,
+            "p95_us": null,
+            "max_us": null
+          },
+          "completed_command_episodes": {
+            "n": 0,
+            "median_s": null,
+            "p95_s": null
+          }
+        },
+        "clearance": {
+          "probes": 0,
+          "fits": {},
+          "probe_us": {
+            "n": 0,
+            "p95_us": null,
+            "max_us": null
+          }
+        }
+      }
+    },
+    {
+      "map": "mp_relic02",
+      "cell": "escape",
+      "log_sha256": "4247124135beea3fdea495692a6f519f7d1a906a8591ed4d92405cf411070596",
+      "duration_s": 122.3,
+      "low_progress_percent": 2.4009603841536613,
+      "frag": {
+        "observed_projectiles": 35,
+        "pilot_kill_callbacks": 7,
+        "matched_self_deaths": 0,
+        "matched_enemy_deaths": 7,
+        "projectiles_with_self_kill": 0,
+        "projectiles_with_enemy_kill": 4,
+        "unmatched_kill_callbacks": 0,
+        "self_kill_projectile_fraction": 0,
+        "enemy_kill_projectile_fraction": 0.11428571428571428,
+        "observed_near_end": 0
+      },
+      "tuning": {
+        "awareness_samples": 175,
+        "escape": {
+          "move_samples": 106,
+          "blocked_samples": 7,
+          "release_samples": 66,
+          "nearby_restarts_within_300ms": 30,
+          "probe_us": {
+            "n": 113,
+            "p95_us": 52,
+            "max_us": 64
+          },
+          "completed_command_episodes": {
+            "n": 66,
+            "median_s": 0.10000000000000142,
+            "p95_s": 1.3499999999999943
+          }
+        },
+        "clearance": {
+          "probes": 0,
+          "fits": {},
+          "probe_us": {
+            "n": 0,
+            "p95_us": null,
+            "max_us": null
+          }
+        }
+      }
+    }
+  ],
+  "limits": "Post-run diagnostic reanalysis, two raw hashes verified; original frozen reports preserved. Churn counts describe transitions, not physical movement. One short unrandomized pair; no promotion."
+}

@@ -52,3 +52,22 @@ Escape move samples are commands, not confirmed escapes. Local probe-call timing
 are not overall frame p95. No visual spectator observation occurred. Current
 saves are backed up but never restored from historical test snapshots. Raw logs,
 entity handles, account data, game assets and binaries remain private.
+
+## First match screen and revised exit rule
+
+The initial6AB62D... screen stopped cleanly after its first Relic pair, retaining
+both matches.121.9s/122.3s,36/35observed frags,3/0matched self-deaths,12/7matched
+enemy deaths,3.38%/2.40%overlapping low-progress. This is too short for a balance
+conclusion. Post-run analysis verified both raw hashes and found30nearby escape
+restarts within0.3s and a0.1s median completed command span. Originals remain in
+screening-a.json; screening-a-reviewed.json adds the later churn measurement.
+
+Source ec45fa0 separates entry from continuation: relative departure only
+suppresses a new escape, while an active observed projectile stays tracked until
+352units (entry remains320). Stale/invalid/offhand/jump/death/unsafe-ground and
+2smaximum limits still apply. This prevents the bot's successful movement away
+from immediately cancelling itself. A regression exercises moving-owner
+cancellation and exit/entry boundaries. New native82D039385FC8040ED103F64F3A013CF7401303714B3402ED36B77A327DF791BB.
+The126Rust/22suite preflight and migration/preset fixtures passed; the added Node
+churn fixture passes, bringing the Node total to110. The new build must complete
+its own lifecycle and fresh controls; never pool it with6AB62D... matches.
