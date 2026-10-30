@@ -1302,3 +1302,30 @@ normal/source/runtime guards, per-cell coarse navigation cutoff and restores
 isolated native/config/enablement without copying historical saves. Source and
 sanitized validation notes are committed on the integration branch; further
 rounds remain pending and no all-map completion or human balance gain is claimed.
+
+## 2026-10-29 — Integrated test results reviewed; queue finished
+
+Sibling TitanFall2-integration-v28 branch candidate/integration-v28-20261029
+completed42/55thirty-point rounds across all15planned maps, stopped cleanly at
+16:20:52EDT before original deadline. No failed attempts/detected runtime errors;
+isolated307.../config/enablement restored, current normalBC2.../11guard files
+unchanged and no game running. Expired receipts/PIDs must not be resumed.
+
+Final findings, corrected full snapshot and summary are under that worktree's
+research/integration-v28-20261029 and published on its branch. Height trial worse
+on Eden0.43%to3.23%overlapping low-progress samples. Grenade guard too restrictive:
+matched four maps182to27observed grenades,28to13self-deaths,49to12enemy deaths.
+Early clearance did not activate at all; zero ordinary-corner candidates under
+its current gate. Stall recovery executed but matched results mixed. Nearest
+pursuit promising in two coordination-off pairs, not the normal coordinated path.
+Combined improved WarGames but worsened other tested maps. No blanket promotion.
+
+Post-run analysis bug corrected: time-window filter discarded clockless
+WNOTE_GAP/fault records. Reanalysis of42hash-verified logs keeps641warnings,
+1,159unique frag damage/hit matches,1,147clean post-health decreases and12without
+clean post. All42correctly require gap review. Navigation/frag-outcome/weapon
+window metrics unchanged; original raw/frozen reports preserved. New regression
+fails old filter;3integration+10concordance checks pass. No game/native behavior
+changed and no new run was started for this review. Prior PulsePowerCell/no-cell
+modifier probes remain passed; normal50%preference retained. Human balance and
+actual ability effect/range, UI integration and serverp95 remain unvalidated.

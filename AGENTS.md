@@ -4,11 +4,11 @@ Canonical development repo for BT-7274's solo Northstar project. Read README.md,
 docs/PROJECT-STATUS.md, Notes/CURRENT-SETUP.md and the latest Notes/HANDOFF.md
 entries before changes.
 
-- Current October29 four-hour integration TEST is in sibling worktree
-  TitanFall2-integration-v28, branch candidate/integration-v28-20261029.
-  Read its target/v28-study-resumed-session.json and actual status/clock first;
-  deadline16:27:48EDT. Do not launch another game or edit frozen study tooling.
-  Normal stays v23BC2...; no automatic rollout. Latest handoff has validation.
+- October29 integration TEST FINISHED42/55rounds across15maps; clean rollback,
+  normalBC2... unchanged, no queue/game remains. See sibling integration-v28
+  research/integration-v28-20261029/FINDINGS.md and corrected snapshot. Never
+  resume expired requests/PIDs; no blanket feature rollout. Latest handoff
+  records the clockless notebook-warning analysis correction.
 - October29 current research: normal remains v23BC2... unchanged. Separate
   candidate/traversal-v26-20261029 prototype passed lifecycle but NOT effectiveness;
   no rollout. Latest frozen map study receipt is target/v24-study-after-v26-session.json,
