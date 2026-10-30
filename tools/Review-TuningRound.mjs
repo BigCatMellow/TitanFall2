@@ -5,15 +5,31 @@ const fields=s=>Object.fromEntries([...s.matchAll(/(?:^|\s)([a-z_]+)=([^\s]+)/g)
 export function reviewTuningRound(lines){
  const base=reviewIntegrationRound(lines,{definition,marker:'MAP_SURVEY_TUNING',cohort:'tuning_v29'});
  const h=fields(lines.find(l=>l.includes('MAP_SURVEY_TUNING '))),start=+h.t,end=start+base.duration_s;
- const escape={move_samples:0,blocked_samples:0,release_samples:0,probe_us:[]},clearance={probes:0,fits:{},probe_us:[]};
+ const escape={move_samples:0,blocked_samples:0,release_samples:0,nearby_restarts_within_300ms:0,probe_us:[]},clearance={probes:0,fits:{},probe_us:[]};
+ const states=new Map(),durations=[];
  let awareSamples=0;
  for(const line of lines){const e=fields(line);if(!Number.isFinite(+e.t)||+e.t<start||+e.t>end+0.1)continue;
-  if(line.includes('BOT_FRAG_ESCAPE ')){if(Object.hasOwn(escape,e.action+'_samples'))escape[e.action+'_samples']++;if(e.action!=='release'&&Number.isFinite(+e.probe_us))escape.probe_us.push(+e.probe_us);}
+  if(line.includes('BOT_FRAG_ESCAPE ')){
+   if(Object.hasOwn(escape,e.action+'_samples'))escape[e.action+'_samples']++;
+   if(e.action!=='release'&&Number.isFinite(+e.probe_us))escape.probe_us.push(+e.probe_us);
+   if(e.epoch!==undefined&&e.slot!==undefined){
+    const key=e.epoch+':'+e.slot,p=states.get(key)||{};
+    if(e.action==='move'){
+     if(p.action==='release'&&+e.t-p.at>=0&&+e.t-p.at<=0.3&&+e.distance>=0&&+e.distance<280)escape.nearby_restarts_within_300ms++;
+     states.set(key,{action:e.action,at:+e.t,began:p.action==='move'?p.began:+e.t});
+    }else{
+     if(p.action==='move'&&+e.t>=p.began)durations.push(+e.t-p.began);
+     states.set(key,{action:e.action,at:+e.t});
+    }
+   }
+  }
   if(line.includes('BOT_CLEARANCE_PROBE ')){clearance.probes++;clearance.fits[e.fit]=(clearance.fits[e.fit]||0)+1;if(Number.isFinite(+e.probe_us))clearance.probe_us.push(+e.probe_us);}
   if(line.includes('BT_FRAG_AWARE_SAMPLE '))awareSamples++;
  }
  const timing=a=>{a.sort((a,b)=>a-b);return {n:a.length,p95_us:a.length?a[Math.ceil(a.length*0.95)-1]:null,max_us:a.length?a[a.length-1]:null};};
- return {...base,tuning:{awareness_samples:awareSamples,escape:{...escape,probe_us:timing(escape.probe_us)},clearance:{...clearance,probe_us:timing(clearance.probe_us)}},
+ durations.sort((a,b)=>a-b);
+ const episodeDuration={n:durations.length,median_s:durations.length?durations[Math.floor(durations.length/2)]:null,p95_s:durations.length?durations[Math.ceil(durations.length*0.95)-1]:null};
+ return {...base,tuning:{awareness_samples:awareSamples,escape:{...escape,completed_command_episodes:episodeDuration,probe_us:timing(escape.probe_us)},clearance:{...clearance,probe_us:timing(clearance.probe_us)}},
   limits:base.limits+' Probe timings cover only the local controller call/hull checks, not overall server-frame p95. Move samples are commands, not independently verified escapes. Generic corner classification remains conservative; actual clearance probe/intent events establish execution. Native and Squirrel handle namespaces are not joined by assumption.'};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){

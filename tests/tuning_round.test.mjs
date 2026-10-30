@@ -15,3 +15,15 @@ test('tuning readback must keep strict frag/height trials off and preserve clock
  assert.throws(()=>reviewTuningRound(round('escape').map(l=>l.replace('frag=0','frag=1'))));
  let a=round('baseline');a.splice(3,0,'BT_FRAG_AWARE_ERROR reason=test');assert.equal(reviewTuningRound(a).error_markers,1);
 });
+test('nearby escape restarts and completed command spans are counted without publishing actor identities',()=>{
+ const a=round('escape').filter(l=>!l.includes('BOT_FRAG_ESCAPE '));a.splice(3,0,
+  'BOT_FRAG_ESCAPE epoch=1 t=11 slot=private action=move distance=100',
+  'BOT_FRAG_ESCAPE epoch=1 t=11.2 slot=private action=move distance=110',
+  'BOT_FRAG_ESCAPE epoch=1 t=11.3 slot=private action=release distance=-1',
+  'BOT_FRAG_ESCAPE epoch=1 t=11.4 slot=private action=move distance=120',
+  'BOT_FRAG_ESCAPE epoch=1 t=12 slot=private action=release distance=-1');
+ const r=reviewTuningRound(a);assert.equal(r.tuning.escape.nearby_restarts_within_300ms,1);
+ assert.equal(r.tuning.escape.completed_command_episodes.n,2);
+ assert(Math.abs(r.tuning.escape.completed_command_episodes.median_s-0.6)<1e-6);
+ assert(!JSON.stringify(r).includes('private'));
+});
