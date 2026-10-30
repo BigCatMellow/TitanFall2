@@ -6,14 +6,19 @@ impl Sample {
         Self{id,at,age,pos,velocity:std::array::from_fn(|i|projectile_velocity[i]-owner_velocity[i])}
     }
     pub fn danger_distance(self,now:f32,origin:[f32;3])->Option<f32>{
+        let distance=self.proximity_distance(now,origin)?;
+        if distance>320. {return None;}
+        let d=[self.pos[0]-origin[0],self.pos[1]-origin[1]];
+        // Relative departure suppresses entry, never an escape already underway.
+        if distance>1. && (self.velocity[0]*d[0]+self.velocity[1]*d[1])/distance>200. {return None;}
+        Some(distance)
+    }
+    pub fn proximity_distance(self,now:f32,origin:[f32;3])->Option<f32>{
         if self.id == -1 || !now.is_finite() || !self.at.is_finite() || now<self.at || now-self.at>0.25
             || !self.age.is_finite() || !(0.35..=6.).contains(&(self.age+now-self.at))
             || !origin.iter().chain(self.pos.iter()).chain(self.velocity.iter()).all(|v|v.is_finite()) {return None;}
         let d=[self.pos[0]-origin[0],self.pos[1]-origin[1]];let distance=d[0].hypot(d[1]);
-        if distance>320. || (self.pos[2]-origin[2]).abs()>96. {return None;}
-        // Departure is relative to its owner: chasing a moving grenade can
-        // still be dangerous even when its world velocity is positive.
-        if distance>1. && (self.velocity[0]*d[0]+self.velocity[1]*d[1])/distance>200. {return None;}
+        if distance>352. || (self.pos[2]-origin[2]).abs()>96. {return None;}
         Some(distance)
     }
 }
@@ -24,6 +29,7 @@ pub(super) struct FragEscape {
 }
 impl FragEscape {
     pub fn active(&self)->bool{self.heading.is_some()}
+    pub fn tracked(&self)->Option<i32>{if self.active(){self.projectile}else{None}}
     pub fn cancel(&mut self){self.heading=None;self.began=None;self.projectile=None;}
     /// At most three checked, separation-increasing ground moves every0.2s.
     /// Commands are world bearings; the caller preserves aim and reframes input.
@@ -31,7 +37,9 @@ impl FragEscape {
         mut clear:impl FnMut(f32)->bool)->Option<f32>{
         if !now.is_finite() || now<self.last_time {*self=Self::default();if !now.is_finite(){return None;}}
         self.last_time=now;
-        let Some(s)=sample.filter(|s|allowed&&aim_yaw.is_finite()&&s.danger_distance(now,origin).is_some()) else {self.cancel();return None;};
+        let Some(s)=sample.filter(|s|allowed&&aim_yaw.is_finite()&&
+            if self.tracked()==Some(s.id){s.proximity_distance(now,origin).is_some()}
+            else{s.danger_distance(now,origin).is_some()}) else {self.cancel();return None;};
         if now<self.retry_after {self.cancel();return None;}
         if self.projectile!=Some(s.id){self.cancel();self.projectile=Some(s.id);self.next_probe=now;}
         if self.began.is_some_and(|at|now-at>=2.){self.cancel();self.retry_after=now+0.35;return None;}
@@ -58,6 +66,19 @@ impl FragEscape {
         assert!(chased.danger_distance(1.,[0.;3]).is_some());
         let departing=Sample::observed(7,1.,1.,[100.,0.,0.],[700.,0.,0.],[260.,0.,0.]);
         assert!(departing.danger_distance(1.,[0.;3]).is_none());
+    }
+    #[test] fn active_escape_ignores_its_own_departure_velocity_and_uses_exit_hysteresis(){
+        let mut a=FragEscape::default();
+        assert!(a.update(1.,[0.;3],0.,Some(frag(1.)),true,|_|true).is_some());
+        let departing=Sample{velocity:[300.,0.,0.],..frag(1.1)};
+        assert!(departing.danger_distance(1.1,[0.;3]).is_none());
+        assert!(a.update(1.1,[0.;3],0.,Some(departing),true,|_|panic!("cached")).is_some());
+        let edge=Sample{pos:[330.,0.,0.],..frag(1.3)};
+        assert!(edge.danger_distance(1.3,[0.;3]).is_none());
+        assert!(a.update(1.3,[0.;3],0.,Some(edge),true,|_|true).is_some());
+        assert_eq!(a.starts,1);
+        assert!(a.update(1.5,[0.;3],0.,Some(Sample{pos:[353.,0.,0.],..frag(1.5)}),true,|_|panic!("safe")).is_none());
+        assert!(a.update(1.6,[0.;3],0.,Some(Sample{at:1.6,..edge}),true,|_|panic!("entry range")).is_none());
     }
     #[test] fn sensor_requires_actual_fresh_nearby_same_floor_released_projectile(){
         assert_eq!(frag(1.).danger_distance(1.,[0.;3]),Some(100.));

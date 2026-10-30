@@ -852,7 +852,7 @@ fn frag_escape_followup(player:&mut CPlayer,helper:&CUserCmdHelper,local:&mut Bo
         &&cmd.buttons&interrupt==0&&!matches!(local.metrics.state,"recover"|"embark")
         &&local.nav_query.as_ref().is_some_and(|q|q.hull==crate::navmesh::Hull::Human);
     let token=unsafe {EngineToken::new_unchecked()};
-    let sample=crate::bots::action_bridge::owned_frag(player.m_RefEHandle,now,[o.x,o.y,o.z],token);
+    let sample=crate::bots::action_bridge::owned_frag(player.m_RefEHandle,now,[o.x,o.y,o.z],local.frag_escape.tracked(),token);
     let was_active=local.frag_escape.active();let probes=local.frag_escape.probes;
     let probe_started=std::time::Instant::now();
     let heading=local.frag_escape.update(now,[o.x,o.y,o.z],cmd.world_view_angles.y,sample,allowed,|yaw|{
@@ -874,7 +874,7 @@ fn frag_escape_followup(player:&mut CPlayer,helper:&CUserCmdHelper,local:&mut Bo
         &&(probes!=local.frag_escape.probes||was_active!=local.frag_escape.active()){
         log::info!("BOT_FRAG_ESCAPE epoch={} t={now:.2} slot={} action={} distance={:.1} probes={} starts={} blocked={} probe_us={}",
             crate::bots::telemetry::epoch(),local.edict,if heading.is_some(){"move"}else if sample.is_some()&&allowed{"blocked"}else{"release"},
-            sample.and_then(|s|s.danger_distance(now,[o.x,o.y,o.z])).unwrap_or(-1.),local.frag_escape.probes,local.frag_escape.starts,local.frag_escape.blocked,probe_started.elapsed().as_micros());
+            sample.and_then(|s|s.proximity_distance(now,[o.x,o.y,o.z])).unwrap_or(-1.),local.frag_escape.probes,local.frag_escape.starts,local.frag_escape.blocked,probe_started.elapsed().as_micros());
     }
 }
 

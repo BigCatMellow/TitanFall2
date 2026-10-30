@@ -19,8 +19,11 @@ pub(super) fn reset(token: EngineToken) { DATA.get(token).replace(Bridge::defaul
 pub(super) fn readiness(actor: i32, token: EngineToken) -> Option<Readiness> {
     DATA.get(token).try_borrow().ok()?.actors.get(&actor).copied()
 }
-pub(super) fn owned_frag(actor:i32,now:f32,origin:[f32;3],token:EngineToken)->Option<Sample>{
-    DATA.get(token).try_borrow().ok()?.frags.iter().filter(|((owner,_),_)|*owner==actor)
+pub(super) fn owned_frag(actor:i32,now:f32,origin:[f32;3],tracked:Option<i32>,token:EngineToken)->Option<Sample>{
+    let data=DATA.get(token).try_borrow().ok()?;
+    if let Some(s)=tracked.and_then(|id|data.frags.get(&(actor,id))).copied()
+        .filter(|s|s.proximity_distance(now,origin).is_some()){return Some(s);}
+    data.frags.iter().filter(|((owner,_),_)|*owner==actor)
         .filter_map(|(_,s)|s.danger_distance(now,origin).map(|distance|(*s,distance)))
         .min_by(|a,b|a.1.total_cmp(&b.1)).map(|(s,_)|s)
 }
