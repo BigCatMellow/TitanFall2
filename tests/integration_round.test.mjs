@@ -20,3 +20,11 @@ test('unknown/missing/wrong integration settings and incomplete rounds fail clos
  assert.throws(()=>reviewIntegrationRound(a.map(l=>l.replace('coordination=1',''))));
  assert.throws(()=>reviewIntegrationRound(a.slice(0,-1)));
 });
+test('clockless notebook gaps and diagnostic faults survive match-window filtering',()=>{
+ const lines=log();lines.splice(3,0,'WNOTE_GAP event=1 victim=7 life=1','WNOTE_ERROR stage=callback count=1','BT_FRAG_DAMAGE_ERROR schema=1');
+ const r=reviewIntegrationRound(lines);
+ assert.equal(r.notebook_concordance.notebook_gap_markers_logged,1);
+ assert.equal(r.notebook_concordance.notebook_errors_logged,1);
+ assert.equal(r.additive_frag_damage.errors,1);
+ assert.equal(r.error_markers,2);
+});

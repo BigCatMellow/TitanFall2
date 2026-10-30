@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "state": "stopped_time_budget",
+  "completed": 42,
+  "planned": 55,
+  "maps": [
+    "mp_relic02",
+    "mp_homestead",
+    "mp_complex3",
+    "mp_drydock",
+    "mp_wargames",
+    "mp_angel_city",
+    "mp_eden",
+    "mp_forwardbase_kodai",
+    "mp_glitch",
+    "mp_colony02",
+    "mp_black_water_canal",
+    "mp_crashsite3",
+    "mp_rise",
+    "mp_thaw",
+    "mp_grave"
+  ],
+  "runtime_error_markers": 0,
+  "pilot_samples": 96927,
+  "normal_unchanged": true,
+  "profile_restored": true,
+  "paired_comparisons": [
+    {
+      "map": "mp_relic02",
+      "cell": "stall",
+      "repeat": 1,
+      "baseline_low_progress_percent": 1.726078799249531,
+      "trial_low_progress_percent": 2.729827378562826,
+      "baseline_duration_s": 209.5,
+      "trial_duration_s": 190.6
+    },
+    {
+      "map": "mp_relic02",
+      "cell": "frag",
+      "repeat": 1,
+      "baseline_low_progress_percent": 1.726078799249531,
+      "trial_low_progress_percent": 1.464226289517471,
+      "baseline_duration_s": 209.5,
+      "trial_duration_s": 235.5
+    },
+    {
+      "map": "mp_relic02",
+      "cell": "clearance",
+      "repeat": 1,
+      "baseline_low_progress_percent": 1.726078799249531,
+      "trial_low_progress_percent": 1.4275517487508922,
+      "baseline_duration_s": 209.5,
+      "trial_duration_s": 208.9
+    },
+    {
+      "map": "mp_complex3",
+      "cell": "frag",
+      "repeat": 1,
+      "baseline_low_progress_percent": 0,
+      "trial_low_progress_percent": 0.390625,
+      "baseline_duration_s": 141.2,
+      "trial_duration_s": 160.8
+    },
+    {
+      "map": "mp_complex3",
+      "cell": "stall",
+      "repeat": 1,
+      "baseline_low_progress_percent": 0,
+      "trial_low_progress_percent": 0.23430178069353327,
+      "baseline_duration_s": 141.2,
+      "trial_duration_s": 168.6
+    },
+    {
+      "map": "mp_complex3",
+      "cell": "clearance",
+      "repeat": 1,
+      "baseline_low_progress_percent": 0,
+      "trial_low_progress_percent": 3.2959789057350033,
+      "baseline_duration_s": 141.2,
+      "trial_duration_s": 124.7
+    },
+    {
+      "map": "mp_wargames",
+      "cell": "clearance",
+      "repeat": 1,
+      "baseline_low_progress_percent": 2.8072837632776935,
+      "trial_low_progress_percent": 2.5545350172215846,
+      "baseline_duration_s": 199.3,
+      "trial_duration_s": 258.4
+    },
+    {
+      "map": "mp_wargames",
+      "cell": "stall",
+      "repeat": 1,
+      "baseline_low_progress_percent": 2.8072837632776935,
+      "trial_low_progress_percent": 2.9560384032339564,
+      "baseline_duration_s": 199.3,
+      "trial_duration_s": 288.5
+    },
+    {
+      "map": "mp_wargames",
+      "cell": "frag",
+      "repeat": 1,
+      "baseline_low_progress_percent": 2.8072837632776935,
+      "trial_low_progress_percent": 2.4275118004045853,
+      "baseline_duration_s": 199.3,
+      "trial_duration_s": 216.6
+    },
+    {
+      "map": "mp_eden",
+      "cell": "stall",
+      "repeat": 1,
+      "baseline_low_progress_percent": 0.4267425320056899,
+      "trial_low_progress_percent": 0.06724949562878278,
+      "baseline_duration_s": 115,
+      "trial_duration_s": 123.1
+    },
+    {
+      "map": "mp_eden",
+      "cell": "frag",
+      "repeat": 1,
+      "baseline_low_progress_percent": 0.4267425320056899,
+      "trial_low_progress_percent": 0.6872852233676976,
+      "baseline_duration_s": 115,
+      "trial_duration_s": 119.7
+    },
+    {
+      "map": "mp_eden",
+      "cell": "clearance",
+      "repeat": 1,
+      "baseline_low_progress_percent": 0.4267425320056899,
+      "trial_low_progress_percent": 0.37105751391465674,
+      "baseline_duration_s": 115,
+      "trial_duration_s": 170.5
+    },
+    {
+      "map": "mp_relic02",
+      "cell": "height",
+      "repeat": 1,
+      "baseline_low_progress_percent": 1.726078799249531,
+      "trial_low_progress_percent": 1.4682539682539681,
+      "baseline_duration_s": 209.5,
+      "trial_duration_s": 191.5
+    },
+    {
+      "map": "mp_complex3",
+      "cell": "height",
+      "repeat": 1,
+      "baseline_low_progress_percent": 0,
+      "trial_low_progress_percent": 0.955794504181601,
+      "baseline_duration_s": 141.2,
+      "trial_duration_s": 198
+    },
+    {
+      "map": "mp_wargames",
+      "cell": "height",
+      "repeat": 1,
+      "baseline_low_progress_percent": 2.8072837632776935,
+      "trial_low_progress_percent": 3.8221685777509555,
+      "baseline_duration_s": 199.3,
+      "trial_duration_s": 364
+    },
+    {
+      "map": "mp_eden",
+      "cell": "height",
+      "repeat": 1,
+      "baseline_low_progress_percent": 0.4267425320056899,
+      "trial_low_progress_percent": 3.2338308457711444,
+      "baseline_duration_s": 115,
+      "trial_duration_s": 150.4
+    },
+    {
+      "map": "mp_relic02",
+      "cell": "nearest",
+      "repeat": 1,
+      "baseline_low_progress_percent": 1.89520624303233,
+      "trial_low_progress_percent": 1.6604400166044002,
+      "baseline_duration_s": 139.2,
+      "trial_duration_s": 179.9
+    },
+    {
+      "map": "mp_complex3",
+      "cell": "nearest",
+      "repeat": 1,
+      "baseline_low_progress_percent": 1.940755873340143,
+      "trial_low_progress_percent": 0.6033182503770739,
+      "baseline_duration_s": 154.9,
+      "trial_duration_s": 159.9
+    },
+    {
+      "map": "mp_relic02",
+      "cell": "combined",
+      "repeat": 1,
+      "baseline_low_progress_percent": 1.726078799249531,
+      "trial_low_progress_percent": 2.5628856193640246,
+      "baseline_duration_s": 209.5,
+      "trial_duration_s": 162.7
+    },
+    {
+      "map": "mp_complex3",
+      "cell": "combined",
+      "repeat": 1,
+      "baseline_low_progress_percent": 0,
+      "trial_low_progress_percent": 1.8910400720396219,
+      "baseline_duration_s": 141.2,
+      "trial_duration_s": 171
+    },
+    {
+      "map": "mp_wargames",
+      "cell": "combined",
+      "repeat": 1,
+      "baseline_low_progress_percent": 2.8072837632776935,
+      "trial_low_progress_percent": 0.5893909626719057,
+      "baseline_duration_s": 199.3,
+      "trial_duration_s": 191.6
+    },
+    {
+      "map": "mp_eden",
+      "cell": "combined",
+      "repeat": 1,
+      "baseline_low_progress_percent": 0.4267425320056899,
+      "trial_low_progress_percent": 0.6208425720620843,
+      "baseline_duration_s": 115,
+      "trial_duration_s": 172.4
+    }
+  ],
+  "unpaired_candidates": [
+    {
+      "map": "mp_relic02",
+      "cell": "clearance",
+      "repeat": 2
+    },
+    {
+      "map": "mp_relic02",
+      "cell": "frag",
+      "repeat": 2
+    },
+    {
+      "map": "mp_relic02",
+      "cell": "stall",
+      "repeat": 2
+    }
+  ],
+  "matched_frag_screen": [
+    {
+      "cell": "baseline",
+      "rounds": 4,
+      "combat_seconds": 665,
+      "observed_projectiles": 182,
+      "matched_self_deaths": 28,
+      "matched_enemy_deaths": 49
+    },
+    {
+      "cell": "frag",
+      "rounds": 4,
+      "combat_seconds": 732.6,
+      "observed_projectiles": 27,
+      "matched_self_deaths": 13,
+      "matched_enemy_deaths": 12
+    }
+  ],
+  "execution_by_cell": [
+    {
+      "cell": "baseline",
+      "rounds": 15,
+      "cooldown_events": 0,
+      "switches_within_8s": 0,
+      "clearance_starts": 0,
+      "ordinary_corner_samples": 0
+    },
+    {
+      "cell": "stall",
+      "rounds": 5,
+      "cooldown_events": 75,
+      "switches_within_8s": 72,
+      "clearance_starts": 0,
+      "ordinary_corner_samples": 0
+    },
+    {
+      "cell": "frag",
+      "rounds": 5,
+      "cooldown_events": 0,
+      "switches_within_8s": 0,
+      "clearance_starts": 0,
+      "ordinary_corner_samples": 0
+    },
+    {
+      "cell": "clearance",
+      "rounds": 5,
+      "cooldown_events": 0,
+      "switches_within_8s": 0,
+      "clearance_starts": 0,
+      "ordinary_corner_samples": 0
+    },
+    {
+      "cell": "height",
+      "rounds": 4,
+      "cooldown_events": 0,
+      "switches_within_8s": 0,
+      "clearance_starts": 0,
+      "ordinary_corner_samples": 0
+    },
+    {
+      "cell": "nearest_baseline",
+      "rounds": 2,
+      "cooldown_events": 0,
+      "switches_within_8s": 0,
+      "clearance_starts": 0,
+      "ordinary_corner_samples": 0
+    },
+    {
+      "cell": "nearest",
+      "rounds": 2,
+      "cooldown_events": 0,
+      "switches_within_8s": 0,
+      "clearance_starts": 0,
+      "ordinary_corner_samples": 0
+    },
+    {
+      "cell": "combined",
+      "rounds": 4,
+      "cooldown_events": 45,
+      "switches_within_8s": 45,
+      "clearance_starts": 0,
+      "ordinary_corner_samples": 0
+    }
+  ],
+  "damage_evidence": {
+    "callbacks": 1159,
+    "uniquely_matched": 1159,
+    "clockless_gap_markers": 641,
+    "consistent_post_health_decrease": 1147,
+    "missing_clean_post": 12
+  },
+  "limits": "Sequential bot-only screening. Pairing requires same map/repeat and the correct coordination control. Single pairs and overlapping samples are not statistical proof or human difficulty evidence. Grenade outcomes are sampled observed-projectile joins, not a complete release denominator. Post-run analysis preserves clockless warnings conservatively across the full log; original frozen reports are retained privately."
+}

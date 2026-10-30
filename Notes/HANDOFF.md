@@ -1333,3 +1333,31 @@ Normal independently remains v23BC2C1019..., current saves/modifiers/presets,
 aim0.78/firingwarmup0.8s.11normal hashes still unchanged after ability probes and
 fresh screen start. Do not edit frozen tools/analysis/cell config during the run.
 Use stop-after-current.txt for a pause; never infer completion from this note.
+
+## 2026-10-29 — Four-hour matrix finished; post-run review
+
+The30-point matrix completed42/55jobs across all15planned full-size maps,
+13:05:25–16:20:52EDT. Normal time-budget stop before16:27:48deadline; zero failed
+attempts/detected runtime errors; no coarse stop fired. Isolated native307...,
+config/enablement restored. Current normalBC2.../all11guard files unchanged;
+no game running. Do not resume historical PIDs or the expired request.
+
+Read research/integration-v28-20261029/FINDINGS.md,summary.json and
+final-screening30-corrected.json. Height trial worse on Eden0.43%to3.23%pilot
+low-progress samples. Frag guard cut observed grenades182to27, self-deaths28to13,
+enemy deaths49to12 across four matched maps: restrictive, not a safety solution.
+Early clearance never started; native corner gate saw zero ordinary candidates.
+Stall recovery ran but matched results mixed; nearest pursuit looked promising
+in two coordination-off pairs and does not affect normal coordination-on mode.
+Combined improved WarGames but worsened the other three maps. No global rollout.
+Three repeat2Relic candidates lack their repeat2baseline and remain unpaired.
+
+Found/fixed an analysis-wrapper bug: match-time filtering discarded timestamp-less
+WNOTE_GAP/fault records. Regression reproduced old failure;3integration/10frag
+concordance fixtures pass. Reanalyzed42verified raw-log hashes into NEW snapshot;
+old frozen reports/raw logs preserved. Corrected evidence:641gap warnings,
+1,159unique frag-damage/hit matches,1,147clean post-health decreases,12without
+clean post evidence. All42now correctly require notebook-gap review. Navigation,
+frag outcome and weapon-window metrics JSON-equivalent before/after correction.
+Do not repeat the old zero-gap/concordant coverage claim. No native/game behavior
+changed; no further run/deployment was authorized or started by this review.

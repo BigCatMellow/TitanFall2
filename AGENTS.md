@@ -4,10 +4,11 @@ Canonical development repo for BT-7274's solo Northstar project. Read README.md,
 docs/PROJECT-STATUS.md, Notes/CURRENT-SETUP.md and the latest Notes/HANDOFF.md
 entries before changes.
 
-- Current October29 four-hour TEST ONLY: integration-v28 worktree/branch;
-  receipt target/v28-study-resumed-session.json THERE; deadline16:27:48EDT.
-  Read actual status before any launch. Freeze active tools/analysis/cell config.
-  Normal remains v23BC2...; no automatic promotion. See latest handoff.
+- October29 integration-v28 TEST FINISHED42/55jobs across15maps. Clean time-budget
+  stop/isolated restore, normalBC2... unchanged; no queue/game remains. Read
+  research/integration-v28-20261029/FINDINGS.md and latest handoff. No rollout.
+  Post-run analyzer correction retains clockless notebook gaps; use corrected
+  snapshot, not old zero-gap status. Never resume expired requests/historical PIDs.
 - October29 current research: normal remains v23BC2... unchanged. Separate
   candidate/traversal-v26-20261029 prototype passed lifecycle but NOT effectiveness;
   no rollout. Latest frozen map study receipt is target/v24-study-after-v26-session.json,

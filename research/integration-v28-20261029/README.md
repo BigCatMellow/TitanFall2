@@ -1,5 +1,7 @@
 # Integrated repository trials — October 29
 
+Completed42/55rounds across all15planned maps; isolated restored and normal unchanged. Read [final findings](FINDINGS.md) and the corrected snapshot. Earlier active-run descriptions below are historical.
+
 The four-hour authorization starts12:27:48EDT and ends16:27:48EDT. Normal remains
 v23BC2C1019... with current saves/settings. No automatic normal deployment.
 
