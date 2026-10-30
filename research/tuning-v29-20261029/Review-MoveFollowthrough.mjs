@@ -3,15 +3,16 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const fields=line=>Object.fromEntries([...line.matchAll(/(?:^|\s)(\w+)=([^\s]+)/g)].map(m=>[m[1],m[2]]));
-export function reviewMoveFollowthrough(lines){
+export function reviewMoveFollowthrough(lines,{start=-Infinity,end=Infinity}={}){
   const positions=new Map(),moves=[];
   for(const line of lines){
     const player=line.includes('BOT_PLAYER '),move=line.includes('BOT_FRAG_ESCAPE ');
     if(!player&&!move)continue;
     const e=fields(line);if(e.epoch===undefined||e.slot===undefined||!Number.isFinite(+e.t))continue;
+    if(+e.t<start-0.55||+e.t>end)continue;
     const key=e.epoch+':'+e.slot;
     if(player){const p={...e,t:+e.t};if(!positions.has(key))positions.set(key,[]);positions.get(key).push(p);}
-    if(move&&e.action==='move')moves.push({key,t:+e.t});
+    if(move&&e.action==='move'&&+e.t>=start)moves.push({key,t:+e.t});
   }
   for(const points of positions.values())points.sort((a,b)=>a.t-b.t);
   moves.sort((a,b)=>a.t-b.t);

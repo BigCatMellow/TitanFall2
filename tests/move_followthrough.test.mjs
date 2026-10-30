@@ -11,3 +11,9 @@ test('death, changed entity, stale or missing snapshots cannot certify followthr
   const r=reviewMoveFollowthrough([...points,move(10.1)]);assert.equal(r.usable_windows,0);assert.equal(r.censored_windows,1);
  }
 });
+test('match window excludes pre-match and post-match commands and censors evidence beyond the boundary',()=>{
+ const r=reviewMoveFollowthrough([pos(10,0),move(10.05),move(10.1),pos(10.5,100),move(11.1),pos(11.5,200)],{start:10.1,end:10.7});
+ assert.equal(r.move_commands,1);assert.equal(r.usable_windows,1);
+ const end=reviewMoveFollowthrough([pos(10,0),move(10.1),pos(10.5,100)],{start:10,end:10.3});
+ assert.equal(end.usable_windows,0);assert.equal(end.censored_windows,1);
+});
