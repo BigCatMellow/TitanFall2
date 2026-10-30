@@ -70,6 +70,7 @@ mod personality;
 mod combat_decisions;
 mod action_policy;
 mod action_bridge;
+mod frag_escape;
 mod offhand_safety;
 mod telemetry;
 mod netvars;
@@ -119,6 +120,7 @@ pub(super) static HEIGHT_RESPONSE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new
 pub(super) static SKILL_USE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PERSONALITY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static OFFHAND_SAFETY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static FRAG_ESCAPE_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static STALL_RETARGET_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 
 pub(super) fn switch_on(cell: &OnceCell<ConVarStruct>) -> bool {
@@ -153,6 +155,7 @@ pub(super) struct BotData {
     navigation_requested: bool,
     tactical_pulse: action_policy::Pulse,
     ordnance_pulse: action_policy::Pulse,
+    frag_escape: frag_escape::FragEscape,
     throw_safety: offhand_safety::ThrowSafety,
     escape_recovery: escape_recovery::EscapeRecovery,
     path_log: nav_diagnostics::RateGate,
@@ -196,6 +199,7 @@ pub(super) struct BotData {
 impl BotData {
     // Per-life candidate state must not survive respawn or pilot/Titan transitions.
     fn reset_candidate_state(&mut self) {
+        self.frag_escape=Default::default();
         self.path_log = Default::default();
         self.segment_log = Default::default();
         self.corner_guard_log = Default::default();
@@ -514,6 +518,7 @@ impl Plugin for Bots {
             (&DEFENSIVE_TACTICS_CONVAR, "bot_defensive_tactics", "Stim/Phase when health is low instead of only in the shared request window; needs bot_action_policy 1"),
             (&SKILL_USE_CONVAR, "bot_skill_use", "situational pilot tactical/ordnance use (Stim, Phase, Cloak, Pulse Blade, Holo, A-Wall, grenades); needs bot_action_policy 1"),
             (&OFFHAND_SAFETY_CONVAR, "bot_offhand_safety", "checked throw clearance, release aim ownership and frag approach brake; needs bot_skill_use 1"),
+            (&FRAG_ESCAPE_CONVAR, "bot_frag_escape", "trial: checked ground escape from fresh owned grenade positions, preserves aim/throw rules; default off"),
             (&STALL_RETARGET_CONVAR, "bot_stall_retarget", "briefly skip an unseen pursuit target after three repeated local pilot stalls; visible threats remain eligible"),
             (&PERSONALITY_CONVAR, "bot_personality", "weapon-based behavior: SMG rushers push in, marksmen keep distance, LMG anchors hold; aim unchanged"),
             (&HEIGHT_RESPONSE_CONVAR, "bot_height_response", "break line of sight from a visible enemy that stays 180+ units above; needs bot_combat_decisions 1"),

@@ -1,0 +1,81 @@
+{
+  "base": {
+    "nearest": 0,
+    "stall": 0,
+    "frag": 0,
+    "clearance": 0,
+    "height": 0,
+    "coordination": 1,
+    "eden": 1,
+    "continuity": 0,
+    "detour": 0,
+    "corner_guard": 0,
+    "safety": 0,
+    "retarget": 0,
+    "measurements": 1,
+    "damage_probe": 1,
+    "input_probe": 1,
+    "action_policy": 1,
+    "skill_use": 1,
+    "roster": 1,
+    "tacticals": 1,
+    "combat_movement": 1,
+    "combat_decisions": 1,
+    "height_response": 1,
+    "defensive": 1,
+    "personality": 1,
+    "route_guard": 0,
+    "jump_timing": 0,
+    "crouch": 0,
+    "perception": 0,
+    "balance_bots": 0,
+    "escape": 0,
+    "awareness": 1
+  },
+  "cells": {
+    "baseline": {},
+    "clearance": {
+      "clearance": 1
+    },
+    "escape": {
+      "escape": 1
+    },
+    "combined": {
+      "clearance": 1,
+      "escape": 1
+    }
+  },
+  "convars": {
+    "nearest": "bot_nearest_pursuit",
+    "stall": "bot_stall_target_recovery",
+    "frag": "bot_frag_safety",
+    "clearance": "bot_low_clearance_approach",
+    "height": "bot_corner_height_trial",
+    "coordination": "bot_team_coordination",
+    "eden": "bot_eden_route_repair",
+    "continuity": "bot_route_continuity",
+    "detour": "bot_link_detour",
+    "corner_guard": "bot_corner_height_guard",
+    "safety": "bot_offhand_safety",
+    "retarget": "bot_stall_retarget",
+    "measurements": "bt7274_bot_measurements",
+    "damage_probe": "bt7274_frag_damage_probe",
+    "input_probe": "bot_frag_input_probe",
+    "action_policy": "bot_action_policy",
+    "skill_use": "bot_skill_use",
+    "roster": "bt7274_bot_roster",
+    "tacticals": "bt7274_bot_tacticals",
+    "combat_movement": "bot_combat_movement",
+    "combat_decisions": "bot_combat_decisions",
+    "height_response": "bot_height_response",
+    "defensive": "bot_defensive_tactics",
+    "personality": "bot_personality",
+    "route_guard": "bot_route_guard",
+    "jump_timing": "bot_jump_timing",
+    "crouch": "bot_crouch_recovery",
+    "perception": "bot_perception_fix",
+    "balance_bots": "solo_weapon_balance_bots",
+    "escape": "bot_frag_escape",
+    "awareness": "bt7274_frag_awareness"
+  }
+}

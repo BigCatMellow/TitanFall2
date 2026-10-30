@@ -827,6 +827,7 @@ pub(crate) fn basic_combat(
                 vel.x.hypot(vel.y), o.x, o.y, o.z);
         }
     } else { local_data.frag_probe = Default::default(); }
+    frag_escape_followup(player,helper,local_data,&mut cmd,is_titan,sim_type);
     cmd.camera_angles = cmd.world_view_angles;
 
     cmd
@@ -838,6 +839,43 @@ fn v3(a: Vector3) -> [f32; 3] { [a.x, a.y, a.z] }
 
 fn grounded(player: &mut CPlayer, helper: &CUserCmdHelper) -> bool {
     unsafe { (helper.sv_funcs.is_on_ground)(nudge_type::<&CBaseEntity>(player)) != 0 }
+}
+
+/// Late locomotion-only overlay: never turn the aim or change attack timing.
+fn frag_escape_followup(player:&mut CPlayer,helper:&CUserCmdHelper,local:&mut BotData,
+    cmd:&mut CUserCmd,is_titan:bool,sim_type:i32){
+    if !crate::bots::switch_on(&crate::bots::FRAG_ESCAPE_CONVAR){local.frag_escape.cancel();return;}
+    let o=player.m_vecAbsOrigin;let now=time(helper);
+    let interrupt=Action::Jump as u32|Action::Duck as u32|Action::Use as u32|Action::OffHand0 as u32|Action::OffHand1 as u32;
+    let allowed=!is_titan&&sim_type==6&&grounded(player,helper)
+        &&player.m_vecAbsVelocity.x.hypot(player.m_vecAbsVelocity.y)<=300.
+        &&cmd.buttons&interrupt==0&&!matches!(local.metrics.state,"recover"|"embark")
+        &&local.nav_query.as_ref().is_some_and(|q|q.hull==crate::navmesh::Hull::Human);
+    let token=unsafe {EngineToken::new_unchecked()};
+    let sample=crate::bots::action_bridge::owned_frag(player.m_RefEHandle,now,[o.x,o.y,o.z],token);
+    let was_active=local.frag_escape.active();let probes=local.frag_escape.probes;
+    let probe_started=std::time::Instant::now();
+    let heading=local.frag_escape.update(now,[o.x,o.y,o.z],cmd.world_view_angles.y,sample,allowed,|yaw|{
+        let (s,c)=yaw.to_radians().sin_cos();
+        if hull_fit(player,helper,[c,s],64.)!=crate::bots::crouch_recovery::Fit::StandClear{return false;}
+        let end=o+Vector3::new(c*64.,s*64.,32.);
+        let ground=view_rate(helper,end,end-Vector3::new(0.,0.,64.)-GROUND_OFFSET,player,true).0;
+        ground>0.05&&ground<0.95
+    });
+    if let Some(yaw)=heading{
+        let (f,s)=crate::bots::combat_movement::reframe(1.,0.,yaw,cmd.world_view_angles.y);
+        cmd.move_.x=f;cmd.move_.y=s;set_move_buttons(cmd);
+        local.navigation_requested=false;local.movement_anchor=None;
+    }else if was_active{
+        if let Some(nav)=local.nav_query.as_mut(){nav.path_points.clear();nav.end_point=None;}
+        local.should_recalculate_path=true;
+    }
+    if crate::bots::switch_on(&crate::bots::NAV_DIAGNOSTICS_CONVAR)
+        &&(probes!=local.frag_escape.probes||was_active!=local.frag_escape.active()){
+        log::info!("BOT_FRAG_ESCAPE epoch={} t={now:.2} slot={} action={} distance={:.1} probes={} starts={} blocked={} probe_us={}",
+            crate::bots::telemetry::epoch(),local.edict,if heading.is_some(){"move"}else if sample.is_some()&&allowed{"blocked"}else{"release"},
+            sample.and_then(|s|s.danger_distance(now,[o.x,o.y,o.z])).unwrap_or(-1.),local.frag_escape.probes,local.frag_escape.starts,local.frag_escape.blocked,probe_started.elapsed().as_micros());
+    }
 }
 
 static HULL_WARNED: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
@@ -1092,14 +1130,19 @@ fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut Bo
         use crate::bots::clearance_approach::{Clearance, Intent};
         use crate::bots::crouch_recovery::Fit;
         let commanded = cmd.move_.x.hypot(cmd.move_.y) > 0.3;
-        let ordinary = crate::bots::clearance_approach::ClearanceApproach::ordinary_corner(local.current_corner);
+        let ordinary = crate::bots::clearance_approach::ClearanceApproach::ordinary_corner(local.current_corner)
+            && (local.next_target_pos.z-o.z).abs()<=36.
+            && cmd.buttons & Action::Jump as u32 == 0;
         let dir = route_dir(player, local, yaw);
         let mut tested = None;
+        let mut probe_us=0;
         let outcome = local.clearance.update(now, [o.x, o.y], on_ground,
             pilot_route && local.metrics.state != "recover" && commanded
                 && !local.crouch.is_active(),
             speed, distance(local.next_target_pos, o), ordinary, || {
+                let begin=std::time::Instant::now();
                 let fit = hull_fit(player, helper, dir, 40.);
+                probe_us=begin.elapsed().as_micros();
                 tested = Some(fit);
                 match fit {
                     Fit::StandClear => Clearance::StandClear,
@@ -1108,6 +1151,10 @@ fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut Bo
                 }
             });
         let duck = outcome == Intent::Duck;
+        if switch_on(&NAV_DIAGNOSTICS_CONVAR)&&tested.is_some(){
+            log::info!("BOT_CLEARANCE_PROBE epoch={} t={now:.2} slot={} fit={tested:?} ordinary={} speed={speed:.0} dist={:.0} probe_us={probe_us}",
+                crate::bots::telemetry::epoch(),local.edict,ordinary as u8,distance(local.next_target_pos,o));
+        }
         if duck {
             cmd.buttons &= !(Action::Speed as u32 | Action::Jump as u32);
             cmd.buttons |= Action::Duck as u32;

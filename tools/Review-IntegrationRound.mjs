@@ -6,9 +6,9 @@ import {reviewRouteStudy} from './Review-RouteStudy.mjs';
 import {parseBotTrialLog} from './Analyze-BotAITrial.mjs';
 import {analyzeFragLog} from './Analyze-FragLifecycle.mjs';
 import {compareFragNotebook} from './Compare-FragNotebook.mjs';
-export function reviewIntegrationRound(lines){
-  const r=reviewRouteStudy(lines,{integration:true});
-  const header=lines.find(l=>l.includes('MAP_SURVEY_INTEGRATION '));
+export function reviewIntegrationRound(lines,options={}){
+  const r=reviewRouteStudy(lines,{integration:true,...options});
+  const header=lines.find(l=>l.includes((options.marker||'MAP_SURVEY_INTEGRATION')+' '));
   const start=Number(header.match(/\bt=([\d.]+)/)?.[1]);
   const end=start+r.duration_s;
   if(!Number.isFinite(start))throw Error('Missing integration clock');
@@ -16,7 +16,7 @@ export function reviewIntegrationRound(lines){
     if(l.includes('WNOTE_CONTEXT '))return true;
     // These fault records have no engine timestamp. Retain them from the
     // whole fresh-process log rather than silently certifying a clean window.
-    if(/\b(?:WNOTE_GAP|WNOTE_ERROR|WNOTE_FIRE_ERROR|BT_FRAG_DAMAGE_ERROR|BT_FRAG_PROBE_ERROR)\b/.test(l))return true;
+    if(/\b(?:WNOTE_GAP|WNOTE_ERROR|WNOTE_FIRE_ERROR|BT_FRAG_AWARE_ERROR|BT_FRAG_DAMAGE_ERROR|BT_FRAG_PROBE_ERROR)\b/.test(l))return true;
     const m=l.match(/(?:^|\s)t=([\d.]+)/);return m&&+m[1]>=start&&+m[1]<=end+0.1;
   }).join('\n');
   const frag=analyzeFragLog(window);

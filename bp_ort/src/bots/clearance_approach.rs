@@ -37,10 +37,10 @@ impl ClearanceApproach {
     pub fn cancel(&mut self) { self.active = None; self.candidate = None; }
     pub fn is_active(&self) -> bool { self.active.is_some() }
     /// The native straight-path metadata must not announce a special link.
-    /// Absence of metadata is unknown, not permission to take over a link.
+    /// The custom Detour null-traversal sentinel is 255, not code zero.
+    /// Only an unflagged point is eligible; real stand/duck sweeps still decide.
     pub fn ordinary_corner(meta: Option<(u8, u8)>) -> bool {
-        meta.is_some_and(|(flags, jump)| flags & !0x03 == 0
-            && jump == 0)
+        meta.is_some_and(|(flags, jump)| flags == 0 && jump == u8::MAX)
     }
     /// Checks are at most 5Hz, require a grounded pilot actively travelling
     /// along an ordinary route, and never override a running escape recovery.
@@ -71,8 +71,13 @@ impl ClearanceApproach {
             if now >= active.next_check {
                 active.next_check = now + Self::CHECK_INTERVAL;
                 self.probes = self.probes.saturating_add(1);
-                if trace() == Clearance::StandClear
-                    && separation(pos, active.origin) >= 24. {
+                let fit=trace();
+                if fit == Clearance::Unsafe {
+                    self.active=None;self.failures=self.failures.saturating_add(1);
+                    self.failed=Some((active.origin,now+Self::FAIL_MEMORY));
+                    return Intent::Failed;
+                }
+                if fit == Clearance::StandClear && separation(pos, active.origin) >= 24. {
                     self.active = None;
                     self.successes = self.successes.saturating_add(1);
                     return Intent::Normal;
@@ -84,7 +89,7 @@ impl ClearanceApproach {
         // Do not override ordinary sprint/slide, target holds, or native links.
         if !ordinary || !corner_distance.is_finite()
             || !(55. ..=220.).contains(&corner_distance)
-            || !(35. ..=180.).contains(&speed) {
+            || !(0. ..=280.).contains(&speed) {
             self.candidate = None;
             return Intent::Normal;
         }
@@ -128,11 +133,13 @@ mod tests {
         assert_eq!((a.starts, a.successes, a.failures), (1, 1, 0));
     }
     #[test] fn no_native_link_or_fast_route_takeover() {
-        assert!(ClearanceApproach::ordinary_corner(Some((0, 0))));
+        assert!(ClearanceApproach::ordinary_corner(Some((0, u8::MAX))));
+        assert!(!ClearanceApproach::ordinary_corner(Some((0, 0))));
         assert!(!ClearanceApproach::ordinary_corner(None));
         assert!(!ClearanceApproach::ordinary_corner(Some((4, 0))));
         assert!(!ClearanceApproach::ordinary_corner(Some((0, 7))));
-        assert!(!ClearanceApproach::ordinary_corner(Some((0, u8::MAX))));
+        assert!(!ClearanceApproach::ordinary_corner(Some((1, u8::MAX))));
+        assert!(!ClearanceApproach::ordinary_corner(Some((2, u8::MAX))));
         assert!(!ClearanceApproach::ordinary_corner(Some((16, 0))));
         assert!(!ClearanceApproach::ordinary_corner(Some((255, 0))));
         let mut a = ClearanceApproach::default();
@@ -166,7 +173,7 @@ mod tests {
         assert!(!a.is_active());
     }
     #[test] fn active_crouch_yields_immediately_to_special_or_unknown_corners() {
-        for meta in [None, Some((4, 16)), Some((0, u8::MAX))] {
+        for meta in [None, Some((4, 16)), Some((0, 0))] {
             let mut a = ClearanceApproach::default();
             a.update(0., [0., 0.], true, true, 80., 100., true,
                 || Clearance::DuckOnly);
@@ -180,6 +187,15 @@ mod tests {
                 || panic!("must yield without another hull probe")), Intent::Normal);
             assert!(!a.is_active());
             assert_eq!(a.probes, 2);
+        }
+    }
+    #[test] fn normal_run_and_blocked_command_are_probed_but_an_unsafe_active_fit_yields() {
+        for speed in [0.,260.] {
+            let mut a=ClearanceApproach::default();
+            assert_eq!(a.update(0.,[0.;2],true,true,speed,100.,true,||Clearance::DuckOnly),Intent::Normal);
+            assert_eq!(a.update(0.21,[0.;2],true,true,speed,100.,true,||Clearance::DuckOnly),Intent::Duck);
+            assert_eq!(a.update(0.42,[8.,0.],true,true,speed,100.,true,||Clearance::Unsafe),Intent::Failed);
+            assert!(!a.is_active());assert_eq!(a.failures,1);
         }
     }
 }

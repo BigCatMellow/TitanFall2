@@ -4,16 +4,22 @@ param([Parameter(Mandatory)][string]$BatchDirectory,[Parameter(Mandatory)][strin
     [string]$RepositoryRoot=(Split-Path $PSScriptRoot),[string]$ResumeBatch,[switch]$ObserverDefaults,
     [ValidateRange(1,9999)][int]$Goal=200,[string[]]$MapNames,[switch]$ValidatedV20,
     [switch]$NavigationV22,[ValidateRange(0,1)][int]$CornerGuard=0,
-    [switch]$RouteStudy,[ValidateRange(0,1)][int]$RouteVariant=0,[switch]$IntegrationV28,
-    [ValidateSet('baseline','nearest_baseline','nearest','stall','frag','clearance','height','combined')][string]$IntegrationCell='baseline')
+    [switch]$RouteStudy,[ValidateRange(0,1)][int]$RouteVariant=0,[switch]$IntegrationV28,[switch]$TuningV29,
+    [ValidateSet('baseline','nearest_baseline','nearest','escape','stall','frag','clearance','height','combined')][string]$IntegrationCell='baseline')
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/Stop-OwnedSurveyGame.ps1"
 $repo=(Resolve-Path -LiteralPath $RepositoryRoot).Path
+if($TuningV29-and!$IntegrationV28){throw 'Tuning requires integration cohort'}
 if($IntegrationV28){
     if($RouteStudy-or$NavigationV22-or$ValidatedV20){throw 'Separate integration cohort required'}
     . "$PSScriptRoot/Read-IntegrationValidation.ps1"
     . "$PSScriptRoot/Integration-Cells.ps1"
-    $validated=Read-IntegrationValidation $ValidationDirectory $TestProfile
+    if($TuningV29){
+        . "$PSScriptRoot/Read-TuningValidation.ps1"
+        $validated=Read-TuningValidation $ValidationDirectory $TestProfile
+        $script:IntegrationDefinition=Get-Content "$repo/automation/tuning-v29-cells.json" -Raw|ConvertFrom-Json
+    }else{$validated=Read-IntegrationValidation $ValidationDirectory $TestProfile}
+    $integrationMarker=if($TuningV29){'MAP_SURVEY_TUNING'}else{'MAP_SURVEY_INTEGRATION'}
     $retestBuild=[pscustomobject]@{bridge_sha256=$validated.bridge_sha256}
     $integrationExpected=Get-IntegrationCell $IntegrationCell
     $integrationVars=Get-IntegrationConVars
@@ -90,6 +96,7 @@ if($NavigationV22){$plan.build='nav-corner-v22';$plan.kind='Navigation A/B, same
 if($RouteStudy){$plan.build='routing-v24-study-v23-native';$plan.kind='Paired global routing trial against installed Eden-only behavior; read-only weapon/frag measurement';$plan.route_variant=$RouteVariant;$plan.measurement_sha256=$validated.measurement_sha256}
 $plan.observer_loadout_restore=-not[bool]$ObserverDefaults
 if($IntegrationV28){$plan.build='integration-v28';$plan.kind='Frozen integrated native, independently switched cell';$plan.integration_cell=$IntegrationCell;$plan.integration_settings=$integrationExpected;$plan.measurement_sha256=$validated.measurement_sha256;$plan.damage_probe_sha256=$validated.damage_probe_sha256}
+if($TuningV29){$plan.build='tuning-v29';$plan.kind='Fresh controlled crouch/owned-frag escape cell';$plan.awareness_sha256=$validated.awareness_sha256}
 $plan|ConvertTo-Json -Depth 5|Set-Content -LiteralPath "$BatchDirectory/plan.json"
 $state=[ordered]@{state='preparing';started=(Get-Date).ToString('o');current=$null;planned=$maps.Count;results=@();failure=$null}
 function Save-State {
@@ -112,6 +119,7 @@ try{
     $mods['BT7274.MapSurvey']=@{'1.0.0'=$true};$mods['BT7274.BotDecisions']=@{'1.0.0'=$true}
     if($RouteStudy-or$IntegrationV28){$mods['BT7274.BotMeasurements']=@{'1.0.0'=$true}}
     if($IntegrationV28){$mods['BT7274.FragDamageProbe']=@{'0.1.0'=$true}}
+    if($TuningV29){$mods['BT7274.FragAwareness']=@{'0.1.0'=$true}}
     $mods|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $enabled
     $text=Get-Content -Raw -LiteralPath "$BatchDirectory/backup/server.cfg"
     $text=$text.Replace('bot_manager_max 16','bot_manager_max 17').Replace('bot_manager_target 16','bot_manager_target 17')
@@ -148,7 +156,7 @@ try{
         if($IntegrationV28){
             $marker='(?m)^(\s*print\( "MAP_SURVEY_BEGIN[^\r\n]+)$'
             if([regex]::Matches($one,$marker).Count-ne1){throw 'Unexpected integration survey marker'}
-            $readback='    print("MAP_SURVEY_INTEGRATION t="+Time()+" cell='+$IntegrationCell+'"'
+            $readback='    print("'+$integrationMarker+' t="+Time()+" cell='+$IntegrationCell+'"'
             foreach($key in $integrationExpected.Keys){$readback+='+" '+$key+'="+GetConVarInt("'+$integrationVars[$key]+'")'}
             $readback+=')'
             $one=[regex]::Replace($one,$marker,('$1'+"`n"+$readback))
@@ -167,7 +175,7 @@ try{
             }
             if($reader){while($null-ne($line=$reader.ReadLine())){
                 if($line-match'NorthstarLauncher version:\s+(\S+)' -and $Matches[1]-ne'1.31.14.0'){throw 'Wrong actual core version'}
-                if($line-match'SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|BOT_MEASURE_ERROR|BT_FRAG_DAMAGE_ERROR|BT_FRAG_PROBE_ERROR|\[error\]'){throw "Game error: $line"}
+                if($line-match'SCRIPT ERROR|COMPILE ERROR|FatalError|Host_Error|Access violation|panicked|BOT_MEASURE_ERROR|BT_FRAG_AWARE_ERROR|BT_FRAG_DAMAGE_ERROR|BT_FRAG_PROBE_ERROR|\[error\]'){throw "Game error: $line"}
                 if($line.Contains('MAP_SURVEY_BEGIN ')){
                     $f=Fields $line;if($f.bots-ne'16'-or$f.imc-ne'8'-or$f.militia-ne'8'-or$f.observer_alive-ne'0'){throw 'Uncontrolled survey population'}
                     if([int]$f.goal-ne$Goal-or[int]$f.engine_goal-ne$Goal){throw 'Engine and harness score goals do not match the requested trial'}
@@ -184,7 +192,7 @@ try{
                     if([int]$f.variant-ne$RouteVariant-or[int]$f.continuity-ne$RouteVariant-or[int]$f.detour-ne$RouteVariant-or$f.eden-ne'1'-or$f.measurements-ne'1'-or$f.safety-ne'false'-or$f.retarget-ne'false'){throw 'Unexpected routing study switches'}
                     $routeStateSeen=$true
                 }
-                if($IntegrationV28-and$line.Contains('MAP_SURVEY_INTEGRATION ')){
+                if($IntegrationV28-and$line.Contains($integrationMarker+' ')){
                     $f=Fields $line;if($f.cell-ne$IntegrationCell){throw 'Wrong integration cell'}
                     foreach($key in $integrationExpected.Keys){if($f[$key]-ne[string]$integrationExpected[$key]){throw "Wrong integration switches $key"}}
                     $routeStateSeen=$true
