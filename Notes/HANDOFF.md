@@ -1361,3 +1361,25 @@ clean post evidence. All42now correctly require notebook-gap review. Navigation,
 frag outcome and weapon-window metrics JSON-equivalent before/after correction.
 Do not repeat the old zero-gap/concordant coverage claim. No native/game behavior
 changed; no further run/deployment was authorized or started by this review.
+
+## 2026-10-29 — v29 tune candidate; bounded screen running
+
+Latest working branch candidate/tune-v29-20261029, worktree
+TitanFall2-integration-v28, source8a83e56. Read research/tuning-v29-20261029/README.md
+and validation.json. Fixed early-clearance255marker/grounded-speed eligibility;
+added default-off owned-frag escape with actual projectile feed, relative
+velocity, ground/hull checks and action handoffs. Aim/damage/warm-up unchanged.
+Final native6AB62D1B7F7E432947D3E2A4CFE69C0ACACA5D598FF333F8DA2061897FE7B545.
+125Rust/22suites,109Node/21files plus PS fixtures passed. Lock bytes E4F843... .
+Final Relic/WarGames off/on/respawn/off/lobby/new-map lifecycle passed.189escape
+move commands;1,240clearance probes including6DuckOnly, zero crouch action events.
+These establish execution/safety, not effectiveness. Initial syntax failure and
+intentionally superseded absolute-velocity run retained separately, not passes.
+
+Six short20-point independent baseline/escape/clearance rounds on Relic and
+WarGames started20:55EDT with hard21:34EDTdeadline. Read actual current status from
+target/v29-study-session.json in INTEGRATION worktree, not any historical PID.
+Private request target/v29-study-request.json; source/tools/cells frozen during
+run. Normal v23BC2.../11files guarded. Isolated candidate will restore307... and
+harnesses off on exit; never restore old saves. No normal rollout yet. Publish
+only sanitized aggregate results after review. No antivirus changes.
