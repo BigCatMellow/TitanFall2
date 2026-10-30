@@ -1394,3 +1394,23 @@ Updated reporting d3b57d3 counts churn and command spans. New native82D039...,
 INTEGRATION target/v29b-smoke-session.json. Never confuse the two builds or
 resume the stopped target/v29a-study-session.json request. See tuning README
 and screening-a-reviewed.json. Current lifecycle is running, no normal rollout.
+
+## 2026-10-29 — v29 tuning FINISHED; no normal rollout
+
+Read research/tuning-v29-20261029/FINDINGS.md in candidate/tune-v29-20261029,
+TitanFall2-integration-v28. Native82D039... passed five-phase lifecycle and four
+fresh20-point Relic/WarGames observer rounds. Initial6AB62D... two-round screen
+remains separate. Fixed owned-grenade self-cancellation with entry/exit hysteresis;
+actual clearance recovered once (Duck→StandClear0.4s). Revised map pairs: self
+frag deaths11→6, enemy10→16, observed frags57→76. Navigation mixed: Relic1.40→2.18%,
+WarGames1.90→1.10%; no broad efficacy/human balance claim. New switches default0.
+126Rust/22suites plus PS fixtures;113Node/22files passed. Lock E4 bytes preserved.
+
+Revised study ended normally at margin after4/6rounds; no failed matches. All
+four raw hashes verified. Current isolated307... restored/config/enablement,
+all harnesses/awareness per-version off. No game/queue remains. All11current
+normal guarded files unchanged/nativeBC2...; saves never overwritten. No normal
+rollout, no antivirus changes. Hist receipts target/v29b-study-session.json and
+target/v29b-smoke-session.json are evidence, not instructions to resume. Next:
+isolated repeat clearance hotspots and escape route handoff/human feedback;
+keep strict throw/height/nearest/stall trials off, aim/damage unchanged.

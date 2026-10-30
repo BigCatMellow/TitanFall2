@@ -1,5 +1,10 @@
 # Project status — 2026-10-29
 
+Latest source candidate: [v29 tuning findings](../research/tuning-v29-20261029/FINDINGS.md).
+Revised clearance/owned-frag escape passed lifecycle and short map screens;
+navigation mixed, no normal rollout. No test queue/game remains. Current normal
+setup below is unchanged.
+
 Normal now has the tested **v23 Eden-only pilot route repair**, native BC2C1019... .
 It preserves pending waypoints and temporarily routes around a failed type16
 jump near its failure location. The reproduced Eden hotspot cleared in both

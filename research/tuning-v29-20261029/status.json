@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "cohort": "tuning_v29_b",
+  "state": "stopped_time_budget",
+  "completed": 4,
+  "planned": 6,
+  "normal_unchanged": true,
+  "profile_restored": true,
+  "failed_attempts": 0,
+  "raw_snapshot": "screening-b.json",
+  "review": "screening-b-reviewed.json",
+  "normal_promoted": false
+}

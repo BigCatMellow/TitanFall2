@@ -4,10 +4,10 @@ Canonical development repo for BT-7274's solo Northstar project. Read README.md,
 docs/PROJECT-STATUS.md, Notes/CURRENT-SETUP.md and the latest Notes/HANDOFF.md
 entries before changes.
 
-- October29 v29 tuning active: separate candidate/tune-v29-20261029 in this
-  integration worktree. Six20-point Relic/WarGames cells, deadline21:34EDT.
-  Read target/v29-study-session.json actual status and latest handoff. Do not
-  edit frozen analysis/tools/cells while running. Normal BC2... unchanged.
+- October29 v29 tuning FINISHED: separate candidate/tune-v29-20261029 in this
+  integration worktree. Two initial + four revised20-point rounds; no queue/game.
+  Read research/tuning-v29-20261029/FINDINGS.md and latest handoff. Do not
+  resume historical requests/PIDs. Normal BC2... unchanged; isolated307restored.
 - October29 integration-v28 TEST FINISHED42/55jobs across15maps. Clean time-budget
   stop/isolated restore, normalBC2... unchanged; no queue/game remains. Read
   research/integration-v28-20261029/FINDINGS.md and latest handoff. No rollout.
@@ -115,4 +115,3 @@ entries before changes.
   instant/unfair bot shooting. No damage/reaction buff justified by this cohort.
   Default Grapple/frag still unused; any defensive-tactical mix needs a separate
   backed-up isolated trial. Do not confuse this played v19 session with v18survey.
-

@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "cohort": "tuning_v29_b_reviewed",
+  "native_sha256": "82D039385FC8040ED103F64F3A013CF7401303714B3402ED36B77A327DF791BB",
+  "analysis_commit": "7054291",
+  "finished": "2026-10-29T21:30:41.1417997-04:00",
+  "normal_unchanged": true,
+  "isolated_restored": true,
+  "hashes_verified": 4,
+  "rounds": [
+    {
+      "map": "mp_relic02",
+      "cell": "baseline",
+      "log_sha256": "b2b996ed8f42179cf4406e3c95ba652f2ba1c19592811a5cde2bba04d251ae8c",
+      "duration_s": 140.4,
+      "live_pilot_samples": 1929,
+      "low_progress_percent": 1.3996889580093312,
+      "frag": {
+        "observed_projectiles": 31,
+        "pilot_kill_callbacks": 10,
+        "matched_self_deaths": 5,
+        "matched_enemy_deaths": 5,
+        "projectiles_with_self_kill": 5,
+        "projectiles_with_enemy_kill": 4,
+        "unmatched_kill_callbacks": 0,
+        "self_kill_projectile_fraction": 0.16129032258064516,
+        "enemy_kill_projectile_fraction": 0.12903225806451613,
+        "observed_near_end": 2
+      },
+      "tuning": {
+        "awareness_samples": 167,
+        "escape": {
+          "move_samples": 0,
+          "blocked_samples": 0,
+          "release_samples": 0,
+          "nearby_restarts_within_300ms": 0,
+          "probe_us": {
+            "n": 0,
+            "p95_us": null,
+            "max_us": null
+          },
+          "completed_command_episodes": {
+            "n": 0,
+            "median_s": null,
+            "p95_s": null
+          }
+        },
+        "clearance": {
+          "probes": 0,
+          "fits": {},
+          "probe_us": {
+            "n": 0,
+            "p95_us": null,
+            "max_us": null
+          }
+        }
+      },
+      "error_markers": 0,
+      "notebook_status": "notebook_gap_review_required",
+      "movement_followthrough": {
+        "schema_version": 1,
+        "move_commands": 0,
+        "spaced_command_windows": 0,
+        "usable_windows": 0,
+        "censored_windows": 0,
+        "windows_with_24_units_displacement": 0,
+        "displacement": {
+          "median_units": null,
+          "p95_units": null
+        },
+        "limits": "Same native epoch/slot/entity and live pilot snapshots only. Commands are spaced at least1s per actor. Previous snapshot within0.55s; next snapshot0.35–1s after command. No observed intervening death/entity change. Unobserved transitions remain possible. Displacement may include ordinary movement and is not causal proof, grenade separation, safe escape, independent incidents or video. No Squirrel/native handle join or actor identifiers published."
+      }
+    },
+    {
+      "map": "mp_relic02",
+      "cell": "escape",
+      "log_sha256": "2b6e94aec991cda5d1a4cb10f803263a05c26cbe8dbe738f585edf7638327e9e",
+      "duration_s": 147.7,
+      "live_pilot_samples": 2022,
+      "low_progress_percent": 2.1760633036597428,
+      "frag": {
+        "observed_projectiles": 36,
+        "pilot_kill_callbacks": 10,
+        "matched_self_deaths": 3,
+        "matched_enemy_deaths": 7,
+        "projectiles_with_self_kill": 3,
+        "projectiles_with_enemy_kill": 6,
+        "unmatched_kill_callbacks": 0,
+        "self_kill_projectile_fraction": 0.08333333333333333,
+        "enemy_kill_projectile_fraction": 0.16666666666666666,
+        "observed_near_end": 0
+      },
+      "tuning": {
+        "awareness_samples": 216,
+        "escape": {
+          "move_samples": 174,
+          "blocked_samples": 20,
+          "release_samples": 34,
+          "nearby_restarts_within_300ms": 5,
+          "probe_us": {
+            "n": 194,
+            "p95_us": 50,
+            "max_us": 77
+          },
+          "completed_command_episodes": {
+            "n": 37,
+            "median_s": 0.5500000000000043,
+            "p95_s": 19.350000000000023
+          }
+        },
+        "clearance": {
+          "probes": 0,
+          "fits": {},
+          "probe_us": {
+            "n": 0,
+            "p95_us": null,
+            "max_us": null
+          }
+        }
+      },
+      "error_markers": 0,
+      "notebook_status": "notebook_gap_review_required",
+      "movement_followthrough": {
+        "schema_version": 1,
+        "move_commands": 174,
+        "spaced_command_windows": 45,
+        "usable_windows": 26,
+        "censored_windows": 19,
+        "windows_with_24_units_displacement": 25,
+        "displacement": {
+          "median_units": 90.50557993847673,
+          "p95_units": 245.47441821908853
+        },
+        "limits": "Same native epoch/slot/entity and live pilot snapshots only. Commands are spaced at least1s per actor. Previous snapshot within0.55s; next snapshot0.35–1s after command. No observed intervening death/entity change. Unobserved transitions remain possible. Displacement may include ordinary movement and is not causal proof, grenade separation, safe escape, independent incidents or video. No Squirrel/native handle join or actor identifiers published."
+      }
+    },
+    {
+      "map": "mp_wargames",
+      "cell": "escape",
+      "log_sha256": "35a39733232bde5d75fe07d616ff135a957475838273c211de3d5fdb4f8cb43f",
+      "duration_s": 159.3,
+      "live_pilot_samples": 2177,
+      "low_progress_percent": 1.1024345429490123,
+      "frag": {
+        "observed_projectiles": 40,
+        "pilot_kill_callbacks": 13,
+        "matched_self_deaths": 3,
+        "matched_enemy_deaths": 9,
+        "projectiles_with_self_kill": 3,
+        "projectiles_with_enemy_kill": 8,
+        "unmatched_kill_callbacks": 1,
+        "self_kill_projectile_fraction": 0.075,
+        "enemy_kill_projectile_fraction": 0.2,
+        "observed_near_end": 0
+      },
+      "tuning": {
+        "awareness_samples": 234,
+        "escape": {
+          "move_samples": 171,
+          "blocked_samples": 31,
+          "release_samples": 37,
+          "nearby_restarts_within_300ms": 11,
+          "probe_us": {
+            "n": 202,
+            "p95_us": 54,
+            "max_us": 107
+          },
+          "completed_command_episodes": {
+            "n": 42,
+            "median_s": 0.5699999999999932,
+            "p95_s": 1.75
+          }
+        },
+        "clearance": {
+          "probes": 0,
+          "fits": {},
+          "probe_us": {
+            "n": 0,
+            "p95_us": null,
+            "max_us": null
+          }
+        }
+      },
+      "error_markers": 0,
+      "notebook_status": "notebook_gap_review_required",
+      "movement_followthrough": {
+        "schema_version": 1,
+        "move_commands": 171,
+        "spaced_command_windows": 45,
+        "usable_windows": 18,
+        "censored_windows": 27,
+        "windows_with_24_units_displacement": 18,
+        "displacement": {
+          "median_units": 91.84062282018779,
+          "p95_units": 193.67008029120032
+        },
+        "limits": "Same native epoch/slot/entity and live pilot snapshots only. Commands are spaced at least1s per actor. Previous snapshot within0.55s; next snapshot0.35–1s after command. No observed intervening death/entity change. Unobserved transitions remain possible. Displacement may include ordinary movement and is not causal proof, grenade separation, safe escape, independent incidents or video. No Squirrel/native handle join or actor identifiers published."
+      }
+    },
+    {
+      "map": "mp_wargames",
+      "cell": "baseline",
+      "log_sha256": "ebae1c15b6318e024e3679b2f19c082b62af71502efea99230c437f408b38f37",
+      "duration_s": 166.2,
+      "live_pilot_samples": 2318,
+      "low_progress_percent": 1.8981880931837791,
+      "frag": {
+        "observed_projectiles": 26,
+        "pilot_kill_callbacks": 13,
+        "matched_self_deaths": 6,
+        "matched_enemy_deaths": 5,
+        "projectiles_with_self_kill": 6,
+        "projectiles_with_enemy_kill": 5,
+        "unmatched_kill_callbacks": 2,
+        "self_kill_projectile_fraction": 0.23076923076923078,
+        "enemy_kill_projectile_fraction": 0.19230769230769232,
+        "observed_near_end": 0
+      },
+      "tuning": {
+        "awareness_samples": 140,
+        "escape": {
+          "move_samples": 0,
+          "blocked_samples": 0,
+          "release_samples": 0,
+          "nearby_restarts_within_300ms": 0,
+          "probe_us": {
+            "n": 0,
+            "p95_us": null,
+            "max_us": null
+          },
+          "completed_command_episodes": {
+            "n": 0,
+            "median_s": null,
+            "p95_s": null
+          }
+        },
+        "clearance": {
+          "probes": 0,
+          "fits": {},
+          "probe_us": {
+            "n": 0,
+            "p95_us": null,
+            "max_us": null
+          }
+        }
+      },
+      "error_markers": 0,
+      "notebook_status": "notebook_gap_review_required",
+      "movement_followthrough": {
+        "schema_version": 1,
+        "move_commands": 0,
+        "spaced_command_windows": 0,
+        "usable_windows": 0,
+        "censored_windows": 0,
+        "windows_with_24_units_displacement": 0,
+        "displacement": {
+          "median_units": null,
+          "p95_units": null
+        },
+        "limits": "Same native epoch/slot/entity and live pilot snapshots only. Commands are spaced at least1s per actor. Previous snapshot within0.55s; next snapshot0.35–1s after command. No observed intervening death/entity change. Unobserved transitions remain possible. Displacement may include ordinary movement and is not causal proof, grenade separation, safe escape, independent incidents or video. No Squirrel/native handle join or actor identifiers published."
+      }
+    }
+  ],
+  "limits": "Two short same-build20-point map pairs; Relic baseline then escape, WarGames reverse. Different maps, repeated samples, nonrandom seeds, end censoring and notebook gaps preclude a broad balance claim. No normal promotion. Initial6AB candidate remains a separate cohort. Movement review is match-window only."
+}
