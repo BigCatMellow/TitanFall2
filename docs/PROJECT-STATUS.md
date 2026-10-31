@@ -1,3 +1,10 @@
+Latest 2026-10-30: BT7274.FragSelfDamage1.0.0 installed for normal playtest;
+75%reduced self-inflicted frag damage for bot pilots only.52health cases and
+Drydock/Glitch combat/lobby/map checks passed;11natural scaling events.
+Native BC2.../current saves preserved. v29native trials remain experimental.
+See research/gameplay-rework-v30-20261030/README.md and validation.json.
+No test/game running. Same solo shortcuts; disable via
+bt7274_bot_frag_self_damage 0. Human and enemy damage unchanged.
 # Project status — 2026-10-29
 
 Latest source candidate: [v29 tuning findings](../research/tuning-v29-20261029/FINDINGS.md).

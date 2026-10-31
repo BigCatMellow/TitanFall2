@@ -115,3 +115,5 @@ entries before changes.
   instant/unfair bot shooting. No damage/reaction buff justified by this cohort.
   Default Grapple/frag still unused; any defensive-tactical mix needs a separate
   backed-up isolated trial. Do not confuse this played v19 session with v18survey.
+
+- October30 bot frag self-damage rule installed: read research/gameplay-rework-v30-20261030/README.md and latest handoff. Normal native BC2... unchanged; BT7274.FragSelfDamage1.0.0 enable1/scale0.25. v29 native remains experimental. No queue/game; preserve saves and human/enemy damage rules.

@@ -1,0 +1,13 @@
+{
+  "Name": "BT7274.FragSelfDamage",
+  "Version": "1.0.0",
+  "Description": "Local solo bot pilots take 25% damage from their own frags; human and enemy damage stay unchanged.",
+  "LoadPriority": 42,
+  "ConVars": [
+    {"Name":"bt7274_bot_frag_self_damage","DefaultValue":"1"},
+    {"Name":"bt7274_bot_frag_self_damage_scale","DefaultValue":"0.25"},
+    {"Name":"bt7274_bot_frag_self_damage_log","DefaultValue":"0"}
+  ],
+  "Scripts": [{"Path":"bt7274_frag_self_damage.nut","RunOn":"SERVER && MP",
+    "ServerCallback":{"After":"BT7274FragSelfDamage_Init"}}]
+}

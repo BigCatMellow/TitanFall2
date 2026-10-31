@@ -1414,3 +1414,38 @@ rollout, no antivirus changes. Hist receipts target/v29b-study-session.json and
 target/v29b-smoke-session.json are evidence, not instructions to resume. Next:
 isolated repeat clearance hotspots and escape route handoff/human feedback;
 keep strict throw/height/nearest/stall trials off, aim/damage unchanged.
+
+## 2026-10-30 — bot frag self-damage rule installed
+
+BT-7274 explicitly requested75%less bot own-grenade damage plus structural
+rework review. Added standalone BT7274.FragSelfDamage1.0.0, source callback
+scales only UID0pilot attacker==victim frag by0.25. Local insecure solo only,
+non-lobby; human/self/enemy/friendly/Titan/other sources retain rules. No DLL
+rebuild or new navigation flags. Normal BC2... unchanged; current saves preserved.
+
+Source in integration worktree candidate/tune-v29-20261029. Read
+research/gameplay-rework-v30-20261030/README.md and validation.json. Isolated
+Drydock/Glitch52health cases passed (13cases xinitial/respawn x2maps),11natural
+scaled hits, lobby/map passed,0detected runtime errors. Native isolated307...;
+normal remainsBC2... . This proves hook/scope execution, not human balance.
+All test processes stopped, isolated config restored and new mods disabled per
+version. Fresh normal backup before-frag-self-20261030-211049 under private
+Notes/backups; no old-save restore. Actual normalreceipt
+local-test-profile/bt7274-frag-self-damage.json. Current shortcuts pick up mod
+next launch, config enable1/scale0.25/log0. Canonical and integration launcher
+metadata filter now includes FragSelfDamage; canonical change backed up.
+
+Fast live rollback: bt7274_bot_frag_self_damage 0. Persistent rollback when
+closed: tools/Install-FragSelfDamage.ps1 -Rollback (integration source). Never
+restore historical saves. No game remains. v29nativeescape/crouch NOT promoted.
+Next proposals are reachable firing positions, narrow failed-route action
+handoffs, position reservations and explicit movement action ownership; review
+only, not installed. Aim/reaction/enemy damage/human buffs preserved.
+
+Latest played Full session20261030-203850 has Drydock/Glitch, normalBC2... .
+Private replay target/played-20261030, findings there. Human pilot-victim credits
+18/3 and13/8 include Titan attacks, not scoreboard/pilot-only attacker K/D.
+Frag self46/enemy21,Glitch low-progress1.88%vsDrydock0.58%;44/46Glitch low
+samples turn>=720deg. Combat holds<9%nearstationary. Only4clean human gun
+episodes: insufficient balance/TTK evidence.137whole-log WNOTE_GAP markers,
+recorder/runtimeerror0. Keep telemetry limits and cohorts separate.

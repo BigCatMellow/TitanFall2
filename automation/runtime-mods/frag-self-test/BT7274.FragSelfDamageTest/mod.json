@@ -1,0 +1,9 @@
+{
+  "Name":"BT7274.FragSelfDamageTest","Version":"1.0.0","LoadPriority":65,
+  "Description":"Isolated controlled damage / respawn / map checks, never enable in normal play.",
+  "ConVars":[{"Name":"bt7274_frag_self_test","DefaultValue":"0"},{"Name":"bt7274_frag_self_test_stage","DefaultValue":"1"}],
+  "Scripts":[
+    {"Path":"bt7274_frag_self_test.nut","RunOn":"SERVER && MP","ServerCallback":{"After":"BT7274FragSelfTest_Init"}},
+    {"Path":"bt7274_frag_self_test_ui.nut","RunOn":"UI","UICallback":{"After":"BT7274FragSelfTest_UIInit"}}
+  ]
+}

@@ -19,7 +19,7 @@ $stream=[IO.File]::OpenRead("$Profile/plugins/bp_ort.dll")
 $hasher=[Security.Cryptography.SHA256]::Create()
 try{$nativeHash=[BitConverter]::ToString($hasher.ComputeHash($stream)).Replace('-','')}finally{$stream.Dispose();$hasher.Dispose()}
 $core=(Get-Item "$Profile/Northstar.dll").VersionInfo.FileVersion
-$mods=@(Get-ChildItem "$Profile/mods" -Filter mod.json -Recurse|ForEach-Object{Get-Content -Raw -LiteralPath $_.FullName|ConvertFrom-Json}|Where-Object {$_.Name-like'Solo.*'-or$_.Name-match'\.(BotLifecycle|BotDecisions|LocalPersistence|TacticalRecharge|WeaponHandling|WeaponReload|BotRoster)$'}|ForEach-Object{@{name=$_.Name;version=$_.Version}})
+$mods=@(Get-ChildItem "$Profile/mods" -Filter mod.json -Recurse|ForEach-Object{Get-Content -Raw -LiteralPath $_.FullName|ConvertFrom-Json}|Where-Object {$_.Name-like'Solo.*'-or$_.Name-match'\.(BotLifecycle|BotDecisions|LocalPersistence|TacticalRecharge|WeaponHandling|WeaponReload|BotRoster|FragSelfDamage)$'}|ForEach-Object{@{name=$_.Name;version=$_.Version}})
 $enabled=Get-Content "$Profile/enabledmods.json" -Raw|ConvertFrom-Json
 $overrides=[ordered]@{}
 if($Trial-ne'Current'){

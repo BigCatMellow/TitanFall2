@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "cases": 52,
+  "matrices": [
+    {
+      "map": "mp_drydock",
+      "phase": "initial",
+      "cases": 13
+    },
+    {
+      "map": "mp_drydock",
+      "phase": "respawn",
+      "cases": 13
+    },
+    {
+      "map": "mp_glitch",
+      "phase": "initial",
+      "cases": 13
+    },
+    {
+      "map": "mp_glitch",
+      "phase": "respawn",
+      "cases": 13
+    }
+  ],
+  "combat": [
+    {
+      "map": "mp_drydock",
+      "scaled_hits": 10
+    },
+    {
+      "map": "mp_glitch",
+      "scaled_hits": 1
+    }
+  ],
+  "natural_scaled_hits": 11,
+  "runtime_errors": 0,
+  "limits": "Synthetic health deltas and short real combat execution, not efficacy, scoreboard, human balance, or immunity to enemy grenades. No actor identifiers exported.",
+  "raw_sha256": "44199924C3A2B5C6F76FC52BCA8CA6940E237022BFA7FAFD1FE5FF717AF11C13",
+  "script_sha256": "BA1E235274E036F0DE1D313B31952A29CD90AFED1EB2757B85CC1DFC2B8A4397",
+  "manifest_sha256": "382B98F18AFC4322D82B814AC1F2EBEF92BAE320C66174E3910B58E485D66172"
+}
