@@ -1449,3 +1449,34 @@ Frag self46/enemy21,Glitch low-progress1.88%vsDrydock0.58%;44/46Glitch low
 samples turn>=720deg. Combat holds<9%nearstationary. Only4clean human gun
 episodes: insufficient balance/TTK evidence.137whole-log WNOTE_GAP markers,
 recorder/runtimeerror0. Keep telemetry limits and cohorts separate.
+
+## 2026-10-30 22:05 — awareness tests HELD for antivirus review
+
+User authorized4hours, then reported Bitdefender flagging pwsh.exe command
+line. Initial default-off pilot awareness CE1369E... passed full off/on/respawn/
+off/lobby/new-map Glitch/Drydock lifecycle. New522A8B...compiled with better
+explicit seen_at logging and less route invalidation on visibility flicker;
+its lifecycle not started. FOUR-HOUR MAP RUN NEVER STARTED. No native candidate
+installed normally. Isolated restored307... from freshcurrentbackup; normal12
+files unchanged including current saves and bot frag self-damage mod. No game,
+build or coordinator running. No antivirus changes/restores/exclusions.
+
+Current integration branch candidate/awareness-v31-20261030. Read
+research/awareness-v31-20261030/README.md. Private active receipt
+integration target/v31-active-session.json state halted_antivirus_review.
+Backup path target/v31-backup.txt. Initial historical smoke receipt
+ target/v31-smoke-session.json. Both native binaries private target only.
+134Rust/23suites+PSfixtures and121Node/24files pass; Cargo.lock E4 bytes intact.
+
+Inspected C:/Program Files/PowerShell/7/pwsh.exe: Valid Authenticode Microsoft
+Corporation, SHA2A6769A3330DC1084D0154BFDE7D164AB750CA7F700F313F9D417C1BE78B2233.
+Host signature is not proof of script safety. Exact detection name/blocked
+command requested, still pending. Do not whitelist pwsh.exe or rename/rewrite
+commands to evade detection. Preserve the sources, compare the actual alert to
+scripts and analyze the cause before further builds/native launches. Planned
+01:47EDTOct31deadline is not permission to resume at a later time.
+
+New source-only bounded adaptive study tools exist but are NOT validated as a
+running queue: Start/Run-AwarenessStudy.ps1, Read-AwarenessValidation.ps1,
+Review-AwarenessRound.mjs, awareness-v31-cells.json. Guard/rollback/deadline
+paths must be validated before use. Pilot sim6 only, Titans remain baseline.

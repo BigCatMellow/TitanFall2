@@ -1,0 +1,9 @@
+{
+  "state": "held_antivirus_review",
+  "four_hour_run_started": false,
+  "normal_unchanged": true,
+  "isolated_restored": true,
+  "game_running": false,
+  "initial_lifecycle": "passed",
+  "revised_lifecycle": "not_started"
+}

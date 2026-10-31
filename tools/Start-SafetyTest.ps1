@@ -1,7 +1,7 @@
 param([string]$Profile="$env:USERPROFILE/northstar-crash-audit/map-cycle-test-profile",
     [Parameter(Mandatory)][string]$DllPath,
     [ValidatePattern('^mp_[a-z0-9_]+$')][string]$Map='mp_eden',
-    [ValidatePattern('^mp_[a-z0-9_]+$')][string]$NextMap='mp_lf_meadow',[switch]$NavigationTrial,[switch]$RouteProbe,[switch]$RouteContinuityTrial,[switch]$RouteWalkTrial,[switch]$QueryOnly,[switch]$RouteDetourTrial,[switch]$EdenRepairTrial,[switch]$Measurements,[switch]$IntegrationTrial,[switch]$TuningTrial)
+    [ValidatePattern('^mp_[a-z0-9_]+$')][string]$NextMap='mp_lf_meadow',[switch]$NavigationTrial,[switch]$RouteProbe,[switch]$RouteContinuityTrial,[switch]$RouteWalkTrial,[switch]$QueryOnly,[switch]$RouteDetourTrial,[switch]$EdenRepairTrial,[switch]$Measurements,[switch]$IntegrationTrial,[switch]$TuningTrial,[switch]$AwarenessTrial)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/Northstar-ModState.ps1"
 $repo=Split-Path $PSScriptRoot
@@ -46,6 +46,7 @@ if($RouteWalkTrial){
 }
 if($QueryOnly){[IO.File]::WriteAllText($serverScript,[IO.File]::ReadAllText($serverScript).Replace('thread BT7274SafetyTest_Run()','// Query-only: no safety/movement phases'))}
 [IO.File]::WriteAllText($uiScript,[IO.File]::ReadAllText($uiScript).Replace('mp_eden',$Map))
+if($AwarenessTrial-and(!$IntegrationTrial-or$TuningTrial)){throw 'Awareness requires separate integration lifecycle'}
 if($TuningTrial-and!$IntegrationTrial){throw 'Tuning requires integration lifecycle harness'}
 if($IntegrationTrial){
     if(!$NavigationTrial -or $RouteContinuityTrial -or $RouteProbe){throw 'Separate integration lifecycle cohort required'}
@@ -54,14 +55,17 @@ if($IntegrationTrial){
     if(!$script.Contains($anchor)){throw 'Integration flag anchor changed'}
     $replacement='if(nav){foreach(string flag in ["bot_nearest_pursuit","bot_stall_target_recovery","bot_frag_safety","bot_low_clearance_approach","bot_corner_height_trial"])SetConVarBool(flag,enabled);print("INTEGRATION_STATE enabled="+enabled+" nearest="+GetConVarInt("bot_nearest_pursuit")+" stall="+GetConVarInt("bot_stall_target_recovery")+" frag="+GetConVarInt("bot_frag_safety")+" clearance="+GetConVarInt("bot_low_clearance_approach")+" height="+GetConVarInt("bot_corner_height_trial"));}'
     if($TuningTrial){$replacement='if(nav){foreach(string flag in ["bot_nearest_pursuit","bot_stall_target_recovery","bot_frag_safety","bot_corner_height_trial"])SetConVarBool(flag,false);SetConVarBool("bot_low_clearance_approach",enabled);SetConVarBool("bot_frag_escape",enabled);}' }
+    if($AwarenessTrial){$replacement='if(nav){SetConVarBool("bot_fair_awareness",enabled);SetConVarFloat("bot_awareness_memory_seconds",4.0);}' }
     $script=$script.Replace($anchor,$replacement)
     $sample='print("INTEGRATION_PHASE name="+name+" nearest="+GetConVarInt("bot_nearest_pursuit")+" stall="+GetConVarInt("bot_stall_target_recovery")+" frag="+GetConVarInt("bot_frag_safety")+" clearance="+GetConVarInt("bot_low_clearance_approach")+" height="+GetConVarInt("bot_corner_height_trial")+" eden="+GetConVarInt("bot_eden_route_repair"));'
     if($TuningTrial){$sample='print("TUNING_PHASE name="+name+" clearance="+GetConVarInt("bot_low_clearance_approach")+" escape="+GetConVarInt("bot_frag_escape")+" strict_frag="+GetConVarInt("bot_frag_safety")+" height="+GetConVarInt("bot_corner_height_trial")+" eden="+GetConVarInt("bot_eden_route_repair"));'}
+    if($AwarenessTrial){$sample='print("AWARE_PHASE name="+name+" fair="+GetConVarInt("bot_fair_awareness")+" memory="+GetConVarFloat("bot_awareness_memory_seconds")+" self_scale="+GetConVarFloat("bt7274_bot_frag_self_damage_scale"));'}
     $script=$script.Replace('print("SAFETY_TEST_PHASE map=',$sample+'print("SAFETY_TEST_PHASE map=')
     [IO.File]::WriteAllText($serverScript,$script)
     Copy-Item "$repo/BT7274.FragDamageProbe" "$Profile/mods" -Recurse -Force
 }
 if($TuningTrial){Copy-Item "$repo/automation/runtime-mods/frag-awareness/BT7274.FragAwareness" "$Profile/mods" -Recurse -Force}
+if($AwarenessTrial){Copy-Item "$repo/BT7274.FragSelfDamage" "$Profile/mods" -Recurse -Force}
 $enabled=Get-Content "$Profile/enabledmods.json" -Raw|ConvertFrom-Json
 foreach($name in @('BT7274.DecisionTest','BT7274.WeaponIntegrationTest','BT7274.CapabilityTest','BT7274.MapSurvey')){Disable-NorthstarMod $enabled $name $Profile}
 $enabled|Add-Member -NotePropertyName 'BT7274.SafetyTest' -NotePropertyValue @{'1.0.0'=$true} -Force
@@ -69,6 +73,7 @@ if($RouteProbe){$enabled|Add-Member -NotePropertyName 'BT7274.RouteProbe' -NoteP
 if($IntegrationTrial){$enabled|Add-Member -NotePropertyName 'BT7274.FragDamageProbe' -NotePropertyValue @{'0.1.0'=$true} -Force}
 if($TuningTrial){$enabled|Add-Member -NotePropertyName 'BT7274.FragAwareness' -NotePropertyValue @{'0.1.0'=$true} -Force}
 if($Measurements){$enabled|Add-Member -NotePropertyName 'BT7274.BotMeasurements' -NotePropertyValue @{'1.0.0'=$true} -Force}
+if($AwarenessTrial){$enabled|Add-Member -NotePropertyName 'BT7274.FragSelfDamage' -NotePropertyValue @{'1.0.0'=$true} -Force}
 $bridgeVersion=(Get-Content "$Profile/mods/BT7274.BotDecisions/mod.json" -Raw|ConvertFrom-Json).Version
 Disable-NorthstarMod $enabled 'BT7274.BotDecisions' $Profile
 $enabled.'BT7274.BotDecisions'|Add-Member -NotePropertyName $bridgeVersion -NotePropertyValue $true -Force
@@ -90,9 +95,21 @@ bot_corner_height_guard 0"}
 if($TuningTrial){Add-Content $cfg "
 bt7274_frag_awareness 1
 bot_frag_escape 0"}
+if($AwarenessTrial){Add-Content $cfg "
+bot_fair_awareness 0
+bot_awareness_memory_seconds 4
+bt7274_bot_frag_self_damage 1
+bt7274_bot_frag_self_damage_scale 0.25
+bt7274_bot_frag_self_damage_log 1
+bot_frag_escape 0
+bot_low_clearance_approach 0
+bot_frag_safety 0
+bot_nearest_pursuit 0
+bot_stall_target_recovery 0
+bot_corner_height_trial 0"}
 $started=Get-Date
 $game=Start-Process "$gameDir/NorthstarLauncher.exe" -WorkingDirectory $gameDir -WindowStyle Hidden -PassThru -ArgumentList "-profile=$Profile",'-bt7274_safety_test','-novid','-windowed','-ip','127.0.0.1','-port','37025','-maxplayersplaylist','+setplaylist','tdm','+setplaylistvaroverrides','"max_players 17 scorelimit 9999 timelimit 30"','+bt7274_safety_test','1','+bt7274_safety_stage','1','+solo_notes_mode','controlled_validation','+mp_gamemode','tdm','+map',$Map
-[ordered]@{experiment=$(if($TuningTrial){'tuning_v29'}elseif($IntegrationTrial){'integration_v28'}elseif($EdenRepairTrial){'eden_repair_v23'}elseif($RouteDetourTrial){'route_detour_v23'}elseif($QueryOnly){'route_queries_v23'}elseif($RouteWalkTrial){'route_walk_v23'}elseif($RouteContinuityTrial){'route_continuity_v23'}elseif($RouteProbe){'route_research_v23'}elseif($NavigationTrial){'navigation_v22'}else{'safety_v21'});directed_walk=[bool]$RouteWalkTrial;map=$Map;next_map=$NextMap;population=$(if($QueryOnly){'query_only_no_movement_assertions'}elseif($RouteWalkTrial){'one_directed_bot_other_bots_stationary_on_eden'}else{'16bots_inactive_human'});core_sha256=(Get-FileHash "$Profile/Northstar.dll").Hash;harness_sha256=(Get-FileHash $serverScript).Hash;ui_sha256=(Get-FileHash $uiScript).Hash}|ConvertTo-Json|Set-Content "$run/context.json"
+[ordered]@{experiment=$(if($AwarenessTrial){'awareness_v31'}elseif($TuningTrial){'tuning_v29'}elseif($IntegrationTrial){'integration_v28'}elseif($EdenRepairTrial){'eden_repair_v23'}elseif($RouteDetourTrial){'route_detour_v23'}elseif($QueryOnly){'route_queries_v23'}elseif($RouteWalkTrial){'route_walk_v23'}elseif($RouteContinuityTrial){'route_continuity_v23'}elseif($RouteProbe){'route_research_v23'}elseif($NavigationTrial){'navigation_v22'}else{'safety_v21'});directed_walk=[bool]$RouteWalkTrial;map=$Map;next_map=$NextMap;population=$(if($QueryOnly){'query_only_no_movement_assertions'}elseif($RouteWalkTrial){'one_directed_bot_other_bots_stationary_on_eden'}else{'16bots_inactive_human'});core_sha256=(Get-FileHash "$Profile/Northstar.dll").Hash;harness_sha256=(Get-FileHash $serverScript).Hash;ui_sha256=(Get-FileHash $uiScript).Hash}|ConvertTo-Json|Set-Content "$run/context.json"
 $shell=(Get-Process -Id $PID).Path
 $watchArgs=@('-NoProfile','-File',"$PSScriptRoot/Watch-SafetyTest.ps1",'-GameProcessId',$game.Id,'-Profile',$Profile,'-RunDirectory',$run,'-Started',$started.ToString('o'))
 if($NavigationTrial){$watchArgs+='-NavigationTrial'}

@@ -117,3 +117,5 @@ entries before changes.
   backed-up isolated trial. Do not confuse this played v19 session with v18survey.
 
 - October30 bot frag self-damage rule installed: read research/gameplay-rework-v30-20261030/README.md and latest handoff. Normal native BC2... unchanged; BT7274.FragSelfDamage1.0.0 enable1/scale0.25. v29 native remains experimental. No queue/game; preserve saves and human/enemy damage rules.
+
+- October30 awareness-v31 candidate HELD for Bitdefender command-line report. Read latest handoff and research/awareness-v31-20261030/README.md. Four-hour run never started; isolated307restored, normal unchanged; no game/coordinator. Exact pwsh.exe detection/command pending. No antivirus changes or automatic resumption.

@@ -1,0 +1,16 @@
+{
+  "cohort": "awareness_v31_initial_lifecycle",
+  "state": "passed",
+  "core": "1.31.14.0",
+  "completed": [
+    "nav_control",
+    "nav_guard",
+    "nav_respawn",
+    "nav_disabled",
+    "nav_new_map"
+  ],
+  "lobby": true,
+  "native_sha256": "CE1369E476F17FE9AA2EF82FFA5435499556C35C9AB78633DF9B95B96A125D22",
+  "raw_sha256": "868CF2B1AA96D945FFEFC2C5CA185DA3D9E1286DE72302C401779D4F92518DC2",
+  "limits": "Initial native only. Revised candidate and four-hour queue not run. No normal promotion."
+}

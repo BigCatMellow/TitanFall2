@@ -9,7 +9,7 @@ const median=a=>{const b=[...a].sort((x,y)=>x-y);return b.length?(b[Math.floor((
 const pct=(n,d)=>d?Math.round(n/d*10000)/100:null;
 const speed=e=>Math.hypot(+e.vvx,+e.vvy);
 const key=e=>`${e.epoch}|${e.t}|${e.slot}`;
-const nav=new Set(['pursue','recover','embark','retreat']);
+const nav=new Set(['pursue','recover','embark','retreat','patrol']);
 function damageGroups(deaths){
   const groups=new Map();for(const d of deaths){const k=JSON.stringify([d.map,d.mode,d.gun,d.attacker_kind,d.victim_kind,d.mods,d.config,d.range_bucket,d.hitgroups,d.critical_scales]);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(d);}
   return [...groups.values()].map(a=>({map:a[0].map,mode:a[0].mode,gun:a[0].gun,attacker_kind:a[0].attacker_kind,victim_kind:a[0].victim_kind,mods:a[0].mods,config:a[0].config,range_bucket:a[0].range_bucket,hitgroups:a[0].hitgroups,critical_scales:a[0].critical_scales,n:a.length,median_s:median(a.map(d=>d.damage_span_s)),min_s:Math.min(...a.map(d=>d.damage_span_s)),max_s:Math.max(...a.map(d=>d.damage_span_s))}));

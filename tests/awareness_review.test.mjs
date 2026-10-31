@@ -1,0 +1,6 @@
+import {test}from'node:test';import assert from'node:assert/strict';import{awarenessEvidence}from'../tools/Review-AwarenessRound.mjs';import{markLowProgress}from'../tools/Analyze-PlayedWeaponSession.mjs';
+const l=(t,mode,x,age)=>`BOT_AWARENESS epoch=1 t=${t} slot=1 mode=${mode} target=4 seen_age=${age} seen_at=${t-age} gx=${x} gy=0 gz=0`;
+test('same hidden observation freezes goal, refreshes are distinguished',()=>{const r=awarenessEvidence([l(2,'memory',100,1),l(3,'memory',100,2),l(4,'memory',500,1),l(5,'patrol',0,-1)]);assert.equal(r.continuous_memory_comparisons,1);assert.equal(r.changed_hidden_goal_comparisons,0);assert.equal(r.logged_memory_to_patrol,1);});
+test('detect hidden goal drift without refresh',()=>assert.equal(awarenessEvidence([l(2,'memory',100,1),l(3,'memory',400,2)]).changed_hidden_goal_comparisons,1));
+test('epoch/window isolation prevents false joins',()=>assert.equal(awarenessEvidence([l(2,'memory',100,1),l(3,'memory',400,2).replace('epoch=1','epoch=2')],2,4).continuous_memory_comparisons,0));
+test('patrol cannot disappear from low-progress metrics',()=>{const r=markLowProgress(Array.from({length:7},(_,i)=>({epoch:'1',slot:'1',id:'4',t:i*2,alive:'1',titan:'0',state:'patrol',x:0,y:0,jumps:0,commands:i*100,yaw_travel:0})));assert.equal(r.at(-1).low,true);});

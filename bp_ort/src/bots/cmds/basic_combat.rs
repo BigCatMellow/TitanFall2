@@ -66,7 +66,7 @@ pub(crate) fn basic_combat(
         && crate::bots::ACTION_POLICY_CONVAR.get().is_some_and(|c| c.get_value_bool());
     if !combat_enabled { local_data.combat.tactic = "legacy"; }
 
-    let target = if !is_titan && sim_type == 6
+    let mut target = if !is_titan && sim_type == 6
         && crate::bots::COORDINATION_CONVAR.get().is_some_and(|c| c.get_value_bool()) {
         unsafe { find_team_target(origin, team, player, helper, local_data, &shared_data.coordination) }
     } else { unsafe {
@@ -107,6 +107,44 @@ pub(crate) fn basic_combat(
         })
     } };
 
+    let fair_awareness = !is_titan && sim_type == 6 && crate::bots::switch_on(&crate::bots::AWARENESS_CONVAR);
+    if fair_awareness {
+        use crate::bots::awareness::Seen;
+        let now=time(helper);
+        let visible=target.as_ref().filter(|(_,visible)|*visible)
+            .map(|((p,t),_)|Seen{id:t.m_RefEHandle,pos:[p.x,p.y,p.z],at:now});
+        let live:Vec<_>=enemy_player_iterator(team,helper).chain(enemy_titan_iterator(helper,team))
+            .map(|t|t.m_RefEHandle).collect();
+        let seconds=crate::bots::AWARENESS_SECONDS_CONVAR.get().map_or(4.,|c|c.get_value_f32());
+        let goal=local_data.awareness.update(now,[origin.x,origin.y,origin.z],visible,&live,seconds);
+        let mode=if visible.is_some(){"visible"}else if goal.is_some_and(|g|g.search){"search"}else if goal.is_some(){"memory"}else{"patrol"};
+        if visible.is_none(){
+            target=None;
+            if let Some(goal)=goal {
+                target=enemy_player_iterator(team,helper).chain(enemy_titan_iterator(helper,team))
+                    .find(|t|t.m_RefEHandle==goal.seen.id)
+                    .map(|t|((Vector3::new(goal.seen.pos[0],goal.seen.pos[1],goal.seen.pos[2]),t),false));
+            }
+        }
+        // Visibility flicker does not discard a route to the same known place.
+        // Clear on patrol/target handoff; remembered endpoints never follow hidden actors.
+        if local_data.awareness_mode.is_some_and(|old|(old=="patrol")!=(mode=="patrol")) {
+            local_data.should_recalculate_path=true;
+            if let Some(nav)=local_data.nav_query.as_mut(){nav.path_points.clear();nav.end_point=None;}
+            local_data.current_corner=None;
+        }
+        if target.is_some(){local_data.awareness_patrol=Default::default();}
+        let awareness_due=local_data.awareness_log.allow(now,2.);
+        if local_data.awareness_mode!=Some(mode)||awareness_due {
+            log::info!("BOT_AWARENESS epoch={} t={now:.2} slot={} mode={mode} target={} seen_age={:.2} seen_at={:.4} gx={:.1} gy={:.1} gz={:.1}",
+                crate::bots::telemetry::epoch(),local_data.edict,goal.map_or(-1,|g|g.seen.id),
+                goal.map_or(-1.,|g|now-g.seen.at),goal.map_or(-1.,|g|g.seen.at),goal.map_or(0.,|g|g.seen.pos[0]),goal.map_or(0.,|g|g.seen.pos[1]),goal.map_or(0.,|g|g.seen.pos[2]));
+        }
+        local_data.awareness_mode=Some(mode);
+    } else {
+        if local_data.awareness_mode.is_some(){local_data.should_recalculate_path=true;if let Some(nav)=local_data.nav_query.as_mut(){nav.path_points.clear();nav.end_point=None;}}
+        local_data.awareness=Default::default();local_data.awareness_patrol=Default::default();local_data.awareness_mode=None;
+    }
     let target_id = target.as_ref().map(|((_, target), _)| target.m_RefEHandle);
     let target_index = target.as_ref().map(|((_, target), _)| get_player_index(target));
     // Set again by whichever branch actually requests a pursuit route.
@@ -174,6 +212,8 @@ pub(crate) fn basic_combat(
                 )
             {
                 local_data.last_target_index = get_player_index(target)
+            } else if fair_awareness && target.is_none() && !cover_active {
+                patrol_without_enemy(player,helper,local_data,&mut cmd);
             }
 
             local_data.should_recalculate_path = false;
@@ -1207,6 +1247,22 @@ fn route_followups(player: &mut CPlayer, helper: &CUserCmdHelper, local: &mut Bo
         if wanted && pilot_route && local.metrics.state != "recover" && !local.crouch_duck && !local.clearance_duck {
             cmd.buttons |= Action::Jump as u32;
         }
+    }
+}
+
+/// Patrol goals come only from the navmesh around this bot, never enemy origins.
+fn patrol_without_enemy(player:&mut CPlayer,helper:&CUserCmdHelper,local:&mut BotData,cmd:&mut CUserCmd){
+    let now=time(helper);let o=player.m_vecAbsOrigin;
+    let mut goal=local.awareness_patrol.goal(now,[o.x,o.y,o.z]);
+    if goal.is_none()&&local.awareness_patrol.can_pick(now){
+        let point=(0..4).find_map(|_|local.nav_query.as_mut().and_then(|n|n.random_point_around(o,1800.,Some(180.)))
+            .filter(|p|distance(*p,o)>200.).map(|p|[p.x,p.y,p.z]));
+        local.awareness_patrol.pick(now,point);goal=point;local.should_recalculate_path=true;
+    }
+    if let Some(p)=goal {
+        local.metrics.state="patrol";
+        path_to_target(cmd,local,o,Vector3::new(p[0],p[1],p[2]),local.should_recalculate_path,helper);
+        local.should_recalculate_path=false;
     }
 }
 

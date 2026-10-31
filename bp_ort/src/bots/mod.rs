@@ -61,6 +61,7 @@ mod escape_recovery;
 mod nav_diagnostics;
 mod route_guard;
 mod perception;
+mod awareness;
 mod combat_movement;
 mod crouch_recovery;
 mod clearance_approach;
@@ -105,6 +106,8 @@ pub(super) static LINK_DETOUR_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static EDEN_REPAIR_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static JUMP_TIMING_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PROXIMITY_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static AWARENESS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
+pub(super) static AWARENESS_SECONDS_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static PERCEPTION_FIX_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static COMBAT_MOVEMENT_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
 pub(super) static CROUCH_RECOVERY_CONVAR: OnceCell<ConVarStruct> = OnceCell::new();
@@ -155,6 +158,10 @@ pub(super) struct BotData {
     navigation_requested: bool,
     tactical_pulse: action_policy::Pulse,
     ordnance_pulse: action_policy::Pulse,
+    awareness: awareness::Memory,
+    awareness_patrol: awareness::Patrol,
+    awareness_log: nav_diagnostics::RateGate,
+    awareness_mode: Option<&'static str>,
     frag_escape: frag_escape::FragEscape,
     throw_safety: offhand_safety::ThrowSafety,
     escape_recovery: escape_recovery::EscapeRecovery,
@@ -199,6 +206,10 @@ pub(super) struct BotData {
 impl BotData {
     // Per-life candidate state must not survive respawn or pilot/Titan transitions.
     fn reset_candidate_state(&mut self) {
+        self.awareness=Default::default();
+        self.awareness_patrol=Default::default();
+        self.awareness_log=Default::default();
+        self.awareness_mode=None;
         self.frag_escape=Default::default();
         self.path_log = Default::default();
         self.segment_log = Default::default();
@@ -495,7 +506,12 @@ impl Plugin for Bots {
             &ConVarRegister::new("bot_telemetry_interval", "0", FCVAR_GAMEDLL as i32,
                 "structured position/decision snapshots in seconds; 0 disables; minimum 0.5"), token,
         ).expect("failed to register bot_telemetry_interval"));
+        _ = AWARENESS_SECONDS_CONVAR.set(ConVarStruct::try_new(
+            &ConVarRegister::new("bot_awareness_memory_seconds", "4", FCVAR_GAMEDLL as i32,
+                "last-confirmed-visible pursuit memory; clamped 1..12 seconds"), token,
+        ).expect("failed to register awareness memory"));
         for (cell, name, help) in [
+            (&AWARENESS_CONVAR, "bot_fair_awareness", "trial: unseen pilot pursuit uses last-seen memory, expires to patrol; default off"),
             (&ACTION_POLICY_CONVAR, "bot_action_policy", "fresh script readiness and bounded pilot offhand input"),
             (&TARGET_ELIGIBILITY_CONVAR, "bot_target_eligibility", "exclude hotdropping pet Titans from coordinated selection and pursuit"),
             (&NAVIGATION_CONTEXT_CONVAR, "bot_navigation_context", "do not age navigation watchdog across non-navigation commands"),
