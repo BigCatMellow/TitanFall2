@@ -1,3 +1,4 @@
+<!-- Current restart guide: Notes/RESUME-HERE.md (2026-10-30). Awareness testing is held for antivirus review; no queue/game running. -->
 # Project instructions
 
 Canonical development repo for BT-7274's solo Northstar project. Read README.md,
